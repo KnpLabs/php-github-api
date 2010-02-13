@@ -9,7 +9,6 @@ require_once(dirname(__FILE__).'/phpGitHubApiRequest.php');
  * @author	Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @license	MIT License
  */
-
 class phpGitHubApi
 {
   protected
@@ -17,7 +16,7 @@ class phpGitHubApi
   $login,
   $token;
 
-  /*
+  /**
    * Instanciates a new API
    *
    * @param  string   $login  GitHub username
@@ -28,7 +27,7 @@ class phpGitHubApi
     $this->authenticate($login, $token);
   }
 
-  /*
+  /**
    * Authenticates a user for all next requests
    *
    * @param  string         $login  GitHub username
@@ -43,7 +42,7 @@ class phpGitHubApi
     return $this;
   }
 
-  /*
+  /**
    * Search users by username
    * http://develop.github.com/p/users.html#searching_for_users
    *
@@ -60,7 +59,7 @@ class phpGitHubApi
     return $data['users'];
   }
 
-  /*
+  /**
    * Get extended information on a user by its username
    * http://develop.github.com/p/users.html#getting_user_information
    *
@@ -77,7 +76,7 @@ class phpGitHubApi
     return $data['user'];
   }
 
-  /*
+  /**
    * List issues by username, repo and state
    * http://develop.github.com/p/issues.html#list_a_projects_issues
    *
@@ -96,7 +95,7 @@ class phpGitHubApi
     return $data['issues'];
   }
 
-  /*
+  /**
    * Search issues by username, repo, state and search term
    * http://develop.github.com/p/issues.html#list_a_projects_issues
    *
@@ -116,7 +115,7 @@ class phpGitHubApi
     return $data['issues'];
   }
 
-  /*
+  /**
    * Creates a new request
    *
    * @param array $options  the request options
