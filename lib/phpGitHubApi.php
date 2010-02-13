@@ -118,7 +118,8 @@ class phpGitHubApi
   /**
    * Creates a new request
    *
-   * @param array $options  the request options
+   * @param   array               $options  the request options
+   * @return  phpGitHubApiRequest a request instance
    */
   protected function createRequest(array $options = array())
   {
