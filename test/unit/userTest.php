@@ -4,7 +4,7 @@ require_once dirname(__FILE__).'/../../lib/phpGitHubApi.php';
 
 $t = new lime_test(4);
 
-$api = new phpGitHubApi();
+$api = new phpGitHubApi(true);
 
 $t->comment('Test ->searchUsers');
 

@@ -17,7 +17,8 @@ class phpGitHubApiRequest
     'http_port'   => 80,
     'timeout'     => 20,
     'login'       => null,
-    'token'       => null
+    'token'       => null,
+    'debug'       => false
   );
 
   /*
@@ -110,7 +111,11 @@ class phpGitHubApiRequest
     
     $queryString = utf8_encode(http_build_query($parameters));
 
-    $options[CURLOPT_URL] = $url . ('GET' === $httpMethod ? '?' . $queryString : '');
+    $completeUrl = $url . ('GET' === $httpMethod ? '?' . $queryString : '');
+
+    $this->debug('send request: '.$completeUrl);
+
+    $options[CURLOPT_URL] = $completeUrl;
     $options[CURLOPT_PORT] = $this->options['http_port'];
     $options[CURLOPT_USERAGENT] = $this->options['user_agent'];
     $options[CURLOPT_FOLLOWLOCATION] = true;
@@ -146,6 +151,14 @@ class phpGitHubApiRequest
     }
 
     return $response;
+  }
+
+  protected function debug($message)
+  {
+    if($this->options['debug'])
+    {
+      print $message."\n";
+    }
   }
 }
 

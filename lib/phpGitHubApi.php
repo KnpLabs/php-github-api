@@ -14,17 +14,17 @@ class phpGitHubApi
   protected
   $requestClass = 'phpGitHubApiRequest',
   $login,
-  $token;
+  $token,
+  $debug;
 
   /**
    * Instanciates a new API
    *
-   * @param  string   $login  GitHub username
-   * @param  string   $token  GitHub password
+   * @param  bool   $debug  print debug messages
    */
-  public function __construct($login = null, $token = null)
+  public function __construct($debug = false)
   {
-    $this->authenticate($login, $token);
+    $this->debug = $debug;
   }
 
   /**
@@ -60,12 +60,12 @@ class phpGitHubApi
   }
 
   /**
-   * Get extended information on a user by its username
+   * Get extended information about a user by its username
    * http://develop.github.com/p/users.html#getting_user_information
    *
    * @param   string  $username       the username to search
    * @param   array   $requestOptions request options
-   * @return  array   list of users found
+   * @return  array   informations about the user
    */
   public function showUser($username, array $requestOptions = array())
   {
@@ -116,6 +116,24 @@ class phpGitHubApi
   }
 
   /**
+   * Get extended information about an issue by its username, repo and number
+   * http://develop.github.com/p/users.html#getting_user_information
+   *
+   * @param   string  $username       the username
+   * @param   string  $repo           the repo
+   * @param   string  $number         the issue number
+   * @return  array   informations about the issue
+   */
+  public function showIssue($username, $repo, $number, array $requestOptions = array())
+  {
+    $data = $this
+    ->createRequest($requestOptions)
+    ->get('issues/show/'.$username.'/'.$repo.'/'.$number);
+
+    return $data['issue'];
+  }
+
+  /**
    * Creates a new request
    *
    * @param   array               $options  the request options
@@ -125,7 +143,8 @@ class phpGitHubApi
   {
     $options = array_merge(array(
       'login' => $this->login,
-      'token' => $this->token
+      'token' => $this->token,
+      'debug' => $this->debug
     ), $options);
     
     return new $this->requestClass($options);
