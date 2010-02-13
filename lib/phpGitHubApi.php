@@ -52,7 +52,9 @@ class phpGitHubApi
    */
   public function searchUsers($username, array $requestOptions = array())
   {
-    $data = $this->createRequest($requestOptions)->get('user/search/'.$username);
+    $data = $this
+    ->createRequest($requestOptions)
+    ->get('user/search/'.$username);
 
     return $data['users'];
   }
@@ -67,9 +69,50 @@ class phpGitHubApi
    */
   public function showUser($username, array $requestOptions = array())
   {
-    $data = $this->createRequest($requestOptions)->get('user/show/'.$username);
+    $data = $this
+    ->createRequest($requestOptions)
+    ->get('user/show/'.$username);
 
     return $data['user'];
+  }
+
+  /*
+   * List issues by username, repo and state
+   * http://develop.github.com/p/issues.html#list_a_projects_issues
+   *
+   * @param   string  $username       the username
+   * @param   string  $repo           the repo
+   * @param   string  $state          the issue state, can be open or closed
+   * @param   array   $requestOptions request options
+   * @return  array   list of users found
+   */
+  public function listIssues($username, $repo, $state = 'open', array $requestOptions = array())
+  {
+    $data = $this
+    ->createRequest($requestOptions)
+    ->get('issues/list/'.$username.'/'.$repo.'/'.$state);
+
+    return $data['issues'];
+  }
+
+  /*
+   * Search issues by username, repo, state and search term
+   * http://develop.github.com/p/issues.html#list_a_projects_issues
+   *
+   * @param   string  $username       the username
+   * @param   string  $repo           the repo
+   * @param   string  $state          the issue state, can be open or closed
+   * @param   string  $searchTerm     the search term to filter issues by
+   * @param   array   $requestOptions request options
+   * @return  array   list of users found
+   */
+  public function searchIssues($username, $repo, $state, $searchTerm, array $requestOptions = array())
+  {
+    $data = $this
+    ->createRequest($requestOptions)
+    ->get('issues/search/'.$username.'/'.$repo.'/'.$state.'/'.$searchTerm);
+
+    return $data['issues'];
   }
 
   /*

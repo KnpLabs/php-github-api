@@ -85,13 +85,13 @@ class phpGitHubApiRequest
   }
 
   /**
-   * Sends a request to the server, receive a response
+   * Sends a request to the server, receives a response
    *
    * @param  string   $apiPath       Request API path
    * @param  array    $parameters    Parameters
    * @param  string   $httpMethod    HTTP method to use
    *
-   * @return string  HTTP response
+   * @return string   HTTP response
    */
   public function doSend($apiPath, array $parameters = array(), $httpMethod = 'GET')
   {
@@ -100,10 +100,13 @@ class phpGitHubApiRequest
       ':path'   => trim($apiPath, '/')
     ));
 
-    $parameters = array_merge(array(
-      'login' => $this->options['login'],
-      'token' => $this->options['token']
-    ), $parameters);
+    if($this->options['login'])
+    {
+      $parameters = array_merge(array(
+        'login' => $this->options['login'],
+        'token' => $this->options['token']
+      ), $parameters);
+    }
     
     $queryString = utf8_encode(http_build_query($parameters));
 
