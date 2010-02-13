@@ -1,4 +1,4 @@
-## Instanciate a new api
+## Instanciate a new API
 
     $api = new phpGitHubApi();
 
