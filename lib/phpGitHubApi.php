@@ -3,7 +3,8 @@
 require_once(dirname(__FILE__).'/phpGitHubApiRequest.php');
 
 /**
- * Simple PHP GitHubAPI class. API documentation should be self-explanatory.
+ * Simple PHP GitHubAPI class.
+ * Usage: http://wiki.github.com/ornicar/php-github-api/
  *
  * @author	Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @license	MIT License
