@@ -2,7 +2,7 @@
 require_once dirname(__FILE__).'/../../vendor/lime.php';
 require_once dirname(__FILE__).'/../../lib/phpGitHubApi.php';
 
-$t = new lime_test(4);
+$t = new lime_test(5);
 
 $t->comment('Test request');
 
@@ -21,3 +21,7 @@ $t->comment('Test api');
 $api = new phpGitHubApi();
 
 $t->isa_ok($api, 'phpGitHubApi', 'Got a phpGitHubApi instance');
+
+$repo = $api->get('repos/show/ornicar/php-github-api');
+
+$t->is($repo['repository']['name'], 'php-github-api', 'Found information about php-github-api repo');

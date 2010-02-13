@@ -154,7 +154,7 @@ class phpGitHubApi
 
   /**
    * List commits by username, repo, branch and path
-   * http://develop.github.com/p/commits.html#Listing Commits for a File
+   * http://develop.github.com/p/commits.html#listing_commits_for_a_file
    *
    * @param   string  $username       the username
    * @param   string  $repo           the repo
@@ -169,6 +169,36 @@ class phpGitHubApi
     ->get('commits/list/'.$username.'/'.$repo.'/'.$branch.'/'.$path);
 
     return $data['commits'];
+  }
+
+  /**
+   * Get data from any route, GET method
+   * Ex: $api->get('repos/show/my-username/my-repo')
+   *
+   * @param   string  $route          the GitHub route
+   * @param   array   $requestOptions request options
+   * @return  array   data returned
+   */
+  public function get($route, array $requestOptions = array())
+  {
+    return $this
+    ->createRequest($requestOptions)
+    ->get($route);
+  }
+
+  /**
+   * Get data from any route, POST method
+   * Ex: $api->get('repos/show/my-username/my-repo')
+   *
+   * @param   string  $route          the GitHub route
+   * @param   array   $requestOptions request options
+   * @return  array   data returned
+   */
+  public function post($route, array $requestOptions = array())
+  {
+    return $this
+    ->createRequest($requestOptions)
+    ->post($route);
   }
 
   /**
