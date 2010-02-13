@@ -117,7 +117,7 @@ class phpGitHubApi
 
   /**
    * Get extended information about an issue by its username, repo and number
-   * http://develop.github.com/p/users.html#getting_user_information
+   * http://develop.github.com/p/issues.html#view_an_issue
    *
    * @param   string  $username       the username
    * @param   string  $repo           the repo
@@ -131,6 +131,44 @@ class phpGitHubApi
     ->get('issues/show/'.$username.'/'.$repo.'/'.$number);
 
     return $data['issue'];
+  }
+
+  /**
+   * List commits by username, repo and branch
+   * http://develop.github.com/p/commits.html#listing_commits_on_a_branch
+   *
+   * @param   string  $username       the username
+   * @param   string  $repo           the repo
+   * @param   string  $branch         the branch
+   * @param   array   $requestOptions request options
+   * @return  array   list of users found
+   */
+  public function listBranchCommits($username, $repo, $branch, array $requestOptions = array())
+  {
+    $data = $this
+    ->createRequest($requestOptions)
+    ->get('commits/list/'.$username.'/'.$repo.'/'.$branch);
+
+    return $data['commits'];
+  }
+
+  /**
+   * List commits by username, repo, branch and path
+   * http://develop.github.com/p/commits.html#Listing Commits for a File
+   *
+   * @param   string  $username       the username
+   * @param   string  $repo           the repo
+   * @param   string  $branch         the branch
+   * @param   array   $requestOptions request options
+   * @return  array   list of users found
+   */
+  public function listFileCommits($username, $repo, $branch, $path, array $requestOptions = array())
+  {
+    $data = $this
+    ->createRequest($requestOptions)
+    ->get('commits/list/'.$username.'/'.$repo.'/'.$branch.'/'.$path);
+
+    return $data['commits'];
   }
 
   /**
