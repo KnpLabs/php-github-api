@@ -109,7 +109,7 @@ class phpGitHubApiRequest
       ), $parameters);
     }
     
-    $queryString = utf8_encode(http_build_query($parameters));
+    $queryString = utf8_encode(http_build_query($parameters, '', '&'));
 
     $completeUrl = $url . ('GET' === $httpMethod ? '?' . $queryString : '');
 
