@@ -21,7 +21,7 @@ class phpGitHubApiRequest
     'debug'       => false
   );
 
-  /*
+  /**
    * Instanciates a new request
    *
    * @param  array   $options  Request options
@@ -31,7 +31,7 @@ class phpGitHubApiRequest
     $this->configure($options);
   }
 
-  /*
+  /**
    * Configures the request
    *
    * @param   array               $options  Request options
@@ -59,7 +59,7 @@ class phpGitHubApiRequest
     return $this->decodeResponse($this->doSend($apiPath, $parameters, $httpMethod));
   }
 
-  /*
+  /**
    * @see send
    */
   public function get($apiPath, array $parameters = array())
@@ -67,7 +67,7 @@ class phpGitHubApiRequest
     return $this->send($apiPath, $parameters, 'GET');
   }
 
-  /*
+  /**
    * @see send
    */
   public function post($apiPath, array $parameters = array())
@@ -75,6 +75,11 @@ class phpGitHubApiRequest
     return $this->send($apiPath, $parameters, 'POST');
   }
 
+  /**
+   * gets a JSON response and transform it to a PHP array
+   *
+   * @return  array   the response
+   */
   protected function decodeResponse($response)
   {
     if('json' === $this->options['format'])
@@ -164,7 +169,6 @@ class phpGitHubApiRequest
 
 /**
  * Request communication error
- *
  */
 class phpGitHubApiRequestException extends Exception
 {
