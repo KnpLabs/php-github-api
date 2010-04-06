@@ -159,6 +159,7 @@ class phpGitHubApi
    * @param   string  $username       the username
    * @param   string  $repo           the repo
    * @param   string  $branch         the branch
+   * @param   string  $path			  the path
    * @param   array   $requestOptions request options
    * @return  array   list of users found
    */
@@ -170,7 +171,62 @@ class phpGitHubApi
 
     return $data['commits'];
   }
-
+  /**
+  * Get a listing of the root tree of a project by the username, repo, and tree SHA
+  * http://develop.github.com/p/object.html#trees
+  * 
+  * @param string $username			the username
+  * @param string $repo				the repo
+  * @param string $treeSHA			the branch
+  * @param array  $requestOptions	request options
+  * @return array					root tree of the project
+  */
+  public function listObjectTree($username, $repo, $treeSHA, $requestOptions = array())
+  {
+	  $data = $this
+      ->createRequest($requestOptions)
+      ->get('tree/show/'.$username.'/'.$repo.'/'.$treeSHA); 
+      
+      return $data['tree'];
+  }
+  /**
+  * Get the data about a blob by tree SHA and file path.
+  * http://develop.github.com/p/object.html#blobs
+  * 
+  * @param string $username
+  * @param string $repo
+  * @param string $treeSHA
+  * @param string $path				the path
+  * @param array  $requestOptions	request options
+  * @return array					data blob of tree and path
+  */
+  public function showObjectBlob($username, $repo, $treeSHA, $path, $requestOptions = array())
+  {
+	  $data = $this
+      ->createRequest($requestOptions)
+      ->get('blob/show/'.$username.'/'.$repo.'/'.$treeSHA .'/'.$path); 
+      
+      return $data['blob']; 
+  }
+  /**
+  * Lists the data blobs of a tree by tree SHA
+  * http://develop.github.com/p/object.html#blobs
+  * 
+  * @param string $username
+  * @param string $repo
+  * @param string $treeSHA
+  * @param string $path				the path
+  * @param array  $requestOptions	request options
+  * @return array					data blobs of tree
+  */
+  public function listObjectBlobs($username, $repo, $treeSHA, $requestOptions = array())
+  {
+	  $data = $this
+      ->createRequest($requestOptions)
+      ->get('blob/all/'.$username.'/'.$repo.'/'.$treeSHA); 
+      
+      return $data['blobs']; 
+  }
   /**
    * Get data from any route, GET method
    * Ex: $api->get('repos/show/my-username/my-repo')

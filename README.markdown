@@ -66,6 +66,20 @@ Returns an array describing the php-github-api repository.
 
 See all GitHub API routes: [http://develop.github.com/](http://develop.github.com/)
 
+## Objects
+
+### List contents of a tree
+	$tree = $api->listObjectTree('ornicar', 'php-github-api', '691c2ec7fd0b948042047b515886fec40fe76e2b');
+Returns an array containing a tree of the repository
+
+### Show the data of a blob
+	$blob = $api->showObjectBlob('ornicar', 'php-github-api', '691c2ec7fd0b948042047b515886fec40fe76e2b', 'CHANGELOG');
+Returns array of blob of specified path
+
+## List all blobs of repository
+	$blobs = $api->listObjectBlobs('ornicar', 'php-github-api', '691c2ec7fd0b948042047b515886fec40fe76e2b');
+Returns an array containing all blobs
+
 ## Run test suite
 
 All code is fully unit tested. To run tests on your server, from a CLI, run
