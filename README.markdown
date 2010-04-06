@@ -76,7 +76,7 @@ Returns an array containing a tree of the repository
 	$blob = $api->showObjectBlob('ornicar', 'php-github-api', '691c2ec7fd0b948042047b515886fec40fe76e2b', 'CHANGELOG');
 Returns array of blob of specified path
 
-## List all blobs of repository
+### List all blobs of repository
 	$blobs = $api->listObjectBlobs('ornicar', 'php-github-api', '691c2ec7fd0b948042047b515886fec40fe76e2b');
 Returns an array containing all blobs
 
