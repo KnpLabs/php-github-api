@@ -17,7 +17,7 @@ All next requests will use the user "ornicar", instead of anonymous access.
 
 ### Deauthenticate a user
 
-Cancels authehtication.
+Cancels authentication.
 
     $api->deAuthenticate();
 
