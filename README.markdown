@@ -99,7 +99,7 @@ Returns an array containing all blobs
 
 All code is fully unit tested. To run tests on your server, from a CLI, run
 
-    php /path/to/php-github-api/test/bin/prove.php
+    php /path/to/php-github-api/test/prove.php
 
 ## Credits
 
