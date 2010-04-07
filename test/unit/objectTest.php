@@ -10,7 +10,8 @@ $t->comment('Test ->listObjectTree');
 
 $tree = $api->listObjectTree('ornicar', 'php-github-api', '691c2ec7fd0b948042047b515886fec40fe76e2b');
 $firstFile = array_pop($tree);
-$t->ok($firstFile['sha'] != null, 'Tree returned with SHA listings');
+$t->is($firstFile['sha'], '5ac35496a1cbb2a914ff4325e7d6e8cae61f90b9', 'Tree returned with SHA listings');
+
 $blob = $api->showObjectBlob('ornicar', 'php-github-api', '691c2ec7fd0b948042047b515886fec40fe76e2b', 'CHANGELOG');
 print_r($blob);
 $t->is($blob['name'], 'CHANGELOG', 'Returned CHANGELOG blob');

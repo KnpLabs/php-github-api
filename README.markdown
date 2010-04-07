@@ -1,3 +1,8 @@
+# PHP GitHub API
+A simple, Object Oriented API wrapper for GitHub written with PHP5.
+Uses [GitHub API v2](http://develop.github.com/).
+Requires [curl](http://php.net/manual/en/book.curl.php).
+
 ## Instanciate a new API
 
     $api = new phpGitHubApi();
@@ -7,6 +12,16 @@
 This step is facultative, as most of GitHub services do not require authentication.
 
     $api->authenticate('ornicar', 'my-token');
+
+All next requests will use the user "ornicar", instead of anonymous access.
+
+### Deauthenticate a user
+
+Cancels authehtication.
+
+    $api->deAuthenticate();
+
+All next requests will anonymous access.
 
 ## Users
 

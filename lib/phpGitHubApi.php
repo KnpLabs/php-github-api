@@ -3,7 +3,7 @@
 require_once(dirname(__FILE__).'/phpGitHubApiRequest.php');
 
 /**
- * Simple PHP GitHubAPI class.
+ * Simple PHP GitHub API class.
  * Usage: http://wiki.github.com/ornicar/php-github-api/
  *
  * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
@@ -38,6 +38,18 @@ class phpGitHubApi
   {
     $this->login = $login;
     $this->token = $token;
+
+    return $this;
+  }
+
+  /**
+   * Deauthenticates a user for all next requests
+   *
+   * @return phpGitHubApi               fluent interface
+   */
+  public function deAuthenticate()
+  {
+    $this->login = $this->token = null;
 
     return $this;
   }
