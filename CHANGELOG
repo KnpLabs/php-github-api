@@ -1,7 +1,13 @@
-v1.1.0 - 2010-04-06
+v1.2 - 2010-04-08
 
- * addition of github Object API
+ * addition of the deAuthenticate method
+ * added unit tests
+ * refactored the request class
 
-v1.0.0 - 2010-02-13
+v1.1 - 2010-04-06
+
+ * addition of GitHub Object API
+
+v1.0 - 2010-02-13
 
  * Created initial 1.0 version
