@@ -59,14 +59,11 @@ class phpGitHubApi
    * http://develop.github.com/p/users.html#searching_for_users
    *
    * @param   string  $username         the username to search
-   * @param   array   $requestOptions   request options
    * @return  array                     list of users found
    */
-  public function searchUsers($username, array $requestOptions = array())
+  public function searchUsers($username)
   {
-    $data = $this
-    ->createRequest($requestOptions)
-    ->get('user/search/'.$username);
+    $data = $this->get('user/search/'.$username);
 
     return $data['users'];
   }
@@ -76,14 +73,25 @@ class phpGitHubApi
    * http://develop.github.com/p/users.html#getting_user_information
    *
    * @param   string  $username         the username to search
-   * @param   array   $requestOptions   request options
    * @return  array                     informations about the user
    */
-  public function showUser($username, array $requestOptions = array())
+  public function showUser($username)
   {
-    $data = $this
-    ->createRequest($requestOptions)
-    ->get('user/show/'.$username);
+    $data = $this->get('user/show/'.$username);
+
+    return $data['user'];
+  }
+
+  /**
+   * Update user informations
+   * http://develop.github.com/p/users.html#getting_user_information
+   *
+   * @param   string  $username         the username to search
+   * @return  array                     informations about the user
+   */
+  public function updateUser($username)
+  {
+    $data = $this->get('user/show/'.$username);
 
     return $data['user'];
   }
@@ -95,14 +103,11 @@ class phpGitHubApi
    * @param   string  $username         the username
    * @param   string  $repo             the repo
    * @param   string  $state            the issue state, can be open or closed
-   * @param   array   $requestOptions   request options
    * @return  array                     list of users found
    */
-  public function listIssues($username, $repo, $state = 'open', array $requestOptions = array())
+  public function listIssues($username, $repo, $state = 'open')
   {
-    $data = $this
-    ->createRequest($requestOptions)
-    ->get('issues/list/'.$username.'/'.$repo.'/'.$state);
+    $data = $this->get('issues/list/'.$username.'/'.$repo.'/'.$state);
 
     return $data['issues'];
   }
@@ -115,14 +120,11 @@ class phpGitHubApi
    * @param   string  $repo             the repo
    * @param   string  $state            the issue state, can be open or closed
    * @param   string  $searchTerm       the search term to filter issues by
-   * @param   array   $requestOptions   request options
    * @return  array                     list of users found
    */
-  public function searchIssues($username, $repo, $state, $searchTerm, array $requestOptions = array())
+  public function searchIssues($username, $repo, $state, $searchTerm)
   {
-    $data = $this
-    ->createRequest($requestOptions)
-    ->get('issues/search/'.$username.'/'.$repo.'/'.$state.'/'.$searchTerm);
+    $data = $this->get('issues/search/'.$username.'/'.$repo.'/'.$state.'/'.$searchTerm);
 
     return $data['issues'];
   }
@@ -136,11 +138,9 @@ class phpGitHubApi
    * @param   string  $number           the issue number
    * @return  array                     informations about the issue
    */
-  public function showIssue($username, $repo, $number, array $requestOptions = array())
+  public function showIssue($username, $repo, $number)
   {
-    $data = $this
-    ->createRequest($requestOptions)
-    ->get('issues/show/'.$username.'/'.$repo.'/'.$number);
+    $data = $this->get('issues/show/'.$username.'/'.$repo.'/'.$number);
 
     return $data['issue'];
   }
@@ -152,14 +152,11 @@ class phpGitHubApi
    * @param   string  $username         the username
    * @param   string  $repo             the repo
    * @param   string  $branch           the branch
-   * @param   array   $requestOptions   request options
    * @return  array                     list of users found
    */
-  public function listBranchCommits($username, $repo, $branch, array $requestOptions = array())
+  public function listBranchCommits($username, $repo, $branch)
   {
-    $data = $this
-    ->createRequest($requestOptions)
-    ->get('commits/list/'.$username.'/'.$repo.'/'.$branch);
+    $data = $this->get('commits/list/'.$username.'/'.$repo.'/'.$branch);
 
     return $data['commits'];
   }
@@ -172,14 +169,11 @@ class phpGitHubApi
    * @param   string  $repo             the repo
    * @param   string  $branch           the branch
    * @param   string  $path             the path
-   * @param   array   $requestOptions   request options
    * @return  array                     list of users found
    */
-  public function listFileCommits($username, $repo, $branch, $path, array $requestOptions = array())
+  public function listFileCommits($username, $repo, $branch, $path)
   {
-    $data = $this
-    ->createRequest($requestOptions)
-    ->get('commits/list/'.$username.'/'.$repo.'/'.$branch.'/'.$path);
+    $data = $this->get('commits/list/'.$username.'/'.$repo.'/'.$branch.'/'.$path);
 
     return $data['commits'];
   }
@@ -191,14 +185,11 @@ class phpGitHubApi
    * @param   string $username          the username
    * @param   string $repo              the repo
    * @param   string $treeSHA           the tree sha
-   * @param   array  $requestOptions    request options
    * @return  array                     root tree of the project
    */
-  public function listObjectTree($username, $repo, $treeSHA, $requestOptions = array())
+  public function listObjectTree($username, $repo, $treeSHA)
   {
-    $data = $this
-    ->createRequest($requestOptions)
-    ->get('tree/show/'.$username.'/'.$repo.'/'.$treeSHA);
+    $data = $this->get('tree/show/'.$username.'/'.$repo.'/'.$treeSHA);
 
     return $data['tree'];
   }
@@ -211,14 +202,11 @@ class phpGitHubApi
    * @param   string $repo              the repo
    * @param   string $treeSHA           the tree sha
    * @param   string $path              the path
-   * @param   array  $requestOptions    request options
    * @return  array                     data blob of tree and path
    */
-  public function showObjectBlob($username, $repo, $treeSHA, $path, $requestOptions = array())
+  public function showObjectBlob($username, $repo, $treeSHA, $path)
   {
-    $data = $this
-    ->createRequest($requestOptions)
-    ->get('blob/show/'.$username.'/'.$repo.'/'.$treeSHA .'/'.$path);
+    $data = $this->get('blob/show/'.$username.'/'.$repo.'/'.$treeSHA .'/'.$path);
 
     return $data['blob'];
   }
@@ -231,14 +219,11 @@ class phpGitHubApi
    * @param   string $repo              the repo
    * @param   string $treeSHA           the tree sha
    * @param   string $path              the path
-   * @param   array  $requestOptions    request options
    * @return  array                     data blobs of tree
    */
-  public function listObjectBlobs($username, $repo, $treeSHA, $requestOptions = array())
+  public function listObjectBlobs($username, $repo, $treeSHA)
   {
-    $data = $this
-    ->createRequest($requestOptions)
-    ->get('blob/all/'.$username.'/'.$repo.'/'.$treeSHA);
+    $data = $this->get('blob/all/'.$username.'/'.$repo.'/'.$treeSHA);
 
     return $data['blobs'];
   }
@@ -249,28 +234,24 @@ class phpGitHubApi
    *
    * @param   string  $route            the GitHub route
    * @param   array   $requestOptions   request options
-   * @return  array   data returned
+   * @return  array                     data returned
    */
   public function get($route, array $requestOptions = array())
   {
-    return $this
-    ->createRequest($requestOptions)
-    ->get($route);
+    return $this->createRequest($requestOptions)->get($route);
   }
 
   /**
    * Get data from any route, POST method
-   * Ex: $api->get('repos/show/my-username/my-repo')
+   * Ex: $api->post('repos/show/my-username/my-repo')
    *
    * @param   string  $route          the GitHub route
    * @param   array   $requestOptions request options
-   * @return  array   data returned
+   * @return  array                   data returned
    */
   public function post($route, array $requestOptions = array())
   {
-    return $this
-    ->createRequest($requestOptions)
-    ->post($route);
+    return $this->createRequest($requestOptions)->post($route);
   }
 
   /**
