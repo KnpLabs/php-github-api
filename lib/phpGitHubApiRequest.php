@@ -46,14 +46,14 @@ class phpGitHubApiRequest
   }
 
   /**
-   * Sends a request to the server, receive a response,
+   * Send a request to the server, receive a response,
    * decode the response and returns an associative array
    *
-   * @param  string   $apiPath       Request API path
-   * @param  array    $parameters    Parameters
-   * @param  string   $httpMethod    HTTP method to use
+   * @param  string   $apiPath        Request API path
+   * @param  array    $parameters     Parameters
+   * @param  string   $httpMethod     HTTP method to use
    *
-   * @return array    Data
+   * @return array                    Data
    */
   public function send($apiPath, array $parameters = array(), $httpMethod = 'GET')
   {
@@ -61,6 +61,7 @@ class phpGitHubApiRequest
   }
 
   /**
+   * Send a GET request
    * @see send
    */
   public function get($apiPath, array $parameters = array())
@@ -69,6 +70,7 @@ class phpGitHubApiRequest
   }
 
   /**
+   * Send a POST request
    * @see send
    */
   public function post($apiPath, array $parameters = array())
@@ -77,7 +79,7 @@ class phpGitHubApiRequest
   }
 
   /**
-   * gets a JSON response and transform it to a PHP array
+   * Get a JSON response and transform it to a PHP array
    *
    * @return  array   the response
    */
