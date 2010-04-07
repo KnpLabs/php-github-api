@@ -2,7 +2,7 @@
 require_once dirname(__FILE__).'/../../vendor/lime.php';
 require_once dirname(__FILE__).'/../../lib/phpGitHubApi.php';
 
-$t = new lime_test(5);
+$t = new lime_test(6);
 
 $t->comment('Test request');
 
@@ -25,3 +25,13 @@ $t->isa_ok($api, 'phpGitHubApi', 'Got a phpGitHubApi instance');
 $repo = $api->get('repos/show/ornicar/php-github-api');
 
 $t->is($repo['repository']['name'], 'php-github-api', 'Found information about php-github-api repo');
+
+try
+{
+  $api->get('non-existing-url/for-sure');
+  $t->fail('Call to non-existing-url/for-sure throws a phpGitHubApiRequestException');
+}
+catch(phpGitHubApiRequestException $e)
+{
+  $t->pass('Call to non-existing-url/for-sure throws a phpGitHubApiRequestException');
+}
