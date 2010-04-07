@@ -116,27 +116,36 @@ class phpGitHubApiRequest
         'token' => $this->options['token']
       ), $parameters);
     }
-    
-    $queryString = utf8_encode(http_build_query($parameters, '', '&'));
 
-    $completeUrl = $url . ('GET' === $httpMethod ? '?' . $queryString : '');
+    $curlOptions = array();
 
-    $this->debug('send request: '.$completeUrl);
+    if (!empty($parameters))
+    {
+      $queryString = utf8_encode(http_build_query($parameters, '', '&'));
 
-    $curlOptions = array(
-      CURLOPT_URL             => $completeUrl,
+      if('GET' === $httpMethod)
+      {
+        $url .= '?' . $queryString;
+      }
+      else
+      {
+        $curlOptions += array(
+          CURLOPT_POST        => true,
+          CURLOPT_POSTFIELDS  => $queryString
+        );
+      }
+    }
+
+    $this->debug('send request: '.$url);
+
+    $curlOptions += array(
+      CURLOPT_URL             => $url,
       CURLOPT_PORT            => $this->options['http_port'],
       CURLOPT_USERAGENT       => $this->options['user_agent'],
       CURLOPT_FOLLOWLOCATION  => true,
       CURLOPT_RETURNTRANSFER  => true,
       CURLOPT_TIMEOUT         => $this->options['timeout']
     );
-
-    if (!empty($parameters) && 'POST' === $httpMethod)
-    {
-      $curlOptions[CURLOPT_POST]        = true;
-      $curlOptions[CURLOPT_POSTFIELDS]  = $queryString;
-    }
 
     $curl = curl_init();
 
