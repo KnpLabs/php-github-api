@@ -65,19 +65,19 @@ Returns an array of following users as described in [http://develop.github.com/p
 
 ### Follow a user
 
-Make the authenticated user follow a user. Require authentication.
+Make the authenticated user follow a user. Requires authentication.
 
     $github->authenticate('ornicar', 'my-github-token');
-    github->getUserApi()->follow('symfony');
+    $github->getUserApi()->follow('symfony');
 
 Returns an array of followed users as described in [http://develop.github.com/p/users.html#following_network](http://develop.github.com/p/users.html#following_network)
 
 ### Unfollow a user
 
-Make the authenticated user unfollow a user. Require authentication.
+Make the authenticated user unfollow a user. Requires authentication.
 
     $github->authenticate('ornicar', 'my-github-token');
-    github->getUserApi()->unFollow('symfony');
+    $github->getUserApi()->unFollow('symfony');
 
 Returns an array of followed users as described in [http://develop.github.com/p/users.html#following_network](http://develop.github.com/p/users.html#following_network)
 
