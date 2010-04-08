@@ -4,6 +4,7 @@ require_once(dirname(__FILE__).'/phpGitHubApiAbstract.php');
 
 /**
  * Listing issues, searching, editing and closing your projects issues.
+ * http://develop.github.com/p/issues.html
  *
  * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @license   MIT License

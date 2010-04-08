@@ -4,6 +4,7 @@ require_once(dirname(__FILE__).'/phpGitHubApiAbstract.php');
 
 /**
  * Searching users, getting user information and managing authenticated user account information.
+ * http://develop.github.com/p/users.html
  *
  * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @license   MIT License

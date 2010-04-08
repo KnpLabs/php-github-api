@@ -4,6 +4,7 @@ require_once(dirname(__FILE__).'/phpGitHubApiAbstract.php');
 
 /**
  * Getting information on specific commits, the diffs they introduce, the files they've changed.
+ * http://develop.github.com/p/commits.html
  *
  * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @license   MIT License
