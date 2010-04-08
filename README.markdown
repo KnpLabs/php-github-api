@@ -42,6 +42,14 @@ Returns an array of users as described in [http://develop.github.com/p/users.htm
 
 Returns an array of information about the user as described in [http://develop.github.com/p/users.html#getting_user_information](http://develop.github.com/p/users.html#getting_user_information)
 
+### Update user informations
+
+Change user attributes: name, email, blog, company, location. Requires authentication.
+
+    $github->getUserApi()->update('ornicar', array('location' => 'France', 'blog' => 'http://diem-project.org/blog'));
+
+Returns an array of information about the user as described in [http://develop.github.com/p/users.html#authenticated_user_management](http://develop.github.com/p/users.html#authenticated_user_management)
+
 ## Issues
 
 [Listing issues, searching, editing and closing your projects issues.](http://develop.github.com/p/issues.html)
