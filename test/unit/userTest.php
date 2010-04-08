@@ -2,7 +2,7 @@
 require_once dirname(__FILE__).'/../../vendor/lime.php';
 require_once dirname(__FILE__).'/../../lib/phpGitHubApi.php';
 
-$t = new lime_test(12);
+$t = new lime_test(13);
 
 $username = 'ornicartest';
 $token    = 'fd8144e29b4a85e9487d1cacbcd4e26c';
@@ -82,3 +82,9 @@ $t->comment('Unfollow ornicar');
 $github->getUserApi()->unfollow('ornicar');
 
 $t->is(!in_array('ornicar', $github->getUserApi()->getFollowing($username)), $username.' does not follow ornicar');
+
+$t->comment('Get watched repos');
+
+$repos = $github->getUserApi()->getWatchedRepos('ornicar');
+
+$t->ok(array_key_exists('homepage', array_pop($repos)), 'Found '.'ornicar'.' watched repos');

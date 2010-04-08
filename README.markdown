@@ -81,6 +81,12 @@ Make the authenticated user unfollow a user. Requires authentication.
 
 Returns an array of followed users as described in [http://develop.github.com/p/users.html#following_network](http://develop.github.com/p/users.html#following_network)
 
+### Get repos that a specific user is watched
+
+    $users = $github->getUserApi()->getWatchedRepos('ornicar');
+
+Returns an array of watched repos as described in [http://develop.github.com/p/users.html#watched_repos](http://develop.github.com/p/users.html#watched_repos)
+
 ## Issues
 
 [Listing issues, searching, editing and closing your projects issues.](http://develop.github.com/p/issues.html)

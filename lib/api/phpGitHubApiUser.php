@@ -110,4 +110,18 @@ class phpGitHubApiUser extends phpGitHubApiAbstract
 
     return $response['users'];
   }
+
+  /**
+   * Request the repos that a specific user is watching
+   * http://develop.github.com/p/users.html#watched_repos
+   *
+   * @param   string  $username         the username
+   * @return  array                     list of watched repos
+   */
+  public function getWatchedRepos($username)
+  {
+    $response = $this->api->get('repos/watched/'.$username);
+
+    return $response['repositories'];
+  }
 }
