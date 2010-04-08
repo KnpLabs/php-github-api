@@ -4,6 +4,7 @@ require_once(dirname(__FILE__).'/phpGitHubApiAbstract.php');
 
 /**
  * Getting full versions of specific files and trees in your Git repositories.
+ * http://develop.github.com/p/object.html
  *
  * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @license   MIT License
@@ -28,6 +29,23 @@ class phpGitHubApiObject extends phpGitHubApiAbstract
   }
 
   /**
+   * Lists the data blobs of a tree by tree SHA
+   * http://develop.github.com/p/object.html#blobs
+   *
+   * @param   string $username          the username
+   * @param   string $repo              the repo
+   * @param   string $treeSHA           the tree sha
+   * @param   string $path              the path
+   * @return  array                     data blobs of tree
+   */
+  public function listBlobs($username, $repo, $treeSHA)
+  {
+    $response = $this->api->get('blob/all/'.$username.'/'.$repo.'/'.$treeSHA);
+
+    return $response['blobs'];
+  }
+
+  /**
    * Get the data about a blob by tree SHA and file path.
    * http://develop.github.com/p/object.html#blobs
    *
@@ -45,19 +63,20 @@ class phpGitHubApiObject extends phpGitHubApiAbstract
   }
 
   /**
-   * Lists the data blobs of a tree by tree SHA
-   * http://develop.github.com/p/object.html#blobs
+   * Returns the raw text content of the object.
+   * http://develop.github.com/p/object.html#raw_git_data
    *
    * @param   string $username          the username
    * @param   string $repo              the repo
-   * @param   string $treeSHA           the tree sha
-   * @param   string $path              the path
-   * @return  array                     data blobs of tree
+   * @param   string $objectSHA         the object sha can be either a blob SHA1, a tree SHA1 or a commit SHA1
+   * @return  string                    raw text content of the blob, tree or commit object
    */
-  public function listBlobs($username, $repo, $treeSHA)
+  public function getRawData($username, $repo, $objectSHA)
   {
-    $response = $this->api->get('blob/all/'.$username.'/'.$repo.'/'.$treeSHA);
+    $response = $this->api->get('blob/show/'.$username.'/'.$repo.'/'.$objectSHA, array(), array(
+      'format' => 'text'
+    ));
 
-    return $response['blobs'];
+    return $response;
   }
 }

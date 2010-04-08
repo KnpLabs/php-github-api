@@ -2,7 +2,7 @@
 require_once dirname(__FILE__).'/../../vendor/lime.php';
 require_once dirname(__FILE__).'/../../lib/phpGitHubApi.php';
 
-$t = new lime_test(6);
+$t = new lime_test(7);
 
 $username = 'ornicar';
 $repo     = 'php-github-api';
@@ -32,3 +32,17 @@ $blobs = $github->getObjectApi()->listBlobs($username, $repo, $treeSha);
 $t->ok(count($blobs) > 0, 'Returned array of blobs');
 
 $t->is_deeply($github->listObjectBlobs($username, $repo, $treeSha), $blobs, 'Both new and BC syntax work');
+
+$t->comment('Get raw text');
+
+$text = $github->getObjectApi()->getRawData($username, $repo, 'bd25d1e4ea7eab84b856131e470edbc21b6cd66b');
+
+$expected = "tree d978e4755a9ed4e7ca3ebf9ed674dfb95b4af481
+parent e291e9377fd64e08dba556f2dce5b0fc0011430e
+author Thibault Duplessis <thibault.duplessis@gmail.com> 1266076405 +0100
+committer Thibault Duplessis <thibault.duplessis@gmail.com> 1266076405 +0100
+
+created README.markdown
+";
+
+$t->is($text, $expected, 'Got a blob raw content');
