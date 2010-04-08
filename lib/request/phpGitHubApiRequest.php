@@ -10,8 +10,11 @@ require_once(dirname(__FILE__).'/phpGitHubApiRequestException.php');
  */
 class phpGitHubApiRequest
 {
-  protected
-  $options = array(
+  /**
+   * The request options
+   * @var array
+   */
+  protected $options = array(
     'protocol'    => 'http',
     'url'         => ':protocol://github.com/api/v2/:format/:path',
     'format'      => 'json',
@@ -24,7 +27,7 @@ class phpGitHubApiRequest
   );
 
   /**
-   * Instanciates a new request
+   * Instanciate a new request
    *
    * @param  array   $options  Request options
    */
@@ -34,7 +37,7 @@ class phpGitHubApiRequest
   }
 
   /**
-   * Configures the request
+   * Configure the request
    *
    * @param   array               $options  Request options
    * @return  phpGitHubApiRequest $this     Fluent interface
@@ -113,7 +116,7 @@ class phpGitHubApiRequest
   }
 
   /**
-   * Sends a request to the server, receives a response
+   * Send a request to the server, receive a response
    *
    * @param  string   $apiPath       Request API path
    * @param  array    $parameters    Parameters
@@ -192,7 +195,7 @@ class phpGitHubApiRequest
   }
 
   /**
-   * Changes an option value.
+   * Change an option value.
    *
    * @param string $name   The option name
    * @param mixed  $value  The value
@@ -207,7 +210,7 @@ class phpGitHubApiRequest
   }
 
   /**
-   * Gets an option value.
+   * Get an option value.
    *
    * @param  string $name The option name
    *

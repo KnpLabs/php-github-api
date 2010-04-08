@@ -10,8 +10,22 @@
  */
 class phpGitHubApi
 {
+  /**
+   * The request instance used to communicate with GitHub
+   * @var phpGitHubApiRequest
+   */
   protected $request  = null;
+  
+  /**
+   * The list of loaded API instances
+   * @var array
+   */
   protected $apis     = array();
+
+  /**
+   * Use debug mode (prints debug messages)
+   * @var bool
+   */
   protected $debug;
 
   /**
