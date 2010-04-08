@@ -83,12 +83,12 @@ class phpGitHubApiIssue extends phpGitHubApiAbstract
   }
 
   /**
-   * Close an existing issue. Requires authentication.
+   * Close an existing issue by username, repo and issue number. Requires authentication.
    * http://develop.github.com/p/issues.html#open_and_close_issues
    *
    * @param   string  $username         the username
    * @param   string  $repo             the repo
-   * @param   string  $issueTitle       the issue number
+   * @param   string  $issueNumber      the issue number
    * @return  array                     informations about the issue
    */
   public function close($username, $repo, $issueNumber)
@@ -99,12 +99,12 @@ class phpGitHubApiIssue extends phpGitHubApiAbstract
   }
 
   /**
-   * Repoen an existing issue. Requires authentication.
+   * Repoen an existing issue by username, repo and issue number. Requires authentication.
    * http://develop.github.com/p/issues.html#open_and_close_issues
    *
    * @param   string  $username         the username
    * @param   string  $repo             the repo
-   * @param   string  $issueTitle       the issue number
+   * @param   string  $issueNumber      the issue number
    * @return  array                     informations about the issue
    */
   public function reOpen($username, $repo, $issueNumber)
@@ -112,5 +112,40 @@ class phpGitHubApiIssue extends phpGitHubApiAbstract
     $response = $this->api->post('issues/reopen/'.$username.'/'.$repo.'/'.$issueNumber);
 
     return $response['issue'];
+  }
+
+  /**
+   * List an issue comments by username, repo and issue number
+   * http://develop.github.com/p/issues.html#list_an_issues_comments
+   *
+   * @param   string  $username         the username
+   * @param   string  $repo             the repo
+   * @param   string  $issueNumber      the issue number
+   * @return  array                     list of issue comments
+   */
+  public function getComments($username, $repo, $issueNumber)
+  {
+    $response = $this->api->get('issues/comments/'.$username.'/'.$repo.'/'.$issueNumber);
+
+    return $response['comments'];
+  }
+
+  /**
+   * Add a comment to the issue by username, repo and issue number
+   * http://develop.github.com/p/issues.html#comment_on_issues
+   *
+   * @param   string  $username         the username
+   * @param   string  $repo             the repo
+   * @param   string  $issueNumber      the issue number
+   * @param   string  $comment          the comment body
+   * @return  array                     the created comment
+   */
+  public function addComment($username, $repo, $issueNumber, $commentBody)
+  {
+    $response = $this->api->post('issues/comment/'.$username.'/'.$repo.'/'.$issueNumber, array(
+      'comment' => $commentBody
+    ));
+
+    return $response['comment'];
   }
 }

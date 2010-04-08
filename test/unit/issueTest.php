@@ -63,3 +63,16 @@ $t->comment('Reopen the issue');
 $issue = $github->getIssueApi()->reOpen($username, $repo, $issueNumber);
 
 $t->is($issue['state'], 'open', 'The new issue is open');
+
+$t->comment('Add an issue comment');
+$commentText = 'This is a test comment';
+
+$comment = $github->getIssueApi()->addComment($username, $repo, $issueNumber, $commentText);
+
+$t->is($comment['comment'], $commentText, 'Got the new comment');
+
+$t->comment('List issue comments');
+
+$comments = $github->getIssueApi()->getComments($username, $repo, $issueNumber);
+
+$t->is($comments[0]['body'], $commentText, 'Found the new comment');
