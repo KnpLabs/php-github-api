@@ -1,3 +1,8 @@
+v2.2 - 2010-04-08
+
+ * add phpGitHubApiObject->getFollowing()
+ * add phpGitHubApiObject->getFollowers()
+
 v2.1 - 2010-04-08
 
  * add phpGitHubApiObject->getRawData()
