@@ -50,6 +50,18 @@ Change user attributes: name, email, blog, company, location. Requires authentic
 
 Returns an array of information about the user as described in [http://develop.github.com/p/users.html#authenticated_user_management](http://develop.github.com/p/users.html#authenticated_user_management)
 
+### Get users that a specific user is following
+
+    $github->getUserApi()->getFollowing('ornicar');
+
+Returns an array of followed users as described in [http://develop.github.com/p/users.html#following_network](http://develop.github.com/p/users.html#following_network)
+
+### Get users following a specific user
+
+    $github->getUserApi()->getFollowers('ornicar');
+
+Returns an array of following users as described in [http://develop.github.com/p/users.html#following_network](http://develop.github.com/p/users.html#following_network)
+
 ## Issues
 
 [Listing issues, searching, editing and closing your projects issues.](http://develop.github.com/p/issues.html)

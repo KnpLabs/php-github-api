@@ -2,7 +2,7 @@
 require_once dirname(__FILE__).'/../../vendor/lime.php';
 require_once dirname(__FILE__).'/../../lib/phpGitHubApi.php';
 
-$t = new lime_test(8);
+$t = new lime_test(10);
 
 $username = 'ornicartest';
 $token    = 'fd8144e29b4a85e9487d1cacbcd4e26c';
@@ -38,6 +38,18 @@ catch(phpGitHubApiRequestException $e)
 {
   $t->pass('Found no infos about this-user-probably-doesnt-exist user');
 }
+
+$t->comment('Get following users');
+
+$users = $github->getUserApi()->getFollowing('ornicar');
+
+$t->ok(count($users), 'Found '.'ornicar'.' following users');
+
+$t->comment('Get follower users');
+
+$users = $github->getUserApi()->getFollowers('ornicar');
+
+$t->ok(count($users), 'Found '.'ornicar'.' followers users');
 
 $t->comment('Authenticate '.$username);
 
