@@ -88,19 +88,26 @@ Returns an array of commits as described in [http://develop.github.com/p/commits
 
     $tree = $github->getObjectApi()->showTree('ornicar', 'php-github-api', '691c2ec7fd0b948042047b515886fec40fe76e2b');
 
-Returns an array containing a tree of the repository
+Returns an array containing a tree of the repository as described in [http://develop.github.com/p/object.html#trees](http://develop.github.com/p/object.html#trees)
 
-### Show the data of a blob
-
-    $blob = $github->getObjectApi()->showBlob('ornicar', 'php-github-api', '691c2ec7fd0b948042047b515886fec40fe76e2b', 'CHANGELOG');
-
-Returns array of blob of specified path
-
-### List all blobs of repository
+### List all blobs of a tree
 
     $blobs = $github->getObjectApi()->listBlobs('ornicar', 'php-github-api', '691c2ec7fd0b948042047b515886fec40fe76e2b');
 
-Returns an array containing all blobs
+Returns an array containing the tree blobs as described in [http://develop.github.com/p/object.html#blobs](http://develop.github.com/p/object.html#blobs)
+
+### Show the informations of a blob
+
+    $blob = $github->getObjectApi()->showBlob('ornicar', 'php-github-api', '691c2ec7fd0b948042047b515886fec40fe76e2b', 'CHANGELOG');
+
+Returns array of blob informations as described in [http://develop.github.com/p/object.html#blobs](http://develop.github.com/p/object.html#blobs)
+
+### Show the raw content of an object
+
+    $rawText = $github->getObjectApi()->getRawData('ornicar', 'php-github-api', 'bd25d1e4ea7eab84b856131e470edbc21b6cd66b');
+
+The last parameter can be either a blob SHA1, a tree SHA1 or a commit SHA1.
+Returns the raw text content of the object as described in [http://develop.github.com/p/object.html#raw_git_data](http://develop.github.com/p/object.html#raw_git_data)
 
 ## Request any route
 
