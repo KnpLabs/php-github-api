@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Simple PHP GitHub API class.
- * Usage: http://wiki.github.com/ornicar/php-github-api/
- *
+ * Simple PHP GitHub API
+ * 
+ * @tutorial  http://github.com/ornicar/php-github-api/blob/master/README.markdown
  * @version   2.0
  * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @license   MIT License
