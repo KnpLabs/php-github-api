@@ -64,6 +64,14 @@ $issue = $github->getIssueApi()->reOpen($username, $repo, $issueNumber);
 
 $t->is($issue['state'], 'open', 'The new issue is open');
 
+$t->comment('Update the issue');
+
+$issue = $github->getIssueApi()->update($username, $repo, $issueNumber, array(
+  'body' => 'Test new issue body updated'
+));
+
+$t->is($issue['body'], 'Test new issue body updated', 'The issue has been updated');
+
 $t->comment('Add an issue comment');
 $commentText = 'This is a test comment';
 

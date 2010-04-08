@@ -99,6 +99,24 @@ class phpGitHubApiIssue extends phpGitHubApiAbstract
   }
 
   /**
+   * Update issue informations by username, repo and issue number. Requires authentication.
+   * http://develop.github.com/p/issues.html#edit_existing_issues
+   *
+   * @param   string  $username         the username
+   * @param   string  $repo             the repo
+   * @param   string  $issueNumber      the issue number
+   * @param   array   $data             key=>value user attributes to update.
+   *                                    key can be title or body
+   * @return  array                     informations about the issue
+   */
+  public function update($username, $repo, $issueNumber, array $data)
+  {
+    $response = $this->api->post('issues/edit/'.$username.'/'.$repo.'/'.$issueNumber, $data);
+
+    return $response['issue'];
+  }
+
+  /**
    * Repoen an existing issue by username, repo and issue number. Requires authentication.
    * http://develop.github.com/p/issues.html#open_and_close_issues
    *

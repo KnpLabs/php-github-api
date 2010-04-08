@@ -49,6 +49,7 @@ Change user attributes: name, email, blog, company, location. Requires authentic
     $github->authenticate('ornicar', 'my-github-token');
     $github->getUserApi()->update('ornicar', array('location' => 'France', 'blog' => 'http://diem-project.org/blog'));
 
+Updates the specified user informations. Available attributes are name, email, blog, company and location.
 Returns an array of information about the user as described in [http://develop.github.com/p/users.html#authenticated_user_management](http://develop.github.com/p/users.html#authenticated_user_management)
 
 ### Get users that a specific user is following
@@ -142,15 +143,37 @@ Returns an array of information about the issue as described in [http://develop.
 
     $github->getIssueApi()->close('ornicar', 'php-github-api', 4);
 
-Closes the fourth issue of the repo "php-github-api" of the user "ornicar".
+Closes the fourth issue of the repo "php-github-api" of the user "ornicar". Requires authentication.
 Returns an array of information about the issue as described in [http://develop.github.com/p/issues.html#view_an_issue](http://develop.github.com/p/issues.html#view_an_issue)
 
 ### Reopen an issue
 
     $github->getIssueApi()->reOpen('ornicar', 'php-github-api', 4);
 
-Reopens the fourth issue of the repo "php-github-api" of the user "ornicar".
+Reopens the fourth issue of the repo "php-github-api" of the user "ornicar". Requires authentication.
 Returns an array of information about the issue as described in [http://develop.github.com/p/issues.html#view_an_issue](http://develop.github.com/p/issues.html#view_an_issue)
+
+### Update an issue
+
+    $github->getIssueApi()->update('ornicar', 'php-github-api', 4, array('body' => 'The new issue body'));
+
+Updates the fourth issue of the repo "php-github-api" of the user "ornicar". Requires authentication.
+Available attributes are title and body.
+Returns an array of information about the issue as described in [http://develop.github.com/p/issues.html#view_an_issue](http://develop.github.com/p/issues.html#view_an_issue)
+
+### List an issue comments
+
+    $comments = $github->getIssueApi()->getComments('ornicar', 'php-github-api', 4);
+
+List an issue comments by username, repo and issue number.
+Returns an array of issues as described in [http://develop.github.com/p/issues.html#list_an_issues_comments](http://develop.github.com/p/issues.html#list_an_issues_comments)
+
+### Add a comment on an issue
+
+    $github->getIssueApi()->addComment('ornicar', 'php-github-api', 4, 'My new comment');
+
+Add a comment to the issue by username, repo and issue number.
+The comment is assigned to the authenticated user. Requires authentication.
 
 ## Commits
 
