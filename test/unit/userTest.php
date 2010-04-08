@@ -2,7 +2,7 @@
 require_once dirname(__FILE__).'/../../vendor/lime.php';
 require_once dirname(__FILE__).'/../../lib/phpGitHubApi.php';
 
-$t = new lime_test(10);
+$t = new lime_test(12);
 
 $username = 'ornicartest';
 $token    = 'fd8144e29b4a85e9487d1cacbcd4e26c';
@@ -70,3 +70,15 @@ $github->getUserApi()->update($username, array('location' => 'France'));
 $user = $github->getUserApi()->show($username);
 
 $t->is($user['location'], 'France', 'User new location is France');
+
+$t->comment('Follow ornicar');
+
+$github->getUserApi()->follow('ornicar');
+
+$t->is(in_array('ornicar', $github->getUserApi()->getFollowing($username)), $username.' follows ornicar');
+
+$t->comment('Unfollow ornicar');
+
+$github->getUserApi()->unfollow('ornicar');
+
+$t->is(!in_array('ornicar', $github->getUserApi()->getFollowing($username)), $username.' does not follow ornicar');

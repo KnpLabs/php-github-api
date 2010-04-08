@@ -46,6 +46,7 @@ Returns an array of information about the user as described in [http://develop.g
 
 Change user attributes: name, email, blog, company, location. Requires authentication.
 
+    $github->authenticate('ornicar', 'my-github-token');
     $github->getUserApi()->update('ornicar', array('location' => 'France', 'blog' => 'http://diem-project.org/blog'));
 
 Returns an array of information about the user as described in [http://develop.github.com/p/users.html#authenticated_user_management](http://develop.github.com/p/users.html#authenticated_user_management)
@@ -61,6 +62,24 @@ Returns an array of followed users as described in [http://develop.github.com/p/
     $users = $github->getUserApi()->getFollowers('ornicar');
 
 Returns an array of following users as described in [http://develop.github.com/p/users.html#following_network](http://develop.github.com/p/users.html#following_network)
+
+### Follow a user
+
+Make the authenticated user follow a user. Require authentication.
+
+    $github->authenticate('ornicar', 'my-github-token');
+    github->getUserApi()->follow('symfony');
+
+Returns an array of followed users as described in [http://develop.github.com/p/users.html#following_network](http://develop.github.com/p/users.html#following_network)
+
+### Unfollow a user
+
+Make the authenticated user unfollow a user. Require authentication.
+
+    $github->authenticate('ornicar', 'my-github-token');
+    github->getUserApi()->unFollow('symfony');
+
+Returns an array of followed users as described in [http://develop.github.com/p/users.html#following_network](http://develop.github.com/p/users.html#following_network)
 
 ## Issues
 

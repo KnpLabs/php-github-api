@@ -64,7 +64,7 @@ class phpGitHubApiUser extends phpGitHubApiAbstract
    */
   public function getFollowing($username)
   {
-    $response = $this->api->get('/user/show/'.$username.'/following');
+    $response = $this->api->get('user/show/'.$username.'/following');
 
     return $response['users'];
   }
@@ -78,7 +78,35 @@ class phpGitHubApiUser extends phpGitHubApiAbstract
    */
   public function getFollowers($username)
   {
-    $response = $this->api->get('/user/show/'.$username.'/followers');
+    $response = $this->api->get('user/show/'.$username.'/followers');
+
+    return $response['users'];
+  }
+
+  /**
+   * Make the authenticated user follow the specified user. Requires authentication.
+   * http://develop.github.com/p/users.html#following_network
+   *
+   * @param   string  $username         the username to follow
+   * @return  array                     list of followed users
+   */
+  public function follow($username)
+  {
+    $response = $this->api->post('user/follow/'.$username);
+
+    return $response['users'];
+  }
+
+  /**
+   * Make the authenticated user unfollow the specified user. Requires authentication.
+   * http://develop.github.com/p/users.html#following_network
+   *
+   * @param   string  $username         the username to unfollow
+   * @return  array                     list of followed users
+   */
+  public function unFollow($username)
+  {
+    $response = $this->api->post('user/unfollow/'.$username);
 
     return $response['users'];
   }
