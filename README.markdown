@@ -52,13 +52,13 @@ Returns an array of information about the user as described in [http://develop.g
 
 ### Get users that a specific user is following
 
-    $github->getUserApi()->getFollowing('ornicar');
+    $users = $github->getUserApi()->getFollowing('ornicar');
 
 Returns an array of followed users as described in [http://develop.github.com/p/users.html#following_network](http://develop.github.com/p/users.html#following_network)
 
 ### Get users following a specific user
 
-    $github->getUserApi()->getFollowers('ornicar');
+    $users = $github->getUserApi()->getFollowers('ornicar');
 
 Returns an array of following users as described in [http://develop.github.com/p/users.html#following_network](http://develop.github.com/p/users.html#following_network)
 
