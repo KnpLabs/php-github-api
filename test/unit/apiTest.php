@@ -1,6 +1,7 @@
 <?php
 require_once dirname(__FILE__).'/../../vendor/lime.php';
 require_once dirname(__FILE__).'/../../lib/phpGitHubApi.php';
+require_once dirname(__FILE__).'/../../lib/request/phpGitHubApiRequest.php';
 
 $t = new lime_test(6);
 
