@@ -9,6 +9,7 @@ v2.5 - 2010-04-08
   * add phpGitHubApiIssue->getLabels()
   * add phpGitHubApiIssue->addLabel()
   * add phpGitHubApiIssue->removeLabel()
+  Issue API completed.
 
 v2.4 - 2010-04-08
 
