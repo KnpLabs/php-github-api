@@ -84,3 +84,22 @@ $t->comment('List issue comments');
 $comments = $github->getIssueApi()->getComments($username, $repo, $issueNumber);
 
 $t->is($comments[0]['body'], $commentText, 'Found the new comment');
+
+$t->comment('Add a label to the issue');
+$labelName = 'testing';
+
+$labels = $github->getIssueApi()->addLabel($username, $repo, $labelName, $issueNumber);
+
+$t->ok(in_array($labelName, $labels), 'The issue now has the label '.$labelName);
+
+$t->comment('Remove a label from the issue');
+
+$labels = $github->getIssueApi()->removeLabel($username, $repo, $labelName, $issueNumber);
+
+$t->ok(!in_array($labelName, $labels), 'The issue has no more label '.$labelName);
+
+$t->comment('List project labels');
+
+$labels = $github->getIssueApi()->getLabels($username, $repo);
+
+$t->ok(in_array($labelName, $labels), 'The project has the label '.$labelName);

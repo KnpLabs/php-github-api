@@ -168,6 +168,28 @@ Returns an array of issues as described in [http://develop.github.com/p/issues.h
 Add a comment to the issue by username, repo and issue number.
 The comment is assigned to the authenticated user. Requires authentication.
 
+### List project labels
+
+    $labels = $github->getIssueApi()->getLabels('ornicar', 'php-github-api');
+
+List all project labels by username and repo.
+Returns an array of project labels as described in [http://develop.github.com/p/issues.html#listing_labels](http://develop.github.com/p/issues.html#listing_labels)
+
+### Add a label on an issue
+
+    $github->getIssueApi()->addLabel('ornicar', 'php-github-api', 'label name', 4);
+
+Add a label to the issue by username, repo, label name and issue number. Requires authentication.
+If the label is not yet in the system, it will be created.
+Returns an array of the issue labels as described in [http://develop.github.com/p/issues.html#add_and_remove_labels](http://develop.github.com/p/issues.html#add_and_remove_labels)
+
+### Remove a label from an issue
+
+    $github->getIssueApi()->removeLabel('ornicar', 'php-github-api', 'label name', 4);
+
+Remove a label from the issue by username, repo, label name and issue number. Requires authentication.
+Returns an array of the issue labels as described in [http://develop.github.com/p/issues.html#add_and_remove_labels](http://develop.github.com/p/issues.html#add_and_remove_labels)
+
 ## Commits
 
 [Getting information on specific commits, the diffs they introduce, the files they've changed.](http://develop.github.com/p/commits.html)

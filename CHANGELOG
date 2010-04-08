@@ -6,6 +6,9 @@ v2.5 - 2010-04-08
   * add phpGitHubApiIssue->update()
   * add phpGitHubApiIssue->getComments()
   * add phpGitHubApiIssue->addComment()
+  * add phpGitHubApiIssue->getLabels()
+  * add phpGitHubApiIssue->addLabel()
+  * add phpGitHubApiIssue->removeLabel()
 
 v2.4 - 2010-04-08
 

@@ -166,4 +166,53 @@ class phpGitHubApiIssue extends phpGitHubApiAbstract
 
     return $response['comment'];
   }
+
+  /**
+   * List all project labels by username and repo
+   * http://develop.github.com/p/issues.html#listing_labels
+   *
+   * @param   string  $username         the username
+   * @param   string  $repo             the repo
+   * @return  array                     list of project labels
+   */
+  public function getLabels($username, $repo)
+  {
+    $response = $this->api->get('issues/labels/'.$username.'/'.$repo);
+
+    return $response['labels'];
+  }
+
+  /**
+   * Add a label to the issue by username, repo and issue number. Requires authentication.
+   * http://develop.github.com/p/issues.html#add_and_remove_labels
+   *
+   * @param   string  $username         the username
+   * @param   string  $repo             the repo
+   * @param   string  $issueNumber      the issue number
+   * @param   string  $labelName        the label name
+   * @return  array                     list of issue labels
+   */
+  public function addLabel($username, $repo, $labelName, $issueNumber)
+  {
+    $response = $this->api->post('issues/label/add/'.$username.'/'.$repo.'/'.$labelName.'/'.$issueNumber);
+
+    return $response['labels'];
+  }
+
+  /**
+   * Remove a label from the issue by username, repo, issue number and label name. Requires authentication.
+   * http://develop.github.com/p/issues.html#add_and_remove_labels
+   *
+   * @param   string  $username         the username
+   * @param   string  $repo             the repo
+   * @param   string  $issueNumber      the issue number
+   * @param   string  $labelName        the label name
+   * @return  array                     list of issue labels
+   */
+  public function removeLabel($username, $repo, $labelName, $issueNumber)
+  {
+    $response = $this->api->post('issues/label/remove/'.$username.'/'.$repo.'/'.$labelName.'/'.$issueNumber);
+
+    return $response['labels'];
+  }
 }
