@@ -12,7 +12,8 @@ class phpGitHubApiRequest
 {
   protected
   $options = array(
-    'url'         => 'http://github.com/api/v2/:format/:path',
+    'protocol'    => 'http',
+    'url'         => ':protocol://github.com/api/v2/:format/:path',
     'format'      => 'json',
     'user_agent'  => 'php-github-api (http://github.com/ornicar/php-github-api)',
     'http_port'   => 80,
@@ -105,8 +106,9 @@ class phpGitHubApiRequest
   public function doSend($apiPath, array $parameters = array(), $httpMethod = 'GET')
   {
     $url = strtr($this->options['url'], array(
-      ':format' => $this->options['format'],
-      ':path'   => trim($apiPath, '/')
+      ':protocol' => $this->options['protocol'],
+      ':format'   => $this->options['format'],
+      ':path'     => trim($apiPath, '/')
     ));
 
     if($this->options['login'])
@@ -136,7 +138,7 @@ class phpGitHubApiRequest
       }
     }
 
-    $this->debug('send request: '.$url);
+    $this->debug('send '.$httpMethod.' request: '.$url);
 
     $curlOptions += array(
       CURLOPT_URL             => $url,

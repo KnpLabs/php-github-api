@@ -12,9 +12,8 @@ require_once(dirname(__FILE__).'/phpGitHubApiRequest.php');
 class phpGitHubApi
 {
   protected
-  $requestClass = 'phpGitHubApiRequest',
-  $login,
-  $token,
+  $requestClass   = 'phpGitHubApiRequest',
+  $requestOptions = array(),
   $debug;
 
   /**
@@ -25,6 +24,7 @@ class phpGitHubApi
   public function __construct($debug = false)
   {
     $this->debug = $debug;
+    $this->requestOptions['debug'] = $debug;
   }
 
   /**
@@ -36,8 +36,8 @@ class phpGitHubApi
    */
   public function authenticate($login, $token)
   {
-    $this->login = $login;
-    $this->token = $token;
+    $this->requestOptions['login'] = $login;
+    $this->requestOptions['token'] = $token;
 
     return $this;
   }
@@ -49,7 +49,7 @@ class phpGitHubApi
    */
   public function deAuthenticate()
   {
-    $this->login = $this->token = null;
+    unset($this->requestOptions['login'], $this->requestOptions['token']);
 
     return $this;
   }
@@ -63,9 +63,9 @@ class phpGitHubApi
    */
   public function searchUsers($username)
   {
-    $data = $this->get('user/search/'.$username);
+    $response = $this->get('user/search/'.$username);
 
-    return $data['users'];
+    return $response['users'];
   }
 
   /**
@@ -77,23 +77,25 @@ class phpGitHubApi
    */
   public function showUser($username)
   {
-    $data = $this->get('user/show/'.$username);
+    $response = $this->get('user/show/'.$username);
 
-    return $data['user'];
+    return $response['user'];
   }
 
   /**
-   * Update user informations
-   * http://develop.github.com/p/users.html#getting_user_information
+   * Update user informations. Requires authentication.
+   * http://develop.github.com/p/users.html#authenticated_user_management
    *
    * @param   string  $username         the username to search
+   * @param   array   $data             key=>value user attributes to update.
+   *                                    key can be name, email, blog, company or location
    * @return  array                     informations about the user
    */
-  public function updateUser($username)
+  public function updateUser($username, array $data)
   {
-    $data = $this->get('user/show/'.$username);
+    $response = $this->post('user/show/'.$username, array('values' => $data));
 
-    return $data['user'];
+    return $response['user'];
   }
 
   /**
@@ -107,9 +109,9 @@ class phpGitHubApi
    */
   public function listIssues($username, $repo, $state = 'open')
   {
-    $data = $this->get('issues/list/'.$username.'/'.$repo.'/'.$state);
+    $response = $this->get('issues/list/'.$username.'/'.$repo.'/'.$state);
 
-    return $data['issues'];
+    return $response['issues'];
   }
 
   /**
@@ -124,9 +126,9 @@ class phpGitHubApi
    */
   public function searchIssues($username, $repo, $state, $searchTerm)
   {
-    $data = $this->get('issues/search/'.$username.'/'.$repo.'/'.$state.'/'.$searchTerm);
+    $response = $this->get('issues/search/'.$username.'/'.$repo.'/'.$state.'/'.$searchTerm);
 
-    return $data['issues'];
+    return $response['issues'];
   }
 
   /**
@@ -140,9 +142,9 @@ class phpGitHubApi
    */
   public function showIssue($username, $repo, $number)
   {
-    $data = $this->get('issues/show/'.$username.'/'.$repo.'/'.$number);
+    $response = $this->get('issues/show/'.$username.'/'.$repo.'/'.$number);
 
-    return $data['issue'];
+    return $response['issue'];
   }
 
   /**
@@ -156,9 +158,9 @@ class phpGitHubApi
    */
   public function listBranchCommits($username, $repo, $branch)
   {
-    $data = $this->get('commits/list/'.$username.'/'.$repo.'/'.$branch);
+    $response = $this->get('commits/list/'.$username.'/'.$repo.'/'.$branch);
 
-    return $data['commits'];
+    return $response['commits'];
   }
 
   /**
@@ -173,9 +175,9 @@ class phpGitHubApi
    */
   public function listFileCommits($username, $repo, $branch, $path)
   {
-    $data = $this->get('commits/list/'.$username.'/'.$repo.'/'.$branch.'/'.$path);
+    $response = $this->get('commits/list/'.$username.'/'.$repo.'/'.$branch.'/'.$path);
 
-    return $data['commits'];
+    return $response['commits'];
   }
 
   /**
@@ -189,9 +191,9 @@ class phpGitHubApi
    */
   public function listObjectTree($username, $repo, $treeSHA)
   {
-    $data = $this->get('tree/show/'.$username.'/'.$repo.'/'.$treeSHA);
+    $response = $this->get('tree/show/'.$username.'/'.$repo.'/'.$treeSHA);
 
-    return $data['tree'];
+    return $response['tree'];
   }
   
   /**
@@ -206,9 +208,9 @@ class phpGitHubApi
    */
   public function showObjectBlob($username, $repo, $treeSHA, $path)
   {
-    $data = $this->get('blob/show/'.$username.'/'.$repo.'/'.$treeSHA .'/'.$path);
+    $response = $this->get('blob/show/'.$username.'/'.$repo.'/'.$treeSHA .'/'.$path);
 
-    return $data['blob'];
+    return $response['blob'];
   }
   
   /**
@@ -223,52 +225,91 @@ class phpGitHubApi
    */
   public function listObjectBlobs($username, $repo, $treeSHA)
   {
-    $data = $this->get('blob/all/'.$username.'/'.$repo.'/'.$treeSHA);
+    $response = $this->get('blob/all/'.$username.'/'.$repo.'/'.$treeSHA);
 
-    return $data['blobs'];
+    return $response['blobs'];
   }
   
   /**
-   * Get data from any route, GET method
+   * Call any route, GET method
    * Ex: $api->get('repos/show/my-username/my-repo')
    *
    * @param   string  $route            the GitHub route
-   * @param   array   $requestOptions   request options
+   * @param   array   $parameters       GET parameters
    * @return  array                     data returned
    */
-  public function get($route, array $requestOptions = array())
+  public function get($route, array $parameters = array())
   {
-    return $this->createRequest($requestOptions)->get($route);
+    return $this->createRequest()->get($route, $parameters);
   }
 
   /**
-   * Get data from any route, POST method
-   * Ex: $api->post('repos/show/my-username/my-repo')
+   * Call any route, POST method
+   * Ex: $api->post('repos/show/my-username', array('email' => 'my-new-email'))
    *
-   * @param   string  $route          the GitHub route
-   * @param   array   $requestOptions request options
-   * @return  array                   data returned
+   * @param   string  $route            the GitHub route
+   * @param   array   $parameters       POST parameters
+   * @return  array                     data returned
    */
-  public function post($route, array $requestOptions = array())
+  public function post($route, array $parameters = array())
   {
-    return $this->createRequest($requestOptions)->post($route);
+    return $this->createRequest()->post($route, $parameters);
   }
 
   /**
    * Creates a new request
    *
-   * @param   array               $options  the request options
    * @return  phpGitHubApiRequest a request instance
    */
-  protected function createRequest(array $options = array())
+  protected function createRequest()
   {
-    $options = array_merge(array(
-      'login' => $this->login,
-      'token' => $this->token,
-      'debug' => $this->debug
-    ), $options);
-    
-    return new $this->requestClass($options);
+    return new $this->requestClass($this->getRequestOptions());
+  }
+
+  /**
+   * Get the request class
+   *
+   * @return  string  the request class
+   */
+  public function getRequestClass()
+  {
+    return $this->requestClass;
+  }
+
+  /**
+   * Set the request class
+   *
+   * @param   string        $requestClass   the new request class
+   * @return  phpGitHubApi                  fluent interface
+   */
+  public function setRequestClass($requestClass)
+  {
+    $this->requestClass = $requestClass;
+
+    return $this;
+  }
+
+  /**
+   * Get the request options
+   *
+   * @return  array  the request options
+   */
+  public function getRequestOptions()
+  {
+    return $this->requestOptions;
+  }
+
+  /**
+   * Set the request options
+   *
+   * @param   array        $requestOptions    the new request options
+   * @return  phpGitHubApi                    fluent interface
+   */
+  public function setRequestOptions($requestOptions)
+  {
+    $this->requestOptions = $requestOptions;
+
+    return $this;
   }
 
 }
