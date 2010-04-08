@@ -81,11 +81,32 @@ Make the authenticated user unfollow a user. Requires authentication.
 
 Returns an array of followed users as described in [http://develop.github.com/p/users.html#following_network](http://develop.github.com/p/users.html#following_network)
 
-### Get repos that a specific user is watched
+### Get repos that a specific user is watching
 
     $users = $github->getUserApi()->getWatchedRepos('ornicar');
 
 Returns an array of watched repos as described in [http://develop.github.com/p/users.html#watched_repos](http://develop.github.com/p/users.html#watched_repos)
+
+### Get the authenticated user emails.
+
+    $github->authenticate('ornicar', 'my-github-token');
+    $emails = $github->getUserApi()->getEmails();
+
+Return an array of the authenticated user emails.
+
+### Add an email to the authenticated user
+
+    $github->authenticate('ornicar', 'my-github-token');
+    $github->getUserApi()->addEmail('my-email@provider.org');
+
+Return an array of the authenticated user emails.
+
+### Remove an email from the authenticated user
+
+    $github->authenticate('ornicar', 'my-github-token');
+    $github->getUserApi()->removeEmail('my-email@provider.org');
+
+Return an array of the authenticated user emails.
 
 ## Issues
 

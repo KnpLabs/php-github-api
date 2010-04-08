@@ -2,7 +2,7 @@
 require_once dirname(__FILE__).'/../../vendor/lime.php';
 require_once dirname(__FILE__).'/../../lib/phpGitHubApi.php';
 
-$t = new lime_test(13);
+$t = new lime_test(16);
 
 $username = 'ornicartest';
 $token    = 'fd8144e29b4a85e9487d1cacbcd4e26c';
@@ -88,3 +88,22 @@ $t->comment('Get watched repos');
 $repos = $github->getUserApi()->getWatchedRepos('ornicar');
 
 $t->ok(array_key_exists('homepage', array_pop($repos)), 'Found '.'ornicar'.' watched repos');
+
+$t->comment('Get emails');
+
+$emails = $github->getUserApi()->getEmails();
+
+$t->ok(in_array('ornicar@yopmail.com', $emails), 'Found '.$username.' emails');
+
+$newEmail = 'test@provider.org';
+$t->comment('Add '.$newEmail.' email');
+
+$emails = $github->getUserApi()->addEmail($newEmail);
+
+$t->ok(in_array($newEmail, $emails), 'Found the added '.$newEmail.' email');
+
+$t->comment('Remove '.$newEmail.' email');
+
+$emails = $github->getUserApi()->removeEmail($newEmail);
+
+$t->ok(!in_array($newEmail, $emails), 'Not found the removed '.$newEmail.' email');

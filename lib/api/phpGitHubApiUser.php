@@ -124,4 +124,40 @@ class phpGitHubApiUser extends phpGitHubApiAbstract
 
     return $response['repositories'];
   }
+
+  /**
+   * Get the authenticated user emails. Requires authentication.
+   *
+   * @return  array                     list of authenticated user emails
+   */
+  public function getEmails()
+  {
+    $response = $this->api->get('user/emails');
+
+    return $response['emails'];
+  }
+
+  /**
+   * Add an email to the authenticated user. Requires authentication.
+   *
+   * @return  array                     list of authenticated user emails
+   */
+  public function addEmail($email)
+  {
+    $response = $this->api->post('user/email/add', array('email' => $email));
+
+    return $response['emails'];
+  }
+
+  /**
+   * Remove an email from the authenticated user. Requires authentication.
+   *
+   * @return  array                     list of authenticated user emails
+   */
+  public function removeEmail($email)
+  {
+    $response = $this->api->post('user/email/remove', array('email' => $email));
+
+    return $response['emails'];
+  }
 }
