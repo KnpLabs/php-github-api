@@ -170,7 +170,7 @@ class phpGitHubApi
   }
 
   /**
-   * Inject another api
+   * Inject another API instance
    *
    * @param   string                $name the API name
    * @param   phpGitHubApiAbstract  $api  the API instance

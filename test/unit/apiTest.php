@@ -4,7 +4,7 @@ require_once dirname(__FILE__).'/../../lib/phpGitHubApi.php';
 
 $t = new lime_test(6);
 
-$t->comment('Test request');
+$t->comment('Low level request');
 
 $request = new phpGitHubApiRequest();
 
@@ -16,7 +16,7 @@ $t->is(count($users['users']), 1, 'Found one user');
 
 $t->is(array_keys($users['users']), array('diem-project'), 'Found diem-project user');
 
-$t->comment('Test api');
+$t->comment('Low level API');
 
 $github = new phpGitHubApi();
 

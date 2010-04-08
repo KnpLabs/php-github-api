@@ -12,7 +12,7 @@ $api = new phpGitHubApi();
 
 $t->comment('Get user with NO authentication');
 
-$user = $api->showUser($username);
+$user = $api->getUserApi()->show($username);
 
 $t->ok(!isset($user['plan']), 'User plan is not available');
 
@@ -22,7 +22,7 @@ $api->authenticate($username, $token);
 
 $t->comment('Get user with authentication');
 
-$user = $api->showUser($username);
+$user = $api->getUserApi()->show($username);
 
 $t->ok(isset($user['plan']), 'User plan is available');
 
@@ -34,7 +34,7 @@ $t->comment('Get user with bad authentication');
 
 try
 {
-  $user = $api->showUser($username);
+  $user = $api->getUserApi()->show($username);
   $t->fail('Call with bad authentication throws a phpGitHubApiRequestException');
 }
 catch(phpGitHubApiRequestException $e)
