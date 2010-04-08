@@ -46,10 +46,8 @@ Returns an array of information about the user as described in [http://develop.g
 
 Change user attributes: name, email, blog, company, location. Requires authentication.
 
-    $github->authenticate('ornicar', 'my-github-token');
     $github->getUserApi()->update('ornicar', array('location' => 'France', 'blog' => 'http://diem-project.org/blog'));
 
-Updates the specified user informations. Available attributes are name, email, blog, company and location.
 Returns an array of information about the user as described in [http://develop.github.com/p/users.html#authenticated_user_management](http://develop.github.com/p/users.html#authenticated_user_management)
 
 ### Get users that a specific user is following
@@ -68,7 +66,6 @@ Returns an array of following users as described in [http://develop.github.com/p
 
 Make the authenticated user follow a user. Requires authentication.
 
-    $github->authenticate('ornicar', 'my-github-token');
     $github->getUserApi()->follow('symfony');
 
 Returns an array of followed users as described in [http://develop.github.com/p/users.html#following_network](http://develop.github.com/p/users.html#following_network)
@@ -77,7 +74,6 @@ Returns an array of followed users as described in [http://develop.github.com/p/
 
 Make the authenticated user unfollow a user. Requires authentication.
 
-    $github->authenticate('ornicar', 'my-github-token');
     $github->getUserApi()->unFollow('symfony');
 
 Returns an array of followed users as described in [http://develop.github.com/p/users.html#following_network](http://develop.github.com/p/users.html#following_network)
@@ -88,26 +84,23 @@ Returns an array of followed users as described in [http://develop.github.com/p/
 
 Returns an array of watched repos as described in [http://develop.github.com/p/users.html#watched_repos](http://develop.github.com/p/users.html#watched_repos)
 
-### Get the authenticated user emails.
+### Get the authenticated user emails
 
-    $github->authenticate('ornicar', 'my-github-token');
     $emails = $github->getUserApi()->getEmails();
 
-Return an array of the authenticated user emails.
+Returns an array of the authenticated user emails. Requires authentication.
 
 ### Add an email to the authenticated user
 
-    $github->authenticate('ornicar', 'my-github-token');
     $github->getUserApi()->addEmail('my-email@provider.org');
 
-Return an array of the authenticated user emails.
+Returns an array of the authenticated user emails. Requires authentication.
 
 ### Remove an email from the authenticated user
 
-    $github->authenticate('ornicar', 'my-github-token');
     $github->getUserApi()->removeEmail('my-email@provider.org');
 
-Return an array of the authenticated user emails.
+Return an array of the authenticated user emails. Requires authentication.
 
 ## Issues
 
