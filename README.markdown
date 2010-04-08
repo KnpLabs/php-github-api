@@ -126,8 +126,30 @@ Returns an array of closed issues matching the "bug" term, as described in [http
 
 ### Get information about an issue
 
-    $users = $github->getIssueApi()->show('ornicar', 'php-github-api', 1);
+    $issue = $github->getIssueApi()->show('ornicar', 'php-github-api', 1);
 
+Returns an array of information about the issue as described in [http://develop.github.com/p/issues.html#view_an_issue](http://develop.github.com/p/issues.html#view_an_issue)
+
+### Open a new issue
+
+    $github->getIssueApi()->open('ornicar', 'php-github-api', 'The issue title', 'The issue body');
+
+Creates a new issue in the repo "php-github-api" of the user "ornicar".
+The issue is assigned to the authenticated user. Requires authentication.
+Returns an array of information about the issue as described in [http://develop.github.com/p/issues.html#view_an_issue](http://develop.github.com/p/issues.html#view_an_issue)
+
+### Close an issue
+
+    $github->getIssueApi()->close('ornicar', 'php-github-api', 4);
+
+Closes the fourth issue of the repo "php-github-api" of the user "ornicar".
+Returns an array of information about the issue as described in [http://develop.github.com/p/issues.html#view_an_issue](http://develop.github.com/p/issues.html#view_an_issue)
+
+### Reopen an issue
+
+    $github->getIssueApi()->reOpen('ornicar', 'php-github-api', 4);
+
+Reopens the fourth issue of the repo "php-github-api" of the user "ornicar".
 Returns an array of information about the issue as described in [http://develop.github.com/p/issues.html#view_an_issue](http://develop.github.com/p/issues.html#view_an_issue)
 
 ## Commits

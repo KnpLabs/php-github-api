@@ -51,12 +51,65 @@ class phpGitHubApiIssue extends phpGitHubApiAbstract
    *
    * @param   string  $username         the username
    * @param   string  $repo             the repo
-   * @param   string  $number           the issue number
+   * @param   string  $issueNumber      the issue number
    * @return  array                     informations about the issue
    */
-  public function show($username, $repo, $number)
+  public function show($username, $repo, $issueNumber)
   {
-    $response = $this->api->get('issues/show/'.$username.'/'.$repo.'/'.$number);
+    $response = $this->api->get('issues/show/'.$username.'/'.$repo.'/'.$issueNumber);
+
+    return $response['issue'];
+  }
+
+  /**
+   * Create a new issue for the given username and repo.
+   * The issue is assigned to the authenticated user. Requires authentication.
+   * http://develop.github.com/p/issues.html#open_and_close_issues
+   *
+   * @param   string  $username         the username
+   * @param   string  $repo             the repo
+   * @param   string  $issueTitle       the new issue title
+   * @param   string   $issueBody       the new issue body
+   * @return  array                     informations about the issue
+   */
+  public function open($username, $repo, $issueTitle, $issueBody)
+  {
+    $response = $this->api->post('issues/open/'.$username.'/'.$repo, array(
+      'title' => $issueTitle,
+      'body'  => $issueBody
+    ));
+
+    return $response['issue'];
+  }
+
+  /**
+   * Close an existing issue. Requires authentication.
+   * http://develop.github.com/p/issues.html#open_and_close_issues
+   *
+   * @param   string  $username         the username
+   * @param   string  $repo             the repo
+   * @param   string  $issueTitle       the issue number
+   * @return  array                     informations about the issue
+   */
+  public function close($username, $repo, $issueNumber)
+  {
+    $response = $this->api->post('issues/close/'.$username.'/'.$repo.'/'.$issueNumber);
+
+    return $response['issue'];
+  }
+
+  /**
+   * Repoen an existing issue. Requires authentication.
+   * http://develop.github.com/p/issues.html#open_and_close_issues
+   *
+   * @param   string  $username         the username
+   * @param   string  $repo             the repo
+   * @param   string  $issueTitle       the issue number
+   * @return  array                     informations about the issue
+   */
+  public function reOpen($username, $repo, $issueNumber)
+  {
+    $response = $this->api->post('issues/reopen/'.$username.'/'.$repo.'/'.$issueNumber);
 
     return $response['issue'];
   }

@@ -1,3 +1,9 @@
+v2.5 - 2010-04-08
+
+  * add phpGitHubApiIssue->open()
+  * add phpGitHubApiIssue->close()
+  * add phpGitHubApiIssue->reOpen()
+
 v2.4 - 2010-04-08
 
  * add phpGitHubApiUser->getEmails()
