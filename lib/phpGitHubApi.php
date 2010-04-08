@@ -1,11 +1,10 @@
 <?php
 
-require_once(dirname(__FILE__).'/request/phpGitHubApiRequest.php');
-
 /**
  * Simple PHP GitHub API class.
  * Usage: http://wiki.github.com/ornicar/php-github-api/
  *
+ * @version   2.0
  * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @license   MIT License
  */
@@ -86,6 +85,7 @@ class phpGitHubApi
   {
     if(!isset($this->request))
     {
+      require_once(dirname(__FILE__).'/request/phpGitHubApiRequest.php');
       $this->request = new phpGitHubApiRequest();
     }
     
@@ -114,7 +114,7 @@ class phpGitHubApi
   {
     if(!isset($this->apis['user']))
     {
-      require_once(dirname(__FILE__).'/apis/phpGitHubApiUser.php');
+      require_once(dirname(__FILE__).'/api/phpGitHubApiUser.php');
       $this->apis['user'] = new phpGitHubApiUser($this);
     }
 
@@ -130,7 +130,7 @@ class phpGitHubApi
   {
     if(!isset($this->apis['issue']))
     {
-      require_once(dirname(__FILE__).'/apis/phpGitHubApiIssue.php');
+      require_once(dirname(__FILE__).'/api/phpGitHubApiIssue.php');
       $this->apis['issue'] = new phpGitHubApiIssue($this);
     }
 
@@ -146,7 +146,7 @@ class phpGitHubApi
   {
     if(!isset($this->apis['commit']))
     {
-      require_once(dirname(__FILE__).'/apis/phpGitHubApiCommit.php');
+      require_once(dirname(__FILE__).'/api/phpGitHubApiCommit.php');
       $this->apis['commit'] = new phpGitHubApiCommit($this);
     }
 
@@ -162,7 +162,7 @@ class phpGitHubApi
   {
     if(!isset($this->apis['object']))
     {
-      require_once(dirname(__FILE__).'/apis/phpGitHubApiObject.php');
+      require_once(dirname(__FILE__).'/api/phpGitHubApiObject.php');
       $this->apis['object'] = new phpGitHubApiObject($this);
     }
 
