@@ -19,7 +19,7 @@ $t->is_deeply($api->listBranchCommits($username, $repo, $branch), $commits, 'Bot
 
 $firstCommit = array_pop($commits);
 
-$t->is($firstCommit['message'], 'first commit', 'Found master commits');
+$t->ok(isset($firstCommit['message']), 'Found master commits');
 
 $commits = $api->getCommitApi()->getFileCommits($username, $repo, $branch, 'README');
 
