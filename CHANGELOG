@@ -1,3 +1,13 @@
+v2.0 - 2010-04-09
+
+ * refactored the whole API for better extensibility and performance; BC compatibility preserved
+ * each API part has a dedicated class
+ * request instance can be injected with phpGitHubApi->setRequest($request)
+ * API instances can be injected with phpGitHubApi->setApi($name, $api)
+ * request and API instances are lazy loaded for best performance
+ * added phpGitHubApiUser->update method
+ * 100% unit test coverage
+
 v1.2 - 2010-04-08
 
  * addition of the deAuthenticate method

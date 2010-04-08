@@ -18,17 +18,17 @@ $t->is(array_keys($users['users']), array('diem-project'), 'Found diem-project u
 
 $t->comment('Test api');
 
-$api = new phpGitHubApi();
+$github = new phpGitHubApi();
 
-$t->isa_ok($api, 'phpGitHubApi', 'Got a phpGitHubApi instance');
+$t->isa_ok($github, 'phpGitHubApi', 'Got a phpGitHubApi instance');
 
-$repo = $api->get('repos/show/ornicar/php-github-api');
+$repo = $github->get('repos/show/ornicar/php-github-api');
 
 $t->is($repo['repository']['name'], 'php-github-api', 'Found information about php-github-api repo');
 
 try
 {
-  $api->get('non-existing-url/for-sure');
+  $github->get('non-existing-url/for-sure');
   $t->fail('Call to non-existing-url/for-sure throws a phpGitHubApiRequestException');
 }
 catch(phpGitHubApiRequestException $e)

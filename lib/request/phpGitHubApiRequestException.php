@@ -3,8 +3,8 @@
 /**
  * Request communication error
  *
- * @author	Thibault Duplessis <thibault.duplessis at gmail dot com>
- * @license	MIT License
+ * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
+ * @license   MIT License
  */
 class phpGitHubApiRequestException extends Exception
 {

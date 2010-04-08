@@ -5,8 +5,8 @@ require_once(dirname(__FILE__).'/phpGitHubApiRequestException.php');
 /**
  * Performs requests on GitHub API. API documentation should be self-explanatory.
  *
- * @author	Thibault Duplessis <thibault.duplessis at gmail dot com>
- * @license	MIT License
+ * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
+ * @license   MIT License
  */
 class phpGitHubApiRequest
 {
@@ -171,6 +171,33 @@ class phpGitHubApiRequest
     }
 
     return $response;
+  }
+
+  /**
+   * Changes an option value.
+   *
+   * @param string $name   The option name
+   * @param mixed  $value  The value
+   *
+   * @return dmConfigurable The current object instance
+   */
+  public function setOption($name, $value)
+  {
+    $this->options[$name] = $value;
+
+    return $this;
+  }
+
+  /**
+   * Gets an option value.
+   *
+   * @param  string $name The option name
+   *
+   * @return mixed  The option value
+   */
+  public function getOption($name, $default = null)
+  {
+    return isset($this->options[$name]) ? $this->options[$name] : $default;
   }
 
   protected function debug($message)
