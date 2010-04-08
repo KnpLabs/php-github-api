@@ -225,7 +225,11 @@ Returns an array describing the php-github-api repository.
 
 See all GitHub API routes: [http://develop.github.com/](http://develop.github.com/)
 
-## Configure the request
+## Customize phpGitHubApi
+
+The library is highly configurable and extensible thanks to dependency injection.
+
+### Configure the request
 
 Wanna change, let's say, the request User Agent?
 
@@ -233,15 +237,15 @@ Wanna change, let's say, the request User Agent?
 
 See all request available options in request/phpGitHubApiRequest.php
 
-## Inject a new request instance
+### Inject a new request instance
 
 If you want to use your own request implementation, inject it to the GitHubApi:
 
-    $github->setRequest($myRequest);
+    $github->setRequest($myOwnRequest);
 
 $myRequest must extend phpGitHubApiRequest.
 
-## Inject a new API part instance
+### Inject a new API part instance
 
 If you want to use your own implementation of the user API, inject it to the GitHubApi:
 
