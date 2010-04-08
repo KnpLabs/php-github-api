@@ -6,6 +6,8 @@ Uses [GitHub API v2](http://develop.github.com/).
 
 Requires [php curl](http://php.net/manual/en/book.curl.php).
 
+If the method you need does not exist yet, dont hesitate to request it with an [issue](http://github.com/ornicar/php-github-api/issues)!
+
 ## Instanciate a new API
 
     $github = new phpGitHubApi();
