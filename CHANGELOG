@@ -1,7 +1,13 @@
+v2.3 - 2010-04-08
+
+ * add phpGitHubApiUser->follow()
+ * add phpGitHubApiUser->unFollow()
+ * improved user documentation and phpDoc
+
 v2.2 - 2010-04-08
 
- * add phpGitHubApiObject->getFollowing()
- * add phpGitHubApiObject->getFollowers()
+ * add phpGitHubApiUser->getFollowing()
+ * add phpGitHubApiUser->getFollowers()
 
 v2.1 - 2010-04-08
 
