@@ -53,30 +53,44 @@ class phpGitHubApiRequest
    * @param  string   $apiPath        Request API path
    * @param  array    $parameters     Parameters
    * @param  string   $httpMethod     HTTP method to use
+   * @param  array    $options        reconfigure the request for this call only
    *
    * @return array                    Data
    */
-  public function send($apiPath, array $parameters = array(), $httpMethod = 'GET')
+  public function send($apiPath, array $parameters = array(), $httpMethod = 'GET', array $options = array())
   {
-    return $this->decodeResponse($this->doSend($apiPath, $parameters, $httpMethod));
+    if(!empty($options))
+    {
+      $initialOptions = $this->options;
+      $this->configure($options);
+    }
+    
+    $response = $this->decodeResponse($this->doSend($apiPath, $parameters, $httpMethod));
+
+    if(isset($initialOptions))
+    {
+      $this->options = $initialOptions;
+    }
+
+    return $response;
   }
 
   /**
    * Send a GET request
    * @see send
    */
-  public function get($apiPath, array $parameters = array())
+  public function get($apiPath, array $parameters = array(), array $options = array())
   {
-    return $this->send($apiPath, $parameters, 'GET');
+    return $this->send($apiPath, $parameters, 'GET', $options);
   }
 
   /**
    * Send a POST request
    * @see send
    */
-  public function post($apiPath, array $parameters = array())
+  public function post($apiPath, array $parameters = array(), array $options = array())
   {
-    return $this->send($apiPath, $parameters, 'POST');
+    return $this->send($apiPath, $parameters, 'POST', $options);
   }
 
   /**
@@ -86,7 +100,11 @@ class phpGitHubApiRequest
    */
   protected function decodeResponse($response)
   {
-    if('json' === $this->options['format'])
+    if('text' === $this->options['format'])
+    {
+      return $response;
+    }
+    elseif('json' === $this->options['format'])
     {
       return json_decode($response, true);
     }

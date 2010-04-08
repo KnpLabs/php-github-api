@@ -56,11 +56,12 @@ class phpGitHubApi
    *
    * @param   string  $route            the GitHub route
    * @param   array   $parameters       GET parameters
+   * @param   array   $requestOptions   reconfigure the request
    * @return  array                     data returned
    */
-  public function get($route, array $parameters = array())
+  public function get($route, array $parameters = array(), $requestOptions = array())
   {
-    return $this->getRequest()->get($route, $parameters);
+    return $this->getRequest()->get($route, $parameters, $requestOptions);
   }
 
   /**
@@ -69,11 +70,12 @@ class phpGitHubApi
    *
    * @param   string  $route            the GitHub route
    * @param   array   $parameters       POST parameters
+   * @param   array   $requestOptions   reconfigure the request
    * @return  array                     data returned
    */
-  public function post($route, array $parameters = array())
+  public function post($route, array $parameters = array(), $requestOptions = array())
   {
-    return $this->getRequest()->post($route, $parameters);
+    return $this->getRequest()->post($route, $parameters, $requestOptions);
   }
 
   /**
@@ -86,7 +88,9 @@ class phpGitHubApi
     if(!isset($this->request))
     {
       require_once(dirname(__FILE__).'/request/phpGitHubApiRequest.php');
-      $this->request = new phpGitHubApiRequest();
+      $this->request = new phpGitHubApiRequest(array(
+        'debug' => $this->debug
+      ));
     }
     
     return $this->request;
