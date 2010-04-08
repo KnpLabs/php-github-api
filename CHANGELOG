@@ -1,4 +1,10 @@
-v2.0 - 2010-04-09
+v2.1 - 2010-04-08
+
+ * add phpGitHubApiObject->getRawData()
+ * allow to reconfigure the request for one call only
+ * make response support text format
+
+v2.0 - 2010-04-08
 
  * refactored the whole API for better extensibility and performance; BC compatibility preserved
  * each API part has a dedicated class
@@ -8,7 +14,7 @@ v2.0 - 2010-04-09
  * added phpGitHubApiUser->update method
  * 100% unit test coverage
 
-v1.2 - 2010-04-08
+v1.2 - 2010-04-07
 
  * addition of the deAuthenticate method
  * added unit tests
