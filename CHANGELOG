@@ -1,3 +1,9 @@
+v2.4 - 2010-04-08
+
+ * add phpGitHubApiUser->getEmails()
+ * add phpGitHubApiUser->addEmail()
+ * add phpGitHubApiUser->removeEmail()
+
 v2.3 - 2010-04-08
 
  * add phpGitHubApiUser->follow()

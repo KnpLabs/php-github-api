@@ -4,9 +4,12 @@
  * Simple PHP GitHub API
  * 
  * @tutorial  http://github.com/ornicar/php-github-api/blob/master/README.markdown
- * @version   2.2
+ * @version   2.4
  * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @license   MIT License
+ *
+ * Website: http://github.com/ornicar/php-github-api
+ * Tickets: http://github.com/ornicar/php-github-api/issues
  */
 class phpGitHubApi
 {
