@@ -100,7 +100,7 @@ class phpGitHubApi
    *
    * @return  phpGitHubApiRequest   a request instance
    */
-  protected function getRequest()
+  public function getRequest()
   {
     if(!isset($this->request))
     {
@@ -119,7 +119,7 @@ class phpGitHubApi
    * @param   phpGitHubApiRequest   a request instance
    * @return  phpGitHubApi          fluent interface
    */
-  protected function setRequest(phpGitHubApiRequest $request)
+  public function setRequest(phpGitHubApiRequest $request)
   {
     $this->request = $request;
 
