@@ -7,6 +7,7 @@ v2.6 - 2010-04-10
  * add phpGitHubApiRepo->getRepoBranches
  * encode url parameters properly
  * move tests
+ * improve documentation
 
 v2.5 - 2010-04-08
 
