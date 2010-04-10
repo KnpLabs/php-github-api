@@ -24,7 +24,7 @@ class phpGitHubApiCommit extends phpGitHubApiAbstract
    */
   public function getBranchCommits($username, $repo, $branch)
   {
-    $response = $this->api->get('commits/list/'.$username.'/'.$repo.'/'.$branch);
+    $response = $this->api->get('commits/list/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($branch));
 
     return $response['commits'];
   }
@@ -41,7 +41,7 @@ class phpGitHubApiCommit extends phpGitHubApiAbstract
    */
   public function getFileCommits($username, $repo, $branch, $path)
   {
-    $response = $this->api->get('commits/list/'.$username.'/'.$repo.'/'.$branch.'/'.$path);
+    $response = $this->api->get('commits/list/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($branch).'/'.urlencode($path));
 
     return $response['commits'];
   }

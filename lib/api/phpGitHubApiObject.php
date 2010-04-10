@@ -23,7 +23,7 @@ class phpGitHubApiObject extends phpGitHubApiAbstract
    */
   public function showTree($username, $repo, $treeSHA)
   {
-    $response = $this->api->get('tree/show/'.$username.'/'.$repo.'/'.$treeSHA);
+    $response = $this->api->get('tree/show/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($treeSHA));
 
     return $response['tree'];
   }
@@ -40,7 +40,7 @@ class phpGitHubApiObject extends phpGitHubApiAbstract
    */
   public function listBlobs($username, $repo, $treeSHA)
   {
-    $response = $this->api->get('blob/all/'.$username.'/'.$repo.'/'.$treeSHA);
+    $response = $this->api->get('blob/all/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($treeSHA));
 
     return $response['blobs'];
   }
@@ -57,7 +57,7 @@ class phpGitHubApiObject extends phpGitHubApiAbstract
    */
   public function showBlob($username, $repo, $treeSHA, $path)
   {
-    $response = $this->api->get('blob/show/'.$username.'/'.$repo.'/'.$treeSHA .'/'.$path);
+    $response = $this->api->get('blob/show/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($treeSHA).'/'.urlencode($path));
 
     return $response['blob'];
   }
@@ -73,7 +73,7 @@ class phpGitHubApiObject extends phpGitHubApiAbstract
    */
   public function getRawData($username, $repo, $objectSHA)
   {
-    $response = $this->api->get('blob/show/'.$username.'/'.$repo.'/'.$objectSHA, array(), array(
+    $response = $this->api->get('blob/show/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($objectSHA), array(), array(
       'format' => 'text'
     ));
 

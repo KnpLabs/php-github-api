@@ -23,7 +23,7 @@ class phpGitHubApiIssue extends phpGitHubApiAbstract
    */
   public function getList($username, $repo, $state = 'open')
   {
-    $response = $this->api->get('issues/list/'.$username.'/'.$repo.'/'.$state);
+    $response = $this->api->get('issues/list/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($state));
 
     return $response['issues'];
   }
@@ -40,7 +40,7 @@ class phpGitHubApiIssue extends phpGitHubApiAbstract
    */
   public function search($username, $repo, $state, $searchTerm)
   {
-    $response = $this->api->get('issues/search/'.$username.'/'.$repo.'/'.$state.'/'.$searchTerm);
+    $response = $this->api->get('issues/search/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($state).'/'.urlencode($searchTerm));
 
     return $response['issues'];
   }
@@ -56,7 +56,7 @@ class phpGitHubApiIssue extends phpGitHubApiAbstract
    */
   public function show($username, $repo, $issueNumber)
   {
-    $response = $this->api->get('issues/show/'.$username.'/'.$repo.'/'.$issueNumber);
+    $response = $this->api->get('issues/show/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($issueNumber));
 
     return $response['issue'];
   }
@@ -74,7 +74,7 @@ class phpGitHubApiIssue extends phpGitHubApiAbstract
    */
   public function open($username, $repo, $issueTitle, $issueBody)
   {
-    $response = $this->api->post('issues/open/'.$username.'/'.$repo, array(
+    $response = $this->api->post('issues/open/'.urlencode($username).'/'.urlencode($repo), array(
       'title' => $issueTitle,
       'body'  => $issueBody
     ));
@@ -93,7 +93,7 @@ class phpGitHubApiIssue extends phpGitHubApiAbstract
    */
   public function close($username, $repo, $issueNumber)
   {
-    $response = $this->api->post('issues/close/'.$username.'/'.$repo.'/'.$issueNumber);
+    $response = $this->api->post('issues/close/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($issueNumber));
 
     return $response['issue'];
   }
@@ -111,7 +111,7 @@ class phpGitHubApiIssue extends phpGitHubApiAbstract
    */
   public function update($username, $repo, $issueNumber, array $data)
   {
-    $response = $this->api->post('issues/edit/'.$username.'/'.$repo.'/'.$issueNumber, $data);
+    $response = $this->api->post('issues/edit/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($issueNumber), $data);
 
     return $response['issue'];
   }
@@ -127,7 +127,7 @@ class phpGitHubApiIssue extends phpGitHubApiAbstract
    */
   public function reOpen($username, $repo, $issueNumber)
   {
-    $response = $this->api->post('issues/reopen/'.$username.'/'.$repo.'/'.$issueNumber);
+    $response = $this->api->post('issues/reopen/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($issueNumber));
 
     return $response['issue'];
   }
@@ -143,7 +143,7 @@ class phpGitHubApiIssue extends phpGitHubApiAbstract
    */
   public function getComments($username, $repo, $issueNumber)
   {
-    $response = $this->api->get('issues/comments/'.$username.'/'.$repo.'/'.$issueNumber);
+    $response = $this->api->get('issues/comments/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($issueNumber));
 
     return $response['comments'];
   }
@@ -160,7 +160,7 @@ class phpGitHubApiIssue extends phpGitHubApiAbstract
    */
   public function addComment($username, $repo, $issueNumber, $commentBody)
   {
-    $response = $this->api->post('issues/comment/'.$username.'/'.$repo.'/'.$issueNumber, array(
+    $response = $this->api->post('issues/comment/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($issueNumber), array(
       'comment' => $commentBody
     ));
 
@@ -177,7 +177,7 @@ class phpGitHubApiIssue extends phpGitHubApiAbstract
    */
   public function getLabels($username, $repo)
   {
-    $response = $this->api->get('issues/labels/'.$username.'/'.$repo);
+    $response = $this->api->get('issues/labels/'.urlencode($username).'/'.urlencode($repo));
 
     return $response['labels'];
   }
@@ -194,7 +194,7 @@ class phpGitHubApiIssue extends phpGitHubApiAbstract
    */
   public function addLabel($username, $repo, $labelName, $issueNumber)
   {
-    $response = $this->api->post('issues/label/add/'.$username.'/'.$repo.'/'.$labelName.'/'.$issueNumber);
+    $response = $this->api->post('issues/label/add/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($labelName).'/'.urlencode($issueNumber));
 
     return $response['labels'];
   }
@@ -211,7 +211,7 @@ class phpGitHubApiIssue extends phpGitHubApiAbstract
    */
   public function removeLabel($username, $repo, $labelName, $issueNumber)
   {
-    $response = $this->api->post('issues/label/remove/'.$username.'/'.$repo.'/'.$labelName.'/'.$issueNumber);
+    $response = $this->api->post('issues/label/remove/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($labelName).'/'.urlencode($issueNumber));
 
     return $response['labels'];
   }

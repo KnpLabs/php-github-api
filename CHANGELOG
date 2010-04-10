@@ -5,6 +5,7 @@ v2.6 - 2010-04-10
  * add phpGitHubApiRepo->getUserRepos
  * add phpGitHubApiRepo->getRepoTags
  * add phpGitHubApiRepo->getRepoBranches
+ * encode url parameters properly
  * move tests
 
 v2.5 - 2010-04-08
