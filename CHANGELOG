@@ -1,15 +1,24 @@
+v2.6 - 2010-04-10
+
+ * add phpGitHubApiRepo->search
+ * add phpGitHubApiRepo->show
+ * add phpGitHubApiRepo->getUserRepos
+ * add phpGitHubApiRepo->getRepoTags
+ * add phpGitHubApiRepo->getRepoBranches
+ * move tests
+
 v2.5 - 2010-04-08
 
-  * add phpGitHubApiIssue->open()
-  * add phpGitHubApiIssue->close()
-  * add phpGitHubApiIssue->reOpen()
-  * add phpGitHubApiIssue->update()
-  * add phpGitHubApiIssue->getComments()
-  * add phpGitHubApiIssue->addComment()
-  * add phpGitHubApiIssue->getLabels()
-  * add phpGitHubApiIssue->addLabel()
-  * add phpGitHubApiIssue->removeLabel()
-  Issue API completed.
+ * add phpGitHubApiIssue->open()
+ * add phpGitHubApiIssue->close()
+ * add phpGitHubApiIssue->reOpen()
+ * add phpGitHubApiIssue->update()
+ * add phpGitHubApiIssue->getComments()
+ * add phpGitHubApiIssue->addComment()
+ * add phpGitHubApiIssue->getLabels()
+ * add phpGitHubApiIssue->addLabel()
+ * add phpGitHubApiIssue->removeLabel()
+ * Issue API completed.
 
 v2.4 - 2010-04-08
 

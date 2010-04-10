@@ -175,6 +175,22 @@ class phpGitHubApi
   }
 
   /**
+   * Get the repo API
+   *
+   * @return  phpGitHubRepoCommit  the repo API
+   */
+  public function getRepoApi()
+  {
+    if(!isset($this->apis['repo']))
+    {
+      require_once(dirname(__FILE__).'/api/phpGitHubApiRepo.php');
+      $this->apis['repo'] = new phpGitHubApiRepo($this);
+    }
+
+    return $this->apis['repo'];
+  }
+
+  /**
    * Get the object API
    *
    * @return  phpGitHubApiObject  the object API
@@ -215,7 +231,9 @@ class phpGitHubApi
     return $this->apis[$name];
   }
 
-  // DEPRECATED METHODS (BC COMPATIBILITY)
+  /**
+   * DEPRECATED METHODS (BC COMPATIBILITY)
+   */
 
   /**
    * @deprecated  use ->getUserApi()->search()
