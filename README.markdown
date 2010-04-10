@@ -30,7 +30,8 @@ Next requests will use anonymous access.
 
 ## Users
 
-[Searching users, getting user information and managing authenticated user account information.](http://develop.github.com/p/users.html)
+Searching users, getting user information and managing authenticated user account information.
+Wrap [GitHub User API](http://develop.github.com/p/users.html).
 
 ### Search for users by username
 
@@ -106,7 +107,8 @@ Return an array of the authenticated user emails. Requires authentication.
 
 ## Issues
 
-[Listing issues, searching, editing and closing your projects issues.](http://develop.github.com/p/issues.html)
+Listing issues, searching, editing and closing your projects issues.
+Wrap [GitHub Issue API](http://develop.github.com/p/issues.html).
 
 ### List issues in a project
 
@@ -194,7 +196,8 @@ Returns an array of the issue labels as described in [http://develop.github.com/
 
 ## Commits
 
-[Getting information on specific commits, the diffs they introduce, the files they've changed.](http://develop.github.com/p/commits.html)
+Getting information on specific commits, the diffs they introduce, the files they've changed.
+Wrap [GitHub Commit API](http://develop.github.com/p/commits.html).
 
 ### List commits in a branch
 
@@ -237,6 +240,41 @@ Returns array of blob informations as described in [http://develop.github.com/p/
 The last parameter can be either a blob SHA1, a tree SHA1 or a commit SHA1.
 Returns the raw text content of the object as described in [http://develop.github.com/p/object.html#raw_git_data](http://develop.github.com/p/object.html#raw_git_data)
 
+## Repos
+
+Searching repositories, getting repository information and managing repository information for authenticated users.
+Wrap [GitHub Repo API](http://develop.github.com/p/repos.html).
+
+### Search repos by keyword
+
+    $repos = $github->getRepoApi()->search('symfony');
+
+Returns a list of repositories as described in [http://develop.github.com/p/repos.html#searching_repositories](http://develop.github.com/p/repos.html#searching_repositories)
+
+### Get extended information about a repository
+
+    $repo = $github->getRepoApi()->show('ornicar', 'php-github-api')
+
+Returns an array of information about the specified repository as described in [http://develop.github.com/p/repos.html#show_repo_info](http://develop.github.com/p/repos.html#show_repo_info)
+
+### Get the repositories of a specific user
+
+    $repos = $github->getRepoApi()->getUserRepos('ornicar');
+
+Returns a list of repositories as described in [http://develop.github.com/p/repos.html#list_all_repositories](http://develop.github.com/p/repos.html#list_all_repositories)
+
+### Get the tags of a repository
+
+    $tags = $github->getRepoApi()->getRepoTags('ornicar', 'php-github-api');
+
+Returns a list of tags as described in [http://develop.github.com/p/repos.html#repository_refs](http://develop.github.com/p/repos.html#repository_refs)
+
+### Get the branches of a repository
+
+    $tags = $github->getRepoApi()->getRepoBranches('ornicar', 'php-github-api');
+
+Returns a list of branches as described in [http://develop.github.com/p/repos.html#repository_refs](http://develop.github.com/p/repos.html#repository_refs)
+
 ## Request any route
 
 The method you need does not exist yet?
@@ -265,17 +303,29 @@ See all request available options in request/phpGitHubApiRequest.php
 
 If you want to use your own request implementation, inject it to the GitHubApi:
 
-    $github->setRequest($myOwnRequest);
+    // create a custom request
+    class myGitHubRequest extends phpGitHubApiRequest
+    {
+      // override things
+    }
 
-$myRequest must extend phpGitHubApiRequest.
+    // inject your request instance to the API.
+    $github->setRequest(new myGitHubRequest());
+
+Your request implementation must extend phpGitHubApiRequest.
 
 ### Inject a new API part instance
 
-If you want to use your own implementation of the user API, inject it to the GitHubApi:
+If you want to use your own implementation of an API, inject it to the GitHubApi.
+For example, to replace the user API:
 
-    $github->setApi('user', $myUserApi);
+    // create a custom User API
+    class myGitHubApiUser extends phpGitHubApiUser
+    {
+      // override things
+    }
 
-$myUserApi should extend phpGitHubApiUser.
+    $github->setApi('user', new myGitHubApiUser());
 
 ## Run test suite
 
