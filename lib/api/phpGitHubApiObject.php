@@ -4,8 +4,8 @@ require_once(dirname(__FILE__).'/phpGitHubApiAbstract.php');
 
 /**
  * Getting full versions of specific files and trees in your Git repositories.
- * http://develop.github.com/p/object.html
  *
+ * @link      http://develop.github.com/p/object.html
  * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @license   MIT License
  */
