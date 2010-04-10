@@ -281,7 +281,18 @@ $myUserApi should extend phpGitHubApiUser.
 
 All code is fully unit tested. To run tests on your server, from a CLI, run
 
-    php /path/to/php-github-api/test/prove.php
+    php /path/to/php-github-api/prove.php
+
+You should see
+
+    test/apiTest.........................................................ok
+    test/authenticationTest..............................................ok
+    test/commitTest......................................................ok
+    test/issueTest.......................................................ok
+    test/objectTest......................................................ok
+    test/userTest........................................................ok
+     All tests successful.
+     Files=6, Tests=52
 
 ## Credits
 
