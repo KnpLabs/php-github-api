@@ -211,6 +211,12 @@ Returns an array of commits as described in [http://develop.github.com/p/commits
 
 Returns an array of commits as described in [http://develop.github.com/p/commits.html#listing_commits_for_a_file](http://develop.github.com/p/commits.html#listing_commits_for_a_file)
 
+### Get a single commit
+
+    $commit = $github->getCommitApi()->getCommit('ornicar', 'php-github-api', '726eac09a3b44411bd86');
+
+Returns a single commit as described in [http://develop.github.com/p/commits.html#showing_a_specific_commit](http://develop.github.com/p/commits.html#showing_a_specific_commit)
+
 ## Objects
 
 [Getting full versions of specific files and trees in your Git repositories.](http://develop.github.com/p/objects.html)
