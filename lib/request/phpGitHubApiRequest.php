@@ -181,7 +181,7 @@ class phpGitHubApiRequest
 
     curl_close($curl);
 
-    if (!in_array($headers['http_code'], array(0, 200)))
+    if (!in_array($headers['http_code'], array(0, 200, 201)))
     {
       throw new phpGitHubApiRequestException(null, (int) $headers['http_code']);
     }
