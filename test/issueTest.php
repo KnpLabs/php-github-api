@@ -77,7 +77,7 @@ $commentText = 'This is a test comment';
 
 $comment = $github->getIssueApi()->addComment($username, $repo, $issueNumber, $commentText);
 
-$t->is($comment['comment'], $commentText, 'Got the new comment');
+$t->is($comment['body'], $commentText, 'Got the new comment');
 
 $t->comment('List issue comments');
 
