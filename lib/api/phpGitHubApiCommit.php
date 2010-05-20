@@ -45,4 +45,19 @@ class phpGitHubApiCommit extends phpGitHubApiAbstract
 
     return $response['commits'];
   }
+
+  /**
+   * Show a specific commit
+   * http://develop.github.com/p/commits.html#showing_a_specific_commit
+   *
+   * @param   string  $username         the username
+   * @param   string  $repo             the repo
+   * @param   string  $sha              the commit sha
+   */
+  public function getCommit($username, $repo, $sha)
+  {
+    $response = $this->api->get('commits/show/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($sha));
+
+    return $response['commit'];
+  }    
 }
