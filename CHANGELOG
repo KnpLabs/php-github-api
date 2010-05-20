@@ -1,3 +1,9 @@
+v2.7 - 2010-05-20
+
+ * add phpGitHubApiCommit->getCommit
+ * allow 201 as valid HTTP response code
+ * fix issues unit tests
+
 v2.6 - 2010-04-10
 
  * add phpGitHubApiRepo->search
