@@ -84,4 +84,58 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
 
     return $response['branches'];
   }
+  
+  /**
+   * create repo
+   * http://develop.github.com/p/repo.html
+   *
+   * @param   string  $name             name of the repository
+   * @param   string  $description      repo description
+   * @param   string  $homepage         homepage url
+   * @param   bool    $public           1 for public, 0 for private
+   * @return  array                     returns repo data
+   */
+  public function create($name, $description = '', $homepage = '', $public = true)
+  {
+    $response = $this->api->post('repos/create', array(
+        'name'        => $name,
+        'description' => $description,
+        'homepage'    => $homepage,
+        'public'      => $public
+      ));
+
+    return $response['repository'];
+  }
+  
+  
+  /**
+   * delete repo
+   * http://develop.github.com/p/repo.html
+   *
+   * @param   string  $name             name of the repository
+   * @param   string  $token            delete token
+   * @param   string  $force            force repository deletion
+   *
+   * @return  string|array              returns delete_token or repo status
+   */
+  public function delete($name, $token = null, $force = false)
+  {
+    if ($token === null) 
+    {
+      $response = $this->api->post('repos/delete/'.urlencode($name));
+
+      $token = $response['delete_token'];
+      
+      if (!$force) 
+      {
+        return $token;
+      }
+    }
+    
+    $response = $this->api->post('repos/delete/'.urlencode($name), array(
+        'delete_token'  => $token,
+      ));
+      
+    return $response;
+  }
 }
