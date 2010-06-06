@@ -40,3 +40,23 @@ $branches = $github->getRepoApi()->getRepoBranches('ornicar', 'php-github-api');
 $t->ok(count($branches) > 0, 'Found '.count($branches).' branch(es)');
 
 $t->ok(isset($branches['master']), 'Found master branch: '.$branches['master']);
+
+$github->authenticate($username, $token);
+
+$info = $github->getRepoApi()->create('NewRepo', 'new repo description', 'http://github.com', true);
+
+$t->is($info['name'], 'NewRepo', 'Repo created with name "NewRepo"');
+
+$t->is($info['description'], 'new repo description', 'Repo created with description "new repo description"');
+
+$t->is($info['homepage'], 'http://github.com', 'Repo created with homepage "http://github.com"');
+
+$t->is($info['private'], false, 'Repo created is public');
+
+$token = $github->getRepoApi()->delete('NewRepo');
+
+$t->ok(is_string($token), 'String delete_token is returned');
+
+$response = $github->getRepoApi()->delete('NewRepo', $token);
+
+$t->is($response['status'], 'deleted', 'Repo is deleted');
