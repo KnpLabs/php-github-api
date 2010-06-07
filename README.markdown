@@ -219,7 +219,7 @@ Returns a single commit as described in [http://develop.github.com/p/commits.htm
 
 ## Objects
 
-[Getting full versions of specific files and trees in your Git repositories.](http://develop.github.com/p/objects.html)
+Getting full versions of specific files and trees in your Git repositories. Wrap [GitHub objects API](http://develop.github.com/p/objects.html).
 
 ### List contents of a tree
 
