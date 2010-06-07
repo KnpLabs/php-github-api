@@ -1,3 +1,8 @@
+v2.8 - 2010-06-07
+
+ * add phpGitHubRepoApi->create
+ * add phpGitHubRepoApi->delete
+
 v2.7 - 2010-05-20
 
  * add phpGitHubApiCommit->getCommit
