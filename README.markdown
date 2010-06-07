@@ -249,37 +249,50 @@ Returns the raw text content of the object as described in [http://develop.githu
 ## Repos
 
 Searching repositories, getting repository information and managing repository information for authenticated users.
-Wrap [GitHub Repo API](http://develop.github.com/p/repos.html).
+Wrap [GitHub Repo API](http://develop.github.com/p/repo.html).
 
 ### Search repos by keyword
 
     $repos = $github->getRepoApi()->search('symfony');
 
-Returns a list of repositories as described in [http://develop.github.com/p/repos.html#searching_repositories](http://develop.github.com/p/repos.html#searching_repositories)
+Returns a list of repositories as described in [http://develop.github.com/p/repo.html#searching_repositories](http://develop.github.com/p/repo.html#searching_repositories)
 
 ### Get extended information about a repository
 
     $repo = $github->getRepoApi()->show('ornicar', 'php-github-api')
 
-Returns an array of information about the specified repository as described in [http://develop.github.com/p/repos.html#show_repo_info](http://develop.github.com/p/repos.html#show_repo_info)
+Returns an array of information about the specified repository as described in [http://develop.github.com/p/repo.html#show_repo_info](http://develop.github.com/p/repo.html#show_repo_info)
 
 ### Get the repositories of a specific user
 
     $repos = $github->getRepoApi()->getUserRepos('ornicar');
 
-Returns a list of repositories as described in [http://develop.github.com/p/repos.html#list_all_repositories](http://develop.github.com/p/repos.html#list_all_repositories)
+Returns a list of repositories as described in [http://develop.github.com/p/repo.html#list_all_repositories](http://develop.github.com/p/repo.html#list_all_repositories)
 
 ### Get the tags of a repository
 
     $tags = $github->getRepoApi()->getRepoTags('ornicar', 'php-github-api');
 
-Returns a list of tags as described in [http://develop.github.com/p/repos.html#repository_refs](http://develop.github.com/p/repos.html#repository_refs)
+Returns a list of tags as described in [http://develop.github.com/p/repo.html#repository_refs](http://develop.github.com/p/repo.html#repository_refs)
 
 ### Get the branches of a repository
 
     $tags = $github->getRepoApi()->getRepoBranches('ornicar', 'php-github-api');
 
-Returns a list of branches as described in [http://develop.github.com/p/repos.html#repository_refs](http://develop.github.com/p/repos.html#repository_refs)
+Returns a list of branches as described in [http://develop.github.com/p/repo.html#repository_refs](http://develop.github.com/p/repo.html#repository_refs)
+
+### Create a repository
+
+    $repo = $github->getRepoApi()->create('my-new-repo', 'This is the description of a repo', 'http://my-repo-homepage.org', true);
+
+Creates and returns a public repository named my-new-repo as described in [http://develop.github.com/p/repo.html](http://develop.github.com/p/repo.html) 
+
+### Delete a repository
+
+    $token = $github->getRepoApi()->delete('my-new-repo'); // Get the deletion token
+    $github->getRepoApi()->delete('my-new-repo', $token);  // Confirm repository deletion
+
+Deletes the my-new-repo repository as described in [http://develop.github.com/p/repo.html](http://develop.github.com/p/repo.html) 
 
 ## Request any route
 
@@ -349,12 +362,19 @@ You should see
     test/repoTest........................................................ok
     test/userTest........................................................ok
      All tests successful.
-     Files=7, Tests=61
+     Files=7, Tests=68
+
+## Run one test
+
+You can run only one test ; usefull when working on a feature.
+
+    php php test/commitTest.php
 
 ## Credits
 
 This library borrows ideas, code and tests from [phptwitterbot](http://code.google.com/p/phptwitterbot/).
 
 Thanks to [noloh](http://github.com/noloh) for his contribution on the Object API.
+Thanks to [bshaffer](http://github.com/bshaffer) for his contribution on the Repo API.
 
 Thanks to GitHub for the high quality API and documentation.
