@@ -23,11 +23,21 @@ $t->is($repo['name'], 'php-github-api', 'Found repo: '.$repo['name']);
 
 $t->comment('Search repos, specify language');
 
-$repos = $github->getRepoApi()->search('chess', 'php');
+$repos = $github->getRepoApi()->search('github', 'JavaScript');
 
-$t->is($repos[0]['language'], 'Php', 'First repo language is php');
+$t->is($repos[0]['language'], 'JavaScript', 'First repo language is Javascript');
 
-$repos = $github->getRepoApi()->search('chess', 'JavaScript');
+$repos = $github->getRepoApi()->search('github', 'php');
+
+$t->is($repos[0]['language'], 'PHP', 'First repo language is Php');
+$firstPageRepo = $repos[0]['name'];
+
+$t->comment ('Search repos, specify language and start page');
+
+$repos = $github->getRepoApi()->search('github', 'php', 2);
+$t->isnt($repos[0]['name'], $firstPageRepo);
+
+$repos = $github->getRepoApi()->search('github', 'JavaScript');
 
 $t->is($repos[0]['language'], 'JavaScript', 'First repo language is Javascript');
 

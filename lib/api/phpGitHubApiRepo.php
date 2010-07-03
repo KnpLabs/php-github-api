@@ -24,7 +24,7 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
   public function search($query, $language = '', $startPage = 1)
   {
     $response = $this->api->get('repos/search/'.urlencode($query), array(
-      'language' => ucfirst($language),
+      'language' => strtolower($language),
       'start_page' => $startPage
     ));
 
