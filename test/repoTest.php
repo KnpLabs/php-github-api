@@ -21,6 +21,20 @@ $repo = $github->getRepoApi()->show('ornicar', 'php-github-api');
 
 $t->is($repo['name'], 'php-github-api', 'Found repo: '.$repo['name']);
 
+$t->comment('Search repos, specify language');
+
+$repos = $github->getRepoApi()->search('chess', 'php');
+
+$t->is($repos[0]['language'], 'Php', 'First repo language is php');
+
+$repos = $github->getRepoApi()->search('chess', 'JavaScript');
+
+$t->is($repos[0]['language'], 'JavaScript', 'First repo language is Javascript');
+
+$repo = $github->getRepoApi()->show('ornicar', 'php-github-api');
+
+$t->is($repo['name'], 'php-github-api', 'Found repo: '.$repo['name']);
+
 $repos = $github->getRepoApi()->getUserRepos('ornicar');
 
 $t->ok(count($repos) > 20, 'Found '.count($repos).' repos');

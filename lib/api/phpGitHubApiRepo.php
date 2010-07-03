@@ -17,11 +17,16 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
    * http://develop.github.com/p/repos.html#searching_repositories
    *
    * @param   string  $query            the search query
+   * @param   string  $language         takes the same values as the language drop down on http://github.com/search
+   * @param   int     $startPage        the page number
    * @return  array                     list of repos found
    */
-  public function search($query)
+  public function search($query, $language = '', $startPage = 1)
   {
-    $response = $this->api->get('repos/search/'.urlencode($query));
+    $response = $this->api->get('repos/search/'.urlencode($query), array(
+      'language' => ucfirst($language),
+      'start_page' => $startPage
+    ));
 
     return $response['repositories'];
   }
