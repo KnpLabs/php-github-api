@@ -253,9 +253,19 @@ Wrap [GitHub Repo API](http://develop.github.com/p/repo.html).
 
 ### Search repos by keyword
 
+#### Simple search
+
     $repos = $github->getRepoApi()->search('symfony');
 
 Returns a list of repositories as described in [http://develop.github.com/p/repo.html#searching_repositories](http://develop.github.com/p/repo.html#searching_repositories)
+
+#### Advanced search
+
+You can filter the results by language. It takes the same values as the language drop down on [http://github.com/search](http://github).
+    $repos = $github->getRepoApi()->search('chess', 'php');
+
+You can specify the page number:
+    $repos = $github->getRepoApi()->search('chess' , 'php', 2);
 
 ### Get extended information about a repository
 
