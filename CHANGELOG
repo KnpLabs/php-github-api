@@ -1,3 +1,7 @@
+v2.9 - 2010-07-03
+
+ * add advanced repository search
+
 v2.8 - 2010-06-07
 
  * add phpGitHubRepoApi->create
