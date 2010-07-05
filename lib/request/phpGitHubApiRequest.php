@@ -20,7 +20,7 @@ class phpGitHubApiRequest
     'format'      => 'json',
     'user_agent'  => 'php-github-api (http://github.com/ornicar/php-github-api)',
     'http_port'   => 80,
-    'timeout'     => 20,
+    'timeout'     => 10,
     'login'       => null,
     'token'       => null,
     'debug'       => false
@@ -68,7 +68,8 @@ class phpGitHubApiRequest
       $this->configure($options);
     }
     
-    $response = $this->decodeResponse($this->doSend($apiPath, $parameters, $httpMethod));
+    $response = $this->doSend($apiPath, $parameters, $httpMethod);
+    $response = $this->decodeResponse($response);
 
     if(isset($initialOptions))
     {
@@ -188,7 +189,8 @@ class phpGitHubApiRequest
 
     if ($errorNumber != '')
     {
-      throw new phpGitHubApiRequestException($errorMessage, $errorNumber);
+      // on timeout, retry!
+      return $this->doSend($apiPath, $parameters, $httpMethod);
     }
 
     return $response;
