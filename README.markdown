@@ -1,6 +1,6 @@
 # PHP GitHub API
 
-A simple, Object Oriented API wrapper for GitHub written with PHP5.
+A simple, Object Oriented wrapper for GitHub API written with PHP5.
 
 Uses [GitHub API v2](http://develop.github.com/).
 
