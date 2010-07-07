@@ -26,6 +26,8 @@ class phpGitHubApiRequest
     'debug'       => false
   );
 
+  protected static $history = array();
+
   /**
    * Instanciate a new request
    *
@@ -127,6 +129,8 @@ class phpGitHubApiRequest
    */
   public function doSend($apiPath, array $parameters = array(), $httpMethod = 'GET')
   {
+    $this->updateHistory();
+
     $url = strtr($this->options['url'], array(
       ':protocol' => $this->options['protocol'],
       ':format'   => $this->options['format'],
@@ -194,6 +198,27 @@ class phpGitHubApiRequest
     }
 
     return $response;
+  }
+
+  /**
+   * Records the requests times
+   * When 60 request have been sent in less than a minute,
+   * sleeps for one second to prevent reaching GitHub API limitation. 
+   * 
+   * @access protected
+   * @return void
+   */
+  protected function updateHistory()
+  {
+    self::$history[] = time();
+    if(60 === count(self::$history))
+    {
+      if(reset(self::$history) >= (time() - 60))
+      {
+        sleep(1);
+      }
+      array_shift(self::$history);
+    }
   }
 
   /**
