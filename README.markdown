@@ -285,6 +285,16 @@ Returns a list of repositories as described in [http://develop.github.com/p/repo
 
 Returns a list of tags as described in [http://develop.github.com/p/repo.html#repository_refs](http://develop.github.com/p/repo.html#repository_refs)
 
+### Get the contributors of a repository
+
+    $contributors = $github->getRepoApi()->getRepoContributors('ornicar', 'php-github-api');
+
+Returns a list of contributors as described in [http://develop.github.com/p/repo.html](http://develop.github.com/p/repo.html)
+
+To include non GitHub users, add a third parameter to true:
+
+    $contributors = $github->getRepoApi()->getRepoContributors('ornicar', 'php-github-api', true);
+
 ### Get the branches of a repository
 
     $tags = $github->getRepoApi()->getRepoBranches('ornicar', 'php-github-api');
@@ -372,7 +382,7 @@ You should see
     test/repoTest........................................................ok
     test/userTest........................................................ok
      All tests successful.
-     Files=7, Tests=68
+     Files=7, Tests=77
 
 ## Run one test
 

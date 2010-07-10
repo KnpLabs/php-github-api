@@ -51,6 +51,14 @@ $t->ok(count($repos) > 20, 'Found '.count($repos).' repos');
 
 $t->ok(isset($repos[0]['name']), 'First repo name: '.$repos[0]['name']);
 
+$contributors = $github->getRepoApi()->getRepoContributors('ornicar', 'php-github-api');
+$t->ok(count($contributors) > 2, 'Found '.count($contributors).' contributors');
+$t->is($contributors[0]['login'], 'ornicar', 'First contributor is ornicar');
+
+$contributors = $github->getRepoApi()->getRepoContributors('ornicar', 'php-github-api', true);
+$t->ok(count($contributors) > 2, 'Found '.count($contributors).' contributors');
+$t->is($contributors[0]['login'], 'ornicar', 'First contributor is ornicar');
+
 $tags = $github->getRepoApi()->getRepoTags('ornicar', 'php-github-api');
 
 $t->ok(count($tags) > 5, 'Found '.count($tags).' tags');
