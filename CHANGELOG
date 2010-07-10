@@ -1,3 +1,7 @@
+v2.10 - 2010-07-10
+
+ * add phpGitHubRepoApi->getRepoContributors
+
 v2.9 - 2010-07-03
 
  * add advanced repository search

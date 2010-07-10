@@ -4,7 +4,7 @@
  * Simple PHP GitHub API
  * 
  * @tutorial  http://github.com/ornicar/php-github-api/blob/master/README.markdown
- * @version   2.9
+ * @version   2.10 2010-07-10
  * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @license   MIT License
  *
