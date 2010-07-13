@@ -202,7 +202,7 @@ class phpGitHubApiRequest
 
   /**
    * Records the requests times
-   * When 60 request have been sent in less than a minute,
+   * When 30 request have been sent in less than a minute,
    * sleeps for one second to prevent reaching GitHub API limitation. 
    * 
    * @access protected
@@ -211,9 +211,9 @@ class phpGitHubApiRequest
   protected function updateHistory()
   {
     self::$history[] = time();
-    if(60 === count(self::$history))
+    if(30 === count(self::$history))
     {
-      if(reset(self::$history) >= (time() - 60))
+      if(reset(self::$history) >= (time() - 30))
       {
         sleep(1);
       }
