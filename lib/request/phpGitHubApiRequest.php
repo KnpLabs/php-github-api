@@ -193,8 +193,7 @@ class phpGitHubApiRequest
 
     if ($errorNumber != '')
     {
-      // on timeout, retry!
-      return $this->doSend($apiPath, $parameters, $httpMethod);
+      throw new phpGitHubApiRequestException('error '.$errorNumber);
     }
 
     return $response;
