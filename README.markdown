@@ -194,6 +194,12 @@ Returns an array of the issue labels as described in [http://develop.github.com/
 Remove a label from the issue by username, repo, label name and issue number. Requires authentication.
 Returns an array of the issue labels as described in [http://develop.github.com/p/issues.html#add_and_remove_labels](http://develop.github.com/p/issues.html#add_and_remove_labels)
 
+### Search issues matching a label
+
+    $github->getIssueApi()->searchLabel('ornicar', 'php-github-api', 'label name')
+
+Returns an array of issues matching the given label.
+
 ## Commits
 
 Getting information on specific commits, the diffs they introduce, the files they've changed.
