@@ -46,6 +46,21 @@ class phpGitHubApiIssue extends phpGitHubApiAbstract
   }
 
   /**
+   * Search issues by label
+   *
+   * @param   string  $username         the username
+   * @param   string  $repo             the repo
+   * @param   string  $label            the label to filter issues by
+   * @return  array                     list of issues found
+   */
+  public function searchLabel($username, $repo, $label)
+  {
+    $response = $this->api->get('issues/list/'.urlencode($username).'/'.urlencode($repo).'/label/'.urlencode($label));
+
+    return $response['issues'];
+  }
+
+  /**
    * Get extended information about an issue by its username, repo and number
    * http://develop.github.com/p/issues.html#view_an_issue
    *
