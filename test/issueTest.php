@@ -92,6 +92,12 @@ $labels = $github->getIssueApi()->addLabel($username, $repo, $labelName, $issueN
 
 $t->ok(in_array($labelName, $labels), 'The issue now has the label '.$labelName);
 
+$t->comment('Search issues by label');
+
+$issues = $github->getIssueApi()->searchLabel($username, $repo, $labelName);
+
+$t->ok(in_array($labelName, $issues[0]['labels']), 'Found issues with label "'.$labelName.'"');
+
 $t->comment('Remove a label from the issue');
 
 $labels = $github->getIssueApi()->removeLabel($username, $repo, $labelName, $issueNumber);
