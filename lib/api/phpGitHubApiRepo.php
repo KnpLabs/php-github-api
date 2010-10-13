@@ -14,7 +14,7 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
 {
   /**
    * Search repos by keyword
-   * http://develop.github.com/p/repos.html#searching_repositories
+   * http://develop.github.com/p/repo.html
    *
    * @param   string  $query            the search query
    * @param   string  $language         takes the same values as the language drop down on http://github.com/search
@@ -33,7 +33,7 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
 
   /**
    * Get extended information about a repository by its username and repo name
-   * http://develop.github.com/p/repos.html#show_repo_info
+   * http://develop.github.com/p/repo.html
    *
    * @param   string  $username         the user who owns the repo
    * @param   string  $repo             the name of the repo
@@ -48,7 +48,7 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
 
   /**
    * Get the repositories of a user
-   * http://develop.github.com/p/repos.html#list_all_repositories
+   * http://develop.github.com/p/repo.html
    *
    * @param   string  $username         the username
    * @return  array                     list of the user repos
@@ -62,7 +62,7 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
 
   /**
    * Get the tags of a repository
-   * http://develop.github.com/p/repos.html#repository_refs
+   * http://develop.github.com/p/repo.html
    *
    * @param   string  $username         the username
    * @param   string  $repo             the name of the repo
@@ -77,7 +77,7 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
 
   /**
    * Get the contributors of a repository
-   * http://develop.github.com/p/repos.html
+   * http://develop.github.com/p/repo.html
    *
    * @param   string  $username         the username
    * @param   string  $repo             the name of the repo
@@ -98,7 +98,7 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
 
   /**
    * Get the branches of a repository
-   * http://develop.github.com/p/repos.html#repository_refs
+   * http://develop.github.com/p/repo.html
    *
    * @param   string  $username         the username
    * @param   string  $repo             the name of the repo
