@@ -136,16 +136,31 @@ class phpGitHubApiRequest
       ':format'   => $this->options['format'],
       ':path'     => trim($apiPath, '/')
     ));
+    
+    $curlOptions = array();
 
     if($this->options['login'])
     {
-      $parameters = array_merge(array(
-        'login' => $this->options['login'],
-        'token' => $this->options['token']
-      ), $parameters);
-    }
+      switch($this->options['auth_method']) {
+        case phpGitHubApi::AUTH_HTTP_PASSWORD:
+          $curlOptions += array(
+            CURLOPT_USERPWD => $this->options['login'] . ':' . $this->options['secret'],
+          );
+          break;
+        case phpGitHubApi::AUTH_HTTP_TOKEN:
+          $curlOptions += array(
+            CURLOPT_USERPWD => $this->options['login'] . '/token:' . $this->options['secret'],
+          );
+        case phpGitHubApi::AUTH_URL_TOKEN:
+        default:
+          $parameters = array_merge(array(
+            'login' => $this->options['login'],
+            'token' => $this->options['secret']
+          ), $parameters);
+          break;
+      }
 
-    $curlOptions = array();
+    }
 
     if (!empty($parameters))
     {

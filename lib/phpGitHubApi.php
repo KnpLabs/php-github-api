@@ -14,6 +14,24 @@
 class phpGitHubApi
 {
   /**
+   * Constant for authentication method. Indicates the default, but deprecated
+   * login with username and token in URL.
+   */
+  const AUTH_URL_TOKEN = 'url_token';
+  
+  /**
+   * Constant for authentication method. Indicates the new favored login method
+   * with username and password via HTTP Authentication.
+   */
+  const AUTH_HTTP_PASSWORD = 'http_password';
+  
+  /**
+   * Constant for authentication method. Indicates the new login method with
+   * with username and token via HTTP Authentication.
+   */
+  const AUTH_HTTP_TOKEN = 'http_token';
+  
+  /**
    * The request instance used to communicate with GitHub
    * @var phpGitHubApiRequest
    */
@@ -45,14 +63,20 @@ class phpGitHubApi
    * Authenticate a user for all next requests
    *
    * @param  string         $login      GitHub username
-   * @param  string         $token      GitHub private token
+   * @param  string         $secret     GitHub private token or Github password if $method == AUTH_HTTP_PASSWORD
+   * @param  string         $method     One of the AUTH_* class constants
+   *
    * @return phpGitHubApi               fluent interface
    */
-  public function authenticate($login, $token)
+  public function authenticate($login, $secret, $method = NULL)
   {
+    if (!$method) {
+      $method = self::AUTH_URL_TOKEN;
+    }
     $this->getRequest()
+    ->setOption('auth_method', $method)
     ->setOption('login', $login)
-    ->setOption('token', $token);
+    ->setOption('secret', $secret);
 
     return $this;
   }
@@ -64,7 +88,7 @@ class phpGitHubApi
    */
   public function deAuthenticate()
   {
-    return $this->authenticate(null, null);
+    return $this->authenticate(null, null, null);
   }
   
   /**
