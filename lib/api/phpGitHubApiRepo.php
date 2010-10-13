@@ -50,7 +50,8 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
    *
    * @return  array                     list of repositories
    */
-  public function getPushableRepos() {
+  public function getPushableRepos()
+  {
     $response = $this->api->get('repos/pushable');
 
     return $response['repositories'];
@@ -134,7 +135,8 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
    * @param   array   $values           the key => value pairs to post
    * @return  array                     informations about the repo
    */
-  public function setRepoInfo($username, $repo, $values) {
+  public function setRepoInfo($username, $repo, $values)
+  {
     $response = $this->api->post('repos/show/'.urlencode($username).'/'.urlencode($repo), $values);
 
     return $response['repository'];
@@ -147,7 +149,8 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
    * @param   string  $repo             the name of the repo
    * @return  array                     informations about the repo
    */
-  public function setPublic($repo) {
+  public function setPublic($repo)
+  {
     $response = $this->api->get('repos/set/public/'.urlencode($repo));
 
     return $response['repository'];
@@ -160,7 +163,8 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
    * @param   string  $repo             the name of the repo
    * @return  array                     informations about the repo
    */
-  public function setPrivate($repo) {
+  public function setPrivate($repo)
+  {
     $response = $this->api->get('repos/set/private/'.urlencode($repo));
 
     return $response['repository'];
@@ -172,7 +176,8 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
    * @param   string  $repo             the name of the repo
    * @return  array                     the list of deploy keys
    */
-  public function getDeployKeys($repo) {
+  public function getDeployKeys($repo)
+  {
     $response = $this->api->get('repos/keys/'.urlencode($repo));
 
     return $response['public_keys'];
@@ -186,7 +191,8 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
    * @param   string  $key              the public key data
    * @return  array                     the list of deploy keys
    */
-  public function addDeployKey($repo, $title, $key) {
+  public function addDeployKey($repo, $title, $key)
+  {
     $response = $this->api->post('repos/key/'.urlencode($repo) . '/add', array(
       'title' => $title,
       'key' => $key
@@ -202,7 +208,8 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
    * @param   string  $id               the the id of the key to remove
    * @return  array                     the list of deploy keys
    */
-  public function removeDeployKey($repo, $id) {
+  public function removeDeployKey($repo, $id)
+  {
     $response = $this->api->post('repos/key/'.urlencode($repo) . '/remove', array(
       'id' => $id,
     ));
@@ -218,7 +225,8 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
    * @param   string  $repo             the name of the repo
    * @return  array                     list of the repo collaborators
    */
-  public function getRepoCollaborators($username, $repo) {
+  public function getRepoCollaborators($username, $repo)
+  {
     $response = $this->api->get('repos/show/'.urlencode($username).'/'.urlencode($repo).'/collaborators');
 
     return $response['collaborators'];
@@ -232,7 +240,8 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
    * @param   string  $username         the user who should be added as a collaborator
    * @return  array                     list of the repo collaborators
    */
-  public function addRepoCollaborator($username, $repo) {
+  public function addRepoCollaborator($username, $repo)
+  {
     $response = $this->api->post('repos/collaborators/'.urlencode($repo).'/add/' . urlencode($username));
 
     return $response['collaborators'];
@@ -246,7 +255,8 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
    * @param   string  $username         the user who should be removed as a collaborator
    * @return  array                     list of the repo collaborators
    */
-  public function removeRepoCollaborator($username, $repo) {
+  public function removeRepoCollaborator($username, $repo)
+  {
     $response = $this->api->post('repos/collaborators/'.urlencode($repo).'/remove/' . urlencode($username));
 
     return $response['collaborators'];
@@ -260,7 +270,8 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
    * @param   string  $repo             the name of the repo
    * @return  array                     informations about the repo
    */
-  public function watch($username, $repo) {
+  public function watch($username, $repo)
+  {
     $response = $this->api->get('repos/watch/'.urlencode($username).'/'.urlencode($repo));
 
     return $response['repository'];
@@ -274,7 +285,8 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
    * @param   string  $repo             the name of the repo
    * @return  array                     informations about the repo
    */
-  public function unwatch($username, $repo) {
+  public function unwatch($username, $repo)
+  {
     $response = $this->api->get('repos/unwatch/'.urlencode($username).'/'.urlencode($repo));
 
     return $response['repository'];
@@ -288,7 +300,8 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
    * @param   string  $repo             the name of the repo
    * @return  array                     informations about the newly forked repo
    */
-  public function fork($username, $repo) {
+  public function fork($username, $repo)
+  {
     $response = $this->api->get('repos/fork/'.urlencode($username).'/'.urlencode($repo));
 
     return $response['repository'];
@@ -333,7 +346,8 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
    * @param   string  $repo             the name of the repo
    * @return  array                     list of the repo watchers
    */
-  public function getRepoWatchers($username, $repo) {
+  public function getRepoWatchers($username, $repo)
+  {
     $response = $this->api->get('repos/show/'.urlencode($username).'/'.urlencode($repo).'/watchers');
 
     return $response['watchers'];
@@ -347,7 +361,8 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
    * @param   string  $repo             the name of the repo
    * @return  array                     list of the repo forks
    */
-  public function getRepoNetwork($username, $repo) {
+  public function getRepoNetwork($username, $repo)
+  {
     $response = $this->api->get('repos/show/'.urlencode($username).'/'.urlencode($repo).'/network');
 
     return $response['network'];
@@ -361,7 +376,8 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
    * @param   string  $repo             the name of the repo
    * @return  array                     list of the languages
    */
-  public function getRepoLanguages($username, $repo) {
+  public function getRepoLanguages($username, $repo)
+  {
     $response = $this->api->get('repos/show/'.urlencode($username).'/'.urlencode($repo).'/languages');
 
     return $response['languages'];
