@@ -32,6 +32,31 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
   }
 
   /**
+   * Get the repositories of a user
+   * http://develop.github.com/p/repo.html
+   *
+   * @param   string  $username         the username
+   * @return  array                     list of the user repos
+   */
+  public function getUserRepos($username)
+  {
+    $response = $this->api->get('repos/show/'.urlencode($username));
+
+    return $response['repositories'];
+  }
+
+  /**
+   * Get a list of the repositories that the authenticated user can push to
+   *
+   * @return  array                     list of repositories
+   */
+  public function getPushableRepos() {
+    $response = $this->api->get('repos/pushable');
+
+    return $response['repositories'];
+  }
+
+  /**
    * Get extended information about a repository by its username and repo name
    * http://develop.github.com/p/repo.html
    *
@@ -47,6 +72,60 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
   }
 
   /**
+   * create repo
+   * http://develop.github.com/p/repo.html
+   *
+   * @param   string  $name             name of the repository
+   * @param   string  $description      repo description
+   * @param   string  $homepage         homepage url
+   * @param   bool    $public           1 for public, 0 for private
+   * @return  array                     returns repo data
+   */
+  public function create($name, $description = '', $homepage = '', $public = true)
+  {
+    $response = $this->api->post('repos/create', array(
+      'name'        => $name,
+      'description' => $description,
+      'homepage'    => $homepage,
+      'public'      => $public
+    ));
+
+    return $response['repository'];
+  }
+
+
+  /**
+   * delete repo
+   * http://develop.github.com/p/repo.html
+   *
+   * @param   string  $name             name of the repository
+   * @param   string  $token            delete token
+   * @param   string  $force            force repository deletion
+   *
+   * @return  string|array              returns delete_token or repo status
+   */
+  public function delete($name, $token = null, $force = false)
+  {
+    if ($token === null) 
+    {
+      $response = $this->api->post('repos/delete/'.urlencode($name));
+
+      $token = $response['delete_token'];
+
+      if (!$force) 
+      {
+        return $token;
+      }
+    }
+
+    $response = $this->api->post('repos/delete/'.urlencode($name), array(
+      'delete_token'  => $token,
+    ));
+
+    return $response;
+  }
+
+  /**
    * Set information of a repository
    * http://develop.github.com/p/repo.html
    *
@@ -57,49 +136,6 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
    */
   public function setRepoInfo($username, $repo, $values) {
     $response = $this->api->post('repos/show/'.urlencode($username).'/'.urlencode($repo), $values);
-
-    return $response['repository'];
-  }
-  
-
-  /**
-   * Make the authenticated user watch a repository
-   * http://develop.github.com/p/repo.html
-   *
-   * @param   string  $username         the user who owns the repo
-   * @param   string  $repo             the name of the repo
-   * @return  array                     informations about the repo
-   */
-  public function watch($username, $repo) {
-    $response = $this->api->get('repos/watch/'.urlencode($username).'/'.urlencode($repo));
-
-    return $response['repository'];
-  }
-  
-  /**
-   * Make the authenticated user unwatch a repository
-   * http://develop.github.com/p/repo.html
-   *
-   * @param   string  $username         the user who owns the repo
-   * @param   string  $repo             the name of the repo
-   * @return  array                     informations about the repo
-   */
-  public function unwatch($username, $repo) {
-    $response = $this->api->get('repos/unwatch/'.urlencode($username).'/'.urlencode($repo));
-
-    return $response['repository'];
-  }
-
-  /**
-   * Make the authenticated user fork a repository
-   * http://develop.github.com/p/repo.html
-   *
-   * @param   string  $username         the user who owns the repo
-   * @param   string  $repo             the name of the repo
-   * @return  array                     informations about the newly forked repo
-   */
-  public function fork($username, $repo) {
-    $response = $this->api->get('repos/fork/'.urlencode($username).'/'.urlencode($repo));
 
     return $response['repository'];
   }
@@ -175,17 +211,87 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
   }
 
   /**
-   * Get the repositories of a user
+   * Get the collaborators of a repository
    * http://develop.github.com/p/repo.html
    *
-   * @param   string  $username         the username
-   * @return  array                     list of the user repos
+   * @param   string  $username         the user who owns the repo
+   * @param   string  $repo             the name of the repo
+   * @return  array                     list of the repo collaborators
    */
-  public function getUserRepos($username)
-  {
-    $response = $this->api->get('repos/show/'.urlencode($username));
+  public function getRepoCollaborators($username, $repo) {
+    $response = $this->api->get('repos/show/'.urlencode($username).'/'.urlencode($repo).'/collaborators');
 
-    return $response['repositories'];
+    return $response['collaborators'];
+  }
+
+  /**
+   * Add a collaborator to a repository
+   * http://develop.github.com/p/repo.html
+   *
+   * @param   string  $repo             the name of the repo
+   * @param   string  $username         the user who should be added as a collaborator
+   * @return  array                     list of the repo collaborators
+   */
+  public function addRepoCollaborator($username, $repo) {
+    $response = $this->api->post('repos/collaborators/'.urlencode($repo).'/add/' . urlencode($username));
+
+    return $response['collaborators'];
+  }
+
+  /**
+   * Delete a collaborator from a repository
+   * http://develop.github.com/p/repo.html
+   *
+   * @param   string  $repo             the name of the repo
+   * @param   string  $username         the user who should be removed as a collaborator
+   * @return  array                     list of the repo collaborators
+   */
+  public function removeRepoCollaborator($username, $repo) {
+    $response = $this->api->post('repos/collaborators/'.urlencode($repo).'/remove/' . urlencode($username));
+
+    return $response['collaborators'];
+  }
+
+  /**
+   * Make the authenticated user watch a repository
+   * http://develop.github.com/p/repo.html
+   *
+   * @param   string  $username         the user who owns the repo
+   * @param   string  $repo             the name of the repo
+   * @return  array                     informations about the repo
+   */
+  public function watch($username, $repo) {
+    $response = $this->api->get('repos/watch/'.urlencode($username).'/'.urlencode($repo));
+
+    return $response['repository'];
+  }
+  
+  /**
+   * Make the authenticated user unwatch a repository
+   * http://develop.github.com/p/repo.html
+   *
+   * @param   string  $username         the user who owns the repo
+   * @param   string  $repo             the name of the repo
+   * @return  array                     informations about the repo
+   */
+  public function unwatch($username, $repo) {
+    $response = $this->api->get('repos/unwatch/'.urlencode($username).'/'.urlencode($repo));
+
+    return $response['repository'];
+  }
+
+  /**
+   * Make the authenticated user fork a repository
+   * http://develop.github.com/p/repo.html
+   *
+   * @param   string  $username         the user who owns the repo
+   * @param   string  $repo             the name of the repo
+   * @return  array                     informations about the newly forked repo
+   */
+  public function fork($username, $repo) {
+    $response = $this->api->get('repos/fork/'.urlencode($username).'/'.urlencode($repo));
+
+    return $response['repository'];
   }
 
   /**
@@ -202,6 +308,22 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
 
     return $response['tags'];
   }
+
+  /**
+   * Get the branches of a repository
+   * http://develop.github.com/p/repo.html
+   *
+   * @param   string  $username         the username
+   * @param   string  $repo             the name of the repo
+   * @return  array                     list of the repo branches
+   */
+  public function getRepoBranches($username, $repo)
+  {
+    $response = $this->api->get('repos/show/'.urlencode($username).'/'.urlencode($repo).'/branches');
+
+    return $response['branches'];
+  }
+
 
   /**
    * Get the watchers of a repository
@@ -264,127 +386,5 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
     $response = $this->api->get($url);
 
     return $response['contributors'];
-  }
-
-  /**
-   * Get the collaborators of a repository
-   * http://develop.github.com/p/repo.html
-   *
-   * @param   string  $username         the user who owns the repo
-   * @param   string  $repo             the name of the repo
-   * @return  array                     list of the repo collaborators
-   */
-  public function getRepoCollaborators($username, $repo) {
-    $response = $this->api->get('repos/show/'.urlencode($username).'/'.urlencode($repo).'/collaborators');
-
-    return $response['collaborators'];
-  }
-
-  /**
-   * Add a collaborator to a repository
-   * http://develop.github.com/p/repo.html
-   *
-   * @param   string  $repo             the name of the repo
-   * @param   string  $username         the user who should be added as a collaborator
-   * @return  array                     list of the repo collaborators
-   */
-  public function addRepoCollaborator($username, $repo) {
-    $response = $this->api->post('repos/collaborators/'.urlencode($repo).'/add/' . urlencode($username));
-
-    return $response['collaborators'];
-  }
-
-  /**
-   * Delete a collaborator from a repository
-   * http://develop.github.com/p/repo.html
-   *
-   * @param   string  $repo             the name of the repo
-   * @param   string  $username         the user who should be removed as a collaborator
-   * @return  array                     list of the repo collaborators
-   */
-  public function removeRepoCollaborator($username, $repo) {
-    $response = $this->api->post('repos/collaborators/'.urlencode($repo).'/remove/' . urlencode($username));
-
-    return $response['collaborators'];
-  }
-
-  /**
-   * Get a list of the repositories that the authenticated user can push to
-   *
-   * @return  array                     list of repositories
-   */
-  public function getPushableRepos() {
-    $response = $this->api->get('repos/pushable');
-
-    return $response['repositories'];
-  }
-
-  /**
-   * Get the branches of a repository
-   * http://develop.github.com/p/repo.html
-   *
-   * @param   string  $username         the username
-   * @param   string  $repo             the name of the repo
-   * @return  array                     list of the repo branches
-   */
-  public function getRepoBranches($username, $repo)
-  {
-    $response = $this->api->get('repos/show/'.urlencode($username).'/'.urlencode($repo).'/branches');
-
-    return $response['branches'];
-  }
-
-  /**
-   * create repo
-   * http://develop.github.com/p/repo.html
-   *
-   * @param   string  $name             name of the repository
-   * @param   string  $description      repo description
-   * @param   string  $homepage         homepage url
-   * @param   bool    $public           1 for public, 0 for private
-   * @return  array                     returns repo data
-   */
-  public function create($name, $description = '', $homepage = '', $public = true)
-  {
-    $response = $this->api->post('repos/create', array(
-      'name'        => $name,
-      'description' => $description,
-      'homepage'    => $homepage,
-      'public'      => $public
-    ));
-
-    return $response['repository'];
-  }
-
-
-  /**
-   * delete repo
-   * http://develop.github.com/p/repo.html
-   *
-   * @param   string  $name             name of the repository
-   * @param   string  $token            delete token
-   * @param   string  $force            force repository deletion
-   *
-   * @return  string|array              returns delete_token or repo status
-   */
-  public function delete($name, $token = null, $force = false)
-  {
-    if ($token === null) 
-    {
-      $response = $this->api->post('repos/delete/'.urlencode($name));
-
-      $token = $response['delete_token'];
-
-      if (!$force) 
-      {
-        return $token;
-      }
-    }
-
-    $response = $this->api->post('repos/delete/'.urlencode($name), array(
-      'delete_token'  => $token,
-    ));
-
-    return $response;
   }
 }
