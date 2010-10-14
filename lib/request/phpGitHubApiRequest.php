@@ -151,6 +151,7 @@ class phpGitHubApiRequest
           $curlOptions += array(
             CURLOPT_USERPWD => $this->options['login'] . '/token:' . $this->options['secret'],
           );
+          break;
         case phpGitHubApi::AUTH_URL_TOKEN:
         default:
           $parameters = array_merge(array(
