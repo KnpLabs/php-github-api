@@ -2,7 +2,7 @@
 require_once dirname(__FILE__).'/vendor/lime.php';
 require_once dirname(__FILE__).'/../lib/phpGitHubApi.php';
 
-$t = new lime_test(4);
+$t = new lime_test(5);
 
 $username = 'ornicartest';
 $token    = 'fd8144e29b4a85e9487d1cacbcd4e26c';
@@ -33,6 +33,14 @@ $api->authenticate($username, $token, phpGitHubApi::AUTH_HTTP_TOKEN);
 $user = $api->getUserApi()->show($username);
 
 $t->ok(isset($user['plan']), 'User plan is available');
+
+$t->comment('Deauthenticate');
+
+$api->deAuthenticate();
+
+$user = $api->getUserApi()->show($username);
+
+$t->ok(!isset($user['plan']), 'User plan is not available');
 
 $t->comment('Authenticate '.$username.' with bad token');
 
