@@ -137,7 +137,11 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
    */
   public function setRepoInfo($username, $repo, $values)
   {
-    $response = $this->api->post('repos/show/'.urlencode($username).'/'.urlencode($repo), $values);
+    $post = array();
+    foreach ($values as $key => $value) {
+      $post['values['.$key.']'] = $value;
+    }
+    $response = $this->api->post('repos/show/'.urlencode($username).'/'.urlencode($repo), $post);
 
     return $response['repository'];
   }
