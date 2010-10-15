@@ -255,7 +255,7 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
    * @param   string  $username         the user who should be removed as a collaborator
    * @return  array                     list of the repo collaborators
    */
-  public function removeRepoCollaborator($username, $repo)
+  public function removeRepoCollaborator($repo, $username)
   {
     $response = $this->api->post('repos/collaborators/'.urlencode($repo).'/remove/' . urlencode($username));
 
