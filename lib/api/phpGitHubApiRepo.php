@@ -240,7 +240,7 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
    * @param   string  $username         the user who should be added as a collaborator
    * @return  array                     list of the repo collaborators
    */
-  public function addRepoCollaborator($username, $repo)
+  public function addRepoCollaborator($repo, $username)
   {
     $response = $this->api->post('repos/collaborators/'.urlencode($repo).'/add/' . urlencode($username));
 
