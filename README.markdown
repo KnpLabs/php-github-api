@@ -1,8 +1,8 @@
 # PHP GitHub API
 
-A simple, Object Oriented wrapper for GitHub API written with PHP5.
+A simple, Object Oriented wrapper for GitHub API written with PHP5. 
 
-Uses [GitHub API v2](http://develop.github.com/).
+Uses [GitHub API v2](http://develop.github.com/). The way the Object Oriented Interface is organized is mainly inspired by the way GitHub has organized their API Documentation.
 
 Requires [php curl](http://php.net/manual/en/book.curl.php).
 
@@ -12,21 +12,30 @@ If the method you need does not exist yet, dont hesitate to request it with an [
 
     $github = new phpGitHubApi();
 
-### Authenticate a user
+This instanciated API does not offer many function by itself, but provides methods to instanciate the different Sub-API's that GitHub defines in the API documentation. The main API object just provides methods for authentication.
 
-This step is facultative, as most of GitHub services do not require authentication.
+### Authentication
 
-    $github->authenticate('ornicar', 'my-token');
+Most GitHub services do not require authentication, but some do. For example the methods that allow you to change properties on Repositories and some others. Therefore this step is facultative.
 
-Next requests will use the user "ornicar", instead of anonymous access.
+GitHub provides some different ways of authentication. This API implementation implements three of them which are handled by one function:
 
-### Deauthenticate a user
+    $github->authenticate($username, $secret, $method);
 
-Cancels authentication.
+$username is, of course, the username. $method is optional. The three allowed
+values are:
+ * phpGitHubApi::AUTH_URL_TOKEN (default, if $method is omitted)
+ * phpGitHubApi::AUTH_HTTP_TOKEN
+ * phpGitHubApi::AUTH_HTTP_PASSWORD
+The required value of $secret depends on the choosen $method. For the AUTH_*_TOKEN methods, you should provide the API token here. For the AUTH_HTTP_PASSWORD, you should provide the password of the account.
+
+After executing the $github->authenticate($username, $secret, $method);authenticate method using correct credentials, all further request are done as the given user.
+
+The phpGitHubApi::AUTH_URL_TOKEN authentication method sends the username and API token in URL parameters. The phpGitHubApi::AUTH_HTTP_* authentication methods send their values to GitHub using HTTP Basic Authentication. phpGitHubApi::AUTH_URL_TOKEN used to be the only available authentication method. To prevent existing applications from changing their behavior in case of an API upgrade, this method is choosen as the default for this API implementation. Note however that GitHub describes this method as deprecated. In most case you should use the phpGitHubApi::AUTH_HTTP_TOKEN instead.
+
+If you want to stop new requests from being authenticated, you can use the deAuthenticate method.
 
     $github->deAuthenticate();
-
-Next requests will use anonymous access.
 
 ## Users
 
