@@ -131,17 +131,17 @@ class phpGitHubApiUser extends phpGitHubApiAbstract
    *
    * @return  array                     list of public keys of the user
    */
-  public function getKeys() 
+  public function getKeys()
   {
     $response = $this->api->get('user/keys');
-    
+
     return $response['public_keys'];
   }
 
   /**
    * Add a public key to the authenticated user. Requires authentication.
    *
-   * @return  array                     ist of public keys of the user
+   * @return  array                    list of public keys of the user
    */
   public function addKey($title, $key)
   {
@@ -153,7 +153,7 @@ class phpGitHubApiUser extends phpGitHubApiAbstract
   /**
    * Remove a public key from the authenticated user. Requires authentication.
    *
-   * @return  array                     ist of public keys of the user
+   * @return  array                    list of public keys of the user
    */
   public function removeKey($id)
   {
