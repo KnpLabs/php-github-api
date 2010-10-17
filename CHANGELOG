@@ -1,3 +1,9 @@
+V2.12 - 2010-10-17
+
+ * add support for HTTP authentication
+ * complete repository API
+ * complete user API
+
 V2.11 - 2010-07-22
 
  * add phpGitHubIssueApi->searchLabel

@@ -2,9 +2,9 @@
 
 /**
  * Simple PHP GitHub API
- * 
+ *
  * @tutorial  http://github.com/ornicar/php-github-api/blob/master/README.markdown
- * @version   2.10 2010-07-10
+ * @version   2.12 2010-10-17
  * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @license   MIT License
  *
@@ -18,25 +18,25 @@ class phpGitHubApi
    * login with username and token in URL.
    */
   const AUTH_URL_TOKEN = 'url_token';
-  
+
   /**
    * Constant for authentication method. Indicates the new favored login method
    * with username and password via HTTP Authentication.
    */
   const AUTH_HTTP_PASSWORD = 'http_password';
-  
+
   /**
    * Constant for authentication method. Indicates the new login method with
    * with username and token via HTTP Authentication.
    */
   const AUTH_HTTP_TOKEN = 'http_token';
-  
+
   /**
    * The request instance used to communicate with GitHub
    * @var phpGitHubApiRequest
    */
   protected $request  = null;
-  
+
   /**
    * The list of loaded API instances
    * @var array
@@ -90,7 +90,7 @@ class phpGitHubApi
   {
     return $this->authenticate(null, null, null);
   }
-  
+
   /**
    * Call any route, GET method
    * Ex: $api->get('repos/show/my-username/my-repo')
@@ -133,7 +133,7 @@ class phpGitHubApi
         'debug' => $this->debug
       ));
     }
-    
+
     return $this->request;
   }
 
