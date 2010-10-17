@@ -264,7 +264,7 @@ Returns the raw text content of the object as described in [http://develop.githu
 ## Repos
 
 Searching repositories, getting repository information and managing repository information for authenticated users.
-Wrap [GitHub Repo API](http://develop.github.com/p/repo.html).
+Wrap [GitHub Repo API](http://develop.github.com/p/repo.html). All methods are described on that page.
 
 ### Search repos by keyword
 
@@ -272,7 +272,7 @@ Wrap [GitHub Repo API](http://develop.github.com/p/repo.html).
 
     $repos = $github->getRepoApi()->search('symfony');
 
-Returns a list of repositories as described in [http://develop.github.com/p/repo.html](http://develop.github.com/p/repo.html)
+Returns a list of repositories.
 
 #### Advanced search
 
@@ -286,48 +286,141 @@ You can specify the page number:
 
     $repo = $github->getRepoApi()->show('ornicar', 'php-github-api')
 
-Returns an array of information about the specified repository as described in [http://develop.github.com/p/repo.html](http://develop.github.com/p/repo.html)
+Returns an array of information about the specified repository.
 
 ### Get the repositories of a specific user
 
     $repos = $github->getRepoApi()->getUserRepos('ornicar');
 
-Returns a list of repositories as described in [http://develop.github.com/p/repo.html](http://develop.github.com/p/repo.html)
+Returns a list of repositories.
 
-### Get the tags of a repository
+### Get the repositories the authenticated user can push to
 
-    $tags = $github->getRepoApi()->getRepoTags('ornicar', 'php-github-api');
+    $repos = $github->getRepoApi()->getPushableRepos();
 
-Returns a list of tags as described in [http://develop.github.com/p/repo.html](http://develop.github.com/p/repo.html)
-
-### Get the contributors of a repository
-
-    $contributors = $github->getRepoApi()->getRepoContributors('ornicar', 'php-github-api');
-
-Returns a list of contributors as described in [http://develop.github.com/p/repo.html](http://develop.github.com/p/repo.html)
-
-To include non GitHub users, add a third parameter to true:
-
-    $contributors = $github->getRepoApi()->getRepoContributors('ornicar', 'php-github-api', true);
-
-### Get the branches of a repository
-
-    $tags = $github->getRepoApi()->getRepoBranches('ornicar', 'php-github-api');
-
-Returns a list of branches as described in [http://develop.github.com/p/repo.html](http://develop.github.com/p/repo.html)
+Returns a list of repositories.
 
 ### Create a repository
 
     $repo = $github->getRepoApi()->create('my-new-repo', 'This is the description of a repo', 'http://my-repo-homepage.org', true);
 
-Creates and returns a public repository named my-new-repo as described in [http://develop.github.com/p/repo.html](http://develop.github.com/p/repo.html) 
+Creates and returns a public repository named my-new-repo.
+
+### Update a repository
+
+    $repo = $github->getRepoApi()->setRepoInfo('username', 'my-new-repo', array('description' => 'some new description'));
+
+The value array also accepts the parameters
+ * description
+ * homepage
+ * has_wiki
+ * has_issues
+ * has_downloads
+
+Updates and returns the repository named 'my-new-repo' that is owned by 'username'.
 
 ### Delete a repository
 
     $token = $github->getRepoApi()->delete('my-new-repo'); // Get the deletion token
     $github->getRepoApi()->delete('my-new-repo', $token);  // Confirm repository deletion
 
-Deletes the my-new-repo repository as described in [http://develop.github.com/p/repo.html](http://develop.github.com/p/repo.html) 
+Deletes the my-new-repo repository.
+
+### Making a repository public or private
+
+    $github->getRepoApi()->setPublic('reponame');
+    $github->getRepoApi()->setPrivate('reponame');
+
+Makes the 'reponame' repository public or private and returns the repository.
+
+### Get the deploy keys of a repository
+
+    $keys = $github->getRepoApi()->getDeployKeys('reponame');
+
+Returns a list of the deploy keys for the 'reponame' repository.
+
+### Add a deploy key to a repository
+
+    $keys = $github->getRepoApi()->addDeployKey('reponame', 'key title', $key);
+
+Adds a key with title 'key title' to the 'reponame' repository and returns a list of the deploy keys for the repository.
+
+### Remove a deploy key from a repository
+
+    $keys = $github->getRepoApi()->removeDeployKey('reponame', 12345);
+
+Removes the key with id 12345 from the 'reponame' repository and returns a list of the deploy keys for the repository.
+
+### Get the collaborators for a repository
+
+    $collaborators = $github->getRepoApi()->getRepoCollaborators('reponame');
+
+Returns a list of the collaborators for the 'reponame' repository.
+
+### Add a collaborator to a repository
+
+    $collaborators = $github->getRepoApi->addCollaborator('reponame', 'username');
+
+Adds the 'username' user as collaborator to the 'reponame' repository.
+
+### Remove a collaborator from a repository
+
+    $collaborators = $github->getRepoApi->removeCollaborator('reponame', 'username');
+
+Remove the 'username' collaborator from the 'reponame' repository.
+
+### Watch and unwatch a repository
+
+    $repository = $github->getRepoApi->watch('ornicar', 'php-github-api');
+    $repository = $github->getRepoApi->unwatch('ornicar', 'php-github-api');
+
+Watches or unwatches the 'php-github-api' repository owned by 'ornicar' and returns the repository.
+
+### Fork a repository
+
+    $repository = $github->getRepoApi->fork('ornicar', 'php-github-api');
+
+Creates a fork of the 'php-github-api' owned by 'ornicar' and returns the newly created repository.
+
+### Get the tags of a repository
+
+    $tags = $github->getRepoApi()->getRepoTags('ornicar', 'php-github-api');
+
+Returns a list of tags.
+
+### Get the branches of a repository
+
+    $tags = $github->getRepoApi()->getRepoBranches('ornicar', 'php-github-api');
+
+Returns a list of branches.
+
+### Get the watchers of a repository
+
+    $watchers = $github->getRepoApi()->getRepoWatchers('ornicar', 'php-github-api');
+
+Returns list of the users watching the 'php-github-api' owned by 'ornicar'.
+
+### Get the network (forks) of a repository
+
+    $network = $github->getRepoApi()->getRepoNetwork('ornicar', 'php-github-api');
+
+Returns list of the forks of the 'php-github-api' owned by 'ornicar', including the original repository.
+
+### Get the languages for a repository
+
+    $contributors = $github->getRepoApi()->getRepoLanguages('ornicar', 'php-github-api');
+
+Returns a list of languages.
+
+### Get the contributors of a repository
+
+    $contributors = $github->getRepoApi()->getRepoContributors('ornicar', 'php-github-api');
+
+Returns a list of contributors.
+
+To include non GitHub users, add a third parameter to true:
+
+    $contributors = $github->getRepoApi()->getRepoContributors('ornicar', 'php-github-api', true);
 
 ## Request any route
 
