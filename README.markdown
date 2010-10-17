@@ -46,13 +46,13 @@ Wrap [GitHub User API](http://develop.github.com/p/users.html).
 
     $users = $github->getUserApi()->search('ornicar');
 
-Returns an array of users as described in [http://develop.github.com/p/users.html#searching_for_users](http://develop.github.com/p/users.html#searching_for_users)
+Returns an array of users as described in [http://develop.github.com/p/users.html](http://develop.github.com/p/users.html)
 
 ### Get information about a user
 
     $user = $github->getUserApi()->show('ornicar');
 
-Returns an array of information about the user as described in [http://develop.github.com/p/users.html#getting_user_information](http://develop.github.com/p/users.html#getting_user_information)
+Returns an array of information about the user as described in [http://develop.github.com/p/users.html](http://develop.github.com/p/users.html)
 
 ### Update user informations
 
@@ -60,19 +60,19 @@ Change user attributes: name, email, blog, company, location. Requires authentic
 
     $github->getUserApi()->update('ornicar', array('location' => 'France', 'blog' => 'http://diem-project.org/blog'));
 
-Returns an array of information about the user as described in [http://develop.github.com/p/users.html#authenticated_user_management](http://develop.github.com/p/users.html#authenticated_user_management)
+Returns an array of information about the user as described in [http://develop.github.com/p/users.html](http://develop.github.com/p/users.html)
 
 ### Get users that a specific user is following
 
     $users = $github->getUserApi()->getFollowing('ornicar');
 
-Returns an array of followed users as described in [http://develop.github.com/p/users.html#following_network](http://develop.github.com/p/users.html#following_network)
+Returns an array of followed users as described in [http://develop.github.com/p/users.html](http://develop.github.com/p/users.html)
 
 ### Get users following a specific user
 
     $users = $github->getUserApi()->getFollowers('ornicar');
 
-Returns an array of following users as described in [http://develop.github.com/p/users.html#following_network](http://develop.github.com/p/users.html#following_network)
+Returns an array of following users as described in [http://develop.github.com/p/users.html](http://develop.github.com/p/users.html)
 
 ### Follow a user
 
@@ -80,7 +80,7 @@ Make the authenticated user follow a user. Requires authentication.
 
     $github->getUserApi()->follow('symfony');
 
-Returns an array of followed users as described in [http://develop.github.com/p/users.html#following_network](http://develop.github.com/p/users.html#following_network)
+Returns an array of followed users as described in [http://develop.github.com/p/users.html](http://develop.github.com/p/users.html)
 
 ### Unfollow a user
 
@@ -88,13 +88,13 @@ Make the authenticated user unfollow a user. Requires authentication.
 
     $github->getUserApi()->unFollow('symfony');
 
-Returns an array of followed users as described in [http://develop.github.com/p/users.html#following_network](http://develop.github.com/p/users.html#following_network)
+Returns an array of followed users as described in [http://develop.github.com/p/users.html](http://develop.github.com/p/users.html)
 
 ### Get repos that a specific user is watching
 
     $users = $github->getUserApi()->getWatchedRepos('ornicar');
 
-Returns an array of watched repos as described in [http://develop.github.com/p/users.html#watched_repos](http://develop.github.com/p/users.html#watched_repos)
+Returns an array of watched repos as described in [http://develop.github.com/p/users.html](http://develop.github.com/p/users.html)
 
 ### Get the authenticated user emails
 
@@ -123,19 +123,19 @@ Wrap [GitHub Issue API](http://develop.github.com/p/issues.html).
 
     $issues = $github->getIssueApi()->getList('ornicar', 'php-github-api', 'open');
 
-Returns an array of issues as described in [http://develop.github.com/p/issues.html#list_a_projects_issues](http://develop.github.com/p/issues.html#list_a_projects_issues)
+Returns an array of issues as described in [http://develop.github.com/p/issues.html](http://develop.github.com/p/issues.html)
 
 ### Search issues in a project
 
     $issues = $github->getIssueApi()->search('ornicar', 'php-github-api', 'closed', 'bug');
 
-Returns an array of closed issues matching the "bug" term, as described in [http://develop.github.com/p/issues.html#search_issues](http://develop.github.com/p/issues.html#search_issues)
+Returns an array of closed issues matching the "bug" term, as described in [http://develop.github.com/p/issues.html](http://develop.github.com/p/issues.html)
 
 ### Get information about an issue
 
     $issue = $github->getIssueApi()->show('ornicar', 'php-github-api', 1);
 
-Returns an array of information about the issue as described in [http://develop.github.com/p/issues.html#view_an_issue](http://develop.github.com/p/issues.html#view_an_issue)
+Returns an array of information about the issue as described in [http://develop.github.com/p/issues.html](http://develop.github.com/p/issues.html)
 
 ### Open a new issue
 
@@ -143,21 +143,21 @@ Returns an array of information about the issue as described in [http://develop.
 
 Creates a new issue in the repo "php-github-api" of the user "ornicar".
 The issue is assigned to the authenticated user. Requires authentication.
-Returns an array of information about the issue as described in [http://develop.github.com/p/issues.html#view_an_issue](http://develop.github.com/p/issues.html#view_an_issue)
+Returns an array of information about the issue as described in [http://develop.github.com/p/issues.html](http://develop.github.com/p/issues.html)
 
 ### Close an issue
 
     $github->getIssueApi()->close('ornicar', 'php-github-api', 4);
 
 Closes the fourth issue of the repo "php-github-api" of the user "ornicar". Requires authentication.
-Returns an array of information about the issue as described in [http://develop.github.com/p/issues.html#view_an_issue](http://develop.github.com/p/issues.html#view_an_issue)
+Returns an array of information about the issue as described in [http://develop.github.com/p/issues.html](http://develop.github.com/p/issues.html)
 
 ### Reopen an issue
 
     $github->getIssueApi()->reOpen('ornicar', 'php-github-api', 4);
 
 Reopens the fourth issue of the repo "php-github-api" of the user "ornicar". Requires authentication.
-Returns an array of information about the issue as described in [http://develop.github.com/p/issues.html#view_an_issue](http://develop.github.com/p/issues.html#view_an_issue)
+Returns an array of information about the issue as described in [http://develop.github.com/p/issues.html](http://develop.github.com/p/issues.html)
 
 ### Update an issue
 
@@ -165,14 +165,14 @@ Returns an array of information about the issue as described in [http://develop.
 
 Updates the fourth issue of the repo "php-github-api" of the user "ornicar". Requires authentication.
 Available attributes are title and body.
-Returns an array of information about the issue as described in [http://develop.github.com/p/issues.html#view_an_issue](http://develop.github.com/p/issues.html#view_an_issue)
+Returns an array of information about the issue as described in [http://develop.github.com/p/issues.html](http://develop.github.com/p/issues.html)
 
 ### List an issue comments
 
     $comments = $github->getIssueApi()->getComments('ornicar', 'php-github-api', 4);
 
 List an issue comments by username, repo and issue number.
-Returns an array of issues as described in [http://develop.github.com/p/issues.html#list_an_issues_comments](http://develop.github.com/p/issues.html#list_an_issues_comments)
+Returns an array of issues as described in [http://develop.github.com/p/issues.html](http://develop.github.com/p/issues.html)
 
 ### Add a comment on an issue
 
@@ -186,7 +186,7 @@ The comment is assigned to the authenticated user. Requires authentication.
     $labels = $github->getIssueApi()->getLabels('ornicar', 'php-github-api');
 
 List all project labels by username and repo.
-Returns an array of project labels as described in [http://develop.github.com/p/issues.html#listing_labels](http://develop.github.com/p/issues.html#listing_labels)
+Returns an array of project labels as described in [http://develop.github.com/p/issues.html](http://develop.github.com/p/issues.html)
 
 ### Add a label on an issue
 
@@ -194,14 +194,14 @@ Returns an array of project labels as described in [http://develop.github.com/p/
 
 Add a label to the issue by username, repo, label name and issue number. Requires authentication.
 If the label is not yet in the system, it will be created.
-Returns an array of the issue labels as described in [http://develop.github.com/p/issues.html#add_and_remove_labels](http://develop.github.com/p/issues.html#add_and_remove_labels)
+Returns an array of the issue labels as described in [http://develop.github.com/p/issues.html](http://develop.github.com/p/issues.html)
 
 ### Remove a label from an issue
 
     $github->getIssueApi()->removeLabel('ornicar', 'php-github-api', 'label name', 4);
 
 Remove a label from the issue by username, repo, label name and issue number. Requires authentication.
-Returns an array of the issue labels as described in [http://develop.github.com/p/issues.html#add_and_remove_labels](http://develop.github.com/p/issues.html#add_and_remove_labels)
+Returns an array of the issue labels as described in [http://develop.github.com/p/issues.html](http://develop.github.com/p/issues.html)
 
 ### Search issues matching a label
 
@@ -218,19 +218,19 @@ Wrap [GitHub Commit API](http://develop.github.com/p/commits.html).
 
     $commits = $github->getCommitApi()->getBranchCommits('ornicar', 'php-github-api', 'master');
 
-Returns an array of commits as described in [http://develop.github.com/p/commits.html#listing_commits_on_a_branch](http://develop.github.com/p/commits.html#listing_commits_on_a_branch)
+Returns an array of commits as described in [http://develop.github.com/p/commits.html](http://develop.github.com/p/commits.html)
 
 ### List commits for a file
 
     $commits = $github->getCommitApi()->getFileCommits('ornicar', 'php-github-api', 'master', 'README');
 
-Returns an array of commits as described in [http://develop.github.com/p/commits.html#listing_commits_for_a_file](http://develop.github.com/p/commits.html#listing_commits_for_a_file)
+Returns an array of commits as described in [http://develop.github.com/p/commits.html](http://develop.github.com/p/commits.html)
 
 ### Get a single commit
 
     $commit = $github->getCommitApi()->getCommit('ornicar', 'php-github-api', '726eac09a3b44411bd86');
 
-Returns a single commit as described in [http://develop.github.com/p/commits.html#showing_a_specific_commit](http://develop.github.com/p/commits.html#showing_a_specific_commit)
+Returns a single commit as described in [http://develop.github.com/p/commits.html](http://develop.github.com/p/commits.html)
 
 ## Objects
 
@@ -240,26 +240,26 @@ Getting full versions of specific files and trees in your Git repositories. Wrap
 
     $tree = $github->getObjectApi()->showTree('ornicar', 'php-github-api', '691c2ec7fd0b948042047b515886fec40fe76e2b');
 
-Returns an array containing a tree of the repository as described in [http://develop.github.com/p/object.html#trees](http://develop.github.com/p/object.html#trees)
+Returns an array containing a tree of the repository as described in [http://develop.github.com/p/object.html](http://develop.github.com/p/object.html)
 
 ### List all blobs of a tree
 
     $blobs = $github->getObjectApi()->listBlobs('ornicar', 'php-github-api', '691c2ec7fd0b948042047b515886fec40fe76e2b');
 
-Returns an array containing the tree blobs as described in [http://develop.github.com/p/object.html#blobs](http://develop.github.com/p/object.html#blobs)
+Returns an array containing the tree blobs as described in [http://develop.github.com/p/object.html](http://develop.github.com/p/object.html)
 
 ### Show the informations of a blob
 
     $blob = $github->getObjectApi()->showBlob('ornicar', 'php-github-api', '691c2ec7fd0b948042047b515886fec40fe76e2b', 'CHANGELOG');
 
-Returns array of blob informations as described in [http://develop.github.com/p/object.html#blobs](http://develop.github.com/p/object.html#blobs)
+Returns array of blob informations as described in [http://develop.github.com/p/object.html](http://develop.github.com/p/object.html)
 
 ### Show the raw content of an object
 
     $rawText = $github->getObjectApi()->getRawData('ornicar', 'php-github-api', 'bd25d1e4ea7eab84b856131e470edbc21b6cd66b');
 
 The last parameter can be either a blob SHA1, a tree SHA1 or a commit SHA1.
-Returns the raw text content of the object as described in [http://develop.github.com/p/object.html#raw_git_data](http://develop.github.com/p/object.html#raw_git_data)
+Returns the raw text content of the object as described in [http://develop.github.com/p/object.html](http://develop.github.com/p/object.html)
 
 ## Repos
 
@@ -272,7 +272,7 @@ Wrap [GitHub Repo API](http://develop.github.com/p/repo.html).
 
     $repos = $github->getRepoApi()->search('symfony');
 
-Returns a list of repositories as described in [http://develop.github.com/p/repo.html#searching_repositories](http://develop.github.com/p/repo.html#searching_repositories)
+Returns a list of repositories as described in [http://develop.github.com/p/repo.html](http://develop.github.com/p/repo.html)
 
 #### Advanced search
 
@@ -286,19 +286,19 @@ You can specify the page number:
 
     $repo = $github->getRepoApi()->show('ornicar', 'php-github-api')
 
-Returns an array of information about the specified repository as described in [http://develop.github.com/p/repo.html#show_repo_info](http://develop.github.com/p/repo.html#show_repo_info)
+Returns an array of information about the specified repository as described in [http://develop.github.com/p/repo.html](http://develop.github.com/p/repo.html)
 
 ### Get the repositories of a specific user
 
     $repos = $github->getRepoApi()->getUserRepos('ornicar');
 
-Returns a list of repositories as described in [http://develop.github.com/p/repo.html#list_all_repositories](http://develop.github.com/p/repo.html#list_all_repositories)
+Returns a list of repositories as described in [http://develop.github.com/p/repo.html](http://develop.github.com/p/repo.html)
 
 ### Get the tags of a repository
 
     $tags = $github->getRepoApi()->getRepoTags('ornicar', 'php-github-api');
 
-Returns a list of tags as described in [http://develop.github.com/p/repo.html#repository_refs](http://develop.github.com/p/repo.html#repository_refs)
+Returns a list of tags as described in [http://develop.github.com/p/repo.html](http://develop.github.com/p/repo.html)
 
 ### Get the contributors of a repository
 
@@ -314,7 +314,7 @@ To include non GitHub users, add a third parameter to true:
 
     $tags = $github->getRepoApi()->getRepoBranches('ornicar', 'php-github-api');
 
-Returns a list of branches as described in [http://develop.github.com/p/repo.html#repository_refs](http://develop.github.com/p/repo.html#repository_refs)
+Returns a list of branches as described in [http://develop.github.com/p/repo.html](http://develop.github.com/p/repo.html)
 
 ### Create a repository
 
