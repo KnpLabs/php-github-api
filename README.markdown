@@ -2,11 +2,12 @@
 
 A simple, Object Oriented wrapper for GitHub API written with PHP5. 
 
+    $github = new phpGitHubApi();
+    $myRepos = $github->getRepoApi()->getUserRepos('ornicar');
+
 Uses [GitHub API v2](http://develop.github.com/). The way the Object Oriented Interface is organized is mainly inspired by the way GitHub has organized their API Documentation.
 
 Requires [php curl](http://php.net/manual/en/book.curl.php).
-
-If the method you need does not exist yet, dont hesitate to request it with an [issue](http://github.com/ornicar/php-github-api/issues)!
 
 ## Instanciate a new API
 
@@ -469,14 +470,14 @@ For example, to replace the user API:
     // create a custom User API
     class myGitHubApiUser extends phpGitHubApiUser
     {
-      // override things
+      // overwrite things
     }
 
-    $github->setApi('user', new myGitHubApiUser());
+    $github->setApi('user', new myGitHubApiUser($github));
 
 ## Run test suite
 
-All code is fully unit tested. To run tests on your server, from a CLI, run
+All code is fully unit tested. To run tests on your machine, from a CLI, run
 
     php /path/to/php-github-api/prove.php
 
@@ -489,12 +490,12 @@ You should see
     test/objectTest......................................................ok
     test/repoTest........................................................ok
     test/userTest........................................................ok
-     All tests successful.
-     Files=7, Tests=77
+    All tests successful.                                                 
+    Files=7, Tests=101                                                    
 
 ## Run one test
 
-You can run only one test ; usefull when working on a feature.
+You can choose to run only one test; usefull when working on a feature.
 
     php php test/commitTest.php
 
