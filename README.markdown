@@ -25,14 +25,20 @@ GitHub provides some different ways of authentication. This API implementation i
 
 $username is, of course, the username. $method is optional. The three allowed
 values are:
- * phpGitHubApi::AUTH_URL_TOKEN (default, if $method is omitted)
- * phpGitHubApi::AUTH_HTTP_TOKEN
- * phpGitHubApi::AUTH_HTTP_PASSWORD
+
+* phpGitHubApi::AUTH_URL_TOKEN (default, if $method is omitted)
+* phpGitHubApi::AUTH_HTTP_TOKEN
+* phpGitHubApi::AUTH_HTTP_PASSWORD
+
 The required value of $secret depends on the choosen $method. For the AUTH_*_TOKEN methods, you should provide the API token here. For the AUTH_HTTP_PASSWORD, you should provide the password of the account.
 
-After executing the $github->authenticate($username, $secret, $method);authenticate method using correct credentials, all further request are done as the given user.
+After executing the `$github->authenticate($username, $secret, $method);` method using correct credentials, all further request are done as the given user.
+
+### About authentication methods
 
 The phpGitHubApi::AUTH_URL_TOKEN authentication method sends the username and API token in URL parameters. The phpGitHubApi::AUTH_HTTP_* authentication methods send their values to GitHub using HTTP Basic Authentication. phpGitHubApi::AUTH_URL_TOKEN used to be the only available authentication method. To prevent existing applications from changing their behavior in case of an API upgrade, this method is choosen as the default for this API implementation. Note however that GitHub describes this method as deprecated. In most case you should use the phpGitHubApi::AUTH_HTTP_TOKEN instead.
+
+### Deauthentication
 
 If you want to stop new requests from being authenticated, you can use the deAuthenticate method.
 
