@@ -69,7 +69,7 @@ class phpGitHubApiRequest
       $initialOptions = $this->options;
       $this->configure($options);
     }
-    
+
     $response = $this->doSend($apiPath, $parameters, $httpMethod);
     $response = $this->decodeResponse($response);
 
@@ -136,7 +136,7 @@ class phpGitHubApiRequest
       ':format'   => $this->options['format'],
       ':path'     => trim($apiPath, '/')
     ));
-    
+
     $curlOptions = array();
 
     if($this->options['login'])
@@ -218,8 +218,8 @@ class phpGitHubApiRequest
   /**
    * Records the requests times
    * When 30 request have been sent in less than a minute,
-   * sleeps for two second to prevent reaching GitHub API limitation. 
-   * 
+   * sleeps for two second to prevent reaching GitHub API limitation.
+   *
    * @access protected
    * @return void
    */
@@ -228,7 +228,7 @@ class phpGitHubApiRequest
     self::$history[] = time();
     if(30 === count(self::$history))
     {
-      if(reset(self::$history) >= (time() - 30))
+      if(reset(self::$history) >= (time() - 35))
       {
         sleep(2);
       }
