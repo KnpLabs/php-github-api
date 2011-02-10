@@ -215,6 +215,22 @@ class phpGitHubApi
   }
 
   /**
+   * Get the organization API
+   *
+   * @return  phpGitHubApiOrganization  the object API
+   */
+  public function getOrganizationApi()
+  {
+    if(!isset($this->apis['organization']))
+    {
+      require_once(dirname(__FILE__).'/api/phpGitHubApiOrganization.php');
+      $this->apis['organization'] = new phpGitHubApiOrganization($this);
+    }
+
+    return $this->apis['organization'];
+  }
+
+  /**
    * Get the object API
    *
    * @return  phpGitHubApiObject  the object API
