@@ -11,34 +11,26 @@ interface Github_HttpClientInterface
     /**
      * Send a GET request
      *
-     * @param  string   $url            Request URL
+     * @param  string   $path            Request path
      * @param  array    $parameters     GET Parameters
      * @param  string   $httpMethod     HTTP method to use
      * @param  array    $options        reconfigure the request for this call only
      *
      * @return array                    Data
      */
-    public function get($url, array $parameters = array(), array $options = array());
+    public function get($path, array $parameters = array(), array $options = array());
 
     /**
      * Send a POST request
      *
-     * @param  string   $url            Request URL
+     * @param  string   $path            Request path
      * @param  array    $parameters     POST Parameters
      * @param  string   $httpMethod     HTTP method to use
      * @param  array    $options        reconfigure the request for this call only
      *
      * @return array                    Data
      */
-    public function post($url, array $parameters = array(), array $options = array());
-
-    /**
-     * Configure the request
-     *
-     * @param   array               $options  Request options
-     * @return  Github_HttpClientInterface $this     Fluent interface
-     */
-    public function configure(array $options);
+    public function post($path, array $parameters = array(), array $options = array());
 
     /**
      * Change an option value.
@@ -49,13 +41,4 @@ interface Github_HttpClientInterface
      * @return Github_HttpClientInterface The current object instance
      */
     public function setOption($name, $value);
-
-    /**
-     * Get an option value.
-     *
-     * @param  string $name The option name
-     *
-     * @return mixed  The option value
-     */
-    public function getOption($name, $default = null);
 }
