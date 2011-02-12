@@ -9,6 +9,13 @@ Uses [GitHub API v2](http://develop.github.com/). The way the Object Oriented In
 
 Requires [php curl](http://php.net/manual/en/book.curl.php).
 
+## IMPORTANT - V3 is not stable yet
+
+This is the third version of php-github-api, which is under development.
+The git branch "v2-stable" contains the actual stable code.
+
+    git checkout v2-stable
+
 ## Instanciate a new API
 
     $github = new phpGitHubApi();
