@@ -1,7 +1,5 @@
 <?php
 
-require_once(dirname(__FILE__).'/phpGitHubApiAbstract.php');
-
 /**
  * Searching repositories, getting repository information
  * and managing repository information for authenticated users.
@@ -10,9 +8,8 @@ require_once(dirname(__FILE__).'/phpGitHubApiAbstract.php');
  * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @license   MIT License
  */
-class phpGitHubApiRepo extends phpGitHubApiAbstract
+class Github_Api_Repo extends Github_Api_Abstract
 {
-
     /**
      * Search repos by keyword
      * http://develop.github.com/p/repo.html
@@ -24,10 +21,10 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
      */
     public function search($query, $language = '', $startPage = 1)
     {
-        $response = $this->api->get('repos/search/'.urlencode($query), array(
-                    'language' => strtolower($language),
-                    'start_page' => $startPage
-                ));
+        $response = $this->client->get('repos/search/'.urlencode($query), array(
+            'language' => strtolower($language),
+            'start_page' => $startPage
+        ));
 
         return $response['repositories'];
     }
@@ -41,7 +38,7 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
      */
     public function getUserRepos($username)
     {
-        $response = $this->api->get('repos/show/'.urlencode($username));
+        $response = $this->client->get('repos/show/'.urlencode($username));
 
         return $response['repositories'];
     }
@@ -53,7 +50,7 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
      */
     public function getPushableRepos()
     {
-        $response = $this->api->get('repos/pushable');
+        $response = $this->client->get('repos/pushable');
 
         return $response['repositories'];
     }
@@ -68,7 +65,7 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
      */
     public function show($username, $repo)
     {
-        $response = $this->api->get('repos/show/'.urlencode($username).'/'.urlencode($repo));
+        $response = $this->client->get('repos/show/'.urlencode($username).'/'.urlencode($repo));
 
         return $response['repository'];
     }
@@ -85,12 +82,12 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
      */
     public function create($name, $description = '', $homepage = '', $public = true)
     {
-        $response = $this->api->post('repos/create', array(
-                    'name' => $name,
-                    'description' => $description,
-                    'homepage' => $homepage,
-                    'public' => $public
-                ));
+        $response = $this->client->post('repos/create', array(
+            'name' => $name,
+            'description' => $description,
+            'homepage' => $homepage,
+            'public' => $public
+        ));
 
         return $response['repository'];
     }
@@ -108,7 +105,7 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
     public function delete($name, $token = null, $force = false)
     {
         if ($token === null) {
-            $response = $this->api->post('repos/delete/'.urlencode($name));
+            $response = $this->client->post('repos/delete/'.urlencode($name));
 
             $token = $response['delete_token'];
 
@@ -117,9 +114,9 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
             }
         }
 
-        $response = $this->api->post('repos/delete/'.urlencode($name), array(
-                    'delete_token' => $token,
-                ));
+        $response = $this->client->post('repos/delete/'.urlencode($name), array(
+            'delete_token' => $token,
+        ));
 
         return $response;
     }
@@ -135,7 +132,7 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
      */
     public function setRepoInfo($username, $repo, $values)
     {
-        $response = $this->api->post('repos/show/'.urlencode($username).'/'.urlencode($repo), array('values' => $values));
+        $response = $this->client->post('repos/show/'.urlencode($username).'/'.urlencode($repo), array('values' => $values));
 
         return $response['repository'];
     }
@@ -149,7 +146,7 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
      */
     public function setPublic($repo)
     {
-        $response = $this->api->get('repos/set/public/'.urlencode($repo));
+        $response = $this->client->get('repos/set/public/'.urlencode($repo));
 
         return $response['repository'];
     }
@@ -163,7 +160,7 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
      */
     public function setPrivate($repo)
     {
-        $response = $this->api->get('repos/set/private/'.urlencode($repo));
+        $response = $this->client->get('repos/set/private/'.urlencode($repo));
 
         return $response['repository'];
     }
@@ -176,7 +173,7 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
      */
     public function getDeployKeys($repo)
     {
-        $response = $this->api->get('repos/keys/'.urlencode($repo));
+        $response = $this->client->get('repos/keys/'.urlencode($repo));
 
         return $response['public_keys'];
     }
@@ -191,10 +188,10 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
      */
     public function addDeployKey($repo, $title, $key)
     {
-        $response = $this->api->post('repos/key/'.urlencode($repo).'/add', array(
-                    'title' => $title,
-                    'key' => $key
-                ));
+        $response = $this->client->post('repos/key/'.urlencode($repo).'/add', array(
+            'title' => $title,
+            'key' => $key
+        ));
 
         return $response['public_keys'];
     }
@@ -208,9 +205,9 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
      */
     public function removeDeployKey($repo, $id)
     {
-        $response = $this->api->post('repos/key/'.urlencode($repo).'/remove', array(
-                    'id' => $id,
-                ));
+        $response = $this->client->post('repos/key/'.urlencode($repo).'/remove', array(
+            'id' => $id,
+        ));
 
         return $response['public_keys'];
     }
@@ -225,7 +222,7 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
      */
     public function getRepoCollaborators($username, $repo)
     {
-        $response = $this->api->get('repos/show/'.urlencode($username).'/'.urlencode($repo).'/collaborators');
+        $response = $this->client->get('repos/show/'.urlencode($username).'/'.urlencode($repo).'/collaborators');
 
         return $response['collaborators'];
     }
@@ -240,7 +237,7 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
      */
     public function addRepoCollaborator($repo, $username)
     {
-        $response = $this->api->post('repos/collaborators/'.urlencode($repo).'/add/'.urlencode($username));
+        $response = $this->client->post('repos/collaborators/'.urlencode($repo).'/add/'.urlencode($username));
 
         return $response['collaborators'];
     }
@@ -255,7 +252,7 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
      */
     public function removeRepoCollaborator($repo, $username)
     {
-        $response = $this->api->post('repos/collaborators/'.urlencode($repo).'/remove/'.urlencode($username));
+        $response = $this->client->post('repos/collaborators/'.urlencode($repo).'/remove/'.urlencode($username));
 
         return $response['collaborators'];
     }
@@ -270,7 +267,7 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
      */
     public function watch($username, $repo)
     {
-        $response = $this->api->get('repos/watch/'.urlencode($username).'/'.urlencode($repo));
+        $response = $this->client->get('repos/watch/'.urlencode($username).'/'.urlencode($repo));
 
         return $response['repository'];
     }
@@ -285,7 +282,7 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
      */
     public function unwatch($username, $repo)
     {
-        $response = $this->api->get('repos/unwatch/'.urlencode($username).'/'.urlencode($repo));
+        $response = $this->client->get('repos/unwatch/'.urlencode($username).'/'.urlencode($repo));
 
         return $response['repository'];
     }
@@ -300,7 +297,7 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
      */
     public function fork($username, $repo)
     {
-        $response = $this->api->get('repos/fork/'.urlencode($username).'/'.urlencode($repo));
+        $response = $this->client->get('repos/fork/'.urlencode($username).'/'.urlencode($repo));
 
         return $response['repository'];
     }
@@ -315,7 +312,7 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
      */
     public function getRepoTags($username, $repo)
     {
-        $response = $this->api->get('repos/show/'.urlencode($username).'/'.urlencode($repo).'/tags');
+        $response = $this->client->get('repos/show/'.urlencode($username).'/'.urlencode($repo).'/tags');
 
         return $response['tags'];
     }
@@ -330,7 +327,7 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
      */
     public function getRepoBranches($username, $repo)
     {
-        $response = $this->api->get('repos/show/'.urlencode($username).'/'.urlencode($repo).'/branches');
+        $response = $this->client->get('repos/show/'.urlencode($username).'/'.urlencode($repo).'/branches');
 
         return $response['branches'];
     }
@@ -345,7 +342,7 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
      */
     public function getRepoWatchers($username, $repo)
     {
-        $response = $this->api->get('repos/show/'.urlencode($username).'/'.urlencode($repo).'/watchers');
+        $response = $this->client->get('repos/show/'.urlencode($username).'/'.urlencode($repo).'/watchers');
 
         return $response['watchers'];
     }
@@ -360,7 +357,7 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
      */
     public function getRepoNetwork($username, $repo)
     {
-        $response = $this->api->get('repos/show/'.urlencode($username).'/'.urlencode($repo).'/network');
+        $response = $this->client->get('repos/show/'.urlencode($username).'/'.urlencode($repo).'/network');
 
         return $response['network'];
     }
@@ -375,7 +372,7 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
      */
     public function getRepoLanguages($username, $repo)
     {
-        $response = $this->api->get('repos/show/'.urlencode($username).'/'.urlencode($repo).'/languages');
+        $response = $this->client->get('repos/show/'.urlencode($username).'/'.urlencode($repo).'/languages');
 
         return $response['languages'];
     }
@@ -395,7 +392,7 @@ class phpGitHubApiRepo extends phpGitHubApiAbstract
         if ($includingNonGithubUsers) {
             $url .= '/anon';
         }
-        $response = $this->api->get($url);
+        $response = $this->client->get($url);
 
         return $response['contributors'];
     }

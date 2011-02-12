@@ -1,7 +1,5 @@
 <?php
 
-require_once(dirname(__FILE__).'/phpGitHubApiAbstract.php');
-
 /**
  * Getting full versions of specific files and trees in your Git repositories.
  *
@@ -9,9 +7,8 @@ require_once(dirname(__FILE__).'/phpGitHubApiAbstract.php');
  * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @license   MIT License
  */
-class phpGitHubApiObject extends phpGitHubApiAbstract
+class Github_Api_Object extends Github_Api_Abstract
 {
-
     /**
      * Get a listing of the root tree of a project by the username, repo, and tree SHA
      * http://develop.github.com/p/object.html#trees
@@ -23,7 +20,7 @@ class phpGitHubApiObject extends phpGitHubApiAbstract
      */
     public function showTree($username, $repo, $treeSHA)
     {
-        $response = $this->api->get('tree/show/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($treeSHA));
+        $response = $this->client->get('tree/show/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($treeSHA));
 
         return $response['tree'];
     }
@@ -40,7 +37,7 @@ class phpGitHubApiObject extends phpGitHubApiAbstract
      */
     public function listBlobs($username, $repo, $treeSHA)
     {
-        $response = $this->api->get('blob/all/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($treeSHA));
+        $response = $this->client->get('blob/all/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($treeSHA));
 
         return $response['blobs'];
     }
@@ -57,7 +54,7 @@ class phpGitHubApiObject extends phpGitHubApiAbstract
      */
     public function showBlob($username, $repo, $treeSHA, $path)
     {
-        $response = $this->api->get('blob/show/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($treeSHA).'/'.urlencode($path));
+        $response = $this->client->get('blob/show/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($treeSHA).'/'.urlencode($path));
 
         return $response['blob'];
     }
@@ -73,11 +70,10 @@ class phpGitHubApiObject extends phpGitHubApiAbstract
      */
     public function getRawData($username, $repo, $objectSHA)
     {
-        $response = $this->api->get('blob/show/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($objectSHA), array(), array(
-                    'format' => 'text'
-                ));
+        $response = $this->client->get('blob/show/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($objectSHA), array(), array(
+            'format' => 'text'
+        ));
 
         return $response;
     }
-
 }

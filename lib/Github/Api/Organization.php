@@ -1,7 +1,5 @@
 <?php
 
-require_once(dirname(__FILE__).'/phpGitHubApiAbstract.php');
-
 /**
  * Searching organizations, getting organization information
  * and managing authenticated organization account information.
@@ -10,7 +8,7 @@ require_once(dirname(__FILE__).'/phpGitHubApiAbstract.php');
  * @author    Antoine Berranger <antoine at ihqs dot net>
  * @license   MIT License
  */
-class phpGitHubApiOrganization extends phpGitHubApiAbstract
+class Github_Api_Organization extends Github_Api_Abstract
 {
     const ADMIN = "admin";
     const PUSH = "push";
@@ -31,7 +29,7 @@ class phpGitHubApiOrganization extends phpGitHubApiAbstract
      */
     public function show($name)
     {
-        $response = $this->api->get('organizations/'.urlencode($name));
+        $response = $this->client->get('organizations/'.urlencode($name));
 
         return $response['organization'];
     }
@@ -45,7 +43,7 @@ class phpGitHubApiOrganization extends phpGitHubApiAbstract
      */
     public function getAllRepos($name)
     {
-        $response = $this->api->get('organizations/repositories');
+        $response = $this->client->get('organizations/repositories');
 
         return $response['repositories'];
     }
@@ -59,7 +57,7 @@ class phpGitHubApiOrganization extends phpGitHubApiAbstract
      */
     public function getPublicRepos($name)
     {
-        $response = $this->api->get('organizations/'.urlencode($name).'/public_repositories');
+        $response = $this->client->get('organizations/'.urlencode($name).'/public_repositories');
 
         return $response['repositories'];
     }
@@ -73,7 +71,7 @@ class phpGitHubApiOrganization extends phpGitHubApiAbstract
      */
     public function getPublicMembers($name)
     {
-        $response = $this->api->get('organizations/'.urlencode($name).'/public_members');
+        $response = $this->client->get('organizations/'.urlencode($name).'/public_members');
 
         return $response['users'];
     }
@@ -87,7 +85,7 @@ class phpGitHubApiOrganization extends phpGitHubApiAbstract
      */
     public function getTeams($name)
     {
-        $response = $this->api->get('organizations/'.urlencode($name).'/teams');
+        $response = $this->client->get('organizations/'.urlencode($name).'/teams');
 
         return $response['teams'];
     }
@@ -109,11 +107,11 @@ class phpGitHubApiOrganization extends phpGitHubApiAbstract
             throw new InvalidArgumentException("Invalid value for the permission variable");
         }
 
-        $response = $this->api->post('organizations/'.urlencode($organization).'/teams', array(
-                    'team' => $team,
-                    'permission' => $permission,
-                    'repo_names' => $repositories
-                ));
+        $response = $this->client->post('organizations/'.urlencode($organization).'/teams', array(
+            'team' => $team,
+            'permission' => $permission,
+            'repo_names' => $repositories
+        ));
 
         return $response['teams'];
     }

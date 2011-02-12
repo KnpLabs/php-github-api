@@ -1,7 +1,5 @@
 <?php
 
-require_once(dirname(__FILE__).'/phpGitHubApiAbstract.php');
-
 /**
  * Searching users, getting user information
  * and managing authenticated user account information.
@@ -10,9 +8,8 @@ require_once(dirname(__FILE__).'/phpGitHubApiAbstract.php');
  * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @license   MIT License
  */
-class phpGitHubApiUser extends phpGitHubApiAbstract
+class Github_Api_User extends Github_Api_Abstract
 {
-
     /**
      * Search users by username
      * http://develop.github.com/p/users.html#searching_for_users
@@ -22,7 +19,7 @@ class phpGitHubApiUser extends phpGitHubApiAbstract
      */
     public function search($username)
     {
-        $response = $this->api->get('user/search/'.urlencode($username));
+        $response = $this->client->get('user/search/'.urlencode($username));
 
         return $response['users'];
     }
@@ -36,7 +33,7 @@ class phpGitHubApiUser extends phpGitHubApiAbstract
      */
     public function show($username)
     {
-        $response = $this->api->get('user/show/'.urlencode($username));
+        $response = $this->client->get('user/show/'.urlencode($username));
 
         return $response['user'];
     }
@@ -52,7 +49,7 @@ class phpGitHubApiUser extends phpGitHubApiAbstract
      */
     public function update($username, array $data)
     {
-        $response = $this->api->post('user/show/'.urlencode($username), array('values' => $data));
+        $response = $this->client->post('user/show/'.urlencode($username), array('values' => $data));
 
         return $response['user'];
     }
@@ -66,7 +63,7 @@ class phpGitHubApiUser extends phpGitHubApiAbstract
      */
     public function getFollowing($username)
     {
-        $response = $this->api->get('user/show/'.urlencode($username).'/following');
+        $response = $this->client->get('user/show/'.urlencode($username).'/following');
 
         return $response['users'];
     }
@@ -80,7 +77,7 @@ class phpGitHubApiUser extends phpGitHubApiAbstract
      */
     public function getFollowers($username)
     {
-        $response = $this->api->get('user/show/'.urlencode($username).'/followers');
+        $response = $this->client->get('user/show/'.urlencode($username).'/followers');
 
         return $response['users'];
     }
@@ -94,7 +91,7 @@ class phpGitHubApiUser extends phpGitHubApiAbstract
      */
     public function follow($username)
     {
-        $response = $this->api->post('user/follow/'.urlencode($username));
+        $response = $this->client->post('user/follow/'.urlencode($username));
 
         return $response['users'];
     }
@@ -108,7 +105,7 @@ class phpGitHubApiUser extends phpGitHubApiAbstract
      */
     public function unFollow($username)
     {
-        $response = $this->api->post('user/unfollow/'.urlencode($username));
+        $response = $this->client->post('user/unfollow/'.urlencode($username));
 
         return $response['users'];
     }
@@ -122,7 +119,7 @@ class phpGitHubApiUser extends phpGitHubApiAbstract
      */
     public function getWatchedRepos($username)
     {
-        $response = $this->api->get('repos/watched/'.urlencode($username));
+        $response = $this->client->get('repos/watched/'.urlencode($username));
 
         return $response['repositories'];
     }
@@ -134,7 +131,7 @@ class phpGitHubApiUser extends phpGitHubApiAbstract
      */
     public function getKeys()
     {
-        $response = $this->api->get('user/keys');
+        $response = $this->client->get('user/keys');
 
         return $response['public_keys'];
     }
@@ -146,7 +143,7 @@ class phpGitHubApiUser extends phpGitHubApiAbstract
      */
     public function addKey($title, $key)
     {
-        $response = $this->api->post('user/key/add', array('title' => $title, 'key' => $key));
+        $response = $this->client->post('user/key/add', array('title' => $title, 'key' => $key));
 
         return $response['public_keys'];
     }
@@ -158,7 +155,7 @@ class phpGitHubApiUser extends phpGitHubApiAbstract
      */
     public function removeKey($id)
     {
-        $response = $this->api->post('user/key/remove', array('id' => $id));
+        $response = $this->client->post('user/key/remove', array('id' => $id));
 
         return $response['public_keys'];
     }
@@ -170,7 +167,7 @@ class phpGitHubApiUser extends phpGitHubApiAbstract
      */
     public function getEmails()
     {
-        $response = $this->api->get('user/emails');
+        $response = $this->client->get('user/emails');
 
         return $response['emails'];
     }
@@ -182,7 +179,7 @@ class phpGitHubApiUser extends phpGitHubApiAbstract
      */
     public function addEmail($email)
     {
-        $response = $this->api->post('user/email/add', array('email' => $email));
+        $response = $this->client->post('user/email/add', array('email' => $email));
 
         return $response['emails'];
     }
@@ -194,9 +191,8 @@ class phpGitHubApiUser extends phpGitHubApiAbstract
      */
     public function removeEmail($email)
     {
-        $response = $this->api->post('user/email/remove', array('email' => $email));
+        $response = $this->client->post('user/email/remove', array('email' => $email));
 
         return $response['emails'];
     }
-
 }

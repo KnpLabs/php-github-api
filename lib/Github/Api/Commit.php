@@ -1,7 +1,5 @@
 <?php
 
-require_once(dirname(__FILE__).'/phpGitHubApiAbstract.php');
-
 /**
  * Getting information on specific commits,
  * the diffs they introduce, the files they've changed.
@@ -10,9 +8,8 @@ require_once(dirname(__FILE__).'/phpGitHubApiAbstract.php');
  * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @license   MIT License
  */
-class phpGitHubApiCommit extends phpGitHubApiAbstract
+class Github_Api_Commit extends Github_Api_Abstract
 {
-
     /**
      * List commits by username, repo and branch
      * http://develop.github.com/p/commits.html#listing_commits_on_a_branch
@@ -24,7 +21,7 @@ class phpGitHubApiCommit extends phpGitHubApiAbstract
      */
     public function getBranchCommits($username, $repo, $branch)
     {
-        $response = $this->api->get('commits/list/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($branch));
+        $response = $this->client->get('commits/list/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($branch));
 
         return $response['commits'];
     }
@@ -41,7 +38,7 @@ class phpGitHubApiCommit extends phpGitHubApiAbstract
      */
     public function getFileCommits($username, $repo, $branch, $path)
     {
-        $response = $this->api->get('commits/list/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($branch).'/'.urlencode($path));
+        $response = $this->client->get('commits/list/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($branch).'/'.urlencode($path));
 
         return $response['commits'];
     }
@@ -56,9 +53,8 @@ class phpGitHubApiCommit extends phpGitHubApiAbstract
      */
     public function getCommit($username, $repo, $sha)
     {
-        $response = $this->api->get('commits/show/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($sha));
+        $response = $this->client->get('commits/show/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($sha));
 
         return $response['commit'];
     }
-
 }
