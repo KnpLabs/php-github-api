@@ -6,7 +6,7 @@
  * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @license   MIT License
  */
-class Github_HttpClient_Curl
+class Github_HttpClient_Curl extends Github_HttpClient_Abstract
 {
     /**
      * Send a request to the server, receive a response
@@ -62,8 +62,6 @@ class Github_HttpClient_Curl
                 );
             }
         }
-
-        $this->debug('send '.$httpMethod.' request: '.$url);
 
         $curlOptions += array(
             CURLOPT_URL => $url,

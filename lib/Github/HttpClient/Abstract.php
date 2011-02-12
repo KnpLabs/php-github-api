@@ -6,7 +6,7 @@
  * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @license   MIT License
  */
-abstract class Github_HttpClient_Abstract
+abstract class Github_HttpClient_Abstract implements Github_HttpClientInterface
 {
     /**
      * The request options
@@ -20,8 +20,7 @@ abstract class Github_HttpClient_Abstract
         'http_port'  => 80,
         'timeout'    => 10,
         'login'      => null,
-        'token'      => null,
-        'debug'      => false
+        'token'      => null
     );
 
     protected static $history = array();
@@ -176,13 +175,6 @@ abstract class Github_HttpClient_Abstract
                 sleep(2);
             }
             array_shift(self::$history);
-        }
-    }
-
-    protected function debug($message)
-    {
-        if ($this->options['debug']) {
-            print $message."\n";
         }
     }
 }
