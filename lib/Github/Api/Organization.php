@@ -8,7 +8,7 @@
  * @author    Antoine Berranger <antoine at ihqs dot net>
  * @license   MIT License
  */
-class Github_Api_Organization extends Github_Api_Abstract
+class Github_Api_Organization extends Github_Api
 {
     const ADMIN = "admin";
     const PUSH = "push";

@@ -8,7 +8,7 @@
  * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @license   MIT License
  */
-class Github_Api_Commit extends Github_Api_Abstract
+class Github_Api_Commit extends Github_Api
 {
     /**
      * List commits by username, repo and branch

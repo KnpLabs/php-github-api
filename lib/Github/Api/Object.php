@@ -7,7 +7,7 @@
  * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @license   MIT License
  */
-class Github_Api_Object extends Github_Api_Abstract
+class Github_Api_Object extends Github_Api
 {
     /**
      * Get a listing of the root tree of a project by the username, repo, and tree SHA
