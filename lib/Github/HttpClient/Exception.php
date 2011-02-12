@@ -1,14 +1,13 @@
 <?php
 
 /**
- * Request communication error
+ * HttpClient communication error
  *
  * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @license   MIT License
  */
-class phpGitHubApiRequestException extends Exception
+class Github_HttpClient_Exception extends Exception
 {
-
     /**
      * Http header-codes
      * @var  array
@@ -71,5 +70,4 @@ class phpGitHubApiRequestException extends Exception
 
         parent::__construct($message, $code);
     }
-
 }

@@ -6,7 +6,7 @@
  * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @license   MIT License
  */
-interface Github_RequestInterface
+interface Github_HttpClientInterface
 {
     /**
      * Send a GET request
@@ -36,7 +36,7 @@ interface Github_RequestInterface
      * Configure the request
      *
      * @param   array               $options  Request options
-     * @return  Github_RequestInterface $this     Fluent interface
+     * @return  Github_HttpClientInterface $this     Fluent interface
      */
     public function configure(array $options);
 
@@ -46,7 +46,7 @@ interface Github_RequestInterface
      * @param string $name   The option name
      * @param mixed  $value  The value
      *
-     * @return Github_RequestInterface The current object instance
+     * @return Github_HttpClientInterface The current object instance
      */
     public function setOption($name, $value);
 
