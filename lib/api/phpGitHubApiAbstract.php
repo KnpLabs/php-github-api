@@ -8,14 +8,16 @@
  */
 abstract class phpGitHubApiAbstract
 {
-  /**
-   * The core API
-   * @var phpGitHubApi
-   */
-  protected $api;
 
-  public function __construct(phpGitHubApi $api)
-  {
-    $this->api = $api;
-  }
+    /**
+     * The core API
+     * @var phpGitHubApi
+     */
+    protected $api;
+
+    public function __construct(phpGitHubApi $api)
+    {
+        $this->api = $api;
+    }
+
 }

@@ -12,189 +12,191 @@ require_once(dirname(__FILE__).'/phpGitHubApiAbstract.php');
  */
 class phpGitHubApiUser extends phpGitHubApiAbstract
 {
-  /**
-   * Search users by username
-   * http://develop.github.com/p/users.html#searching_for_users
-   *
-   * @param   string  $username         the username to search
-   * @return  array                     list of users found
-   */
-  public function search($username)
-  {
-    $response = $this->api->get('user/search/'.urlencode($username));
 
-    return $response['users'];
-  }
+    /**
+     * Search users by username
+     * http://develop.github.com/p/users.html#searching_for_users
+     *
+     * @param   string  $username         the username to search
+     * @return  array                     list of users found
+     */
+    public function search($username)
+    {
+        $response = $this->api->get('user/search/'.urlencode($username));
 
-  /**
-   * Get extended information about a user by its username
-   * http://develop.github.com/p/users.html#getting_user_information
-   *
-   * @param   string  $username         the username to show
-   * @return  array                     informations about the user
-   */
-  public function show($username)
-  {
-    $response = $this->api->get('user/show/'.urlencode($username));
+        return $response['users'];
+    }
 
-    return $response['user'];
-  }
+    /**
+     * Get extended information about a user by its username
+     * http://develop.github.com/p/users.html#getting_user_information
+     *
+     * @param   string  $username         the username to show
+     * @return  array                     informations about the user
+     */
+    public function show($username)
+    {
+        $response = $this->api->get('user/show/'.urlencode($username));
 
-  /**
-   * Update user informations. Requires authentication.
-   * http://develop.github.com/p/users.html#authenticated_user_management
-   *
-   * @param   string  $username         the username to update
-   * @param   array   $data             key=>value user attributes to update.
-   *                                    key can be name, email, blog, company or location
-   * @return  array                     informations about the user
-   */
-  public function update($username, array $data)
-  {
-    $response = $this->api->post('user/show/'.urlencode($username), array('values' => $data));
+        return $response['user'];
+    }
 
-    return $response['user'];
-  }
+    /**
+     * Update user informations. Requires authentication.
+     * http://develop.github.com/p/users.html#authenticated_user_management
+     *
+     * @param   string  $username         the username to update
+     * @param   array   $data             key=>value user attributes to update.
+     *                                    key can be name, email, blog, company or location
+     * @return  array                     informations about the user
+     */
+    public function update($username, array $data)
+    {
+        $response = $this->api->post('user/show/'.urlencode($username), array('values' => $data));
 
-  /**
-   * Request the users that a specific user is following
-   * http://develop.github.com/p/users.html#following_network
-   *
-   * @param   string  $username         the username
-   * @return  array                     list of followed users
-   */
-  public function getFollowing($username)
-  {
-    $response = $this->api->get('user/show/'.urlencode($username).'/following');
+        return $response['user'];
+    }
 
-    return $response['users'];
-  }
+    /**
+     * Request the users that a specific user is following
+     * http://develop.github.com/p/users.html#following_network
+     *
+     * @param   string  $username         the username
+     * @return  array                     list of followed users
+     */
+    public function getFollowing($username)
+    {
+        $response = $this->api->get('user/show/'.urlencode($username).'/following');
 
-  /**
-   * Request the users following a specific user
-   * http://develop.github.com/p/users.html#following_network
-   *
-   * @param   string  $username         the username
-   * @return  array                     list of following users
-   */
-  public function getFollowers($username)
-  {
-    $response = $this->api->get('user/show/'.urlencode($username).'/followers');
+        return $response['users'];
+    }
 
-    return $response['users'];
-  }
+    /**
+     * Request the users following a specific user
+     * http://develop.github.com/p/users.html#following_network
+     *
+     * @param   string  $username         the username
+     * @return  array                     list of following users
+     */
+    public function getFollowers($username)
+    {
+        $response = $this->api->get('user/show/'.urlencode($username).'/followers');
 
-  /**
-   * Make the authenticated user follow the specified user. Requires authentication.
-   * http://develop.github.com/p/users.html#following_network
-   *
-   * @param   string  $username         the username to follow
-   * @return  array                     list of followed users
-   */
-  public function follow($username)
-  {
-    $response = $this->api->post('user/follow/'.urlencode($username));
+        return $response['users'];
+    }
 
-    return $response['users'];
-  }
+    /**
+     * Make the authenticated user follow the specified user. Requires authentication.
+     * http://develop.github.com/p/users.html#following_network
+     *
+     * @param   string  $username         the username to follow
+     * @return  array                     list of followed users
+     */
+    public function follow($username)
+    {
+        $response = $this->api->post('user/follow/'.urlencode($username));
 
-  /**
-   * Make the authenticated user unfollow the specified user. Requires authentication.
-   * http://develop.github.com/p/users.html#following_network
-   *
-   * @param   string  $username         the username to unfollow
-   * @return  array                     list of followed users
-   */
-  public function unFollow($username)
-  {
-    $response = $this->api->post('user/unfollow/'.urlencode($username));
+        return $response['users'];
+    }
 
-    return $response['users'];
-  }
+    /**
+     * Make the authenticated user unfollow the specified user. Requires authentication.
+     * http://develop.github.com/p/users.html#following_network
+     *
+     * @param   string  $username         the username to unfollow
+     * @return  array                     list of followed users
+     */
+    public function unFollow($username)
+    {
+        $response = $this->api->post('user/unfollow/'.urlencode($username));
 
-  /**
-   * Request the repos that a specific user is watching
-   * http://develop.github.com/p/users.html#watched_repos
-   *
-   * @param   string  $username         the username
-   * @return  array                     list of watched repos
-   */
-  public function getWatchedRepos($username)
-  {
-    $response = $this->api->get('repos/watched/'.urlencode($username));
+        return $response['users'];
+    }
 
-    return $response['repositories'];
-  }
+    /**
+     * Request the repos that a specific user is watching
+     * http://develop.github.com/p/users.html#watched_repos
+     *
+     * @param   string  $username         the username
+     * @return  array                     list of watched repos
+     */
+    public function getWatchedRepos($username)
+    {
+        $response = $this->api->get('repos/watched/'.urlencode($username));
 
-  /**
-   * Get the authenticated user public keys. Requires authentication
-   *
-   * @return  array                     list of public keys of the user
-   */
-  public function getKeys()
-  {
-    $response = $this->api->get('user/keys');
+        return $response['repositories'];
+    }
 
-    return $response['public_keys'];
-  }
+    /**
+     * Get the authenticated user public keys. Requires authentication
+     *
+     * @return  array                     list of public keys of the user
+     */
+    public function getKeys()
+    {
+        $response = $this->api->get('user/keys');
 
-  /**
-   * Add a public key to the authenticated user. Requires authentication.
-   *
-   * @return  array                    list of public keys of the user
-   */
-  public function addKey($title, $key)
-  {
-    $response = $this->api->post('user/key/add', array('title' => $title, 'key' => $key));
+        return $response['public_keys'];
+    }
 
-    return $response['public_keys'];
-  }
+    /**
+     * Add a public key to the authenticated user. Requires authentication.
+     *
+     * @return  array                    list of public keys of the user
+     */
+    public function addKey($title, $key)
+    {
+        $response = $this->api->post('user/key/add', array('title' => $title, 'key' => $key));
 
-  /**
-   * Remove a public key from the authenticated user. Requires authentication.
-   *
-   * @return  array                    list of public keys of the user
-   */
-  public function removeKey($id)
-  {
-    $response = $this->api->post('user/key/remove', array('id' => $id));
+        return $response['public_keys'];
+    }
 
-    return $response['public_keys'];
-  }
+    /**
+     * Remove a public key from the authenticated user. Requires authentication.
+     *
+     * @return  array                    list of public keys of the user
+     */
+    public function removeKey($id)
+    {
+        $response = $this->api->post('user/key/remove', array('id' => $id));
 
-  /**
-   * Get the authenticated user emails. Requires authentication.
-   *
-   * @return  array                     list of authenticated user emails
-   */
-  public function getEmails()
-  {
-    $response = $this->api->get('user/emails');
+        return $response['public_keys'];
+    }
 
-    return $response['emails'];
-  }
+    /**
+     * Get the authenticated user emails. Requires authentication.
+     *
+     * @return  array                     list of authenticated user emails
+     */
+    public function getEmails()
+    {
+        $response = $this->api->get('user/emails');
 
-  /**
-   * Add an email to the authenticated user. Requires authentication.
-   *
-   * @return  array                     list of authenticated user emails
-   */
-  public function addEmail($email)
-  {
-    $response = $this->api->post('user/email/add', array('email' => $email));
+        return $response['emails'];
+    }
 
-    return $response['emails'];
-  }
+    /**
+     * Add an email to the authenticated user. Requires authentication.
+     *
+     * @return  array                     list of authenticated user emails
+     */
+    public function addEmail($email)
+    {
+        $response = $this->api->post('user/email/add', array('email' => $email));
 
-  /**
-   * Remove an email from the authenticated user. Requires authentication.
-   *
-   * @return  array                     list of authenticated user emails
-   */
-  public function removeEmail($email)
-  {
-    $response = $this->api->post('user/email/remove', array('email' => $email));
+        return $response['emails'];
+    }
 
-    return $response['emails'];
-  }
+    /**
+     * Remove an email from the authenticated user. Requires authentication.
+     *
+     * @return  array                     list of authenticated user emails
+     */
+    public function removeEmail($email)
+    {
+        $response = $this->api->post('user/email/remove', array('email' => $email));
+
+        return $response['emails'];
+    }
+
 }
