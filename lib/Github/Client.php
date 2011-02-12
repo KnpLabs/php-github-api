@@ -224,11 +224,11 @@ class Github_Client
      * Inject an API instance
      *
      * @param   string                $name the API name
-     * @param   Github_Api_Interface  $api  the API instance
+     * @param   Github_ApiInterface  $api  the API instance
      *
      * @return  null
      */
-    public function setApi($name, Github_Api_Interface $instance)
+    public function setApi($name, Github_ApiInterface $instance)
     {
         $this->apis[$name] = $instance;
 
@@ -239,7 +239,7 @@ class Github_Client
      * Get any API
      *
      * @param   string                $name the API name
-     * @return  Github_Api_Interface  the API instance
+     * @return  Github_ApiInterface  the API instance
      */
     public function getApi($name)
     {
