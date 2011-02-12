@@ -21,7 +21,7 @@ class phpGitHubApiOrganization extends phpGitHubApiAbstract
       self::PUSH,
       self::PULL
   );
-  
+
   /**
    * Get extended information about an organization by its name
    * http://develop.github.com/p/orgs.html
@@ -107,9 +107,9 @@ class phpGitHubApiOrganization extends phpGitHubApiAbstract
   {
     if(!in_array($permission, self::$PERMISSIONS))
     {
-        throw new \InvalidArgumentException("Invalid value for the permission variable");
+        throw new InvalidArgumentException("Invalid value for the permission variable");
     }
-    
+
     $response = $this->api->post('organizations/'.urlencode($organization) . '/teams', array(
       'team' => $team,
       'permission' => $permission,
