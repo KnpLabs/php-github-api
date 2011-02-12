@@ -6,7 +6,7 @@
  * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @license   MIT License
  */
-abstract class Github_Api_Abstract implements Github_ApiInterface
+abstract class Github_Api implements Github_ApiInterface
 {
     /**
      * The client
