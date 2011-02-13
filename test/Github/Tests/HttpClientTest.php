@@ -19,10 +19,10 @@ class Github_Tests_HttpClientTest extends PHPUnit_Framework_TestCase
         $options    = array('c' => 'd');
 
         $httpClient = $this->getHttpClientMockBuilder()
-            ->setMethods(array('doSend', 'send'))
+            ->setMethods(array('doRequest', 'request'))
             ->getMock();
         $httpClient->expects($this->once())
-            ->method('send')
+            ->method('request')
             ->with($path, $parameters, 'GET', $options);
 
         $httpClient->get($path, $parameters, $options);
@@ -35,16 +35,16 @@ class Github_Tests_HttpClientTest extends PHPUnit_Framework_TestCase
         $options    = array('c' => 'd');
 
         $httpClient = $this->getHttpClientMockBuilder()
-            ->setMethods(array('doSend', 'send'))
+            ->setMethods(array('doRequest', 'request'))
             ->getMock();
         $httpClient->expects($this->once())
-            ->method('send')
+            ->method('request')
             ->with($path, $parameters, 'POST', $options);
 
         $httpClient->post($path, $parameters, $options);
     }
 
-    public function testSend()
+    public function testRequest()
     {
         $path       = '/some/path';
         $parameters = array('a' => 'b');
@@ -52,20 +52,20 @@ class Github_Tests_HttpClientTest extends PHPUnit_Framework_TestCase
         $options    = array('c' => 'd');
 
         $httpClient = $this->getHttpClientMockBuilder()
-            ->setMethods(array('doSend', 'updateHistory', 'decodeResponse'))
+            ->setMethods(array('doRequest', 'updateHistory', 'decodeResponse'))
             ->getMock();
         $httpClient->expects($this->once())
             ->method('updateHistory')
             ->with();
         $httpClient->expects($this->once())
-            ->method('doSend')
+            ->method('doRequest')
             ->will($this->returnValue('response'));
         $httpClient->expects($this->once())
             ->method('decodeResponse')
             ->with('response')
             ->will($this->returnValue(array('response')));
 
-        $response = $httpClient->send($path, $parameters, $method, $options);
+        $response = $httpClient->request($path, $parameters, $method, $options);
 
         $this->assertSame(array('response'), $response);
     }
@@ -78,7 +78,7 @@ class Github_Tests_HttpClientTest extends PHPUnit_Framework_TestCase
 
 class Github_HttpClient_TestDriver extends Github_HttpClient
 {
-    protected function doSend($url, array $parameters = array(), $httpMethod = 'GET', array $options)
+    protected function doRequest($url, array $parameters = array(), $httpMethod = 'GET', array $options)
     {
     }
 

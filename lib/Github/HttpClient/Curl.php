@@ -11,21 +11,15 @@ class Github_HttpClient_Curl extends Github_HttpClient
     /**
      * Send a request to the server, receive a response
      *
-     * @param  string   $path           Request path
+     * @param  string   $path          Request url
      * @param  array    $parameters    Parameters
      * @param  string   $httpMethod    HTTP method to use
-     * @param  array    $options        Request options
+     * @param  array    $options       Request options
      *
      * @return string   HTTP response
      */
-    public function doSend($path, array $parameters = array(), $httpMethod = 'GET', array $options)
+    public function doRequest($url, array $parameters = array(), $httpMethod = 'GET', array $options)
     {
-        $url = strtr($options['url'], array(
-            ':protocol' => $options['protocol'],
-            ':format'   => $options['format'],
-            ':path'     => trim($path, '/')
-        ));
-
         $curlOptions = array();
 
         if ($options['login']) {

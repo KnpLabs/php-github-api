@@ -38,14 +38,14 @@ abstract class Github_HttpClient implements Github_HttpClientInterface
     /**
      * Send a request to the server, receive a response
      *
-     * @param  string   $path           Request API path
+     * @param  string   $url           Request url
      * @param  array    $parameters    Parameters
      * @param  string   $httpMethod    HTTP method to use
      * @param  array    $options        Request options
      *
      * @return string   HTTP response
      */
-    abstract protected function doSend($path, array $parameters = array(), $httpMethod = 'GET', array $options);
+    abstract protected function doRequest($url, array $parameters = array(), $httpMethod = 'GET', array $options);
 
     /**
      * Send a GET request
@@ -59,7 +59,7 @@ abstract class Github_HttpClient implements Github_HttpClientInterface
      */
     public function get($path, array $parameters = array(), array $options = array())
     {
-        return $this->send($path, $parameters, 'GET', $options);
+        return $this->request($path, $parameters, 'GET', $options);
     }
 
     /**
@@ -74,7 +74,7 @@ abstract class Github_HttpClient implements Github_HttpClientInterface
      */
     public function post($path, array $parameters = array(), array $options = array())
     {
-        return $this->send($path, $parameters, 'POST', $options);
+        return $this->request($path, $parameters, 'POST', $options);
     }
 
     /**
@@ -88,14 +88,21 @@ abstract class Github_HttpClient implements Github_HttpClientInterface
      *
      * @return array                    Data
      */
-    public function send($path, array $parameters = array(), $httpMethod = 'GET', array $options = array())
+    public function request($path, array $parameters = array(), $httpMethod = 'GET', array $options = array())
     {
         $this->updateHistory();
 
         $options = array_merge($this->options, $options);
 
+        // create full url
+        $url = strtr($options['url'], array(
+            ':protocol' => $options['protocol'],
+            ':format'   => $options['format'],
+            ':path'     => trim($path, '/')
+        ));
+
         // get encoded response
-        $response = $this->doSend($path, $parameters, $httpMethod, $options);
+        $response = $this->doRequest($url, $parameters, $httpMethod, $options);
 
         // decode response
         $response = $this->decodeResponse($response);
