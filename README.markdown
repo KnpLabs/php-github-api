@@ -1,57 +1,45 @@
 # PHP GitHub API
 
-A simple, Object Oriented wrapper for GitHub API written with PHP5. 
+A simple Object Oriented wrapper for GitHub API, written with PHP5. 
 
-    $github = new phpGitHubApi();
+    $github = new Github_Client();
     $myRepos = $github->getRepoApi()->getUserRepos('ornicar');
 
 Uses [GitHub API v2](http://develop.github.com/). The way the Object Oriented Interface is organized is mainly inspired by the way GitHub has organized their API Documentation.
 
-Requires [php curl](http://php.net/manual/en/book.curl.php).
+## Requirements
 
-## IMPORTANT - V3 is not stable yet
+* PHP 5.2 or 5.3.
+* [php curl](http://php.net/manual/en/book.curl.php), but it is made possible to write another transport layer.
+* PHPUnit to run tests.
 
-This is the third version of php-github-api, which is under development.
-See what's new in V3 in the ROADMAP_V3 file.
+## Migrate php-github-api from version 2 to version 3 (current)
 
-The git branch "v2-stable" contains the actual stable code.
+Good news! Even if the internal code is much better, the API stays untouched!
+Only the main class has changed. Just replace
 
-    git checkout v2-stable
+    $github = new phpGitHubApi(); // old
 
-## Instanciate a new API
+with
 
-    $github = new phpGitHubApi();
+    $github = new Github_Client(); // new
 
-This instanciated API does not offer many function by itself, but provides methods to instanciate the different Sub-API's that GitHub defines in the API documentation. The main API object just provides methods for authentication.
+Also you will need to setup autoloading, see instructions below.
 
-### Authentication
+## Autoload
 
-Most GitHub services do not require authentication, but some do. For example the methods that allow you to change properties on Repositories and some others. Therefore this step is facultative.
+The first step to use php-github-api is to register its autoloader:
 
-GitHub provides some different ways of authentication. This API implementation implements three of them which are handled by one function:
+    require_once '/path/to/lib/Github/Autoloader.php';
+    Github_Autoloader::register();
 
-    $github->authenticate($username, $secret, $method);
+Replace the ``/path/to/lib/`` path with the path you used for php-github-api installation.
 
-$username is, of course, the username. $method is optional. The three allowed
-values are:
+> php-github-api follows the PEAR convention names for its classes, which means you can easily integrate php-github-api classes loading in your own autoloader.
 
-* phpGitHubApi::AUTH_URL_TOKEN (default, if $method is omitted)
-* phpGitHubApi::AUTH_HTTP_TOKEN
-* phpGitHubApi::AUTH_HTTP_PASSWORD
+## Instanciate a new github client
 
-The required value of $secret depends on the choosen $method. For the AUTH_*_TOKEN methods, you should provide the API token here. For the AUTH_HTTP_PASSWORD, you should provide the password of the account.
-
-After executing the `$github->authenticate($username, $secret, $method);` method using correct credentials, all further request are done as the given user.
-
-### About authentication methods
-
-The phpGitHubApi::AUTH_URL_TOKEN authentication method sends the username and API token in URL parameters. The phpGitHubApi::AUTH_HTTP_* authentication methods send their values to GitHub using HTTP Basic Authentication. phpGitHubApi::AUTH_URL_TOKEN used to be the only available authentication method. To prevent existing applications from changing their behavior in case of an API upgrade, this method is choosen as the default for this API implementation. Note however that GitHub describes this method as deprecated. In most case you should use the phpGitHubApi::AUTH_HTTP_TOKEN instead.
-
-### Deauthentication
-
-If you want to stop new requests from being authenticated, you can use the deAuthenticate method.
-
-    $github->deAuthenticate();
+    $github = new Github_Client();
 
 ## Users
 
@@ -450,32 +438,73 @@ Returns an array describing the php-github-api repository.
 
 See all GitHub API routes: [http://develop.github.com/](http://develop.github.com/)
 
-## Customize phpGitHubApi
+## Authentication & Security
+
+Most GitHub services do not require authentication, but some do. For example the methods that allow you to change properties on Repositories and some others. Therefore this step is facultative.
+
+### Authenticate
+
+GitHub provides some different ways of authentication. This API implementation implements three of them which are handled by one function:
+
+    $github->authenticate($username, $secret, $method);
+
+$username is, of course, the username. $method is optional. The three allowed
+values are:
+
+* Github_Client::AUTH_URL_TOKEN (default, if $method is omitted)
+* Github_Client::AUTH_HTTP_TOKEN
+* Github_Client::AUTH_HTTP_PASSWORD
+
+The required value of $secret depends on the choosen $method. For the AUTH_*_TOKEN methods, you should provide the API token here. For the AUTH_HTTP_PASSWORD, you should provide the password of the account.
+
+After executing the `$github->authenticate($username, $secret, $method);` method using correct credentials, all further request are done as the given user.
+
+### About authentication methods
+
+The Github_Client::AUTH_URL_TOKEN authentication method sends the username and API token in URL parameters. The Github_Client::AUTH_HTTP_* authentication methods send their values to GitHub using HTTP Basic Authentication. Github_Client::AUTH_URL_TOKEN used to be the only available authentication method. To prevent existing applications from changing their behavior in case of an API upgrade, this method is choosen as the default for this API implementation. Note however that GitHub describes this method as deprecated. In most case you should use the Github_Client::AUTH_HTTP_TOKEN instead.
+
+### Deauthenticate
+
+If you want to stop new requests from being authenticated, you can use the deAuthenticate method.
+
+    $github->deAuthenticate();
+
+## Customize php-github-api
 
 The library is highly configurable and extensible thanks to dependency injection.
 
 ### Configure the request
 
-Wanna change, let's say, the request User Agent?
+Wanna change, let's say, the http client User Agent?
 
-    $github->getRequest()->setOption('user_agent', 'My new User Agent');
+    $github->getHttpClient()->setOption('user_agent', 'My new User Agent');
 
-See all request available options in request/phpGitHubApiRequest.php
+See all request available options in Github/HttpClient.php
 
-### Inject a new request instance
+### Inject a new http client instance
 
-If you want to use your own request implementation, inject it to the GitHubApi:
+php-github-api provides a curl-based implementation of a http client.
+If you want to use your own http client implementation, inject it to the Github_Client instance:
 
-    // create a custom request
-    class myGitHubRequest extends phpGitHubApiRequest
+    // create a custom http client
+    class MyHttpClient implements Github_HttpClient
     {
-      // override things
+        public function doRequest($url, array $parameters = array(), $httpMethod = 'GET', array $options)
+        {
+            // send the request and return the raw response
+        }
     }
 
-    // inject your request instance to the API.
-    $github->setRequest(new myGitHubRequest());
+You can now inject your request through Github_Client constructor:
 
-Your request implementation must extend phpGitHubApiRequest.
+    $github = new Github_Client(new MyHttpClient());
+
+Or to an existing Github_Client instance:
+
+    $github->setHttpClient(new MyHttpClient());
+
+Your request implementation may extend Github_HttpClient to inherit useful methods.
+See Github_HttpClient_Curl for an implementation example. And feel free to contribute your http client!
 
 ### Inject a new API part instance
 
@@ -483,36 +512,18 @@ If you want to use your own implementation of an API, inject it to the GitHubApi
 For example, to replace the user API:
 
     // create a custom User API
-    class myGitHubApiUser extends phpGitHubApiUser
+    class MyGithubApiUser extends Github_Api_User
     {
       // overwrite things
     }
 
-    $github->setApi('user', new myGitHubApiUser($github));
+    $github->setApi('user', new MyGithubApiUser($github));
 
 ## Run test suite
 
-All code is fully unit tested. To run tests on your machine, from a CLI, run
+The code is unit tested. To run tests on your machine, from a CLI, run
 
-    php /path/to/php-github-api/prove.php
-
-You should see
-
-    test/apiTest.........................................................ok
-    test/authenticationTest..............................................ok
-    test/commitTest......................................................ok
-    test/issueTest.......................................................ok
-    test/objectTest......................................................ok
-    test/repoTest........................................................ok
-    test/userTest........................................................ok
-    All tests successful.                                                 
-    Files=7, Tests=101                                                    
-
-## Run one test
-
-You can choose to run only one test; usefull when working on a feature.
-
-    php php test/commitTest.php
+    phpunit
 
 ## Credits
 
