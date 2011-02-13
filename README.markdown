@@ -5,7 +5,7 @@ A simple Object Oriented wrapper for GitHub API, written with PHP5.
     $github = new Github_Client();
     $myRepos = $github->getRepoApi()->getUserRepos('ornicar');
 
-Uses [GitHub API v2](http://develop.github.com/). The way the Object Oriented Interface is organized is mainly inspired by the way GitHub has organized their API Documentation.
+Uses [GitHub API v2](http://develop.github.com/). The object API is very similar to the RESTful API.
 
 ## Features
 
@@ -33,7 +33,7 @@ Replace the `/path/to/lib/` path with the path you used for php-github-api insta
 
 > php-github-api follows the PEAR convention names for its classes, which means you can easily integrate php-github-api classes loading in your own autoloader.
 
-## Instanciate a new github client
+## instantiate a new github client
 
     $github = new Github_Client();
 
