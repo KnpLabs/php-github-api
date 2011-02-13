@@ -87,31 +87,31 @@ class Github_Client
     }
 
     /**
-     * Call any route, GET method
+     * Call any path, GET method
      * Ex: $api->get('repos/show/my-username/my-repo')
      *
-     * @param   string  $route            the GitHub route
+     * @param   string  $path            the GitHub path
      * @param   array   $parameters       GET parameters
      * @param   array   $requestOptions   reconfigure the request
      * @return  array                     data returned
      */
-    public function get($route, array $parameters = array(), $requestOptions = array())
+    public function get($path, array $parameters = array(), $requestOptions = array())
     {
-        return $this->getHttpClient()->get($route, $parameters, $requestOptions);
+        return $this->getHttpClient()->get($path, $parameters, $requestOptions);
     }
 
     /**
-     * Call any route, POST method
+     * Call any path, POST method
      * Ex: $api->post('repos/show/my-username', array('email' => 'my-new-email@provider.org'))
      *
-     * @param   string  $route            the GitHub route
+     * @param   string  $path            the GitHub path
      * @param   array   $parameters       POST parameters
      * @param   array   $requestOptions   reconfigure the request
      * @return  array                     data returned
      */
-    public function post($route, array $parameters = array(), $requestOptions = array())
+    public function post($path, array $parameters = array(), $requestOptions = array())
     {
-        return $this->getHttpClient()->post($route, $parameters, $requestOptions);
+        return $this->getHttpClient()->post($path, $parameters, $requestOptions);
     }
 
     /**

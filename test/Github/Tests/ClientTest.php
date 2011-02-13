@@ -53,14 +53,14 @@ class Github_Tests_ClientTest extends PHPUnit_Framework_TestCase
 
     public function testGet()
     {
-        $route      = '/some/route';
+        $path      = '/some/path';
         $parameters = array('a' => 'b');
         $options    = array('c' => 'd');
 
         $httpClient = $this->getHttpClientMock();
         $httpClient->expects($this->once())
             ->method('get')
-            ->with($route, $parameters, $options);
+            ->with($path, $parameters, $options);
 
         $client = $this->getClientMockBuilder()
             ->setMethods(array('getHttpClient'))
@@ -70,19 +70,19 @@ class Github_Tests_ClientTest extends PHPUnit_Framework_TestCase
             ->with()
             ->will($this->returnValue($httpClient));
 
-        $client->get($route, $parameters, $options);
+        $client->get($path, $parameters, $options);
     }
 
     public function testPost()
     {
-        $route      = '/some/route';
+        $path      = '/some/path';
         $parameters = array('a' => 'b');
         $options    = array('c' => 'd');
 
         $httpClient = $this->getHttpClientMock();
         $httpClient->expects($this->once())
             ->method('post')
-            ->with($route, $parameters, $options);
+            ->with($path, $parameters, $options);
 
         $client = $this->getClientMockBuilder()
             ->setMethods(array('getHttpClient'))
@@ -92,7 +92,7 @@ class Github_Tests_ClientTest extends PHPUnit_Framework_TestCase
             ->with()
             ->will($this->returnValue($httpClient));
 
-        $client->post($route, $parameters, $options);
+        $client->post($path, $parameters, $options);
     }
 
     public function testDefaultApi()
