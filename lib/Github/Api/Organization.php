@@ -29,7 +29,7 @@ class Github_Api_Organization extends Github_Api
      */
     public function show($name)
     {
-        $response = $this->client->get('organizations/'.urlencode($name));
+        $response = $this->get('organizations/'.urlencode($name));
 
         return $response['organization'];
     }
@@ -43,7 +43,7 @@ class Github_Api_Organization extends Github_Api
      */
     public function getAllRepos($name)
     {
-        $response = $this->client->get('organizations/repositories');
+        $response = $this->get('organizations/repositories');
 
         return $response['repositories'];
     }
@@ -57,7 +57,7 @@ class Github_Api_Organization extends Github_Api
      */
     public function getPublicRepos($name)
     {
-        $response = $this->client->get('organizations/'.urlencode($name).'/public_repositories');
+        $response = $this->get('organizations/'.urlencode($name).'/public_repositories');
 
         return $response['repositories'];
     }
@@ -71,7 +71,7 @@ class Github_Api_Organization extends Github_Api
      */
     public function getPublicMembers($name)
     {
-        $response = $this->client->get('organizations/'.urlencode($name).'/public_members');
+        $response = $this->get('organizations/'.urlencode($name).'/public_members');
 
         return $response['users'];
     }
@@ -85,7 +85,7 @@ class Github_Api_Organization extends Github_Api
      */
     public function getTeams($name)
     {
-        $response = $this->client->get('organizations/'.urlencode($name).'/teams');
+        $response = $this->get('organizations/'.urlencode($name).'/teams');
 
         return $response['teams'];
     }
@@ -107,7 +107,7 @@ class Github_Api_Organization extends Github_Api
             throw new InvalidArgumentException("Invalid value for the permission variable");
         }
 
-        $response = $this->client->post('organizations/'.urlencode($organization).'/teams', array(
+        $response = $this->post('organizations/'.urlencode($organization).'/teams', array(
             'team' => $team,
             'permission' => $permission,
             'repo_names' => $repositories

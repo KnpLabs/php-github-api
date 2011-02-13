@@ -20,7 +20,7 @@ class Github_Api_Object extends Github_Api
      */
     public function showTree($username, $repo, $treeSHA)
     {
-        $response = $this->client->get('tree/show/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($treeSHA));
+        $response = $this->get('tree/show/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($treeSHA));
 
         return $response['tree'];
     }
@@ -37,7 +37,7 @@ class Github_Api_Object extends Github_Api
      */
     public function listBlobs($username, $repo, $treeSHA)
     {
-        $response = $this->client->get('blob/all/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($treeSHA));
+        $response = $this->get('blob/all/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($treeSHA));
 
         return $response['blobs'];
     }
@@ -54,7 +54,7 @@ class Github_Api_Object extends Github_Api
      */
     public function showBlob($username, $repo, $treeSHA, $path)
     {
-        $response = $this->client->get('blob/show/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($treeSHA).'/'.urlencode($path));
+        $response = $this->get('blob/show/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($treeSHA).'/'.urlencode($path));
 
         return $response['blob'];
     }
@@ -70,7 +70,7 @@ class Github_Api_Object extends Github_Api
      */
     public function getRawData($username, $repo, $objectSHA)
     {
-        $response = $this->client->get('blob/show/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($objectSHA), array(), array(
+        $response = $this->get('blob/show/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($objectSHA), array(), array(
             'format' => 'text'
         ));
 

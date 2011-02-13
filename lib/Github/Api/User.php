@@ -19,7 +19,7 @@ class Github_Api_User extends Github_Api
      */
     public function search($username)
     {
-        $response = $this->client->get('user/search/'.urlencode($username));
+        $response = $this->get('user/search/'.urlencode($username));
 
         return $response['users'];
     }
@@ -33,7 +33,7 @@ class Github_Api_User extends Github_Api
      */
     public function show($username)
     {
-        $response = $this->client->get('user/show/'.urlencode($username));
+        $response = $this->get('user/show/'.urlencode($username));
 
         return $response['user'];
     }
@@ -49,7 +49,7 @@ class Github_Api_User extends Github_Api
      */
     public function update($username, array $data)
     {
-        $response = $this->client->post('user/show/'.urlencode($username), array('values' => $data));
+        $response = $this->post('user/show/'.urlencode($username), array('values' => $data));
 
         return $response['user'];
     }
@@ -63,7 +63,7 @@ class Github_Api_User extends Github_Api
      */
     public function getFollowing($username)
     {
-        $response = $this->client->get('user/show/'.urlencode($username).'/following');
+        $response = $this->get('user/show/'.urlencode($username).'/following');
 
         return $response['users'];
     }
@@ -77,7 +77,7 @@ class Github_Api_User extends Github_Api
      */
     public function getFollowers($username)
     {
-        $response = $this->client->get('user/show/'.urlencode($username).'/followers');
+        $response = $this->get('user/show/'.urlencode($username).'/followers');
 
         return $response['users'];
     }
@@ -91,7 +91,7 @@ class Github_Api_User extends Github_Api
      */
     public function follow($username)
     {
-        $response = $this->client->post('user/follow/'.urlencode($username));
+        $response = $this->post('user/follow/'.urlencode($username));
 
         return $response['users'];
     }
@@ -105,7 +105,7 @@ class Github_Api_User extends Github_Api
      */
     public function unFollow($username)
     {
-        $response = $this->client->post('user/unfollow/'.urlencode($username));
+        $response = $this->post('user/unfollow/'.urlencode($username));
 
         return $response['users'];
     }
@@ -119,7 +119,7 @@ class Github_Api_User extends Github_Api
      */
     public function getWatchedRepos($username)
     {
-        $response = $this->client->get('repos/watched/'.urlencode($username));
+        $response = $this->get('repos/watched/'.urlencode($username));
 
         return $response['repositories'];
     }
@@ -131,7 +131,7 @@ class Github_Api_User extends Github_Api
      */
     public function getKeys()
     {
-        $response = $this->client->get('user/keys');
+        $response = $this->get('user/keys');
 
         return $response['public_keys'];
     }
@@ -143,7 +143,7 @@ class Github_Api_User extends Github_Api
      */
     public function addKey($title, $key)
     {
-        $response = $this->client->post('user/key/add', array('title' => $title, 'key' => $key));
+        $response = $this->post('user/key/add', array('title' => $title, 'key' => $key));
 
         return $response['public_keys'];
     }
@@ -155,7 +155,7 @@ class Github_Api_User extends Github_Api
      */
     public function removeKey($id)
     {
-        $response = $this->client->post('user/key/remove', array('id' => $id));
+        $response = $this->post('user/key/remove', array('id' => $id));
 
         return $response['public_keys'];
     }
@@ -167,7 +167,7 @@ class Github_Api_User extends Github_Api
      */
     public function getEmails()
     {
-        $response = $this->client->get('user/emails');
+        $response = $this->get('user/emails');
 
         return $response['emails'];
     }
@@ -179,7 +179,7 @@ class Github_Api_User extends Github_Api
      */
     public function addEmail($email)
     {
-        $response = $this->client->post('user/email/add', array('email' => $email));
+        $response = $this->post('user/email/add', array('email' => $email));
 
         return $response['emails'];
     }
@@ -191,7 +191,7 @@ class Github_Api_User extends Github_Api
      */
     public function removeEmail($email)
     {
-        $response = $this->client->post('user/email/remove', array('email' => $email));
+        $response = $this->post('user/email/remove', array('email' => $email));
 
         return $response['emails'];
     }

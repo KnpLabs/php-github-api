@@ -21,7 +21,7 @@ class Github_Api_Commit extends Github_Api
      */
     public function getBranchCommits($username, $repo, $branch)
     {
-        $response = $this->client->get('commits/list/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($branch));
+        $response = $this->get('commits/list/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($branch));
 
         return $response['commits'];
     }
@@ -38,7 +38,7 @@ class Github_Api_Commit extends Github_Api
      */
     public function getFileCommits($username, $repo, $branch, $path)
     {
-        $response = $this->client->get('commits/list/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($branch).'/'.urlencode($path));
+        $response = $this->get('commits/list/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($branch).'/'.urlencode($path));
 
         return $response['commits'];
     }
@@ -53,7 +53,7 @@ class Github_Api_Commit extends Github_Api
      */
     public function getCommit($username, $repo, $sha)
     {
-        $response = $this->client->get('commits/show/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($sha));
+        $response = $this->get('commits/show/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($sha));
 
         return $response['commit'];
     }
