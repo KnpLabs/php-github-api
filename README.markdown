@@ -446,7 +446,7 @@ values are:
 
 The required value of $secret depends on the choosen $method. For the AUTH_*_TOKEN methods, you should provide the API token here. For the AUTH_HTTP_PASSWORD, you should provide the password of the account.
 
-After executing the `$github->authenticate($username, $secret, $method);` method using correct credentials, all further request are done as the given user.
+After executing the `$github->authenticate($username, $secret, $method);` method using correct credentials, all further requests are done as the given user.
 
 ### About authentication methods
 
@@ -462,13 +462,13 @@ If you want to stop new requests from being authenticated, you can use the deAut
 
 The library is highly configurable and extensible thanks to dependency injection.
 
-### Configure the request
+### Configure the http client
 
 Wanna change, let's say, the http client User Agent?
 
     $github->getHttpClient()->setOption('user_agent', 'My new User Agent');
 
-See all request available options in Github/HttpClient.php
+See all available options in Github/HttpClient.php
 
 ### Inject a new http client instance
 
@@ -476,7 +476,7 @@ php-github-api provides a curl-based implementation of a http client.
 If you want to use your own http client implementation, inject it to the Github_Client instance:
 
     // create a custom http client
-    class MyHttpClient implements Github_HttpClient
+    class MyHttpClient extends Github_HttpClient
     {
         public function doRequest($url, array $parameters = array(), $httpMethod = 'GET', array $options)
         {
@@ -484,16 +484,15 @@ If you want to use your own http client implementation, inject it to the Github_
         }
     }
 
-You can now inject your request through Github_Client constructor:
+> Your http client implementation may not extend Github_HttpClient, but only implement Github_HttpClientInterface.
+
+You can now inject your http client through Github_Client constructor:
 
     $github = new Github_Client(new MyHttpClient());
 
 Or to an existing Github_Client instance:
 
     $github->setHttpClient(new MyHttpClient());
-
-Your request implementation may extend Github_HttpClient to inherit useful methods.
-See Github_HttpClient_Curl for an implementation example. And feel free to contribute your http client!
 
 ### Inject a new API part instance
 

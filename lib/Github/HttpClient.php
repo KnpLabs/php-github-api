@@ -9,7 +9,7 @@
 abstract class Github_HttpClient implements Github_HttpClientInterface
 {
     /**
-     * The request options
+     * The http client options
      * @var array
      */
     protected $options = array(
@@ -26,9 +26,9 @@ abstract class Github_HttpClient implements Github_HttpClientInterface
     protected static $history = array();
 
     /**
-     * Instanciate a new request
+     * Instanciate a new http client
      *
-     * @param  array   $options  Request options
+     * @param  array   $options  http client options
      */
     public function __construct(array $options = array())
     {
