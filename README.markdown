@@ -10,21 +10,8 @@ Uses [GitHub API v2](http://develop.github.com/). The way the Object Oriented In
 ## Requirements
 
 * PHP 5.2 or 5.3.
-* [php curl](http://php.net/manual/en/book.curl.php), but it is made possible to write another transport layer.
+* [php curl](http://php.net/manual/en/book.curl.php), but it is possible to write another transport layer.
 * PHPUnit to run tests.
-
-## Migrate php-github-api from version 2 to version 3 (current)
-
-Good news! Even if the internal code is much better, the API stays untouched!
-Only the main class has changed. Just replace
-
-    $github = new phpGitHubApi(); // old
-
-with
-
-    $github = new Github_Client(); // new
-
-Also you will need to setup autoloading, see instructions below.
 
 ## Autoload
 
@@ -33,13 +20,15 @@ The first step to use php-github-api is to register its autoloader:
     require_once '/path/to/lib/Github/Autoloader.php';
     Github_Autoloader::register();
 
-Replace the ``/path/to/lib/`` path with the path you used for php-github-api installation.
+Replace the `/path/to/lib/` path with the path you used for php-github-api installation.
 
 > php-github-api follows the PEAR convention names for its classes, which means you can easily integrate php-github-api classes loading in your own autoloader.
 
 ## Instanciate a new github client
 
     $github = new Github_Client();
+
+From this object, you can access to all GitHub apis, listed below.
 
 ## Users
 
