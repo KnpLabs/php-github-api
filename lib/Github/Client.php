@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Simple PHP Github client
+ * Simple yet very cool PHP Github client
  *
  * @tutorial  http://github.com/ornicar/php-github-api/blob/master/README.markdown
- * @version   3.0.0
+ * @version   3.0
  * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @license   MIT License
  *

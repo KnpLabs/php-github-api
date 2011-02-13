@@ -7,6 +7,15 @@ A simple Object Oriented wrapper for GitHub API, written with PHP5.
 
 Uses [GitHub API v2](http://develop.github.com/). The way the Object Oriented Interface is organized is mainly inspired by the way GitHub has organized their API Documentation.
 
+## Features
+
+* Covers 100% of GitHub API with PHP methods
+* Supports 3 authentication methods
+* Follows PEAR conventions and coding standard: autoload friendly
+* Light and fast thanks to lazy loading of API classes
+* Flexible and extensible thanks to dependency injection
+* Extensively tested and documented
+
 ## Requirements
 
 * PHP 5.2 or 5.3.
