@@ -88,11 +88,11 @@ abstract class Github_HttpClient implements Github_HttpClientInterface
      *
      * @return array                    Data
      */
-    protected function send($path, array $parameters = array(), $httpMethod = 'GET', array $options = array())
+    public function send($path, array $parameters = array(), $httpMethod = 'GET', array $options = array())
     {
         $this->updateHistory();
 
-        $requestOptions = array_merge($this->options, $options);
+        $options = array_merge($this->options, $options);
 
         // get encoded response
         $response = $this->doSend($path, $parameters, $httpMethod, $options);
