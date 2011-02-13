@@ -1,3 +1,14 @@
+V3 - 2011-02-12
+
+Major refactoring, not backward compatible.
+
+ * autoload friendly class/file names
+ * builtin optional autoloader
+ * PEAR coding standards
+ * PHPUnit for tests instead of lime
+ * Mock github responses in tests
+ * Allow different http drivers
+
 V2.12 - 2010-10-17
 
  * add support for HTTP authentication
