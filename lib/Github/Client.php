@@ -50,7 +50,7 @@ class Github_Client
      *
      * @param  Github_HttpClient_Interface $httpClient custom http client
      */
-    public function __construct($httpClient = null)
+    public function __construct(Github_HttpClientInterface $httpClient = null)
     {
         $this->httpClient = $httpClient ?: new Github_HttpClient_Curl();
     }
