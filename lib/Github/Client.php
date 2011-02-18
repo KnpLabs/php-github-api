@@ -52,7 +52,11 @@ class Github_Client
      */
     public function __construct(Github_HttpClientInterface $httpClient = null)
     {
-        $this->httpClient = $httpClient ?: new Github_HttpClient_Curl();
+        if (null === $httpClient) {
+            $this->httpClient = new Github_HttpClientInterface();
+        } else {
+            $this->httpClient = $httpClient;
+        }
     }
 
     /**
