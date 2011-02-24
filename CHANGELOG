@@ -1,3 +1,11 @@
+V3.1 - 2011-02-24
+
+Bugfixes release
+
+ * Fix PHP 5.2 compatibility
+ * Fix bug when instantiating a client without passing a http client
+ * Fix bug when sending authenticated requests using curl driver
+
 V3.0 - 2011-02-12
 
 Major refactoring, nearly BC compatible. See migration in same dir.
