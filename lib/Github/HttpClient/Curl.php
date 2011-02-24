@@ -66,6 +66,21 @@ class Github_HttpClient_Curl extends Github_HttpClient
             CURLOPT_TIMEOUT => $options['timeout']
         );
 
+        $response = $this->doCurlCall($curlOptions);
+
+        if (!in_array($response['headers']['http_code'], array(0, 200, 201))) {
+            throw new Github_HttpClient_Exception(null, (int) $response['headers']['http_code']);
+        }
+
+        if ($response['errorNumber'] != '') {
+            throw new Github_HttpClient_Exception('error '.$response['errorNumber']);
+        }
+
+        return $response['response'];
+    }
+
+    protected function doCurlCall(array $curlOptions)
+    {
         $curl = curl_init();
 
         curl_setopt_array($curl, $curlOptions);
@@ -77,14 +92,6 @@ class Github_HttpClient_Curl extends Github_HttpClient
 
         curl_close($curl);
 
-        if (!in_array($headers['http_code'], array(0, 200, 201))) {
-            throw new Github_HttpClient_Exception(null, (int) $headers['http_code']);
-        }
-
-        if ($errorNumber != '') {
-            throw new Github_HttpClient_Exception('error '.$errorNumber);
-        }
-
-        return $response;
+        return compact('response', 'headers', 'errorNumber', 'errorMessage');
     }
 }
