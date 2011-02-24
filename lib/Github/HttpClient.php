@@ -105,7 +105,7 @@ abstract class Github_HttpClient implements Github_HttpClientInterface
         $response = $this->doRequest($url, $parameters, $httpMethod, $options);
 
         // decode response
-        $response = $this->decodeResponse($response);
+        $response = $this->decodeResponse($response, $options);
 
         return $response;
     }
@@ -115,15 +115,15 @@ abstract class Github_HttpClient implements Github_HttpClientInterface
      *
      * @return  array   the response
      */
-    protected function decodeResponse($response)
+    protected function decodeResponse($response, array $options)
     {
-        if ('text' === $this->options['format']) {
+        if ('text' === $options['format']) {
             return $response;
-        } elseif ('json' === $this->options['format']) {
+        } elseif ('json' === $options['format']) {
             return json_decode($response, true);
         }
 
-        throw new Exception(__CLASS__.' only supports json format, '.$this->options['format'].' given.');
+        throw new Exception(__CLASS__.' only supports json & text format, '.$options['format'].' given.');
     }
 
     /**
