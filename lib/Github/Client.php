@@ -119,7 +119,7 @@ class Github_Client
     }
 
     /**
-     * Get the http client. If none is available, instanciate a curl client.
+     * Get the http client.
      *
      * @return  Github_HttpClient_Interface   a request instance
      */
