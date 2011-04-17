@@ -18,7 +18,7 @@ class Github_HttpClient_Curl extends Github_HttpClient
      *
      * @return string   HTTP response
      */
-    public function doRequest($url, array $parameters = array(), $httpMethod = 'GET', array $options)
+    public function doRequest($url, array $parameters = array(), $httpMethod = 'GET', array $options = array())
     {
         $curlOptions = array();
 

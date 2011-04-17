@@ -78,7 +78,7 @@ class Github_Tests_HttpClientTest extends PHPUnit_Framework_TestCase
 
 class Github_HttpClient_TestDriver extends Github_HttpClient
 {
-    protected function doRequest($url, array $parameters = array(), $httpMethod = 'GET', array $options)
+    protected function doRequest($url, array $parameters = array(), $httpMethod = 'GET', array $options = array())
     {
     }
 

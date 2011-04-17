@@ -487,7 +487,7 @@ If you want to use your own http client implementation, inject it to the Github_
     // create a custom http client
     class MyHttpClient extends Github_HttpClient
     {
-        public function doRequest($url, array $parameters = array(), $httpMethod = 'GET', array $options)
+        public function doRequest($url, array $parameters = array(), $httpMethod = 'GET', array $options = array())
         {
             // send the request and return the raw response
         }

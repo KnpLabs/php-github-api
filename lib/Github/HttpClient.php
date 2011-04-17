@@ -45,7 +45,7 @@ abstract class Github_HttpClient implements Github_HttpClientInterface
      *
      * @return string   HTTP response
      */
-    abstract protected function doRequest($url, array $parameters = array(), $httpMethod = 'GET', array $options);
+    abstract protected function doRequest($url, array $parameters = array(), $httpMethod = 'GET', array $options = array());
 
     /**
      * Send a GET request
