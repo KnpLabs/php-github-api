@@ -531,5 +531,6 @@ This library borrows ideas, code and tests from [phptwitterbot](http://code.goog
 - Thanks to [noloh](http://github.com/noloh) for his contribution on the Object API.
 - Thanks to [bshaffer](http://github.com/bshaffer) for his contribution on the Repo API.
 - Thanks to [Rolf van de Krol](http://github.com/rolfvandekrol) for his countless contributions.
+- Thanks to [Nicolas Pastorino](http://github.com/jeanvoye) for his contribution on the Pull Request API.
 
 Thanks to GitHub for the high quality API and documentation.
