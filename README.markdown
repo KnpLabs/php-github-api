@@ -587,11 +587,11 @@ The last parameter of this call, Pull request ID, can be either extracted from t
 
 The ``$pullRequest15`` array contains the same elements as every entry in the result of a ``listPullRequests`` call, plus a "discussion" key, self-explanatory.
 
-## Create a pull request
+### Create a pull request
 
 A pull request can either be created by supplying both the Title & Body, OR an Issue ID.
 
-### Populated with Title and Body
+#### Populated with Title and Body
 
 Requires authentication.
 
@@ -603,7 +603,7 @@ Requires authentication.
 
 This returns the details of the pull request.
 
-### Populated with Issue ID
+#### Populated with Issue ID
 
 Requires authentication. The issue ID is provided instead of title and body. 
 
