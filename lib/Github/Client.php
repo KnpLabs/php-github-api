@@ -225,6 +225,20 @@ class Github_Client
     }
 
     /**
+     * Get the pull request API
+     *
+     * @return  Github_Api_PullRequest  the pull request API
+     */
+    public function getPullRequestApi()
+    {
+        if (!isset($this->apis['pullrequest'])) {
+            $this->apis['pullrequest'] = new Github_Api_PullRequest($this);
+        }
+
+        return $this->apis['pullrequest'];
+    }
+
+    /**
      * Inject an API instance
      *
      * @param   string                $name the API name
