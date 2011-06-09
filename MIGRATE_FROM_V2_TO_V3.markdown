@@ -1,5 +1,5 @@
 Good news! Even if the internal code is much better, the API stays untouched!
-Only the main class has changed. Just replace
+Only the main class name has changed. Just replace
 
     $github = new phpGitHubApi(); // old
 
