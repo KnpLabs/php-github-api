@@ -61,25 +61,20 @@ class Github_Api_PullRequest extends Github_Api
                                  'pull[head]' => $head
                           );
 
-        if ( $title !== null and $body !== null )
-        {
+        if ( $title !== null and $body !== null ) {
             $postParameters = array_merge( $postParameters,
                                            array(
                                              'pull[title]' => $title,
                                              'pull[body]'  => $body
                                            )
                                          );
-        }
-        elseif ( $issueId !== null )
-        {
+        } elseif ( $issueId !== null ) {
             $postParameters = array_merge( $postParameters,
                                            array(
                                              'pull[issue]' => $issueId
                                            )
                                          );
-        }
-        else
-        {
+        } else {
             // @FIXME : Exception required here.
             return null;
         }
