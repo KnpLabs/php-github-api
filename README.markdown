@@ -590,6 +590,7 @@ The ``$pullRequest15`` array contains the same elements as every entry in the re
 ### Create a pull request
 
 A pull request can either be created by supplying both the Title & Body, OR an Issue ID.
+Details regarding the content of parameters 3 and 4 of the ``create`` method are presented here : http://develop.github.com/p/pulls.html .
 
 #### Populated with Title and Body
 
