@@ -272,7 +272,9 @@ Returns an array of the issue labels.
 
 Returns an array of issues matching the given label.
 
+<a name='commits'></a>
 ## Commits
+<a href='#nav' alt='Back to the navigation'>Go back to the Navigation</a>
 
 Getting information on specific commits, the diffs they introduce, the files they've changed.
 Wrap [GitHub Commit API](http://develop.github.com/p/commits.html).
