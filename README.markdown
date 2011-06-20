@@ -46,7 +46,9 @@ Replace the `/path/to/lib/` path with the path you used for php-github-api insta
 From this object, you can access to all GitHub apis, listed below.
 
 <a name='nav'></a>
-*Navigation*: [Users][] | [Issues][] | [Commits][] | [Objects][] | [Repos][] | [Pull Requests][] | [Request any Route][] | [Authentication & Security][] | [Customize php-github-api][] | [Run Test Suite][]
+## Navigation
+
+[Users][] | [Issues][] | [Commits][] | [Objects][] | [Repos][] | [Pull Requests][] | [Request any Route][] | [Authentication & Security][] | [Customize php-github-api][] | [Run Test Suite][]
 
 <a name='users'></a>
 ## Users
