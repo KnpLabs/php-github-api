@@ -45,7 +45,12 @@ Replace the `/path/to/lib/` path with the path you used for php-github-api insta
 
 From this object, you can access to all GitHub apis, listed below.
 
+<a name='nav'></a>
+*Navigation*: [Users][] | [Issues][] | [Commits][] | [Objects][] | [Repos][] | [Pull Requests][] | [Request any Route][] | [Authentication & Security][] | [Customize php-github-api][] | [Run Test Suite][]
+
+<a name='users'></a>
 ## Users
+<a href='#nav' alt='Back to the navigation'>Go back to the Navigation</a>
 
 Searching users, getting user information and managing authenticated user account information.
 Wrap [GitHub User API](http://develop.github.com/p/users.html).
@@ -144,7 +149,9 @@ Returns an array of the authenticated user emails. Requires authentication.
 
 Return an array of the authenticated user emails. Requires authentication.
 
+<a name='issues'></a>
 ## Issues
+<a href='#nav' alt='Back to the navigation'>Go back to the Navigation</a>
 
 Listing issues, searching, editing and closing your projects issues.
 Wrap [GitHub Issue API](http://develop.github.com/p/issues.html).
@@ -294,7 +301,9 @@ Returns an array of commits.
 
 Returns a single commit.
 
+<a name='objects'></a>
 ## Objects
+<a href='#nav' alt='Back to the navigation'>Go back to the Navigation</a>
 
 Getting full versions of specific files and trees in your Git repositories. Wrap [GitHub objects API](http://develop.github.com/p/objects.html).
 
@@ -331,7 +340,9 @@ Returns array of blob informations.
 The last parameter can be either a blob SHA1, a tree SHA1 or a commit SHA1.
 Returns the raw text content of the object.
 
+<a name='repos'></a>
 ## Repos
+<a href='#nav' alt='Back to the navigation'>Go back to the Navigation</a>
 
 Searching repositories, getting repository information and managing repository information for authenticated users.
 Wrap [GitHub Repo API](http://develop.github.com/p/repo.html). All methods are described on that page.
@@ -547,7 +558,9 @@ To include non GitHub users, add a third parameter to true:
 
 
 
-## Pull requests
+<a name='pull_requests'></a>
+## Pull Requests
+<a href='#nav' alt='Back to the navigation'>Go back to the Navigation</a>
 
 Lets you list pull requests for a given repository, list one pull request in particular along with its discussion, and create a pull-request. 
 Wraps [GitHub Pull Request API](http://develop.github.com/p/pulls.html), still tagged **BETA**. All methods are described there.
@@ -616,7 +629,9 @@ Requires authentication. The issue ID is provided instead of title and body.
 This returns the details of the pull request.
 
 
-## Request any route
+<a name='request_any_route'></a>
+## Request any Route
+<a href='#nav' alt='Back to the navigation'>Go back to the Navigation</a>
 
 The method you need does not exist yet?
 You can access any GitHub route by using the "get" and "post" methods.
@@ -630,7 +645,9 @@ Returns an array describing the php-github-api repository.
 
 See all GitHub API routes: [http://develop.github.com/](http://develop.github.com/)
 
+<a name='authentication_and_security'></a>
 ## Authentication & Security
+<a href='#nav' alt='Back to the navigation'>Go back to the Navigation</a>
 
 Most GitHub services do not require authentication, but some do. For example the methods that allow you to change properties on Repositories and some others. Therefore this step is facultative.
 
@@ -665,7 +682,9 @@ If you want to stop new requests from being authenticated, you can use the deAut
     $github->deAuthenticate();
 ```
 
+<a name='customize'></a>
 ## Customize php-github-api
+<a href='#nav' alt='Back to the navigation'>Go back to the Navigation</a>
 
 The library is highly configurable and extensible thanks to dependency injection.
 
@@ -724,7 +743,9 @@ For example, to replace the user API:
     $github->setApi('user', new MyGithubApiUser($github));
 ```
 
-## Run test suite
+<a name='run_test_suite'></a>
+## Run Test Suite
+<a href='#nav' alt='Back to the navigation'>Go back to the Navigation</a>
 
 The code is unit tested. To run tests on your machine, from a CLI, run
 
@@ -742,3 +763,15 @@ This library borrows ideas, code and tests from [phptwitterbot](http://code.goog
 - Thanks to [Nicolas Pastorino](http://github.com/jeanvoye) for his contribution on the Pull Request API.
 
 Thanks to GitHub for the high quality API and documentation.
+
+
+[Users]: #users
+[Issues]: #issues
+[Commits]: #commits
+[Objects]: #objects
+[Repos]: #repos
+[Pull Requests]: #pull_requests
+[Request any Route]: #request_any_route
+[Authentication & Security]: #authentication_and_security
+[Customize php-github-api]: #customize
+[Run Test Suite]: #run_test_suite
