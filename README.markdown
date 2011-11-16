@@ -467,7 +467,7 @@ Removes the key with id 12345 from the 'reponame' repository and returns a list 
 ### Get the collaborators for a repository
 
 ```php
-    $collaborators = $github->getRepoApi()->getRepoCollaborators('reponame');
+    $collaborators = $github->getRepoApi()->getRepoCollaborators('username', 'reponame');
 ```
 
 Returns a list of the collaborators for the 'reponame' repository.
