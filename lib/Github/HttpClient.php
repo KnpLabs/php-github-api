@@ -13,11 +13,11 @@ abstract class Github_HttpClient implements Github_HttpClientInterface
      * @var array
      */
     protected $options = array(
-        'protocol'   => 'http',
-        'url'        => ':protocol://github.com/api/v2/:format/:path',
+        'protocol'   => 'https',
+        'url'        => ':protocol://api.github.com/:path',
         'format'     => 'json',
         'user_agent' => 'php-github-api (http://github.com/ornicar/php-github-api)',
-        'http_port'  => 80,
+        'http_port'  => 443,
         'timeout'    => 10,
         'login'      => null,
         'token'      => null

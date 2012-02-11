@@ -2,6 +2,7 @@
     "name": "ornicar/github-api",
     "type": "library",
     "description": "GitHub API",
+    "version": "3.3",
     "homepage": "https://github.com/ornicar/php-github-api",
     "keywords": ["github", "api", "gist"],
     "license": "MIT",
