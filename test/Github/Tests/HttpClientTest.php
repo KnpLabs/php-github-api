@@ -9,7 +9,7 @@ class Github_Tests_HttpClientTest extends PHPUnit_Framework_TestCase
         ));
 
         $this->assertEquals(33, $httpClient->getOption('timeout'));
-        $this->assertEquals(80, $httpClient->getOption('http_port'));
+        $this->assertEquals(443, $httpClient->getOption('http_port'));
     }
 
     public function testGet()
