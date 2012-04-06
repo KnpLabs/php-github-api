@@ -1,5 +1,7 @@
 <?php
-require_once dirname(__FILE__).'/../test/Github/Tests/ApiTest.php';
 
-require_once dirname(__FILE__).'/../lib/Github/Autoloader.php';
-Github_Autoloader::register();
+$loader = require_once __DIR__.'/../vendor/.composer/autoload.php';
+$loader->add('Github_', __DIR__.'/../lib');
+$loader->add('Github_', __DIR__.'/../test');
+
+return $loader;
