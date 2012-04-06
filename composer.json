@@ -15,7 +15,8 @@
     ],
     "require": {
         "php": ">=5.2",
-        "ext-curl": "*"
+        "ext-curl": "*",
+        "kriswallsmith/buzz": "v0.5"
     },
     "autoload": {
         "psr-0": { "Github_": "lib/" }
