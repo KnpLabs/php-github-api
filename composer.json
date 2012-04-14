@@ -2,7 +2,6 @@
     "name": "ornicar/github-api",
     "type": "library",
     "description": "GitHub API",
-    "version": "3.3",
     "homepage": "https://github.com/ornicar/php-github-api",
     "keywords": ["github", "api", "gist"],
     "license": "MIT",
@@ -11,14 +10,20 @@
             "name": "Thibault Duplessis",
             "email": "thibault.duplessis@gmail.com",
             "homepage": "http://ornicar.github.com"
+        },
+        {
+            "name": "KnpLabs Team",
+            "homepage": "http://knplabs.com"
         }
     ],
     "require": {
-        "php": ">=5.2",
-        "ext-curl": "*",
+        "php": ">=5.3.2",
         "kriswallsmith/buzz": "v0.5"
     },
+    "suggest": {
+        "ext-curl": "*"
+    },
     "autoload": {
-        "psr-0": { "Github_": "lib/" }
+        "psr-0": { "Github": "lib/" }
     }
 }

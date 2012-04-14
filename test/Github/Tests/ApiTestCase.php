@@ -1,6 +1,8 @@
 <?php
 
-abstract class Github_Tests_ApiTest extends PHPUnit_Framework_TestCase
+namespace Github\Tests;
+
+abstract class ApiTestCase extends \PHPUnit_Framework_TestCase
 {
     abstract protected function getApiClass();
 

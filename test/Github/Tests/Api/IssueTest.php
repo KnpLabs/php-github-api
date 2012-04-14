@@ -1,6 +1,10 @@
 <?php
 
-class Github_Tests_Api_IssueTest extends Github_Tests_ApiTest
+namespace Github\Tests\Api;
+
+use Github\Tests\ApiTestCase;
+
+class IssueTest extends ApiTestCase
 {
     public function testGetList()
     {
@@ -15,6 +19,6 @@ class Github_Tests_Api_IssueTest extends Github_Tests_ApiTest
 
     protected function getApiClass()
     {
-        return 'Github_Api_Issue';
+        return 'Github\Api\Issue';
     }
 }

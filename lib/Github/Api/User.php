@@ -1,5 +1,9 @@
 <?php
 
+namespace Github\Api;
+
+use Github\Api;
+
 /**
  * Searching users, getting user information
  * and managing authenticated user account information.
@@ -8,7 +12,7 @@
  * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @license   MIT License
  */
-class Github_Api_User extends Github_Api
+class User extends Api
 {
     /**
      * Search users by username

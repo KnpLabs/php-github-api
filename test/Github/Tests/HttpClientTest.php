@@ -1,10 +1,14 @@
 <?php
 
-class Github_Tests_HttpClientTest extends PHPUnit_Framework_TestCase
+namespace Github\Tests;
+
+use Github\HttpClient as BaseHttpClient;
+
+class HttpClientTest extends \PHPUnit_Framework_TestCase
 {
     public function testInstanciateWithOptions()
     {
-        $httpClient = new Github_HttpClient_TestDriver(array(
+        $httpClient = new TestDriver(array(
             'timeout' => 33
         ));
 
@@ -72,11 +76,11 @@ class Github_Tests_HttpClientTest extends PHPUnit_Framework_TestCase
 
     protected function getHttpClientMockBuilder()
     {
-        return $this->getMockBuilder('Github_HttpClient');
+        return $this->getMockBuilder('Github\HttpClient');
     }
 }
 
-class Github_HttpClient_TestDriver extends Github_HttpClient
+class TestDriver extends BaseHttpClient
 {
     protected function doRequest($url, array $parameters = array(), $httpMethod = 'GET', array $options = array())
     {

@@ -1,6 +1,10 @@
 <?php
 
-class Github_Tests_Functional_ObjectTest extends PHPUnit_Framework_TestCase
+namespace Github\Tests\Functional;
+
+use Github\Client;
+
+class ObjectTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetRawData()
     {
@@ -8,7 +12,7 @@ class Github_Tests_Functional_ObjectTest extends PHPUnit_Framework_TestCase
         $repo     = 'php-github-api';
         $sha1     = 'ab9f17c8ed85c0dd9f33ba8d2d61ebb570768158';
 
-        $github = new Github_Client();
+        $github = new Client();
         $data = $github->getObjectApi()->getRawData($username, $repo, $sha1);
 
         $this->assertRegexp('/Release version 3\.1/', $data);

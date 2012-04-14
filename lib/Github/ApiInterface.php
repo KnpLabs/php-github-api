@@ -1,5 +1,7 @@
 <?php
 
-interface Github_ApiInterface
+namespace Github;
+
+interface ApiInterface
 {
 }

@@ -1,12 +1,14 @@
 <?php
 
+namespace Github\HttpClient;
+
 /**
  * HttpClient communication error
  *
  * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @license   MIT License
  */
-class Github_HttpClient_Exception extends Exception
+class Exception extends \Exception
 {
     /**
      * Http header-codes

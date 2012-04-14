@@ -1,5 +1,12 @@
 <?php
 
+namespace Github;
+
+use Github\ApiInterface;
+use Github\Api;
+use Github\HttpClientInterface;
+use Github\HttpClient\Curl;
+
 /**
  * Simple yet very cool PHP Github client
  *
@@ -11,7 +18,7 @@
  * Website: http://github.com/ornicar/php-github-api
  * Tickets: http://github.com/ornicar/php-github-api/issues
  */
-class Github_Client
+class Client
 {
     /**
      * Constant for authentication method. Indicates the default, but deprecated
@@ -50,13 +57,9 @@ class Github_Client
      *
      * @param  Github_HttpClient_Interface $httpClient custom http client
      */
-    public function __construct(Github_HttpClientInterface $httpClient = null)
+    public function __construct(HttpClientInterface $httpClient = null)
     {
-        if (null === $httpClient) {
-            $this->httpClient = new Github_HttpClient_Curl();
-        } else {
-            $this->httpClient = $httpClient;
-        }
+        $this->httpClient = $httpClient ?: new Curl();
     }
 
     /**
@@ -65,10 +68,8 @@ class Github_Client
      * @param  string         $login      GitHub username
      * @param  string         $secret     GitHub private token or Github password if $method == AUTH_HTTP_PASSWORD
      * @param  string         $method     One of the AUTH_* class constants
-     *
-     * @return null
      */
-    public function authenticate($login, $secret, $method = NULL)
+    public function authenticate($login, $secret, $method = null)
     {
         if (!$method) {
             $method = self::AUTH_URL_TOKEN;
@@ -82,8 +83,6 @@ class Github_Client
 
     /**
      * Deauthenticate a user for all next requests
-     *
-     * @return null
      */
     public function deAuthenticate()
     {
@@ -121,7 +120,7 @@ class Github_Client
     /**
      * Get the http client.
      *
-     * @return  Github_HttpClient_Interface   a request instance
+     * @return  HttpClientInterface   a request instance
      */
     public function getHttpClient()
     {
@@ -131,11 +130,11 @@ class Github_Client
     /**
      * Inject another http client
      *
-     * @param   Github_HttpClient_Interface   a httpClient instance
+     * @param   HttpClientInterface   a httpClient instance
      *
      * @return  null
      */
-    public function setHttpClient(Github_HttpClient_Interface $httpClient)
+    public function setHttpClient(HttpClientInterface $httpClient)
     {
         $this->httpClient = $httpClient;
     }
@@ -143,12 +142,12 @@ class Github_Client
     /**
      * Get the user API
      *
-     * @return  Github_Api_User    the user API
+     * @return  Api\User    the user API
      */
     public function getUserApi()
     {
         if (!isset($this->apis['user'])) {
-            $this->apis['user'] = new Github_Api_User($this);
+            $this->apis['user'] = new Api\User($this);
         }
 
         return $this->apis['user'];
@@ -157,12 +156,12 @@ class Github_Client
     /**
      * Get the issue API
      *
-     * @return  Github_Api_Issue   the issue API
+     * @return  Api\Issue   the issue API
      */
     public function getIssueApi()
     {
         if (!isset($this->apis['issue'])) {
-            $this->apis['issue'] = new Github_Api_Issue($this);
+            $this->apis['issue'] = new Api\Issue($this);
         }
 
         return $this->apis['issue'];
@@ -171,12 +170,12 @@ class Github_Client
     /**
      * Get the commit API
      *
-     * @return  Github_Api_Commit  the commit API
+     * @return  Api\Commit  the commit API
      */
     public function getCommitApi()
     {
         if (!isset($this->apis['commit'])) {
-            $this->apis['commit'] = new Github_Api_Commit($this);
+            $this->apis['commit'] = new Api\Commit($this);
         }
 
         return $this->apis['commit'];
@@ -185,12 +184,12 @@ class Github_Client
     /**
      * Get the repo API
      *
-     * @return  Github_Api_Repo  the repo API
+     * @return  Api\Repo  the repo API
      */
     public function getRepoApi()
     {
         if (!isset($this->apis['repo'])) {
-            $this->apis['repo'] = new Github_Api_Repo($this);
+            $this->apis['repo'] = new Api\Repo($this);
         }
 
         return $this->apis['repo'];
@@ -199,12 +198,12 @@ class Github_Client
     /**
      * Get the organization API
      *
-     * @return  Github_Api_Organization  the object API
+     * @return  Api\Organization  the object API
      */
     public function getOrganizationApi()
     {
         if (!isset($this->apis['organization'])) {
-            $this->apis['organization'] = new Github_Api_Organization($this);
+            $this->apis['organization'] = new Api\Organization($this);
         }
 
         return $this->apis['organization'];
@@ -213,12 +212,12 @@ class Github_Client
     /**
      * Get the object API
      *
-     * @return  Github_Api_Object  the object API
+     * @return  Api\Object  the object API
      */
     public function getObjectApi()
     {
         if (!isset($this->apis['object'])) {
-            $this->apis['object'] = new Github_Api_Object($this);
+            $this->apis['object'] = new Api\Object($this);
         }
 
         return $this->apis['object'];
@@ -227,12 +226,12 @@ class Github_Client
     /**
      * Get the pull request API
      *
-     * @return  Github_Api_PullRequest  the pull request API
+     * @return  Api\PullRequest  the pull request API
      */
     public function getPullRequestApi()
     {
         if (!isset($this->apis['pullrequest'])) {
-            $this->apis['pullrequest'] = new Github_Api_PullRequest($this);
+            $this->apis['pullrequest'] = new Api\PullRequest($this);
         }
 
         return $this->apis['pullrequest'];
@@ -241,12 +240,12 @@ class Github_Client
     /**
      * Inject an API instance
      *
-     * @param   string                $name the API name
-     * @param   Github_ApiInterface  $api  the API instance
+     * @param   string        $name the API name
+     * @param   ApiInterface  $api  the API instance
      *
      * @return  null
      */
-    public function setApi($name, Github_ApiInterface $instance)
+    public function setApi($name, ApiInterface $instance)
     {
         $this->apis[$name] = $instance;
 

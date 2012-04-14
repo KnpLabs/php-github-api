@@ -1,12 +1,14 @@
 <?php
 
+namespace Github;
+
 /**
  * Performs requests on GitHub API. API documentation should be self-explanatory.
  *
  * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @license   MIT License
  */
-abstract class Github_HttpClient implements Github_HttpClientInterface
+abstract class HttpClient implements HttpClientInterface
 {
     /**
      * The http client options
@@ -23,12 +25,15 @@ abstract class Github_HttpClient implements Github_HttpClientInterface
         'token'      => null
     );
 
+    /**
+     * @var array
+     */
     protected static $history = array();
 
     /**
-     * Instanciate a new http client
+     * Instantiated a new http client
      *
-     * @param  array   $options  http client options
+     * @param array $options Http client options
      */
     public function __construct(array $options = array())
     {
@@ -41,21 +46,14 @@ abstract class Github_HttpClient implements Github_HttpClientInterface
      * @param  string   $url           Request url
      * @param  array    $parameters    Parameters
      * @param  string   $httpMethod    HTTP method to use
-     * @param  array    $options        Request options
+     * @param  array    $options       Request options
      *
      * @return string   HTTP response
      */
     abstract protected function doRequest($url, array $parameters = array(), $httpMethod = 'GET', array $options = array());
 
     /**
-     * Send a GET request
-     *
-     * @param  string   $path            Request path
-     * @param  array    $parameters     GET Parameters
-     * @param  string   $httpMethod     HTTP method to use
-     * @param  array    $options        Request options
-     *
-     * @return array                    Data
+     * {@inheridoc}
      */
     public function get($path, array $parameters = array(), array $options = array())
     {
@@ -63,14 +61,7 @@ abstract class Github_HttpClient implements Github_HttpClientInterface
     }
 
     /**
-     * Send a POST request
-     *
-     * @param  string   $path            Request path
-     * @param  array    $parameters     POST Parameters
-     * @param  string   $httpMethod     HTTP method to use
-     * @param  array    $options        reconfigure the request for this call only
-     *
-     * @return array                    Data
+     * {@inheridoc}
      */
     public function post($path, array $parameters = array(), array $options = array())
     {
@@ -119,11 +110,13 @@ abstract class Github_HttpClient implements Github_HttpClientInterface
     {
         if ('text' === $options['format']) {
             return $response;
-        } elseif ('json' === $options['format']) {
+        }
+
+        if ('json' === $options['format']) {
             return json_decode($response, true);
         }
 
-        throw new Exception(__CLASS__.' only supports json & text format, '.$options['format'].' given.');
+        throw new \InvalidArgumentException(__CLASS__.' only supports json & text format, '.$options['format'].' given.');
     }
 
     /**
@@ -132,7 +125,7 @@ abstract class Github_HttpClient implements Github_HttpClientInterface
      * @param string $name   The option name
      * @param mixed  $value  The value
      *
-     * @return Github_HttpClientInterface The current object instance
+     * @return HttpClientInterface The current object instance
      */
     public function setOption($name, $value)
     {

@@ -1,6 +1,10 @@
 <?php
 
-class Github_Tests_Api_RepoTest extends Github_Tests_ApiTest
+namespace Github\Tests\Api;
+
+use Github\Tests\ApiTestCase;
+
+class RepoTest extends ApiTestCase
 {
     public function testSearch()
     {
@@ -18,6 +22,6 @@ class Github_Tests_Api_RepoTest extends Github_Tests_ApiTest
 
     protected function getApiClass()
     {
-        return 'Github_Api_Repo';
+        return 'Github\Api\Repo';
     }
 }

@@ -1,5 +1,9 @@
 <?php
 
+namespace Github\Api;
+
+use Github\Api;
+
 /**
  * API for accessing Pull Requests from your Git/Github repositories.
  *
@@ -7,7 +11,7 @@
  * @author    Nicolas Pastorino <nicolas.pastorino at gmail dot com>
  * @license   MIT License
  */
-class Github_Api_PullRequest extends Github_Api
+class PullRequest extends Api
 {
     /**
      * Get a listing of a project's pull requests by the username, repo, and optionnally state.
@@ -22,6 +26,7 @@ class Github_Api_PullRequest extends Github_Api
     public function listPullRequests($username, $repo, $state = '')
     {
         $response = $this->get('pulls/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($state));
+
         return $response['pulls'];
     }
 
@@ -37,6 +42,7 @@ class Github_Api_PullRequest extends Github_Api
     public function show($username, $repo, $pullRequestId)
     {
         $response = $this->get('pulls/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($pullRequestId));
+
         return $response['pulls'];
     }
 
@@ -57,9 +63,10 @@ class Github_Api_PullRequest extends Github_Api
      */
     public function create($username, $repo, $base, $head, $title = null, $body = null, $issueId = null)
     {
-        $postParameters = array( 'pull[base]' => $base,
-                                 'pull[head]' => $head
-                          );
+        $postParameters = array(
+            'pull[base]' => $base,
+            'pull[head]' => $head
+        );
 
         if ( $title !== null and $body !== null ) {
             $postParameters = array_merge( $postParameters,

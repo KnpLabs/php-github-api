@@ -1,6 +1,10 @@
 <?php
 
-class Github_Tests_HttpClient_CurlTest extends PHPUnit_Framework_TestCase
+namespace Github\Tests\HttpClient;
+
+use Github\Client;
+
+class CurlTest extends \PHPUnit_Framework_TestCase
 {
     public function testDoRequest()
     {
@@ -24,7 +28,7 @@ class Github_Tests_HttpClient_CurlTest extends PHPUnit_Framework_TestCase
     {
         $url       = 'http://site.com/some/path';
         $curlResponse = array('headers' => array('http_code' => 200), 'response' => 'hi there', 'errorNumber' => '', 'errorMessage' => '');
-        $options = array('format' => 'text', 'login' => 'mylogin', 'secret' => 'mysecret', 'auth_method' => Github_Client::AUTH_URL_TOKEN);
+        $options = array('format' => 'text', 'login' => 'mylogin', 'secret' => 'mysecret', 'auth_method' => Client::AUTH_URL_TOKEN);
 
         $httpClient = $this->getHttpClientCurlMockBuilder()
             ->setMethods(array('doCurlCall'))
@@ -78,6 +82,6 @@ class Github_Tests_HttpClient_CurlTest extends PHPUnit_Framework_TestCase
 
     protected function getHttpClientCurlMockBuilder()
     {
-        return $this->getMockBuilder('Github_HttpClient_Curl');
+        return $this->getMockBuilder('Github\HttpClient\Curl');
     }
 }

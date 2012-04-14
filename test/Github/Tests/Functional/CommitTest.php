@@ -1,6 +1,10 @@
 <?php
 
-class Github_Tests_Functional_CommitTest extends PHPUnit_Framework_TestCase
+namespace Github\Tests\Functional;
+
+use Github\Client;
+
+class CommitTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetCommits()
     {
@@ -8,7 +12,7 @@ class Github_Tests_Functional_CommitTest extends PHPUnit_Framework_TestCase
         $repo     = 'php-github-api';
         $branch   = 'master';
 
-        $github = new Github_Client();
+        $github = new Client();
         $commits = $github->getCommitApi()->getBranchCommits($username, $repo, $branch);
         $commit = array_pop($commits);
 

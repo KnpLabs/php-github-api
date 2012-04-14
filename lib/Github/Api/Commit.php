@@ -1,5 +1,9 @@
 <?php
 
+namespace Github\Api;
+
+use Github\Api;
+
 /**
  * Getting information on specific commits,
  * the diffs they introduce, the files they've changed.
@@ -8,7 +12,7 @@
  * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @license   MIT License
  */
-class Github_Api_Commit extends Github_Api
+class Commit extends Api
 {
     /**
      * List commits by username, repo and branch

@@ -1,5 +1,9 @@
 <?php
 
+namespace Github\Api;
+
+use Github\Api;
+
 /**
  * Listing issues, searching, editing and closing your projects issues.
  *
@@ -7,7 +11,7 @@
  * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @license   MIT License
  */
-class Github_Api_Issue extends Github_Api
+class Issue extends Api
 {
     /**
      * List issues by username, repo and state

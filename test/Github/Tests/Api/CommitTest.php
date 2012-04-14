@@ -1,6 +1,10 @@
 <?php
 
-class Github_Tests_Api_CommitTest extends Github_Tests_ApiTest
+namespace Github\Tests\Api;
+
+use Github\Tests\ApiTestCase;
+
+class CommitTest extends ApiTestCase
 {
     public function testGetBranchCommits()
     {
@@ -15,6 +19,6 @@ class Github_Tests_Api_CommitTest extends Github_Tests_ApiTest
 
     protected function getApiClass()
     {
-        return 'Github_Api_Commit';
+        return 'Github\Api\Commit';
     }
 }

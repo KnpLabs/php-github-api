@@ -1,12 +1,17 @@
 <?php
 
+namespace Github\HttpClient;
+
+use Github\Client;
+use Github\HttpClient as BaseHttpClient;
+
 /**
  * Performs requests on GitHub API. API documentation should be self-explanatory.
  *
  * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @license   MIT License
  */
-class Github_HttpClient_Curl extends Github_HttpClient
+class Curl extends BaseHttpClient
 {
     /**
      * Send a request to the server, receive a response
@@ -24,17 +29,17 @@ class Github_HttpClient_Curl extends Github_HttpClient
 
         if ($options['login']) {
             switch ($options['auth_method']) {
-                case Github_Client::AUTH_HTTP_PASSWORD:
+                case Client::AUTH_HTTP_PASSWORD:
                     $curlOptions += array(
                         CURLOPT_USERPWD => $options['login'].':'.$options['secret'],
                     );
                     break;
-                case Github_Client::AUTH_HTTP_TOKEN:
+                case Client::AUTH_HTTP_TOKEN:
                     $curlOptions += array(
                         CURLOPT_USERPWD => $options['login'].'/token:'.$options['secret'],
                     );
                     break;
-                case Github_Client::AUTH_URL_TOKEN:
+                case Client::AUTH_URL_TOKEN:
                 default:
                     $parameters = array_merge(array(
                         'login' => $options['login'],
@@ -70,11 +75,11 @@ class Github_HttpClient_Curl extends Github_HttpClient
         $response = $this->doCurlCall($curlOptions);
 
         if (!in_array($response['headers']['http_code'], array(0, 200, 201))) {
-            throw new Github_HttpClient_Exception(null, (int) $response['headers']['http_code']);
+            throw new Exception(null, (int) $response['headers']['http_code']);
         }
 
         if ($response['errorNumber'] != '') {
-            throw new Github_HttpClient_Exception('error '.$response['errorNumber']);
+            throw new Exception('error '.$response['errorNumber']);
         }
 
         return $response['response'];

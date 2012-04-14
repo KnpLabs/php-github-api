@@ -1,5 +1,9 @@
 <?php
 
+namespace Github\Api;
+
+use Github\Api;
+
 /**
  * Searching organizations, getting organization information
  * and managing authenticated organization account information.
@@ -8,7 +12,7 @@
  * @author    Antoine Berranger <antoine at ihqs dot net>
  * @license   MIT License
  */
-class Github_Api_Organization extends Github_Api
+class Organization extends Api
 {
     const ADMIN = "admin";
     const PUSH = "push";
@@ -104,7 +108,7 @@ class Github_Api_Organization extends Github_Api
     public function addTeam($organization, $team, $permission, array $repositories = array())
     {
         if (!in_array($permission, self::$PERMISSIONS)) {
-            throw new InvalidArgumentException("Invalid value for the permission variable");
+            throw new \InvalidArgumentException("Invalid value for the permission variable");
         }
 
         $response = $this->post('organizations/'.urlencode($organization).'/teams', array(

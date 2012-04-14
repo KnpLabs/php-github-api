@@ -1,6 +1,10 @@
 <?php
 
-class Github_Tests_Api_PullRequestTest extends Github_Tests_ApiTest
+namespace Github\Tests\Api;
+
+use Github\Tests\ApiTestCase;
+
+class PullRequestTest extends ApiTestCase
 {
     public function testlistPullRequests()
     {
@@ -79,6 +83,6 @@ class Github_Tests_Api_PullRequestTest extends Github_Tests_ApiTest
 
     protected function getApiClass()
     {
-        return 'Github_Api_PullRequest';
+        return 'Github\Api\PullRequest';
     }
 }

@@ -1,18 +1,22 @@
 <?php
 
-class Github_Tests_ClientTest extends PHPUnit_Framework_TestCase
+namespace Github\Tests;
+
+use Github\Client;
+
+class ClientTest extends \PHPUnit_Framework_TestCase
 {
     public function testInstanciateWithoutHttpClient()
     {
-        $client = new Github_Client();
+        $client = new Client();
 
-        $this->assertInstanceOf('Github_HttpClientInterface', $client->getHttpClient());
+        $this->assertInstanceOf('Github\HttpClientInterface', $client->getHttpClient());
     }
 
     public function testInstanciateWithHttpClient()
     {
         $httpClient = $this->getHttpClientMock();
-        $client = new Github_Client($httpClient);
+        $client = new Client($httpClient);
 
         $this->assertEquals($httpClient, $client->getHttpClient());
     }
@@ -97,16 +101,16 @@ class Github_Tests_ClientTest extends PHPUnit_Framework_TestCase
 
     public function testDefaultApi()
     {
-        $client = new Github_Client();
+        $client = new Client();
 
-        $this->assertInstanceOf('Github_Api_User', $client->getUserApi());
+        $this->assertInstanceOf('Github\Api\User', $client->getUserApi());
     }
 
     public function testInjectApi()
     {
-        $client = new Github_Client();
+        $client = new Client();
 
-        $userApiMock = $this->getMockBuilder('Github_ApiInterface')
+        $userApiMock = $this->getMockBuilder('Github\ApiInterface')
             ->getMock();
 
         $client->setApi('user', $userApiMock);
@@ -116,13 +120,13 @@ class Github_Tests_ClientTest extends PHPUnit_Framework_TestCase
 
     protected function getClientMockBuilder()
     {
-        return $this->getMockBuilder('Github_Client')
+        return $this->getMockBuilder('Github\Client')
             ->disableOriginalConstructor();
     }
 
     protected function getHttpClientMock()
     {
-        return $this->getMockBuilder('Github_HttpClientInterface')
+        return $this->getMockBuilder('Github\HttpClientInterface')
             ->getMock();
     }
 }

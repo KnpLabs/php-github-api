@@ -1,20 +1,25 @@
 <?php
 
+namespace Github;
+
 /**
  * Abstract class for Github_Api classes
  *
  * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @license   MIT License
  */
-abstract class Github_Api implements Github_ApiInterface
+abstract class Api implements ApiInterface
 {
     /**
      * The client
-     * @var Github_Client
+     * @var Client
      */
     private $client;
 
-    public function __construct(Github_Client $client)
+    /**
+     * @param Client $client
+     */
+    public function __construct(Client $client)
     {
         $this->client = $client;
     }
