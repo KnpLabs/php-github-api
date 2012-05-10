@@ -62,7 +62,7 @@ class PullRequestTest extends ApiTestCase
                   );
 
         $api->create('ezsystems', 'ezpublish', 'master', 'virtualtestbranch',
-        			 'TITLE : Testing pull-request creation from PHP Gituhub API',
+                     'TITLE : Testing pull-request creation from PHP Gituhub API',
                      'BODY: Testing pull-request creation from PHP Gituhub API' );
 
 

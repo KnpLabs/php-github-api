@@ -2,10 +2,9 @@
 
 namespace Github;
 
-use Github\ApiInterface;
 use Github\Api;
-use Github\HttpClientInterface;
-use Github\HttpClient\Curl;
+use Github\HttpClient\HttpClientInterface;
+use Github\HttpClient\HttpClient;
 
 /**
  * Simple yet very cool PHP Github client
@@ -41,7 +40,7 @@ class Client
     /**
      * The httpClient instance used to communicate with GitHub
      *
-     * @var Github_HttpClient_Interface
+     * @var HttpClientInterface
      */
     protected $httpClient = null;
 
@@ -55,30 +54,30 @@ class Client
     /**
      * Instanciate a new GitHub client
      *
-     * @param  Github_HttpClient_Interface $httpClient custom http client
+     * @param HttpClientInterface $httpClient custom http client
      */
     public function __construct(HttpClientInterface $httpClient = null)
     {
-        $this->httpClient = $httpClient ?: new Curl();
+        $this->httpClient = $httpClient ?: new HttpClient();
     }
 
     /**
      * Authenticate a user for all next requests
      *
-     * @param  string         $login      GitHub username
-     * @param  string         $secret     GitHub private token or Github password if $method == AUTH_HTTP_PASSWORD
-     * @param  string         $method     One of the AUTH_* class constants
+     * @param string      $login  GitHub username
+     * @param string      $secret GitHub private token or Github password if $method == AUTH_HTTP_PASSWORD
+     * @param null|string $method One of the AUTH_* class constants
      */
     public function authenticate($login, $secret, $method = null)
     {
-        if (!$method) {
-            $method = self::AUTH_URL_TOKEN;
-        }
+        $this->httpClient->setOption('auth_method', $method ?: self::AUTH_URL_TOKEN);
 
-        $this->getHttpClient()
-                ->setOption('auth_method', $method)
-                ->setOption('login', $login)
-                ->setOption('secret', $secret);
+        if (self::AUTH_HTTP_PASSWORD) {
+            $this->httpClient->setOption('login', $login)
+                             ->setOption('password', $secret);
+        } else {
+            $this->httpClient->setOption('token', $secret);
+        }
     }
 
     /**
@@ -100,7 +99,7 @@ class Client
      */
     public function get($path, array $parameters = array(), $requestOptions = array())
     {
-        return $this->getHttpClient()->get($path, $parameters, $requestOptions);
+        return $this->httpClient->get($path, $parameters, $requestOptions);
     }
 
     /**
@@ -114,13 +113,13 @@ class Client
      */
     public function post($path, array $parameters = array(), $requestOptions = array())
     {
-        return $this->getHttpClient()->post($path, $parameters, $requestOptions);
+        return $this->httpClient->post($path, $parameters, $requestOptions);
     }
 
     /**
      * Get the http client.
      *
-     * @return  HttpClientInterface   a request instance
+     * @return HttpClientInterface a request instance
      */
     public function getHttpClient()
     {
@@ -130,9 +129,7 @@ class Client
     /**
      * Inject another http client
      *
-     * @param   HttpClientInterface   a httpClient instance
-     *
-     * @return  null
+     * @param HttpClientInterface $httpClient The httpClient instance
      */
     public function setHttpClient(HttpClientInterface $httpClient)
     {
@@ -240,10 +237,10 @@ class Client
     /**
      * Inject an API instance
      *
-     * @param   string        $name the API name
-     * @param   ApiInterface  $api  the API instance
+     * @param  string        $name the API name
+     * @param  ApiInterface  $api  the API instance
      *
-     * @return  null
+     * @return self
      */
     public function setApi($name, ApiInterface $instance)
     {
@@ -255,8 +252,8 @@ class Client
     /**
      * Get any API
      *
-     * @param   string                $name the API name
-     * @return  Github_ApiInterface  the API instance
+     * @param  string       $name the API name
+     * @return ApiInterface       the API instance
      */
     public function getApi($name)
     {

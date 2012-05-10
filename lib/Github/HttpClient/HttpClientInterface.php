@@ -1,6 +1,6 @@
 <?php
 
-namespace Github;
+namespace Github\HttpClient;
 
 /**
  * Performs requests on GitHub API. API documentation should be self-explanatory.

@@ -18,10 +18,8 @@
     ],
     "require": {
         "php": ">=5.3.2",
-        "kriswallsmith/buzz": "v0.5"
-    },
-    "suggest": {
-        "ext-curl": "*"
+        "ext-curl": "*",
+        "kriswallsmith/buzz": "*"
     },
     "autoload": {
         "psr-0": { "Github": "lib/" }
