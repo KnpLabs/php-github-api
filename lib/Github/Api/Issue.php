@@ -2,8 +2,6 @@
 
 namespace Github\Api;
 
-use Github\Api;
-
 /**
  * Listing issues, searching, editing and closing your projects issues.
  *

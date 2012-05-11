@@ -2,8 +2,6 @@
 
 namespace Github\Api;
 
-use Github\Api;
-
 /**
  * Searching repositories, getting repository information
  * and managing repository information for authenticated users.

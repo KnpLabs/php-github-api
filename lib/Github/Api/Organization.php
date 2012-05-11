@@ -2,8 +2,6 @@
 
 namespace Github\Api;
 
-use Github\Api;
-
 /**
  * Searching organizations, getting organization information
  * and managing authenticated organization account information.

@@ -2,8 +2,6 @@
 
 namespace Github\Api;
 
-use Github\Api;
-
 /**
  * Getting full versions of specific files and trees in your Git repositories.
  *

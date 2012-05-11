@@ -3,7 +3,7 @@
 namespace Github\HttpClient;
 
 use Buzz\Browser;
-use Buzz\Browser\Message\Response;
+use Buzz\Message\Response;
 
 /**
  * Performs requests on GitHub API. API documentation should be self-explanatory.
@@ -51,8 +51,8 @@ class HttpClient implements HttpClientInterface
         $this->options = array_merge($this->options, $options);
         $this->browser = $browser ?: new Browser();
 
-        $this->browser->setTimeout($this->options['timeout']);
-        $this->browser->setVerifyPeer(false);
+        $this->browser->getClient()->setTimeout($this->options['timeout']);
+        $this->browser->getClient()->setVerifyPeer(false);
 
         if ($this->options['login']) {
             $this->browser->addListener(
@@ -136,14 +136,6 @@ class HttpClient implements HttpClientInterface
      */
     protected function doRequest($url, array $parameters = array(), $httpMethod = 'GET', array $options = array())
     {
-        $curlOptions = array(
-            CURLOPT_URL       => $url,
-            CURLOPT_PORT      => $options['http_port'],
-            CURLOPT_USERAGENT => $options['user_agent'],
-        );
-
-        curl_setopt_array($this->browser->getClient(), $curlOptions);
-
         $response = $this->browser->call($url, $httpMethod);
 
         $this->checkApiLimit($response);

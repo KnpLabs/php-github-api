@@ -2,8 +2,6 @@
 
 namespace Github\Api;
 
-use Github\Api;
-
 /**
  * API for accessing Pull Requests from your Git/Github repositories.
  *

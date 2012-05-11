@@ -10,7 +10,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $client = new Client();
 
-        $this->assertInstanceOf('Github\HttpClientInterface', $client->getHttpClient());
+        $this->assertInstanceOf('Github\HttpClient\HttpClientInterface', $client->getHttpClient());
     }
 
     public function testInstanciateWithHttpClient()
@@ -32,14 +32,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             ->method('setOption')
             ->will($this->returnValue($httpClient));
 
-        $client = $this->getClientMockBuilder()
-            ->setMethods(array('getHttpClient'))
-            ->getMock();
-        $client->expects($this->once())
-            ->method('getHttpClient')
-            ->with()
-            ->will($this->returnValue($httpClient));
-
+        $client = new Client($httpClient);
         $client->authenticate($login, $secret, $method);
     }
 
@@ -66,14 +59,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             ->method('get')
             ->with($path, $parameters, $options);
 
-        $client = $this->getClientMockBuilder()
-            ->setMethods(array('getHttpClient'))
-            ->getMock();
-        $client->expects($this->once())
-            ->method('getHttpClient')
-            ->with()
-            ->will($this->returnValue($httpClient));
-
+        $client = new Client($httpClient);
         $client->get($path, $parameters, $options);
     }
 
@@ -88,14 +74,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             ->method('post')
             ->with($path, $parameters, $options);
 
-        $client = $this->getClientMockBuilder()
-            ->setMethods(array('getHttpClient'))
-            ->getMock();
-        $client->expects($this->once())
-            ->method('getHttpClient')
-            ->with()
-            ->will($this->returnValue($httpClient));
-
+        $client = new Client($httpClient);
         $client->post($path, $parameters, $options);
     }
 
@@ -110,7 +89,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $client = new Client();
 
-        $userApiMock = $this->getMockBuilder('Github\ApiInterface')
+        $userApiMock = $this->getMockBuilder('Github\Api\ApiInterface')
             ->getMock();
 
         $client->setApi('user', $userApiMock);
@@ -126,7 +105,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     protected function getHttpClientMock()
     {
-        return $this->getMockBuilder('Github\HttpClientInterface')
-            ->getMock();
+        return $this->getMock('Github\HttpClient\HttpClientInterface');
     }
 }

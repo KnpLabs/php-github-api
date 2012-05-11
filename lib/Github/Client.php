@@ -2,7 +2,7 @@
 
 namespace Github;
 
-use Github\Api;
+use Github\Api\ApiInterface;
 use Github\HttpClient\HttpClientInterface;
 use Github\HttpClient\HttpClient;
 

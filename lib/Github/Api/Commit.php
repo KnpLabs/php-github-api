@@ -2,8 +2,6 @@
 
 namespace Github\Api;
 
-use Github\Api;
-
 /**
  * Getting information on specific commits,
  * the diffs they introduce, the files they've changed.

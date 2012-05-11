@@ -1,6 +1,8 @@
 <?php
 
-namespace Github;
+namespace Github\Api;
+
+use Github\Client;
 
 /**
  * Abstract class for Github_Api classes

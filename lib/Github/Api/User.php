@@ -2,8 +2,6 @@
 
 namespace Github\Api;
 
-use Github\Api;
-
 /**
  * Searching users, getting user information
  * and managing authenticated user account information.

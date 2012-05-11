@@ -2,7 +2,7 @@
 
 namespace Github\Tests;
 
-use Github\HttpClient as BaseHttpClient;
+use Github\HttpClient\HttpClient as BaseHttpClient;
 
 class HttpClientTest extends \PHPUnit_Framework_TestCase
 {
@@ -56,11 +56,8 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $options    = array('c' => 'd');
 
         $httpClient = $this->getHttpClientMockBuilder()
-            ->setMethods(array('doRequest', 'updateHistory', 'decodeResponse'))
+            ->setMethods(array('doRequest', 'decodeResponse'))
             ->getMock();
-        $httpClient->expects($this->once())
-            ->method('updateHistory')
-            ->with();
         $httpClient->expects($this->once())
             ->method('doRequest')
             ->will($this->returnValue('response'));
@@ -76,7 +73,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
 
     protected function getHttpClientMockBuilder()
     {
-        return $this->getMockBuilder('Github\HttpClient');
+        return $this->getMockBuilder('Github\HttpClient\HttpClient');
     }
 }
 
