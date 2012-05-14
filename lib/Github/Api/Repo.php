@@ -390,13 +390,13 @@ class Repo extends Api
      */
     public function getRepoContributors($username, $repo, $includingNonGithubUsers = false)
     {
-        $url = 'repos/show/'.urlencode($username).'/'.urlencode($repo).'/contributors';
+        $url = 'repos/'.urlencode($username).'/'.urlencode($repo).'/contributors';
         if ($includingNonGithubUsers) {
-            $url .= '/anon';
+            $url .= '?anon=1';
         }
         $response = $this->get($url);
 
-        return $response['contributors'];
+        return $response;
     }
 
 }

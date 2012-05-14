@@ -14,7 +14,7 @@ class Commit extends Api
 {
     /**
      * List commits by username, repo and branch
-     * http://develop.github.com/p/commits.html#listing_commits_on_a_branch
+     * http://developer.github.com/v3/repos/commits/
      *
      * @param   string  $username         the username
      * @param   string  $repo             the repo
@@ -23,14 +23,14 @@ class Commit extends Api
      */
     public function getBranchCommits($username, $repo, $branch)
     {
-        $response = $this->get('commits/list/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($branch));
+        $branchSha = $this->getBranchSha($username, $repo, $branch);
 
-        return $response['commits'];
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repo).'/commits?sha='.urlencode($branchSha));
     }
 
     /**
      * List commits by username, repo, branch and path
-     * http://develop.github.com/p/commits.html#listing_commits_for_a_file
+     * http://developer.github.com/v3/repos/commits/
      *
      * @param   string  $username         the username
      * @param   string  $repo             the repo
@@ -40,14 +40,14 @@ class Commit extends Api
      */
     public function getFileCommits($username, $repo, $branch, $path)
     {
-        $response = $this->get('commits/list/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($branch).'/'.urlencode($path));
+        $branchSha = $this->getBranchSha($username, $repo, $branch);
 
-        return $response['commits'];
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repo).'/commits?path='.urlencode($path).'&sha='.urlencode($branchSha));
     }
 
     /**
      * Show a specific commit
-     * http://develop.github.com/p/commits.html#showing_a_specific_commit
+     * http://developer.github.com/v3/repos/commits/
      *
      * @param   string  $username         the username
      * @param   string  $repo             the repo
@@ -55,8 +55,22 @@ class Commit extends Api
      */
     public function getCommit($username, $repo, $sha)
     {
-        $response = $this->get('commits/show/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($sha));
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repo).'/commits/'.urlencode($sha));
+    }
 
-        return $response['commit'];
+    /**
+     * Fetch branch sha from branch name
+     *
+     * @param string $username
+     * @param string $repoName
+     * @param string $branchName
+     * @return string
+     */
+    private function getBranchSha($username, $repoName, $branchName)
+    {
+        $branchInfo = $this->get('repos/'.urlencode($username).'/'.urlencode($repoName).'/git/trees/'.urlencode($branchName));
+        if (isset($branchInfo['sha'])) {
+            return $branchInfo['sha'];
+        }
     }
 }

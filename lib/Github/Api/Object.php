@@ -72,9 +72,7 @@ class Object extends Api
      */
     public function getRawData($username, $repo, $objectSHA)
     {
-        $response = $this->get('blob/show/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($objectSHA), array(), array(
-            'format' => 'text'
-        ));
+        $response = $this->get('repos/'.urlencode($username).'/'.urlencode($repo).'/git/blobs/'.urlencode($objectSHA));
 
         return $response;
     }

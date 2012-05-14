@@ -18,7 +18,7 @@ class HttpClient implements HttpClientInterface
      * @var array
      */
     protected $options = array(
-        'url'        => 'https://github.com/api/v3/:path/:format',
+        'url'        => 'https://api.github.com/:path',
         'user_agent' => 'php-github-api (http://github.com/KnpLabs/php-github-api)',
         'http_port'  => 443,
         'timeout'    => 10,
@@ -119,7 +119,7 @@ class HttpClient implements HttpClientInterface
         $response = $this->doRequest($url, $parameters, $httpMethod, $options);
 
         // decode response
-        $response = $this->decodeResponse($response);
+        $response = $this->decodeResponse($response['response']);
 
         return $response;
     }
@@ -179,7 +179,7 @@ class HttpClient implements HttpClientInterface
     {
         $limit = $response->getHeader('X-RateLimit-Remaining');
 
-        if (null !== $limit && 1 < $limit) {
+        if (null !== $limit && 1 > $limit) {
             throw new \RuntimeException('You have reached GitHub hour limit! Actual limit is: '. $this->options['api_limit']);
         }
     }

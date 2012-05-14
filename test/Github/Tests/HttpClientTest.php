@@ -60,7 +60,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
             ->getMock();
         $httpClient->expects($this->once())
             ->method('doRequest')
-            ->will($this->returnValue('response'));
+            ->will($this->returnValue(array('response' => 'response')));
         $httpClient->expects($this->once())
             ->method('decodeResponse')
             ->with('response')
