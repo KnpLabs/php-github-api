@@ -41,4 +41,11 @@ interface HttpClientInterface
      * @return HttpClientInterface The current object instance
      */
     function setOption($name, $value);
+
+    /**
+     * Set HTTP headers
+     *
+     * @param array
+     */
+    function setHeaders($headers);
 }

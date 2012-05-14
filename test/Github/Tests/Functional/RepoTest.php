@@ -25,4 +25,58 @@ class RepoTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('login', $contributor);
         $this->assertArrayHasKey('id', $contributor);
     }
+
+    /**
+     * @test
+     */
+    public function shouldGetUserRepositories()
+    {
+        $username = 'KnpLabs';
+
+        $github = new Client();
+        $repos = $github->getRepoApi()->getUserRepos($username);
+        $repo = array_pop($repos);
+
+        $this->assertArrayHasKey('id', $repo);
+        $this->assertArrayHasKey('name', $repo);
+        $this->assertArrayHasKey('description', $repo);
+        $this->assertArrayHasKey('url', $repo);
+        $this->assertArrayHasKey('has_wiki', $repo);
+        $this->assertArrayHasKey('has_issues', $repo);
+        $this->assertArrayHasKey('forks', $repo);
+        $this->assertArrayHasKey('updated_at', $repo);
+        $this->assertArrayHasKey('created_at', $repo);
+        $this->assertArrayHasKey('pushed_at', $repo);
+        $this->assertArrayHasKey('open_issues', $repo);
+        $this->assertArrayHasKey('ssh_url', $repo);
+        $this->assertArrayHasKey('git_url', $repo);
+        $this->assertArrayHasKey('svn_url', $repo);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldShowRepo()
+    {
+        $username = 'KnpLabs';
+        $repo     = 'php-github-api';
+
+        $github = new Client();
+        $repo = $github->getRepoApi()->show($username, $repo);
+
+        $this->assertArrayHasKey('id', $repo);
+        $this->assertArrayHasKey('name', $repo);
+        $this->assertArrayHasKey('description', $repo);
+        $this->assertArrayHasKey('url', $repo);
+        $this->assertArrayHasKey('has_wiki', $repo);
+        $this->assertArrayHasKey('has_issues', $repo);
+        $this->assertArrayHasKey('forks', $repo);
+        $this->assertArrayHasKey('updated_at', $repo);
+        $this->assertArrayHasKey('created_at', $repo);
+        $this->assertArrayHasKey('pushed_at', $repo);
+        $this->assertArrayHasKey('open_issues', $repo);
+        $this->assertArrayHasKey('ssh_url', $repo);
+        $this->assertArrayHasKey('git_url', $repo);
+        $this->assertArrayHasKey('svn_url', $repo);
+    }
 }

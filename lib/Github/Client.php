@@ -45,6 +45,13 @@ class Client
     protected $httpClient = null;
 
     /**
+     * HTTP Headers
+     *
+     * @var array
+     */
+    private $headers = array();
+
+    /**
      * The list of loaded API instances
      *
      * @var array
@@ -70,13 +77,13 @@ class Client
      */
     public function authenticate($login, $secret, $method = null)
     {
-        $this->httpClient->setOption('auth_method', $method ?: self::AUTH_URL_TOKEN);
+        $this->getHttpClient()->setOption('auth_method', $method ?: self::AUTH_URL_TOKEN);
 
         if (self::AUTH_HTTP_PASSWORD) {
-            $this->httpClient->setOption('login', $login)
+            $this->getHttpClient()->setOption('login', $login)
                              ->setOption('password', $secret);
         } else {
-            $this->httpClient->setOption('token', $secret);
+            $this->getHttpClient()->setOption('token', $secret);
         }
     }
 
@@ -99,7 +106,7 @@ class Client
      */
     public function get($path, array $parameters = array(), $requestOptions = array())
     {
-        return $this->httpClient->get($path, $parameters, $requestOptions);
+        return $this->getHttpClient()->get($path, $parameters, $requestOptions);
     }
 
     /**
@@ -113,7 +120,7 @@ class Client
      */
     public function post($path, array $parameters = array(), $requestOptions = array())
     {
-        return $this->httpClient->post($path, $parameters, $requestOptions);
+        return $this->getHttpClient()->post($path, $parameters, $requestOptions);
     }
 
     /**
@@ -123,6 +130,8 @@ class Client
      */
     public function getHttpClient()
     {
+        $this->httpClient->setHeaders($this->headers);
+
         return $this->httpClient;
     }
 
@@ -258,5 +267,15 @@ class Client
     public function getApi($name)
     {
         return $this->apis[$name];
+    }
+
+    public function clearHeaders()
+    {
+        $this->setHeaders(array());
+    }
+
+    public function setHeaders($headers)
+    {
+        $this->headers = $headers;
     }
 }

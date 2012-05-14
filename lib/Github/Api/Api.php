@@ -16,7 +16,7 @@ abstract class Api implements ApiInterface
      * The client
      * @var Client
      */
-    private $client;
+    protected $client;
 
     /**
      * @param Client $client

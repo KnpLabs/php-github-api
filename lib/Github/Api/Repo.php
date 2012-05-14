@@ -40,9 +40,7 @@ class Repo extends Api
      */
     public function getUserRepos($username)
     {
-        $response = $this->get('repos/show/'.urlencode($username));
-
-        return $response['repositories'];
+        return $this->get('users/'.urlencode($username).'/repos');
     }
 
     /**
@@ -59,7 +57,6 @@ class Repo extends Api
 
     /**
      * Get extended information about a repository by its username and repo name
-     * http://develop.github.com/p/repo.html
      *
      * @param   string  $username         the user who owns the repo
      * @param   string  $repo             the name of the repo
@@ -67,9 +64,7 @@ class Repo extends Api
      */
     public function show($username, $repo)
     {
-        $response = $this->get('repos/show/'.urlencode($username).'/'.urlencode($repo));
-
-        return $response['repository'];
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repo));
     }
 
     /**

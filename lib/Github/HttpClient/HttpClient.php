@@ -36,6 +36,11 @@ class HttpClient implements HttpClientInterface
     protected static $history = array();
 
     /**
+     * @var array
+     */
+    protected $headers = array();
+
+    /**
      * @var Buzz\Browser
      */
     protected $browser;
@@ -62,6 +67,11 @@ class HttpClient implements HttpClientInterface
                 )
             );
         }
+    }
+
+    public function setHeaders($headers)
+    {
+        $this->headers = $headers;
     }
 
     /**
@@ -118,10 +128,7 @@ class HttpClient implements HttpClientInterface
         // get encoded response
         $response = $this->doRequest($url, $parameters, $httpMethod, $options);
 
-        // decode response
-        $response = $this->decodeResponse($response['response']);
-
-        return $response;
+        return $this->decodeResponse($response['response']);
     }
 
     /**
@@ -136,7 +143,7 @@ class HttpClient implements HttpClientInterface
      */
     protected function doRequest($url, array $parameters = array(), $httpMethod = 'GET', array $options = array())
     {
-        $response = $this->browser->call($url, $httpMethod);
+        $response = $this->browser->call($url, $httpMethod, $this->headers);
 
         $this->checkApiLimit($response);
 
@@ -162,7 +169,7 @@ class HttpClient implements HttpClientInterface
         $content = json_decode($response, true);
 
         if (JSON_ERROR_NONE !== json_last_error()) {
-            throw new \RuntimeException('Response was not valid json, error: '.json_last_error());
+            return $response;
         }
 
         return $content;

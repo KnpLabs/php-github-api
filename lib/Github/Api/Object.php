@@ -18,18 +18,21 @@ class Object extends Api
      * @param   string $username          the username
      * @param   string $repo              the repo
      * @param   string $treeSHA           the tree sha
+     * @param   boolean $resursive        the recursive flag
      * @return  array                     root tree of the project
      */
-    public function showTree($username, $repo, $treeSHA)
+    public function showTree($username, $repo, $treeSHA, $recursive = false)
     {
-        $response = $this->get('tree/show/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($treeSHA));
+        $url = 'repos/'.urlencode($username).'/'.urlencode($repo).'/git/trees/'.urlencode($treeSHA);
+        if ($recursive) {
+            $url .= '?recursive=1';
+        }
 
-        return $response['tree'];
+        return $this->get($url);
     }
 
     /**
      * Lists the data blobs of a tree by tree SHA
-     * http://develop.github.com/p/object.html#blobs
      *
      * @param   string $username          the username
      * @param   string $repo              the repo
@@ -39,14 +42,19 @@ class Object extends Api
      */
     public function listBlobs($username, $repo, $treeSHA)
     {
-        $response = $this->get('blob/all/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($treeSHA));
+        $tree = $this->showTree($username, $repo, $treeSHA, true);
 
-        return $response['blobs'];
+        if (isset($tree['tree'])) {
+            $blobs = array_filter($tree['tree'], function ($element) {
+                return 'blob' === $element['type'];
+            });
+
+            return $blobs;
+        }
     }
 
     /**
      * Get the data about a blob by tree SHA and file path.
-     * http://develop.github.com/p/object.html#blobs
      *
      * @param   string $username          the username
      * @param   string $repo              the repo
@@ -56,14 +64,19 @@ class Object extends Api
      */
     public function showBlob($username, $repo, $treeSHA, $path)
     {
-        $response = $this->get('blob/show/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($treeSHA).'/'.urlencode($path));
+        $tree = $this->showTree($username, $repo, $treeSHA, true);
 
-        return $response['blob'];
+        if (isset($tree['tree'])) {
+            $blobs = array_filter($tree['tree'], function ($element) use ($path) {
+                return $path === $element['path'];
+            });
+
+            return reset($blobs);
+        }
     }
 
     /**
      * Returns the raw text content of the object.
-     * http://develop.github.com/p/object.html#raw_git_data
      *
      * @param   string $username          the username
      * @param   string $repo              the repo
@@ -72,7 +85,9 @@ class Object extends Api
      */
     public function getRawData($username, $repo, $objectSHA)
     {
+        $this->client->setHeaders(array('Accept: application/vnd.github.v3.raw'));
         $response = $this->get('repos/'.urlencode($username).'/'.urlencode($repo).'/git/blobs/'.urlencode($objectSHA));
+        $this->client->clearHeaders();
 
         return $response;
     }
