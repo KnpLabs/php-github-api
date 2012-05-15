@@ -180,7 +180,7 @@ class Repo extends Api
      */
     public function removeDeployKey($username, $repo, $id)
     {
-        return $this->post('repos/'.urlencode($username).'/'.urlencode($repo).'/keys/'.urlencode($id));
+        return $this->delete('repos/'.urlencode($username).'/'.urlencode($repo).'/keys/'.urlencode($id));
     }
 
     /**
