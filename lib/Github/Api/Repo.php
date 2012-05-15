@@ -33,6 +33,16 @@ class Repo extends Api
     }
 
     /**
+     * Get a list of the repositories that the authenticated user can push to
+     *
+     * @return  array  list of repositories
+     */
+    public function getPushableRepos()
+    {
+        throw new \BadMethodCallException('Method cannot be implemented using new api version');
+    }
+
+    /**
      * Get the repositories of a user
      * http://develop.github.com/p/repo.html
      *

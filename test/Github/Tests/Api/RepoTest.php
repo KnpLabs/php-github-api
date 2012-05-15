@@ -20,6 +20,16 @@ class RepoTest extends ApiTestCase
         $api->search('github api', 'fr', 3);
     }
 
+    /**
+     * @expectedException BadMethodCallException
+     */
+    public function testThatPushableReposIsNotSupported()
+    {
+        $api = $this->getApiMock();
+
+        $api->getPushableRepos();
+    }
+
     protected function getApiClass()
     {
         return 'Github\Api\Repo';
