@@ -53,4 +53,42 @@ abstract class Api implements ApiInterface
     {
         return $this->client->post($path, $parameters, $requestOptions);
     }
+
+    /**
+     * Call any path, PATCH method
+     * Ex: $api->patch('repos/show/my-username/my-repo')
+     *
+     * @param   string  $path            the GitHub path
+     * @param   array   $parameters       PATCH parameters
+     * @param   array   $requestOptions   reconfigure the request
+     * @return  array                     data returned
+     */
+    protected function patch($path, array $parameters = array(), $requestOptions = array())
+    {
+        return $this->client->patch($path, $parameters, $requestOptions);
+    }
+
+    /**
+     * Call any path, PUT method
+     *
+     * @param   string  $path            the GitHub path
+     * @param   array   $requestOptions   reconfigure the request
+     * @return  array                     data returned
+     */
+    protected function put($path, array $parameters = array(), $requestOptions = array())
+    {
+        return $this->client->put($path, $parameters, $requestOptions);
+    }
+
+    /**
+     * Call any path, DELETE method
+     *
+     * @param   string  $path            the GitHub path
+     * @param   array   $requestOptions   reconfigure the request
+     * @return  array                     data returned
+     */
+    protected function delete($path, array $parameters = array(), $requestOptions = array())
+    {
+        return $this->client->delete($path, $parameters, $requestOptions);
+    }
 }

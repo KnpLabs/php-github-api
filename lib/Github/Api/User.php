@@ -21,6 +21,7 @@ class User extends Api
      */
     public function search($username)
     {
+        //old api to do
         $response = $this->get('user/search/'.urlencode($username));
 
         return $response['users'];
@@ -35,81 +36,68 @@ class User extends Api
      */
     public function show($username)
     {
-        $response = $this->get('user/show/'.urlencode($username));
-
-        return $response['user'];
+        return $this->get('users/'.urlencode($username));
     }
 
     /**
      * Update user informations. Requires authentication.
-     * http://develop.github.com/p/users.html#authenticated_user_management
+     * http://developer.github.com/v3/users/
      *
-     * @param   string  $username         the username to update
      * @param   array   $data             key=>value user attributes to update.
      *                                    key can be name, email, blog, company or location
      * @return  array                     informations about the user
      */
-    public function update($username, array $data)
+    public function update(array $data)
     {
-        $response = $this->post('user/show/'.urlencode($username), array('values' => $data));
-
-        return $response['user'];
+        return $this->patch('user', $data);
     }
 
     /**
      * Request the users that a specific user is following
-     * http://develop.github.com/p/users.html#following_network
+     * http://developer.github.com/v3/users/followers/
      *
      * @param   string  $username         the username
      * @return  array                     list of followed users
      */
     public function getFollowing($username)
     {
-        $response = $this->get('user/show/'.urlencode($username).'/following');
-
-        return $response['users'];
+        return $this->get('users/'.urlencode($username).'/following');
     }
 
     /**
      * Request the users following a specific user
-     * http://develop.github.com/p/users.html#following_network
+     * http://developer.github.com/v3/users/followers/
      *
      * @param   string  $username         the username
      * @return  array                     list of following users
      */
     public function getFollowers($username)
     {
-        $response = $this->get('user/show/'.urlencode($username).'/followers');
-
-        return $response['users'];
+        return $this->get('users/'.urlencode($username).'/followers');
     }
 
     /**
      * Make the authenticated user follow the specified user. Requires authentication.
-     * http://develop.github.com/p/users.html#following_network
+     * http://developer.github.com/v3/users/followers/
      *
      * @param   string  $username         the username to follow
      * @return  array                     list of followed users
      */
     public function follow($username)
     {
-        $response = $this->post('user/follow/'.urlencode($username));
-
-        return $response['users'];
+        return $this->put('user/following/'.urlencode($username));
     }
 
     /**
      * Make the authenticated user unfollow the specified user. Requires authentication.
-     * http://develop.github.com/p/users.html#following_network
+     * http://developer.github.com/v3/users/followers/
      *
      * @param   string  $username         the username to unfollow
      * @return  array                     list of followed users
      */
     public function unFollow($username)
     {
-        $response = $this->post('user/unfollow/'.urlencode($username));
-
-        return $response['users'];
+        return $this->delete('user/following/'.urlencode($username));
     }
 
     /**
@@ -121,9 +109,7 @@ class User extends Api
      */
     public function getWatchedRepos($username)
     {
-        $response = $this->get('repos/watched/'.urlencode($username));
-
-        return $response['repositories'];
+        return $this->get('users/'.urlencode($username).'/watched');
     }
 
     /**
@@ -133,9 +119,7 @@ class User extends Api
      */
     public function getKeys()
     {
-        $response = $this->get('user/keys');
-
-        return $response['public_keys'];
+        return $this->get('user/keys');
     }
 
     /**
@@ -145,9 +129,7 @@ class User extends Api
      */
     public function addKey($title, $key)
     {
-        $response = $this->post('user/key/add', array('title' => $title, 'key' => $key));
-
-        return $response['public_keys'];
+        return $this->post('user/keys', array('title' => $title, 'key' => $key));
     }
 
     /**
@@ -157,9 +139,7 @@ class User extends Api
      */
     public function removeKey($id)
     {
-        $response = $this->post('user/key/remove', array('id' => $id));
-
-        return $response['public_keys'];
+        return $this->delete('user/keys/'.urlencode($id));
     }
 
     /**
@@ -169,9 +149,7 @@ class User extends Api
      */
     public function getEmails()
     {
-        $response = $this->get('user/emails');
-
-        return $response['emails'];
+        return $this->get('user/emails');
     }
 
     /**
@@ -181,9 +159,7 @@ class User extends Api
      */
     public function addEmail($email)
     {
-        $response = $this->post('user/email/add', array('email' => $email));
-
-        return $response['emails'];
+        return $this->post('user/emails', array($email));
     }
 
     /**
@@ -193,8 +169,6 @@ class User extends Api
      */
     public function removeEmail($email)
     {
-        $response = $this->post('user/email/remove', array('email' => $email));
-
-        return $response['emails'];
+        return $this->delete('user/emails', array($email));
     }
 }

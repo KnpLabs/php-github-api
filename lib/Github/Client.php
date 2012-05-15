@@ -124,6 +124,44 @@ class Client
     }
 
     /**
+     * Call any path, PUT method
+     *
+     * @param   string  $path            the GitHub path
+     * @param   array   $requestOptions   reconfigure the request
+     * @return  array                     data returned
+     */
+    public function put($path, $requestOptions = array())
+    {
+        return $this->getHttpClient()->put($path, $requestOptions);
+    }
+
+    /**
+     * Call any path, PATCH method
+     *
+     * @param   string  $path            the GitHub path
+     * @param   array   $parameters       Patch parameters
+     * @param   array   $requestOptions   reconfigure the request
+     * @return  array                     data returned
+     */
+    public function patch($path, array $parameters = array(), $requestOptions = array())
+    {
+        return $this->getHttpClient()->patch($path, $parameters, $requestOptions);
+    }
+
+    /**
+     * Call any path, DELETE method
+     *
+     * @param   string  $path            the GitHub path
+     * @param   array   $parameters       DELETE parameters
+     * @param   array   $requestOptions   reconfigure the request
+     * @return  array                     data returned
+     */
+    public function delete($path, array $parameters = array(), $requestOptions = array())
+    {
+        return $this->getHttpClient()->delete($path, $parameters, $requestOptions);
+    }
+
+    /**
      * Get the http client.
      *
      * @return HttpClientInterface a request instance

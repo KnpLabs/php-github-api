@@ -106,6 +106,30 @@ class HttpClient implements HttpClientInterface
     }
 
     /**
+     * {@inheridoc}
+     */
+    public function patch($path, array $parameters = array(), array $options = array())
+    {
+        return $this->request($path, $parameters, 'PATCH', $options);
+    }
+
+    /**
+     * {@inheridoc}
+     */
+    public function delete($path, array $parameters = array(), array $options = array())
+    {
+        return $this->request($path, $parameters, 'DELETE', $options);
+    }
+
+    /**
+     * {@inheridoc}
+     */
+    public function put($path, array $options = array())
+    {
+        return $this->request($path, array(), 'PUT', $options);
+    }
+
+    /**
      * Send a request to the server, receive a response,
      * decode the response and returns an associative array
      *
@@ -143,7 +167,7 @@ class HttpClient implements HttpClientInterface
      */
     protected function doRequest($url, array $parameters = array(), $httpMethod = 'GET', array $options = array())
     {
-        $response = $this->browser->call($url, $httpMethod, $this->headers);
+        $response = $this->browser->call($url, $httpMethod, $this->headers, json_encode($parameters));
 
         $this->checkApiLimit($response);
 

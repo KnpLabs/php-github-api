@@ -33,6 +33,38 @@ interface HttpClientInterface
     function post($path, array $parameters = array(), array $options = array());
 
     /**
+     * Send a PATCH request
+     *
+     * @param  string   $path       Request path
+     * @param  array    $parameters PATCH Parameters
+     * @param  array    $options    Reconfigure the request for this call only
+     *
+     * @return array                Data
+     */
+    function patch($path, array $parameters = array(), array $options = array());
+
+    /**
+     * Send a PUT request
+     *
+     * @param  string   $path       Request path
+     * @param  array    $options    Reconfigure the request for this call only
+     *
+     * @return array                Data
+     */
+    function put($path, array $options = array());
+
+    /**
+     * Send a DELETE request
+     *
+     * @param  string   $path       Request path
+     * @param  array    $parameters DELETE Parameters
+     * @param  array    $options    Reconfigure the request for this call only
+     *
+     * @return array                Data
+     */
+    function delete($path, array $parameters = array(), array $options = array());
+
+    /**
      * Change an option value.
      *
      * @param string $name   The option name

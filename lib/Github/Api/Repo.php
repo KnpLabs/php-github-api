@@ -23,6 +23,7 @@ class Repo extends Api
      */
     public function search($query, $language = '', $startPage = 1)
     {
+        //todo old api
         $response = $this->get('repos/search/'.urlencode($query), array(
             'language' => strtolower($language),
             'start_page' => $startPage
@@ -44,18 +45,6 @@ class Repo extends Api
     }
 
     /**
-     * Get a list of the repositories that the authenticated user can push to
-     *
-     * @return  array                     list of repositories
-     */
-    public function getPushableRepos()
-    {
-        $response = $this->get('repos/pushable');
-
-        return $response['repositories'];
-    }
-
-    /**
      * Get extended information about a repository by its username and repo name
      *
      * @param   string  $username         the user who owns the repo
@@ -69,7 +58,6 @@ class Repo extends Api
 
     /**
      * create repo
-     * http://develop.github.com/p/repo.html
      *
      * @param   string  $name             name of the repository
      * @param   string  $description      repo description
@@ -79,19 +67,16 @@ class Repo extends Api
      */
     public function create($name, $description = '', $homepage = '', $public = true)
     {
-        $response = $this->post('repos/create', array(
+        return $this->post('user/repos', array(
             'name' => $name,
             'description' => $description,
             'homepage' => $homepage,
-            'public' => $public
+            'private' => !$public
         ));
-
-        return $response['repository'];
     }
 
     /**
      * delete repo
-     * http://develop.github.com/p/repo.html
      *
      * @param   string  $name             name of the repository
      * @param   string  $token            delete token
@@ -101,6 +86,7 @@ class Repo extends Api
      */
     public function delete($name, $token = null, $force = false)
     {
+        //todo old api
         if ($token === null) {
             $response = $this->post('repos/delete/'.urlencode($name));
 
@@ -120,7 +106,6 @@ class Repo extends Api
 
     /**
      * Set information of a repository
-     * http://develop.github.com/p/repo.html
      *
      * @param   string  $username         the user who owns the repo
      * @param   string  $repo             the name of the repo
@@ -129,89 +114,77 @@ class Repo extends Api
      */
     public function setRepoInfo($username, $repo, $values)
     {
-        $response = $this->post('repos/show/'.urlencode($username).'/'.urlencode($repo), array('values' => $values));
-
-        return $response['repository'];
+        return $this->patch('repos/'.urlencode($username).'/'.urlencode($repo), $values);
     }
 
     /**
      * Set the visibility of a repostory to public
-     * http://develop.github.com/p/repo.html
      *
+     * @param   string  $username         the user who owns the repo
      * @param   string  $repo             the name of the repo
      * @return  array                     informations about the repo
      */
-    public function setPublic($repo)
+    public function setPublic($username, $repo)
     {
-        $response = $this->get('repos/set/public/'.urlencode($repo));
-
-        return $response['repository'];
+        $this->setRepoInfo($username, $repo, array('private' => false));
     }
 
     /**
      * Set the visibility of a repostory to private
-     * http://develop.github.com/p/repo.html
      *
+     * @param   string  $username         the user who owns the repo
      * @param   string  $repo             the name of the repo
      * @return  array                     informations about the repo
      */
-    public function setPrivate($repo)
+    public function setPrivate($username, $repo)
     {
-        $response = $this->get('repos/set/private/'.urlencode($repo));
-
-        return $response['repository'];
+        $this->setRepoInfo($username, $repo, array('private' => true));
     }
 
     /**
      * Get the list of deploy keys for a repository
      *
+     * @param   string  $username         the user who owns the repo
      * @param   string  $repo             the name of the repo
      * @return  array                     the list of deploy keys
      */
-    public function getDeployKeys($repo)
+    public function getDeployKeys($username, $repo)
     {
-        $response = $this->get('repos/keys/'.urlencode($repo));
-
-        return $response['public_keys'];
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repo).'/keys');
     }
 
     /**
      * Add a deploy key for a repository
      *
+     * @param   string  $username         the user who owns the repo
      * @param   string  $repo             the name of the repo
      * @param   string  $title            the title of the key
      * @param   string  $key              the public key data
      * @return  array                     the list of deploy keys
      */
-    public function addDeployKey($repo, $title, $key)
+    public function addDeployKey($username, $repo, $title, $key)
     {
-        $response = $this->post('repos/key/'.urlencode($repo).'/add', array(
+        return $this->post('repos/'.urlencode($username).'/'.urlencode($repo).'/keys', array(
             'title' => $title,
             'key' => $key
         ));
-
-        return $response['public_keys'];
     }
 
     /**
      * Delete a deploy key from a repository
      *
+     * @param   string  $username         the user who owns the repo
      * @param   string  $repo             the name of the repo
      * @param   string  $id               the the id of the key to remove
      * @return  array                     the list of deploy keys
      */
-    public function removeDeployKey($repo, $id)
+    public function removeDeployKey($username, $repo, $id)
     {
-        $response = $this->post('repos/key/'.urlencode($repo).'/remove', array(
-            'id' => $id,
-        ));
-
-        return $response['public_keys'];
+        return $this->post('repos/'.urlencode($username).'/'.urlencode($repo).'/keys/'.urlencode($id));
     }
 
     /**
      * Get the collaborators of a repository
-     * http://develop.github.com/p/repo.html
      *
      * @param   string  $username         the user who owns the repo
      * @param   string  $repo             the name of the repo
