@@ -82,35 +82,6 @@ class Repo extends Api
     }
 
     /**
-     * Delete repo
-     *
-     * @param   string  $name             name of the repository
-     * @param   string  $token            delete token
-     * @param   string  $force            force repository deletion
-     *
-     * @return  string|array              returns delete_token or repo status
-     */
-    public function delete($name, $token = null, $force = false)
-    {
-        //todo old api
-        if ($token === null) {
-            $response = $this->post('repos/delete/'.urlencode($name));
-
-            $token = $response['delete_token'];
-
-            if (!$force) {
-                return $token;
-            }
-        }
-
-        $response = $this->post('repos/delete/'.urlencode($name), array(
-            'delete_token' => $token,
-        ));
-
-        return $response;
-    }
-
-    /**
      * Set information of a repository
      * @link http://developer.github.com/v3/repos/
      *
