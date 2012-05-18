@@ -13,7 +13,7 @@ class Issue extends Api
 {
     /**
      * List issues by username, repo and state
-     * http://develop.github.com/p/issues.html#list_a_projects_issues
+     * @link http://developer.github.com/v3/issues/
      *
      * @param   string  $username         the username
      * @param   string  $repo             the repo
@@ -22,9 +22,7 @@ class Issue extends Api
      */
     public function getList($username, $repo, $state = 'open')
     {
-        $response = $this->get('issues/list/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($state));
-
-        return $response['issues'];
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repo).'/issues?state='.urlencode($state));
     }
 
     /**
@@ -39,9 +37,7 @@ class Issue extends Api
      */
     public function search($username, $repo, $state, $searchTerm)
     {
-        $response = $this->get('issues/search/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($state).'/'.urlencode($searchTerm));
-
-        return $response['issues'];
+        throw new \BadMethodCallException('Method cannot be implemented using new api version');
     }
 
     /**
@@ -54,46 +50,40 @@ class Issue extends Api
      */
     public function searchLabel($username, $repo, $label)
     {
-        $response = $this->get('issues/list/'.urlencode($username).'/'.urlencode($repo).'/label/'.urlencode($label));
-
-        return $response['issues'];
+        throw new \BadMethodCallException('Method cannot be implemented using new api version');
     }
 
     /**
      * Get extended information about an issue by its username, repo and number
-     * http://develop.github.com/p/issues.html#view_an_issue
+     * @link http://developer.github.com/v3/issues/
      *
      * @param   string  $username         the username
      * @param   string  $repo             the repo
-     * @param   string  $issueNumber      the issue number
+     * @param   string  $number           the issue number
      * @return  array                     information about the issue
      */
-    public function show($username, $repo, $issueNumber)
+    public function show($username, $repo, $number)
     {
-        $response = $this->get('issues/show/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($issueNumber));
-
-        return $response['issue'];
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repo).'/issues/'.urlencode($number));
     }
 
     /**
      * Create a new issue for the given username and repo.
      * The issue is assigned to the authenticated user. Requires authentication.
-     * http://develop.github.com/p/issues.html#open_and_close_issues
+     * @link http://developer.github.com/v3/issues/
      *
      * @param   string  $username         the username
      * @param   string  $repo             the repo
-     * @param   string  $issueTitle       the new issue title
-     * @param   string   $issueBody       the new issue body
+     * @param   string  $title            the new issue title
+     * @param   string  $body             the new issue body
      * @return  array                     information about the issue
      */
-    public function open($username, $repo, $issueTitle, $issueBody)
+    public function open($username, $repo, $title, $body)
     {
-        $response = $this->post('issues/open/'.urlencode($username).'/'.urlencode($repo), array(
-            'title' => $issueTitle,
-            'body' => $issueBody
+        return $this->post('repos/'.urlencode($username).'/'.urlencode($repo).'/issues', array(
+            'title' => $title,
+            'body' => $body
         ));
-
-        return $response['issue'];
     }
 
     /**
@@ -102,14 +92,12 @@ class Issue extends Api
      *
      * @param   string  $username         the username
      * @param   string  $repo             the repo
-     * @param   string  $issueNumber      the issue number
+     * @param   string  $number           the issue number
      * @return  array                     information about the issue
      */
-    public function close($username, $repo, $issueNumber)
+    public function close($username, $repo, $number)
     {
-        $response = $this->post('issues/close/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($issueNumber));
-
-        return $response['issue'];
+        return $this->update($username, $repo, $number, array('state' => 'closed'));
     }
 
     /**
@@ -118,16 +106,14 @@ class Issue extends Api
      *
      * @param   string  $username         the username
      * @param   string  $repo             the repo
-     * @param   string  $issueNumber      the issue number
+     * @param   string  $number           the issue number
      * @param   array   $data             key=>value user attributes to update.
      *                                    key can be title or body
      * @return  array                     information about the issue
      */
-    public function update($username, $repo, $issueNumber, array $data)
+    public function update($username, $repo, $number, array $data)
     {
-        $response = $this->post('issues/edit/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($issueNumber), $data);
-
-        return $response['issue'];
+        return $this->post('repos/'.urlencode($username).'/'.urlencode($repo).'/issues/'.urlencode($number), $data);
     }
 
     /**
@@ -136,14 +122,12 @@ class Issue extends Api
      *
      * @param   string  $username         the username
      * @param   string  $repo             the repo
-     * @param   string  $issueNumber      the issue number
+     * @param   string  $number           the issue number
      * @return  array                     informations about the issue
      */
-    public function reOpen($username, $repo, $issueNumber)
+    public function reOpen($username, $repo, $number)
     {
-        $response = $this->post('issues/reopen/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($issueNumber));
-
-        return $response['issue'];
+        return $this->update($username, $repo, $number, array('state' => 'open'));
     }
 
     /**
@@ -152,38 +136,49 @@ class Issue extends Api
      *
      * @param   string  $username         the username
      * @param   string  $repo             the repo
-     * @param   string  $issueNumber      the issue number
+     * @param   string  $number           the issue number
      * @return  array                     list of issue comments
      */
-    public function getComments($username, $repo, $issueNumber)
+    public function getComments($username, $repo, $number)
     {
-        $response = $this->get('issues/comments/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($issueNumber));
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repo).'/issues/'.urlencode($number).'/comments');
+    }
 
-        return $response['comments'];
+    /**
+     * Get an issue comments by username, repo, issue number and comment id
+     * @link http://developer.github.com/v3/issues/comments/
+     *
+     * @param   string  $username         the username
+     * @param   string  $repo             the repo
+     * @param   string  $number           the issue number
+     * @param   string  $id               the comment id
+     * @return  array                     list of issue comments
+     */
+    public function getComment($username, $repo, $number, $id)
+    {
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repo).'/issues/'.urlencode($number).'/comments/'.urlencode($id));
     }
 
     /**
      * Add a comment to the issue by username, repo and issue number
-     * http://develop.github.com/p/issues.html#comment_on_issues
+     * @link http://developer.github.com/v3/issues/comments/
      *
      * @param   string  $username         the username
      * @param   string  $repo             the repo
-     * @param   string  $issueNumber      the issue number
-     * @param   string  $comment          the comment body
+     * @param   string  $number           the issue number
+     * @param   string  $body             the comment body
      * @return  array                     the created comment
      */
-    public function addComment($username, $repo, $issueNumber, $commentBody)
+    public function addComment($username, $repo, $number, $body)
     {
-        $response = $this->post('issues/comment/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($issueNumber), array(
-            'comment' => $commentBody
+        return $this->post('repos/'.urlencode($username).'/'.urlencode($repo).'/issues/'.urlencode($number).'/comments', array(
+            'body' => $body
         ));
-
-        return $response['comment'];
     }
 
     /**
      * List all project labels by username and repo
-     * http://develop.github.com/p/issues.html#listing_labels
+     * @link http://developer.github.com/v3/issues/labels/
      *
      * @param   string  $username         the username
      * @param   string  $repo             the repo
@@ -191,42 +186,52 @@ class Issue extends Api
      */
     public function getLabels($username, $repo)
     {
-        $response = $this->get('issues/labels/'.urlencode($username).'/'.urlencode($repo));
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repo).'/labels');
+    }
 
-        return $response['labels'];
+    /**
+     * Get project label by username and repo
+     * @link http://developer.github.com/v3/issues/labels/
+     *
+     * @param   string  $username         the username
+     * @param   string  $repo             the repo
+     * @param   string  $name             the label name
+     * @return  array                     list of project labels
+     */
+    public function getLabel($username, $repo, $name)
+    {
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repo).'/labels/'.urlencode($name));
     }
 
     /**
      * Add a label to the issue by username, repo and issue number. Requires authentication.
-     * http://develop.github.com/p/issues.html#add_and_remove_labels
+     * @link http://developer.github.com/v3/issues/labels/
      *
      * @param   string  $username         the username
      * @param   string  $repo             the repo
-     * @param   string  $issueNumber      the issue number
      * @param   string  $labelName        the label name
+     * @param   string  $labelColor       the label color
      * @return  array                     list of issue labels
      */
-    public function addLabel($username, $repo, $labelName, $issueNumber)
+    public function addLabel($username, $repo, $labelName, $labelColor)
     {
-        $response = $this->post('issues/label/add/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($labelName).'/'.urlencode($issueNumber));
-
-        return $response['labels'];
+        return $this->post('repos/'.urlencode($username).'/'.urlencode($repo).'/labels', array(
+            'name' => $labelName,
+            'color' => $labelColor
+        ));
     }
 
     /**
      * Remove a label from the issue by username, repo, issue number and label name. Requires authentication.
-     * http://develop.github.com/p/issues.html#add_and_remove_labels
+     * @link http://developer.github.com/v3/issues/labels/
      *
      * @param   string  $username         the username
      * @param   string  $repo             the repo
-     * @param   string  $issueNumber      the issue number
      * @param   string  $labelName        the label name
      * @return  array                     list of issue labels
      */
-    public function removeLabel($username, $repo, $labelName, $issueNumber)
+    public function removeLabel($username, $repo, $labelName)
     {
-        $response = $this->post('issues/label/remove/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($labelName).'/'.urlencode($issueNumber));
-
-        return $response['labels'];
+        return $this->delete('repos/'.urlencode($username).'/'.urlencode($repo).'/labels/'.urlencode($labelName));
     }
 }

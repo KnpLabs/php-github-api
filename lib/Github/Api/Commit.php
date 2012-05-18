@@ -52,6 +52,7 @@ class Commit extends Api
      * @param   string  $username         the username
      * @param   string  $repo             the repo
      * @param   string  $sha              the commit sha
+     * @return  array                     data from commit
      */
     public function getCommit($username, $repo, $sha)
     {
@@ -64,13 +65,12 @@ class Commit extends Api
      * @param string $username
      * @param string $repoName
      * @param string $branchName
-     * @return string
+     * @return null|string
      */
     private function getBranchSha($username, $repoName, $branchName)
     {
         $branchInfo = $this->get('repos/'.urlencode($username).'/'.urlencode($repoName).'/git/trees/'.urlencode($branchName));
-        if (isset($branchInfo['sha'])) {
-            return $branchInfo['sha'];
-        }
+
+        return isset($branchInfo['sha']) ? $branchInfo['sha'] : null;
     }
 }
