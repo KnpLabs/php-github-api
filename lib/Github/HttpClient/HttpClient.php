@@ -3,6 +3,7 @@
 namespace Github\HttpClient;
 
 use Buzz\Browser;
+use Buzz\Client\Curl;
 use Buzz\Message\Response;
 
 /**
@@ -54,7 +55,7 @@ class HttpClient implements HttpClientInterface
     public function __construct(array $options = array(), Browser $browser = null)
     {
         $this->options = array_merge($this->options, $options);
-        $this->browser = $browser ?: new Browser();
+        $this->browser = $browser ?: new Browser(new Curl());
 
         $this->browser->getClient()->setTimeout($this->options['timeout']);
         $this->browser->getClient()->setVerifyPeer(false);
