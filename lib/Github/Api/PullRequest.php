@@ -12,36 +12,32 @@ namespace Github\Api;
 class PullRequest extends Api
 {
     /**
-     * Get a listing of a project's pull requests by the username, repo, and optionnally state.
+     * Get a listing of a project's pull requests by the username, repo, and optionally state.
+     * @link    http://developer.github.com/v3/pulls/
      *
-     * @link      http://develop.github.com/p/pulls.html
      * @param   string $username          the username
      * @param   string $repo              the repo
      * @param   string $state             the state of the fetched pull requests.
      *                                    The API seems to automatically default to 'open'
      * @return  array                     array of pull requests for the project
      */
-    public function listPullRequests($username, $repo, $state = '')
+    public function listPullRequests($username, $repo, $state = 'open')
     {
-        $response = $this->get('pulls/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($state));
-
-        return $response['pulls'];
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repo).'/pulls?state='.urlencode($state));
     }
 
     /**
      * Show all details of a pull request, including the discussions.
+     * @link    http://developer.github.com/v3/pulls/
      *
-     * @link      http://develop.github.com/p/pulls.html
      * @param   string $username          the username
      * @param   string $repo              the repo
-     * @param   string $pullRequestId     the ID of the pull request for which details are retrieved
+     * @param   string $id                the ID of the pull request for which details are retrieved
      * @return  array                     array of pull requests for the project
      */
-    public function show($username, $repo, $pullRequestId)
+    public function show($username, $repo, $id)
     {
-        $response = $this->get('pulls/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($pullRequestId));
-
-        return $response['pulls'];
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repo).'/pulls/'.urlencode($id));
     }
 
     /**
@@ -56,40 +52,15 @@ class PullRequest extends Api
      *                                    specify the username first: "my-user:some-branch".
      * @param   string $title             The String title of the Pull Request. Used in pair with $body.
      * @param   string $body              The String body of the Pull Request. Used in pair with $title.
-     * @param   int $issueId              If a pull-request is related to an issue, place issue ID here. The $title-$body pair and this are mutually exclusive.
      * @return  array                     array of pull requests for the project
      */
-    public function create($username, $repo, $base, $head, $title = null, $body = null, $issueId = null)
+    public function create($username, $repo, $base, $head, $title, $body = null)
     {
-        $postParameters = array(
-            'pull[base]' => $base,
-            'pull[head]' => $head
-        );
-
-        if ( $title !== null and $body !== null ) {
-            $postParameters = array_merge( $postParameters,
-                                           array(
-                                             'pull[title]' => $title,
-                                             'pull[body]'  => $body
-                                           )
-                                         );
-        } elseif ( $issueId !== null ) {
-            $postParameters = array_merge( $postParameters,
-                                           array(
-                                             'pull[issue]' => $issueId
-                                           )
-                                         );
-        } else {
-            // @FIXME : Exception required here.
-            return null;
-        }
-
-        $response = $this->post('pulls/'.urlencode($username).'/'.urlencode($repo),
-                                $postParameters
-                               );
-
-        // @FIXME : Exception to be thrown when $response['error'] exists.
-        //          Content of error can be : "{"error":["A pull request already exists for <username>:<branch>."]}"
-        return $response['pull'];
+        return $this->post('repos/'.urlencode($username).'/'.urlencode($repo).'/pulls', array(
+            'head' => $head,
+            'base' => $base,
+            'title' => $title,
+            'body' => $body,
+        ));
     }
 }
