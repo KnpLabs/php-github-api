@@ -16,12 +16,6 @@ class Organization extends Api
     const PUSH = "push";
     const PULL = "pull";
 
-    static $PERMISSIONS = array(
-        self::ADMIN,
-        self::PUSH,
-        self::PULL
-    );
-
     /**
      * Get extended information about an organization by its name
      * http://develop.github.com/p/orgs.html
@@ -31,9 +25,7 @@ class Organization extends Api
      */
     public function show($name)
     {
-        $response = $this->get('organizations/'.urlencode($name));
-
-        return $response['organization'];
+        return $this->get('orgs/'.urlencode($name));
     }
 
     /**
@@ -66,56 +58,78 @@ class Organization extends Api
 
     /**
      * List all public members of that organization
-     * http://develop.github.com/p/orgs.html
+     * @link http://developer.github.com/v3/orgs/members/
      *
      * @param   string  $name             the organization name
      * @return  array                     the members
      */
     public function getPublicMembers($name)
     {
-        $response = $this->get('organizations/'.urlencode($name).'/public_members');
+        return $this->get('orgs/'.urlencode($name).'/members');
+    }
 
-        return $response['users'];
+    /**
+     * Check that user is in that organization
+     * @link http://developer.github.com/v3/orgs/members/
+     *
+     * @param   string  $name             the organization name
+     * @param   string  $user             the user
+     * @return  array                     the members
+     */
+    public function getPublicMember($name, $user)
+    {
+        return $this->get('orgs/'.urlencode($name).'/members/'.urlencode($user));
     }
 
     /**
      * List all teams of that organization
-     * http://develop.github.com/p/orgs.html
+     * @link http://developer.github.com/v3/orgs/teams/
      *
      * @param   string  $name             the organization name
      * @return  array                     the teams
      */
     public function getTeams($name)
     {
-        $response = $this->get('organizations/'.urlencode($name).'/teams');
+        return $this->get('orgs/'.urlencode($name).'/teams');
+    }
 
-        return $response['teams'];
+    /**
+     * Get team with given id of that organization
+     * @link http://developer.github.com/v3/orgs/teams/
+     *
+     * @param   string  $name             the organization name
+     * @param   string  $id               id of team
+     * @return  array                     the team
+     */
+    public function getTeam($name, $id)
+    {
+        return $this->get('orgs/'.urlencode($name).'/teams/'.urlencode($id));
     }
 
     /**
      * Add a team to that organization
-     * http://develop.github.com/p/orgs.html
+     * @link http://developer.github.com/v3/orgs/teams/
      *
-     * @param   string  $name             the organization name
+     * @param   string  $organization     the organization name
      * @param   string  $team             name of the new team
      * @param   string  $permission       its permission [PULL|PUSH|ADMIN]
-     * @param   array   $name             (optionnal) its repositories names
+     * @param   array   $repositories     (optional) its repositories names
      *
      * @return  array                     the teams
+     *
+     * @throws \InvalidArgumentException
      */
-    public function addTeam($organization, $team, $permission, array $repositories = array())
+    public function addTeam($organization, $team, $permission = 'pull', array $repositories = array())
     {
-        if (!in_array($permission, self::$PERMISSIONS)) {
+        if (!in_array($permission, array(self::ADMIN, self::PUSH, self::PULL))) {
             throw new \InvalidArgumentException("Invalid value for the permission variable");
         }
 
-        $response = $this->post('organizations/'.urlencode($organization).'/teams', array(
-            'team' => $team,
+        return $this->post('orgs/'.urlencode($organization).'/teams', array(
+            'name' => $team,
             'permission' => $permission,
             'repo_names' => $repositories
         ));
-
-        return $response['teams'];
     }
 
 }

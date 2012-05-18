@@ -21,10 +21,7 @@ class User extends Api
      */
     public function search($username)
     {
-        //old api to do
-        $response = $this->get('user/search/'.urlencode($username));
-
-        return $response['users'];
+        throw new \BadMethodCallException('Method cannot be implemented using new api version');
     }
 
     /**
