@@ -1,19 +1,19 @@
 {
-    "name": "ornicar/github-api",
+    "name": "knplabs/github-api",
     "type": "library",
-    "description": "GitHub API",
-    "homepage": "https://github.com/ornicar/php-github-api",
+    "description": "GitHub API v3 client",
+    "homepage": "https://github.com/KnpLabs/php-github-api",
     "keywords": ["github", "api", "gist"],
     "license": "MIT",
     "authors": [
         {
+            "name": "KnpLabs Team",
+            "homepage": "http://knplabs.com"
+        },
+        {
             "name": "Thibault Duplessis",
             "email": "thibault.duplessis@gmail.com",
             "homepage": "http://ornicar.github.com"
-        },
-        {
-            "name": "KnpLabs Team",
-            "homepage": "http://knplabs.com"
         }
     ],
     "require": {
