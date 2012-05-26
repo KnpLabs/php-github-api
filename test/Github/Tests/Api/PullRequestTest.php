@@ -6,14 +6,17 @@ use Github\Tests\ApiTestCase;
 
 class PullRequestTest extends ApiTestCase
 {
-    public function testlistPullRequests()
+    /**
+     * @test
+     */
+    public function shouldCreateValidQueryForListPullRequests()
     {
         $api = $this->getApiMock();
 
         // 1. Test with no last parameter
         $api->expects($this->once())
             ->method('get')
-            ->with('pulls/ezsystems/ezpublish/');
+            ->with('repos/ezsystems/ezpublish/pulls');
 
         $api->listPullRequests('ezsystems', 'ezpublish' );
 
@@ -22,7 +25,7 @@ class PullRequestTest extends ApiTestCase
         // 2. Test with last parameter set to 'open'
         $api->expects($this->once())
             ->method('get')
-            ->with('pulls/ezsystems/ezpublish/open');
+            ->with('repos/ezsystems/ezpublish/pulls?state=open');
 
         $api->listPullRequests('ezsystems', 'ezpublish', 'open' );
 
@@ -30,34 +33,40 @@ class PullRequestTest extends ApiTestCase
         // 2. Test with last parameter set to 'closed'
         $api->expects($this->once())
             ->method('get')
-            ->with('pulls/ezsystems/ezpublish/closed');
+            ->with('repos/ezsystems/ezpublish/pulls?state=closed');
 
         $api->listPullRequests('ezsystems', 'ezpublish', 'closed' );
     }
 
-    public function testshow()
+    /**
+     * @test
+     */
+    public function shouldCreateValidQueryForShow()
     {
         $api = $this->getApiMock();
 
         $api->expects($this->once())
             ->method('get')
-            ->with('pulls/ezsystems/ezpublish/15');
+            ->with('repos/ezsystems/ezpublish/pulls/15');
 
-        $api->listPullRequests('ezsystems', 'ezpublish', '15' );
+        $api->show('ezsystems', 'ezpublish', '15' );
     }
 
-    public function testcreate()
+    /**
+     * @test
+     */
+    public function shouldCreateValidQueryForCreate()
     {
         // 1. Testing with body & title
         $api = $this->getApiMock();
 
         $api->expects($this->once())
             ->method('post')
-            ->with('pulls/ezsystems/ezpublish',
-                    array( 'pull[base]'  => 'master',
-                           'pull[head]'  => 'virtualtestbranch',
-                           'pull[title]' => 'TITLE : Testing pull-request creation from PHP Gituhub API',
-                           'pull[body]'  => 'BODY: Testing pull-request creation from PHP Gituhub API'
+            ->with('repos/ezsystems/ezpublish/pulls',
+                    array( 'base'  => 'master',
+                           'head'  => 'virtualtestbranch',
+                           'title' => 'TITLE : Testing pull-request creation from PHP Gituhub API',
+                           'body'  => 'BODY: Testing pull-request creation from PHP Gituhub API'
                          )
                   );
 
@@ -71,14 +80,29 @@ class PullRequestTest extends ApiTestCase
 
         $api->expects($this->once())
             ->method('post')
-            ->with('pulls/ezsystems/ezpublish',
-                    array( 'pull[base]'   => 'master',
-                           'pull[head]'   => 'virtualtestbranch',
-                           'pull[issue]'  => 25
+            ->with('repos/ezsystems/ezpublish/pulls',
+                    array( 'base'   => 'master',
+                           'head'   => 'virtualtestbranch',
+                           'issue'  => 25
                          )
                   );
 
         $api->create('ezsystems', 'ezpublish', 'master', 'virtualtestbranch', null, null, 25 );
+
+        // 3. Testing with title and issue ID
+        $api = $this->getApiMock();
+
+        $api->expects($this->once())
+            ->method('post')
+            ->with('repos/ezsystems/ezpublish/pulls',
+                    array( 'base'   => 'master',
+                           'head'   => 'virtualtestbranch',
+                           'title'  => 'some title',
+                           'body'   => null
+                         )
+                  );
+
+        $api->create('ezsystems', 'ezpublish', 'master', 'virtualtestbranch', 'some title', null, 25 );
     }
 
     protected function getApiClass()
