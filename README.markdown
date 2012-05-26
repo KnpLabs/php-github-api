@@ -1,5 +1,7 @@
 # PHP GitHub API
 
+[![Build Status](https://secure.travis-ci.org/KnpLabs/php-github-api.png?branch=api_v3)](http://travis-ci.org/KnpLabs/php-github-api)
+
 A simple Object Oriented wrapper for GitHub API, written with PHP5. 
 
 ```php
