@@ -21,9 +21,14 @@ class PullRequest extends Api
      *                                    The API seems to automatically default to 'open'
      * @return  array                     array of pull requests for the project
      */
-    public function listPullRequests($username, $repo, $state = 'open')
+    public function listPullRequests($username, $repo, $state = null)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repo).'/pulls?state='.urlencode($state));
+        $url = 'repos/'.urlencode($username).'/'.urlencode($repo).'/pulls';
+        if ($state) {
+            $url .= '?state='.urlencode($state);
+        }
+
+        return $this->get($url);
     }
 
     /**
@@ -43,7 +48,7 @@ class PullRequest extends Api
     /**
      * Create a pull request
      *
-     * @link      http://develop.github.com/p/pulls.html
+     * @link    http://developer.github.com/v3/pulls/
      * @param   string $username          the username
      * @param   string $repo              the repo
      * @param   string $base              A String of the branch or commit SHA that you want your changes to be pulled to.
@@ -52,15 +57,23 @@ class PullRequest extends Api
      *                                    specify the username first: "my-user:some-branch".
      * @param   string $title             The String title of the Pull Request. Used in pair with $body.
      * @param   string $body              The String body of the Pull Request. Used in pair with $title.
+     * @param   string $issueNumber       The issue number. Used when title and body is not set.
      * @return  array                     array of pull requests for the project
      */
-    public function create($username, $repo, $base, $head, $title, $body = null)
+    public function create($username, $repo, $base, $head, $title, $body = null, $issueNumber = null)
     {
-        return $this->post('repos/'.urlencode($username).'/'.urlencode($repo).'/pulls', array(
+        $input = array(
             'head' => $head,
             'base' => $base,
-            'title' => $title,
-            'body' => $body,
-        ));
+        );
+
+        if ($title || $body) {
+            $input['title'] = $title;
+            $input['body']  = $body;
+        } else {
+            $input['issue'] = $issueNumber;
+        }
+
+        return $this->post('repos/'.urlencode($username).'/'.urlencode($repo).'/pulls', $input);
     }
 }

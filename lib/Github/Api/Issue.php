@@ -18,16 +18,24 @@ class Issue extends Api
      * @param   string  $username         the username
      * @param   string  $repo             the repo
      * @param   string  $state            the issue state, can be open or closed
+     * @param   array  $state             the additional parameters like milestone, assignee, lables, sort, direction
      * @return  array                     list of issues found
      */
-    public function getList($username, $repo, $state = 'open')
+    public function getList($username, $repo, $state = null, $parameters = array())
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repo).'/issues?state='.urlencode($state));
+        $url = 'repos/'.urlencode($username).'/'.urlencode($repo).'/issues';
+        if ($state) {
+            $parameters['state'] = $state;
+        }
+        if ($parameters) {
+            $url .= '?'.http_build_query($parameters);
+        }
+
+        return $this->get($url);
     }
 
     /**
      * Search issues by username, repo, state and search term
-     * http://develop.github.com/p/issues.html#list_a_projects_issues
      *
      * @param   string  $username         the username
      * @param   string  $repo             the repo
@@ -88,7 +96,7 @@ class Issue extends Api
 
     /**
      * Close an existing issue by username, repo and issue number. Requires authentication.
-     * http://develop.github.com/p/issues.html#open_and_close_issues
+     * @link http://developer.github.com/v3/issues/
      *
      * @param   string  $username         the username
      * @param   string  $repo             the repo
@@ -102,7 +110,7 @@ class Issue extends Api
 
     /**
      * Update issue informations by username, repo and issue number. Requires authentication.
-     * http://develop.github.com/p/issues.html#edit_existing_issues
+     * @link http://developer.github.com/v3/issues/
      *
      * @param   string  $username         the username
      * @param   string  $repo             the repo
@@ -113,12 +121,12 @@ class Issue extends Api
      */
     public function update($username, $repo, $number, array $data)
     {
-        return $this->post('repos/'.urlencode($username).'/'.urlencode($repo).'/issues/'.urlencode($number), $data);
+        return $this->patch('repos/'.urlencode($username).'/'.urlencode($repo).'/issues/'.urlencode($number), $data);
     }
 
     /**
      * Repoen an existing issue by username, repo and issue number. Requires authentication.
-     * http://develop.github.com/p/issues.html#open_and_close_issues
+     * @link http://developer.github.com/v3/issues/
      *
      * @param   string  $username         the username
      * @param   string  $repo             the repo
@@ -132,7 +140,7 @@ class Issue extends Api
 
     /**
      * List an issue comments by username, repo and issue number
-     * http://develop.github.com/p/issues.html#list_an_issues_comments
+     * @link http://developer.github.com/v3/issues/comments/
      *
      * @param   string  $username         the username
      * @param   string  $repo             the repo
@@ -150,13 +158,12 @@ class Issue extends Api
      *
      * @param   string  $username         the username
      * @param   string  $repo             the repo
-     * @param   string  $number           the issue number
      * @param   string  $id               the comment id
      * @return  array                     list of issue comments
      */
-    public function getComment($username, $repo, $number, $id)
+    public function getComment($username, $repo, $id)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repo).'/issues/'.urlencode($number).'/comments/'.urlencode($id));
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repo).'/issues/comments/'.urlencode($id));
     }
 
     /**
