@@ -6,16 +6,12 @@ use Github\Tests\ApiTestCase;
 
 class RepoTest extends ApiTestCase
 {
-    public function testSearch()
+    /**
+     * @expectedException BadMethodCallException
+     */
+    public function testThatSearchIsNotSupported()
     {
         $api = $this->getApiMock();
-
-        $api->expects($this->once())
-            ->method('get')
-            ->with('repos/search/github+api', array(
-                'language' => 'fr',
-                'start_page' => 3
-            ));
 
         $api->search('github api', 'fr', 3);
     }
