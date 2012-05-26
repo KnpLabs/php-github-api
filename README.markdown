@@ -1,48 +1,48 @@
-# PHP GitHub API
+# PHP GitHub API [WIP]
 
 [![Build Status](https://secure.travis-ci.org/KnpLabs/php-github-api.png?branch=api_v3)](http://travis-ci.org/KnpLabs/php-github-api)
+
+[WARNING] We are converting that lib into "github api v3" so some stuff is not working yet...
 
 A simple Object Oriented wrapper for GitHub API, written with PHP5. 
 
 ```php
-    $github = new Github_Client();
+    $github = new Github\Client();
     $myRepos = $github->getRepoApi()->getUserRepos('ornicar');
 ```
 
-Uses [GitHub API v2](http://develop.github.com/). The object API is very similar to the RESTful API.
+Uses [GitHub API v3](http://developer.github.com/v3/). The object API is very similar to the RESTful API.
 
 ## Features
 
-* Covers 100% of GitHub API with PHP methods
-* Supports 3 authentication methods
-* Follows PEAR conventions and coding standard: autoload friendly
+* Follows PSR-0 conventions and coding standard: autoload friendly
 * Light and fast thanks to lazy loading of API classes
 * Flexible and extensible thanks to dependency injection
 * Extensively tested and documented
 
 ## Requirements
 
-* PHP 5.2 or 5.3.
-* [php curl](http://php.net/manual/en/book.curl.php), but it is possible to write another transport layer.
+* PHP >= 5.3
 * PHPUnit to run tests.
 
 ## Autoload
 
-The first step to use php-github-api is to register its autoloader:
+The new version of php-github-api using [composer](http://getcomposer.org).
+The first step to use php-github-api is to download composer: `curl -s http://getcomposer.org/installer | php`
+Then we have to install our dependencies using `php composer.phar install`, now we can use autoloader from composer by:
 
 ```php
-    require_once '/path/to/lib/Github/Autoloader.php';
-    Github_Autoloader::register();
+    require_once 'vendor/autoload.php';
 ```
 
-Replace the `/path/to/lib/` path with the path you used for php-github-api installation.
+TODO: More examples how to install with composer. Some example of composer.json files. Add to packagist
 
-> php-github-api follows the PEAR convention names for its classes, which means you can easily integrate php-github-api classes loading in your own autoloader.
+> php-github-api follows the PSR-0 convention names for its classes, which means you can easily integrate php-github-api classes loading in your own autoloader.
 
 ## instantiate a new github client
 
 ```php
-    $github = new Github_Client();
+    $github = new Github\Client();
 ```
 
 From this object, you can access to all GitHub apis, listed below.
@@ -57,15 +57,9 @@ From this object, you can access to all GitHub apis, listed below.
 <a href='#nav' alt='Back to the navigation'>Go back to the Navigation</a>
 
 Searching users, getting user information and managing authenticated user account information.
-Wrap [GitHub User API](http://develop.github.com/p/users.html).
+Wrap [GitHub User API](http://developer.github.com/v3/users).
 
-### Search for users by username
-
-```php
-    $users = $github->getUserApi()->search('ornicar');
-```
-
-Returns an array of users.
+### Search for users by username is depreciated cause of github api limitation.
 
 ### Get information about a user
 
@@ -702,16 +696,16 @@ Wanna change, let's say, the http client User Agent?
     $github->getHttpClient()->setOption('user_agent', 'My new User Agent');
 ```
 
-See all available options in Github/HttpClient.php
+See all available options in Github/HttpClient/HttpClient.php
 
 ### Inject a new http client instance
 
 php-github-api provides a curl-based implementation of a http client.
-If you want to use your own http client implementation, inject it to the Github_Client instance:
+If you want to use your own http client implementation, inject it to the Github\Client instance:
 
 ```php
     // create a custom http client
-    class MyHttpClient extends Github_HttpClient
+    class MyHttpClient extends Github\HttpClient\HttpClient
     {
         public function doRequest($url, array $parameters = array(), $httpMethod = 'GET', array $options = array())
         {
@@ -722,10 +716,10 @@ If you want to use your own http client implementation, inject it to the Github_
 
 > Your http client implementation may not extend Github_HttpClient, but only implement Github_HttpClientInterface.
 
-You can now inject your http client through Github_Client constructor:
+You can now inject your http client through Github\Client constructor:
 
 ```php
-    $github = new Github_Client(new MyHttpClient());
+    $github = new Github\Client(new MyHttpClient());
 ```
 
 Or to an existing Github_Client instance:
@@ -741,7 +735,7 @@ For example, to replace the user API:
 
 ```php
     // create a custom User API
-    class MyGithubApiUser extends Github_Api_User
+    class MyGithubApiUser extends Github\Api\User
     {
       // overwrite things
     }
