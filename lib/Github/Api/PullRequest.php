@@ -37,7 +37,7 @@ class Github_Api_PullRequest extends Github_Api
     public function show($username, $repo, $pullRequestId)
     {
         $response = $this->get('pulls/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($pullRequestId));
-        return $response;
+        return $response['pull'];
     }
 
     /**
