@@ -356,4 +356,19 @@ class Repo extends Api
     {
         return $this->get('repos/'.urlencode($username).'/'.urlencode($repo).'/teams');
     }
+
+    /**
+     * Get contents of any file or directory in a repository
+     * @link http://developer.github.com/v3/repos/contents/
+     *
+     * @param   string  $username         the user who owns the repo
+     * @param   string  $repo             the name of the repo
+     * @param           $path             path to file or directory
+     *
+     * @return array                      information for file | information for each item in directory
+     */
+    public function getRepoContents($username, $repo, $path)
+    {
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repo).'/contents/'.$path);
+    }
 }
