@@ -1,3 +1,7 @@
+# GithHub API v2 is deprecated
+
+And therefore, so is this library. You may fork it and implement v3 support.
+
 # PHP GitHub API
 
 A simple Object Oriented wrapper for GitHub API, written with PHP5. 
