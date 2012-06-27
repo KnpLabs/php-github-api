@@ -5,7 +5,7 @@ namespace Github\Api;
 /**
  * Creating, editing, deleting and listing gists
  *
- * @link      http://develop.github.com/p/issues.html
+ * @link      http://developer.github.com/v3/gists/
  * @author    Edoardo Rivello <edoardo.rivello at gmail dot com>
  * @license   MIT License
  */
@@ -59,5 +59,18 @@ class Gist extends Api
         );
         
         return $this->post('gists', $input);
+    }    
+    
+    /**
+     * Remove a gist by id
+     * Requires authentication.
+     * @link http://developer.github.com/v3/issues/
+     * 
+     * @param   string  $id          the gist id
+     * @return                  
+     */
+    public function delete($id)
+    {
+        return $this->delete('gists/'.urlencode($id));
     }    
 }
