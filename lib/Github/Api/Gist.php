@@ -13,7 +13,7 @@ class Gist extends Api
 {
     /**
      * List gists by username
-     * http://developer.github.com/v3/gists/
+     * @link http://developer.github.com/v3/gists/
      * 
      * @param   string  $username    the username
      * @return  array                list of gist found 
@@ -25,7 +25,7 @@ class Gist extends Api
     
     /**
      * Show a specific gist
-     * http://developer.github.com/v3/gists/
+     * @link http://developer.github.com/v3/gists/
      *
      * @param   string  $id          the gist id
      * @return  array                data from gist
@@ -33,5 +33,34 @@ class Gist extends Api
     public function getGist($id)
     {
         return $this->get('/gists/'.urlencode($id));
+    }
+    
+    /**
+     * Create a new gist.
+     * The gist is assigned to the authenticated user. Requires authentication.
+     * @link http://developer.github.com/v3/issues/
+     *
+     * @param   string  $description      the new gist description
+     * @param   bool    $public           the new gist visibility
+     * @param   string  $filename         the new gist filename
+     * @param   string  $content          the new gist file contents
+     * @return  array                     information about the gist
+     */
+    public function create($public, $filename, $content, $description = null)
+    {
+        $input = array(
+            'public' => $public,
+            'files' => array(
+                $filename => array(
+                    'content' => $content
+                )
+            )
+        );
+        
+        if ($description) {
+            $input['description'] = $description;
+        }
+        
+        return $this->post('gists', $input);
     }    
 }
