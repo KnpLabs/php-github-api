@@ -40,15 +40,16 @@ class Gist extends Api
      * The gist is assigned to the authenticated user. Requires authentication.
      * @link http://developer.github.com/v3/issues/
      *
-     * @param   string  $description      the new gist description
-     * @param   bool    $public           the new gist visibility
-     * @param   string  $filename         the new gist filename
-     * @param   string  $content          the new gist file contents
+     * @param   string  $description      gist description
+     * @param   bool    $public           1 for public, 0 for private
+     * @param   string  $filename         gist filename
+     * @param   string  $content          gist file contents
      * @return  array                     information about the gist
      */
-    public function create($public, $filename, $content, $description = null)
+    public function create($filename, $content, $description = '', $public = false)
     {
         $input = array(
+            'description' => $description,
             'public' => $public,
             'files' => array(
                 $filename => array(
@@ -56,10 +57,6 @@ class Gist extends Api
                 )
             )
         );
-        
-        if ($description) {
-            $input['description'] = $description;
-        }
         
         return $this->post('gists', $input);
     }    
