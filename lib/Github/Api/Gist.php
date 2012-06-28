@@ -37,7 +37,7 @@ class Gist extends Api
     
     /**
      * Create a new gist.
-     * The gist is assigned to the authenticated user. Requires authentication.
+     * The gist is assigned to the authenticated user.
      * @link http://developer.github.com/v3/issues/
      *
      * @param   string  $description      gist description
@@ -66,10 +66,10 @@ class Gist extends Api
      * Requires authentication.
      * @link http://developer.github.com/v3/issues/
      * 
-     * @param   string  $id          the gist id
-     * @return                  
+     * @param   int  $id          the gist id
+     * @return  null              
      */
-    public function delete($id)
+    public function remove($id)
     {
         return $this->delete('gists/'.urlencode($id));
     }    
