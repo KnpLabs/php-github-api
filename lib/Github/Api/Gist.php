@@ -37,7 +37,7 @@ class Gist extends Api
     
     /**
      * Create a new gist.
-     * The gist is assigned to the authenticated user.
+     * The gist is assigned to null user.
      * @link http://developer.github.com/v3/issues/
      *
      * @param   string  $description      gist description
