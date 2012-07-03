@@ -79,5 +79,5 @@ interface HttpClientInterface
      *
      * @param array
      */
-    function setHeaders($headers);
+    function setHeaders(array $headers);
 }
