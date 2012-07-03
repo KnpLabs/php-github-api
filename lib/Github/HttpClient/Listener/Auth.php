@@ -4,8 +4,9 @@ namespace Github\HttpClient\Listener;
 
 use Github\Client;
 
-use Buzz\Message;
 use Buzz\Listener\ListenerInterface;
+use Buzz\Message\MessageInterface;
+use Buzz\Message\RequestInterface;
 use Buzz\Util\Url;
 
 class AuthListener implements ListenerInterface
@@ -28,14 +29,17 @@ class AuthListener implements ListenerInterface
     public function __construct($method, array $options)
     {
         if (!isset($options['token']) || (!isset($options['login'], $options['password']))) {
-            throw new \InvalidArgumentException('You need to set OAuth token, or username + password!');
+            throw new \InvalidArgumentException('You need to set OAuth token, or username with password!');
         }
 
         $this->method  = $method;
         $this->options = $options;
     }
 
-    public function preSend(Message\Request $request)
+    /**
+     * {@inheritDoc}
+     */
+    public function preSend(RequestInterface $request)
     {
         switch ($this->method) {
             case Client::AUTH_HTTP_PASSWORD:
@@ -48,14 +52,12 @@ class AuthListener implements ListenerInterface
             default:
                 $url = $request->getUrl();
 
-                $parameters = array(
-                    'access_token' => $this->options['token']
-                );
-
-                $queryString = utf8_encode(http_build_query($parameters, '', '&'));
-
                 if ('GET' === $request->getMethod()) {
-                    $url .= '?'.$queryString;
+                    $parameters = array(
+                        'access_token' => $this->options['token']
+                    );
+
+                    $url .= '?'.utf8_encode(http_build_query($parameters, '', '&'));
                 }
 
                 $request->fromUrl(new Url($url));
@@ -63,7 +65,10 @@ class AuthListener implements ListenerInterface
         }
     }
 
-    public function postSend(Message\Request $request, Message\Response $response)
+    /**
+     * {@inheritDoc}
+     */
+    public function postSend(RequestInterface $request, MessageInterface $response)
     {
     }
 }
