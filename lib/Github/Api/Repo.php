@@ -13,17 +13,32 @@ namespace Github\Api;
 class Repo extends Api
 {
     /**
-     * Search repos by keyword
-     * http://develop.github.com/p/repo.html
+     * Search repositories by keyword:
+     * @link http://developer.github.com/v3/search/#search-repositories
      *
-     * @param   string  $query            the search query
+     * @param   string  $keyword          the search query
      * @param   string  $language         takes the same values as the language drop down on http://github.com/search
-     * @param   int     $startPage        the page number
-     * @return  array                     list of repos found
+     * @param   integer $startPage        the page number
+     *
+     * @return  array                     list of founded repositories
      */
-    public function search($query, $language = '', $startPage = 1)
+    public function search($keyword, $language = null, $startPage = 1)
     {
-        throw new \BadMethodCallException('Method cannot be implemented using new api version');
+        $url = 'legacy/repos/search/'.urlencode($keyword);
+
+        $params = array();
+        if (null !== $language) {
+            $params['language'] = $language;
+        }
+        if (1 !== $startPage) {
+            $params['start_page'] = $startPage;
+        }
+
+        if (!empty($params)) {
+            $url .= '?' . http_build_query($params);
+        }
+
+        return $this->get($url);
     }
 
     /**
@@ -363,7 +378,7 @@ class Repo extends Api
      *
      * @param   string  $username         the user who owns the repo
      * @param   string  $repo             the name of the repo
-     * @param           $path             path to file or directory
+     * @param   string  $path             path to file or directory
      *
      * @return array                      information for file | information for each item in directory
      */
