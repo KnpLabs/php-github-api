@@ -282,6 +282,20 @@ class Client
     }
 
     /**
+     * Get the markdown API
+     *
+     * @return Api\Markdown the markdown API
+     */
+    public function getMarkdownApi()
+    {
+        if (!isset($this->apis['markdown'])) {
+            $this->apis['markdown'] = new Api\Markdown($this);
+        }
+
+        return $this->apis['markdown'];
+    }
+
+    /**
      * Inject an API instance
      *
      * @param  string        $name the API name
