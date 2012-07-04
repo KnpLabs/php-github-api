@@ -2,6 +2,8 @@
 
 namespace Github\Api;
 
+use Github\Exception\InvalidArgumentException;
+
 /**
  * Searching organizations, getting organization information
  * and managing authenticated organization account information.
@@ -30,35 +32,32 @@ class Organization extends Api
 
     /**
      * List all repositories across all the organizations that you can access
-     * http://develop.github.com/p/orgs.html
+     * @link http://developer.github.com/v3/repos/#list-organization-repositories
      *
      * @param   string  $name             the user name
+     * @param   string  $type             the type of repositories
      * @return  array                     the repositories
      */
-    public function getAllRepos($name)
+    public function getAllRepos($name, $type = 'all')
     {
-        $response = $this->get('organizations/repositories');
-
-        return $response['repositories'];
+        return $this->get('orgs/'.urlencode($name).'/repos?type='.urlencode($type));
     }
 
     /**
      * List all public repositories of any other organization
-     * http://develop.github.com/p/orgs.html
+     * @link http://developer.github.com/v3/repos/#list-organization-repositories
      *
      * @param   string  $name             the organization name
      * @return  array                     the repositories
      */
     public function getPublicRepos($name)
     {
-        $response = $this->get('organizations/'.urlencode($name).'/public_repositories');
-
-        return $response['repositories'];
+        return $this->getAllRepos($name, 'public');
     }
 
     /**
      * List all public members of that organization
-     * @link http://developer.github.com/v3/orgs/members/
+     * @link http://developer.github.com/v3/orgs/members/#list-members
      *
      * @param   string  $name             the organization name
      * @return  array                     the members
@@ -70,7 +69,7 @@ class Organization extends Api
 
     /**
      * Check that user is in that organization
-     * @link http://developer.github.com/v3/orgs/members/
+     * @link http://developer.github.com/v3/orgs/members/#get-member
      *
      * @param   string  $name             the organization name
      * @param   string  $user             the user
@@ -83,7 +82,7 @@ class Organization extends Api
 
     /**
      * List all teams of that organization
-     * @link http://developer.github.com/v3/orgs/teams/
+     * @link http://developer.github.com/v3/orgs/teams/#list-teams
      *
      * @param   string  $name             the organization name
      * @return  array                     the teams
@@ -95,7 +94,7 @@ class Organization extends Api
 
     /**
      * Get team with given id of that organization
-     * @link http://developer.github.com/v3/orgs/teams/
+     * @link http://developer.github.com/v3/orgs/teams/#get-team
      *
      * @param   string  $name             the organization name
      * @param   string  $id               id of team
@@ -108,21 +107,21 @@ class Organization extends Api
 
     /**
      * Add a team to that organization
-     * @link http://developer.github.com/v3/orgs/teams/
+     * @link http://developer.github.com/v3/orgs/teams/#create-team
      *
-     * @param   string  $organization     the organization name
-     * @param   string  $team             name of the new team
-     * @param   string  $permission       its permission [PULL|PUSH|ADMIN]
-     * @param   array   $repositories     (optional) its repositories names
+     * @param  string  $organization     the organization name
+     * @param  string  $team             name of the new team
+     * @param  string  $permission       its permission [PULL|PUSH|ADMIN]
+     * @param  array   $repositories     (optional) its repositories names
      *
-     * @return  array                     the teams
+     * @return array                     the teams
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function addTeam($organization, $team, $permission = 'pull', array $repositories = array())
     {
         if (!in_array($permission, array(self::ADMIN, self::PUSH, self::PULL))) {
-            throw new \InvalidArgumentException("Invalid value for the permission variable");
+            throw new InvalidArgumentException("Invalid value for the permission variable");
         }
 
         return $this->post('orgs/'.urlencode($organization).'/teams', array(

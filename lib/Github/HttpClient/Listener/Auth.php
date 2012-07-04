@@ -3,6 +3,7 @@
 namespace Github\HttpClient\Listener;
 
 use Github\Client;
+use Github\Exception\InvalidArgumentException;
 
 use Buzz\Listener\ListenerInterface;
 use Buzz\Message\MessageInterface;
@@ -24,12 +25,12 @@ class AuthListener implements ListenerInterface
      * @param string $method
      * @param array  $options
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function __construct($method, array $options)
     {
         if (!isset($options['token']) || (!isset($options['login'], $options['password']))) {
-            throw new \InvalidArgumentException('You need to set OAuth token, or username with password!');
+            throw new InvalidArgumentException('You need to set OAuth token, or username with password!');
         }
 
         $this->method  = $method;

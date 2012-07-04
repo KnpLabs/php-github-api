@@ -9,13 +9,10 @@ use Github\HttpClient\HttpClient;
 /**
  * Simple yet very cool PHP Github client
  *
- * @tutorial  http://github.com/ornicar/php-github-api/blob/master/README.markdown
- * @version   3.2
- * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
- * @license   MIT License
+ * @author Thibault Duplessis <thibault.duplessis at gmail dot com>
+ * @author Joseph Bielawski <stloyd@gmail.com>
  *
- * Website: http://github.com/ornicar/php-github-api
- * Tickets: http://github.com/ornicar/php-github-api/issues
+ * Website: http://github.com/KnpLabs/php-github-api
  */
 class Client
 {
@@ -59,7 +56,7 @@ class Client
     protected $apis = array();
 
     /**
-     * Instanciate a new GitHub client
+     * Instantiate a new GitHub client
      *
      * @param HttpClientInterface $httpClient custom http client
      */
@@ -79,16 +76,19 @@ class Client
     {
         $this->getHttpClient()->setOption('auth_method', $method ?: self::AUTH_URL_TOKEN);
 
-        if (self::AUTH_HTTP_PASSWORD) {
-            $this->getHttpClient()->setOption('login', $login)
-                             ->setOption('password', $secret);
+        if ($method === self::AUTH_HTTP_PASSWORD) {
+            $this
+                ->getHttpClient()
+                ->setOption('login', $login)
+                ->setOption('password', $secret)
+            ;
         } else {
             $this->getHttpClient()->setOption('token', $secret);
         }
     }
 
     /**
-     * Deauthenticate a user for all next requests
+     * De-authenticate a user for all next requests
      */
     public function deAuthenticate()
     {
@@ -287,7 +287,7 @@ class Client
      * @param  string        $name the API name
      * @param  ApiInterface  $api  the API instance
      *
-     * @return self
+     * @return Client
      */
     public function setApi($name, ApiInterface $instance)
     {
@@ -307,11 +307,17 @@ class Client
         return $this->apis[$name];
     }
 
+    /**
+     * Clears used headers
+     */
     public function clearHeaders()
     {
         $this->setHeaders(array());
     }
 
+    /**
+     * @param array $headers
+     */
     public function setHeaders($headers)
     {
         $this->headers = $headers;

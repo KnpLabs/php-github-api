@@ -6,15 +6,15 @@ namespace Github\Api;
  * Getting information on specific commits,
  * the diffs they introduce, the files they've changed.
  *
- * @link      http://develop.github.com/p/commits.html
- * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
- * @license   MIT License
+ * @link   http://developer.github.com/v3/repos/commits/
+ * @author Thibault Duplessis <thibault.duplessis at gmail dot com>
+ * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class Commit extends Api
 {
     /**
      * List commits by username, repo and branch
-     * http://developer.github.com/v3/repos/commits/
+     * @link http://developer.github.com/v3/repos/commits/
      *
      * @param   string  $username         the username
      * @param   string  $repo             the repo
@@ -30,7 +30,7 @@ class Commit extends Api
 
     /**
      * List commits by username, repo, branch and path
-     * http://developer.github.com/v3/repos/commits/
+     * @link http://developer.github.com/v3/repos/commits/
      *
      * @param   string  $username         the username
      * @param   string  $repo             the repo
@@ -47,7 +47,7 @@ class Commit extends Api
 
     /**
      * Show a specific commit
-     * http://developer.github.com/v3/repos/commits/
+     * @link http://developer.github.com/v3/repos/commits/#get-a-single-commit
      *
      * @param   string  $username         the username
      * @param   string  $repo             the repo
@@ -61,6 +61,7 @@ class Commit extends Api
 
     /**
      * Fetch branch sha from branch name
+     * @link http://developer.github.com/v3/git/refs/#get-a-reference
      *
      * @param string $username
      * @param string $repoName
@@ -69,8 +70,12 @@ class Commit extends Api
      */
     private function getBranchSha($username, $repoName, $branchName)
     {
-        $branchInfo = $this->get('repos/'.urlencode($username).'/'.urlencode($repoName).'/git/trees/'.urlencode($branchName));
+        $info = $this->get('repos/'.urlencode($username).'/'.urlencode($repoName).'/git/refs/'.urlencode($branchName));
 
-        return isset($branchInfo['sha']) ? $branchInfo['sha'] : null;
+        if (!isset($info['ref'])) {
+            return null;
+        }
+
+        return $info['object']['sha'];
     }
 }

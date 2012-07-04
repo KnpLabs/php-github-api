@@ -6,13 +6,14 @@ use Buzz\Browser;
 use Buzz\Client\Curl;
 use Buzz\Message\MessageInterface;
 
+use Github\Exception\ApiLimitExceedException;
 use Github\HttpClient\Listener\AuthListener;
 
 /**
  * Performs requests on GitHub API. API documentation should be self-explanatory.
  *
- * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
- * @license   MIT License
+ * @author Thibault Duplessis <thibault.duplessis at gmail dot com>
+ * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class HttpClient implements HttpClientInterface
 {
@@ -78,7 +79,7 @@ class HttpClient implements HttpClientInterface
     }
 
     /**
-     * @param array $headers
+     * {@inheritDoc}
      */
     public function setHeaders(array $headers)
     {
@@ -86,12 +87,7 @@ class HttpClient implements HttpClientInterface
     }
 
     /**
-     * Change an option value.
-     *
-     * @param string $name   The option name
-     * @param mixed  $value  The value
-     *
-     * @return self The current object instance
+     * {@inheritDoc}
      */
     public function setOption($name, $value)
     {
@@ -191,13 +187,7 @@ class HttpClient implements HttpClientInterface
     }
 
     /**
-     * Get a JSON response and transform it to a PHP array
-     *
-     * @param  string $response  The response
-     *
-     * @return array  The content of response
-     *
-     * @throws \RuntimeException
+     * {@inheritDoc}
      */
     protected function decodeResponse($response)
     {
@@ -211,18 +201,14 @@ class HttpClient implements HttpClientInterface
     }
 
     /**
-     * Report to user he reached his GitHub API limit.
-     *
-     * @param MessageInterface $response
-     *
-     * @throws \RuntimeException
+     * {@inheritDoc}
      */
     protected function checkApiLimit(MessageInterface $response)
     {
         $limit = $response->getHeader('X-RateLimit-Remaining');
 
         if (null !== $limit && 1 > $limit) {
-            throw new \RuntimeException('You have reached GitHub hour limit! Actual limit is: '. $this->options['api_limit']);
+            throw new ApiLimitExceedException($this->options['api_limit']);
         }
     }
 }
