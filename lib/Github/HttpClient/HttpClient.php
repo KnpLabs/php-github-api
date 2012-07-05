@@ -18,6 +18,11 @@ use Github\HttpClient\Listener\AuthListener;
 class HttpClient implements HttpClientInterface
 {
     /**
+     * @var integer
+     */
+    public $remainingCalls;
+
+    /**
      * The http client options
      * @var array
      */
@@ -205,9 +210,9 @@ class HttpClient implements HttpClientInterface
      */
     protected function checkApiLimit(MessageInterface $response)
     {
-        $limit = $response->getHeader('X-RateLimit-Remaining');
+        $this->remainingCalls = $response->getHeader('X-RateLimit-Remaining');
 
-        if (null !== $limit && 1 > $limit) {
+        if (null !== $this->remainingCalls && 1 > $this->remainingCalls) {
             throw new ApiLimitExceedException($this->options['api_limit']);
         }
     }

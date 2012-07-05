@@ -6,7 +6,7 @@ use Github\Tests\ApiTestCase;
 
 class CommitTest extends ApiTestCase
 {
-    public function testGetBranchCommits()
+    public function testGetInvalidBranchCommits()
     {
         $api = $this->getApiMock();
 
@@ -18,7 +18,7 @@ class CommitTest extends ApiTestCase
 
         $api->expects($this->at(1))
             ->method('get')
-            ->with($this->equalTo('repos/ornicar/php-github-api/commits?sha=123'))
+            ->with($this->equalTo('repos/ornicar/php-github-api/commits'))
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->getBranchCommits('ornicar', 'php-github-api', 'v3'));

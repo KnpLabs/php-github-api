@@ -13,19 +13,25 @@ class Markdown extends Api
     /**
      * @param string $text
      * @param string $mode
+     * @param string $context
      *
      * @return string
      */
-    public function render($text, $mode = 'markdown')
+    public function render($text, $mode = 'markdown', $context = null)
     {
-        if (!in_array($mode, array())) {
+        if (!in_array($mode, array('gfm', 'markdown'))) {
             $mode = 'markdown';
         }
 
-        return $this->post('markdown', array(
+        $params = array(
             'text' => $text,
             'mode' => $mode
-        ));
+        );
+        if (null !== $context && 'gfm' === $mode) {
+            $params['context'] = $context;
+        }
+
+        return $this->post('markdown', $params);
     }
 
     /**

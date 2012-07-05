@@ -23,9 +23,14 @@ class Commit extends Api
      */
     public function getBranchCommits($username, $repo, $branch)
     {
-        $branchSha = $this->getBranchSha($username, $repo, $branch);
+        $url = 'repos/'.urlencode($username).'/'.urlencode($repo).'/commits';
 
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repo).'/commits?sha='.urlencode($branchSha));
+        $sha = $this->getBranchSha($username, $repo, $branch);
+        if (null !== $sha) {
+            $url .= '?sha='.urlencode($sha);
+        }
+
+        return $this->get($url);
     }
 
     /**

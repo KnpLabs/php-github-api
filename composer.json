@@ -17,11 +17,17 @@
         }
     ],
     "require": {
-        "php": ">=5.3.2",
-        "ext-curl": "*",
+        "php":                ">=5.3.2",
+        "ext-curl":           "*",
         "kriswallsmith/buzz": "0.7"
+    },
+    "require-dev": {
+        "behat/behat": "2.4.*"
     },
     "autoload": {
         "psr-0": { "Github": "lib/" }
+    },
+    "config": {
+        "bin-dir": "bin/"
     }
 }

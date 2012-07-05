@@ -28,7 +28,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $method = 'method';
 
         $httpClient = $this->getHttpClientMock();
-        $httpClient->expects($this->exactly(3))
+        $httpClient->expects($this->exactly(2))
             ->method('setOption')
             ->will($this->returnValue($httpClient));
 

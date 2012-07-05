@@ -42,18 +42,18 @@ class Client
     protected $httpClient = null;
 
     /**
-     * HTTP Headers
-     *
-     * @var array
-     */
-    private $headers = array();
-
-    /**
      * The list of loaded API instances
      *
      * @var array
      */
     protected $apis = array();
+
+    /**
+     * HTTP Headers
+     *
+     * @var array
+     */
+    private $headers = array();
 
     /**
      * Instantiate a new GitHub client
@@ -113,7 +113,7 @@ class Client
      * Call any path, POST method
      * Ex: $api->post('repos/show/my-username', array('email' => 'my-new-email@provider.org'))
      *
-     * @param   string  $path            the GitHub path
+     * @param   string  $path             the GitHub path
      * @param   array   $parameters       POST parameters
      * @param   array   $requestOptions   reconfigure the request
      * @return  array                     data returned
@@ -293,6 +293,14 @@ class Client
         }
 
         return $this->apis['markdown'];
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRateLimit()
+    {
+        return $this->get('rate_limit');
     }
 
     /**
