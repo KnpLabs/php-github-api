@@ -9,7 +9,7 @@ class GistTest extends ApiTestCase
     /**
      * @test
      */
-    public function shouldCreateAnonymousGist()
+    public function shouldCreateGist()
     {
         $api = $this->getApiMock();
         
@@ -32,6 +32,33 @@ class GistTest extends ApiTestCase
         
         $gist = $api->create($filename, $content);
     }
+    
+    /**
+     * @test
+     */
+    public function shouldUpdateGist()
+    {
+        $api = $this->getApiMock();
+        
+        $input = array(
+            'description' => '',
+            'files' => array(
+                'filename.txt' => array(
+                    'filename' => 'new_name.txt',
+                    'content'  => 'content'
+                ),
+                'filename_new.txt' => array(
+                    'content'  => 'content new'
+                )
+            )
+        );
+        
+        $api->expects($this->once())
+            ->method('patch')
+            ->with('gists/5', $input);
+        
+        $gist = $api->update(5, $input);
+    }    
     
     /**
      * @test
