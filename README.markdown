@@ -50,7 +50,7 @@ From this object, you can access to all GitHub apis, listed below.
 <a name='nav'></a>
 ## Navigation
 
-[Users][] | [Issues][] | [Commits][] | [Objects][] | [Repos][] | [Pull Requests][] | [Request any Route][] | [Authentication & Security][] | [Customize php-github-api][] | [Run Test Suite][]
+[Users][] | [Issues][] | [Commits][] | [Objects][] | [Repos][] | [Pull Requests][] | [Gists][] | [Request any Route][] | [Authentication & Security][] | [Customize php-github-api][] | [Run Test Suite][]
 
 <a name='users'></a>
 ## Users
@@ -556,8 +556,6 @@ To include non GitHub users, add a third parameter to true:
 ```
 
 
-
-
 <a name='pull_requests'></a>
 ## Pull Requests
 <a href='#nav' alt='Back to the navigation'>Go back to the Navigation</a>
@@ -627,6 +625,55 @@ Requires authentication. The issue ID is provided instead of title and body.
 ```
 
 This returns the details of the pull request.
+
+
+<a name='users'></a>
+## Gists
+<a href='#nav' alt='Back to the navigation'>Go back to the Navigation</a>
+
+Creating, editing, deleting and listing gists. Wraps [GitHub Gists API](http://developer.github.com/v3/gists/).
+
+#### List gists of a specific user
+
+```php
+    $gists = $github->getGistApi()->getList( 'ornicar' );
+```
+
+Returns a list of user’s gists.
+
+#### Get a single gist
+
+```php
+    $gist = $github->getGistApi()->getGist( 1 );
+```
+
+Returns a single gist.
+
+#### Create a gist
+
+```php
+    $gist = $github->getGistApi()->create( 'filename.php', 'file contents', 'This is an optional description of my gist', true );
+```
+
+Creates and returns a public gist.
+
+#### Update a gist
+
+```php
+    $description = 'This is a new description of my gist';
+    $files = array( 'new_file.txt' => array( 'content' => 'a new file' ));
+    $gist = $github->getGistApi()->update( 1234, array( 'description' => $description, 'files' => $files ));
+```
+
+Updates and returns my gist with id 1234.
+
+#### Delete a gist
+
+```php
+    $gist = $github->getGistApi()->remove( 1234 );
+```
+
+Delete my gist with id 1234.
 
 
 <a name='request_any_route'></a>
