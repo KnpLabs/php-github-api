@@ -37,7 +37,6 @@ class Gist extends Api
     
     /**
      * Create a new gist.
-     * The gist is assigned to null user.
      * @link http://developer.github.com/v3/issues/
      *
      * @param   string  $description      gist description
@@ -63,7 +62,6 @@ class Gist extends Api
     
     /**
      * Remove a gist by id
-     * Requires authentication.
      * @link http://developer.github.com/v3/issues/
      * 
      * @param   int  $id          the gist id
