@@ -627,7 +627,7 @@ Requires authentication. The issue ID is provided instead of title and body.
 This returns the details of the pull request.
 
 
-<a name='users'></a>
+<a name='gists'></a>
 ## Gists
 <a href='#nav' alt='Back to the navigation'>Go back to the Navigation</a>
 
@@ -817,6 +817,7 @@ Thanks to GitHub for the high quality API and documentation.
 [Commits]: #commits
 [Objects]: #objects
 [Repos]: #repos
+[Gists]: #gists
 [Pull Requests]: #pull_requests
 [Request any Route]: #request_any_route
 [Authentication & Security]: #authentication_and_security
