@@ -32,20 +32,20 @@ class Gist extends Api
      */
     public function getGist($id)
     {
-        return $this->get('/gists/'.urlencode($id));
+        return $this->get('gists/'.urlencode($id));
     }
     
     /**
      * Create a new gist.
      * @link http://developer.github.com/v3/gists/
      *
-     * @param   string  $description      gist description
-     * @param   bool    $public           1 for public, 0 for private
      * @param   string  $filename         gist filename
      * @param   string  $content          gist file contents
+     * @param   bool    $public           1 for public, 0 for private
+     * @param   string  $description      gist description
      * @return  array                     returns gist data
      */
-    public function create($filename, $content, $description = '', $public = false)
+    public function create($filename, $content, $public = false, $description = '')
     {
         $input = array(
             'description' => $description,
@@ -64,9 +64,9 @@ class Gist extends Api
      * Edit a gist
      * @link http://developer.github.com/v3/gists/
      *
-     * @param   string  $$id              the gist id
-     * @param   array   $values           the key => value pairs to post
-     * @return  array                     informations about the gist
+     * @param   string  $id              the gist id
+     * @param   array   $values          the key => value pairs to post
+     * @return  array                    informations about the gist
      */
     public function update($id, $values)
     {
@@ -78,7 +78,7 @@ class Gist extends Api
      * @link http://developer.github.com/v3/gists/
      * 
      * @param   int  $id          the gist id
-     * @return  null              
+     * @return  Response              
      */
     public function remove($id)
     {
