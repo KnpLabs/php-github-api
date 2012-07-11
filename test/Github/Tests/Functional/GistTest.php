@@ -53,7 +53,7 @@ class GistTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('user', $gist);        
         $this->assertEquals('KnpLabs', $gist['user']['login']);        
     }
-
+    
     /**
      * @test
      */

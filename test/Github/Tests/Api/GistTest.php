@@ -28,9 +28,9 @@ class GistTest extends ApiTestCase
         $api = $this->getApiMock();
         
         $files = array(
-            'filename.txt' => array(
-                'content' => 'content'
-            )
+                'filename.txt' => array(
+                    'content' => 'content'
+                )
         );
         
         $input = array(
@@ -54,13 +54,13 @@ class GistTest extends ApiTestCase
         $api = $this->getApiMock();
         
         $files =  array(
-            'filename.txt' => array(
-                'filename' => 'new_name.txt',
-                'content'  => 'content'
-            ),
-            'filename_new.txt' => array(
-                'content'  => 'content new'
-            )
+                'filename.txt' => array(
+                    'filename' => 'new_name.txt',
+                    'content'  => 'content'
+                ),
+                'filename_new.txt' => array(
+                    'content'  => 'content new'
+                )
         );
         
         $input = array(
