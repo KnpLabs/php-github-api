@@ -363,9 +363,10 @@ class Repo extends Api
      * Get the teams of a repository
      * @link http://developer.github.com/v3/repos/
      *
-     * @param   string  $username         the user who owns the repo
-     * @param   string  $repo             the name of the repo
-     * @return  array                     list of the languages
+     * @param  string  $username         the user who owns the repo
+     * @param  string  $repo             the name of the repo
+     *
+     * @return array                     list of the languages
      */
     public function getRepoTeams($username, $repo)
     {
@@ -376,14 +377,43 @@ class Repo extends Api
      * Get contents of any file or directory in a repository
      * @link http://developer.github.com/v3/repos/contents/
      *
-     * @param   string  $username         the user who owns the repo
-     * @param   string  $repo             the name of the repo
-     * @param   string  $path             path to file or directory
+     * @param  string  $username         the user who owns the repo
+     * @param  string  $repo             the name of the repo
+     * @param  string  $path             path to file or directory
      *
-     * @return array                      information for file | information for each item in directory
+     * @return array                     information for file | information for each item in directory
      */
     public function getRepoContents($username, $repo, $path)
     {
         return $this->get('repos/'.urlencode($username).'/'.urlencode($repo).'/contents/'.$path);
+    }
+
+    /**
+     * Get the downloads for selected repository
+     * @link http://developer.github.com/v3/repos/downloads/#list-downloads-for-a-repository
+     *
+     * @param  string  $username         the user who owns the repo
+     * @param  string  $repo             the name of the repo
+     *
+     * @return array
+     */
+    public function getRepoDownloads($username, $repo)
+    {
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repo).'/downloads');
+    }
+
+    /**
+     * Delete a download in selected repository
+     * @link http://developer.github.com/v3/repos/downloads/#delete-a-download
+     *
+     * @param  string  $username         the user who owns the repo
+     * @param  string  $repo             the name of the repo
+     * @param  integer $id               the id of the download file
+     *
+     * @return array
+     */
+    public function deleteRepoDownload($username, $repo, $id)
+    {
+        return $this->delete('repos/'.urlencode($username).'/'.urlencode($repo).'/downloads/'.urlencode($id));
     }
 }
