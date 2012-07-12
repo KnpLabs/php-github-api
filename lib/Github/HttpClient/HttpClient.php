@@ -57,6 +57,11 @@ class HttpClient implements HttpClientInterface
     protected $browser;
 
     /**
+     * @var array
+     */
+    private $lastResponse;
+
+    /**
      * Instantiated a new http client
      *
      * @param array        $options Http client options
@@ -99,6 +104,18 @@ class HttpClient implements HttpClientInterface
         $this->options[$name] = $value;
 
         return $this;
+    }
+
+    /**
+     * @return null|array
+     */
+    public function getPagination()
+    {
+        if (null === $this->lastResponse) {
+            return null;
+        }
+
+        return $this->lastResponse['pagination'];
     }
 
     /**
@@ -162,9 +179,9 @@ class HttpClient implements HttpClientInterface
         ));
 
         // get encoded response
-        $response = $this->doRequest($url, $parameters, $httpMethod, $options);
+        $this->lastResponse = $this->doRequest($url, $parameters, $httpMethod, $options);
 
-        return $this->decodeResponse($response['response']);
+        return $this->decodeResponse($this->lastResponse['response']);
     }
 
     /**
@@ -186,9 +203,34 @@ class HttpClient implements HttpClientInterface
         return array(
             'response'     => $response->getContent(),
             'headers'      => $response->getHeaders(),
+            'pagination'   => $this->decodePagination($response),
             'errorNumber'  => '',
             'errorMessage' => ''
         );
+    }
+
+    /**
+     * @param MessageInterface $response
+     *
+     * @return array|null
+     */
+    protected function decodePagination(MessageInterface $response)
+    {
+        $header = $response->getHeader('Link');
+        if (empty($header)) {
+            return null;
+        }
+
+        $pagination = array();
+        foreach (explode("\n", $header) as $link) {
+            preg_match('/<(.*)>; rel="(.*)"/i', trim($link, ','), $match);
+
+            if (3 === count($match)) {
+                $pagination[$match[2]] = $match[1];
+            }
+        }
+
+        return $pagination;
     }
 
     /**
