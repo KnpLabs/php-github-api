@@ -18,7 +18,7 @@ class Issue extends Api
      * @param   string  $username         the username
      * @param   string  $repo             the repo
      * @param   string  $state            the issue state, can be open or closed
-     * @param   array  $state             the additional parameters like milestone, assignee, lables, sort, direction
+     * @param   array   $parameters       the additional parameters like milestone, assignee, lables, sort, direction
      * @return  array                     list of issues found
      */
     public function getList($username, $repo, $state = null, $parameters = array())
@@ -35,17 +35,23 @@ class Issue extends Api
     }
 
     /**
-     * Search issues by username, repo, state and search term
+     * Search issues by username, repo, state and keyword
+     * @link http://developer.github.com/v3/search/#search-issues
      *
      * @param   string  $username         the username
      * @param   string  $repo             the repo
      * @param   string  $state            the issue state, can be open or closed
-     * @param   string  $searchTerm       the search term to filter issues by
+     * @param   string  $keyword          the keyword to filter issues by
+     *
      * @return  array                     list of issues found
      */
-    public function search($username, $repo, $state, $searchTerm)
+    public function search($username, $repo, $state, $keyword)
     {
-        throw new \BadMethodCallException('Method cannot be implemented using new api version');
+        if (!in_array($state, array('open', 'closed'))) {
+            $state = 'open';
+        }
+
+        return $this->get('legacy/issues/search/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($state).'/'.urlencode($keyword));
     }
 
     /**
@@ -125,7 +131,7 @@ class Issue extends Api
     }
 
     /**
-     * Repoen an existing issue by username, repo and issue number. Requires authentication.
+     * Reopen an existing issue by username, repo and issue number. Requires authentication.
      * @link http://developer.github.com/v3/issues/
      *
      * @param   string  $username         the username

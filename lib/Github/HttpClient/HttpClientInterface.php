@@ -5,8 +5,8 @@ namespace Github\HttpClient;
 /**
  * Performs requests on GitHub API. API documentation should be self-explanatory.
  *
- * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
- * @license   MIT License
+ * @author Thibault Duplessis <thibault.duplessis at gmail dot com>
+ * @author Joseph Bielawski <stloyd@gmail.com>
  */
 interface HttpClientInterface
 {
@@ -77,7 +77,7 @@ interface HttpClientInterface
     /**
      * Set HTTP headers
      *
-     * @param array
+     * @param array $headers
      */
-    function setHeaders($headers);
+    function setHeaders(array $headers);
 }

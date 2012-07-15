@@ -13,15 +13,16 @@ namespace Github\Api;
 class User extends Api
 {
     /**
-     * Search users by username
-     * http://develop.github.com/p/users.html#searching_for_users
+     * Search users by username:
+     * @link http://developer.github.com/v3/search/#search-users
      *
-     * @param   string  $username         the username to search
-     * @return  array                     list of users found
+     * @param  string $keyword the keyword to search
+     *
+     * @return array           list of users found
      */
-    public function search($username)
+    public function search($keyword)
     {
-        throw new \BadMethodCallException('Method cannot be implemented using new api version');
+        return $this->get('legacy/user/search/'.urlencode($keyword));
     }
 
     /**

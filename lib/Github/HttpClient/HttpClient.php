@@ -4,31 +4,41 @@ namespace Github\HttpClient;
 
 use Buzz\Browser;
 use Buzz\Client\Curl;
-use Buzz\Message\Response;
+use Buzz\Message\MessageInterface;
+
+use Github\Exception\ApiLimitExceedException;
+use Github\HttpClient\Listener\AuthListener;
 
 /**
  * Performs requests on GitHub API. API documentation should be self-explanatory.
  *
- * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
- * @license   MIT License
+ * @author Thibault Duplessis <thibault.duplessis at gmail dot com>
+ * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class HttpClient implements HttpClientInterface
 {
+    /**
+     * @var integer
+     */
+    public $remainingCalls;
+
     /**
      * The http client options
      * @var array
      */
     protected $options = array(
-        'url'        => 'https://api.github.com/:path',
-        'user_agent' => 'php-github-api (http://github.com/KnpLabs/php-github-api)',
-        'http_port'  => 443,
-        'timeout'    => 10,
+        'url'         => 'https://api.github.com/:path',
+        'user_agent'  => 'php-github-api (http://github.com/KnpLabs/php-github-api)',
+        'http_port'   => 443,
+        'timeout'     => 10,
 
-        'api_limit'  => 5000,
+        'api_limit'   => 5000,
 
-        'login'      => null,
-        'password'   => null,
-        'token'      => null,
+        'auth_method' => null,
+
+        'login'       => null,
+        'password'    => null,
+        'token'       => null,
     );
 
     /**
@@ -42,7 +52,7 @@ class HttpClient implements HttpClientInterface
     protected $headers = array();
 
     /**
-     * @var Buzz\Browser
+     * @var Browser
      */
     protected $browser;
 
@@ -60,28 +70,29 @@ class HttpClient implements HttpClientInterface
         $this->browser->getClient()->setTimeout($this->options['timeout']);
         $this->browser->getClient()->setVerifyPeer(false);
 
-        if ($this->options['login']) {
+        if (null !== $this->options['login'] || null !== $this->options['token']) {
+            if (null !== $this->options['token']) {
+                $options = array($this->options['token']);
+            } else {
+                $options = array($this->options['login'], $this->options['password']);
+            }
+
             $this->browser->addListener(
-                new Listener\AuthListener(
-                    $this->options['auth_method'],
-                    array($this->options['login'], $this->options['password'])
-                )
+                new AuthListener($this->options['auth_method'], $options)
             );
         }
     }
 
-    public function setHeaders($headers)
+    /**
+     * {@inheritDoc}
+     */
+    public function setHeaders(array $headers)
     {
         $this->headers = $headers;
     }
 
     /**
-     * Change an option value.
-     *
-     * @param string $name   The option name
-     * @param mixed  $value  The value
-     *
-     * @return self The current object instance
+     * {@inheritDoc}
      */
     public function setOption($name, $value)
     {
@@ -91,7 +102,7 @@ class HttpClient implements HttpClientInterface
     }
 
     /**
-     * {@inheridoc}
+     * {@inheritDoc}
      */
     public function get($path, array $parameters = array(), array $options = array())
     {
@@ -99,7 +110,7 @@ class HttpClient implements HttpClientInterface
     }
 
     /**
-     * {@inheridoc}
+     * {@inheritDoc}
      */
     public function post($path, array $parameters = array(), array $options = array())
     {
@@ -107,7 +118,7 @@ class HttpClient implements HttpClientInterface
     }
 
     /**
-     * {@inheridoc}
+     * {@inheritDoc}
      */
     public function patch($path, array $parameters = array(), array $options = array())
     {
@@ -115,7 +126,7 @@ class HttpClient implements HttpClientInterface
     }
 
     /**
-     * {@inheridoc}
+     * {@inheritDoc}
      */
     public function delete($path, array $parameters = array(), array $options = array())
     {
@@ -123,7 +134,7 @@ class HttpClient implements HttpClientInterface
     }
 
     /**
-     * {@inheridoc}
+     * {@inheritDoc}
      */
     public function put($path, array $options = array())
     {
@@ -164,7 +175,7 @@ class HttpClient implements HttpClientInterface
      * @param  string   $httpMethod    HTTP method to use
      * @param  array    $options       Request options
      *
-     * @return string   HTTP response
+     * @return array    HTTP response
      */
     protected function doRequest($url, array $parameters = array(), $httpMethod = 'GET', array $options = array())
     {
@@ -181,13 +192,7 @@ class HttpClient implements HttpClientInterface
     }
 
     /**
-     * Get a JSON response and transform it to a PHP array
-     *
-     * @param  string $response  The response
-     *
-     * @return array  The content of response
-     *
-     * @throws \RuntimeException
+     * {@inheritDoc}
      */
     protected function decodeResponse($response)
     {
@@ -201,18 +206,14 @@ class HttpClient implements HttpClientInterface
     }
 
     /**
-     * Report to user he reached his GitHub API limit.
-     *
-     * @param Response $response
-     *
-     * @throws \RuntimeException
+     * {@inheritDoc}
      */
-    protected function checkApiLimit(Response $response)
+    protected function checkApiLimit(MessageInterface $response)
     {
-        $limit = $response->getHeader('X-RateLimit-Remaining');
+        $this->remainingCalls = $response->getHeader('X-RateLimit-Remaining');
 
-        if (null !== $limit && 1 > $limit) {
-            throw new \RuntimeException('You have reached GitHub hour limit! Actual limit is: '. $this->options['api_limit']);
+        if (null !== $this->remainingCalls && 1 > $this->remainingCalls) {
+            throw new ApiLimitExceedException($this->options['api_limit']);
         }
     }
 }
