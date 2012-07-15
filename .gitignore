@@ -1,3 +1,9 @@
-composer.lock
-composer.phar
-vendor/*
+#<? a Courtesy of Respect/Foundation
+.foundation
+*.tgz
+*.phar
+*.lock
+*tmp
+scratch/*
+test/reports
+vendor
