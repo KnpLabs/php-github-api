@@ -1,0 +1,30 @@
+<!-- a Courtesy of Respect/Foundation -->
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         bootstrap="bootstrap.php"
+         cacheTokens="true"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         printerClass="PHPUnit_TextUI_ResultPrinter"
+         mapTestClassNameToCoveredClassName="true"
+         forceCoversAnnotation="true"
+         processIsolation="false"
+         stopOnError="false"
+         stopOnFailure="false"
+         stopOnIncomplete="false"
+         stopOnSkipped="false"
+         testSuiteLoaderClass="PHPUnit_Runner_StandardTestSuiteLoader"
+         syntaxCheck="false"
+         strict="false"
+         verbose="false">
+    <filter>
+        <whitelist addUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">../lib/Github/</directory>
+        </whitelist>
+    </filter>
+    <testsuite name="Github/Api Test Suite">
+        <directory suffix="Test.php" phpVersion="5.3.0" phpVersionOperator=">=">.</directory>
+    </testsuite>
+</phpunit>
