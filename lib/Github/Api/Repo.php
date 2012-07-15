@@ -416,4 +416,18 @@ class Repo extends Api
     {
         return $this->delete('repos/'.urlencode($username).'/'.urlencode($repo).'/downloads/'.urlencode($id));
     }
+
+    /**
+     * Get the hooks for selected repository
+     * @link http://developer.github.com/v3/repos/hooks/#list
+     *
+     * @param  string  $username         the user who owns the repo
+     * @param  string  $repo             the name of the repo
+     *
+     * @return array
+     */
+    public function getRepoHooks($username, $repo)
+    {
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repo).'/hooks');
+    }
 }
