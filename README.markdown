@@ -50,7 +50,7 @@ From this object, you can access to all GitHub apis, listed below.
 <a name='nav'></a>
 ## Navigation
 
-[Users][] | [Issues][] | [Commits][] | [Objects][] | [Repos][] | [Pull Requests][] | [Request any Route][] | [Authentication & Security][] | [Customize php-github-api][] | [Run Test Suite][]
+[Users][] | [Issues][] | [Commits][] | [Objects][] | [Repos][] | [Pull Requests][] | [Gists][] | [Request any Route][] | [Authentication & Security][] | [Customize php-github-api][] | [Run Test Suite][]
 
 <a name='users'></a>
 ## Users
@@ -556,8 +556,6 @@ To include non GitHub users, add a third parameter to true:
 ```
 
 
-
-
 <a name='pull_requests'></a>
 ## Pull Requests
 <a href='#nav' alt='Back to the navigation'>Go back to the Navigation</a>
@@ -627,6 +625,97 @@ Requires authentication. The issue ID is provided instead of title and body.
 ```
 
 This returns the details of the pull request.
+
+
+<a name='gists'></a>
+## Gists
+<a href='#nav' alt='Back to the navigation'>Go back to the Navigation</a>
+
+Creating, editing, deleting and listing gists. Wraps [GitHub Gists API](http://developer.github.com/v3/gists/).
+
+#### List gists of a specific user
+
+```php
+    $gists = $github->getGistApi()->getListByUser( 'ornicar' );
+```
+
+#### List all public gists.
+
+```php
+    $gists = $github->getGistApi()->getPublicList();
+```
+
+#### List the authenticated user’s starred gists.
+
+```php
+    $gists = $github->getGistApi()->getStarredList();
+```
+
+Requires authentication.
+
+#### List the authenticated user’s gists or if called anonymously, this will return all public gists.
+
+```php
+    $gists = $github->getGistApi()->getList();
+```
+
+#### Get a single gist
+
+```php
+    $gist = $github->getGistApi()->getGist( 1 );
+```
+
+#### Create a gist
+
+```php
+    $files = array( 'filename.txt' => array( 'content' => 'txt file content' ));
+    $gist = $github->getGistApi()->create( $files, true, 'This is an optional description' );
+```
+
+Creates and returns a public gist.
+
+#### Update a gist
+
+You can update ``description``.
+
+```php
+    $files = array();
+    $gist = $github->getGistApi()->update( 1234, $files, 'This is a new description' );
+```
+
+You can update ``content`` of a previous file's version.
+
+```php
+    $files = array( 'filename.txt' => array( 'content' => 'updated txt file content' ));
+    $gist = $github->getGistApi()->update( 1234, $files );
+```
+
+You can update the ``filename`` of a previous file's version.
+
+```php
+    $files = array( 'filename.txt' => array( 'filename' => 'new-filename.txt' ));
+    $gist = $github->getGistApi()->update( 1234, $files );
+```
+
+You can add a new file to the gist.
+
+```php
+    $files = array( 'new-filename.php' => array( 'content' => 'a new file content' ));
+    $gist = $github->getGistApi()->update( 1234, $files );
+```
+
+You can remove a file from the gist.
+
+```php
+    $files = array( 'filename.txt' => null );
+    $gist = $github->getGistApi()->update( 1234, $files );
+```
+
+#### Delete a gist
+
+```php
+    $gist = $github->getGistApi()->remove( 1234 );
+```
 
 
 <a name='request_any_route'></a>
@@ -770,6 +859,7 @@ Thanks to GitHub for the high quality API and documentation.
 [Commits]: #commits
 [Objects]: #objects
 [Repos]: #repos
+[Gists]: #gists
 [Pull Requests]: #pull_requests
 [Request any Route]: #request_any_route
 [Authentication & Security]: #authentication_and_security

@@ -224,6 +224,20 @@ class Client
 
         return $this->apis['commit'];
     }
+    
+    /**
+     * Get the gist API
+     *
+     * @return  Api\Gist  the gist API
+     */
+    public function getGistApi()
+    {
+        if (!isset($this->apis['gist'])) {
+            $this->apis['gist'] = new Api\Gist($this);
+        }
+
+        return $this->apis['gist'];
+    }
 
     /**
      * Get the repo API

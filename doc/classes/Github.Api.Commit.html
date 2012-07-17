@@ -1,0 +1,214 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>phpDocumentor » \Github\Api\Commit</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">phpDocumentor</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/Github.html"><i class="icon-th"></i> Github</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">68</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#getBranchCommits" title="getBranchCommits :: List commits by username, repo and branch"><span class="description">List commits by username, repo and branch</span><pre>getBranchCommits()</pre></a></li>
+<li class="method public "><a href="#getCommit" title="getCommit :: Show a specific commit"><span class="description">Show a specific commit</span><pre>getCommit()</pre></a></li>
+<li class="method public "><a href="#getFileCommits" title="getFileCommits :: List commits by username, repo, branch and path"><span class="description">List commits by username, repo, branch and path</span><pre>getFileCommits()</pre></a></li>
+<li class="nav-header private">» Private</li>
+<li class="method private "><a href="#getBranchSha" title="getBranchSha :: Fetch branch sha from branch name"><span class="description">Fetch branch sha from branch name</span><pre>getBranchSha()</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CGithub%5CApi%5CCommit" id="\Github\Api\Commit"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/Github.html">Github</a></li>
+<span class="divider">\</span><li><a href="../namespaces/Github.Api.html">Api</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/Github.Api.Commit.html">Commit</a>
+</li>
+</ul>
+<div href="../classes/Github.Api.Commit.html" class="element class">
+<p class="short_description">Getting information on specific commits,
+the diffs they introduce, the files they've changed.</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/commits/">http://developer.github.com/v3/repos/commits/</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="">Thibault Duplessis &lt;thibault.duplessis at gmail dot com&gt;</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:stloyd@gmail.com">Joseph Bielawski</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="getBranchCommits" id="getBranchCommits"></a><div class="element clickable method public getBranchCommits" data-toggle="collapse" data-target=".getBranchCommits .collapse">
+<h2>List commits by username, repo and branch</h2>
+<pre>getBranchCommits(string $username, string $repo, string $branch) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/commits/">http://developer.github.com/v3/repos/commits/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the username</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the repo</p></div>
+<div class="subelement argument">
+<h4>$branch</h4>
+<code>string</code><p>the branch</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>list of users found</div>
+</div></div>
+</div>
+<a name="getCommit" id="getCommit"></a><div class="element clickable method public getCommit" data-toggle="collapse" data-target=".getCommit .collapse">
+<h2>Show a specific commit</h2>
+<pre>getCommit(string $username, string $repo, string $sha) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/commits/#get-a-single-commit">http://developer.github.com/v3/repos/commits/#get-a-single-commit</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the username</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the repo</p></div>
+<div class="subelement argument">
+<h4>$sha</h4>
+<code>string</code><p>the commit sha</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>data from commit</div>
+</div></div>
+</div>
+<a name="getFileCommits" id="getFileCommits"></a><div class="element clickable method public getFileCommits" data-toggle="collapse" data-target=".getFileCommits .collapse">
+<h2>List commits by username, repo, branch and path</h2>
+<pre>getFileCommits(string $username, string $repo, string $branch, string $path) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/commits/">http://developer.github.com/v3/repos/commits/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the username</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the repo</p></div>
+<div class="subelement argument">
+<h4>$branch</h4>
+<code>string</code><p>the branch</p></div>
+<div class="subelement argument">
+<h4>$path</h4>
+<code>string</code><p>the path</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>list of users found</div>
+</div></div>
+</div>
+<a name="getBranchSha" id="getBranchSha"></a><div class="element clickable method private getBranchSha" data-toggle="collapse" data-target=".getBranchSha .collapse">
+<h2>Fetch branch sha from branch name</h2>
+<pre>getBranchSha(string $username, string $repoName, string $branchName) : null | string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/git/refs/#get-a-reference">http://developer.github.com/v3/git/refs/#get-a-reference</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$repoName</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$branchName</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>null</code><code>string</code>
+</div>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a6</a> and<br>
+            generated on 2012-07-15T22:43:05+02:00.<br></footer></div>
+</div>
+</body>
+</html>
