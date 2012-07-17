@@ -75,17 +75,19 @@ class HttpClient implements HttpClientInterface
         $this->browser->getClient()->setTimeout($this->options['timeout']);
         $this->browser->getClient()->setVerifyPeer(false);
 
-        if (null !== $this->options['login'] || null !== $this->options['token']) {
-            if (null !== $this->options['token']) {
-                $options = array($this->options['token']);
-            } else {
-                $options = array($this->options['login'], $this->options['password']);
-            }
+    }
 
-            $this->browser->addListener(
-                new AuthListener($this->options['auth_method'], $options)
-            );
-        }
+    /**
+     * {@inheritDoc}
+     */
+    public function authenticate()
+    {
+        $this->browser->addListener(
+            new AuthListener(
+                $this->options['auth_method'],
+                array($this->options['login'], $this->options['password'], $this->options['token'])
+            )
+        );
     }
 
     /**
@@ -123,7 +125,9 @@ class HttpClient implements HttpClientInterface
      */
     public function get($path, array $parameters = array(), array $options = array())
     {
-        return $this->request($path, $parameters, 'GET', $options);
+        $path .= (false === strpos($path, '?') ? '?' : '&').http_build_query($parameters, '', '&');
+
+        return $this->request($path, array(), 'GET', $options);
     }
 
     /**

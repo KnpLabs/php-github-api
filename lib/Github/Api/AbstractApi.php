@@ -10,7 +10,7 @@ use Github\Client;
  * @author Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
-abstract class Api implements ApiInterface
+abstract class AbstractApi implements ApiInterface
 {
     /**
      * The client

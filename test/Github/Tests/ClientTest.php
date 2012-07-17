@@ -6,14 +6,14 @@ use Github\Client;
 
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
-    public function testInstanciateWithoutHttpClient()
+    public function testInstanceWithoutHttpClient()
     {
         $client = new Client();
 
         $this->assertInstanceOf('Github\HttpClient\HttpClientInterface', $client->getHttpClient());
     }
 
-    public function testInstanciateWithHttpClient()
+    public function testInstanceWithHttpClient()
     {
         $httpClient = $this->getHttpClientMock();
         $client = new Client($httpClient);
@@ -34,18 +34,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $client = new Client($httpClient);
         $client->authenticate($login, $secret, $method);
-    }
-
-    public function testDeauthenticate()
-    {
-        $client = $this->getClientMockBuilder()
-            ->setMethods(array('authenticate'))
-            ->getMock();
-        $client->expects($this->once())
-            ->method('authenticate')
-            ->with(null, null, null);
-
-        $client->deAuthenticate();
     }
 
     public function testGet()
@@ -78,23 +66,26 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $client->post($path, $parameters, $options);
     }
 
-    public function testDefaultApi()
+    public function testRateLimit()
     {
-        $client = new Client();
+        $limit = 666;
 
-        $this->assertInstanceOf('Github\Api\User', $client->getUserApi());
+        $httpClient = $this->getHttpClientMock();
+        $httpClient->expects($this->once())
+            ->method('get')
+            ->with('rate_limit')
+            ->will($this->returnValue($limit));
+
+        $client = new Client($httpClient);
+
+        $this->assertEquals($limit, $client->getRateLimit());
     }
 
-    public function testInjectApi()
+    public function testUserApiInstance()
     {
         $client = new Client();
 
-        $userApiMock = $this->getMockBuilder('Github\Api\ApiInterface')
-            ->getMock();
-
-        $client->setApi('user', $userApiMock);
-
-        $this->assertSame($userApiMock, $client->getUserApi());
+        $this->assertInstanceOf('Github\Api\User', $client->api('user'));
     }
 
     protected function getClientMockBuilder()

@@ -6,14 +6,15 @@ use Github\Tests\ApiTestCase;
 
 class RepoTest extends ApiTestCase
 {
-    /**
-     * @expectedException BadMethodCallException
-     */
-    public function testThatPushableReposIsNotSupported()
+    public function testShow()
     {
         $api = $this->getApiMock();
 
-        $api->getPushableRepos();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('repos/KnpLabs/php-github-api');
+
+        $api->show('KnpLabs', 'php-github-api');
     }
 
     protected function getApiClass()

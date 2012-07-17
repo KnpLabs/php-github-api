@@ -39,14 +39,14 @@ class Client
      *
      * @var HttpClientInterface
      */
-    protected $httpClient = null;
+    private $httpClient = null;
 
     /**
      * The list of loaded API instances
      *
      * @var array
      */
-    protected $apis = array();
+    private $apis = array();
 
     /**
      * HTTP Headers
@@ -72,9 +72,9 @@ class Client
      * @param string      $secret GitHub private token or Github password if $method == AUTH_HTTP_PASSWORD
      * @param null|string $method One of the AUTH_* class constants
      */
-    public function authenticate($login, $secret, $method = null)
+    public function authenticate($login, $secret = null, $method = null)
     {
-        $this->getHttpClient()->setOption('auth_method', $method ?: self::AUTH_URL_TOKEN);
+        $this->getHttpClient()->setOption('auth_method', $method);
 
         if ($method === self::AUTH_HTTP_PASSWORD) {
             $this
@@ -85,14 +85,8 @@ class Client
         } else {
             $this->getHttpClient()->setOption('token', $secret);
         }
-    }
 
-    /**
-     * De-authenticate a user for all next requests
-     */
-    public function deAuthenticate()
-    {
-        $this->authenticate(null, null, null);
+        $this->getHttpClient()->authenticate();
     }
 
     /**
@@ -184,115 +178,60 @@ class Client
     }
 
     /**
-     * Get the user API
+     * @param string $name
      *
-     * @return  Api\User    the user API
+     * @return ApiInterface
+     *
+     * @throws \InvalidArgumentException
      */
-    public function getUserApi()
+    public function api($name)
     {
-        if (!isset($this->apis['user'])) {
-            $this->apis['user'] = new Api\User($this);
+        if (!isset($this->apis[$name])) {
+            switch ($name) {
+                case 'current_user':
+                    $api = new Api\CurrentUser($this);
+                    break;
+
+                case 'git_data':
+                    $api = new Api\GitData($this);
+                    break;
+
+                case 'gists':
+                    $api = new Api\Gists($this);
+                    break;
+
+                case 'issue':
+                    $api = new Api\Issue($this);
+                    break;
+
+                case 'markdown':
+                    $api = new Api\Markdown($this);
+                    break;
+
+                case 'organization':
+                    $api = new Api\Organization($this);
+                    break;
+
+                case 'pull_request':
+                    $api = new Api\PullRequest($this);
+                    break;
+
+                case 'repo':
+                    $api = new Api\Repo($this);
+                    break;
+
+                case 'user':
+                    $api = new Api\User($this);
+                    break;
+
+                default:
+                    throw new \InvalidArgumentException();
+            }
+
+            $this->apis[$name] = $api;
         }
 
-        return $this->apis['user'];
-    }
-
-    /**
-     * Get the issue API
-     *
-     * @return  Api\Issue   the issue API
-     */
-    public function getIssueApi()
-    {
-        if (!isset($this->apis['issue'])) {
-            $this->apis['issue'] = new Api\Issue($this);
-        }
-
-        return $this->apis['issue'];
-    }
-
-    /**
-     * Get the commit API
-     *
-     * @return  Api\Commit  the commit API
-     */
-    public function getCommitApi()
-    {
-        if (!isset($this->apis['commit'])) {
-            $this->apis['commit'] = new Api\Commit($this);
-        }
-
-        return $this->apis['commit'];
-    }
-
-    /**
-     * Get the repo API
-     *
-     * @return  Api\Repo  the repo API
-     */
-    public function getRepoApi()
-    {
-        if (!isset($this->apis['repo'])) {
-            $this->apis['repo'] = new Api\Repo($this);
-        }
-
-        return $this->apis['repo'];
-    }
-
-    /**
-     * Get the organization API
-     *
-     * @return  Api\Organization  the object API
-     */
-    public function getOrganizationApi()
-    {
-        if (!isset($this->apis['organization'])) {
-            $this->apis['organization'] = new Api\Organization($this);
-        }
-
-        return $this->apis['organization'];
-    }
-
-    /**
-     * Get the object API
-     *
-     * @return  Api\Object  the object API
-     */
-    public function getObjectApi()
-    {
-        if (!isset($this->apis['object'])) {
-            $this->apis['object'] = new Api\Object($this);
-        }
-
-        return $this->apis['object'];
-    }
-
-    /**
-     * Get the pull request API
-     *
-     * @return  Api\PullRequest  the pull request API
-     */
-    public function getPullRequestApi()
-    {
-        if (!isset($this->apis['pullrequest'])) {
-            $this->apis['pullrequest'] = new Api\PullRequest($this);
-        }
-
-        return $this->apis['pullrequest'];
-    }
-
-    /**
-     * Get the markdown API
-     *
-     * @return Api\Markdown the markdown API
-     */
-    public function getMarkdownApi()
-    {
-        if (!isset($this->apis['markdown'])) {
-            $this->apis['markdown'] = new Api\Markdown($this);
-        }
-
-        return $this->apis['markdown'];
+        return $this->apis[$name];
     }
 
     /**
@@ -301,32 +240,6 @@ class Client
     public function getRateLimit()
     {
         return $this->get('rate_limit');
-    }
-
-    /**
-     * Inject an API instance
-     *
-     * @param  string        $name the API name
-     * @param  ApiInterface  $api  the API instance
-     *
-     * @return Client
-     */
-    public function setApi($name, ApiInterface $instance)
-    {
-        $this->apis[$name] = $instance;
-
-        return $this;
-    }
-
-    /**
-     * Get any API
-     *
-     * @param  string       $name the API name
-     * @return ApiInterface       the API instance
-     */
-    public function getApi($name)
-    {
-        return $this->apis[$name];
     }
 
     /**

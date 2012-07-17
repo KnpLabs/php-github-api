@@ -12,20 +12,18 @@ class CommitTest extends ApiTestCase
 
         $expectedValue = array('commit' => array(), 'comitter');
 
+        $data = array('sha' => 'v3');
+
         $api->expects($this->at(0))
             ->method('get')
-            ->will($this->returnValue(array('sha' => '123')));
-
-        $api->expects($this->at(1))
-            ->method('get')
-            ->with($this->equalTo('repos/ornicar/php-github-api/commits'))
+            ->with('repos/ornicar/php-github-api/commits', $data)
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->getBranchCommits('ornicar', 'php-github-api', 'v3'));
+        $this->assertEquals($expectedValue, $api->all('ornicar', 'php-github-api', $data));
     }
 
     protected function getApiClass()
     {
-        return 'Github\Api\Commit';
+        return 'Github\Api\Repository\Commits';
     }
 }
