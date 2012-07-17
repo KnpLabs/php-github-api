@@ -1,0 +1,507 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>phpDocumentor » \Github\Client</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">phpDocumentor</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/Github.html"><i class="icon-th"></i> Github</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">68</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#__construct" title="__construct :: Instantiate a new GitHub client"><span class="description">Instantiate a new GitHub client</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#authenticate" title="authenticate :: Authenticate a user for all next requests"><span class="description">Authenticate a user for all next requests</span><pre>authenticate()</pre></a></li>
+<li class="method public "><a href="#clearHeaders" title="clearHeaders :: Clears used headers"><span class="description">Clears used headers</span><pre>clearHeaders()</pre></a></li>
+<li class="method public "><a href="#deAuthenticate" title="deAuthenticate :: De-authenticate a user for all next requests"><span class="description">De-authenticate a user for all next requests</span><pre>deAuthenticate()</pre></a></li>
+<li class="method public "><a href="#delete" title="delete :: Call any path, DELETE method"><span class="description">Call any path, DELETE method</span><pre>delete()</pre></a></li>
+<li class="method public "><a href="#get" title="get :: Call any path, GET method
+Ex: $api-&gt;get('repos/show/my-username/my-repo')"><span class="description">Call any path, GET method
+Ex: $api-&gt;get('repos/show/my-username/my-repo')</span><pre>get()</pre></a></li>
+<li class="method public "><a href="#getApi" title="getApi :: Get any API"><span class="description">Get any API</span><pre>getApi()</pre></a></li>
+<li class="method public "><a href="#getCommitApi" title="getCommitApi :: Get the commit API"><span class="description">Get the commit API</span><pre>getCommitApi()</pre></a></li>
+<li class="method public "><a href="#getGistApi" title="getGistApi :: Get the gist API"><span class="description">Get the gist API</span><pre>getGistApi()</pre></a></li>
+<li class="method public "><a href="#getHttpClient" title="getHttpClient :: Get the http client."><span class="description">Get the http client.</span><pre>getHttpClient()</pre></a></li>
+<li class="method public "><a href="#getIssueApi" title="getIssueApi :: Get the issue API"><span class="description">Get the issue API</span><pre>getIssueApi()</pre></a></li>
+<li class="method public "><a href="#getMarkdownApi" title="getMarkdownApi :: Get the markdown API"><span class="description">Get the markdown API</span><pre>getMarkdownApi()</pre></a></li>
+<li class="method public "><a href="#getObjectApi" title="getObjectApi :: Get the object API"><span class="description">Get the object API</span><pre>getObjectApi()</pre></a></li>
+<li class="method public "><a href="#getOrganizationApi" title="getOrganizationApi :: Get the organization API"><span class="description">Get the organization API</span><pre>getOrganizationApi()</pre></a></li>
+<li class="method public "><a href="#getPullRequestApi" title="getPullRequestApi :: Get the pull request API"><span class="description">Get the pull request API</span><pre>getPullRequestApi()</pre></a></li>
+<li class="method public "><a href="#getRateLimit" title="getRateLimit :: "><span class="description">getRateLimit()
+        </span><pre>getRateLimit()</pre></a></li>
+<li class="method public "><a href="#getRepoApi" title="getRepoApi :: Get the repo API"><span class="description">Get the repo API</span><pre>getRepoApi()</pre></a></li>
+<li class="method public "><a href="#getUserApi" title="getUserApi :: Get the user API"><span class="description">Get the user API</span><pre>getUserApi()</pre></a></li>
+<li class="method public "><a href="#patch" title="patch :: Call any path, PATCH method"><span class="description">Call any path, PATCH method</span><pre>patch()</pre></a></li>
+<li class="method public "><a href="#post" title="post :: Call any path, POST method
+Ex: $api-&gt;post('repos/show/my-username', array('email' =&gt; 'my-new-email@provider.org'))"><span class="description">Call any path, POST method
+Ex: $api-&gt;post('repos/show/my-username', array('email' =&gt; 'my-new-email@provider.org'))</span><pre>post()</pre></a></li>
+<li class="method public "><a href="#put" title="put :: Call any path, PUT method"><span class="description">Call any path, PUT method</span><pre>put()</pre></a></li>
+<li class="method public "><a href="#setApi" title="setApi :: Inject an API instance"><span class="description">Inject an API instance</span><pre>setApi()</pre></a></li>
+<li class="method public "><a href="#setHeaders" title="setHeaders :: "><span class="description">setHeaders()
+        </span><pre>setHeaders()</pre></a></li>
+<li class="method public "><a href="#setHttpClient" title="setHttpClient :: Inject another http client"><span class="description">Inject another http client</span><pre>setHttpClient()</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties</li>
+<li class="nav-header protected">» Protected</li>
+<li class="property protected "><a href="#%24apis" title="$apis :: The list of loaded API instances"><span class="description">The list of loaded API instances</span><pre>$apis</pre></a></li>
+<li class="property protected "><a href="#%24httpClient" title="$httpClient :: The httpClient instance used to communicate with GitHub"><span class="description">The httpClient instance used to communicate with GitHub</span><pre>$httpClient</pre></a></li>
+<li class="nav-header private">» Private</li>
+<li class="property private "><a href="#%24headers" title="$headers :: HTTP Headers"><span class="description">HTTP Headers</span><pre>$headers</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-constant"></i> Constants</li>
+<li class="constant  "><a href="#AUTH_HTTP_PASSWORD" title="AUTH_HTTP_PASSWORD :: "><span class="description">AUTH_HTTP_PASSWORD</span><pre>AUTH_HTTP_PASSWORD</pre></a></li>
+<li class="constant  "><a href="#AUTH_HTTP_TOKEN" title="AUTH_HTTP_TOKEN :: "><span class="description">AUTH_HTTP_TOKEN</span><pre>AUTH_HTTP_TOKEN</pre></a></li>
+<li class="constant  "><a href="#AUTH_URL_TOKEN" title="AUTH_URL_TOKEN :: "><span class="description">AUTH_URL_TOKEN</span><pre>AUTH_URL_TOKEN</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CGithub%5CClient" id="\Github\Client"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/Github.html">Github</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/Github.Client.html">Client</a>
+</li>
+</ul>
+<div href="../classes/Github.Client.html" class="element class">
+<p class="short_description">Simple yet very cool PHP Github client</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>author</th>
+<td><a href="">Thibault Duplessis &lt;thibault.duplessis at gmail dot com&gt;</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="">Joseph Bielawski &lt;stloyd@gmail.com&gt;
+Website: http://github.com/KnpLabs/php-github-api</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
+<h2>Instantiate a new GitHub client</h2>
+<pre>__construct(Github\HttpClient\HttpClientInterface $httpClient) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$httpClient</h4>
+<code>\HttpClientInterface</code><p>custom http client</p></div>
+</div></div>
+</div>
+<a name="authenticate" id="authenticate"></a><div class="element clickable method public authenticate" data-toggle="collapse" data-target=".authenticate .collapse">
+<h2>Authenticate a user for all next requests</h2>
+<pre>authenticate(string $login, string $secret, null | string $method) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$login</h4>
+<code>string</code><p>GitHub username</p></div>
+<div class="subelement argument">
+<h4>$secret</h4>
+<code>string</code><p>GitHub private token or Github password if $method == AUTH_HTTP_PASSWORD</p>
+</div>
+<div class="subelement argument">
+<h4>$method</h4>
+<code>nullstring</code><p>One of the AUTH_* class constants</p>
+</div>
+</div></div>
+</div>
+<a name="clearHeaders" id="clearHeaders"></a><div class="element clickable method public clearHeaders" data-toggle="collapse" data-target=".clearHeaders .collapse">
+<h2>Clears used headers</h2>
+<pre>clearHeaders() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="deAuthenticate" id="deAuthenticate"></a><div class="element clickable method public deAuthenticate" data-toggle="collapse" data-target=".deAuthenticate .collapse">
+<h2>De-authenticate a user for all next requests</h2>
+<pre>deAuthenticate() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="delete" id="delete"></a><div class="element clickable method public delete" data-toggle="collapse" data-target=".delete .collapse">
+<h2>Call any path, DELETE method</h2>
+<pre>delete(string $path, array $parameters, array $requestOptions) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$path</h4>
+<code>string</code><p>the GitHub path</p></div>
+<div class="subelement argument">
+<h4>$parameters</h4>
+<code>array</code><p>DELETE parameters</p></div>
+<div class="subelement argument">
+<h4>$requestOptions</h4>
+<code>array</code><p>reconfigure the request</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>data returned</div>
+</div></div>
+</div>
+<a name="get" id="get"></a><div class="element clickable method public get" data-toggle="collapse" data-target=".get .collapse">
+<h2>Call any path, GET method
+Ex: $api-&gt;get('repos/show/my-username/my-repo')</h2>
+<pre>get(string $path, array $parameters, array $requestOptions) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$path</h4>
+<code>string</code><p>the GitHub path</p></div>
+<div class="subelement argument">
+<h4>$parameters</h4>
+<code>array</code><p>GET parameters</p></div>
+<div class="subelement argument">
+<h4>$requestOptions</h4>
+<code>array</code><p>reconfigure the request</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>data returned</div>
+</div></div>
+</div>
+<a name="getApi" id="getApi"></a><div class="element clickable method public getApi" data-toggle="collapse" data-target=".getApi .collapse">
+<h2>Get any API</h2>
+<pre>getApi(string $name) : \ApiInterface</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>the API name</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\ApiInterface</code>the API instance</div>
+</div></div>
+</div>
+<a name="getCommitApi" id="getCommitApi"></a><div class="element clickable method public getCommitApi" data-toggle="collapse" data-target=".getCommitApi .collapse">
+<h2>Get the commit API</h2>
+<pre>getCommitApi() : \Api\Commit</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\Api\Commit</code>the commit API</div>
+</div></div>
+</div>
+<a name="getGistApi" id="getGistApi"></a><div class="element clickable method public getGistApi" data-toggle="collapse" data-target=".getGistApi .collapse">
+<h2>Get the gist API</h2>
+<pre>getGistApi() : \Api\Gist</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\Api\Gist</code>the gist API</div>
+</div></div>
+</div>
+<a name="getHttpClient" id="getHttpClient"></a><div class="element clickable method public getHttpClient" data-toggle="collapse" data-target=".getHttpClient .collapse">
+<h2>Get the http client.</h2>
+<pre>getHttpClient() : \HttpClientInterface</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\HttpClientInterface</code>a request instance</div>
+</div></div>
+</div>
+<a name="getIssueApi" id="getIssueApi"></a><div class="element clickable method public getIssueApi" data-toggle="collapse" data-target=".getIssueApi .collapse">
+<h2>Get the issue API</h2>
+<pre>getIssueApi() : \Api\Issue</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\Api\Issue</code>the issue API</div>
+</div></div>
+</div>
+<a name="getMarkdownApi" id="getMarkdownApi"></a><div class="element clickable method public getMarkdownApi" data-toggle="collapse" data-target=".getMarkdownApi .collapse">
+<h2>Get the markdown API</h2>
+<pre>getMarkdownApi() : \Api\Markdown</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\Api\Markdown</code>the markdown API</div>
+</div></div>
+</div>
+<a name="getObjectApi" id="getObjectApi"></a><div class="element clickable method public getObjectApi" data-toggle="collapse" data-target=".getObjectApi .collapse">
+<h2>Get the object API</h2>
+<pre>getObjectApi() : \Api\Object</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\Api\Object</code>the object API</div>
+</div></div>
+</div>
+<a name="getOrganizationApi" id="getOrganizationApi"></a><div class="element clickable method public getOrganizationApi" data-toggle="collapse" data-target=".getOrganizationApi .collapse">
+<h2>Get the organization API</h2>
+<pre>getOrganizationApi() : \Api\Organization</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\Api\Organization</code>the object API</div>
+</div></div>
+</div>
+<a name="getPullRequestApi" id="getPullRequestApi"></a><div class="element clickable method public getPullRequestApi" data-toggle="collapse" data-target=".getPullRequestApi .collapse">
+<h2>Get the pull request API</h2>
+<pre>getPullRequestApi() : \Api\PullRequest</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\Api\PullRequest</code>the pull request API</div>
+</div></div>
+</div>
+<a name="getRateLimit" id="getRateLimit"></a><div class="element clickable method public getRateLimit" data-toggle="collapse" data-target=".getRateLimit .collapse">
+<h2>getRateLimit()
+        </h2>
+<pre>getRateLimit() : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
+<a name="getRepoApi" id="getRepoApi"></a><div class="element clickable method public getRepoApi" data-toggle="collapse" data-target=".getRepoApi .collapse">
+<h2>Get the repo API</h2>
+<pre>getRepoApi() : \Api\Repo</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\Api\Repo</code>the repo API</div>
+</div></div>
+</div>
+<a name="getUserApi" id="getUserApi"></a><div class="element clickable method public getUserApi" data-toggle="collapse" data-target=".getUserApi .collapse">
+<h2>Get the user API</h2>
+<pre>getUserApi() : \Api\User</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\Api\User</code>the user API</div>
+</div></div>
+</div>
+<a name="patch" id="patch"></a><div class="element clickable method public patch" data-toggle="collapse" data-target=".patch .collapse">
+<h2>Call any path, PATCH method</h2>
+<pre>patch(string $path, array $parameters, array $requestOptions) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$path</h4>
+<code>string</code><p>the GitHub path</p></div>
+<div class="subelement argument">
+<h4>$parameters</h4>
+<code>array</code><p>Patch parameters</p></div>
+<div class="subelement argument">
+<h4>$requestOptions</h4>
+<code>array</code><p>reconfigure the request</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>data returned</div>
+</div></div>
+</div>
+<a name="post" id="post"></a><div class="element clickable method public post" data-toggle="collapse" data-target=".post .collapse">
+<h2>Call any path, POST method
+Ex: $api-&gt;post('repos/show/my-username', array('email' =&gt; 'my-new-email@provider.org'))</h2>
+<pre>post(string $path, array $parameters, array $requestOptions) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$path</h4>
+<code>string</code><p>the GitHub path</p></div>
+<div class="subelement argument">
+<h4>$parameters</h4>
+<code>array</code><p>POST parameters</p></div>
+<div class="subelement argument">
+<h4>$requestOptions</h4>
+<code>array</code><p>reconfigure the request</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>data returned</div>
+</div></div>
+</div>
+<a name="put" id="put"></a><div class="element clickable method public put" data-toggle="collapse" data-target=".put .collapse">
+<h2>Call any path, PUT method</h2>
+<pre>put(string $path, array $requestOptions) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$path</h4>
+<code>string</code><p>the GitHub path</p></div>
+<div class="subelement argument">
+<h4>$requestOptions</h4>
+<code>array</code><p>reconfigure the request</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>data returned</div>
+</div></div>
+</div>
+<a name="setApi" id="setApi"></a><div class="element clickable method public setApi" data-toggle="collapse" data-target=".setApi .collapse">
+<h2>Inject an API instance</h2>
+<pre>setApi(string $name, Github\Api\ApiInterface $instance) : \Client</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>the API name</p></div>
+<div class="subelement argument">
+<h4>$instance</h4>
+<code></code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Client</code></div>
+</div></div>
+</div>
+<a name="setHeaders" id="setHeaders"></a><div class="element clickable method public setHeaders" data-toggle="collapse" data-target=".setHeaders .collapse">
+<h2>setHeaders()
+        </h2>
+<pre>setHeaders(array $headers) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$headers</h4>
+<code>array</code>
+</div>
+</div></div>
+</div>
+<a name="setHttpClient" id="setHttpClient"></a><div class="element clickable method public setHttpClient" data-toggle="collapse" data-target=".setHttpClient .collapse">
+<h2>Inject another http client</h2>
+<pre>setHttpClient(Github\HttpClient\HttpClientInterface $httpClient) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$httpClient</h4>
+<code>\HttpClientInterface</code><p>The httpClient instance</p></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24apis" id="$apis"> </a><div class="element clickable property protected $apis" data-toggle="collapse" data-target=".$apis .collapse">
+<h2>The list of loaded API instances</h2>
+<pre>$apis : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24httpClient" id="$httpClient"> </a><div class="element clickable property protected $httpClient" data-toggle="collapse" data-target=".$httpClient .collapse">
+<h2>The httpClient instance used to communicate with GitHub</h2>
+<pre>$httpClient : \HttpClientInterface</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24headers" id="$headers"> </a><div class="element clickable property private $headers" data-toggle="collapse" data-target=".$headers .collapse">
+<h2>HTTP Headers</h2>
+<pre>$headers : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<h3>
+<i class="icon-custom icon-constant"></i> Constants</h3>
+<a name="AUTH_HTTP_PASSWORD" id="AUTH_HTTP_PASSWORD"> </a><div class="element clickable constant  AUTH_HTTP_PASSWORD" data-toggle="collapse" data-target=".AUTH_HTTP_PASSWORD .collapse">
+<h2>AUTH_HTTP_PASSWORD</h2>
+<pre>AUTH_HTTP_PASSWORD </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="AUTH_HTTP_TOKEN" id="AUTH_HTTP_TOKEN"> </a><div class="element clickable constant  AUTH_HTTP_TOKEN" data-toggle="collapse" data-target=".AUTH_HTTP_TOKEN .collapse">
+<h2>AUTH_HTTP_TOKEN</h2>
+<pre>AUTH_HTTP_TOKEN </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="AUTH_URL_TOKEN" id="AUTH_URL_TOKEN"> </a><div class="element clickable constant  AUTH_URL_TOKEN" data-toggle="collapse" data-target=".AUTH_URL_TOKEN .collapse">
+<h2>AUTH_URL_TOKEN</h2>
+<pre>AUTH_URL_TOKEN </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a6</a> and<br>
+            generated on 2012-07-15T22:43:06+02:00.<br></footer></div>
+</div>
+</body>
+</html>

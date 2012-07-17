@@ -1,0 +1,936 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>phpDocumentor » \Github\Api\Repo</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">phpDocumentor</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/Github.html"><i class="icon-th"></i> Github</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">68</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#addDeployKey" title="addDeployKey :: Add a deploy key for a repository"><span class="description">Add a deploy key for a repository</span><pre>addDeployKey()</pre></a></li>
+<li class="method public "><a href="#addRepoCollaborator" title="addRepoCollaborator :: Add a collaborator to a repository"><span class="description">Add a collaborator to a repository</span><pre>addRepoCollaborator()</pre></a></li>
+<li class="method public "><a href="#addRepoHook" title="addRepoHook :: Add hook informations by username and repo. Requires authentication."><span class="description">Add hook informations by username and repo. Requires authentication.</span><pre>addRepoHook()</pre></a></li>
+<li class="method public "><a href="#create" title="create :: Create repo"><span class="description">Create repo</span><pre>create()</pre></a></li>
+<li class="method public "><a href="#deleteRepoDownload" title="deleteRepoDownload :: Delete a download in selected repository"><span class="description">Delete a download in selected repository</span><pre>deleteRepoDownload()</pre></a></li>
+<li class="method public "><a href="#deleteRepoHook" title="deleteRepoHook :: Delete a hook in selected repository"><span class="description">Delete a hook in selected repository</span><pre>deleteRepoHook()</pre></a></li>
+<li class="method public "><a href="#fork" title="fork :: Make the authenticated user fork a repository"><span class="description">Make the authenticated user fork a repository</span><pre>fork()</pre></a></li>
+<li class="method public "><a href="#getDeployKeys" title="getDeployKeys :: Get the list of deploy keys for a repository"><span class="description">Get the list of deploy keys for a repository</span><pre>getDeployKeys()</pre></a></li>
+<li class="method public "><a href="#getPushableRepos" title="getPushableRepos :: Get a list of the repositories that the authenticated user can push to"><span class="description">Get a list of the repositories that the authenticated user can push to</span><pre>getPushableRepos()</pre></a></li>
+<li class="method public "><a href="#getRepoBranches" title="getRepoBranches :: Get the branches of a repository"><span class="description">Get the branches of a repository</span><pre>getRepoBranches()</pre></a></li>
+<li class="method public "><a href="#getRepoCollaborator" title="getRepoCollaborator :: Get the collaborator of a repository"><span class="description">Get the collaborator of a repository</span><pre>getRepoCollaborator()</pre></a></li>
+<li class="method public "><a href="#getRepoCollaborators" title="getRepoCollaborators :: Get the collaborators of a repository"><span class="description">Get the collaborators of a repository</span><pre>getRepoCollaborators()</pre></a></li>
+<li class="method public "><a href="#getRepoContents" title="getRepoContents :: Get contents of any file or directory in a repository"><span class="description">Get contents of any file or directory in a repository</span><pre>getRepoContents()</pre></a></li>
+<li class="method public "><a href="#getRepoContributors" title="getRepoContributors :: Get the contributors of a repository"><span class="description">Get the contributors of a repository</span><pre>getRepoContributors()</pre></a></li>
+<li class="method public "><a href="#getRepoDownloads" title="getRepoDownloads :: Get the downloads for selected repository"><span class="description">Get the downloads for selected repository</span><pre>getRepoDownloads()</pre></a></li>
+<li class="method public "><a href="#getRepoHook" title="getRepoHook :: Get the hooks for selected repository"><span class="description">Get the hooks for selected repository</span><pre>getRepoHook()</pre></a></li>
+<li class="method public "><a href="#getRepoHooks" title="getRepoHooks :: Get the hooks for selected repository"><span class="description">Get the hooks for selected repository</span><pre>getRepoHooks()</pre></a></li>
+<li class="method public "><a href="#getRepoLanguages" title="getRepoLanguages :: Get the language breakdown of a repository"><span class="description">Get the language breakdown of a repository</span><pre>getRepoLanguages()</pre></a></li>
+<li class="method public "><a href="#getRepoNetwork" title="getRepoNetwork :: Get the network (a list of forks) of a repository
+http://develop.github.com/p/repo.html"><span class="description">Get the network (a list of forks) of a repository
+http://develop.github.com/p/repo.html</span><pre>getRepoNetwork()</pre></a></li>
+<li class="method public "><a href="#getRepoTags" title="getRepoTags :: Get the tags of a repository"><span class="description">Get the tags of a repository</span><pre>getRepoTags()</pre></a></li>
+<li class="method public "><a href="#getRepoTeams" title="getRepoTeams :: Get the teams of a repository"><span class="description">Get the teams of a repository</span><pre>getRepoTeams()</pre></a></li>
+<li class="method public "><a href="#getRepoWatchers" title="getRepoWatchers :: Get the watchers of a repository"><span class="description">Get the watchers of a repository</span><pre>getRepoWatchers()</pre></a></li>
+<li class="method public "><a href="#getUserRepos" title="getUserRepos :: Get the repositories of a user"><span class="description">Get the repositories of a user</span><pre>getUserRepos()</pre></a></li>
+<li class="method public "><a href="#removeDeployKey" title="removeDeployKey :: Delete a deploy key from a repository"><span class="description">Delete a deploy key from a repository</span><pre>removeDeployKey()</pre></a></li>
+<li class="method public "><a href="#removeRepoCollaborator" title="removeRepoCollaborator :: Delete a collaborator from a repository"><span class="description">Delete a collaborator from a repository</span><pre>removeRepoCollaborator()</pre></a></li>
+<li class="method public "><a href="#search" title="search :: Search repositories by keyword:"><span class="description">Search repositories by keyword:</span><pre>search()</pre></a></li>
+<li class="method public "><a href="#setPrivate" title="setPrivate :: Set the visibility of a repository to private"><span class="description">Set the visibility of a repository to private</span><pre>setPrivate()</pre></a></li>
+<li class="method public "><a href="#setPublic" title="setPublic :: Set the visibility of a repository to public"><span class="description">Set the visibility of a repository to public</span><pre>setPublic()</pre></a></li>
+<li class="method public "><a href="#setRepoInfo" title="setRepoInfo :: Set information of a repository"><span class="description">Set information of a repository</span><pre>setRepoInfo()</pre></a></li>
+<li class="method public "><a href="#show" title="show :: Get extended information about a repository by its username and repo name"><span class="description">Get extended information about a repository by its username and repo name</span><pre>show()</pre></a></li>
+<li class="method public "><a href="#testRepoHook" title="testRepoHook :: Test a hook in selected repository"><span class="description">Test a hook in selected repository</span><pre>testRepoHook()</pre></a></li>
+<li class="method public "><a href="#unwatch" title="unwatch :: Make the authenticated user unwatch a repository"><span class="description">Make the authenticated user unwatch a repository</span><pre>unwatch()</pre></a></li>
+<li class="method public "><a href="#updateRepoHook" title="updateRepoHook :: Update hook informations by username, repo and hook number. Requires authentication."><span class="description">Update hook informations by username, repo and hook number. Requires authentication.</span><pre>updateRepoHook()</pre></a></li>
+<li class="method public "><a href="#watch" title="watch :: Make the authenticated user watch a repository"><span class="description">Make the authenticated user watch a repository</span><pre>watch()</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CGithub%5CApi%5CRepo" id="\Github\Api\Repo"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/Github.html">Github</a></li>
+<span class="divider">\</span><li><a href="../namespaces/Github.Api.html">Api</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/Github.Api.Repo.html">Repo</a>
+</li>
+</ul>
+<div href="../classes/Github.Api.Repo.html" class="element class">
+<p class="short_description">Searching repositories, getting repository information
+and managing repository information for authenticated users.</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>link</th>
+<td><a href="http://develop.github.com/p/repos.html">http://develop.github.com/p/repos.html</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="">Thibault Duplessis &lt;thibault.duplessis at gmail dot com&gt;</a></td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="http://opensource.org/licenses/MIT">MIT License</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="addDeployKey" id="addDeployKey"></a><div class="element clickable method public addDeployKey" data-toggle="collapse" data-target=".addDeployKey .collapse">
+<h2>Add a deploy key for a repository</h2>
+<pre>addDeployKey(string $username, string $repo, string $title, string $key) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/keys/">http://developer.github.com/v3/repos/keys/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the user who owns the repo</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the name of the repo</p></div>
+<div class="subelement argument">
+<h4>$title</h4>
+<code>string</code><p>the title of the key</p></div>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code><p>the public key data</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>the list of deploy keys</div>
+</div></div>
+</div>
+<a name="addRepoCollaborator" id="addRepoCollaborator"></a><div class="element clickable method public addRepoCollaborator" data-toggle="collapse" data-target=".addRepoCollaborator .collapse">
+<h2>Add a collaborator to a repository</h2>
+<pre>addRepoCollaborator(string $username, string $repo, string $user) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/collaborators/">http://developer.github.com/v3/repos/collaborators/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the user who owns the repo</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the name of the repo</p></div>
+<div class="subelement argument">
+<h4>$user</h4>
+<code>string</code><p>the user who should be added as a collaborator</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>list of the repo collaborators</div>
+</div></div>
+</div>
+<a name="addRepoHook" id="addRepoHook"></a><div class="element clickable method public addRepoHook" data-toggle="collapse" data-target=".addRepoHook .collapse">
+<h2>Add hook informations by username and repo. Requires authentication.</h2>
+<pre>addRepoHook(string $username, string $repo, string $name, array $config, array $events, boolean $active) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/hooks/#edit-a-hook">http://developer.github.com/v3/repos/hooks/#edit-a-hook</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the username</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the repo</p></div>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>the name of the service that is being called. @see https://api.github.com/hooks for the possible names.</p>
+</div>
+<div class="subelement argument">
+<h4>$config</h4>
+<code>array</code><p>an array containing key/value pairs to provide settings for this hook</p>
+</div>
+<div class="subelement argument">
+<h4>$events</h4>
+<code>array</code><p>Determines what events the hook is triggered for. Default: ["push"].</p>
+</div>
+<div class="subelement argument">
+<h4>$active</h4>
+<code>boolean</code><p>Determines whether the hook is actually triggered on pushes.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>information about the issue</div>
+</div></div>
+</div>
+<a name="create" id="create"></a><div class="element clickable method public create" data-toggle="collapse" data-target=".create .collapse">
+<h2>Create repo</h2>
+<pre>create(string $name, string $description, string $homepage, bool $public) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/">http://developer.github.com/v3/repos/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>name of the repository</p></div>
+<div class="subelement argument">
+<h4>$description</h4>
+<code>string</code><p>repo description</p></div>
+<div class="subelement argument">
+<h4>$homepage</h4>
+<code>string</code><p>homepage url</p></div>
+<div class="subelement argument">
+<h4>$public</h4>
+<code>bool</code><p>1 for public, 0 for private</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>returns repo data</div>
+</div></div>
+</div>
+<a name="deleteRepoDownload" id="deleteRepoDownload"></a><div class="element clickable method public deleteRepoDownload" data-toggle="collapse" data-target=".deleteRepoDownload .collapse">
+<h2>Delete a download in selected repository</h2>
+<pre>deleteRepoDownload(string $username, string $repo, integer $id) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/downloads/#delete-a-download">http://developer.github.com/v3/repos/downloads/#delete-a-download</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the user who owns the repo</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the name of the repo</p></div>
+<div class="subelement argument">
+<h4>$id</h4>
+<code>integer</code><p>the id of the download file</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a name="deleteRepoHook" id="deleteRepoHook"></a><div class="element clickable method public deleteRepoHook" data-toggle="collapse" data-target=".deleteRepoHook .collapse">
+<h2>Delete a hook in selected repository</h2>
+<pre>deleteRepoHook(string $username, string $repo, integer $id) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/hooks/#delete-a-hook">http://developer.github.com/v3/repos/hooks/#delete-a-hook</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the user who owns the repo</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the name of the repo</p></div>
+<div class="subelement argument">
+<h4>$id</h4>
+<code>integer</code><p>the id of the hook</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a name="fork" id="fork"></a><div class="element clickable method public fork" data-toggle="collapse" data-target=".fork .collapse">
+<h2>Make the authenticated user fork a repository</h2>
+<pre>fork(string $username, string $repo) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/forks/">http://developer.github.com/v3/repos/forks/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the user who owns the repo</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the name of the repo</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>informations about the newly forked repo</div>
+</div></div>
+</div>
+<a name="getDeployKeys" id="getDeployKeys"></a><div class="element clickable method public getDeployKeys" data-toggle="collapse" data-target=".getDeployKeys .collapse">
+<h2>Get the list of deploy keys for a repository</h2>
+<pre>getDeployKeys(string $username, string $repo) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/keys/">http://developer.github.com/v3/repos/keys/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the user who owns the repo</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the name of the repo</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>the list of deploy keys</div>
+</div></div>
+</div>
+<a name="getPushableRepos" id="getPushableRepos"></a><div class="element clickable method public getPushableRepos" data-toggle="collapse" data-target=".getPushableRepos .collapse">
+<h2>Get a list of the repositories that the authenticated user can push to</h2>
+<pre>getPushableRepos() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>list of repositories</div>
+</div></div>
+</div>
+<a name="getRepoBranches" id="getRepoBranches"></a><div class="element clickable method public getRepoBranches" data-toggle="collapse" data-target=".getRepoBranches .collapse">
+<h2>Get the branches of a repository</h2>
+<pre>getRepoBranches(string $username, string $repo) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/">http://developer.github.com/v3/repos/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the username</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the name of the repo</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>list of the repo branches</div>
+</div></div>
+</div>
+<a name="getRepoCollaborator" id="getRepoCollaborator"></a><div class="element clickable method public getRepoCollaborator" data-toggle="collapse" data-target=".getRepoCollaborator .collapse">
+<h2>Get the collaborator of a repository</h2>
+<pre>getRepoCollaborator(string $username, string $repo, string $user) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/collaborators/">http://developer.github.com/v3/repos/collaborators/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the user who owns the repo</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the name of the repo</p></div>
+<div class="subelement argument">
+<h4>$user</h4>
+<code>string</code><p>the user which we seek</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>list of the repo collaborators</div>
+</div></div>
+</div>
+<a name="getRepoCollaborators" id="getRepoCollaborators"></a><div class="element clickable method public getRepoCollaborators" data-toggle="collapse" data-target=".getRepoCollaborators .collapse">
+<h2>Get the collaborators of a repository</h2>
+<pre>getRepoCollaborators(string $username, string $repo) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/collaborators/">http://developer.github.com/v3/repos/collaborators/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the user who owns the repo</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the name of the repo</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>list of the repo collaborators</div>
+</div></div>
+</div>
+<a name="getRepoContents" id="getRepoContents"></a><div class="element clickable method public getRepoContents" data-toggle="collapse" data-target=".getRepoContents .collapse">
+<h2>Get contents of any file or directory in a repository</h2>
+<pre>getRepoContents(string $username, string $repo, string $path) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/contents/">http://developer.github.com/v3/repos/contents/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the user who owns the repo</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the name of the repo</p></div>
+<div class="subelement argument">
+<h4>$path</h4>
+<code>string</code><p>path to file or directory</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>information for file | information for each item in directory</div>
+</div></div>
+</div>
+<a name="getRepoContributors" id="getRepoContributors"></a><div class="element clickable method public getRepoContributors" data-toggle="collapse" data-target=".getRepoContributors .collapse">
+<h2>Get the contributors of a repository</h2>
+<pre>getRepoContributors(string $username, string $repo, boolean $includingAnonymous) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/">http://developer.github.com/v3/repos/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the user who owns the repo</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the name of the repo</p></div>
+<div class="subelement argument">
+<h4>$includingAnonymous</h4>
+<code>boolean</code><p>by default, the list only shows GitHub users. You can include non-users too by setting this to true</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>list of the repo contributors</div>
+</div></div>
+</div>
+<a name="getRepoDownloads" id="getRepoDownloads"></a><div class="element clickable method public getRepoDownloads" data-toggle="collapse" data-target=".getRepoDownloads .collapse">
+<h2>Get the downloads for selected repository</h2>
+<pre>getRepoDownloads(string $username, string $repo) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/downloads/#list-downloads-for-a-repository">http://developer.github.com/v3/repos/downloads/#list-downloads-for-a-repository</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the user who owns the repo</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the name of the repo</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a name="getRepoHook" id="getRepoHook"></a><div class="element clickable method public getRepoHook" data-toggle="collapse" data-target=".getRepoHook .collapse">
+<h2>Get the hooks for selected repository</h2>
+<pre>getRepoHook(string $username, string $repo, integer $id) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/hooks/#get-single-hook">http://developer.github.com/v3/repos/hooks/#get-single-hook</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the user who owns the repo</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the name of the repo</p></div>
+<div class="subelement argument">
+<h4>$id</h4>
+<code>integer</code><p>the id of the hook</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a name="getRepoHooks" id="getRepoHooks"></a><div class="element clickable method public getRepoHooks" data-toggle="collapse" data-target=".getRepoHooks .collapse">
+<h2>Get the hooks for selected repository</h2>
+<pre>getRepoHooks(string $username, string $repo) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/hooks/#list">http://developer.github.com/v3/repos/hooks/#list</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the user who owns the repo</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the name of the repo</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a name="getRepoLanguages" id="getRepoLanguages"></a><div class="element clickable method public getRepoLanguages" data-toggle="collapse" data-target=".getRepoLanguages .collapse">
+<h2>Get the language breakdown of a repository</h2>
+<pre>getRepoLanguages(string $username, string $repo) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/">http://developer.github.com/v3/repos/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the user who owns the repo</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the name of the repo</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>list of the languages</div>
+</div></div>
+</div>
+<a name="getRepoNetwork" id="getRepoNetwork"></a><div class="element clickable method public getRepoNetwork" data-toggle="collapse" data-target=".getRepoNetwork .collapse">
+<h2>Get the network (a list of forks) of a repository
+http://develop.github.com/p/repo.html</h2>
+<pre>getRepoNetwork(string $username, string $repo) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the user who owns the repo</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the name of the repo</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>list of the repo forks</div>
+</div></div>
+</div>
+<a name="getRepoTags" id="getRepoTags"></a><div class="element clickable method public getRepoTags" data-toggle="collapse" data-target=".getRepoTags .collapse">
+<h2>Get the tags of a repository</h2>
+<pre>getRepoTags(string $username, string $repo) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/">http://developer.github.com/v3/repos/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the user who owns the repo</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the name of the repo</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>list of the repo tags</div>
+</div></div>
+</div>
+<a name="getRepoTeams" id="getRepoTeams"></a><div class="element clickable method public getRepoTeams" data-toggle="collapse" data-target=".getRepoTeams .collapse">
+<h2>Get the teams of a repository</h2>
+<pre>getRepoTeams(string $username, string $repo) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/">http://developer.github.com/v3/repos/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the user who owns the repo</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the name of the repo</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>list of the languages</div>
+</div></div>
+</div>
+<a name="getRepoWatchers" id="getRepoWatchers"></a><div class="element clickable method public getRepoWatchers" data-toggle="collapse" data-target=".getRepoWatchers .collapse">
+<h2>Get the watchers of a repository</h2>
+<pre>getRepoWatchers(string $username, string $repo) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/watching/">http://developer.github.com/v3/repos/watching/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the user who owns the repo</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the name of the repo</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>list of the repo watchers</div>
+</div></div>
+</div>
+<a name="getUserRepos" id="getUserRepos"></a><div class="element clickable method public getUserRepos" data-toggle="collapse" data-target=".getUserRepos .collapse">
+<h2>Get the repositories of a user</h2>
+<pre>getUserRepos(string $username) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/">http://developer.github.com/v3/repos/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the username</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>list of the user repos</div>
+</div></div>
+</div>
+<a name="removeDeployKey" id="removeDeployKey"></a><div class="element clickable method public removeDeployKey" data-toggle="collapse" data-target=".removeDeployKey .collapse">
+<h2>Delete a deploy key from a repository</h2>
+<pre>removeDeployKey(string $username, string $repo, string $id) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/keys/">http://developer.github.com/v3/repos/keys/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the user who owns the repo</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the name of the repo</p></div>
+<div class="subelement argument">
+<h4>$id</h4>
+<code>string</code><p>the the id of the key to remove</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>the list of deploy keys</div>
+</div></div>
+</div>
+<a name="removeRepoCollaborator" id="removeRepoCollaborator"></a><div class="element clickable method public removeRepoCollaborator" data-toggle="collapse" data-target=".removeRepoCollaborator .collapse">
+<h2>Delete a collaborator from a repository</h2>
+<pre>removeRepoCollaborator(string $repo, string $username, string $user) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/collaborators/">http://developer.github.com/v3/repos/collaborators/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the name of the repo</p></div>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the user who owns the repo</p></div>
+<div class="subelement argument">
+<h4>$user</h4>
+<code>string</code><p>the user who should be removed as a collaborator</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>list of the repo collaborators</div>
+</div></div>
+</div>
+<a name="search" id="search"></a><div class="element clickable method public search" data-toggle="collapse" data-target=".search .collapse">
+<h2>Search repositories by keyword:</h2>
+<pre>search(string $keyword, string $language, integer $startPage) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/search/#search-repositories">http://developer.github.com/v3/search/#search-repositories</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$keyword</h4>
+<code>string</code><p>the search query</p></div>
+<div class="subelement argument">
+<h4>$language</h4>
+<code>string</code><p>takes the same values as the language drop down on http://github.com/search</p>
+</div>
+<div class="subelement argument">
+<h4>$startPage</h4>
+<code>integer</code><p>the page number</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>list of founded repositories</div>
+</div></div>
+</div>
+<a name="setPrivate" id="setPrivate"></a><div class="element clickable method public setPrivate" data-toggle="collapse" data-target=".setPrivate .collapse">
+<h2>Set the visibility of a repository to private</h2>
+<pre>setPrivate(string $username, string $repo) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/">http://developer.github.com/v3/repos/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the user who owns the repo</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the name of the repo</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>informations about the repo</div>
+</div></div>
+</div>
+<a name="setPublic" id="setPublic"></a><div class="element clickable method public setPublic" data-toggle="collapse" data-target=".setPublic .collapse">
+<h2>Set the visibility of a repository to public</h2>
+<pre>setPublic(string $username, string $repo) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/">http://developer.github.com/v3/repos/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the user who owns the repo</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the name of the repo</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>informations about the repo</div>
+</div></div>
+</div>
+<a name="setRepoInfo" id="setRepoInfo"></a><div class="element clickable method public setRepoInfo" data-toggle="collapse" data-target=".setRepoInfo .collapse">
+<h2>Set information of a repository</h2>
+<pre>setRepoInfo(string $username, string $repo, array $values) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/">http://developer.github.com/v3/repos/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the user who owns the repo</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the name of the repo</p></div>
+<div class="subelement argument">
+<h4>$values</h4>
+<code>array</code><p>the key => value pairs to post</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>informations about the repo</div>
+</div></div>
+</div>
+<a name="show" id="show"></a><div class="element clickable method public show" data-toggle="collapse" data-target=".show .collapse">
+<h2>Get extended information about a repository by its username and repo name</h2>
+<pre>show(string $username, string $repo) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/">http://developer.github.com/v3/repos/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the user who owns the repo</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the name of the repo</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>informations about the repo</div>
+</div></div>
+</div>
+<a name="testRepoHook" id="testRepoHook"></a><div class="element clickable method public testRepoHook" data-toggle="collapse" data-target=".testRepoHook .collapse">
+<h2>Test a hook in selected repository</h2>
+<pre>testRepoHook(string $username, string $repo, integer $id) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/hooks/#test-a-hook">http://developer.github.com/v3/repos/hooks/#test-a-hook</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the user who owns the repo</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the name of the repo</p></div>
+<div class="subelement argument">
+<h4>$id</h4>
+<code>integer</code><p>the id of the hook</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a name="unwatch" id="unwatch"></a><div class="element clickable method public unwatch" data-toggle="collapse" data-target=".unwatch .collapse">
+<h2>Make the authenticated user unwatch a repository</h2>
+<pre>unwatch(string $username, string $repo) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/watching/">http://developer.github.com/v3/repos/watching/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the user who owns the repo</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the name of the repo</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>informations about the repo</div>
+</div></div>
+</div>
+<a name="updateRepoHook" id="updateRepoHook"></a><div class="element clickable method public updateRepoHook" data-toggle="collapse" data-target=".updateRepoHook .collapse">
+<h2>Update hook informations by username, repo and hook number. Requires authentication.</h2>
+<pre>updateRepoHook(string $username, string $repo, string $id, array $data) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/hooks/#edit-a-hook">http://developer.github.com/v3/repos/hooks/#edit-a-hook</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the username</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the repo</p></div>
+<div class="subelement argument">
+<h4>$id</h4>
+<code>string</code><p>the hook id</p></div>
+<div class="subelement argument">
+<h4>$data</h4>
+<code>array</code><p>key=>value user attributes to update.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>information about the issue</div>
+</div></div>
+</div>
+<a name="watch" id="watch"></a><div class="element clickable method public watch" data-toggle="collapse" data-target=".watch .collapse">
+<h2>Make the authenticated user watch a repository</h2>
+<pre>watch(string $username, string $repo) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/repos/watching/">http://developer.github.com/v3/repos/watching/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the user who owns the repo</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the name of the repo</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>informations about the repo</div>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a6</a> and<br>
+            generated on 2012-07-15T22:43:06+02:00.<br></footer></div>
+</div>
+</body>
+</html>

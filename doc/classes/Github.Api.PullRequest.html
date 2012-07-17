@@ -1,0 +1,195 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>phpDocumentor » \Github\Api\PullRequest</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">phpDocumentor</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/Github.html"><i class="icon-th"></i> Github</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">68</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#create" title="create :: Create a pull request"><span class="description">Create a pull request</span><pre>create()</pre></a></li>
+<li class="method public "><a href="#listPullRequests" title="listPullRequests :: Get a listing of a project's pull requests by the username, repo, and optionally state."><span class="description">Get a listing of a project's pull requests by the username, repo, and optionally state.</span><pre>listPullRequests()</pre></a></li>
+<li class="method public "><a href="#show" title="show :: Show all details of a pull request, including the discussions."><span class="description">Show all details of a pull request, including the discussions.</span><pre>show()</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CGithub%5CApi%5CPullRequest" id="\Github\Api\PullRequest"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/Github.html">Github</a></li>
+<span class="divider">\</span><li><a href="../namespaces/Github.Api.html">Api</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/Github.Api.PullRequest.html">PullRequest</a>
+</li>
+</ul>
+<div href="../classes/Github.Api.PullRequest.html" class="element class">
+<p class="short_description">API for accessing Pull Requests from your Git/Github repositories.</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>link</th>
+<td><a href="http://develop.github.com/p/pulls.html">http://develop.github.com/p/pulls.html</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="">Nicolas Pastorino &lt;nicolas.pastorino at gmail dot com&gt;</a></td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="http://opensource.org/licenses/MIT">MIT License</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="create" id="create"></a><div class="element clickable method public create" data-toggle="collapse" data-target=".create .collapse">
+<h2>Create a pull request</h2>
+<pre>create(string $username, string $repo, string $base, string $head, string $title, string $body, string $issueNumber) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/pulls/">http://developer.github.com/v3/pulls/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the username</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the repo</p></div>
+<div class="subelement argument">
+<h4>$base</h4>
+<code>string</code><p>A String of the branch or commit SHA that you want your changes to be pulled to.</p></div>
+<div class="subelement argument">
+<h4>$head</h4>
+<code>string</code><p>A String of the branch or commit SHA of your changes. Typically this will be a branch. If the branch is in a fork of the original repository, specify the username first: "my-user:some-branch".</p>
+</div>
+<div class="subelement argument">
+<h4>$title</h4>
+<code>string</code><p>The String title of the Pull Request. Used in pair with $body.</p>
+</div>
+<div class="subelement argument">
+<h4>$body</h4>
+<code>string</code><p>The String body of the Pull Request. Used in pair with $title.</p>
+</div>
+<div class="subelement argument">
+<h4>$issueNumber</h4>
+<code>string</code><p>The issue number. Used when title and body is not set.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>array of pull requests for the project</div>
+</div></div>
+</div>
+<a name="listPullRequests" id="listPullRequests"></a><div class="element clickable method public listPullRequests" data-toggle="collapse" data-target=".listPullRequests .collapse">
+<h2>Get a listing of a project's pull requests by the username, repo, and optionally state.</h2>
+<pre>listPullRequests(string $username, string $repo, string $state) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/pulls/">http://developer.github.com/v3/pulls/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the username</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the repo</p></div>
+<div class="subelement argument">
+<h4>$state</h4>
+<code>string</code><p>the state of the fetched pull requests. The API seems to automatically default to 'open'</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>array of pull requests for the project</div>
+</div></div>
+</div>
+<a name="show" id="show"></a><div class="element clickable method public show" data-toggle="collapse" data-target=".show .collapse">
+<h2>Show all details of a pull request, including the discussions.</h2>
+<pre>show(string $username, string $repo, string $id) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://developer.github.com/v3/pulls/">http://developer.github.com/v3/pulls/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>the username</p></div>
+<div class="subelement argument">
+<h4>$repo</h4>
+<code>string</code><p>the repo</p></div>
+<div class="subelement argument">
+<h4>$id</h4>
+<code>string</code><p>the ID of the pull request for which details are retrieved</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>array of pull requests for the project</div>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a6</a> and<br>
+            generated on 2012-07-15T22:43:06+02:00.<br></footer></div>
+</div>
+</body>
+</html>
