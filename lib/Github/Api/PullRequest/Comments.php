@@ -21,7 +21,7 @@ class Comments extends AbstractApi
         return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls/comments/'.urlencode($comment));
     }
 
-    public function create($username, $repository, $sha, array $params)
+    public function create($username, $repository, $pullRequest, array $params)
     {
         if (!isset($params['body'])) {
             throw new MissingArgumentException('body');
@@ -32,7 +32,7 @@ class Comments extends AbstractApi
             throw new MissingArgumentException(array('commit_id', 'path', 'position'));
         }
 
-        return $this->post('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls/'.urlencode($sha).'/comments', $params);
+        return $this->post('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls/'.urlencode($pullRequest).'/comments', $params);
     }
 
     public function update($username, $repository, $comment, array $params)

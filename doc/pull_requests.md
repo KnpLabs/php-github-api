@@ -1,8 +1,12 @@
 ## Pull Requests API
 [Back to the navigation](index.md)
 
-Lets you list pull requests for a given repository, list one pull request in particular along with its discussion, and create a pull-request.
-Wraps [GitHub Pull Request API](http://developer.github.com/v3/pulls/), still tagged **BETA**. All methods are described there.
+Additional APIs:
+* [Review Comments](pull_request/comments.md)
+
+Lets you list pull requests for a given repository, list one pull request in particular along
+with its discussion, and create a pull-request.
+Wraps [GitHub Pull Request API](http://developer.github.com/v3/pulls/).
 
 ### List all pull requests, per repository
 
