@@ -21,9 +21,6 @@
         "ext-curl":           "*",
         "kriswallsmith/buzz": "0.7"
     },
-    "require-dev": {
-        "behat/behat": "2.4.*"
-    },
     "autoload": {
         "psr-0": { "Github": "lib/" }
     },

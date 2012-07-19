@@ -15,7 +15,7 @@ class RepoTest extends \PHPUnit_Framework_TestCase
         $repo     = 'php-github-api';
 
         $github = new Client();
-        $contributors = $github->getRepoApi()->getRepoContributors($username, $repo);
+        $contributors = $github->api('repo')->contributors($username, $repo);
         $contributor = array_pop($contributors);
 
         $this->assertArrayHasKey('url', $contributor);
@@ -29,40 +29,13 @@ class RepoTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function shouldGetUserRepositories()
-    {
-        $username = 'KnpLabs';
-
-        $github = new Client();
-        $repos = $github->getRepoApi()->getUserRepos($username);
-        $repo = array_pop($repos);
-
-        $this->assertArrayHasKey('id', $repo);
-        $this->assertArrayHasKey('name', $repo);
-        $this->assertArrayHasKey('description', $repo);
-        $this->assertArrayHasKey('url', $repo);
-        $this->assertArrayHasKey('has_wiki', $repo);
-        $this->assertArrayHasKey('has_issues', $repo);
-        $this->assertArrayHasKey('forks', $repo);
-        $this->assertArrayHasKey('updated_at', $repo);
-        $this->assertArrayHasKey('created_at', $repo);
-        $this->assertArrayHasKey('pushed_at', $repo);
-        $this->assertArrayHasKey('open_issues', $repo);
-        $this->assertArrayHasKey('ssh_url', $repo);
-        $this->assertArrayHasKey('git_url', $repo);
-        $this->assertArrayHasKey('svn_url', $repo);
-    }
-
-    /**
-     * @test
-     */
     public function shouldShowRepo()
     {
         $username = 'KnpLabs';
         $repo     = 'php-github-api';
 
         $github = new Client();
-        $repo = $github->getRepoApi()->show($username, $repo);
+        $repo = $github->api('repo')->show($username, $repo);
 
         $this->assertArrayHasKey('id', $repo);
         $this->assertArrayHasKey('name', $repo);
