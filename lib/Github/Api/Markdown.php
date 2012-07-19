@@ -8,7 +8,7 @@ namespace Github\Api;
  * @link   http://developer.github.com/v3/markdown/
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
-class Markdown extends Api
+class Markdown extends AbstractApi
 {
     /**
      * @param string $text

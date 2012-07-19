@@ -14,7 +14,7 @@ class UsetTest extends \PHPUnit_Framework_TestCase
         $username = 'KnpLabs';
 
         $github = new Client();
-        $user = $github->getUserApi()->show($username);
+        $user = $github->api('user')->show($username);
 
         $this->assertArrayHasKey('id', $user);
         $this->assertEquals('KnpLabs', $user['login']);
@@ -36,7 +36,7 @@ class UsetTest extends \PHPUnit_Framework_TestCase
     public function shouldNotUpdateUserWithoutAuthorization()
     {
         $github = new Client();
-        $response = $github->getUserApi()->update(array('email' => 'leszek.prabucki@gmail.com'));
+        $response = $github->api('current_user')->update(array('email' => 'leszek.prabucki@gmail.com'));
 
         $this->assertEquals('Requires authentication', $response['message']);
     }
@@ -49,7 +49,7 @@ class UsetTest extends \PHPUnit_Framework_TestCase
         $username = 'l3l0';
 
         $github = new Client();
-        $users = $github->getUserApi()->getFollowing($username);
+        $users = $github->api('user')->following($username);
         $user = array_pop($users);
 
         $this->assertArrayHasKey('id', $user);
@@ -64,7 +64,7 @@ class UsetTest extends \PHPUnit_Framework_TestCase
         $username = 'KnpLabs';
 
         $github = new Client();
-        $users = $github->getUserApi()->getFollowers($username);
+        $users = $github->api('user')->followers($username);
         $user = array_pop($users);
 
         $this->assertArrayHasKey('id', $user);
@@ -77,7 +77,7 @@ class UsetTest extends \PHPUnit_Framework_TestCase
     public function shouldNotFollowUserWithoutAuthorization()
     {
         $github = new Client();
-        $response = $github->getUserApi()->follow('KnpLabs');
+        $response = $github->api('current_user')->follow()->follow('KnpLabs');
 
         $this->assertEquals('Requires authentication', $response['message']);
     }
@@ -88,7 +88,7 @@ class UsetTest extends \PHPUnit_Framework_TestCase
     public function shouldNotUnfollowUserWithoutAuthorization()
     {
         $github = new Client();
-        $response = $github->getUserApi()->unfollow('KnpLabs');
+        $response = $github->api('current_user')->follow()->unfollow('KnpLabs');
 
         $this->assertEquals('Requires authentication', $response['message']);
     }
@@ -101,7 +101,7 @@ class UsetTest extends \PHPUnit_Framework_TestCase
         $username = 'l3l0';
 
         $github = new Client();
-        $repos = $github->getUserApi()->getWatchedRepos($username);
+        $repos = $github->api('user')->watched($username);
         $repo = array_pop($repos);
 
         $this->assertArrayHasKey('id', $repo);

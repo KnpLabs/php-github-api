@@ -6,7 +6,7 @@ use Github\HttpClient\HttpClient as BaseHttpClient;
 
 class HttpClientTest extends \PHPUnit_Framework_TestCase
 {
-    public function testInstanciateWithOptions()
+    public function testInstanceWithOptions()
     {
         $httpClient = new TestDriver(array(
             'timeout' => 33
@@ -27,7 +27,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
             ->getMock();
         $httpClient->expects($this->once())
             ->method('request')
-            ->with($path, $parameters, 'GET', $options);
+            ->with('/some/path?a=b', array(), 'GET', $options);
 
         $httpClient->get($path, $parameters, $options);
     }
@@ -83,13 +83,6 @@ class TestDriver extends BaseHttpClient
     {
     }
 
-    /**
-     * Get an option value.
-     *
-     * @param  string $name The option name
-     *
-     * @return mixed  The option value
-     */
     public function getOption($name, $default = null)
     {
         return isset($this->options[$name]) ? $this->options[$name] : $default;

@@ -19,7 +19,7 @@ interface HttpClientInterface
      *
      * @return array                Data
      */
-    function get($path, array $parameters = array(), array $options = array());
+    public function get($path, array $parameters = array(), array $options = array());
 
     /**
      * Send a POST request
@@ -30,7 +30,7 @@ interface HttpClientInterface
      *
      * @return array                Data
      */
-    function post($path, array $parameters = array(), array $options = array());
+    public function post($path, array $parameters = array(), array $options = array());
 
     /**
      * Send a PATCH request
@@ -41,7 +41,7 @@ interface HttpClientInterface
      *
      * @return array                Data
      */
-    function patch($path, array $parameters = array(), array $options = array());
+    public function patch($path, array $parameters = array(), array $options = array());
 
     /**
      * Send a PUT request
@@ -51,7 +51,7 @@ interface HttpClientInterface
      *
      * @return array                Data
      */
-    function put($path, array $options = array());
+    public function put($path, array $options = array());
 
     /**
      * Send a DELETE request
@@ -62,7 +62,12 @@ interface HttpClientInterface
      *
      * @return array                Data
      */
-    function delete($path, array $parameters = array(), array $options = array());
+    public function delete($path, array $parameters = array(), array $options = array());
+
+    /**
+     * Authenticate a user for all next requests
+     */
+    public function authenticate();
 
     /**
      * Change an option value.
@@ -72,12 +77,12 @@ interface HttpClientInterface
      *
      * @return HttpClientInterface The current object instance
      */
-    function setOption($name, $value);
+    public function setOption($name, $value);
 
     /**
      * Set HTTP headers
      *
      * @param array $headers
      */
-    function setHeaders(array $headers);
+    public function setHeaders(array $headers);
 }

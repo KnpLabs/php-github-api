@@ -57,6 +57,11 @@ class HttpClient implements HttpClientInterface
     protected $browser;
 
     /**
+     * @var array
+     */
+    private $lastResponse;
+
+    /**
      * Instantiated a new http client
      *
      * @param array        $options Http client options
@@ -70,17 +75,19 @@ class HttpClient implements HttpClientInterface
         $this->browser->getClient()->setTimeout($this->options['timeout']);
         $this->browser->getClient()->setVerifyPeer(false);
 
-        if (null !== $this->options['login'] || null !== $this->options['token']) {
-            if (null !== $this->options['token']) {
-                $options = array($this->options['token']);
-            } else {
-                $options = array($this->options['login'], $this->options['password']);
-            }
+    }
 
-            $this->browser->addListener(
-                new AuthListener($this->options['auth_method'], $options)
-            );
-        }
+    /**
+     * {@inheritDoc}
+     */
+    public function authenticate()
+    {
+        $this->browser->addListener(
+            new AuthListener(
+                $this->options['auth_method'],
+                array($this->options['login'], $this->options['password'], $this->options['token'])
+            )
+        );
     }
 
     /**
@@ -102,11 +109,25 @@ class HttpClient implements HttpClientInterface
     }
 
     /**
+     * @return null|array
+     */
+    public function getPagination()
+    {
+        if (null === $this->lastResponse) {
+            return null;
+        }
+
+        return $this->lastResponse['pagination'];
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function get($path, array $parameters = array(), array $options = array())
     {
-        return $this->request($path, $parameters, 'GET', $options);
+        $path .= (false === strpos($path, '?') ? '?' : '&').http_build_query($parameters, '', '&');
+
+        return $this->request($path, array(), 'GET', $options);
     }
 
     /**
@@ -162,9 +183,9 @@ class HttpClient implements HttpClientInterface
         ));
 
         // get encoded response
-        $response = $this->doRequest($url, $parameters, $httpMethod, $options);
+        $this->lastResponse = $this->doRequest($url, $parameters, $httpMethod, $options);
 
-        return $this->decodeResponse($response['response']);
+        return $this->decodeResponse($this->lastResponse['response']);
     }
 
     /**
@@ -186,9 +207,34 @@ class HttpClient implements HttpClientInterface
         return array(
             'response'     => $response->getContent(),
             'headers'      => $response->getHeaders(),
+            'pagination'   => $this->decodePagination($response),
             'errorNumber'  => '',
             'errorMessage' => ''
         );
+    }
+
+    /**
+     * @param MessageInterface $response
+     *
+     * @return array|null
+     */
+    protected function decodePagination(MessageInterface $response)
+    {
+        $header = $response->getHeader('Link');
+        if (empty($header)) {
+            return null;
+        }
+
+        $pagination = array();
+        foreach (explode("\n", $header) as $link) {
+            preg_match('/<(.*)>; rel="(.*)"/i', trim($link, ','), $match);
+
+            if (3 === count($match)) {
+                $pagination[$match[2]] = $match[1];
+            }
+        }
+
+        return $pagination;
     }
 
     /**

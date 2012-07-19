@@ -13,11 +13,18 @@ class IssueTest extends ApiTestCase
     {
         $api = $this->getApiMock();
 
+        $data = array(
+            'state' => 'open'
+        );
+        $sentData = $data + array(
+            'page' => 1
+        );
+
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/ornicar/php-github-api/issues?state=open');
+            ->with('repos/ornicar/php-github-api/issues', $sentData);
 
-        $api->getList('ornicar', 'php-github-api', 'open');
+        $api->all('ornicar', 'php-github-api', $data);
     }
 
     /**
@@ -27,18 +34,25 @@ class IssueTest extends ApiTestCase
     {
         $api = $this->getApiMock();
 
-        $api->expects($this->once())
-            ->method('get')
-            ->with('repos/ornicar/php-github-api/issues?milestone=%2A&assignee=l3l0&mentioned=l3l0&labels=bug%2C%40high&sort=created&direction=asc&state=open');
-
-        $api->getList('ornicar', 'php-github-api', 'open', array(
+        $data = array(
+            'state' => 'open',
             'milestone' => '*',
             'assignee'  => 'l3l0',
             'mentioned' => 'l3l0',
             'labels'    => 'bug,@high',
             'sort'      => 'created',
             'direction' => 'asc'
-        ));
+        );
+
+        $sentData = $data + array(
+            'page' => 1
+        );
+
+        $api->expects($this->once())
+            ->method('get')
+            ->with('repos/ornicar/php-github-api/issues', $sentData);
+
+        $api->all('ornicar', 'php-github-api', $data);
     }
 
     /**
@@ -62,14 +76,16 @@ class IssueTest extends ApiTestCase
     {
         $api = $this->getApiMock();
 
+        $data = array(
+            'title' => 'some title',
+            'body'  => 'some body'
+        );
+
         $api->expects($this->once())
             ->method('post')
-            ->with('repos/ornicar/php-github-api/issues', array(
-                'title' => 'some title',
-                'body'  => 'some body'
-            ));
+            ->with('repos/ornicar/php-github-api/issues', $data);
 
-        $api->open('ornicar', 'php-github-api', 'some title', 'some body');
+        $api->create('ornicar', 'php-github-api', $data);
     }
 
     /**
@@ -79,13 +95,15 @@ class IssueTest extends ApiTestCase
     {
         $api = $this->getApiMock();
 
+        $data = array(
+            'state' => 'closed',
+        );
+
         $api->expects($this->once())
             ->method('patch')
-            ->with('repos/ornicar/php-github-api/issues/14', array(
-                'state' => 'closed',
-            ));
+            ->with('repos/ornicar/php-github-api/issues/14', $data);
 
-        $api->close('ornicar', 'php-github-api', 14);
+        $api->update('ornicar', 'php-github-api', 14, $data);
     }
 
     /**
@@ -95,116 +113,15 @@ class IssueTest extends ApiTestCase
     {
         $api = $this->getApiMock();
 
+        $data = array(
+            'state' => 'open',
+        );
+
         $api->expects($this->once())
             ->method('patch')
-            ->with('repos/ornicar/php-github-api/issues/14', array(
-                'state' => 'open',
-            ));
+            ->with('repos/ornicar/php-github-api/issues/14', $data);
 
-        $api->reOpen('ornicar', 'php-github-api', 14);
-    }
-
-    /**
-     * @test
-     */
-    public function shouldBuildValidQueryForGetComments()
-    {
-        $api = $this->getApiMock();
-
-        $api->expects($this->once())
-            ->method('get')
-            ->with('repos/ornicar/php-github-api/issues/14/comments');
-
-        $api->getComments('ornicar', 'php-github-api', 14);
-    }
-
-    /**
-     * @test
-     */
-    public function shouldBuildValidQueryForGetComment()
-    {
-        $api = $this->getApiMock();
-
-        $api->expects($this->once())
-            ->method('get')
-            ->with('repos/ornicar/php-github-api/issues/comments/666');
-
-        $api->getComment('ornicar', 'php-github-api', 666);
-    }
-
-    /**
-     * @test
-     */
-    public function shouldBuildValidQueryForAddComment()
-    {
-        $api = $this->getApiMock();
-
-        $api->expects($this->once())
-            ->method('post')
-            ->with('repos/ornicar/php-github-api/issues/14/comments', array(
-                'body'  => 'some body'
-            ));
-
-        $api->addComment('ornicar', 'php-github-api', 14, 'some body');
-    }
-
-    /**
-     * @test
-     */
-    public function shouldBuildValidQueryForGetLabels()
-    {
-        $api = $this->getApiMock();
-
-        $api->expects($this->once())
-            ->method('get')
-            ->with('repos/ornicar/php-github-api/labels');
-
-        $api->getLabels('ornicar', 'php-github-api');
-    }
-
-    /**
-     * @test
-     */
-    public function shouldBuildValidQueryForGetLabel()
-    {
-        $api = $this->getApiMock();
-
-        $api->expects($this->once())
-            ->method('get')
-            ->with('repos/ornicar/php-github-api/labels/my-label');
-
-        $api->getLabel('ornicar', 'php-github-api', 'my-label');
-    }
-
-    /**
-     * @test
-     */
-    public function shouldBuildValidQueryForAddLabel()
-    {
-        $api = $this->getApiMock();
-
-        $api->expects($this->once())
-            ->method('post')
-            ->with('repos/ornicar/php-github-api/labels', array(
-                'name'  => 'my-label',
-                'color' => 'FFFFFF'
-            ));
-
-        $api->addLabel('ornicar', 'php-github-api', 'my-label', 'FFFFFF');
-    }
-
-    /**
-     * @test
-     */
-    public function shouldBuildValidQueryForRemoveLabel()
-    {
-        $api = $this->getApiMock();
-
-        $api->expects($this->once())
-            ->method('delete')
-            ->with('repos/ornicar/php-github-api/labels/my-label');
-
-        $api->removeLabel('ornicar', 'php-github-api', 'my-label');
+        $api->update('ornicar', 'php-github-api', 14, $data);
     }
 
     protected function getApiClass()

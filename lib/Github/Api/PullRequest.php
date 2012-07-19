@@ -2,78 +2,116 @@
 
 namespace Github\Api;
 
+use Github\Api\PullRequest\Comments;
+use Github\Exception\MissingArgumentException;
+
 /**
  * API for accessing Pull Requests from your Git/Github repositories.
  *
- * @link      http://develop.github.com/p/pulls.html
- * @author    Nicolas Pastorino <nicolas.pastorino at gmail dot com>
- * @license   MIT License
+ * @link   http://developer.github.com/v3/pulls/
+ * @author Joseph Bielawski <stloyd@gmail.com>
  */
-class PullRequest extends Api
+class PullRequest extends AbstractApi
 {
     /**
-     * Get a listing of a project's pull requests by the username, repo, and optionally state.
-     * @link    http://developer.github.com/v3/pulls/
+     * Get a listing of a project's pull requests by the username, repository and (optionally) state.
+     * @link http://developer.github.com/v3/pulls/
      *
-     * @param   string $username          the username
-     * @param   string $repo              the repo
-     * @param   string $state             the state of the fetched pull requests.
-     *                                    The API seems to automatically default to 'open'
-     * @return  array                     array of pull requests for the project
+     * @param  string $username          the username
+     * @param  string $repository        the repository
+     * @param  string $state             the state of the fetched pull requests.
+     *                                   The API seems to automatically default to 'open'
+     *
+     * @return array                     array of pull requests for the project
      */
-    public function listPullRequests($username, $repo, $state = null)
+    public function all($username, $repository, $state = null)
     {
-        $url = 'repos/'.urlencode($username).'/'.urlencode($repo).'/pulls';
-        if ($state) {
-            $url .= '?state='.urlencode($state);
-        }
-
-        return $this->get($url);
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls', array('state' => $state));
     }
 
     /**
      * Show all details of a pull request, including the discussions.
-     * @link    http://developer.github.com/v3/pulls/
+     * @link http://developer.github.com/v3/pulls/
      *
-     * @param   string $username          the username
-     * @param   string $repo              the repo
-     * @param   string $id                the ID of the pull request for which details are retrieved
-     * @return  array                     array of pull requests for the project
+     * @param  string $username          the username
+     * @param  string $repository        the repository
+     * @param  string $id                the ID of the pull request for which details are retrieved
+     *
+     * @return array                     array of pull requests for the project
      */
-    public function show($username, $repo, $id)
+    public function show($username, $repository, $id)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repo).'/pulls/'.urlencode($id));
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls/'.urlencode($id));
+    }
+
+    public function commits($username, $repository, $id)
+    {
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls/'.urlencode($id).'/commits');
+    }
+
+    public function files($username, $repository, $id)
+    {
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls/'.urlencode($id).'/files');
+    }
+
+    public function comments()
+    {
+        return new Comments($this->client);
     }
 
     /**
      * Create a pull request
+     * @link   http://developer.github.com/v3/pulls/
      *
-     * @link    http://developer.github.com/v3/pulls/
-     * @param   string $username          the username
-     * @param   string $repo              the repo
-     * @param   string $base              A String of the branch or commit SHA that you want your changes to be pulled to.
-     * @param   string $head              A String of the branch or commit SHA of your changes.
-     *                                    Typically this will be a branch. If the branch is in a fork of the original repository,
-     *                                    specify the username first: "my-user:some-branch".
-     * @param   string $title             The String title of the Pull Request. Used in pair with $body.
-     * @param   string $body              The String body of the Pull Request. Used in pair with $title.
-     * @param   string $issueNumber       The issue number. Used when title and body is not set.
-     * @return  array                     array of pull requests for the project
+     * @param  string $username   the username
+     * @param  string $repository the repository
+     * @param  array  $params     A String of the branch or commit SHA that you want your changes to be pulled to.
+     *                            A String of the branch or commit SHA of your changes. Typically this will be a branch.
+     *                            If the branch is in a fork of the original repository, specify the username first:
+     *                            "my-user:some-branch". The String title of the Pull Request. The String body of
+     *                            the Pull Request. The issue number. Used when title and body is not set.
+     *
+     * @return array
+     *
+     * @throws MissingArgumentException
      */
-    public function create($username, $repo, $base, $head, $title, $body = null, $issueNumber = null)
+    public function create($username, $repository, array $params)
     {
-        $input = array(
-            'head' => $head,
-            'base' => $base,
-        );
-
-        if ($title || $body) {
-            $input['title'] = $title;
-            $input['body']  = $body;
-        } else {
-            $input['issue'] = $issueNumber;
+        // Two ways to create PR, using issue or title
+        if (!isset($params['issue']) && !isset($params['title'])) {
+            throw new MissingArgumentException(array('issue', 'title'));
         }
 
-        return $this->post('repos/'.urlencode($username).'/'.urlencode($repo).'/pulls', $input);
+        if (!isset($params['base'], $params['head'])) {
+            throw new MissingArgumentException(array('base', 'head'));
+        }
+
+        // If `issue` is not sent, then `body` must be sent
+        if (!isset($params['issue']) && !isset($params['body'])) {
+            throw new MissingArgumentException(array('issue', 'body'));
+        }
+
+        return $this->post('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls', $params);
+    }
+
+    public function update($username, $repository, array $params)
+    {
+        if (isset($params['state']) && !in_array($params['state'], array('open', 'closed'))) {
+            $params['state'] = 'open';
+        }
+
+        return $this->patch('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls', $params);
+    }
+
+    public function merged($username, $repository, $id)
+    {
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls/'.urlencode($id).'/merge');
+    }
+
+    public function merge($username, $repository, $id, $message = null)
+    {
+        return $this->put('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls/'.urlencode($id).'/merge', array(
+            'commit_message' => $message
+        ));
     }
 }

@@ -9,5 +9,4 @@ before_script:
   - php composer.phar install --dev
 
 script:
-  - phpunit
-  - bin/behat
+  - phpunit --coverage-text
