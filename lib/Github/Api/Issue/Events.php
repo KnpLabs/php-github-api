@@ -12,7 +12,7 @@ class Events extends AbstractApi
 {
     public function all($username, $repository, $issue = null, $page = 1)
     {
-        if (null === $issue) {
+        if (null !== $issue) {
             return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/issues/'.urlencode($issue).'/events', array(
                 'page' => $page
             ));

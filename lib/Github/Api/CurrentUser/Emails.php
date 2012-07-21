@@ -13,7 +13,7 @@ class Emails extends AbstractApi
 {
     /**
      * List emails for the authenticated user
-     * @link http://developer.github.com/v3/repos/emails/
+     * @link http://developer.github.com/v3/users/emails/
      *
      * @return array
      */
@@ -24,7 +24,7 @@ class Emails extends AbstractApi
 
     /**
      * Adds one or more email for the authenticated user
-     * @link http://developer.github.com/v3/repos/emails/
+     * @link http://developer.github.com/v3/users/emails/
      *
      * @param  string|array $emails
      * @return array
@@ -44,7 +44,7 @@ class Emails extends AbstractApi
 
     /**
      * Removes one or more email for the authenticated user
-     * @link http://developer.github.com/v3/repos/emails/
+     * @link http://developer.github.com/v3/users/emails/
      *
      * @param  string|array $emails
      * @return array
@@ -59,6 +59,6 @@ class Emails extends AbstractApi
             throw new InvalidArgumentException();
         }
 
-        return $this->delete('user/emails/', $emails);
+        return $this->delete('user/emails', $emails);
     }
 }

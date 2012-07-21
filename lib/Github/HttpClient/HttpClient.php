@@ -85,7 +85,7 @@ class HttpClient implements HttpClientInterface
         $this->browser->addListener(
             new AuthListener(
                 $this->options['auth_method'],
-                array($this->options['login'], $this->options['password'], $this->options['token'])
+                array('login' => $this->options['login'], 'password' => $this->options['password'], 'token' => $this->options['token'])
             )
         );
     }
@@ -96,6 +96,8 @@ class HttpClient implements HttpClientInterface
     public function setHeaders(array $headers)
     {
         $this->headers = $headers;
+
+        return $this;
     }
 
     /**
