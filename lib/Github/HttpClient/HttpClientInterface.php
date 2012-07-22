@@ -83,6 +83,7 @@ interface HttpClientInterface
      * Set HTTP headers
      *
      * @param array $headers
+     * @return HttpClientInterface The current object instance
      */
     public function setHeaders(array $headers);
 }
