@@ -13,13 +13,13 @@ class Milestones extends AbstractApi
 {
     public function all($username, $repository, array $params = array())
     {
-        if (!in_array($params['state'], array('open', 'closed'))) {
+        if (isset($params['state']) && !in_array($params['state'], array('open', 'closed'))) {
             $params['state'] = 'open';
         }
-        if (!in_array($params['sort'], array('due_date', 'completeness'))) {
+        if (isset($params['sort']) && !in_array($params['sort'], array('due_date', 'completeness'))) {
             $params['sort'] = 'due_date';
         }
-        if (!in_array($params['direction'], array('asc', 'desc'))) {
+        if (isset($params['direction']) && !in_array($params['direction'], array('asc', 'desc'))) {
             $params['direction'] = 'desc';
         }
 
