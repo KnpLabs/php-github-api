@@ -20,8 +20,8 @@ Uses [GitHub API v3](http://developer.github.com/v3/). The object API is very si
 
 ## Autoload
 
-The new version of php-github-api using [composer](http://getcomposer.org).
-The first step to use php-github-api is to download composer:
+The new version of `php-github-api` using [Composer](http://getcomposer.org).
+The first step to use `php-github-api` is to download composer:
 
 ```bash
 $ curl -s http://getcomposer.org/installer | php
@@ -42,7 +42,7 @@ Now we can use autoloader from Composer by:
 }
 ```
 
-> php-github-api follows the PSR-0 convention names for its classes, which means you can easily integrate php-github-api classes loading in your own autoloader.
+> `php-github-api` follows the PSR-0 convention names for its classes, which means you can easily integrate `php-github-api` classes loading in your own autoloader.
 
 ## Basic usage of `php-github-api` client
 
@@ -62,9 +62,17 @@ From `$client` object, you can access to all GitHub.
 
 See the `doc` directory for more detailed documentation.
 
+## License
+
+`php-github-api` is licensed under the MIT License - see the LICENSE file for details
+
 ## Credits
 
-### Contributors Hall of Fame
+### Sponsored by
+
+[![KnpLabs Team](http://knplabs.pl/bundles/knpcorporate/images/logo.png)](http://knplabs.com)
+
+### Contributors
 
 - Thanks to [Thibault Duplessis aka. ornicar](http://github.com/ornicar) for his first version of this library.
 - Thanks to [noloh](http://github.com/noloh) for his contribution on the Object API.
@@ -74,7 +82,3 @@ See the `doc` directory for more detailed documentation.
 - Thanks to [Edoardo Rivello](http://github.com/erivello) for his contribution on the Gists API.
 
 Thanks to GitHub for the high quality API and documentation.
-
-## License
-
-php-github-api is licensed under the MIT License - see the LICENSE file for details
