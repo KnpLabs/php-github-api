@@ -16,9 +16,14 @@ class Contents extends AbstractApi
         return $this->show($username, $repository, 'readme', $reference);
     }
 
-    public function show($username, $repository, $path, $reference = null)
+    public function show($username, $repository, $path = null, $reference = null)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/contents/'.urlencode($path), array(
+        $url = 'repos/'.urlencode($username).'/'.urlencode($repository).'/contents';
+        if (null !== $path) {
+            $url .= '/'.urlencode($path);
+        }
+
+        return $this->get($url, array(
             'ref' => $reference
         ));
     }
