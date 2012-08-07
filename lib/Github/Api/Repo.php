@@ -87,6 +87,20 @@ class Repo extends AbstractApi
     }
 
     /**
+     * Delete a repository
+     * @link http://developer.github.com/v3/repos/
+     *
+     * @param  string  $username         the user who owns the repository
+     * @param  string  $repository       the name of the repository
+     *
+     * @return mixed                     null on success, arrray on error with 'message'
+     */
+    public function delete($username, $repository)
+    {
+        return parent::delete('repos/'.urlencode($username).'/'.urlencode($repository));
+    }
+
+    /**
      * Manage the collaborators of a repository
      * @link http://developer.github.com/v3/repos/collaborators/
      *

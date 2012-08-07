@@ -269,7 +269,36 @@ class RepoTest extends TestCase
 
         $this->assertEquals($expectedArray, $api->update('l3l0Repo', 'test', array('description' => 'test', 'homepage' => 'http://l3l0.eu')));
     }
+    
+    /** 
+     * @test
+     */
+    public function shouldDelete()
+    {
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('delete')
+            ->with('l3l0Repo', 'test')
+            ->will($this->returnValue(null));
 
+        $this->assertNull($api->delete('l3l0Repo', 'test'));
+    }
+
+    /** 
+     * @test
+     */
+    public function shouldNotDelete()
+    {
+        $expectedArray = array('message'=>'Not Found');
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('delete')
+            ->with('l3l0Repo', 'uknown-repo')
+            ->will($this->returnValue(array('message'=>'Not Found')));
+
+        $this->assertEquals($expectedArray, $api->delete('l3l0Repo', 'uknown-repo'));
+    }
     /**
      * @test
      */
