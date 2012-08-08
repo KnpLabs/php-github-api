@@ -18,16 +18,25 @@ class Trees extends AbstractApi
 
     public function create($username, $repository, array $params)
     {
-        if (!isset($params['tree'])) {
+        if (!isset($params['tree']) || !is_array($params['tree'])) {
             throw new MissingArgumentException('tree');
         }
-        if (!isset($params['tree']['path'], $params['tree']['mode'], $params['tree']['type'])) {
-            throw new MissingArgumentException(array('tree.path', 'tree.mode', 'tree.type'));
+
+        if (!isset($params['tree'][0])) {
+            $params['tree'] = array($params['tree']);
         }
 
-        // If `sha` is not set, `content` is required
-        if (!isset($params['tree']['sha']) && !isset($params['tree']['content'])) {
-            throw new MissingArgumentException('tree.content');
+        foreach ($params['tree'] as $key => $tree) {
+            if (!isset($tree['path'], $tree['mode'], $tree['type'])) {
+                throw new MissingArgumentException(array("tree.$key.path", "tree.$key.mode", "tree.$key.type"));
+            }
+
+            // If `sha` is not set, `content` is required
+            if (!isset($tree['sha']) && !isset($tree['content'])) {
+                throw new MissingArgumentException("tree.$key.content");
+            }
+
+            $params['tree'][$key] = $this->translateArrayToObject($tree);
         }
 
         return $this->post('repos/'.urlencode($username).'/'.urlencode($repository).'/git/trees', $params);

@@ -5,7 +5,7 @@ namespace Github\Tests\Api;
 use Github\Api\AbstractApi;
 
 /**
- * AbstractApi test case 
+ * AbstractApi test case
  *
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  */

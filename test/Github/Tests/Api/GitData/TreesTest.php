@@ -35,10 +35,18 @@ class TreesTest extends TestCase
         $expectedValue = array('sha' => '123', 'comitter');
         $data = array(
             'tree' => array(
-                'path' => 'path',
-                'mode' => 'mode',
-                'type' => 'type',
-                'sha'  => '1234'
+                array(
+                    'path' => 'path',
+                    'mode' => 'mode',
+                    'type' => 'type',
+                    'sha'  => '1234'
+                ),
+                array(
+                    'path' => 'htap',
+                    'mode' => 'edom',
+                    'type' => 'epyt',
+                    'sha'  => '4321'
+                ),
             )
         );
 
@@ -59,10 +67,18 @@ class TreesTest extends TestCase
         $expectedValue = array('sha' => '123', 'comitter');
         $data = array(
             'tree' => array(
-                'path' => 'path',
-                'mode' => 'mode',
-                'type' => 'type',
-                'content'  => 'content'
+                array(
+                    'path' => 'path',
+                    'mode' => 'mode',
+                    'type' => 'type',
+                    'content' => 'content'
+                ),
+                array(
+                    'path' => 'htap',
+                    'mode' => 'edom',
+                    'type' => 'epyt',
+                    'content' => 'tnetnoc'
+                ),
             )
         );
 
@@ -166,6 +182,23 @@ class TreesTest extends TestCase
     public function shouldNotCreateTreeWithoutTreeParam()
     {
         $data = array();
+
+        $api = $this->getApiMock();
+        $api->expects($this->never())
+            ->method('post');
+
+        $api->create('KnpLabs', 'php-github-api', $data);
+    }
+
+    /**
+     * @test
+     * @expectedException Github\Exception\MissingArgumentException
+     */
+    public function shouldNotCreateTreeWhenTreeParamIsNotArray()
+    {
+        $data = array(
+            'tree' => ''
+        );
 
         $api = $this->getApiMock();
         $api->expects($this->never())
