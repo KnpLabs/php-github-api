@@ -3,7 +3,7 @@
 namespace Github\Tests\Api;
 
 /**
- * Repository api test case 
+ * Repository api test case
  *
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  */
@@ -50,16 +50,17 @@ class RepoTest extends TestCase
     public function shouldPaginateFoundRepositories()
     {
         $expectedArray = array(
-            array('id' => 1, 'name' => 'php'),
-            array('id' => 2, 'name' => 'php-cs')
+            array('id' => 3, 'name' => 'fork of php'),
+            array('id' => 4, 'name' => 'fork of php-cs')
         );
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('legacy/repos/search/php', array('start_page' => 2));
+            ->with('legacy/repos/search/php', array('start_page' => 2))
+            ->will($this->returnValue($expectedArray));
 
-        $api->find('php', array('start_page' => 2));
+        $this->assertEquals($expectedArray, $api->find('php', array('start_page' => 2)));
     }
 
     /**
@@ -269,8 +270,8 @@ class RepoTest extends TestCase
 
         $this->assertEquals($expectedArray, $api->update('l3l0Repo', 'test', array('description' => 'test', 'homepage' => 'http://l3l0.eu')));
     }
-    
-    /** 
+
+    /**
      * @test
      */
     public function shouldDelete()
@@ -278,27 +279,28 @@ class RepoTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('l3l0Repo', 'test')
+            ->with('repos/l3l0Repo/test')
             ->will($this->returnValue(null));
 
-        $this->assertNull($api->delete('l3l0Repo', 'test'));
+        $this->assertNull($api->remove('l3l0Repo', 'test'));
     }
 
-    /** 
+    /**
      * @test
      */
     public function shouldNotDelete()
     {
-        $expectedArray = array('message'=>'Not Found');
+        $expectedArray = array('message' => 'Not Found');
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('l3l0Repo', 'uknown-repo')
-            ->will($this->returnValue(array('message'=>'Not Found')));
+            ->with('repos/l3l0Repo/uknown-repo')
+            ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($expectedArray, $api->delete('l3l0Repo', 'uknown-repo'));
+        $this->assertEquals($expectedArray, $api->remove('l3l0Repo', 'uknown-repo'));
     }
+
     /**
      * @test
      */

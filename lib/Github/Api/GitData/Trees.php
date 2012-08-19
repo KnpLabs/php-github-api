@@ -35,8 +35,6 @@ class Trees extends AbstractApi
             if (!isset($tree['sha']) && !isset($tree['content'])) {
                 throw new MissingArgumentException("tree.$key.content");
             }
-
-            $params['tree'][$key] = $this->translateArrayToObject($tree);
         }
 
         return $this->post('repos/'.urlencode($username).'/'.urlencode($repository).'/git/trees', $params);

@@ -66,21 +66,4 @@ abstract class AbstractApi implements ApiInterface
     {
         return $this->client->delete($path, $parameters, $requestOptions);
     }
-
-    /**
-     * Translates array to object, for proper json data (forcing `[]` instead of `{}`)
-     *
-     * @param array $params
-     *
-     * @return object
-     */
-    protected function translateArrayToObject(array $params)
-    {
-        $object = new \stdClass();
-        foreach ($params as $key => $param) {
-            $object->$key = $param;
-        }
-
-        return $object;
-    }
 }
