@@ -210,22 +210,6 @@ class RepoTest extends TestCase
     /**
      * @test
      */
-    public function shouldGetContentsForPathFromRepository()
-    {
-        $expectedArray = 'some content';
-
-        $api = $this->getApiMock();
-        $api->expects($this->once())
-            ->method('get')
-            ->with('repos/KnpLabs/php-github-api/contents/path/in/repo')
-            ->will($this->returnValue($expectedArray));
-
-        $this->assertEquals($expectedArray, $api->contents('KnpLabs', 'php-github-api', 'path/in/repo'));
-    }
-
-    /**
-     * @test
-     */
     public function shouldGetRepositoryDownloads()
     {
         $expectedArray = array('down1', 'down2');
@@ -329,6 +313,16 @@ class RepoTest extends TestCase
         $api = $this->getApiMock();
 
         $this->assertInstanceOf('Github\Api\Repository\Commits', $api->commits());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetContentsApiObject()
+    {
+        $api = $this->getApiMock();
+
+        $this->assertInstanceOf('Github\Api\Repository\Contents', $api->contents());
     }
 
     /**

@@ -134,6 +134,17 @@ class Repo extends AbstractApi
     }
 
     /**
+     * Manage the content of a repository
+     * @link http://developer.github.com/v3/repos/contents/
+     *
+     * @return Contents
+     */
+    public function contents()
+    {
+        return new Contents($this->client);
+    }
+
+    /**
      * Manage the deploy keys of a repository
      * @link http://developer.github.com/v3/repos/keys/
      *
@@ -268,21 +279,6 @@ class Repo extends AbstractApi
     public function teams($username, $repository)
     {
         return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/teams');
-    }
-
-    /**
-     * Get contents of any file or directory in a repository
-     * @link http://developer.github.com/v3/repos/contents/
-     *
-     * @param  string  $username         the user who owns the repository
-     * @param  string  $repository       the name of the repository
-     * @param  string  $path             path to file or directory
-     *
-     * @return array                     information for file | information for each item in directory
-     */
-    public function contents($username, $repository, $path)
-    {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/contents/'.$path);
     }
 
     /**
