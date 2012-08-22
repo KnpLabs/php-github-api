@@ -37,7 +37,7 @@ class ContentsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/contents/readme', array('ref' => null))
+            ->with('repos/KnpLabs/php-github-api/readme', array('ref' => null))
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->readme('KnpLabs', 'php-github-api'));

@@ -23,7 +23,9 @@ class Contents extends AbstractApi
      */
     public function readme($username, $repository, $reference = null)
     {
-        return $this->show($username, $repository, 'readme', $reference);
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/readme', array(
+            'ref' => $reference
+        ));
     }
 
     /**
