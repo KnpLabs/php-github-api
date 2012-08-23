@@ -6,7 +6,7 @@ use Github\HttpClient\HttpClient;
 use Buzz\Message\Response;
 
 /**
- * HttpClient test case 
+ * HttpClient test case
  *
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  */
@@ -166,7 +166,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $options    = array('c' => 'd');
 
         $response = new Response();
-        $response->addHeader("Link:<page1>; rel=\"page2\"\n<page3>; rel=\"page4\"");
+        $response->addHeader("Link:<page1>; rel=\"page2\", \n<page3>; rel=\"page4\"");
 
         $browser = $this->getBrowserMock();
         $browser
