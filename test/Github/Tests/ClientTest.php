@@ -1,57 +1,154 @@
 <?php
 
-class Github_Tests_ClientTest extends PHPUnit_Framework_TestCase
-{
-    public function testInstanciateWithoutHttpClient()
-    {
-        $client = new Github_Client();
+namespace Github\Tests;
 
-        $this->assertInstanceOf('Github_HttpClientInterface', $client->getHttpClient());
+use Github\Client;
+use Github\Tests\Mock\TestHttpClient;
+
+/**
+ * Client unit test
+ *
+ * @author Leszek Prabucki <leszek.prabucki@gmail.com>
+ */
+class ClientTest extends \PHPUnit_Framework_TestCase
+{
+    /**
+     * @test
+     */
+    public function shouldNotHaveToPassHttpClientToConstructor()
+    {
+        $client = new Client();
+
+        $this->assertInstanceOf('Github\HttpClient\HttpClientInterface', $client->getHttpClient());
     }
 
-    public function testInstanciateWithHttpClient()
+    /**
+     * @test
+     */
+    public function shouldBeAbleToPassHttpClientToConstructor()
     {
         $httpClient = $this->getHttpClientMock();
-        $client = new Github_Client($httpClient);
+        $client = new Client($httpClient);
 
         $this->assertEquals($httpClient, $client->getHttpClient());
     }
 
-    public function testAuthenticate()
+    /**
+     * @test
+     */
+    public function shouldAuthenticateUsingLoginAndPassword()
     {
         $login = 'login';
-        $secret = 'secret';
-        $method = 'method';
+        $secret = 'password';
+        $method = Client::AUTH_HTTP_PASSWORD;
 
-        $httpClient = $this->getHttpClientMock();
-        $httpClient->expects($this->exactly(3))
-            ->method('setOption')
-            ->will($this->returnValue($httpClient));
+        $httpClient = new TestHttpClient();
 
-        $client = $this->getClientMockBuilder()
-            ->setMethods(array('getHttpClient'))
-            ->getMock();
-        $client->expects($this->once())
-            ->method('getHttpClient')
-            ->with()
-            ->will($this->returnValue($httpClient));
-
+        $client = new Client($httpClient);
         $client->authenticate($login, $secret, $method);
+
+        $expectedOptions = array(
+            'login' => $login,
+            'password' => $secret,
+            'auth_method' => $method
+        );
+
+        $this->assertEquals($expectedOptions, $httpClient->options);
+        $this->assertTrue($httpClient->authenticated);
     }
 
-    public function testDeauthenticate()
+    /**
+     * @test
+     */
+    public function shouldAuthenticateUsingHttpToken()
     {
-        $client = $this->getClientMockBuilder()
-            ->setMethods(array('authenticate'))
-            ->getMock();
-        $client->expects($this->once())
-            ->method('authenticate')
-            ->with(null, null, null);
+        $login = 'login';
+        $secret = 'password';
+        $method = Client::AUTH_HTTP_TOKEN;
 
-        $client->deAuthenticate();
+        $httpClient = new TestHttpClient();
+
+        $client = new Client($httpClient);
+        $client->authenticate($login, $secret, $method);
+
+        $expectedOptions = array(
+            'token' => $secret,
+            'auth_method' => $method
+        );
+
+        $this->assertEquals($expectedOptions, $httpClient->options);
+        $this->assertTrue($httpClient->authenticated);
     }
 
-    public function testGet()
+    /**
+     * @test
+     */
+    public function shouldAuthenticateUsingUrlToken()
+    {
+        $login = 'login';
+        $secret = 'password';
+        $method = Client::AUTH_HTTP_TOKEN;
+
+        $httpClient = new TestHttpClient();
+
+        $client = new Client($httpClient);
+        $client->authenticate($login, $secret, $method);
+
+        $expectedOptions = array(
+            'token' => $secret,
+            'auth_method' => $method
+        );
+
+        $this->assertEquals($expectedOptions, $httpClient->options);
+        $this->assertTrue($httpClient->authenticated);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldInjectHttpClientBySetter()
+    {
+        $httpClient = new TestHttpClient();
+        $client = new Client();
+        $client->setHttpClient($httpClient);
+
+        $this->assertSame($httpClient, $client->getHttpClient());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldClearHeadersLaizly()
+    {
+        $httpClient = $this->getHttpClientMock();
+        $httpClient->expects($this->once())
+            ->method('setHeaders')
+            ->with(array());
+
+        $client = new Client($httpClient);
+        $client->clearHeaders();
+        $client->getHttpClient();
+    }
+
+    /**
+     * @test
+     */
+    public function shouldSetHeadersLaizly()
+    {
+        $httpClient = $this->getHttpClientMock();
+        $httpClient->expects($this->once())
+            ->method('setHeaders')
+            ->with(array('header1', 'header2'));
+
+        $client = new Client($httpClient);
+        $client->setHeaders(array('header1', 'header2'));
+        $client->getHttpClient();
+    }
+
+    /**
+     * @test
+     */
+    public function shouldDoGETRequest()
     {
         $path      = '/some/path';
         $parameters = array('a' => 'b');
@@ -62,18 +159,14 @@ class Github_Tests_ClientTest extends PHPUnit_Framework_TestCase
             ->method('get')
             ->with($path, $parameters, $options);
 
-        $client = $this->getClientMockBuilder()
-            ->setMethods(array('getHttpClient'))
-            ->getMock();
-        $client->expects($this->once())
-            ->method('getHttpClient')
-            ->with()
-            ->will($this->returnValue($httpClient));
-
+        $client = new Client($httpClient);
         $client->get($path, $parameters, $options);
     }
 
-    public function testPost()
+    /**
+     * @test
+     */
+    public function shouldDoPOSTRequest()
     {
         $path      = '/some/path';
         $parameters = array('a' => 'b');
@@ -84,45 +177,119 @@ class Github_Tests_ClientTest extends PHPUnit_Framework_TestCase
             ->method('post')
             ->with($path, $parameters, $options);
 
-        $client = $this->getClientMockBuilder()
-            ->setMethods(array('getHttpClient'))
-            ->getMock();
-        $client->expects($this->once())
-            ->method('getHttpClient')
-            ->with()
-            ->will($this->returnValue($httpClient));
-
+        $client = new Client($httpClient);
         $client->post($path, $parameters, $options);
     }
 
-    public function testDefaultApi()
+    /**
+     * @test
+     */
+    public function shouldDoPUTRequest()
     {
-        $client = new Github_Client();
+        $path      = '/some/path';
+        $options    = array('c' => 'd');
 
-        $this->assertInstanceOf('Github_Api_User', $client->getUserApi());
+        $httpClient = $this->getHttpClientMock();
+        $httpClient->expects($this->once())
+            ->method('put')
+            ->with($path, $options);
+
+        $client = new Client($httpClient);
+        $client->put($path, $options);
     }
 
-    public function testInjectApi()
+    /**
+     * @test
+     */
+    public function shouldDoPATCHRequest()
     {
-        $client = new Github_Client();
+        $path      = '/some/path';
+        $parameters = array('a' => 'b');
+        $options    = array('c' => 'd');
 
-        $userApiMock = $this->getMockBuilder('Github_ApiInterface')
-            ->getMock();
+        $httpClient = $this->getHttpClientMock();
+        $httpClient->expects($this->once())
+            ->method('patch')
+            ->with($path, $parameters, $options);
 
-        $client->setApi('user', $userApiMock);
-
-        $this->assertSame($userApiMock, $client->getUserApi());
+        $client = new Client($httpClient);
+        $client->patch($path, $parameters, $options);
     }
 
-    protected function getClientMockBuilder()
+    /**
+     * @test
+     */
+    public function shouldDoDELETERequest()
     {
-        return $this->getMockBuilder('Github_Client')
-            ->disableOriginalConstructor();
+        $path      = '/some/path';
+        $parameters = array('a' => 'b');
+        $options    = array('c' => 'd');
+
+        $httpClient = $this->getHttpClientMock();
+        $httpClient->expects($this->once())
+            ->method('delete')
+            ->with($path, $parameters, $options);
+
+        $client = new Client($httpClient);
+        $client->delete($path, $parameters, $options);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldDoGETRequestForRateLimit()
+    {
+        $limit = 666;
+
+        $httpClient = $this->getHttpClientMock();
+        $httpClient->expects($this->once())
+            ->method('get')
+            ->with('rate_limit')
+            ->will($this->returnValue($limit));
+
+        $client = new Client($httpClient);
+
+        $this->assertEquals($limit, $client->getRateLimit());
+    }
+
+    /**
+     * @test
+     * @dataProvider getApiClassesProvider
+     */
+    public function shouldGetApiInstance($apiName, $class)
+    {
+        $client = new Client();
+
+        $this->assertInstanceOf($class, $client->api($apiName));
+    }
+
+    /**
+     * @test
+     * @expectedException InvalidArgumentException
+     */
+    public function shouldNotGetApiInstance()
+    {
+        $client = new Client();
+        $client->api('do_not_exist');
+    }
+
+    public function getApiClassesProvider()
+    {
+        return array(
+            array('user', 'Github\Api\User'),
+            array('current_user', 'Github\Api\CurrentUser'),
+            array('git_data', 'Github\Api\GitData'),
+            array('gists', 'Github\Api\Gists'),
+            array('issue', 'Github\Api\Issue'),
+            array('markdown', 'Github\Api\Markdown'),
+            array('organization', 'Github\Api\Organization'),
+            array('repo', 'Github\Api\Repo'),
+            array('pull_request', 'Github\Api\PullRequest'),
+        );
     }
 
     protected function getHttpClientMock()
     {
-        return $this->getMockBuilder('Github_HttpClientInterface')
-            ->getMock();
+        return $this->getMock('Github\HttpClient\HttpClientInterface');
     }
 }

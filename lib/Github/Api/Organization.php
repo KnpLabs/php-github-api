@@ -1,119 +1,66 @@
 <?php
 
+namespace Github\Api;
+
+use Github\Api\Organization\Members;
+use Github\Api\Organization\Teams;
+
 /**
- * Searching organizations, getting organization information
- * and managing authenticated organization account information.
+ * Getting organization information and managing authenticated organization account information.
  *
- * @link      http://develop.github.com/p/orgs.html
- * @author    Antoine Berranger <antoine at ihqs dot net>
- * @license   MIT License
+ * @link   http://developer.github.com/v3/orgs/
+ * @author Antoine Berranger <antoine at ihqs dot net>
+ * @author Joseph Bielawski <stloyd@gmail.com>
  */
-class Github_Api_Organization extends Github_Api
+class Organization extends AbstractApi
 {
-    const ADMIN = "admin";
-    const PUSH = "push";
-    const PULL = "pull";
-
-    static $PERMISSIONS = array(
-        self::ADMIN,
-        self::PUSH,
-        self::PULL
-    );
-
     /**
      * Get extended information about an organization by its name
-     * http://develop.github.com/p/orgs.html
+     * @link http://developer.github.com/v3/orgs/#get
      *
-     * @param   string  $name             the organization to show
-     * @return  array                     informations about the organization
+     * @param  string  $organization     the organization to show
+     *
+     * @return array                     informations about the organization
      */
-    public function show($name)
+    public function show($organization)
     {
-        $response = $this->get('organizations/'.urlencode($name));
+        return $this->get('orgs/'.urlencode($organization));
+    }
 
-        return $response['organization'];
+    public function update($organization, array $params)
+    {
+        return $this->patch('orgs/'.urlencode($organization), $params);
     }
 
     /**
      * List all repositories across all the organizations that you can access
-     * http://develop.github.com/p/orgs.html
+     * @link http://developer.github.com/v3/repos/#list-organization-repositories
      *
-     * @param   string  $name             the user name
-     * @return  array                     the repositories
+     * @param  string  $organization     the user name
+     * @param  string  $type             the type of repositories
+     *
+     * @return array                     the repositories
      */
-    public function getAllRepos($name)
+    public function repositories($organization, $type = 'all')
     {
-        $response = $this->get('organizations/repositories');
-
-        return $response['repositories'];
-    }
-
-    /**
-     * List all public repositories of any other organization
-     * http://develop.github.com/p/orgs.html
-     *
-     * @param   string  $name             the organization name
-     * @return  array                     the repositories
-     */
-    public function getPublicRepos($name)
-    {
-        $response = $this->get('organizations/'.urlencode($name).'/public_repositories');
-
-        return $response['repositories'];
-    }
-
-    /**
-     * List all public members of that organization
-     * http://develop.github.com/p/orgs.html
-     *
-     * @param   string  $name             the organization name
-     * @return  array                     the members
-     */
-    public function getPublicMembers($name)
-    {
-        $response = $this->get('organizations/'.urlencode($name).'/public_members');
-
-        return $response['users'];
-    }
-
-    /**
-     * List all teams of that organization
-     * http://develop.github.com/p/orgs.html
-     *
-     * @param   string  $name             the organization name
-     * @return  array                     the teams
-     */
-    public function getTeams($name)
-    {
-        $response = $this->get('organizations/'.urlencode($name).'/teams');
-
-        return $response['teams'];
-    }
-
-    /**
-     * Add a team to that organization
-     * http://develop.github.com/p/orgs.html
-     *
-     * @param   string  $name             the organization name
-     * @param   string  $team             name of the new team
-     * @param   string  $permission       its permission [PULL|PUSH|ADMIN]
-     * @param   array   $name             (optionnal) its repositories names
-     *
-     * @return  array                     the teams
-     */
-    public function addTeam($organization, $team, $permission, array $repositories = array())
-    {
-        if (!in_array($permission, self::$PERMISSIONS)) {
-            throw new InvalidArgumentException("Invalid value for the permission variable");
-        }
-
-        $response = $this->post('organizations/'.urlencode($organization).'/teams', array(
-            'team' => $team,
-            'permission' => $permission,
-            'repo_names' => $repositories
+        return $this->get('orgs/'.urlencode($organization).'/repos', array(
+            'type' => $type
         ));
-
-        return $response['teams'];
     }
 
+    /**
+     * @return Members
+     */
+    public function members()
+    {
+        return new Members($this->client);
+    }
+
+    /**
+     * @return Teams
+     */
+    public function teams()
+    {
+        return new Teams($this->client);
+    }
 }

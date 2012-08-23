@@ -1,230 +1,148 @@
 <?php
 
+namespace Github\Api;
+
+use Github\Api\Issue\Comments;
+use Github\Api\Issue\Events;
+use Github\Api\Issue\Labels;
+use Github\Api\Issue\Milestones;
+use Github\Exception\MissingArgumentException;
+
 /**
  * Listing issues, searching, editing and closing your projects issues.
  *
- * @link      http://develop.github.com/p/issues.html
- * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
- * @license   MIT License
+ * @link   http://develop.github.com/p/issues.html
+ * @author Thibault Duplessis <thibault.duplessis at gmail dot com>
+ * @author Joseph Bielawski <stloyd@gmail.com>
  */
-class Github_Api_Issue extends Github_Api
+class Issue extends AbstractApi
 {
     /**
      * List issues by username, repo and state
-     * http://develop.github.com/p/issues.html#list_a_projects_issues
+     * @link http://developer.github.com/v3/issues/
      *
-     * @param   string  $username         the username
-     * @param   string  $repo             the repo
-     * @param   string  $state            the issue state, can be open or closed
-     * @return  array                     list of issues found
+     * @param  string  $username         the username
+     * @param  string  $repository       the repository
+     * @param  array   $params           the additional parameters like milestone, assignees, labels, sort, direction
+     * @return array                     list of issues found
      */
-    public function getList($username, $repo, $state = 'open')
+    public function all($username, $repository, array $params = array())
     {
-        $response = $this->get('issues/list/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($state));
-
-        return $response['issues'];
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/issues', array_merge(array('page' => 1), $params));
     }
 
     /**
-     * Search issues by username, repo, state and search term
-     * http://develop.github.com/p/issues.html#list_a_projects_issues
+     * Search issues by username, repo, state and keyword
+     * @link http://developer.github.com/v3/search/#search-issues
      *
-     * @param   string  $username         the username
-     * @param   string  $repo             the repo
-     * @param   string  $state            the issue state, can be open or closed
-     * @param   string  $searchTerm       the search term to filter issues by
-     * @return  array                     list of issues found
-     */
-    public function search($username, $repo, $state, $searchTerm)
-    {
-        $response = $this->get('issues/search/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($state).'/'.urlencode($searchTerm));
-
-        return $response['issues'];
-    }
-
-    /**
-     * Search issues by label
+     * @param  string  $username         the username
+     * @param  string  $repository       the repository
+     * @param  string  $state            the issue state, can be open or closed
+     * @param  string  $keyword          the keyword to filter issues by
      *
-     * @param   string  $username         the username
-     * @param   string  $repo             the repo
-     * @param   string  $label            the label to filter issues by
-     * @return  array                     list of issues found
+     * @return array                     list of issues found
      */
-    public function searchLabel($username, $repo, $label)
+    public function find($username, $repository, $state, $keyword)
     {
-        $response = $this->get('issues/list/'.urlencode($username).'/'.urlencode($repo).'/label/'.urlencode($label));
+        if (!in_array($state, array('open', 'closed'))) {
+            $state = 'open';
+        }
 
-        return $response['issues'];
+        return $this->get('legacy/issues/search/'.urlencode($username).'/'.urlencode($repository).'/'.urlencode($state).'/'.urlencode($keyword));
     }
 
     /**
      * Get extended information about an issue by its username, repo and number
-     * http://develop.github.com/p/issues.html#view_an_issue
+     * @link http://developer.github.com/v3/issues/
      *
-     * @param   string  $username         the username
-     * @param   string  $repo             the repo
-     * @param   string  $issueNumber      the issue number
-     * @return  array                     information about the issue
+     * @param  string  $username         the username
+     * @param  string  $repository       the repository
+     * @param  string  $id               the issue number
+     * @return array                     information about the issue
      */
-    public function show($username, $repo, $issueNumber)
+    public function show($username, $repository, $id)
     {
-        $response = $this->get('issues/show/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($issueNumber));
-
-        return $response['issue'];
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/issues/'.urlencode($id));
     }
 
     /**
      * Create a new issue for the given username and repo.
      * The issue is assigned to the authenticated user. Requires authentication.
-     * http://develop.github.com/p/issues.html#open_and_close_issues
+     * @link http://developer.github.com/v3/issues/
      *
-     * @param   string  $username         the username
-     * @param   string  $repo             the repo
-     * @param   string  $issueTitle       the new issue title
-     * @param   string   $issueBody       the new issue body
-     * @return  array                     information about the issue
+     * @param  string  $username         the username
+     * @param  string  $repository       the repository
+     * @param  array   $params           the new issue data
+     * @return array                     information about the issue
+     *
+     * @throws MissingArgumentException
      */
-    public function open($username, $repo, $issueTitle, $issueBody)
+    public function create($username, $repository, array $params)
     {
-        $response = $this->post('issues/open/'.urlencode($username).'/'.urlencode($repo), array(
-            'title' => $issueTitle,
-            'body' => $issueBody
-        ));
+        if (!isset($params['title'], $params['body'])) {
+            throw new MissingArgumentException(array('title', 'body'));
+        }
 
-        return $response['issue'];
+        return $this->post('repos/'.urlencode($username).'/'.urlencode($repository).'/issues', $params);
     }
 
     /**
-     * Close an existing issue by username, repo and issue number. Requires authentication.
-     * http://develop.github.com/p/issues.html#open_and_close_issues
+     * Update issue information's by username, repo and issue number. Requires authentication.
+     * @link http://developer.github.com/v3/issues/
      *
      * @param   string  $username         the username
-     * @param   string  $repo             the repo
-     * @param   string  $issueNumber      the issue number
-     * @return  array                     information about the issue
-     */
-    public function close($username, $repo, $issueNumber)
-    {
-        $response = $this->post('issues/close/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($issueNumber));
-
-        return $response['issue'];
-    }
-
-    /**
-     * Update issue informations by username, repo and issue number. Requires authentication.
-     * http://develop.github.com/p/issues.html#edit_existing_issues
-     *
-     * @param   string  $username         the username
-     * @param   string  $repo             the repo
-     * @param   string  $issueNumber      the issue number
-     * @param   array   $data             key=>value user attributes to update.
+     * @param   string  $repository       the repository
+     * @param   string  $id               the issue number
+     * @param   array   $params           key=>value user attributes to update.
      *                                    key can be title or body
      * @return  array                     information about the issue
      */
-    public function update($username, $repo, $issueNumber, array $data)
+    public function update($username, $repository, $id, array $params)
     {
-        $response = $this->post('issues/edit/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($issueNumber), $data);
-
-        return $response['issue'];
+        return $this->patch('repos/'.urlencode($username).'/'.urlencode($repository).'/issues/'.urlencode($id), $params);
     }
 
     /**
-     * Repoen an existing issue by username, repo and issue number. Requires authentication.
-     * http://develop.github.com/p/issues.html#open_and_close_issues
+     * List an issue comments
+     * @link http://developer.github.com/v3/issues/comments/
      *
-     * @param   string  $username         the username
-     * @param   string  $repo             the repo
-     * @param   string  $issueNumber      the issue number
-     * @return  array                     informations about the issue
+     * @return Comments
      */
-    public function reOpen($username, $repo, $issueNumber)
+    public function comments()
     {
-        $response = $this->post('issues/reopen/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($issueNumber));
-
-        return $response['issue'];
+        return new Comments($this->client);
     }
 
     /**
-     * List an issue comments by username, repo and issue number
-     * http://develop.github.com/p/issues.html#list_an_issues_comments
+     * List all project events
+     * @link http://developer.github.com/v3/issues/events/
      *
-     * @param   string  $username         the username
-     * @param   string  $repo             the repo
-     * @param   string  $issueNumber      the issue number
-     * @return  array                     list of issue comments
+     * @return Events
      */
-    public function getComments($username, $repo, $issueNumber)
+    public function events()
     {
-        $response = $this->get('issues/comments/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($issueNumber));
-
-        return $response['comments'];
+        return new Events($this->client);
     }
 
     /**
-     * Add a comment to the issue by username, repo and issue number
-     * http://develop.github.com/p/issues.html#comment_on_issues
+     * List all project labels
+     * @link http://developer.github.com/v3/issues/labels/
      *
-     * @param   string  $username         the username
-     * @param   string  $repo             the repo
-     * @param   string  $issueNumber      the issue number
-     * @param   string  $comment          the comment body
-     * @return  array                     the created comment
+     * @return Labels
      */
-    public function addComment($username, $repo, $issueNumber, $commentBody)
+    public function labels()
     {
-        $response = $this->post('issues/comment/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($issueNumber), array(
-            'comment' => $commentBody
-        ));
-
-        return $response['comment'];
+        return new Labels($this->client);
     }
 
     /**
-     * List all project labels by username and repo
-     * http://develop.github.com/p/issues.html#listing_labels
+     * List all project milestones
+     * @link http://developer.github.com/v3/issues/milestones/
      *
-     * @param   string  $username         the username
-     * @param   string  $repo             the repo
-     * @return  array                     list of project labels
+     * @return Milestones
      */
-    public function getLabels($username, $repo)
+    public function milestones()
     {
-        $response = $this->get('issues/labels/'.urlencode($username).'/'.urlencode($repo));
-
-        return $response['labels'];
-    }
-
-    /**
-     * Add a label to the issue by username, repo and issue number. Requires authentication.
-     * http://develop.github.com/p/issues.html#add_and_remove_labels
-     *
-     * @param   string  $username         the username
-     * @param   string  $repo             the repo
-     * @param   string  $issueNumber      the issue number
-     * @param   string  $labelName        the label name
-     * @return  array                     list of issue labels
-     */
-    public function addLabel($username, $repo, $labelName, $issueNumber)
-    {
-        $response = $this->post('issues/label/add/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($labelName).'/'.urlencode($issueNumber));
-
-        return $response['labels'];
-    }
-
-    /**
-     * Remove a label from the issue by username, repo, issue number and label name. Requires authentication.
-     * http://develop.github.com/p/issues.html#add_and_remove_labels
-     *
-     * @param   string  $username         the username
-     * @param   string  $repo             the repo
-     * @param   string  $issueNumber      the issue number
-     * @param   string  $labelName        the label name
-     * @return  array                     list of issue labels
-     */
-    public function removeLabel($username, $repo, $labelName, $issueNumber)
-    {
-        $response = $this->post('issues/label/remove/'.urlencode($username).'/'.urlencode($repo).'/'.urlencode($labelName).'/'.urlencode($issueNumber));
-
-        return $response['labels'];
+        return new Milestones($this->client);
     }
 }
