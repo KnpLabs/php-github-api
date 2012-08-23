@@ -228,7 +228,7 @@ class HttpClient implements HttpClientInterface
         }
 
         $pagination = array();
-        foreach (explode("\n", $header) as $link) {
+        foreach (explode(",", $header) as $link) {
             preg_match('/<(.*)>; rel="(.*)"/i', trim($link, ','), $match);
 
             if (3 === count($match)) {
