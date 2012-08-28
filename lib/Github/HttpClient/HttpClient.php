@@ -127,7 +127,9 @@ class HttpClient implements HttpClientInterface
      */
     public function get($path, array $parameters = array(), array $options = array())
     {
-        $path .= (false === strpos($path, '?') ? '?' : '&').http_build_query($parameters, '', '&');
+        if (0 < count($parameters)) {
+            $path .= (false === strpos($path, '?') ? '?' : '&').http_build_query($parameters, '', '&');
+        }
 
         return $this->request($path, array(), 'GET', $options);
     }
