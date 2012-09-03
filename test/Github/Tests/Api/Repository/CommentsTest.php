@@ -65,37 +65,7 @@ class CommentsTest extends TestCase
      */
     public function shouldNotCreateWithoutBody()
     {
-        $data = array('commit_id' => 123, 'line' => 53, 'path' => 'test.php', 'position' => 2);
-
-        $api = $this->getApiMock();
-        $api->expects($this->never())
-            ->method('post');
-
-        $api->create('KnpLabs', 'php-github-api', 'commitSHA123456', $data);
-    }
-
-    /**
-     * @test
-     * @expectedException Github\Exception\MissingArgumentException
-     */
-    public function shouldNotCreateWithoutCommitId()
-    {
-        $data = array('body' => 'body', 'line' => 53, 'path' => 'test.php', 'position' => 2);
-
-        $api = $this->getApiMock();
-        $api->expects($this->never())
-            ->method('post');
-
-        $api->create('KnpLabs', 'php-github-api', 'commitSHA123456', $data);
-    }
-
-    /**
-     * @test
-     * @expectedException Github\Exception\MissingArgumentException
-     */
-    public function shouldNotCreateWithoutLine()
-    {
-        $data = array('body' => 'body', 'commit_id' => 123, 'path' => 'test.php', 'position' => 2);
+        $data = array('line' => 53, 'path' => 'test.php', 'position' => 2);
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -110,7 +80,7 @@ class CommentsTest extends TestCase
      */
     public function shouldNotCreateWithoutPath()
     {
-        $data = array('body' => 'body', 'commit_id' => 123, 'line' => 11, 'position' => 2);
+        $data = array('body' => 'body', 'line' => 11, 'position' => 2);
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -125,7 +95,7 @@ class CommentsTest extends TestCase
      */
     public function shouldNotCreateWithoutPosition()
     {
-        $data = array('body' => 'body', 'commit_id' => 123, 'path' => 'test.php', 'line' => 2);
+        $data = array('body' => 'body', 'path' => 'test.php', 'line' => 2);
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -140,7 +110,7 @@ class CommentsTest extends TestCase
     public function shouldCreateRepositoryCommitComment()
     {
         $expectedValue = array('comment1data');
-        $data = array('body' => 'test body', 'commit_id' => 123, 'line' => 53, 'path' => 'test.php', 'position' => 2);
+        $data = array('body' => 'test body', 'line' => 53, 'path' => 'test.php', 'position' => 2);
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -153,17 +123,32 @@ class CommentsTest extends TestCase
 
     /**
      * @test
+     */
+    public function shouldCreateRepositoryCommitCommentWithoutLine()
+    {
+        $expectedValue = array('comment1data');
+        $data = array('body' => 'body', 'path' => 'test.php', 'position' => 2);
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('post')
+            ->with('repos/KnpLabs/php-github-api/commits/commitSHA123456/comments', $data)
+            ->will($this->returnValue($expectedValue));
+
+        $api->create('KnpLabs', 'php-github-api', 'commitSHA123456', $data);
+    }
+
+    /**
+     * @test
      * @expectedException Github\Exception\MissingArgumentException
      */
     public function shouldNotUpdateWithoutBody()
     {
-        $data = array('commit_id' => 123, 'path' => 'test.php', 'line' => 2);
-
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('patch');
 
-        $api->update('KnpLabs', 'php-github-api', 'commitSHA123456', $data);
+        $api->update('KnpLabs', 'php-github-api', 'commitSHA123456', array());
     }
 
     /**
