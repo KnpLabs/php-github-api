@@ -1,3 +1,7 @@
+# GithHub API v2 is deprecated
+
+And therefore, so is this library. You may fork it and implement v3 support.
+
 # PHP GitHub API
 
 [![Build Status](https://secure.travis-ci.org/KnpLabs/php-github-api.png)](http://travis-ci.org/KnpLabs/php-github-api)
