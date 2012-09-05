@@ -11,17 +11,18 @@ use Github\Exception\MissingArgumentException;
  */
 class Blobs extends AbstractApi
 {
-    public function show($username, $repository, $sha, $raw = false)
+    public function configure($bodyType = null)
     {
-        if ($raw) {
-            $this->client->setHeaders(array('Accept: application/vnd.github.v3.raw'));
+        if ('raw' == $bodyType) {
+            $this->client->setHeaders(array(
+                sprintf('Accept: application/vnd.github.%s.raw', $this->client->getOption('api_version'))
+            ));
         }
+    }
 
+    public function show($username, $repository, $sha)
+    {
         $response = $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/git/blobs/'.urlencode($sha));
-
-        if ($raw) {
-            $this->client->clearHeaders();
-        }
 
         return $response;
     }

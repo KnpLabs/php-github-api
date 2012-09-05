@@ -2,10 +2,11 @@
 
 namespace Github\HttpClient;
 
+use Github\Exception\InvalidArgumentException;
+
 /**
  * Performs requests on GitHub API. API documentation should be self-explanatory.
  *
- * @author Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 interface HttpClientInterface
@@ -13,61 +14,69 @@ interface HttpClientInterface
     /**
      * Send a GET request
      *
-     * @param  string   $path       Request path
-     * @param  array    $parameters GET Parameters
-     * @param  array    $options    Reconfigure the request for this call only
+     * @param  string $path       Request path
+     * @param  array  $parameters GET Parameters
+     * @param  array  $headers    Reconfigure the request headers for this call only
      *
-     * @return array                Data
+     * @return array              Data
      */
-    public function get($path, array $parameters = array(), array $options = array());
+    public function get($path, array $parameters = array(), array $headers = array());
 
     /**
      * Send a POST request
      *
-     * @param  string   $path       Request path
-     * @param  array    $parameters POST Parameters
-     * @param  array    $options    Reconfigure the request for this call only
+     * @param  string $path       Request path
+     * @param  array  $parameters POST Parameters
+     * @param  array  $headers    Reconfigure the request headers for this call only
      *
-     * @return array                Data
+     * @return array              Data
      */
-    public function post($path, array $parameters = array(), array $options = array());
+    public function post($path, array $parameters = array(), array $headers = array());
 
     /**
      * Send a PATCH request
      *
-     * @param  string   $path       Request path
-     * @param  array    $parameters PATCH Parameters
-     * @param  array    $options    Reconfigure the request for this call only
+     * @param  string $path       Request path
+     * @param  array  $parameters PATCH Parameters
+     * @param  array  $headers    Reconfigure the request headers for this call only
      *
-     * @return array                Data
+     * @return array              Data
      */
-    public function patch($path, array $parameters = array(), array $options = array());
+    public function patch($path, array $parameters = array(), array $headers = array());
 
     /**
      * Send a PUT request
      *
-     * @param  string   $path       Request path
-     * @param  array    $options    Reconfigure the request for this call only
+     * @param  string $path       Request path
+     * @param  array  $headers    Reconfigure the request headers for this call only
      *
-     * @return array                Data
+     * @return array              Data
      */
-    public function put($path, array $options = array());
+    public function put($path, array $headers = array());
 
     /**
      * Send a DELETE request
      *
-     * @param  string   $path       Request path
-     * @param  array    $parameters DELETE Parameters
-     * @param  array    $options    Reconfigure the request for this call only
+     * @param  string $path       Request path
+     * @param  array  $parameters DELETE Parameters
+     * @param  array  $headers    Reconfigure the request headers for this call only
      *
-     * @return array                Data
+     * @return array              Data
      */
-    public function delete($path, array $parameters = array(), array $options = array());
+    public function delete($path, array $parameters = array(), array $headers = array());
 
     /**
-     * Authenticate a user for all next requests
+     * Send a request to the server, receive a response,
+     * decode the response and returns an associative array
+     *
+     * @param  string $path       Request API path
+     * @param  array  $parameters Parameters
+     * @param  string $httpMethod HTTP method to use
+     * @param  array  $headers    Request headers
+     *
+     * @return array              Data
      */
-    public function authenticate();
+    public function request($path, array $parameters = array(), $httpMethod = 'GET', array $headers = array());
 
     /**
      * Change an option value.
@@ -75,7 +84,7 @@ interface HttpClientInterface
      * @param string $name   The option name
      * @param mixed  $value  The value
      *
-     * @return HttpClientInterface The current object instance
+     * @throws InvalidArgumentException
      */
     public function setOption($name, $value);
 
@@ -83,7 +92,6 @@ interface HttpClientInterface
      * Set HTTP headers
      *
      * @param array $headers
-     * @return HttpClientInterface The current object instance
      */
     public function setHeaders(array $headers);
 }

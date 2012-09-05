@@ -7,10 +7,10 @@ namespace Github\Exception;
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
-class ApiLimitExceedException extends \RuntimeException
+class ApiLimitExceedException extends RuntimeException
 {
-    public function __construct($limit)
+    public function __construct($limit, $code = 0, $previous = null)
     {
-        parent::__construct('You have reached GitHub hour limit! Actual limit is: '. $limit);
+        parent::__construct('You have reached GitHub hour limit! Actual limit is: '. $limit, $code, $previous);
     }
 }

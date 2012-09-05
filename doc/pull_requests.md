@@ -57,12 +57,11 @@ Details regarding the content of parameters 3 and 4 of the ``create``.
 
 #### Populated with Title and Body
 
-Requires authentication.
+Requires [authentication](security.md).
 
 ```php
 <?php
 
-$client->authenticate();
 $pullRequest = $client->api('pull_request')->create('ezsystems', 'ezpublish', array(
     'base'  => 'master',
     'head'  => 'testbranch',
@@ -75,12 +74,11 @@ This returns the details of the pull request.
 
 #### Populated with Issue ID
 
-Requires authentication. The issue ID is provided instead of title and body.
+Requires [authentication](security.md). The issue ID is provided instead of title and body.
 
 ```php
 <?php
 
-$client->authenticate();
 $pullRequest = $client->api('pull_request')->create('ezsystems', 'ezpublish', array(
     'base'  => 'master',
     'head'  => 'testbranch',

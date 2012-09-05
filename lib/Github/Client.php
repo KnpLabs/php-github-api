@@ -2,14 +2,18 @@
 
 namespace Github;
 
+use Buzz\Client\Curl;
+use Buzz\Client\ClientInterface;
+
 use Github\Api\ApiInterface;
-use Github\HttpClient\HttpClientInterface;
+use Github\Exception\InvalidArgumentException;
 use Github\HttpClient\HttpClient;
+use Github\HttpClient\HttpClientInterface;
+use Github\HttpClient\Listener\AuthListener;
 
 /**
- * Simple yet very cool PHP Github client
+ * Simple yet very cool PHP GitHub client
  *
- * @author Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @author Joseph Bielawski <stloyd@gmail.com>
  *
  * Website: http://github.com/KnpLabs/php-github-api
@@ -41,146 +45,37 @@ class Client
     const AUTH_HTTP_TOKEN = 'http_token';
 
     /**
-     * The httpClient instance used to communicate with GitHub
-     *
-     * @var HttpClientInterface
-     */
-    private $httpClient = null;
-
-    /**
-     * The list of loaded API instances
-     *
      * @var array
      */
-    private $apis = array();
+    private $options = array(
+        'base_url'    => 'https://api.github.com/',
+
+        'user_agent'  => 'php-github-api (http://github.com/KnpLabs/php-github-api)',
+        'timeout'     => 10,
+
+        'api_limit'   => 5000,
+        'api_version' => 'beta',
+    );
 
     /**
-     * HTTP Headers
+     * The Buzz instance used to communicate with GitHub
      *
-     * @var array
+     * @var HttpClient
      */
-    private $headers = array();
+    private $httpClient;
 
     /**
      * Instantiate a new GitHub client
      *
-     * @param HttpClientInterface $httpClient custom http client
+     * @param null|ClientInterface $httpClient Buzz client
      */
-    public function __construct(HttpClientInterface $httpClient = null)
+    public function __construct(ClientInterface $httpClient = null)
     {
-        $this->httpClient = $httpClient ?: new HttpClient();
-    }
+        $httpClient = $httpClient ?: new Curl();
+        $httpClient->setTimeout($this->options['timeout']);
+        $httpClient->setVerifyPeer(false);
 
-    /**
-     * Authenticate a user for all next requests
-     *
-     * @param string      $login  GitHub username
-     * @param string      $secret GitHub private token or Github password if $method == AUTH_HTTP_PASSWORD
-     * @param null|string $method One of the AUTH_* class constants
-     */
-    public function authenticate($login, $secret = null, $method = null)
-    {
-        $this->getHttpClient()->setOption('auth_method', $method);
-
-        if ($method === self::AUTH_HTTP_PASSWORD || $method === self::AUTH_URL_CLIENT_ID) {
-            $this
-                ->getHttpClient()
-                ->setOption('login', $login)
-                ->setOption('password', $secret)
-            ;
-        } else {
-            $this->getHttpClient()->setOption('token', $secret);
-        }
-
-        $this->getHttpClient()->authenticate();
-    }
-
-    /**
-     * Call any path, GET method
-     * Ex: $api->get('repos/show/my-username/my-repo')
-     *
-     * @param   string  $path            the GitHub path
-     * @param   array   $parameters       GET parameters
-     * @param   array   $requestOptions   reconfigure the request
-     * @return  array                     data returned
-     */
-    public function get($path, array $parameters = array(), $requestOptions = array())
-    {
-        return $this->getHttpClient()->get($path, $parameters, $requestOptions);
-    }
-
-    /**
-     * Call any path, POST method
-     * Ex: $api->post('repos/show/my-username', array('email' => 'my-new-email@provider.org'))
-     *
-     * @param   string  $path             the GitHub path
-     * @param   array   $parameters       POST parameters
-     * @param   array   $requestOptions   reconfigure the request
-     * @return  array                     data returned
-     */
-    public function post($path, array $parameters = array(), $requestOptions = array())
-    {
-        return $this->getHttpClient()->post($path, $parameters, $requestOptions);
-    }
-
-    /**
-     * Call any path, PUT method
-     *
-     * @param   string  $path            the GitHub path
-     * @param   array   $requestOptions   reconfigure the request
-     * @return  array                     data returned
-     */
-    public function put($path, $requestOptions = array())
-    {
-        return $this->getHttpClient()->put($path, $requestOptions);
-    }
-
-    /**
-     * Call any path, PATCH method
-     *
-     * @param   string  $path            the GitHub path
-     * @param   array   $parameters       Patch parameters
-     * @param   array   $requestOptions   reconfigure the request
-     * @return  array                     data returned
-     */
-    public function patch($path, array $parameters = array(), $requestOptions = array())
-    {
-        return $this->getHttpClient()->patch($path, $parameters, $requestOptions);
-    }
-
-    /**
-     * Call any path, DELETE method
-     *
-     * @param   string  $path            the GitHub path
-     * @param   array   $parameters       DELETE parameters
-     * @param   array   $requestOptions   reconfigure the request
-     * @return  array                     data returned
-     */
-    public function delete($path, array $parameters = array(), $requestOptions = array())
-    {
-        return $this->getHttpClient()->delete($path, $parameters, $requestOptions);
-    }
-
-    /**
-     * Get the http client.
-     *
-     * @return HttpClientInterface a request instance
-     */
-    public function getHttpClient()
-    {
-        $this->httpClient->setHeaders($this->headers);
-
-        return $this->httpClient;
-    }
-
-    /**
-     * Inject another http client
-     *
-     * @param HttpClientInterface $httpClient The httpClient instance
-     */
-    public function setHttpClient(HttpClientInterface $httpClient)
-    {
-        $this->httpClient = $httpClient;
+        $this->httpClient = new HttpClient($this->options, $httpClient);
     }
 
     /**
@@ -188,64 +83,88 @@ class Client
      *
      * @return ApiInterface
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function api($name)
     {
-        if (!isset($this->apis[$name])) {
-            switch ($name) {
-                case 'current_user':
-                    $api = new Api\CurrentUser($this);
-                    break;
+        switch ($name) {
+            case 'current_user':
+                $api = new Api\CurrentUser($this);
+                break;
 
-                case 'git_data':
-                    $api = new Api\GitData($this);
-                    break;
+            case 'git_data':
+                $api = new Api\GitData($this);
+                break;
 
-                case 'gists':
-                    $api = new Api\Gists($this);
-                    break;
+            case 'gists':
+                $api = new Api\Gists($this);
+                break;
 
-                case 'issue':
-                    $api = new Api\Issue($this);
-                    break;
+            case 'issue':
+                $api = new Api\Issue($this);
+                break;
 
-                case 'markdown':
-                    $api = new Api\Markdown($this);
-                    break;
+            case 'markdown':
+                $api = new Api\Markdown($this);
+                break;
 
-                case 'organization':
-                    $api = new Api\Organization($this);
-                    break;
+            case 'organization':
+                $api = new Api\Organization($this);
+                break;
 
-                case 'pull_request':
-                    $api = new Api\PullRequest($this);
-                    break;
+            case 'pull_request':
+                $api = new Api\PullRequest($this);
+                break;
 
-                case 'repo':
-                    $api = new Api\Repo($this);
-                    break;
+            case 'repo':
+                $api = new Api\Repo($this);
+                break;
 
-                case 'user':
-                    $api = new Api\User($this);
-                    break;
+            case 'user':
+                $api = new Api\User($this);
+                break;
 
-                default:
-                    throw new \InvalidArgumentException();
-            }
-
-            $this->apis[$name] = $api;
+            default:
+                throw new InvalidArgumentException();
         }
 
-        return $this->apis[$name];
+        return $api;
     }
 
     /**
-     * @return mixed
+     * Authenticate a user for all next requests
+     *
+     * @param string      $tokenOrLogin  GitHub private token/username/client ID
+     * @param null|string $password      GitHub password/secret
+     * @param null|string $authMethod    One of the AUTH_* class constants
      */
-    public function getRateLimit()
+    public function authenticate($tokenOrLogin, $password = null, $authMethod = null)
     {
-        return $this->get('rate_limit');
+        $this->httpClient->addListener(
+            new AuthListener(
+                $authMethod,
+                array(
+                    'tokenOrLogin' => $tokenOrLogin,
+                    'password'     => $password
+                )
+            )
+        );
+    }
+
+    /**
+     * @return HttpClient
+     */
+    public function getHttpClient()
+    {
+        return $this->httpClient;
+    }
+
+    /**
+     * @param HttpClientInterface $httpClient
+     */
+    public function setHttpClient(HttpClientInterface $httpClient)
+    {
+        $this->httpClient = $httpClient;
     }
 
     /**
@@ -253,14 +172,51 @@ class Client
      */
     public function clearHeaders()
     {
-        $this->setHeaders(array());
+        $this->httpClient->clearHeaders();
     }
 
     /**
      * @param array $headers
      */
-    public function setHeaders($headers)
+    public function setHeaders(array $headers)
     {
-        $this->headers = $headers;
+        $this->httpClient->setHeaders($headers);
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return mixed
+     *
+     * @throws InvalidArgumentException
+     */
+    public function getOption($name)
+    {
+        if (!array_key_exists($name, $this->options)) {
+            throw new InvalidArgumentException(sprintf('Undefined option called: "%s"', $name));
+        }
+
+        return $this->options[$name];
+    }
+
+
+    /**
+     * @param string $name
+     * @param mixed  $value
+     *
+     * @throws InvalidArgumentException
+     * @throws InvalidArgumentException
+     */
+    public function setOption($name, $value)
+    {
+        if (!array_key_exists($name, $this->options)) {
+            throw new InvalidArgumentException(sprintf('Undefined option called: "%s"', $name));
+        }
+
+        if ('api_version' == $name && !in_array($value, array('v3', 'beta'))) {
+            throw new InvalidArgumentException(sprintf('Invalid API version ("%s"), valid are: %s', $name, implode(', ', array('v3', 'beta'))));
+        }
+
+        $this->options[$name] = $value;
     }
 }

@@ -32,13 +32,12 @@ class UsetTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @expectedException \Github\Exception\RuntimeException
      */
     public function shouldNotUpdateUserWithoutAuthorization()
     {
         $github = new Client();
-        $response = $github->api('current_user')->update(array('email' => 'leszek.prabucki@gmail.com'));
-
-        $this->assertEquals('Requires authentication', $response['message']);
+        $github->api('current_user')->update(array('email' => 'leszek.prabucki@gmail.com'));
     }
 
     /**
@@ -73,24 +72,22 @@ class UsetTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @expectedException \Github\Exception\RuntimeException
      */
     public function shouldNotFollowUserWithoutAuthorization()
     {
         $github = new Client();
-        $response = $github->api('current_user')->follow()->follow('KnpLabs');
-
-        $this->assertEquals('Requires authentication', $response['message']);
+        $github->api('current_user')->follow()->follow('KnpLabs');
     }
 
     /**
      * @test
+     * @expectedException \Github\Exception\RuntimeException
      */
     public function shouldNotUnfollowUserWithoutAuthorization()
     {
         $github = new Client();
-        $response = $github->api('current_user')->follow()->unfollow('KnpLabs');
-
-        $this->assertEquals('Requires authentication', $response['message']);
+        $github->api('current_user')->follow()->unfollow('KnpLabs');
     }
 
     /**

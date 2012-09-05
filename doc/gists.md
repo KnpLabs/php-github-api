@@ -6,17 +6,14 @@ Creating, editing, deleting and listing gists. Wraps [GitHub Gists API](http://d
 #### List all public gists.
 
 ```php
-<?php
-
 $gists = $github->api('gists')->all('public');
 ```
 
 #### List the authenticated user’s starred gists.
 
-```php
-<?php
+> Requires [authentication](security.md).
 
-$client->authenticate();
+```php
 $gists = $github->api('gists')->all('starred');
 ```
 
@@ -24,26 +21,21 @@ Requires authentication.
 
 #### List the authenticated user’s gists or if called anonymously, this will return all public gists.
 
-```php
-<?php
+> Requires [authentication](security.md) to list your gists.
 
-// $client->authenticate();
+```php
 $gists = $github->api('gists')->all();
 ```
 
 #### Get a single gist
 
 ```php
-<?php
-
 $gist = $github->api('gists')->show(1);
 ```
 
 #### Create a gist
 
 ```php
-<?php
-
 $data = array(
     'files' => array(
         'filename.txt' => array(
@@ -64,8 +56,6 @@ Creates and returns a public gist.
 You can update ``description``.
 
 ```php
-<?php
-
 $data = array(
     'description' => 'This is new description'
 );
@@ -76,8 +66,6 @@ $gist = $github->api('gists')->update($data);
 You can update ``content`` of a previous file's version.
 
 ```php
-<?php
-
 $data = array(
     'files' => array(
         'filename.txt' => array(
@@ -91,8 +79,6 @@ $gist = $github->api('gists')->update(1234, $data);
 You can update the ``filename`` of a previous file's version.
 
 ```php
-<?php
-
 $data = array(
     'files' => array(
         'filename.txt' => array(
@@ -106,8 +92,6 @@ $gist = $github->api('gists')->update(1234, $data);
 You can add a new file to the gist.
 
 ```php
-<?php
-
 $data = array(
     'files' => array(
         'new-filename.php' => array(
@@ -121,8 +105,6 @@ $gist = $github->api('gists')->update(1234, $data);
 You can remove a file from the gist.
 
 ```php
-<?php
-
 $data = array(
     'files' => array(
         'filename.txt' => null,
@@ -134,7 +116,5 @@ $gist = $github->api('gists')->update(1234, $data);
 #### Delete a gist
 
 ```php
-<?php
-
 $gist = $github->api('gists')->remove(1234);
 ```

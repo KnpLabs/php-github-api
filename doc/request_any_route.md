@@ -5,8 +5,6 @@ The method you need does not exist yet? You can access any GitHub route by using
 For example:
 
 ```php
-<?php
-
 $repo = $client->get('repos/show/ornicar/php-github-api');
 ```
 

@@ -48,54 +48,47 @@ class AuthListener implements ListenerInterface
 
         switch ($this->method) {
             case Client::AUTH_HTTP_PASSWORD:
-                if (!isset($this->options['login'], $this->options['password'])) {
+                if (!isset($this->options['tokenOrLogin'], $this->options['password'])) {
                     throw new InvalidArgumentException('You need to set username with password!');
                 }
-                $request->addHeader('Authorization: Basic '. base64_encode($this->options['login'] .':'. $this->options['password']));
+
+                $request->addHeader('Authorization: Basic '. base64_encode($this->options['tokenOrLogin'] .':'. $this->options['password']));
                 break;
 
             case Client::AUTH_HTTP_TOKEN:
-                if (!isset($this->options['token'])) {
+                if (!isset($this->options['tokenOrLogin'])) {
                     throw new InvalidArgumentException('You need to set OAuth token!');
                 }
-                $request->addHeader('Authorization: token '. $this->options['token']);
+
+                $request->addHeader('Authorization: token '. $this->options['tokenOrLogin']);
                 break;
 
             case Client::AUTH_URL_CLIENT_ID:
-                if (!isset($this->options['login'], $this->options['password'])) {
+                if (!isset($this->options['tokenOrLogin'], $this->options['password'])) {
                     throw new InvalidArgumentException('You need to set client_id and client_secret!');
                 }
 
-                if ('GET' === $request->getMethod()) {
-                    $url = $request->getUrl();
+                $url = $request->getUrl();
 
-                    $parameters = array(
-                        'client_id'     => $this->options['login'],
-                        'client_secret' => $this->options['password'],
-                    );
+                $parameters = array(
+                    'client_id'     => $this->options['login'],
+                    'client_secret' => $this->options['password'],
+                );
 
-                    $url .= (false === strpos($url, '?') ? '?' : '&').utf8_encode(http_build_query($parameters, '', '&'));
+                $url .= (false === strpos($url, '?') ? '?' : '&').utf8_encode(http_build_query($parameters, '', '&'));
 
-                    $request->fromUrl(new Url($url));
-                }
+                $request->fromUrl(new Url($url));
                 break;
 
             case Client::AUTH_URL_TOKEN:
-                if (!isset($this->options['token'])) {
+                if (!isset($this->options['tokenOrLogin'])) {
                     throw new InvalidArgumentException('You need to set OAuth token!');
                 }
 
-                if ('GET' === $request->getMethod()) {
-                    $url = $request->getUrl();
+                $url  = $request->getUrl();
+                $url .= '?'.utf8_encode(http_build_query(array('access_token' => $this->options['tokenOrLogin']), '', '&'));
 
-                    $parameters = array(
-                        'access_token' => $this->options['token']
-                    );
-
-                    $url .= (false === strpos($url, '?') ? '?' : '&').utf8_encode(http_build_query($parameters, '', '&'));
-
-                    $request->fromUrl(new Url($url));
-                }
+                $request->fromUrl(new Url($url));
                 break;
         }
     }

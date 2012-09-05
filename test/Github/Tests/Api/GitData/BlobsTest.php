@@ -36,24 +36,23 @@ class BlobsTest extends TestCase
 
         $client = $this->getMockBuilder('Github\Client')
             ->disableOriginalConstructor()
-            ->setMethods(array('setHeaders', 'clearHeaders'))
             ->getMock();
-        $client->expects($this->once())
-            ->method('clearHeaders');
-        $client->expects($this->once())
-            ->method('setHeaders')
-            ->with(array('Accept: application/vnd.github.v3.raw'));
 
         $api = $this->getMockBuilder($this->getApiClass())
-            ->setMethods(array('get'))
+            ->setMethods(array('configure', 'get'))
             ->setConstructorArgs(array($client))
             ->getMock();
+        $api->expects($this->once())
+            ->method('configure')
+            ->with('raw');
         $api->expects($this->once())
             ->method('get')
             ->with('repos/l3l0/l3l0repo/git/blobs/123456sha')
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->show('l3l0', 'l3l0repo', '123456sha', true));
+        $api->configure('raw');
+
+        $this->assertEquals($expectedValue, $api->show('l3l0', 'l3l0repo', '123456sha'));
     }
 
     /**

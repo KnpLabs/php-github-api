@@ -31,28 +31,24 @@ class TestHttpClient implements HttpClientInterface
     public function setOption($key, $value)
     {
         $this->options[$key] = $value;
-
-        return $this;
     }
 
     public function setHeaders(array $headers)
     {
         $this->headers = $headers;
-
-        return $this;
     }
 
-    public function get($path, array $parameters = array(), array $options = array())
+    public function get($path, array $parameters = array(), array $headers = array())
     {
         $this->requests['get'][] = $path;
     }
 
-    public function post($path, array $parameters = array(), array $options = array())
+    public function post($path, array $parameters = array(), array $headers = array())
     {
         $this->requests['post'][] = $path;
     }
 
-    public function patch($path, array $parameters = array(), array $options = array())
+    public function patch($path, array $parameters = array(), array $headers = array())
     {
         $this->requests['patch'][] = $path;
     }
@@ -62,8 +58,13 @@ class TestHttpClient implements HttpClientInterface
         $this->requests['put'][] = $path;
     }
 
-    public function delete($path, array $parameters = array(), array $options = array())
+    public function delete($path, array $parameters = array(), array $headers = array())
     {
         $this->requests['delete'][] = $path;
+    }
+
+    public function request($path, array $parameters = array(), $httpMethod = 'GET', array $headers = array())
+    {
+        $this->requests[$httpMethod][] = $path;
     }
 }

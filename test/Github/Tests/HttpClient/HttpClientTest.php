@@ -3,7 +3,8 @@
 namespace Github\Tests\HttpClient;
 
 use Github\HttpClient\HttpClient;
-use Buzz\Message\Response;
+use Github\HttpClient\Message\Request;
+use Github\HttpClient\Message\Response;
 
 /**
  * HttpClient test case
@@ -19,10 +20,10 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     {
         $httpClient = new TestHttpClient(array(
             'timeout' => 33
-        ));
+        ), $this->getBrowserMock());
 
         $this->assertEquals(33, $httpClient->getOption('timeout'));
-        $this->assertEquals(443, $httpClient->getOption('http_port'));
+        $this->assertEquals(5000, $httpClient->getOption('api_limit'));
     }
 
     /**
@@ -30,7 +31,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldBeAbleToSetOption()
     {
-        $httpClient = new TestHttpClient(array());
+        $httpClient = new TestHttpClient(array(), $this->getBrowserMock());
         $httpClient->setOption('timeout', 666);
 
         $this->assertEquals(666, $httpClient->getOption('timeout'));
@@ -43,17 +44,12 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     {
         $path       = '/some/path';
         $parameters = array('a' => 'b');
-        $options    = array('c' => 'd');
+        $headers    = array('c' => 'd');
 
-        $browser = $this->getBrowserMock();
-        $browser
-            ->expects($this->once())
-            ->method('call')
-            ->with('https://api.github.com/some/path?a=b', 'GET', array(), '[]')
-            ->will($this->returnValue($this->getMock('Buzz\Message\MessageInterface')));
+        $client = $this->getBrowserMock();
 
-        $httpClient = new HttpClient(array(), $browser);
-        $httpClient->get($path, $parameters, $options);
+        $httpClient = new HttpClient(array(), $client);
+        $httpClient->get($path, $parameters, $headers);
     }
 
     /**
@@ -63,17 +59,12 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     {
         $path       = '/some/path';
         $parameters = array('a' => 'b');
-        $options    = array('c' => 'd');
+        $headers    = array('c' => 'd');
 
-        $browser = $this->getBrowserMock();
-        $browser
-            ->expects($this->once())
-            ->method('call')
-            ->with('https://api.github.com/some/path', 'POST', array(), json_encode($parameters))
-            ->will($this->returnValue($this->getMock('Buzz\Message\MessageInterface')));
+        $client = $this->getBrowserMock();
 
-        $httpClient = new HttpClient(array(), $browser);
-        $httpClient->post($path, $parameters, $options);
+        $httpClient = new HttpClient(array(), $client);
+        $httpClient->post($path, $parameters, $headers);
     }
 
     /**
@@ -83,17 +74,12 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     {
         $path       = '/some/path';
         $parameters = array('a' => 'b');
-        $options    = array('c' => 'd');
+        $headers    = array('c' => 'd');
 
-        $browser = $this->getBrowserMock();
-        $browser
-            ->expects($this->once())
-            ->method('call')
-            ->with('https://api.github.com/some/path', 'PATCH', array(), json_encode($parameters))
-            ->will($this->returnValue($this->getMock('Buzz\Message\MessageInterface')));
+        $client = $this->getBrowserMock();
 
-        $httpClient = new HttpClient(array(), $browser);
-        $httpClient->patch($path, $parameters, $options);
+        $httpClient = new HttpClient(array(), $client);
+        $httpClient->patch($path, $parameters, $headers);
     }
 
     /**
@@ -103,17 +89,12 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     {
         $path       = '/some/path';
         $parameters = array('a' => 'b');
-        $options    = array('c' => 'd');
+        $headers    = array('c' => 'd');
 
-        $browser = $this->getBrowserMock();
-        $browser
-            ->expects($this->once())
-            ->method('call')
-            ->with('https://api.github.com/some/path', 'DELETE', array(), json_encode($parameters))
-            ->will($this->returnValue($this->getMock('Buzz\Message\MessageInterface')));
+        $client = $this->getBrowserMock();
 
-        $httpClient = new HttpClient(array(), $browser);
-        $httpClient->delete($path, $parameters, $options);
+        $httpClient = new HttpClient(array(), $client);
+        $httpClient->delete($path, $parameters, $headers);
     }
 
     /**
@@ -122,18 +103,12 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     public function shouldDoPUTRequest()
     {
         $path       = '/some/path';
-        $parameters = array('a' => 'b');
-        $options    = array('c' => 'd');
+        $headers    = array('c' => 'd');
 
-        $browser = $this->getBrowserMock();
-        $browser
-            ->expects($this->once())
-            ->method('call')
-            ->with('https://api.github.com/some/path', 'PUT', array(), '[]')
-            ->will($this->returnValue($this->getMock('Buzz\Message\MessageInterface')));
+        $client = $this->getBrowserMock();
 
-        $httpClient = new HttpClient(array(), $browser);
-        $httpClient->put($path, $options);
+        $httpClient = new HttpClient(array(), $client);
+        $httpClient->put($path, $headers);
     }
 
     /**
@@ -145,14 +120,9 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $parameters = array('a' => 'b');
         $options    = array('c' => 'd');
 
-        $browser = $this->getBrowserMock();
-        $browser
-            ->expects($this->once())
-            ->method('call')
-            ->with('https://api.github.com/some/path', 'HEAD', array(), json_encode($parameters))
-            ->will($this->returnValue($this->getMock('Buzz\Message\MessageInterface')));
+        $client = $this->getBrowserMock();
 
-        $httpClient = new HttpClient(array(), $browser);
+        $httpClient = new HttpClient(array(), $client);
         $httpClient->request($path, $parameters, 'HEAD', $options);
     }
 
@@ -163,32 +133,17 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     {
         $path       = '/some/path';
         $parameters = array('a' => 'b');
-        $options    = array('c' => 'd');
+        $headers    = array('c' => 'd');
 
         $response = new Response();
         $response->addHeader("Link:<page1>; rel=\"page2\", \n<page3>; rel=\"page4\"");
 
-        $browser = $this->getBrowserMock();
-        $browser
-            ->expects($this->once())
-            ->method('call')
-            ->with('https://api.github.com/some/path', 'HEAD', array(), json_encode($parameters))
-            ->will($this->returnValue($response));
+        $client = $this->getBrowserMock();
 
-        $httpClient = new HttpClient(array(), $browser);
-        $httpClient->request($path, $parameters, 'HEAD', $options);
+        $httpClient = new HttpClient(array(), $client);
+        $httpClient->request($path, $parameters, 'HEAD', $headers);
 
-        $this->assertEquals(array('page2' => 'page1', 'page4' => 'page3'), $httpClient->getPagination());
-    }
-
-    /**
-     * @test
-     */
-    public function shouldGetEmtpyPaginationWhenNotDoRequest()
-    {
-        $httpClient = new HttpClient(array());
-
-        $this->assertNull($httpClient->getPagination());
+        $this->assertEquals(array('page2' => 'page1', 'page4' => 'page3'), $response->getPagination());
     }
 
     /**
@@ -198,79 +153,78 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     {
         $path       = '/some/path';
         $parameters = array('a' => 'b');
-        $options    = array('c' => 'd');
+        $headers    = array('c' => 'd');
 
-        $message = $this->getMock('Buzz\Message\MessageInterface');
-        $message->expects($this->any())
+        $message = $this->getMock('Github\HttpClient\Message\Response');
+        $message->expects($this->once())
             ->method('getContent')
-            ->will($this->returnValue("Just raw context"));
+            ->will($this->returnValue('Just raw context'));
 
-        $browser = $this->getBrowserMock();
-        $browser
-            ->expects($this->once())
-            ->method('call')
-            ->will($this->returnValue($message));
+        $client = $this->getBrowserMock();
 
-        $httpClient = new HttpClient(array(), $browser);
-        $content = $httpClient->get($path, $parameters, $options);
+        $httpClient = new TestHttpClient(array(), $client);
+        $httpClient->setFakeResponse($message);
 
-        $this->assertEquals("Just raw context", $content);
+        $response = $httpClient->get($path, $parameters, $headers);
+
+        $this->assertEquals("Just raw context", $response->getContent());
+        $this->assertInstanceOf('Buzz\Message\MessageInterface', $response);
     }
 
     /**
      * @test
-     * @expectedException Github\Exception\ApiLimitExceedException
+     * @expectedException \Github\Exception\ApiLimitExceedException
      */
     public function shouldThrowExceptionWhenApiIsExceeded()
     {
         $path       = '/some/path';
         $parameters = array('a' => 'b');
-        $options    = array('c' => 'd');
+        $headers    = array('c' => 'd');
 
         $response = new Response();
-        $response->addHeader("X-RateLimit-Remaining: 0");
+        $response->addHeader('HTTP/1.1 403 Forbidden');
+        $response->addHeader('X-RateLimit-Remaining: 0');
 
-        $browser = $this->getBrowserMock();
-        $browser
-            ->expects($this->once())
-            ->method('call')
-            ->will($this->returnValue($response));
+        $httpClient = new TestHttpClient(array(), $this->getBrowserMock());
+        $httpClient->setFakeResponse($response);
 
-        $httpClient = new HttpClient(array(), $browser);
-        $content = $httpClient->get($path, $parameters, $options);
-    }
-
-    /**
-     * @test
-     */
-    public function shouldAuthenticateUsingListener()
-    {
-        $browser = $this->getBrowserMock();
-        $browser
-            ->expects($this->once())
-            ->method('addListener')
-            ->with($this->isInstanceOf('Github\HttpClient\Listener\AuthListener'));
-
-        $httpClient = new HttpClient(array(), $browser);
-        $content = $httpClient->authenticate();
+        $httpClient->get($path, $parameters, $headers);
     }
 
     protected function getBrowserMock()
     {
-        $browser = $this->getMock('Buzz\Browser');
-        $browser
-            ->expects($this->any())
-            ->method('getClient')
-            ->will($this->returnValue($this->getMock('Buzz\Client\AbstractClient')));
-
-        return $browser;
+        return $this->getMock('Buzz\Client\ClientInterface');
     }
 }
 
 class TestHttpClient extends HttpClient
 {
+    public $fakeResponse;
+
+    public function setFakeResponse($response)
+    {
+        $this->fakeResponse = $response;
+    }
+
     public function getOption($name, $default = null)
     {
         return isset($this->options[$name]) ? $this->options[$name] : $default;
+    }
+
+    public function clearHeaders()
+    {
+    }
+
+    public function request($path, array $parameters = array(), $httpMethod = 'GET', array $headers = array())
+    {
+        $request  = new Request($httpMethod);
+        $response = $this->fakeResponse ? $this->fakeResponse : new Response();
+        if (0 < count($this->listeners)) {
+            foreach ($this->listeners as $listener) {
+                $listener->postSend($request, $response);
+            }
+        }
+
+        return $response;
     }
 }

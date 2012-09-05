@@ -11,8 +11,6 @@ Additional APIs:
 ### List issues in a project
 
 ```php
-<?php
-
 $issues = $client->api('issue')->all('KnpLabs', 'php-github-api', array('state' => 'open'));
 ```
 
@@ -21,8 +19,6 @@ Returns an array of issues.
 ### Search issues in a project
 
 ```php
-<?php
-
 $issues = $client->api('issue')->find('KnpLabs', 'php-github-api', 'closed', 'bug');
 ```
 
@@ -31,8 +27,6 @@ Returns an array of closed issues matching the "bug" term.
 ### Get information about an issue
 
 ```php
-<?php
-
 $issue = $client->api('issue')->show('KnpLabs', 'php-github-api', 1);
 ```
 
@@ -40,12 +34,9 @@ Returns an array of information about the issue.
 
 ### Open a new issue
 
-> Requires authentication.
+> Requires [authentication](security.md).
 
 ```php
-<?php
-
-$client->authenticate();
 $client->api('issue')->create('KnpLabs', 'php-github-api', array('title' => 'The issue title', 'body' => 'The issue body');
 ```
 
@@ -54,12 +45,9 @@ Returns an array of information about the issue.
 
 ### Close an issue
 
-> Requires authentication.
+> Requires [authentication](security.md).
 
 ```php
-<?php
-
-$client->authenticate();
 $client->api('issue')->update('KnpLabs', 'php-github-api', 4, array('state' => 'closed'));
 ```
 
@@ -68,12 +56,9 @@ Returns an array of information about the issue.
 
 ### Reopen an issue
 
-> Requires authentication.
+> Requires [authentication](security.md).
 
 ```php
-<?php
-
-$client->authenticate();
 $client->api('issue')->update('KnpLabs', 'php-github-api', 4, array('state' => 'open'));
 ```
 
@@ -82,12 +67,9 @@ Returns an array of information about the issue.
 
 ### Update an issue
 
-> Requires authentication.
+> Requires [authentication](security.md).
 
 ```php
-<?php
-
-$client->authenticate();
 $client->api('issue')->update('KnpLabs', 'php-github-api', 4, array('body' => 'The new issue body'));
 ```
 
@@ -97,8 +79,6 @@ Returns an array of information about the issue.
 ### Search issues matching a label
 
 ```php
-<?php
-
 $client->api('issue')->all('KnpLabs', 'php-github-api', array('labels' => 'label name'));
 ```
 

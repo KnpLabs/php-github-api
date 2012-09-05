@@ -25,13 +25,12 @@ class GistTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @expectedException \Github\Exception\RuntimeException
      */
     public function shouldNotGetStarredListWithoutAuthorization()
     {
         $github = new Client();
-        $response = $github->api('gists')->all('starred');
-
-        $this->assertEquals('Requires authentication', $response['message']);
+        $github->api('gists')->all('starred');
     }
 
     /**
