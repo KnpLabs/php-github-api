@@ -23,6 +23,12 @@ class Client
     const AUTH_URL_TOKEN = 'url_token';
 
     /**
+     * Constant for authentication method. Not indicates the new login, but allows
+     * usage of unauthenticated rate limited requests for given client_id + client_secret
+     */
+    const AUTH_URL_CLIENT_ID = 'url_client_id';
+
+    /**
      * Constant for authentication method. Indicates the new favored login method
      * with username and password via HTTP Authentication.
      */
@@ -76,7 +82,7 @@ class Client
     {
         $this->getHttpClient()->setOption('auth_method', $method);
 
-        if ($method === self::AUTH_HTTP_PASSWORD) {
+        if ($method === self::AUTH_HTTP_PASSWORD || $method === self::AUTH_URL_CLIENT_ID) {
             $this
                 ->getHttpClient()
                 ->setOption('login', $login)

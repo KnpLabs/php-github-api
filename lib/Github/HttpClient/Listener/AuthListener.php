@@ -61,21 +61,41 @@ class AuthListener implements ListenerInterface
                 $request->addHeader('Authorization: token '. $this->options['token']);
                 break;
 
+            case Client::AUTH_URL_CLIENT_ID:
+                if (!isset($this->options['login'], $this->options['password'])) {
+                    throw new InvalidArgumentException('You need to set client_id and client_secret!');
+                }
+
+                if ('GET' === $request->getMethod()) {
+                    $url = $request->getUrl();
+
+                    $parameters = array(
+                        'client_id'     => $this->options['login'],
+                        'client_secret' => $this->options['password'],
+                    );
+
+                    $url .= (false === strpos($url, '?') ? '?' : '&').utf8_encode(http_build_query($parameters, '', '&'));
+
+                    $request->fromUrl(new Url($url));
+                }
+                break;
+
             case Client::AUTH_URL_TOKEN:
                 if (!isset($this->options['token'])) {
                     throw new InvalidArgumentException('You need to set OAuth token!');
                 }
-                $url = $request->getUrl();
 
                 if ('GET' === $request->getMethod()) {
+                    $url = $request->getUrl();
+
                     $parameters = array(
                         'access_token' => $this->options['token']
                     );
 
-                    $url .= '?'.utf8_encode(http_build_query($parameters, '', '&'));
-                }
+                    $url .= (false === strpos($url, '?') ? '?' : '&').utf8_encode(http_build_query($parameters, '', '&'));
 
-                $request->fromUrl(new Url($url));
+                    $request->fromUrl(new Url($url));
+                }
                 break;
         }
     }
