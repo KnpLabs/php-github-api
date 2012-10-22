@@ -71,7 +71,7 @@ class AuthListener implements ListenerInterface
                 $url = $request->getUrl();
 
                 $parameters = array(
-                    'client_id'     => $this->options['login'],
+                    'client_id'     => $this->options['tokenOrLogin'],
                     'client_secret' => $this->options['password'],
                 );
 
