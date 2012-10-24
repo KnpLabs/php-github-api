@@ -2,9 +2,7 @@
 
 namespace Github\Tests\Functional;
 
-use Github\Client;
-
-class RepoTest extends \PHPUnit_Framework_TestCase
+class RepoTest extends TestCase
 {
     /**
      * @test
@@ -14,8 +12,7 @@ class RepoTest extends \PHPUnit_Framework_TestCase
         $username = 'KnpLabs';
         $repo     = 'php-github-api';
 
-        $github = new Client();
-        $contributors = $github->api('repo')->contributors($username, $repo);
+        $contributors = $this->client->api('repo')->contributors($username, $repo);
         $contributor = array_pop($contributors);
 
         $this->assertArrayHasKey('url', $contributor);
@@ -34,8 +31,7 @@ class RepoTest extends \PHPUnit_Framework_TestCase
         $username = 'KnpLabs';
         $repo     = 'php-github-api';
 
-        $github = new Client();
-        $repo = $github->api('repo')->show($username, $repo);
+        $repo = $this->client->api('repo')->show($username, $repo);
 
         $this->assertArrayHasKey('id', $repo);
         $this->assertArrayHasKey('name', $repo);

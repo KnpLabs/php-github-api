@@ -2,17 +2,14 @@
 
 namespace Github\Tests\Functional;
 
-use Github\Client;
-
-class GistTest extends \PHPUnit_Framework_TestCase
+class GistTest extends TestCase
 {
     /**
      * @test
      */
     public function shouldRetrievePublicGistsListWhenCalledAnonymously()
     {
-        $github = new Client();
-        $gists = $github->api('gists')->all();
+        $gists = $this->client->api('gists')->all();
         $gist = array_pop($gists);
 
         $this->assertArrayHasKey('url', $gist);
@@ -29,8 +26,7 @@ class GistTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldNotGetStarredListWithoutAuthorization()
     {
-        $github = new Client();
-        $github->api('gists')->all('starred');
+        $this->client->api('gists')->all('starred');
     }
 
     /**
@@ -38,8 +34,7 @@ class GistTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldRetrievePublicGistsList()
     {
-        $github = new Client();
-        $gists = $github->api('gists')->all('public');
+        $gists = $this->client->api('gists')->all('public');
         $gist = array_pop($gists);
 
         $this->assertArrayHasKey('url', $gist);
@@ -57,8 +52,7 @@ class GistTest extends \PHPUnit_Framework_TestCase
     {
         $id = 1;
 
-        $github = new Client();
-        $gist = $github->api('gists')->show($id);
+        $gist = $this->client->api('gists')->show($id);
 
         $this->assertArrayHasKey('url', $gist);
         $this->assertArrayHasKey('files', $gist);

@@ -2,9 +2,7 @@
 
 namespace Github\Tests\Functional;
 
-use Github\Client;
-
-class CommitTest extends \PHPUnit_Framework_TestCase
+class CommitTest extends TestCase
 {
     /**
      * @test
@@ -15,9 +13,8 @@ class CommitTest extends \PHPUnit_Framework_TestCase
         $repo     = 'php-github-api';
         $branch   = 'master';
 
-        $github = new Client();
-        $commits = $github->api('repo')->commits()->all($username, $repo, array('sha' => $branch));
-        $commit = array_pop($commits);
+        $commits = $this->client->api('repo')->commits()->all($username, $repo, array('sha' => $branch));
+        $commit  = array_pop($commits);
 
         $this->assertArrayHasKey('url', $commit);
         $this->assertArrayHasKey('committer', $commit);
@@ -34,8 +31,7 @@ class CommitTest extends \PHPUnit_Framework_TestCase
         $username = 'KnpLabs';
         $repo     = 'php-github-api';
 
-        $github = new Client();
-        $commit = $github->api('repo')->commits()->show($username, $repo, '6df3adf5bd16745299c6429e163265daed430fa1');
+        $commit = $this->client->api('repo')->commits()->show($username, $repo, '6df3adf5bd16745299c6429e163265daed430fa1');
 
         $this->assertArrayHasKey('url', $commit);
         $this->assertArrayHasKey('committer', $commit);
@@ -54,8 +50,7 @@ class CommitTest extends \PHPUnit_Framework_TestCase
         $repo     = 'php-github-api';
         $branch   = 'master';
 
-        $github = new Client();
-        $commits = $github->api('repo')->commits()->all($username, $repo, array('sha' => $branch, 'path' => 'composer.json'));
+        $commits = $this->client->api('repo')->commits()->all($username, $repo, array('sha' => $branch, 'path' => 'composer.json'));
         $commit = array_pop($commits);
 
         $this->assertArrayHasKey('url', $commit);

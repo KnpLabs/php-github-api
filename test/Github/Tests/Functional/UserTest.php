@@ -2,9 +2,7 @@
 
 namespace Github\Tests\Functional;
 
-use Github\Client;
-
-class UsetTest extends \PHPUnit_Framework_TestCase
+class UsetTest extends TestCase
 {
     /**
      * @test
@@ -13,8 +11,7 @@ class UsetTest extends \PHPUnit_Framework_TestCase
     {
         $username = 'KnpLabs';
 
-        $github = new Client();
-        $user = $github->api('user')->show($username);
+        $user = $this->client->api('user')->show($username);
 
         $this->assertArrayHasKey('id', $user);
         $this->assertEquals('KnpLabs', $user['login']);
@@ -36,8 +33,7 @@ class UsetTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldNotUpdateUserWithoutAuthorization()
     {
-        $github = new Client();
-        $github->api('current_user')->update(array('email' => 'leszek.prabucki@gmail.com'));
+        $this->client->api('current_user')->update(array('email' => 'leszek.prabucki@gmail.com'));
     }
 
     /**
@@ -47,8 +43,7 @@ class UsetTest extends \PHPUnit_Framework_TestCase
     {
         $username = 'l3l0';
 
-        $github = new Client();
-        $users = $github->api('user')->following($username);
+        $users = $this->client->api('user')->following($username);
         $user = array_pop($users);
 
         $this->assertArrayHasKey('id', $user);
@@ -62,8 +57,12 @@ class UsetTest extends \PHPUnit_Framework_TestCase
     {
         $username = 'KnpLabs';
 
-        $github = new Client();
-        $users = $github->api('user')->followers($username);
+        $this->client = new Client();
+        try {
+            $users = $this->client->api('user')->followers($username);
+        } catch (ApiLimitExceedException $e) {
+            $this->markTestSkipped('API limit reached. Skipping to prevent unnecessary failure.');
+        }
         $user = array_pop($users);
 
         $this->assertArrayHasKey('id', $user);
@@ -76,8 +75,7 @@ class UsetTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldNotFollowUserWithoutAuthorization()
     {
-        $github = new Client();
-        $github->api('current_user')->follow()->follow('KnpLabs');
+        $this->client->api('current_user')->follow()->follow('KnpLabs');
     }
 
     /**
@@ -86,8 +84,7 @@ class UsetTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldNotUnfollowUserWithoutAuthorization()
     {
-        $github = new Client();
-        $github->api('current_user')->follow()->unfollow('KnpLabs');
+        $this->client->api('current_user')->follow()->unfollow('KnpLabs');
     }
 
     /**
@@ -97,8 +94,7 @@ class UsetTest extends \PHPUnit_Framework_TestCase
     {
         $username = 'l3l0';
 
-        $github = new Client();
-        $repos = $github->api('user')->watched($username);
+        $repos = $this->client->api('user')->watched($username);
         $repo = array_pop($repos);
 
         $this->assertArrayHasKey('id', $repo);

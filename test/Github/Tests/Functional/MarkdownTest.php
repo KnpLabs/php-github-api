@@ -2,17 +2,14 @@
 
 namespace Github\Tests\Functional;
 
-use Github\Client;
-
-class MarkdownTest extends \PHPUnit_Framework_TestCase
+class MarkdownTest extends TestCase
 {
     /**
      * @test
      */
     public function shouldRetrieveParsedMarkdownContent()
     {
-        $api = new Client();
-        $api = $api->api('markdown');
+        $api = $this->client->api('markdown');
 
         $input  = 'Hello world github/linguist#1 **cool**, and #1!';
         $output = '<p>Hello world github/linguist#1 <strong>cool</strong>, and #1!</p>';
