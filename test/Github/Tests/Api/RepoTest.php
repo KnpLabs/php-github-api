@@ -210,22 +210,6 @@ class RepoTest extends TestCase
     /**
      * @test
      */
-    public function shouldGetRepositoryDownloads()
-    {
-        $expectedArray = array('down1', 'down2');
-
-        $api = $this->getApiMock();
-        $api->expects($this->once())
-            ->method('get')
-            ->with('repos/KnpLabs/php-github-api/downloads')
-            ->will($this->returnValue($expectedArray));
-
-        $this->assertEquals($expectedArray, $api->downloads('KnpLabs', 'php-github-api'));
-    }
-
-    /**
-     * @test
-     */
     public function shouldCreateUsingAllParams()
     {
         $expectedArray = array('id' => 1, 'name' => 'l3l0Repo');
@@ -338,6 +322,16 @@ class RepoTest extends TestCase
     /**
      * @test
      */
+    public function shouldGetDownloadsApiObject()
+    {
+        $api = $this->getApiMock();
+
+        $this->assertInstanceOf('Github\Api\Repository\Downloads', $api->downloads());
+    }
+
+    /**
+     * @test
+     */
     public function shouldGetForksApiObject()
     {
         $api = $this->getApiMock();
@@ -363,6 +357,16 @@ class RepoTest extends TestCase
         $api = $this->getApiMock();
 
         $this->assertInstanceOf('Github\Api\Repository\Labels', $api->labels());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetStatusesApiObject()
+    {
+        $api = $this->getApiMock();
+
+        $this->assertInstanceOf('Github\Api\Repository\Statuses', $api->statuses());
     }
 
     protected function getApiClass()

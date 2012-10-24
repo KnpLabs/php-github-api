@@ -12,7 +12,7 @@ class Downloads extends AbstractApi
 {
     /**
      * List downloads in selected repository
-     * @link http://developer.github.com/v3/repos/downloads/
+     * @link http://developer.github.com/v3/repos/downloads/#list-downloads-for-a-repository
      *
      * @param  string  $username         the user who owns the repo
      * @param  string  $repository       the name of the repo
@@ -26,7 +26,7 @@ class Downloads extends AbstractApi
 
     /**
      * Get a download in selected repository
-     * @link http://developer.github.com/v3/repos/downloads/
+     * @link http://developer.github.com/v3/repos/downloads/#get-a-single-download
      *
      * @param  string  $username         the user who owns the repo
      * @param  string  $repository       the name of the repo

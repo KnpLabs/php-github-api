@@ -47,16 +47,34 @@ class CurrentUser extends AbstractApi
         return new Followers($this->client);
     }
 
-    public function issues(array $params = array())
-    {
-        return $this->get('issues', array_merge(array('page' => 1), $params));
-    }
-
     public function followers($page = 1)
     {
         return $this->get('user/followers', array(
             'page' => $page
         ));
+    }
+
+    /**
+     * @link http://developer.github.com/v3/issues/#list-issues
+     *
+     * @param array   $params
+     * @param boolean $includeOrgIssues
+     *
+     * @return array
+     */
+    public function issues(array $params = array(), $includeOrgIssues = true)
+    {
+        return $this->get($includeOrgIssues ? 'issues' : 'user/issues', array_merge(array('page' => 1), $params));
+    }
+
+    /**
+     * @link http://developer.github.com/v3/repos/#list-your-repositories
+     *
+     * @return array
+     */
+    public function repositories()
+    {
+        return $this->get('users/repos');
     }
 
     /**

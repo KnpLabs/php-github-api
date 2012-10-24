@@ -11,6 +11,7 @@ use Github\Api\Repository\Downloads;
 use Github\Api\Repository\Forks;
 use Github\Api\Repository\Hooks;
 use Github\Api\Repository\Labels;
+use Github\Api\Repository\Statuses;
 
 /**
  * Searching repositories, getting repository information
@@ -145,6 +146,17 @@ class Repo extends AbstractApi
     }
 
     /**
+     * Manage the content of a repository
+     * @link http://developer.github.com/v3/repos/downloads/
+     *
+     * @return Downloads
+     */
+    public function downloads()
+    {
+        return new Downloads($this->client);
+    }
+
+    /**
      * Manage the deploy keys of a repository
      * @link http://developer.github.com/v3/repos/keys/
      *
@@ -189,31 +201,14 @@ class Repo extends AbstractApi
     }
 
     /**
-     * @param  string  $username
-     * @param  string  $repository
-     * @param  integer $page
+     * Manage the statuses of a repository
+     * @link http://developer.github.com/v3/repos/statuses/
      *
-     * @return array
+     * @return Statuses
      */
-    public function watchers($username, $repository, $page = 1)
+    public function statuses()
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/watchers', array(
-            'page' => $page
-        ));
-    }
-
-    /**
-     * Get the tags of a repository
-     * @link http://developer.github.com/v3/repos/
-     *
-     * @param  string  $username         the user who owns the repository
-     * @param  string  $repository       the name of the repository
-     *
-     * @return array                     list of the repository tags
-     */
-    public function tags($username, $repository)
-    {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/tags');
+        return new Statuses($this->client);
     }
 
     /**
@@ -237,20 +232,6 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Get the language breakdown of a repository
-     * @link http://developer.github.com/v3/repos/
-     *
-     * @param  string  $username         the user who owns the repository
-     * @param  string  $repository       the name of the repository
-     *
-     * @return array                     list of the languages
-     */
-    public function languages($username, $repository)
-    {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/languages');
-    }
-
-    /**
      * Get the contributors of a repository
      * @link http://developer.github.com/v3/repos/
      *
@@ -268,6 +249,34 @@ class Repo extends AbstractApi
     }
 
     /**
+     * Get the language breakdown of a repository
+     * @link http://developer.github.com/v3/repos/
+     *
+     * @param  string  $username         the user who owns the repository
+     * @param  string  $repository       the name of the repository
+     *
+     * @return array                     list of the languages
+     */
+    public function languages($username, $repository)
+    {
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/languages');
+    }
+
+    /**
+     * Get the tags of a repository
+     * @link http://developer.github.com/v3/repos/
+     *
+     * @param  string  $username         the user who owns the repository
+     * @param  string  $repository       the name of the repository
+     *
+     * @return array                     list of the repository tags
+     */
+    public function tags($username, $repository)
+    {
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/tags');
+    }
+
+    /**
      * Get the teams of a repository
      * @link http://developer.github.com/v3/repos/
      *
@@ -282,16 +291,16 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Get the downloads for selected repository
-     * @link http://developer.github.com/v3/repos/downloads/#list-downloads-for-a-repository
-     *
-     * @param  string  $username         the user who owns the repository
-     * @param  string  $repository       the name of the repository
+     * @param  string  $username
+     * @param  string  $repository
+     * @param  integer $page
      *
      * @return array
      */
-    public function downloads($username, $repository)
+    public function watchers($username, $repository, $page = 1)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/downloads');
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/watchers', array(
+            'page' => $page
+        ));
     }
 }
