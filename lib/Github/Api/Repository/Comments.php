@@ -49,8 +49,8 @@ class Comments extends AbstractApi
 
     public function create($username, $repository, $sha, array $params)
     {
-        if (!isset($params['body'], $params['path'], $params['position'])) {
-            throw new MissingArgumentException(array('body', 'path', 'position'));
+        if (!isset($params['body'])) {
+            throw new MissingArgumentException('body');
         }
 
         return $this->post('repos/'.urlencode($username).'/'.urlencode($repository).'/commits/'.urlencode($sha).'/comments', $params);

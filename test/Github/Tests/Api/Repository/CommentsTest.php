@@ -5,7 +5,7 @@ namespace Github\Tests\Api\Repository;
 use Github\Tests\Api\TestCase;
 
 /**
- * Repository comments api test case 
+ * Repository comments api test case
  *
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  */
@@ -37,10 +37,10 @@ class CommentsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/commits/123456/comments')
+            ->with('repos/KnpLabs/php-github-api/commits/commitSHA123456/comments')
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', '123456'));
+        $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', 'commitSHA123456'));
     }
 
     /**
@@ -66,36 +66,6 @@ class CommentsTest extends TestCase
     public function shouldNotCreateWithoutBody()
     {
         $data = array('line' => 53, 'path' => 'test.php', 'position' => 2);
-
-        $api = $this->getApiMock();
-        $api->expects($this->never())
-            ->method('post');
-
-        $api->create('KnpLabs', 'php-github-api', 'commitSHA123456', $data);
-    }
-
-    /**
-     * @test
-     * @expectedException Github\Exception\MissingArgumentException
-     */
-    public function shouldNotCreateWithoutPath()
-    {
-        $data = array('body' => 'body', 'line' => 11, 'position' => 2);
-
-        $api = $this->getApiMock();
-        $api->expects($this->never())
-            ->method('post');
-
-        $api->create('KnpLabs', 'php-github-api', 'commitSHA123456', $data);
-    }
-
-    /**
-     * @test
-     * @expectedException Github\Exception\MissingArgumentException
-     */
-    public function shouldNotCreateWithoutPosition()
-    {
-        $data = array('body' => 'body', 'path' => 'test.php', 'line' => 2);
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -165,7 +135,7 @@ class CommentsTest extends TestCase
             ->with('repos/KnpLabs/php-github-api/comments/123', $data)
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->update('KnpLabs', 'php-github-api', '123', $data));
+        $this->assertEquals($expectedValue, $api->update('KnpLabs', 'php-github-api', 123, $data));
     }
 
     /**
