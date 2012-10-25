@@ -58,7 +58,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function shouldClearHeadersLaizly()
+    public function shouldClearHeadersLazy()
     {
         $client = new Client();
         $client->clearHeaders();
@@ -102,14 +102,33 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array('user', 'Github\Api\User'),
+            array('users', 'Github\Api\User'),
+
+            array('me', 'Github\Api\CurrentUser'),
             array('current_user', 'Github\Api\CurrentUser'),
+
+            array('git', 'Github\Api\GitData'),
             array('git_data', 'Github\Api\GitData'),
+
+            array('gist', 'Github\Api\Gists'),
             array('gists', 'Github\Api\Gists'),
+
             array('issue', 'Github\Api\Issue'),
+            array('issues', 'Github\Api\Issue'),
+
             array('markdown', 'Github\Api\Markdown'),
+
             array('organization', 'Github\Api\Organization'),
+            array('organizations', 'Github\Api\Organization'),
+
             array('repo', 'Github\Api\Repo'),
+            array('repos', 'Github\Api\Repo'),
+            array('repository', 'Github\Api\Repo'),
+            array('repositories', 'Github\Api\Repo'),
+
+            array('pr', 'Github\Api\PullRequest'),
             array('pull_request', 'Github\Api\PullRequest'),
+            array('pull_requests', 'Github\Api\PullRequest'),
         );
     }
 }

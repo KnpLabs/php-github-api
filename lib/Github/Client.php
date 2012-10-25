@@ -88,19 +88,23 @@ class Client
     public function api($name)
     {
         switch ($name) {
+            case 'me':
             case 'current_user':
                 $api = new Api\CurrentUser($this);
                 break;
 
+            case 'git':
             case 'git_data':
                 $api = new Api\GitData($this);
                 break;
 
+            case 'gist':
             case 'gists':
                 $api = new Api\Gists($this);
                 break;
 
             case 'issue':
+            case 'issues':
                 $api = new Api\Issue($this);
                 break;
 
@@ -109,18 +113,25 @@ class Client
                 break;
 
             case 'organization':
+            case 'organizations':
                 $api = new Api\Organization($this);
                 break;
 
+            case 'pr':
             case 'pull_request':
+            case 'pull_requests':
                 $api = new Api\PullRequest($this);
                 break;
 
             case 'repo':
+            case 'repos':
+            case 'repository':
+            case 'repositories':
                 $api = new Api\Repo($this);
                 break;
 
             case 'user':
+            case 'users':
                 $api = new Api\User($this);
                 break;
 
