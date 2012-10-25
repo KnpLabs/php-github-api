@@ -57,12 +57,7 @@ class UsetTest extends TestCase
     {
         $username = 'KnpLabs';
 
-        $this->client = new Client();
-        try {
-            $users = $this->client->api('user')->followers($username);
-        } catch (ApiLimitExceedException $e) {
-            $this->markTestSkipped('API limit reached. Skipping to prevent unnecessary failure.');
-        }
+        $users = $this->client->api('user')->followers($username);
         $user = array_pop($users);
 
         $this->assertArrayHasKey('id', $user);

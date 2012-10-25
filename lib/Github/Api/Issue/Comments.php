@@ -11,6 +11,28 @@ use Github\Exception\MissingArgumentException;
  */
 class Comments extends AbstractApi
 {
+    public function configure($bodyType = null)
+    {
+        switch ($bodyType) {
+            case 'raw':
+                $header = sprintf('Accept: application/vnd.github.%s.raw+json', $this->client->getOption('api_version'));
+                break;
+
+            case 'text':
+                $header = sprintf('Accept: application/vnd.github.%s.text+json', $this->client->getOption('api_version'));
+                break;
+
+            case 'html':
+                $header = sprintf('Accept: application/vnd.github.%s.html+json', $this->client->getOption('api_version'));
+                break;
+
+            default:
+                $header = sprintf('Accept: application/vnd.github.%s.full+json', $this->client->getOption('api_version'));
+        }
+
+        $this->client->setHeaders(array($header));
+    }
+
     public function all($username, $repository, $issue, $page = 1)
     {
         return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/issues/'.urlencode($issue).'/comments', array(
