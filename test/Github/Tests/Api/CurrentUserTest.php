@@ -3,7 +3,7 @@
 namespace Github\Tests\Api;
 
 /**
- * CurrentUser api test case 
+ * CurrentUser api test case
  *
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  */
@@ -117,6 +117,16 @@ class CurrentUserTest extends TestCase
         $api = $this->getApiMock();
 
         $this->assertInstanceOf('Github\Api\CurrentUser\Followers', $api->follow());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetNotificationsApiObject()
+    {
+        $api = $this->getApiMock();
+
+        $this->assertInstanceOf('Github\Api\CurrentUser\Notifications', $api->notifications());
     }
 
     /**
