@@ -71,10 +71,14 @@ class ErrorListener implements ListenerInterface
                                 $errors[] = sprintf('Field "%s" already exists, for resource "%s"', $error['field'], $error['resource']);
                                 break;
 
+                            default:
+                                $errors[] = $error['message'];
+                                break;
+
                         }
                     }
 
-                    throw new ValidationFailedException('Validation Failed:' . implode(', ', $errors), 422);
+                    throw new ValidationFailedException('Validation Failed: ' . implode(', ', $errors), 422);
                 }
             }
 
