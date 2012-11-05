@@ -52,7 +52,7 @@ interface HttpClientInterface
      *
      * @return array              Data
      */
-    public function put($path, array $headers = array());
+    public function put($path, array $paramters = array(), array $headers = array());
 
     /**
      * Send a DELETE request
