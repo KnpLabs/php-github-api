@@ -82,6 +82,22 @@ class RepoTest extends TestCase
     /**
      * @test
      */
+    public function shouldCreateRepositoryForOrganization()
+    {
+        $expectedArray = array('id' => 1, 'name' => 'KnpLabsRepo');
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('post')
+            ->with('orgs/KnpLabs/repos', array('name' => 'KnpLabsRepo', 'description' => '', 'homepage' => '', 'private' => false))
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->create('KnpLabsRepo', '', '', true, 'KnpLabs'));
+    }
+
+    /**
+     * @test
+     */
     public function shouldGetRepositoryWatchers()
     {
         $expectedArray = array(array('id' => 1, 'username' => 'l3l0'));

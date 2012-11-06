@@ -55,17 +55,17 @@ class Repo extends AbstractApi
      * Create repository
      * @link http://developer.github.com/v3/repos/
      *
-     * @param  string  $name                  name of the repository
-     * @param  string  $description           repository description
-     * @param  string  $homepage              homepage url
-     * @param  boolean $public                1 for public, 0 for private
-     * @param  boolean|string $organization   username of organization if applicable
+     * @param  string  $name             name of the repository
+     * @param  string  $description      repository description
+     * @param  string  $homepage         homepage url
+     * @param  boolean $public           `true` for public, `false` for private
+     * @param  null|string $organization username of organization if applicable
      *
      * @return array                     returns repository data
      */
-    public function create($name, $description = '', $homepage = '', $public = true, $organization = false)
+    public function create($name, $description = '', $homepage = '', $public = true, $organization = null)
     {
-        $path = ($organization) ? 'orgs/'.$organization.'/repos' : 'user/repos';
+        $path = null !== $organization ? 'orgs/'.$organization.'/repos' : 'user/repos';
 
         return $this->post($path, array(
             'name'        => $name,

@@ -48,11 +48,12 @@ interface HttpClientInterface
      * Send a PUT request
      *
      * @param  string $path       Request path
+     * @param  array  $parameters PUT Parameters
      * @param  array  $headers    Reconfigure the request headers for this call only
      *
      * @return array              Data
      */
-    public function put($path, array $paramters = array(), array $headers = array());
+    public function put($path, array $parameters = array(), array $headers = array());
 
     /**
      * Send a DELETE request

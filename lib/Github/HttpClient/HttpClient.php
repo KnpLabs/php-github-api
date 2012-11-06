@@ -131,9 +131,9 @@ class HttpClient implements HttpClientInterface
     /**
      * {@inheritDoc}
      */
-    public function put($path, array $paramters = array(), array $headers = array())
+    public function put($path, array $parameters = array(), array $headers = array())
     {
-        return $this->request($path, $paramters, 'PUT', $headers);
+        return $this->request($path, $parameters, 'PUT', $headers);
     }
 
     /**
