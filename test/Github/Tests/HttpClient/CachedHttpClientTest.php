@@ -16,7 +16,7 @@ class CachedHttpClientTest extends HttpClientTest
         $cache = $this->getCacheMock();
         $httpClient = new CachedHttpClient(
             array('base_url' => ''),
-            $this->getMock('Buzz\Client\ClientInterface'),
+            $this->getMock('Buzz\Client\ClientInterface', array('setTimeout', 'setVerifyPeer', 'send')),
             $cache
         );
 
@@ -30,7 +30,7 @@ class CachedHttpClientTest extends HttpClientTest
      */
     public function shouldGetCachedResponseWhileResourceNotModified()
     {
-        $client = $this->getMock('Buzz\Client\ClientInterface');
+        $client = $this->getMock('Buzz\Client\ClientInterface', array('setTimeout', 'setVerifyPeer', 'send'));
         $client->expects($this->once())->method('send');
 
         $cache = $this->getCacheMock();
@@ -54,7 +54,7 @@ class CachedHttpClientTest extends HttpClientTest
      */
     public function shouldRenewCacheWhenResourceHasChanged()
     {
-        $client = $this->getMock('Buzz\Client\ClientInterface');
+        $client = $this->getMock('Buzz\Client\ClientInterface', array('setTimeout', 'setVerifyPeer', 'send'));
         $client->expects($this->once())->method('send');
 
         $cache = $this->getCacheMock();
