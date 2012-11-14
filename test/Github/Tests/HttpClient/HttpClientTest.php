@@ -215,7 +215,7 @@ class TestHttpClient extends HttpClient
     {
     }
 
-    public function request($path, array $parameters = array(), $httpMethod = 'GET', array $headers = array())
+    public function request($path, array $parameters = array(), $httpMethod = 'GET', array $headers = array(), Response $response = null)
     {
         $request  = new Request($httpMethod);
         $response = $this->fakeResponse ? $this->fakeResponse : new Response();
