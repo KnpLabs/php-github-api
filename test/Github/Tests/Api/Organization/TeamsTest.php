@@ -69,10 +69,10 @@ class TeamsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('orgs/KnpLabs/teams/KnpWorld')
+            ->with('teams/KnpWorld')
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->show('KnpLabs', 'KnpWorld'));
+        $this->assertEquals($expectedValue, $api->show('KnpWorld'));
     }
 
     /**
