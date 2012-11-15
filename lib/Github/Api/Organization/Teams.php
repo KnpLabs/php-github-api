@@ -16,11 +16,6 @@ class Teams extends AbstractApi
         return $this->get('orgs/'.urlencode($organization).'/teams');
     }
 
-    public function show($organization, $team)
-    {
-        return $this->get('orgs/'.urlencode($organization).'/teams/'.urlencode($team));
-    }
-
     public function create($organization, array $params)
     {
         if (!isset($params['name'])) {
@@ -34,6 +29,11 @@ class Teams extends AbstractApi
         }
 
         return $this->post('orgs/'.urlencode($organization).'/teams', $params);
+    }
+
+    public function show($team)
+    {
+        return $this->get('teams/'.urlencode($team));
     }
 
     public function update($team, array $params)
