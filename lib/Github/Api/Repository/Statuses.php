@@ -43,6 +43,6 @@ class Statuses extends AbstractApi
             throw new MissingArgumentException('state');
         }
 
-        return $this->post('repos/'.urlencode($username).'/'.urlencode($repository).'/statuses'.urlencode($sha), $params);
+        return $this->post('repos/'.urlencode($username).'/'.urlencode($repository).'/statuses/'.urlencode($sha), $params);
     }
 }
