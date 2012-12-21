@@ -3,6 +3,7 @@
 namespace Github\Tests;
 
 use Github\Client;
+use Github\HttpClient\Listener\AuthListener;
 use Github\Exception\InvalidArgumentException;
 
 /**
@@ -25,45 +26,37 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function shouldAuthenticateUsingLoginAndPassword()
+    public function shouldPassHttpClientInterfaceToConstructor()
     {
-        $client = new Client();
-        $client->authenticate('login', 'password', Client::AUTH_HTTP_PASSWORD);
+        $client = new Client($this->getHttpClientMock());
 
-        $this->assertInstanceOf('Github\HttpClient\HttpClient', $client->getHttpClient());
+        $this->assertInstanceOf('Github\HttpClient\HttpClientInterface', $client->getHttpClient());
     }
 
     /**
      * @test
+     * @dataProvider getAuthenticationData
      */
-    public function shouldAuthenticateUsingHttpToken()
+    public function shouldAuthenticateUsingGivenParameters($login, $password, $method)
     {
-        $client = new Client();
-        $client->authenticate('login', 'password', Client::AUTH_HTTP_TOKEN);
+        $httpClient = $this->getHttpClientMock(array('addListener'));
+        $httpClient->expects($this->once())
+            ->method('addListener')
+            ->with(new AuthListener($method, array('tokenOrLogin' => $login, 'password' => $password)));
 
-        $this->assertInstanceOf('Github\HttpClient\HttpClient', $client->getHttpClient());
+        $client = new Client($httpClient);
+        $client->authenticate($login, $password, $method);
     }
 
-    /**
-     * @test
-     */
-    public function shouldAuthenticateUsingUrlToken()
+    public function getAuthenticationData()
     {
-        $client = new Client();
-        $client->authenticate('login', 'password', Client::AUTH_URL_TOKEN);
-
-        $this->assertInstanceOf('Github\HttpClient\HttpClient', $client->getHttpClient());
-    }
-
-    /**
-     * @test
-     */
-    public function shouldAuthenticateUsingUrlClientId()
-    {
-        $client = new Client();
-        $client->authenticate('client_id', 'client_secret', Client::AUTH_URL_CLIENT_ID);
-
-        $this->assertInstanceOf('Github\HttpClient\HttpClient', $client->getHttpClient());
+        return array(
+            array('login', null, null),
+            array('login', 'password', Client::AUTH_HTTP_PASSWORD),
+            array('token', null, Client::AUTH_HTTP_TOKEN),
+            array('token', null, Client::AUTH_URL_TOKEN),
+            array('client_id', 'client_secret', Client::AUTH_URL_CLIENT_ID),
+        );
     }
 
     /**
@@ -71,10 +64,11 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldClearHeadersLazy()
     {
-        $client = new Client();
-        $client->clearHeaders();
+        $httpClient = $this->getHttpClientMock(array('clearHeaders'));
+        $httpClient->expects($this->once())->method('clearHeaders');
 
-        $this->assertInstanceOf('Github\HttpClient\HttpClientInterface', $client->getHttpClient());
+        $client = new Client($httpClient);
+        $client->clearHeaders();
     }
 
     /**
@@ -82,10 +76,13 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldSetHeadersLaizly()
     {
-        $client = new Client();
-        $client->setHeaders(array('header1', 'header2'));
+        $headers = array('header1', 'header2');
 
-        $this->assertInstanceOf('Github\HttpClient\HttpClientInterface', $client->getHttpClient());
+        $httpClient = $this->getHttpClientMock();
+        $httpClient->expects($this->once())->method('setHeaders')->with($headers);
+
+        $client = new Client($httpClient);
+        $client->setHeaders($headers);
     }
 
     /**
@@ -141,5 +138,15 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             array('pull_request', 'Github\Api\PullRequest'),
             array('pull_requests', 'Github\Api\PullRequest'),
         );
+    }
+
+    public function getHttpClientMock(array $methods = array())
+    {
+        $methods = array_merge(
+            array('get', 'post', 'patch', 'put', 'delete', 'request', 'setOption', 'setHeaders'),
+            $methods
+        );
+
+        return $this->getMock('Github\HttpClient\HttpClientInterface', $methods);
     }
 }
