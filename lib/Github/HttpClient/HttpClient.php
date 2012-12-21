@@ -12,6 +12,7 @@ use Github\Exception\RuntimeException;
 use Github\HttpClient\Listener\ErrorListener;
 use Github\HttpClient\Message\Request;
 use Github\HttpClient\Message\Response;
+use Buzz\Client\Curl;
 
 /**
  * Performs requests on GitHub API. API documentation should be self-explanatory.
@@ -48,8 +49,12 @@ class HttpClient implements HttpClientInterface
      * @param array           $options
      * @param ClientInterface $client
      */
-    public function __construct(array $options, ClientInterface $client)
+    public function __construct(array $options = array(), ClientInterface $client = null)
     {
+        $client = $client ?: new Curl();
+        $client->setTimeout($this->options['timeout']);
+        $client->setVerifyPeer(false);
+
         $this->options = array_merge($this->options, $options);
         $this->client  = $client;
 
@@ -139,7 +144,7 @@ class HttpClient implements HttpClientInterface
     /**
      * {@inheritDoc}
      */
-    public function request($path, array $parameters = array(), $httpMethod = 'GET', array $headers = array())
+    public function request($path, array $parameters = array(), $httpMethod = 'GET', array $headers = array(), Response $response = null)
     {
         $path = trim($this->options['base_url'].$path, '/');
 
@@ -154,7 +159,9 @@ class HttpClient implements HttpClientInterface
             }
         }
 
-        $response = new Response();
+        if (null === $response) {
+            $response = new Response;
+        }
 
         try {
             $this->client->send($request, $response);
@@ -198,7 +205,7 @@ class HttpClient implements HttpClientInterface
      *
      * @return Request
      */
-    private function createRequest($httpMethod, $url)
+    protected function createRequest($httpMethod, $url)
     {
         $request = new Request($httpMethod);
         $request->setHeaders($this->headers);

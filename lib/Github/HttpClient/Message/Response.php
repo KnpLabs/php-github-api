@@ -64,4 +64,14 @@ class Response extends BaseResponse
             throw new ApiLimitExceedException($this->options['api_limit']);
         }
     }
+
+    /**
+     * Is not modified
+     *
+     * @return Boolean
+     */
+    public function isNotModified()
+    {
+        return 304 === $this->getStatusCode();
+    }
 }
