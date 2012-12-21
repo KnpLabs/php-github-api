@@ -32,6 +32,8 @@ class HttpClient implements HttpClientInterface
 
         'api_limit'   => 5000,
         'api_version' => 'beta',
+
+        'cache_dir'   => null
     );
     /**
      * @var array

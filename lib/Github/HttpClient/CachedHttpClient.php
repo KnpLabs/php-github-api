@@ -3,15 +3,7 @@
 namespace Github\HttpClient;
 
 use Buzz\Client\ClientInterface;
-use Buzz\Message\MessageInterface;
-use Buzz\Message\RequestInterface;
-use Buzz\Listener\ListenerInterface;
 
-use Github\Exception\ErrorException;
-use Github\Exception\RuntimeException;
-use Github\HttpClient\Listener\ErrorListener;
-use Github\HttpClient\Message\Request;
-use Github\HttpClient\Message\Response;
 use Github\HttpClient\Cache\CacheInterface;
 use Github\HttpClient\Cache\FilesystemCache;
 
@@ -24,15 +16,26 @@ use Github\HttpClient\Cache\FilesystemCache;
  */
 class CachedHttpClient extends HttpClient
 {
+    /**
+     * @var CacheInterface
+     */
     protected $cache;
 
+    /**
+     * @param array                $options
+     * @param null|ClientInterface $client
+     * @param null|CacheInterface  $cache
+     */
     public function __construct(array $options = array(), ClientInterface $client = null, CacheInterface $cache = null)
     {
         parent::__construct($options, $client);
 
-        $this->cache = $cache ?: new FilesystemCache;
+        $this->cache = $cache ?: new FilesystemCache($this->options['cache_dir'] ?: sys_get_temp_dir().DIRECTORY_SEPARATOR.'php-github-api-cache');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function request($path, array $parameters = array(), $httpMethod = 'GET', array $headers = array())
     {
         $response = parent::request($path, $parameters, $httpMethod, $headers);
@@ -50,10 +53,7 @@ class CachedHttpClient extends HttpClient
     /**
      * Create requests with If-Modified-Since headers
      *
-     * @param string $httpMethod
-     * @param string $url
-     *
-     * @return Request
+     * {@inheritdoc}
      */
     protected function createRequest($httpMethod, $url)
     {

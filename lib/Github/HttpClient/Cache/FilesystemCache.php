@@ -12,11 +12,11 @@ class FilesystemCache implements CacheInterface
     protected $path;
 
     /**
-     * @param null|string $path
+     * @param string $path
      */
-    public function __construct($path = null)
+    public function __construct($path)
     {
-        $this->path = $path ?: sys_get_temp_dir().DIRECTORY_SEPARATOR.'php-github-api-cache';
+        $this->path = $path;
     }
 
     /**
