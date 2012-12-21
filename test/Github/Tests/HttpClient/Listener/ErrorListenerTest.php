@@ -2,7 +2,6 @@
 
 namespace Github\Tests\HttpClient;
 
-use Github\Client;
 use Github\HttpClient\Listener\ErrorListener;
 
 /**
@@ -127,9 +126,11 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
         $content = array(
             'message' => 'Validation Failed',
             'errors'  => array(
-                'code'     => $errorCode,
-                'field'    => 'test',
-                'resource' => 'fake'
+                array(
+                    'code'     => $errorCode,
+                    'field'    => 'test',
+                    'resource' => 'fake'
+                )
             )
         );
 

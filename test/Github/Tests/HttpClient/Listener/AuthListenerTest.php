@@ -68,7 +68,7 @@ class AuthListenerTest extends \PHPUnit_Framework_TestCase
             ->method('getUrl');
 
         $listener = new AuthListener(null, array('password' => 'pass', 'tokenOrLogin' => 'test'));
-        $this->assertNull($listener->preSend($request));
+        $listener->preSend($request);
     }
 
     /**
@@ -99,7 +99,7 @@ class AuthListenerTest extends \PHPUnit_Framework_TestCase
             ->method('getHeader');
 
         $listener = new AuthListener(Client::AUTH_HTTP_PASSWORD, array('tokenOrLogin' => 'login', 'password' => 'mypasswd'));
-        $this->assertNull($listener->postSend($request, $response));
+        $listener->postSend($request, $response);
     }
 
     /**
@@ -107,13 +107,21 @@ class AuthListenerTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldSetAuthBasicHeaderForAuthPassMethod()
     {
+        $expected = 'Basic '.base64_encode('login:mypasswd');
+
         $request = $this->getMock('Buzz\Message\RequestInterface');
         $request->expects($this->once())
             ->method('addHeader')
-            ->with('Authorization: Basic '.base64_encode('login:mypasswd'));
+            ->with('Authorization: '.$expected);
+        $request->expects($this->once())
+            ->method('getHeader')
+            ->with('Authorization')
+            ->will($this->returnValue($expected));
 
         $listener = new AuthListener(Client::AUTH_HTTP_PASSWORD, array('tokenOrLogin' => 'login', 'password' => 'mypasswd'));
         $listener->preSend($request);
+
+        $this->assertEquals($expected, $request->getHeader('Authorization'));
     }
 
     /**
@@ -121,13 +129,21 @@ class AuthListenerTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldSetAuthTokenHeaderForAuthPassMethod()
     {
+        $expected = 'token test';
+
         $request = $this->getMock('Buzz\Message\RequestInterface');
         $request->expects($this->once())
             ->method('addHeader')
-            ->with('Authorization: token test');
+            ->with('Authorization: '.$expected);
+        $request->expects($this->once())
+            ->method('getHeader')
+            ->with('Authorization')
+            ->will($this->returnValue($expected));
 
         $listener = new AuthListener(Client::AUTH_HTTP_TOKEN, array('tokenOrLogin' => 'test'));
         $listener->preSend($request);
+
+        $this->assertEquals($expected, $request->getHeader('Authorization'));
     }
 
     /**
@@ -141,5 +157,18 @@ class AuthListenerTest extends \PHPUnit_Framework_TestCase
         $listener->preSend($request);
 
         $this->assertEquals('/res?access_token=test', $request->getUrl());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldSetClientDetailsInUrlForAuthUrlMethod()
+    {
+        $request = new Request(Request::METHOD_GET, '/res');
+
+        $listener = new AuthListener(Client::AUTH_URL_CLIENT_ID, array('tokenOrLogin' => 'clientId', 'password' => 'clientSsecret'));
+        $listener->preSend($request);
+
+        $this->assertEquals('/res?client_id=clientId&client_secret=clientSsecret', $request->getUrl());
     }
 }
