@@ -58,6 +58,17 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function shouldAuthenticateUsingUrlClientId()
+    {
+        $client = new Client();
+        $client->authenticate('client_id', 'client_secret', Client::AUTH_URL_CLIENT_ID);
+
+        $this->assertInstanceOf('Github\HttpClient\HttpClient', $client->getHttpClient());
+    }
+
+    /**
+     * @test
+     */
     public function shouldClearHeadersLazy()
     {
         $client = new Client();
