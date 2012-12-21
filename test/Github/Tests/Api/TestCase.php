@@ -23,7 +23,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
 
         $mock = $this->getMock('Github\HttpClient\HttpClient', array(), array(array(), $httpClient));
 
-        $client = new \Github\Client($httpClient);
+        $client = new \Github\Client($mock);
         $client->setHttpClient($mock);
 
         return $this->getMockBuilder($this->getApiClass())

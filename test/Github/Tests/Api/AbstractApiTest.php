@@ -126,7 +126,7 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
      */
     protected function getClientMock()
     {
-        return new \Github\Client($this->getHttpClientMock());
+        return new \Github\Client($this->getHttpMock());
     }
 
     /**

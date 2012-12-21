@@ -67,15 +67,11 @@ class Client
     /**
      * Instantiate a new GitHub client
      *
-     * @param null|ClientInterface $httpClient Buzz client
+     * @param null|HttpClientInterface $httpClient Github http client
      */
-    public function __construct(ClientInterface $httpClient = null)
+    public function __construct(HttpClientInterface $httpClient = null)
     {
-        $httpClient = $httpClient ?: new Curl();
-        $httpClient->setTimeout($this->options['timeout']);
-        $httpClient->setVerifyPeer(false);
-
-        $this->httpClient = new HttpClient($this->options, $httpClient);
+        $this->httpClient = $httpClient ?: new HttpClient($this->options);
     }
 
     /**
