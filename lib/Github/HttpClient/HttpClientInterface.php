@@ -3,7 +3,6 @@
 namespace Github\HttpClient;
 
 use Github\Exception\InvalidArgumentException;
-use Github\HttpClient\Message\Response;
 
 /**
  * Performs requests on GitHub API. API documentation should be self-explanatory.
@@ -78,7 +77,7 @@ interface HttpClientInterface
      *
      * @return array              Data
      */
-    public function request($path, array $parameters = array(), $httpMethod = 'GET', array $headers = array(), Response $response = null);
+    public function request($path, array $parameters = array(), $httpMethod = 'GET', array $headers = array());
 
     /**
      * Change an option value.

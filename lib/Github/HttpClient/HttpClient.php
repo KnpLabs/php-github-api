@@ -144,7 +144,7 @@ class HttpClient implements HttpClientInterface
     /**
      * {@inheritDoc}
      */
-    public function request($path, array $parameters = array(), $httpMethod = 'GET', array $headers = array(), Response $response = null)
+    public function request($path, array $parameters = array(), $httpMethod = 'GET', array $headers = array())
     {
         $path = trim($this->options['base_url'].$path, '/');
 
@@ -159,9 +159,7 @@ class HttpClient implements HttpClientInterface
             }
         }
 
-        if (null === $response) {
-            $response = new Response;
-        }
+        $response = $this->createResponse();
 
         try {
             $this->client->send($request, $response);
@@ -212,5 +210,13 @@ class HttpClient implements HttpClientInterface
         $request->fromUrl($url);
 
         return $request;
+    }
+
+    /**
+     * @return Response
+     */
+    protected function createResponse()
+    {
+        return new Response();
     }
 }

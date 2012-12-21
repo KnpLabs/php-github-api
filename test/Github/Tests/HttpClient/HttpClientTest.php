@@ -163,7 +163,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $client = $this->getBrowserMock();
 
         $httpClient = new TestHttpClient(array(), $client);
-        $httpClient->setFakeResponse($message);
+        $httpClient->fakeResponse = $message;
 
         $response = $httpClient->get($path, $parameters, $headers);
 
@@ -186,7 +186,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $response->addHeader('X-RateLimit-Remaining: 0');
 
         $httpClient = new TestHttpClient(array(), $this->getBrowserMock());
-        $httpClient->setFakeResponse($response);
+        $httpClient->fakeResponse = $response;
 
         $httpClient->get($path, $parameters, $headers);
     }
@@ -201,11 +201,6 @@ class TestHttpClient extends HttpClient
 {
     public $fakeResponse;
 
-    public function setFakeResponse($response)
-    {
-        $this->fakeResponse = $response;
-    }
-
     public function getOption($name, $default = null)
     {
         return isset($this->options[$name]) ? $this->options[$name] : $default;
@@ -215,10 +210,10 @@ class TestHttpClient extends HttpClient
     {
     }
 
-    public function request($path, array $parameters = array(), $httpMethod = 'GET', array $headers = array(), Response $response = null)
+    public function request($path, array $parameters = array(), $httpMethod = 'GET', array $headers = array())
     {
-        $request  = new Request($httpMethod);
-        $response = $this->fakeResponse ? $this->fakeResponse : new Response();
+        $request  = $this->createRequest($httpMethod, $path);
+        $response = $this->createResponse();
         if (0 < count($this->listeners)) {
             foreach ($this->listeners as $listener) {
                 $listener->postSend($request, $response);
@@ -226,5 +221,15 @@ class TestHttpClient extends HttpClient
         }
 
         return $response;
+    }
+
+    protected function createRequest($httpMethod, $url)
+    {
+        return new Request($httpMethod);
+    }
+
+    protected function createResponse()
+    {
+        return $this->fakeResponse ?: new Response();
     }
 }

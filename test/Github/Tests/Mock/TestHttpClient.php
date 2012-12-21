@@ -53,7 +53,7 @@ class TestHttpClient implements HttpClientInterface
         $this->requests['patch'][] = $path;
     }
 
-    public function put($path, array $options = array())
+    public function put($path, array $options = array(), array $headers = array())
     {
         $this->requests['put'][] = $path;
     }

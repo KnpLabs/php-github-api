@@ -33,9 +33,9 @@ class CachedHttpClient extends HttpClient
         $this->cache = $cache ?: new FilesystemCache;
     }
 
-    public function request($path, array $parameters = array(), $httpMethod = 'GET', array $headers = array(), Response $response = null)
+    public function request($path, array $parameters = array(), $httpMethod = 'GET', array $headers = array())
     {
-        $response = parent::request($path, $parameters, $httpMethod, $headers, $response);
+        $response = parent::request($path, $parameters, $httpMethod, $headers);
 
         $key = trim($this->options['base_url'].$path, '/');
         if ($response->isNotModified()) {
@@ -49,6 +49,7 @@ class CachedHttpClient extends HttpClient
 
     /**
      * Create requests with If-Modified-Since headers
+     *
      * @param string $httpMethod
      * @param string $url
      *
@@ -57,8 +58,7 @@ class CachedHttpClient extends HttpClient
     protected function createRequest($httpMethod, $url)
     {
         $request = parent::createRequest($httpMethod, $url);
-        $modifiedSince = date('r', $this->cache->getModifiedSince($url));
-        $request->addHeader(sprintf('If-Modified-Since: %s', $modifiedSince));
+        $request->addHeader(sprintf('If-Modified-Since: %s', date('r', $this->cache->getModifiedSince($url))));
 
         return $request;
     }

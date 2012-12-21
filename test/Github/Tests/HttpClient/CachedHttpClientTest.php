@@ -4,7 +4,6 @@ namespace Github\Tests\HttpClient;
 
 use Github\HttpClient\CachedHttpClient;
 use Github\HttpClient\Message\Response;
-use Github\HttpClient\Message\Request;
 
 class CachedHttpClientTest extends HttpClientTest
 {
@@ -14,7 +13,8 @@ class CachedHttpClientTest extends HttpClientTest
     public function shouldCacheResponseAtFirstTime()
     {
         $cache = $this->getCacheMock();
-        $httpClient = new CachedHttpClient(
+
+        $httpClient = new TestCachedHttpClient(
             array('base_url' => ''),
             $this->getMock('Buzz\Client\ClientInterface', array('setTimeout', 'setVerifyPeer', 'send')),
             $cache
@@ -35,18 +35,19 @@ class CachedHttpClientTest extends HttpClientTest
 
         $cache = $this->getCacheMock();
 
-        $httpClient = new CachedHttpClient(
+        $response = new Response;
+        $response->addHeader('HTTP/1.1 304 Not Modified');
+
+        $httpClient = new TestCachedHttpClient(
             array('base_url' => ''),
             $client,
             $cache
         );
+        $httpClient->fakeResponse = $response;
 
         $cache->expects($this->once())->method('get')->with('test');
 
-        $response = new Response;
-        $response->addHeader('HTTP/1.1 304 Not Modified');
-
-        $httpClient->request('test', array(), 'GET', array(), $response);
+        $httpClient->get('test');
     }
 
     /**
@@ -59,23 +60,34 @@ class CachedHttpClientTest extends HttpClientTest
 
         $cache = $this->getCacheMock();
 
-        $httpClient = new CachedHttpClient(
+        $response = new Response;
+        $response->addHeader('HTTP/1.1 200 OK');
+
+        $httpClient = new TestCachedHttpClient(
             array('base_url' => ''),
             $client,
             $cache
         );
-
-        $response = new Response;
-        $response->addHeader('HTTP/1.1 200 OK');
+        $httpClient->fakeResponse = $response;
 
         $cache->expects($this->once())->method('set')->with('test', $response);
         $cache->expects($this->once())->method('getModifiedSince')->with('test')->will($this->returnValue(1256953732));
 
-        $httpClient->request('test', array(), 'GET', array(), $response);
+        $httpClient->get('test');
     }
 
     public function getCacheMock()
     {
         return $this->getMock('Github\HttpClient\Cache\CacheInterface');
+    }
+}
+
+class TestCachedHttpClient extends CachedHttpClient
+{
+    public $fakeResponse;
+
+    protected function createResponse()
+    {
+        return $this->fakeResponse ?: new Response();
     }
 }
