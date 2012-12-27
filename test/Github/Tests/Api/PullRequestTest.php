@@ -2,11 +2,6 @@
 
 namespace Github\Tests\Api;
 
-/**
- * PR api test case
- *
- * @author Leszek Prabucki <leszek.prabucki@gmail.com>
- */
 class PullRequestTest extends TestCase
 {
     /**

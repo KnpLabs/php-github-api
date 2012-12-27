@@ -4,11 +4,6 @@ namespace Github\Tests\HttpClient;
 
 use Github\HttpClient\Listener\ErrorListener;
 
-/**
- * HttpClient error listener test case
- *
- * @author Joseph Bielawski <stloyd@gmail.com>
- */
 class ErrorListenerTest extends \PHPUnit_Framework_TestCase
 {
     /**

@@ -2,11 +2,6 @@
 
 namespace Github\Tests\Api;
 
-/**
- * GitData api test case 
- *
- * @author Leszek Prabucki <leszek.prabucki@gmail.com>
- */
 class GitDataTest extends TestCase
 {
     /**

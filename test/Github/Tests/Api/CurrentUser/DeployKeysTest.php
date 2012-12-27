@@ -4,11 +4,6 @@ namespace Github\Tests\Api;
 
 use Github\Tests\Api\TestCase;
 
-/**
- * CurrentUser deploy keys api test case
- *
- * @author Leszek Prabucki <leszek.prabucki@gmail.com>
- */
 class DeployKeysTest extends TestCase
 {
     /**

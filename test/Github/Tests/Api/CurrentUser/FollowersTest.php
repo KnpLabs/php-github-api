@@ -4,11 +4,6 @@ namespace Github\Tests\Api;
 
 use Github\Tests\Api\TestCase;
 
-/**
- * CurrentUser followers api test case
- *
- * @author Joseph Bielawski <stloyd@gmail.com>
- */
 class FollowersTest extends TestCase
 {
     /**

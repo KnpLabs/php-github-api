@@ -4,11 +4,6 @@ namespace Github\Tests\Api;
 
 use Github\Tests\Api\TestCase;
 
-/**
- * CurrentUser watchers api test case
- *
- * @author Joseph Bielawski <stloyd@gmail.com>
- */
 class WatchersTest extends TestCase
 {
     /**

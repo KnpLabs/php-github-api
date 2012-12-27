@@ -4,11 +4,6 @@ namespace Github\Tests\Api\Issue;
 
 use Github\Tests\Api\TestCase;
 
-/**
- * Issue milestones api test case
- *
- * @author Leszek Prabucki <leszek.prabucki@gmail.com>
- */
 class MilestonesTest extends TestCase
 {
     /**

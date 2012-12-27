@@ -4,11 +4,6 @@ namespace Github\Tests\Api;
 
 use Github\Tests\Api\TestCase;
 
-/**
- * GitData trees api test case
- *
- * @author Leszek Prabucki <leszek.prabucki@gmail.com>
- */
 class TreesTest extends TestCase
 {
     /**

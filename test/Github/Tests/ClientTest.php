@@ -6,11 +6,6 @@ use Github\Client;
 use Github\HttpClient\Listener\AuthListener;
 use Github\Exception\InvalidArgumentException;
 
-/**
- * Client unit test
- *
- * @author Leszek Prabucki <leszek.prabucki@gmail.com>
- */
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
     /**

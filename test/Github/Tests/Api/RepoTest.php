@@ -2,11 +2,6 @@
 
 namespace Github\Tests\Api;
 
-/**
- * Repository api test case
- *
- * @author Leszek Prabucki <leszek.prabucki@gmail.com>
- */
 class RepoTest extends TestCase
 {
     /**

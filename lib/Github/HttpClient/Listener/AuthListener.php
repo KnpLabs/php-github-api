@@ -90,6 +90,9 @@ class AuthListener implements ListenerInterface
 
                 $request->fromUrl(new Url($url));
                 break;
+
+            default:
+                throw new InvalidArgumentException(sprintf('Unknown method called "%s".', $this->method));
         }
     }
 

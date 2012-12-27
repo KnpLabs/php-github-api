@@ -2,11 +2,6 @@
 
 namespace Github\Tests\Api;
 
-/**
- * Gist api test case 
- *
- * @author Leszek Prabucki <leszek.prabucki@gmail.com>
- */
 class GistsTest extends TestCase
 {
     /**

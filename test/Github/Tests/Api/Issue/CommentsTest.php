@@ -4,11 +4,6 @@ namespace Github\Tests\Api\Issue;
 
 use Github\Tests\Api\TestCase;
 
-/**
- * Issue comments api test case 
- *
- * @author Leszek Prabucki <leszek.prabucki@gmail.com>
- */
 class CommentsTest extends TestCase
 {
     /**

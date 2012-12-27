@@ -4,11 +4,6 @@ namespace Github\Tests\Api;
 
 use Github\Tests\Api\TestCase;
 
-/**
- * GitData blobs api test case
- *
- * @author Leszek Prabucki <leszek.prabucki@gmail.com>
- */
 class BlobsTest extends TestCase
 {
     /**

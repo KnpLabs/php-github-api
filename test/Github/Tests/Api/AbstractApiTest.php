@@ -4,11 +4,6 @@ namespace Github\Tests\Api;
 
 use Github\Api\AbstractApi;
 
-/**
- * AbstractApi test case
- *
- * @author Leszek Prabucki <leszek.prabucki@gmail.com>
- */
 class AbstractApiTest extends \PHPUnit_Framework_TestCase
 {
     /**

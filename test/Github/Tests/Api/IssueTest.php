@@ -2,11 +2,6 @@
 
 namespace Github\Tests\Api;
 
-/**
- * Issue api test case 
- *
- * @author Leszek Prabucki <leszek.prabucki@gmail.com>
- */
 class IssueTest extends TestCase
 {
     /**

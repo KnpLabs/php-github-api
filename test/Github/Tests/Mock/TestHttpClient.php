@@ -4,11 +4,6 @@ namespace Github\Tests\Mock;
 
 use Github\HttpClient\HttpClientInterface;
 
-/**
- * HTTPClient test implementation
- *
- * @author Leszek Prabucki <leszek.prabucki@gmail.com>
- */
 class TestHttpClient implements HttpClientInterface
 {
     public $authenticated = false;

@@ -4,11 +4,6 @@ namespace Github\Tests\Api\Repository;
 
 use Github\Tests\Api\TestCase;
 
-/**
- * Repository commits api test case 
- *
- * @author Leszek Prabucki <leszek.prabucki@gmail.com>
- */
 class CommitsTest extends TestCase
 {
     /**

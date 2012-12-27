@@ -2,11 +2,6 @@
 
 namespace Github\Tests\Api;
 
-/**
- * CurrentUser api test case
- *
- * @author Leszek Prabucki <leszek.prabucki@gmail.com>
- */
 class CurrentUserTest extends TestCase
 {
     /**

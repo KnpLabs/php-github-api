@@ -6,11 +6,6 @@ use Github\HttpClient\HttpClient;
 use Github\HttpClient\Message\Request;
 use Github\HttpClient\Message\Response;
 
-/**
- * HttpClient test case
- *
- * @author Leszek Prabucki <leszek.prabucki@gmail.com>
- */
 class HttpClientTest extends \PHPUnit_Framework_TestCase
 {
     /**

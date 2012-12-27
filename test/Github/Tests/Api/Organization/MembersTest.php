@@ -4,11 +4,6 @@ namespace Github\Tests\Api\Organization;
 
 use Github\Tests\Api\TestCase;
 
-/**
- * Organization members api test case 
- *
- * @author Leszek Prabucki <leszek.prabucki@gmail.com>
- */
 class MembersTest extends TestCase
 {
     /**

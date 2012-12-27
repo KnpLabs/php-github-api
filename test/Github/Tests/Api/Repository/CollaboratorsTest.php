@@ -4,11 +4,6 @@ namespace Github\Tests\Api\Repository;
 
 use Github\Tests\Api\TestCase;
 
-/**
- * Repository collaborators api test case 
- *
- * @author Leszek Prabucki <leszek.prabucki@gmail.com>
- */
 class CollaboratorsTest extends TestCase
 {
     /**

@@ -7,13 +7,18 @@ use Github\Exception\InvalidArgumentException;
 use Github\HttpClient\Listener\AuthListener;
 use Github\HttpClient\Message\Request;
 
-/**
- * HttpClient auth listener test case
- *
- * @author Leszek Prabucki <leszek.prabucki@gmail.com>
- */
 class AuthListenerTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @test
+     * @expectedException InvalidArgumentException
+     */
+    public function shouldHaveKnownMethodName()
+    {
+        $listener = new AuthListener('unknown', array('tokenOrLogin' => 'test'));
+        $listener->preSend($this->getMock('Buzz\Message\RequestInterface'));
+    }
+
     /**
      * @test
      * @expectedException InvalidArgumentException

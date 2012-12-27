@@ -2,11 +2,6 @@
 
 namespace Github\Tests\Api;
 
-/**
- * Markdown api test case 
- *
- * @author Leszek Prabucki <leszek.prabucki@gmail.com>
- */
 class MarkdownTest extends TestCase
 {
     /**
