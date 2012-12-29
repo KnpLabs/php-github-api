@@ -5,9 +5,10 @@ The method you need does not exist yet? You can access any GitHub route by using
 For example:
 
 ```php
-$repo = $client->get('repos/show/ornicar/php-github-api');
+$client = new Github\Client();
+$repo   = $client->getHttpClient()->get('repos/KnpLabs/php-github-api');
 ```
 
 Returns an array describing the "php-github-api" repository.
 
-See all GitHub API routes: [http://develop.github.com/](http://develop.github.com/)
+See all GitHub API routes: [http://developer.github.com/](http://developer.github.com/)
