@@ -30,9 +30,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @dataProvider getAuthenticationData
+     * @dataProvider getAuthenticationFullData
      */
-    public function shouldAuthenticateUsingGivenParameters($login, $password, $method)
+    public function shouldAuthenticateUsingAllGivenParameters($login, $password, $method)
     {
         $httpClient = $this->getHttpClientMock(array('addListener'));
         $httpClient->expects($this->once())
@@ -43,15 +43,49 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $client->authenticate($login, $password, $method);
     }
 
-    public function getAuthenticationData()
+    public function getAuthenticationFullData()
     {
         return array(
-            array('login', null, null),
             array('login', 'password', Client::AUTH_HTTP_PASSWORD),
             array('token', null, Client::AUTH_HTTP_TOKEN),
             array('token', null, Client::AUTH_URL_TOKEN),
             array('client_id', 'client_secret', Client::AUTH_URL_CLIENT_ID),
         );
+    }
+
+    /**
+     * @test
+     * @dataProvider getAuthenticationPartialData
+     */
+    public function shouldAuthenticateUsingGivenParameters($token, $method)
+    {
+        $httpClient = $this->getHttpClientMock(array('addListener'));
+        $httpClient->expects($this->once())
+            ->method('addListener')
+            ->with(new AuthListener($method, array('tokenOrLogin' => $token, 'password' => null)));
+
+        $client = new Client($httpClient);
+        $client->authenticate($token, $method);
+    }
+
+    public function getAuthenticationPartialData()
+    {
+        return array(
+            array('token', Client::AUTH_HTTP_TOKEN),
+            array('token', Client::AUTH_URL_TOKEN),
+        );
+    }
+
+    /**
+     * @test
+     * @expectedException InvalidArgumentException
+     */
+    public function shouldThrowExceptionWhenAuthenticatingWithoutMethodSet()
+    {
+        $httpClient = $this->getHttpClientMock(array('addListener'));
+
+        $client = new Client($httpClient);
+        $client->authenticate('login', null, null);
     }
 
     /**
