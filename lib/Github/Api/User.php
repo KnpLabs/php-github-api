@@ -95,4 +95,16 @@ class User extends AbstractApi
     {
         return $this->get('users/'.urlencode($username).'/gists');
     }
+
+    /**
+     * Get the public keys for a user
+     * @link http://developer.github.com/v3/users/keys/#list-public-keys-for-a-user
+     *
+     * @param  string  $username         the username
+     * @return array                     list of the user public keys
+     */
+    public function keys($username)
+    {
+        return $this->get('users/'.urlencode($username).'/keys');
+    }
 }
