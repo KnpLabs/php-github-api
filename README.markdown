@@ -67,7 +67,7 @@ From `$client` object, you can access to all GitHub.
 require_once 'vendor/autoload.php';
 
 $client = new Github\Client(
-    new Github\HttpClient\CachedHttpClient(array('cache_dir' => '/tmp/github-api-cache')
+    new Github\HttpClient\CachedHttpClient(array('cache_dir' => '/tmp/github-api-cache'))
 );
 
 // Or select directly which cache you want to use
