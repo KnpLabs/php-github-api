@@ -1,6 +1,6 @@
 <?php
 
-namespace Github\HttpClient\Message;
+namespace Github\HttpClient\Adapter\Buzz\Message;
 
 use Buzz\Message\Request as BaseRequest;
 

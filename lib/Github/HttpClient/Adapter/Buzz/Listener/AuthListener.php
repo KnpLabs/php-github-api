@@ -1,6 +1,6 @@
 <?php
 
-namespace Github\HttpClient\Listener;
+namespace Github\HttpClient\Adapter\Buzz\Listener;
 
 use Github\Client;
 use Github\Exception\InvalidArgumentException;
@@ -32,6 +32,26 @@ class AuthListener implements ListenerInterface
     {
         $this->method  = $method;
         $this->options = $options;
+    }
+
+    /**
+     * Returns authentication method
+     *
+     * @return string
+     */
+    public function getMethod()
+    {
+        return $this->method;
+    }
+
+    /**
+     * Returns Options
+     *
+     * @return array
+     */
+    public function getOptions()
+    {
+        return $this->options;
     }
 
     /**

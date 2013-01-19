@@ -1,6 +1,6 @@
 <?php
 
-namespace Github\HttpClient;
+namespace Github\HttpClient\Adapter\Buzz;
 
 use Buzz\Client\ClientInterface;
 

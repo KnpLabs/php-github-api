@@ -1,12 +1,12 @@
 <?php
 
-namespace Github\HttpClient\Message;
+namespace Github\HttpClient\Adapter\Buzz\Message;
 
 use Buzz\Message\Response as BaseResponse;
-
 use Github\Exception\ApiLimitExceedException;
+use Github\HttpClient\ResponseInterface;
 
-class Response extends BaseResponse
+class Response extends BaseResponse implements ResponseInterface
 {
     /**
      * @var integer
@@ -66,9 +66,7 @@ class Response extends BaseResponse
     }
 
     /**
-     * Is not modified
-     *
-     * @return Boolean
+     * {@inheritdoc}
      */
     public function isNotModified()
     {

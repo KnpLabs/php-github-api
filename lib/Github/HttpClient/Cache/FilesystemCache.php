@@ -2,7 +2,7 @@
 
 namespace Github\HttpClient\Cache;
 
-use Github\HttpClient\Message\Response;
+use Github\HttpClient\ResponseInterface;
 
 class FilesystemCache implements CacheInterface
 {
@@ -34,7 +34,7 @@ class FilesystemCache implements CacheInterface
     /**
      * {@inheritdoc}
      */
-    public function set($id, Response $response)
+    public function set($id, ResponseInterface $response)
     {
         if (!is_dir($this->path)) {
             @mkdir($this->path, 0777, true);

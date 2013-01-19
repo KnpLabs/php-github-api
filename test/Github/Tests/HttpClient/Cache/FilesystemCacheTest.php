@@ -2,7 +2,6 @@
 
 namespace Github\Tests\HttpClient\Cache;
 
-use Github\HttpClient\Message\Response;
 use Github\HttpClient\Cache\FilesystemCache;
 
 class FilesystemCacheTest extends \PHPUnit_Framework_TestCase
@@ -14,7 +13,7 @@ class FilesystemCacheTest extends \PHPUnit_Framework_TestCase
     {
         $cache = new FilesystemCache('/tmp/github-api-test');
 
-        $cache->set('test', new Response);
+        $cache->set('test', $this->getMock('Github\HttpClient\ResponseInterface'));
 
         $this->assertNotNull($cache->get('test'));
     }
@@ -26,7 +25,7 @@ class FilesystemCacheTest extends \PHPUnit_Framework_TestCase
     {
         $cache = new FilesystemCache('/tmp/github-api-test');
 
-        $cache->set('test', new Response);
+        $cache->set('test', $this->getMock('Github\HttpClient\ResponseInterface'));
 
         $this->assertInternalType('int', $cache->getModifiedSince('test'));
     }

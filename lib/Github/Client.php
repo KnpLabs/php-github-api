@@ -2,14 +2,10 @@
 
 namespace Github;
 
-use Buzz\Client\Curl;
-use Buzz\Client\ClientInterface;
-
 use Github\Api\ApiInterface;
 use Github\Exception\InvalidArgumentException;
-use Github\HttpClient\HttpClient;
+use Github\HttpClient\Adapter\Buzz\HttpClient;
 use Github\HttpClient\HttpClientInterface;
-use Github\HttpClient\Listener\AuthListener;
 
 /**
  * Simple yet very cool PHP GitHub client
@@ -160,15 +156,7 @@ class Client
             $password   = null;
         }
 
-        $this->httpClient->addListener(
-            new AuthListener(
-                $authMethod,
-                array(
-                    'tokenOrLogin' => $tokenOrLogin,
-                    'password'     => $password
-                )
-            )
-        );
+        $this->httpClient->authenticate($authMethod, $tokenOrLogin, $password);
     }
 
     /**

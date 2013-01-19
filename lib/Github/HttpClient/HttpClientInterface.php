@@ -95,4 +95,18 @@ interface HttpClientInterface
      * @param array $headers
      */
     public function setHeaders(array $headers);
+
+    /**
+     * Removes all headers previously set
+     */
+    public function clearHeaders();
+
+    /**
+     * Authenticate HttpClient requests with parameters
+     *
+     * @param string      $method
+     * @param string      $tokenOrLogin
+     * @param string|null $password
+     */
+    public function authenticate($method, $tokenOrLogin, $password = null);
 }

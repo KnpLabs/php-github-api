@@ -1,11 +1,10 @@
 <?php
 
-namespace Github\Tests\HttpClient;
+namespace Github\Tests\HttpClient\Adapter\Buzz\Listener;
 
 use Github\Client;
-use Github\Exception\InvalidArgumentException;
-use Github\HttpClient\Listener\AuthListener;
-use Github\HttpClient\Message\Request;
+use Github\HttpClient\Adapter\Buzz\Listener\AuthListener;
+use Github\HttpClient\Adapter\Buzz\Message\Request;
 
 class AuthListenerTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,18 +1,18 @@
 <?php
 
-namespace Github\HttpClient;
+namespace Github\HttpClient\Adapter\Buzz;
 
+use Buzz\Client\Curl;
 use Buzz\Client\ClientInterface;
-use Buzz\Message\MessageInterface;
-use Buzz\Message\RequestInterface;
 use Buzz\Listener\ListenerInterface;
 
 use Github\Exception\ErrorException;
 use Github\Exception\RuntimeException;
-use Github\HttpClient\Listener\ErrorListener;
-use Github\HttpClient\Message\Request;
-use Github\HttpClient\Message\Response;
-use Buzz\Client\Curl;
+use Github\HttpClient\Adapter\Buzz\Listener\AuthListener;
+use Github\HttpClient\Adapter\Buzz\Listener\ErrorListener;
+use Github\HttpClient\Adapter\Buzz\Message\Request;
+use Github\HttpClient\Adapter\Buzz\Message\Response;
+use Github\HttpClient\HttpClientInterface;
 
 /**
  * Performs requests on GitHub API. API documentation should be self-explanatory.
@@ -82,7 +82,7 @@ class HttpClient implements HttpClientInterface
     }
 
     /**
-     * Clears used headers
+     * {@inheritDoc}
      */
     public function clearHeaders()
     {
@@ -97,6 +97,16 @@ class HttpClient implements HttpClientInterface
     public function addListener(ListenerInterface $listener)
     {
         $this->listeners[get_class($listener)] = $listener;
+    }
+
+    /**
+     * Returns listeners
+     *
+     * @return array
+     */
+    public function getListeners()
+    {
+        return $this->listeners;
     }
 
     /**
@@ -197,6 +207,22 @@ class HttpClient implements HttpClientInterface
     public function getLastResponse()
     {
         return $this->lastResponse;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function authenticate($method, $tokenOrLogin, $password = null)
+    {
+        $this->addListener(
+            new AuthListener(
+                $method,
+                array(
+                    'tokenOrLogin' => $tokenOrLogin,
+                    'password'     => $password
+                )
+            )
+        );;
     }
 
     /**

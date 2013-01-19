@@ -129,7 +129,7 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
      */
     protected function getHttpMock()
     {
-        return $this->getMock('Github\HttpClient\HttpClient', array(), array(array(), $this->getHttpClientMock()));
+        return $this->getMock('Github\HttpClient\HttpClientInterface', array(), array(array(), $this->getHttpClientMock()));
     }
 
     protected function getHttpClientMock()
