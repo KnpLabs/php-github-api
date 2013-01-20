@@ -9,6 +9,7 @@ use Github\Client as GithubClient;
 use Github\Exception\RuntimeException;
 use Guzzle\Http\Message\Request;
 use Guzzle\Http\Message\Response;
+use Github\HttpClient\Adapter\Guzzle\Message\Response;
 use Github\HttpClient\HttpClientInterface;
 
 class HttpClient implements HttpClientInterface
@@ -143,7 +144,7 @@ class HttpClient implements HttpClientInterface
         $request = $this->client->createRequest($httpMethod, $path, $headers, json_encode($parameters));
 
         try {
-            $response = $request->send();
+            $response = new Response($request->send());
         } catch (\Guzzle\Common\Exception\GuzzleException $e) {
             throw new RuntimeException($e->getMessage());
         }
@@ -177,6 +178,7 @@ class HttpClient implements HttpClientInterface
     {
         if (GithubClient::AUTH_HTTP_TOKEN === $method) {
             $this->headers['Authorization'] = sprintf('token %s', $tokenOrLogin);
+            return;
         }
 
         throw new \RuntimeException(sprintf('%s not yet implemented', $method));
