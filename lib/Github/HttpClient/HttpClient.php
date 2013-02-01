@@ -87,7 +87,8 @@ class HttpClient implements HttpClientInterface
     public function clearHeaders()
     {
         $this->headers = array(
-            sprintf('Accept: application/vnd.github.%s+json', $this->options['api_version'])
+            sprintf('Accept: application/vnd.github.%s+json', $this->options['api_version']),
+            sprintf('User-Agent: %s', $this->options['user_agent']),
         );
     }
 
