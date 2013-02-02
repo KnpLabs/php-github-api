@@ -158,7 +158,7 @@ class AbstractApiTestInstance extends AbstractApi
      */
     public function get($path, array $parameters = array(), $requestHeaders = array())
     {
-        return $this->client->executeCommand('GET', $path, $parameters, $requestHeaders);
+        return $this->client->executeRequest('GET', $path, $parameters, $requestHeaders);
     }
 
     /**
@@ -166,7 +166,7 @@ class AbstractApiTestInstance extends AbstractApi
      */
     public function post($path, array $parameters = array(), $requestHeaders = array())
     {
-        return $this->client->executeCommand('POST', $path, $parameters, $requestHeaders);
+        return $this->client->executeRequest('POST', $path, $parameters, $requestHeaders);
     }
 
     /**
@@ -174,7 +174,7 @@ class AbstractApiTestInstance extends AbstractApi
      */
     public function patch($path, array $parameters = array(), $requestHeaders = array())
     {
-        return $this->client->executeCommand('PATCH', $path, $parameters, $requestHeaders);
+        return $this->client->executeRequest('PATCH', $path, $parameters, $requestHeaders);
     }
 
     /**
@@ -182,7 +182,7 @@ class AbstractApiTestInstance extends AbstractApi
      */
     public function put($path, array $parameters = array(), $requestHeaders = array())
     {
-        return $this->client->executeCommand('PUT', $path, $parameters, $requestHeaders);
+        return $this->client->executeRequest('PUT', $path, $parameters, $requestHeaders);
     }
 
     /**
@@ -190,6 +190,6 @@ class AbstractApiTestInstance extends AbstractApi
      */
     public function delete($path, array $parameters = array(), $requestHeaders = array())
     {
-        return $this->client->executeCommand('DELETE', $path, $parameters, $requestHeaders);
+        return $this->client->executeRequest('DELETE', $path, $parameters, $requestHeaders);
     }
 }

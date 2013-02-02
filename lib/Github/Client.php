@@ -181,9 +181,9 @@ class Client
         $this->httpClient->authenticate($authMethod, $tokenOrLogin, $password);
     }
 
-    public function executeCommand($method, $command, $parameters, $headers)
+    public function executeRequest($method, $path, $parameters, $headers)
     {
-        return $this->httpClient->request($command, $parameters, $method, $headers)->getContent();
+        return $this->httpClient->request($path, $parameters, $method, $headers)->getContent();
     }
 
     /**

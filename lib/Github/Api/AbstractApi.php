@@ -35,7 +35,7 @@ abstract class AbstractApi implements ApiInterface
      */
     protected function get($path, array $parameters = array(), $requestHeaders = array())
     {
-        $response = $this->client->executeCommand('GET', $path, $parameters, $requestHeaders);
+        $response = $this->client->executeRequest('GET', $path, $parameters, $requestHeaders);
 
         return $response->getContent();
     }
@@ -45,7 +45,7 @@ abstract class AbstractApi implements ApiInterface
      */
     protected function post($path, array $parameters = array(), $requestHeaders = array())
     {
-        $response = $this->client->executeCommand('POST', $path, $parameters, $requestHeaders);
+        $response = $this->client->executeRequest('POST', $path, $parameters, $requestHeaders);
 
         return $response->getContent();
     }
@@ -55,7 +55,7 @@ abstract class AbstractApi implements ApiInterface
      */
     protected function patch($path, array $parameters = array(), $requestHeaders = array())
     {
-        $response = $this->client->executeCommand('PATCH', $path, $parameters, $requestHeaders);
+        $response = $this->client->executeRequest('PATCH', $path, $parameters, $requestHeaders);
 
         return $response->getContent();
     }
@@ -65,7 +65,7 @@ abstract class AbstractApi implements ApiInterface
      */
     protected function put($path, array $parameters = array(), $requestHeaders = array())
     {
-        $response = $this->client->executeCommand('PUT', $path, $parameters, $requestHeaders);
+        $response = $this->client->executeRequest('PUT', $path, $parameters, $requestHeaders);
 
         return $response->getContent();
     }
@@ -75,7 +75,7 @@ abstract class AbstractApi implements ApiInterface
      */
     protected function delete($path, array $parameters = array(), $requestHeaders = array())
     {
-        $response = $this->client->executeCommand('DELETE', $path, $parameters, $requestHeaders);
+        $response = $this->client->executeRequest('DELETE', $path, $parameters, $requestHeaders);
 
         return $response->getContent();
     }
