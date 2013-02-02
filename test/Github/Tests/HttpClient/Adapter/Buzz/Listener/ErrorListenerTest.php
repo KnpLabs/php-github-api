@@ -16,7 +16,7 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
             ->method('isClientError')
             ->will($this->returnValue(false));
 
-        $listener = new ErrorListener(array('api_limit' => 5000));
+        $listener = new ErrorListener();
         $listener->postSend($this->getMock('Buzz\Message\RequestInterface'), $response);
     }
 
@@ -35,7 +35,7 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
             ->with('X-RateLimit-Remaining')
             ->will($this->returnValue(0));
 
-        $listener = new ErrorListener(array('api_limit' => 5000));
+        $listener = new ErrorListener();
         $listener->postSend($this->getMock('Buzz\Message\RequestInterface'), $response);
     }
 
@@ -57,7 +57,7 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
             ->method('getContent')
             ->will($this->returnValue('fail'));
 
-        $listener = new ErrorListener(array('api_limit' => 5000));
+        $listener = new ErrorListener();
         $listener->postSend($this->getMock('Buzz\Message\RequestInterface'), $response);
     }
 
@@ -82,7 +82,7 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
             ->method('getStatusCode')
             ->will($this->returnValue(404));
 
-        $listener = new ErrorListener(array('api_limit' => 5000));
+        $listener = new ErrorListener();
         $listener->postSend($this->getMock('Buzz\Message\RequestInterface'), $response);
     }
 
@@ -107,7 +107,7 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
             ->method('getStatusCode')
             ->will($this->returnValue(400));
 
-        $listener = new ErrorListener(array('api_limit' => 5000));
+        $listener = new ErrorListener();
         $listener->postSend($this->getMock('Buzz\Message\RequestInterface'), $response);
     }
 

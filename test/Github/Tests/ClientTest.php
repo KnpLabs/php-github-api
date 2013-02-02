@@ -22,9 +22,10 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldPassHttpClientInterfaceToConstructor()
     {
-        $client = new Client($this->getHttpClientMock());
+        $httpClient = $this->getHttpClientMock();
+        $client = new Client($httpClient);
 
-        $this->assertInstanceOf('Github\HttpClient\HttpClientInterface', $client->getHttpClient());
+        $this->assertEquals($httpClient, $client->getHttpClient());
     }
 
     /**
@@ -123,7 +124,11 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     public function getHttpClientMock(array $methods = array())
     {
         $methods = array_merge(
-            array('get', 'post', 'patch', 'put', 'delete', 'request', 'setOption', 'setHeaders', 'clearHeaders', 'authenticate'),
+            array(
+                'get', 'post', 'patch', 'put', 'delete', 'request',
+                'setOption', 'setHeaders', 'clearHeaders', 'authenticate',
+                'getLastRequest', 'getLastResponse', 'getAPILimit', 'getAPIRemaining'
+            ),
             $methods
         );
 

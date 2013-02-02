@@ -49,7 +49,6 @@ class Client
         'user_agent'  => 'php-github-api (http://github.com/KnpLabs/php-github-api)',
         'timeout'     => 10,
 
-        'api_limit'   => 5000,
         'api_version' => 'beta',
 
         'cache_dir'   => null
@@ -156,7 +155,35 @@ class Client
             $password   = null;
         }
 
+        switch ($authMethod) {
+            case Client::AUTH_HTTP_PASSWORD:
+                if (!$tokenOrLogin || !$password) {
+                    throw new InvalidArgumentException('You need to set username with password!');
+                }
+                break;
+            case Client::AUTH_HTTP_TOKEN:
+                if (!$tokenOrLogin) {
+                    throw new InvalidArgumentException('You need to set OAuth token!');
+                }
+                break;
+            case Client::AUTH_URL_CLIENT_ID:
+                if (!$tokenOrLogin || !$password) {
+                    throw new InvalidArgumentException('You need to set client_id and client_secret!');
+                }
+                break;
+            case Client::AUTH_URL_TOKEN:
+                if (!$tokenOrLogin) {
+                    throw new InvalidArgumentException('You need to set OAuth token!');
+                }
+                break;
+        }
+
         $this->httpClient->authenticate($authMethod, $tokenOrLogin, $password);
+    }
+
+    public function executeCommand($method, $command, $parameters, $headers)
+    {
+        return $this->httpClient->request($command, $parameters, $method, $headers)->getContent();
     }
 
     /**

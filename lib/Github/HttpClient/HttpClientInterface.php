@@ -109,4 +109,32 @@ interface HttpClientInterface
      * @param string|null $password
      */
     public function authenticate($method, $tokenOrLogin, $password = null);
+
+    /**
+     * Return the last request that has been executed
+     *
+     * @return RequestInterface
+     */
+    public function getLastRequest();
+
+    /**
+     * Return the last response that has been received
+     *
+     * @return ResponseInterface
+     */
+    public function getLastResponse();
+
+    /**
+     * Return the API Limit with the current authentication state
+     *
+     * @return Integer
+     */
+    public function getAPILimit();
+
+    /**
+     * Return the API remaining request quantity with the current authentication state
+     *
+     * @return Integer
+     */
+    public function getAPIRemaining();
 }

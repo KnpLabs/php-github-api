@@ -16,19 +16,6 @@ use Github\Exception\ValidationFailedException;
 class ErrorListener implements ListenerInterface
 {
     /**
-     * @var array
-     */
-    private $options;
-
-    /**
-     * @param array $options
-     */
-    public function __construct(array $options)
-    {
-        $this->options = $options;
-    }
-
-    /**
      * {@inheritDoc}
      */
     public function preSend(RequestInterface $request)
@@ -42,9 +29,8 @@ class ErrorListener implements ListenerInterface
     {
         /** @var $response \Github\HttpClient\ResponseInterface */
         if ($response->isClientError() || $response->isServerError()) {
-            $remaining = $response->getHeader('X-RateLimit-Remaining');
-            if (null !== $remaining && 1 > $remaining) {
-                throw new ApiLimitExceedException($this->options['api_limit']);
+            if (0 === (int) $response->getHeader('X-RateLimit-Remaining')) {
+                throw new ApiLimitExceedException($response->getHeader('X-RateLimit-Limit'));
             }
 
             $content = $response->getContent();

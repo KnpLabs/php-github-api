@@ -5,21 +5,22 @@ namespace Github\HttpClient\Adapter\Buzz;
 use Buzz\Client\Curl;
 use Buzz\Client\ClientInterface;
 use Buzz\Listener\ListenerInterface;
-
+use Buzz\Message\Request as BuzzRequest;
+use Buzz\Message\Response as BuzzResponse;
 use Github\Exception\ErrorException;
 use Github\Exception\RuntimeException;
+use Github\HttpClient\AbstractAdapter;
 use Github\HttpClient\Adapter\Buzz\Listener\AuthListener;
 use Github\HttpClient\Adapter\Buzz\Listener\ErrorListener;
 use Github\HttpClient\Adapter\Buzz\Message\Request;
 use Github\HttpClient\Adapter\Buzz\Message\Response;
-use Github\HttpClient\HttpClientInterface;
 
 /**
  * Performs requests on GitHub API. API documentation should be self-explanatory.
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
-class HttpClient implements HttpClientInterface
+class HttpClient extends AbstractAdapter
 {
     /**
      * @var array
@@ -29,8 +30,6 @@ class HttpClient implements HttpClientInterface
 
         'user_agent'  => 'php-github-api (http://github.com/KnpLabs/php-github-api)',
         'timeout'     => 10,
-
-        'api_limit'   => 5000,
         'api_version' => 'beta',
 
         'cache_dir'   => null
@@ -39,13 +38,6 @@ class HttpClient implements HttpClientInterface
      * @var array
      */
     protected $listeners = array();
-    /**
-     * @var array
-     */
-    protected $headers = array();
-
-    private $lastResponse;
-    private $lastRequest;
 
     /**
      * @param array           $options
@@ -60,35 +52,9 @@ class HttpClient implements HttpClientInterface
         $this->options = array_merge($this->options, $options);
         $this->client  = $client;
 
-        $this->addListener(new ErrorListener($this->options));
+        $this->addListener(new ErrorListener());
 
         $this->clearHeaders();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setOption($name, $value)
-    {
-        $this->options[$name] = $value;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setHeaders(array $headers)
-    {
-        $this->headers = array_merge($this->headers, $headers);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function clearHeaders()
-    {
-        $this->headers = array(
-            sprintf('Accept: application/vnd.github.%s+json', $this->options['api_version'])
-        );
     }
 
     /**
@@ -160,6 +126,7 @@ class HttpClient implements HttpClientInterface
     {
         $path = trim($this->options['base_url'].$path, '/');
 
+        var_dump($httpMethod, $path);
         $request = $this->createRequest($httpMethod, $path);
         $request->addHeaders($headers);
         $request->setContent(json_encode($parameters));
@@ -181,32 +148,16 @@ class HttpClient implements HttpClientInterface
             throw new RuntimeException($e->getMessage());
         }
 
-        $this->lastRequest  = $request;
-        $this->lastResponse = $response;
-
         if ($hasListeners) {
             foreach ($this->listeners as $listener) {
                 $listener->postSend($request, $response);
             }
         }
 
+        $this->lastRequest  = new Request($request);
+        $this->lastResponse = new Response($response);
+
         return $response;
-    }
-
-    /**
-     * @return Request
-     */
-    public function getLastRequest()
-    {
-        return $this->lastRequest;
-    }
-
-    /**
-     * @return Response
-     */
-    public function getLastResponse()
-    {
-        return $this->lastResponse;
     }
 
     /**
@@ -231,9 +182,9 @@ class HttpClient implements HttpClientInterface
      *
      * @return Request
      */
-    protected function createRequest($httpMethod, $url)
+    private function createRequest($httpMethod, $url)
     {
-        $request = new Request($httpMethod);
+        $request = new BuzzRequest($httpMethod);
         $request->setHeaders($this->headers);
         $request->fromUrl($url);
 
@@ -243,8 +194,8 @@ class HttpClient implements HttpClientInterface
     /**
      * @return Response
      */
-    protected function createResponse()
+    private function createResponse()
     {
-        return new Response();
+        return new BuzzResponse();
     }
 }

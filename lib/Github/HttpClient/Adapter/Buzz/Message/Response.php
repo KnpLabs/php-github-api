@@ -2,67 +2,33 @@
 
 namespace Github\HttpClient\Adapter\Buzz\Message;
 
-use Buzz\Message\Response as BaseResponse;
-use Github\Exception\ApiLimitExceedException;
-use Github\HttpClient\ResponseInterface;
+use Buzz\Message\Response as BuzzResponse;
+use Github\HttpClient\Message\AbstractResponse;
 
-class Response extends BaseResponse implements ResponseInterface
+class Response extends AbstractResponse
 {
-    /**
-     * @var integer
-     */
-    public $remainingCalls;
+    /** @var BuzzResponse */
+    private $response;
 
-    /**
-     * {@inheritDoc}
-     */
-    public function getContent()
+    public function __construct(BuzzResponse $response)
     {
-        $response = parent::getContent();
-        $content  = json_decode($response, true);
-
-        if (JSON_ERROR_NONE !== json_last_error()) {
-            return $response;
-        }
-
-        return $content;
+        $this->response = $response;
     }
 
     /**
-     * @return array|null
+     * {@inheritdoc}
      */
-    public function getPagination()
+    public function getStatusCode()
     {
-        $header = $this->getHeader('Link');
-        if (empty($header)) {
-            return null;
-        }
-
-        $pagination = array();
-        foreach (explode(',', $header) as $link) {
-            preg_match('/<(.*)>; rel="(.*)"/i', trim($link, ','), $match);
-
-            if (3 === count($match)) {
-                $pagination[$match[2]] = $match[1];
-            }
-        }
-
-        return $pagination;
+        return $this->response->getStatusCode();
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
-    public function getApiLimit()
+    public function getHeaderAsString($name)
     {
-        $header = $this->getHeaderAttributes('X-RateLimit-Remaining');
-        if (!empty($header)) {
-            $this->remainingCalls = $header;
-        }
-
-        if (null !== $this->remainingCalls && 1 > $this->remainingCalls) {
-            throw new ApiLimitExceedException($this->options['api_limit']);
-        }
+        return $this->response->getHeader($name);
     }
 
     /**
@@ -71,5 +37,23 @@ class Response extends BaseResponse implements ResponseInterface
     public function isNotModified()
     {
         return 304 === $this->getStatusCode();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAdapterResponse()
+    {
+        return $this->response;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @return BuzzResponse
+     */
+    public function getRawBody()
+    {
+        return $this->response->getContent();
     }
 }
