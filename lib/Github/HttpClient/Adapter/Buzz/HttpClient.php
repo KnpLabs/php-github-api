@@ -126,7 +126,6 @@ class HttpClient extends AbstractAdapter
     {
         $path = trim($this->options['base_url'].$path, '/');
 
-        var_dump($httpMethod, $path);
         $request = $this->createRequest($httpMethod, $path);
         $request->addHeaders($headers);
         $request->setContent(json_encode($parameters));
