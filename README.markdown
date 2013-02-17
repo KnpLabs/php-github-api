@@ -73,6 +73,8 @@ $client = new Github\Client(
 // Or select directly which cache you want to use
 $client = new Github\Client(
     new Github\HttpClient\CachedHttpClient(
+    	array(), // $options
+    	null, // $client
         new Github\HttpClient\Cache\FilesystemCache('/tmp/github-api-cache')
     )
 );
