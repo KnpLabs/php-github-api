@@ -9,6 +9,7 @@ use Buzz\Listener\ListenerInterface;
 
 use Github\Exception\ErrorException;
 use Github\Exception\RuntimeException;
+use Github\HttpClient\Listener\AuthListener;
 use Github\HttpClient\Listener\ErrorListener;
 use Github\HttpClient\Message\Request;
 use Github\HttpClient\Message\Response;
@@ -63,6 +64,19 @@ class HttpClient implements HttpClientInterface
         $this->addListener(new ErrorListener($this->options));
 
         $this->clearHeaders();
+    }
+
+    public function authenticate($tokenOrLogin, $password, $authMethod)
+    {
+         $this->addListener(
+            new AuthListener(
+                $authMethod,
+                array(
+                     'tokenOrLogin' => $tokenOrLogin,
+                     'password'     => $password
+                )
+            )
+        );
     }
 
     /**

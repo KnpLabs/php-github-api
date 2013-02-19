@@ -68,16 +68,13 @@ class AuthListener implements ListenerInterface
                     throw new InvalidArgumentException('You need to set client_id and client_secret!');
                 }
 
-                $url = $request->getUrl();
-
-                $parameters = array(
-                    'client_id'     => $this->options['tokenOrLogin'],
-                    'client_secret' => $this->options['password'],
+                $this->setRequestUrl(
+                    $request,
+                    array(
+                        'client_id'     => $this->options['tokenOrLogin'],
+                        'client_secret' => $this->options['password'],
+                    )
                 );
-
-                $url .= (false === strpos($url, '?') ? '?' : '&').utf8_encode(http_build_query($parameters, '', '&'));
-
-                $request->fromUrl(new Url($url));
                 break;
 
             case Client::AUTH_URL_TOKEN:
@@ -85,10 +82,12 @@ class AuthListener implements ListenerInterface
                     throw new InvalidArgumentException('You need to set OAuth token!');
                 }
 
-                $url  = $request->getUrl();
-                $url .= (false === strpos($url, '?') ? '?' : '&').utf8_encode(http_build_query(array('access_token' => $this->options['tokenOrLogin']), '', '&'));
-
-                $request->fromUrl(new Url($url));
+                $this->setRequestUrl(
+                    $request,
+                    array(
+                        'access_token' => $this->options['tokenOrLogin'],
+                    )
+                );
                 break;
 
             default:
@@ -101,5 +100,19 @@ class AuthListener implements ListenerInterface
      */
     public function postSend(RequestInterface $request, MessageInterface $response)
     {
+    }
+
+    /**
+     * @param RequestInterface $request
+     * @param array            $parameters
+     *
+     * @return Url
+     */
+    private function setRequestUrl(RequestInterface $request, array $parameters = array())
+    {
+        $url  = $request->getUrl();
+        $url .= (false === strpos($url, '?') ? '?' : '&').utf8_encode(http_build_query($parameters, '', '&'));
+
+        $request->fromUrl(new Url($url));
     }
 }

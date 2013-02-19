@@ -9,7 +9,6 @@ use Github\Api\ApiInterface;
 use Github\Exception\InvalidArgumentException;
 use Github\HttpClient\HttpClient;
 use Github\HttpClient\HttpClientInterface;
-use Github\HttpClient\Listener\AuthListener;
 
 /**
  * Simple yet very cool PHP GitHub client
@@ -73,7 +72,9 @@ class Client
      */
     public function __construct(HttpClientInterface $httpClient = null)
     {
-        $this->httpClient = $httpClient ?: new HttpClient($this->options);
+        if (null !== $httpClient) {
+            $this->httpClient = $httpClient;
+        }
     }
 
     /**
@@ -134,7 +135,7 @@ class Client
                 break;
 
             default:
-                throw new InvalidArgumentException();
+                throw new InvalidArgumentException(sprintf('Undefined api instance called: "%s"', $name));
         }
 
         return $api;
@@ -160,15 +161,7 @@ class Client
             $password   = null;
         }
 
-        $this->httpClient->addListener(
-            new AuthListener(
-                $authMethod,
-                array(
-                    'tokenOrLogin' => $tokenOrLogin,
-                    'password'     => $password
-                )
-            )
-        );
+        $this->httpClient->authenticate($tokenOrLogin, $password, $authMethod);
     }
 
     /**
@@ -176,6 +169,10 @@ class Client
      */
     public function getHttpClient()
     {
+        if (null === $this->httpClient) {
+            $this->httpClient = new HttpClient($this->options);
+        }
+
         return $this->httpClient;
     }
 
@@ -192,7 +189,7 @@ class Client
      */
     public function clearHeaders()
     {
-        $this->httpClient->clearHeaders();
+        $this->getHttpClient()->clearHeaders();
     }
 
     /**
@@ -200,7 +197,7 @@ class Client
      */
     public function setHeaders(array $headers)
     {
-        $this->httpClient->setHeaders($headers);
+        $this->getHttpClient()->setHeaders($headers);
     }
 
     /**
