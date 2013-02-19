@@ -2,8 +2,6 @@
 
 namespace Github\HttpClient;
 
-use Buzz\Client\ClientInterface;
-
 use Github\HttpClient\Cache\CacheInterface;
 use Github\HttpClient\Cache\FilesystemCache;
 
@@ -22,15 +20,23 @@ class CachedHttpClient extends HttpClient
     protected $cache;
 
     /**
-     * @param array                $options
-     * @param null|ClientInterface $client
-     * @param null|CacheInterface  $cache
+     * @return CacheInterface
      */
-    public function __construct(array $options = array(), ClientInterface $client = null, CacheInterface $cache = null)
+    public function getCache()
     {
-        parent::__construct($options, $client);
+        if (null === $this->cache) {
+            $this->cache = new FilesystemCache($this->options['cache_dir'] ?: sys_get_temp_dir().DIRECTORY_SEPARATOR.'php-github-api-cache');
+        }
 
-        $this->cache = $cache ?: new FilesystemCache($this->options['cache_dir'] ?: sys_get_temp_dir().DIRECTORY_SEPARATOR.'php-github-api-cache');
+        return $this->cache;
+    }
+
+    /**
+     * @param $cache CacheInterface
+     */
+    public function setCache(CacheInterface $cache)
+    {
+        $this->cache = $cache;
     }
 
     /**
@@ -42,10 +48,10 @@ class CachedHttpClient extends HttpClient
 
         $key = trim($this->options['base_url'].$path, '/');
         if ($response->isNotModified()) {
-            return $this->cache->get($key);
+            return $this->getCache()->get($key);
         }
 
-        $this->cache->set($key, $response);
+        $this->getCache()->set($key, $response);
 
         return $response;
     }
@@ -58,7 +64,7 @@ class CachedHttpClient extends HttpClient
     protected function createRequest($httpMethod, $url)
     {
         $request = parent::createRequest($httpMethod, $url);
-        $request->addHeader(sprintf('If-Modified-Since: %s', date('r', $this->cache->getModifiedSince($url))));
+        $request->addHeader(sprintf('If-Modified-Since: %s', date('r', $this->getCache()->getModifiedSince($url))));
 
         return $request;
     }

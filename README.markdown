@@ -71,14 +71,17 @@ $client = new Github\Client(
 );
 
 // Or select directly which cache you want to use
-$client = new Github\Client(
-    new Github\HttpClient\CachedHttpClient(
-        new Github\HttpClient\Cache\FilesystemCache('/tmp/github-api-cache')
-    )
+$client = new Github\HttpClient\CachedHttpClient();
+$client->setCache(
+    // Built in one, or any cache implementing this interface:
+    // Github\HttpClient\Cache\CacheInterface
+    new Github\HttpClient\Cache\FilesystemCache('/tmp/github-api-cache')
 );
+
+$client = new Github\Client($client);
 ```
 
-Using cache, the client will get cached responses if resources haven't changed since last time,  
+Using cache, the client will get cached responses if resources haven't changed since last time,
 **without** reaching the `X-Rate-Limit` [imposed by github](http://developer.github.com/v3/#rate-limiting).
 
 

@@ -16,9 +16,9 @@ class CachedHttpClientTest extends HttpClientTest
 
         $httpClient = new TestCachedHttpClient(
             array('base_url' => ''),
-            $this->getMock('Buzz\Client\ClientInterface', array('setTimeout', 'setVerifyPeer', 'send')),
-            $cache
+            $this->getMock('Buzz\Client\ClientInterface', array('setTimeout', 'setVerifyPeer', 'send'))
         );
+        $httpClient->setCache($cache);
 
         $cache->expects($this->once())->method('set')->with('test', new Response);
 
@@ -40,9 +40,9 @@ class CachedHttpClientTest extends HttpClientTest
 
         $httpClient = new TestCachedHttpClient(
             array('base_url' => ''),
-            $client,
-            $cache
+            $client
         );
+        $httpClient->setCache($cache);
         $httpClient->fakeResponse = $response;
 
         $cache->expects($this->once())->method('get')->with('test');
@@ -65,9 +65,9 @@ class CachedHttpClientTest extends HttpClientTest
 
         $httpClient = new TestCachedHttpClient(
             array('base_url' => ''),
-            $client,
-            $cache
+            $client
         );
+        $httpClient->setCache($cache);
         $httpClient->fakeResponse = $response;
 
         $cache->expects($this->once())->method('set')->with('test', $response);
