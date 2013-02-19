@@ -11,15 +11,21 @@
          syntaxCheck="false"
          bootstrap="test/bootstrap.php"
 >
-  <testsuites>
-    <testsuite name="php-github-api Test Suite">
-      <directory>./test/Github/</directory>
-    </testsuite>
-  </testsuites>
+    <testsuites>
+        <testsuite name="php-github-api Test Suite">
+            <directory>./test/Github/</directory>
+        </testsuite>
+    </testsuites>
 
-  <filter>
-    <whitelist>
-      <directory suffix=".php">./lib/Github/</directory>
-    </whitelist>
-  </filter>
+    <groups>
+        <exclude>
+            <group>functional</group>
+        </exclude>
+    </groups>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./lib/Github/</directory>
+        </whitelist>
+    </filter>
 </phpunit>

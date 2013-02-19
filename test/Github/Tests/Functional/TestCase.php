@@ -6,6 +6,9 @@ use Github\Client;
 use Github\Exception\ApiLimitExceedException;
 use Github\Exception\RuntimeException;
 
+/**
+ * @group functional
+ */
 class TestCase extends \PHPUnit_Framework_TestCase
 {
     protected $client;
