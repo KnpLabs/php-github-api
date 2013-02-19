@@ -3,7 +3,6 @@
 namespace Github\Tests;
 
 use Github\Client;
-use Github\HttpClient\Listener\AuthListener;
 use Github\Exception\InvalidArgumentException;
 
 class ClientTest extends \PHPUnit_Framework_TestCase
@@ -34,10 +33,10 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldAuthenticateUsingAllGivenParameters($login, $password, $method)
     {
-        $httpClient = $this->getHttpClientMock(array('addListener'));
+        $httpClient = $this->getHttpClientMock(array('authenticate'));
         $httpClient->expects($this->once())
-            ->method('addListener')
-            ->with(new AuthListener($method, array('tokenOrLogin' => $login, 'password' => $password)));
+            ->method('authenticate')
+            ->with($login, $password, $method);
 
         $client = new Client($httpClient);
         $client->authenticate($login, $password, $method);
@@ -59,10 +58,10 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldAuthenticateUsingGivenParameters($token, $method)
     {
-        $httpClient = $this->getHttpClientMock(array('addListener'));
+        $httpClient = $this->getHttpClientMock(array('authenticate'));
         $httpClient->expects($this->once())
-            ->method('addListener')
-            ->with(new AuthListener($method, array('tokenOrLogin' => $token, 'password' => null)));
+            ->method('authenticate')
+            ->with($token, null, $method);
 
         $client = new Client($httpClient);
         $client->authenticate($token, $method);

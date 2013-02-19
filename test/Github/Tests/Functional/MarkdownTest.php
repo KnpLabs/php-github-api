@@ -2,6 +2,9 @@
 
 namespace Github\Tests\Functional;
 
+/**
+ * @group functional
+ */
 class MarkdownTest extends TestCase
 {
     /**
