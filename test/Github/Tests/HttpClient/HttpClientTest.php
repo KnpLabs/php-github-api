@@ -84,6 +84,23 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
 
         $httpClient = new HttpClient(array(), $client);
         $httpClient->post($path, $parameters, $headers);
+
+        $this->assertEquals('{"a":"b"}', $httpClient->getLastRequest()->getContent());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldDoPOSTRequestWithoutContent()
+    {
+        $path       = '/some/path';
+
+        $client = $this->getBrowserMock();
+
+        $httpClient = new HttpClient(array(), $client);
+        $httpClient->post($path);
+
+        $this->assertEmpty($httpClient->getLastRequest()->getContent());
     }
 
     /**

@@ -167,7 +167,9 @@ class HttpClient implements HttpClientInterface
 
         $request = $this->createRequest($httpMethod, $path);
         $request->addHeaders($headers);
-        $request->setContent(json_encode($parameters));
+        if (count($parameters) > 0) {
+            $request->setContent(json_encode($parameters));
+        }
 
         $hasListeners = 0 < count($this->listeners);
         if ($hasListeners) {
