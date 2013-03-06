@@ -161,7 +161,7 @@ class Client
             $password   = null;
         }
 
-        $this->httpClient->authenticate($tokenOrLogin, $password, $authMethod);
+        $this->getHttpClient()->authenticate($tokenOrLogin, $password, $authMethod);
     }
 
     /**
