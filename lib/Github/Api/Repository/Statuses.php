@@ -22,7 +22,7 @@ class Statuses extends AbstractApi
      */
     public function show($username, $repository, $sha)
     {
-        return $this->get('/repos/'.urlencode($username).'/'.urlencode($repository).'/statuses/'.urlencode($sha));
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/statuses/'.urlencode($sha));
     }
 
     /**
