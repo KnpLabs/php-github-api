@@ -72,4 +72,33 @@ class Contents extends AbstractApi
             'ref' => $reference
         ));
     }
+    
+    /**
+     * Get the contents of a file in a repository
+     *
+     * @param  string  $username         the user who owns the repository
+     * @param  string  $repository       the name of the repository
+     * @param  string  $path             path to file
+     * @param  string  $reference        reference to a branch or commit
+     *
+     * @return string                    content of file
+     */
+    public function showContents($username, $repository, $path, $reference = null)
+    {
+        $file = $this->show($username, $repository, $path, $reference);
+        
+        if (!isset($file['type']) || 'file' !== $file['type']) {
+            throw new \Exception(sprintf('Path "%s" is not a file.', $path));
+        }
+
+        if (!isset($file['content'])) {
+            throw new \Exception(sprintf('Unable to access "content" for file "%s" (possible keys: "%s").', $path, implode(', ', array_keys($file))));
+        }
+
+        if (!isset($file['encoding']) || 'base64' !== $file['encoding']) {
+            throw new \Exception(sprintf('Encoding of file "%s" is not supported.', $path));
+        }
+
+        return base64_decode($file['content']);
+    }
 }
