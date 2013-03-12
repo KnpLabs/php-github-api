@@ -83,7 +83,7 @@ class Contents extends AbstractApi
      *
      * @return string                    content of file
      */
-    public function showContents($username, $repository, $path, $reference = null)
+    public function download($username, $repository, $path, $reference = null)
     {
         $file = $this->show($username, $repository, $path, $reference);
         
