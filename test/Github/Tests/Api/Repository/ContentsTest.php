@@ -85,6 +85,26 @@ class ContentsTest extends TestCase
 
         $this->assertEquals($expectedValue, $api->archive('KnpLabs', 'php-github-api', 'zipball'));
     }
+    
+    /**
+     * @test
+     */
+    public function shouldDownloadForGivenPath()
+    {
+        // The show() method return
+        $getValue = include 'ContentsDownloadFixture.php';
+        
+        // The download() method return
+        $expectedValue = base64_decode($getValue['content']);
+        
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('repos/KnpLabs/php-github-api/contents/test%2FGithub%2FTests%2FApi%2FRepository%2FContentsTest.php', array('ref' => null))
+            ->will($this->returnValue($getValue));
+
+        $this->assertEquals($expectedValue, $api->download('KnpLabs', 'php-github-api', 'test/Github/Tests/Api/Repository/ContentsTest.php'));
+    }
 
     protected function getApiClass()
     {
