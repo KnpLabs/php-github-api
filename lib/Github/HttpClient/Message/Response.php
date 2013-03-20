@@ -3,7 +3,6 @@
 namespace Github\HttpClient\Message;
 
 use Buzz\Message\Response as BaseResponse;
-
 use Github\Exception\ApiLimitExceedException;
 
 class Response extends BaseResponse
@@ -55,23 +54,13 @@ class Response extends BaseResponse
      */
     public function getApiLimit()
     {
-        $header = $this->getHeaderAttributes('X-RateLimit-Remaining');
+        $header = $this->getHeader('X-RateLimit-Remaining');
         if (!empty($header)) {
             $this->remainingCalls = $header;
         }
 
         if (null !== $this->remainingCalls && 1 > $this->remainingCalls) {
-            throw new ApiLimitExceedException($this->options['api_limit']);
+            throw new ApiLimitExceedException($this->getHeader('X-RateLimit-Limit'));
         }
-    }
-
-    /**
-     * Is not modified
-     *
-     * @return Boolean
-     */
-    public function isNotModified()
-    {
-        return 304 === $this->getStatusCode();
     }
 }

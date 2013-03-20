@@ -47,7 +47,7 @@ class CachedHttpClient extends HttpClient
         $response = parent::request($path, $parameters, $httpMethod, $headers);
 
         $key = trim($this->options['base_url'].$path, '/');
-        if ($response->isNotModified()) {
+        if (304 == $response->getStatusCode()) {
             return $this->getCache()->get($key);
         }
 
@@ -64,7 +64,13 @@ class CachedHttpClient extends HttpClient
     protected function createRequest($httpMethod, $url)
     {
         $request = parent::createRequest($httpMethod, $url);
-        $request->addHeader(sprintf('If-Modified-Since: %s', date('r', $this->getCache()->getModifiedSince($url))));
+
+        if ($modifiedAt = $this->getCache()->getModifiedSince($url)) {
+            $modifiedAt = new \DateTime('@'.$modifiedAt);
+            $modifiedAt->setTimezone(new \DateTimeZone('GMT'));
+
+            $request->addHeader(sprintf('If-Modified-Since: %s GMT', $modifiedAt->format('l, d-M-y H:i:s')));
+        }
 
         return $request;
     }
