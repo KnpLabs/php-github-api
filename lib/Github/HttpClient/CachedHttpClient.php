@@ -67,9 +67,9 @@ class CachedHttpClient extends HttpClient
 
         if ($modifiedAt = $this->getCache()->getModifiedSince($url)) {
             $modifiedAt = new \DateTime('@'.$modifiedAt);
-            $modifiedAt->setTimezone(new \DateTimeZone('GMT')); 
+            $modifiedAt->setTimezone(new \DateTimeZone('GMT'));
 
-            $request->addHeader(sprintf('If-Modified-Since: %s', $modifiedAt->format(DATE_RFC2822)));
+            $request->addHeader(sprintf('If-Modified-Since: %s GMT', $modifiedAt->format('l, d-M-y H:i:s')));
         }
 
         return $request;
