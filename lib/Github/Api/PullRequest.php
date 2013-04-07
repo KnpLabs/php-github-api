@@ -24,9 +24,10 @@ class PullRequest extends AbstractApi
      *
      * @return array                     array of pull requests for the project
      */
-    public function all($username, $repository, $state = null)
+    public function all($username, $repository, $state = null, array $params=array())
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls', array('state' => $state));
+        $params['state'] = $state;
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls', $params);
     }
 
     /**
