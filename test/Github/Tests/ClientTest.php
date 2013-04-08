@@ -171,7 +171,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     public function getHttpClientMock(array $methods = array())
     {
         $methods = array_merge(
-            array('get', 'post', 'patch', 'put', 'delete', 'request', 'setOption', 'setHeaders'),
+            array('get', 'post', 'patch', 'put', 'delete', 'request', 'setOption', 'setHeaders', 'authenticate'),
             $methods
         );
 
