@@ -18,7 +18,7 @@ class TestHttpClient implements HttpClientInterface
     public $options = array();
     public $headers = array();
 
-    public function authenticate()
+    public function authenticate($tokenOrLogin, $password, $authMethod)
     {
         $this->authenticated = true;
     }
