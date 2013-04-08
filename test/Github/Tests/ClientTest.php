@@ -33,7 +33,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldAuthenticateUsingAllGivenParameters($login, $password, $method)
     {
-        $httpClient = $this->getHttpClientMock(array('authenticate'));
+        $httpClient = $this->getHttpClientMock();
         $httpClient->expects($this->once())
             ->method('authenticate')
             ->with($login, $password, $method);
@@ -58,7 +58,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldAuthenticateUsingGivenParameters($token, $method)
     {
-        $httpClient = $this->getHttpClientMock(array('authenticate'));
+        $httpClient = $this->getHttpClientMock();
         $httpClient->expects($this->once())
             ->method('authenticate')
             ->with($token, null, $method);
