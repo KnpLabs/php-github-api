@@ -36,8 +36,16 @@ abstract class AbstractApi implements ApiInterface
     protected function get($path, array $parameters = array(), $requestHeaders = array())
     {
         $response = $this->client->getHttpClient()->get($path, $parameters, $requestHeaders);
+        $responseContent = $response->getContent();
+        $pagination = $response->getPagination();
+        if (isset($pagination['next'])) {
+            $nextPageResponse = $this->get(str_replace($this->client->getOption('base_url'), '', $pagination['next']), $parameters, $requestHeaders);
+            foreach ($nextPageResponse as $item) {
+                $responseContent[] = $item;
+            }
+        }
 
-        return $response->getContent();
+        return $responseContent;
     }
 
     /**
