@@ -38,13 +38,15 @@ class Organization extends AbstractApi
      *
      * @param  string  $organization     the user name
      * @param  string  $type             the type of repositories
+     * @param  int     $items_per_page   the number of items per page
      *
      * @return array                     the repositories
      */
-    public function repositories($organization, $type = 'all')
+    public function repositories($organization, $type = 'all', $items_per_page = 30)
     {
         return $this->get('orgs/'.urlencode($organization).'/repos', array(
-            'type' => $type
+            'type' => $type,
+            'per_page' => $items_per_page,
         ));
     }
 
