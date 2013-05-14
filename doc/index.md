@@ -2,6 +2,7 @@ Navigation
 ==========
 
 APIs:
+* [Authorizations](authorizations.md)
 * [Commits](commits.md)
 * [Gists](gists.md)
 * [Issues](issues.md)
