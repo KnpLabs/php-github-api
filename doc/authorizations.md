@@ -15,7 +15,7 @@ $authorizations = $github->api('authorizations')->all();
 $authorization = $github->api('authorizations')->show(1);
 ```
 
-#### Create a authorization
+#### Create an authorization
 
 ```php
 $data = array(
@@ -25,9 +25,9 @@ $data = array(
 $authorization = $github->api('authorizations')->create($data);
 ```
 
-Creates and returns a authorization.
+Creates and returns an authorization.
 
-#### Update a authorization
+#### Update an authorization
 
 You can update ``note``.
 
@@ -39,13 +39,13 @@ $data = array(
 $authorization = $github->api('authorizations')->update(1234, $data);
 ```
 
-#### Delete a authorization
+#### Delete an authorization
 
 ```php
 $authorization = $github->api('authorizations')->remove(1234);
 ```
 
-#### Check a authorization
+#### Check an authorization
 
 ```php
 $authorization = $github->api('authorizations')->check(1234, 'token');
