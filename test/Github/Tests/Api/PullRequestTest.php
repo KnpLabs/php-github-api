@@ -30,7 +30,7 @@ class PullRequestTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/ezsystems/ezpublish/pulls', array('state' => 'open'))
+            ->with('repos/ezsystems/ezpublish/pulls', array('state' => 'open', 'per_page' => 30, 'page' => 1))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->all('ezsystems', 'ezpublish', 'open'));
@@ -46,7 +46,7 @@ class PullRequestTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/ezsystems/ezpublish/pulls', array('state' => 'closed'))
+            ->with('repos/ezsystems/ezpublish/pulls', array('state' => 'closed', 'per_page' => 30, 'page' => 1))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->all('ezsystems', 'ezpublish', 'closed'));
