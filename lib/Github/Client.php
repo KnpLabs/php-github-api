@@ -72,9 +72,7 @@ class Client
      */
     public function __construct(HttpClientInterface $httpClient = null)
     {
-        if (null !== $httpClient) {
-            $this->httpClient = $httpClient;
-        }
+        $this->httpClient = $httpClient;
     }
 
     /**
