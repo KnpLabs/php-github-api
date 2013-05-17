@@ -85,7 +85,7 @@ class ContentsTest extends TestCase
 
         $this->assertEquals($expectedValue, $api->archive('KnpLabs', 'php-github-api', 'zipball'));
     }
-    
+
     /**
      * @test
      */
@@ -93,10 +93,10 @@ class ContentsTest extends TestCase
     {
         // The show() method return
         $getValue = include 'ContentsDownloadFixture.php';
-        
+
         // The download() method return
         $expectedValue = base64_decode($getValue['content']);
-        
+
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')

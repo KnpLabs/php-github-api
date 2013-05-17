@@ -101,7 +101,6 @@ class HooksTest extends TestCase
         $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', $data));
     }
 
-
     /**
      * @test
      * @expectedException Github\Exception\MissingArgumentException
