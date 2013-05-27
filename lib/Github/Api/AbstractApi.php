@@ -19,6 +19,13 @@ abstract class AbstractApi implements ApiInterface
     protected $client;
 
     /**
+     * number of items per page (GitHub pagination)
+     *
+     * @var int
+     */
+    protected $perPage = null;
+
+    /**
      * @param Client $client
      */
     public function __construct(Client $client)
@@ -31,10 +38,30 @@ abstract class AbstractApi implements ApiInterface
     }
 
     /**
+     * @return int|null
+     */
+    public function getPerPage()
+    {
+        return $this->perPage;
+    }
+
+    /**
+     * @param Client $client
+     */
+    public function setPerPage($perPage)
+    {
+        $this->perPage = (int) $perPage;
+        return $this;
+    }
+
+    /**
      * {@inheritDoc}
      */
     protected function get($path, array $parameters = array(), $requestHeaders = array())
     {
+        if (null !== $this->perPage && !isset($parameters['per_page'])) {
+            $parameters['per_page'] = $this->perPage;
+        }
         $response = $this->client->getHttpClient()->get($path, $parameters, $requestHeaders);
 
         return $response->getContent();
