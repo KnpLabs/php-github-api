@@ -21,12 +21,20 @@ class PullRequest extends AbstractApi
      * @param  string $repository        the repository
      * @param  string $state             the state of the fetched pull requests.
      *                                   The API seems to automatically default to 'open'
+     * @param integer $page              the page
+     * @param integer $perPage           the per page
      *
      * @return array                     array of pull requests for the project
      */
-    public function all($username, $repository, $state = null)
+    public function all($username, $repository, $state = null, $page = 1, $perPage = 30)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls', array('state' => $state));
+        $parameters = array(
+            'page' => $page,
+            'per_page' => $perPage,
+            'state' => $state,
+        );
+
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls', $parameters);
     }
 
     /**
