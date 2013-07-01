@@ -25,7 +25,7 @@ $repos = $client->api('repo')->find('chess', array('language' => 'php'));
 You can specify the page number:
 
 ```php
-$repos = $client->api('repo')->find('chess', array('language' => 'php', 'starting_page' => 2));
+$repos = $client->api('repo')->find('chess', array('language' => 'php', 'start_page' => 2));
 ```
 
 ### Get extended information about a repository
