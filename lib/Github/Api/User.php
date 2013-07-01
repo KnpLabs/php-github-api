@@ -107,4 +107,18 @@ class User extends AbstractApi
     {
         return $this->get('users/'.urlencode($username).'/keys');
     }
+
+    /**
+     * List events performed by a user
+     *
+     * @link http://developer.github.com/v3/activity/events/#list-public-events-performed-by-a-user
+     *
+     * @param string $username
+     *
+     * @return array
+     */
+    public function publicEvents($username)
+    {
+        return $this->get('users/' . urlencode($username) . '/events/public');
+    }
 }
