@@ -34,6 +34,8 @@ class HttpClient implements HttpClientInterface
         'api_limit'   => 5000,
         'api_version' => 'beta',
 
+        'per_page'   => 500,
+
         'cache_dir'   => null
     );
     /**
@@ -119,10 +121,15 @@ class HttpClient implements HttpClientInterface
      */
     public function get($path, array $parameters = array(), array $headers = array())
     {
+        if(is_int($this->options['per_page']) && $this->options['per_page'] > 0){
+            $parameters['per_page'] = $this->options['per_page'];
+        }
+
         if (0 < count($parameters)) {
             $path .= (false === strpos($path, '?') ? '?' : '&').http_build_query($parameters, '', '&');
         }
 
+        
         return $this->request($path, array(), 'GET', $headers);
     }
 
@@ -164,7 +171,6 @@ class HttpClient implements HttpClientInterface
     public function request($path, array $parameters = array(), $httpMethod = 'GET', array $headers = array())
     {
         $path = trim($this->options['base_url'].$path, '/');
-
         $request = $this->createRequest($httpMethod, $path);
         $request->addHeaders($headers);
         if (count($parameters) > 0) {
