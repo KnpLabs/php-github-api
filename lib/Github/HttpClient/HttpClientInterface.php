@@ -95,4 +95,15 @@ interface HttpClientInterface
      * @param array $headers
      */
     public function setHeaders(array $headers);
+    
+    /**
+     * Authenticate a user for all next requests
+     *
+     * @param string $tokenOrLogin GitHub private token/username/client ID
+     * @param null|string $password GitHub password/secret (optionally can contain $authMethod)
+     * @param null|string $authMethod One of the AUTH_* class constants
+     *
+     * @throws InvalidArgumentException If no authentication method was given
+     */
+    public function authenticate($tokenOrLogin, $password, $authMethod);
 }
