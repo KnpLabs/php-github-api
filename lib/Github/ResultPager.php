@@ -71,7 +71,6 @@ class ResultPager implements ResultPagerInterface
     public function postFetch()
     {
         $this->pagination = $this->client->getHttpClient()->getLastResponse()->getPagination();
-        var_dump( $this->pagination );
     }
 
     /**
