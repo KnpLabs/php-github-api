@@ -163,7 +163,7 @@ class HttpClient implements HttpClientInterface
      */
     public function request($path, array $parameters = array(), $httpMethod = 'GET', array $headers = array())
     {
-        if (0 !== strpos( $path, $this->options['base_url'] )) {
+        if ( !empty($this->options['base_url']) AND 0 !== strpos( $path, $this->options['base_url'] )) {
             $path = trim($this->options['base_url'].$path, '/');
         }
 
