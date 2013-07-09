@@ -16,6 +16,8 @@ APIs:
 * [Repositories](repos.md)
 * [Users](users.md)
 
+* [Result Pager](result_pager.md)
+
 Additional features:
 
 * [Authentication & Security](security.md)
