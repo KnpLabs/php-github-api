@@ -32,6 +32,14 @@ class ResultPager implements ResultPagerInterface
     }
 
     /**
+     *  @return null|array pagination result of last request
+     */
+    public function getPagination()
+    {
+        return $this->pagination;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function fetch( ApiInterface $api, $method )
