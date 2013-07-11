@@ -2,22 +2,24 @@
 
 namespace Github\Tests\Mock;
 
-use Buzz\Message\Response as BaseResponse;
-use Github\Exception\ApiLimitExceedException;
-
-class TestResponse extends BaseResponse
+class TestResponse
 {
-    /**
-     * @var integer
-     */
-    public $remainingCalls;
+    protected $loopCount;
+
+    protected $content;
+
+    public function __construct( $loopCount, array $content = array() )
+    {
+        $this->loopCount = $loopCount;
+        $this->content   = $content;
+    }
 
     /**
      * {@inheritDoc}
      */
     public function getContent()
     {
-        return null;
+        return $this->content;
     }
 
     /**
@@ -25,14 +27,18 @@ class TestResponse extends BaseResponse
      */
     public function getPagination()
     {
-        return null;
-    }
+        if($this->loopCount){
+            $returnArray = array(
+                'next' => 'http://github.com/' . $this->loopCount
+            );
+        } else {
+            $returnArray = array(
+                'prev' => 'http://github.com/prev'
+            );
+        }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function getApiLimit()
-    {
-        return null;
+        $this->loopCount--;
+
+        return $returnArray;
     }
 }
