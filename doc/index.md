@@ -16,10 +16,9 @@ APIs:
 * [Repositories](repos.md)
 * [Users](users.md)
 
-* [Result Pager](result_pager.md)
-
 Additional features:
 
+* [Pagination support](result_pager.md)
 * [Authentication & Security](security.md)
 * [Request any Route](request_any_route.md)
 * [Customize `php-github-api` and testing](customize.md)
