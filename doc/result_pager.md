@@ -10,8 +10,9 @@ $client = new Github\Client();
 
 $organizationApi = $client->api('organization');
 
-$paginator = new Github\ResultPager( $client );
-$result    = $paginator->fetchAll( $organizationApi, 'repositories', 'github' );
+$paginator  = new Github\ResultPager($client);
+$parameters = array('github');
+$result     = $paginator->fetchAll($organizationApi, 'repositories', $parameters);
 ```
 
 Get the first page
@@ -20,9 +21,11 @@ $client = new Github\Client();
 
 $organizationApi = $client->api('organization');
 
-$paginator = new Github\ResultPager( $client );
-$result    = $paginator->fetch( $organizationApi, 'repositories', 'github' );
+$paginator  = new Github\ResultPager( $client );
+$parameters = array('github');
+$result     = $paginator->fetch($organizationApi, 'repositories', $parameters);
 ```
+
 Check for a next page:
 ```php
 $paginator->hasNext();
@@ -41,4 +44,9 @@ $paginator->hasPrevious();
 Get prevrious page:
 ```php
 $paginator->fetchPrevious();
+```
+
+If you want to retrieve the pagination links (available after the call to fetch):
+```php
+$paginator->getPagination();
 ```

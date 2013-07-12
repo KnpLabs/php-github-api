@@ -25,7 +25,7 @@ class ResultPagerTest extends \PHPUnit_Framework_TestCase
     {
         $amountLoops  = 3;
         $content      = array(1,2,3,4,5,6,7,8,9,10);
-        $responseMock = new TestResponse( $amountLoops, $content );
+        $responseMock = new TestResponse($amountLoops, $content);
 
         // httpClient mock
         $httpClientMock = $this->getHttpClientMock($responseMock);
@@ -37,7 +37,7 @@ class ResultPagerTest extends \PHPUnit_Framework_TestCase
         $clientMock = $this->getClientMock($httpClientMock);
 
         // memberApi Mock
-        $memberApiMock = $this->getApiMock( 'Github\Api\Organization\Members' );
+        $memberApiMock = $this->getApiMock('Github\Api\Organization\Members');
         $memberApiMock
             ->expects($this->once())
             ->method('all')
@@ -47,8 +47,8 @@ class ResultPagerTest extends \PHPUnit_Framework_TestCase
         $parameters = array('netwerven');
 
         // Run fetchAll on result paginator
-        $paginator = new Github\ResultPager( $clientMock );
-        $result    = $paginator->fetchAll( $memberApiMock, $method, $parameters );
+        $paginator = new Github\ResultPager($clientMock);
+        $result    = $paginator->fetchAll($memberApiMock, $method, $parameters);
 
         $this->assertEquals($amountLoops * count($content), count($result));
     }
@@ -64,10 +64,10 @@ class ResultPagerTest extends \PHPUnit_Framework_TestCase
         $resultContent = 'organization test';
 
         $responseMock = $this->getResponseMock($pagination);
-        $httpClient   = $this->getHttpClientMock( $responseMock );
+        $httpClient   = $this->getHttpClientMock($responseMock);
         $client       = $this->getClientMock($httpClient);
 
-        $organizationApiMock = $this->getApiMock( 'Github\Api\Organization' );
+        $organizationApiMock = $this->getApiMock('Github\Api\Organization');
 
         $organizationApiMock
             ->expects($this->once())
@@ -75,8 +75,8 @@ class ResultPagerTest extends \PHPUnit_Framework_TestCase
             ->with('github')
             ->will($this->returnValue($resultContent));
 
-        $paginator = new Github\ResultPager( $client );
-        $result    = $paginator->fetch($organizationApiMock, 'show', 'github');
+        $paginator = new Github\ResultPager($client);
+        $result    = $paginator->fetch($organizationApiMock, 'show', array('github'));
 
         $this->assertEquals($resultContent, $result);
         $this->assertEquals($pagination, $paginator->getPagination());
@@ -103,10 +103,10 @@ class ResultPagerTest extends \PHPUnit_Framework_TestCase
             ->method('getPagination')
             ->will($this->returnValue($pagination));
 
-        $httpClient = $this->getHttpClientMock( $responseMock );
+        $httpClient = $this->getHttpClientMock($responseMock);
         $client     = $this->getClientMock($httpClient);
 
-        $paginator = new Github\ResultPager( $client );
+        $paginator = new Github\ResultPager($client);
         $paginator->postFetch();
 
         $this->assertEquals($paginator->getPagination(), $pagination);
@@ -122,7 +122,7 @@ class ResultPagerTest extends \PHPUnit_Framework_TestCase
         $pagination    = array('next' => 'http://github.com/next');
         $resultContent = 'fetch test';
 
-        $responseMock = $this->getResponseMock( $pagination );
+        $responseMock = $this->getResponseMock($pagination);
         $responseMock
             ->expects($this->once())
             ->method('getContent')
@@ -132,17 +132,17 @@ class ResultPagerTest extends \PHPUnit_Framework_TestCase
             ->expects($this->exactly(2))
             ->method('getPagination');
 
-        $httpClient = $this->getHttpClientMock( $responseMock );
+        $httpClient = $this->getHttpClientMock($responseMock);
 
         $httpClient
             ->expects($this->once())
             ->method('get')
-            ->with( $pagination['next'] )
+            ->with($pagination['next'])
             ->will($this->returnValue($responseMock));
 
         $client = $this->getClientMock($httpClient);
 
-        $paginator = new Github\ResultPager( $client );
+        $paginator = new Github\ResultPager($client);
         $paginator->postFetch();
 
         $this->assertEquals($paginator->fetchNext(), $resultContent);
@@ -156,10 +156,10 @@ class ResultPagerTest extends \PHPUnit_Framework_TestCase
     public function shouldHaveNext()
     {
         $responseMock = $this->getResponseMock(array('next'  => 'http://github.com/next'));
-        $httpClient   = $this->getHttpClientMock( $responseMock );
+        $httpClient   = $this->getHttpClientMock($responseMock);
         $client       = $this->getClientMock($httpClient);
 
-        $paginator = new Github\ResultPager( $client );
+        $paginator = new Github\ResultPager($client);
         $paginator->postFetch();
 
         $this->assertEquals($paginator->hasNext(), true);
@@ -174,34 +174,32 @@ class ResultPagerTest extends \PHPUnit_Framework_TestCase
     public function shouldHavePrevious()
     {
         $responseMock = $this->getResponseMock(array('prev'  => 'http://github.com/previous'));
-        $httpClient   = $this->getHttpClientMock( $responseMock );
+        $httpClient   = $this->getHttpClientMock($responseMock);
         $client       = $this->getClientMock($httpClient);
 
-        $paginator = new Github\ResultPager( $client );
+        $paginator = new Github\ResultPager($client);
         $paginator->postFetch();
 
         $this->assertEquals($paginator->hasPrevious(), true);
         $this->assertEquals($paginator->hasNext(), false);
     }
 
-    protected function getResponseMock( array $pagination )
+    protected function getResponseMock(array $pagination)
     {
         // response mock
         $responseMock = $this->getMock('Github\HttpClient\Message\Response');
         $responseMock
             ->expects($this->any())
             ->method('getPagination')
-            ->will($this->returnValue(
-                $pagination
-            ));
+            ->will($this->returnValue($pagination));
 
         return $responseMock;
     }
 
-    protected function getClientMock( HttpClientInterface $httpClient = null )
+    protected function getClientMock(HttpClientInterface $httpClient = null)
     {
         // if no httpClient isset use the default HttpClient mock
-        if( !$httpClient ){
+        if (!$httpClient) {
             $httpClient = $this->getHttpClientMock();
         }
 
@@ -211,7 +209,7 @@ class ResultPagerTest extends \PHPUnit_Framework_TestCase
         return $client;
     }
 
-    protected function getHttpClientMock( $responseMock = null )
+    protected function getHttpClientMock($responseMock = null)
     {
         // mock the client interface
         $clientInterfaceMock = $this->getMock('Buzz\Client\ClientInterface', array('setTimeout', 'setVerifyPeer', 'send'));
@@ -230,7 +228,7 @@ class ResultPagerTest extends \PHPUnit_Framework_TestCase
         // create the httpClient mock
         $httpClientMock = $this->getMock('Github\HttpClient\HttpClient', array(), array(array(), $clientInterfaceMock));
 
-        if( $responseMock ){
+        if ($responseMock) {
             $httpClientMock
                 ->expects($this->any())
                 ->method('getLastResponse')
@@ -240,11 +238,11 @@ class ResultPagerTest extends \PHPUnit_Framework_TestCase
         return $httpClientMock;
     }
 
-    protected function getApiMock( $apiClass )
+    protected function getApiMock($apiClass)
     {
         $client = $this->getClientMock();
 
-        return $this->getMockBuilder( $apiClass )
+        return $this->getMockBuilder($apiClass)
             ->setConstructorArgs(array($client))
             ->getMock();
     }

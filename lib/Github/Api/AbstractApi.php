@@ -21,9 +21,9 @@ abstract class AbstractApi implements ApiInterface
     /**
      * number of items per page (GitHub pagination)
      *
-     * @var int
+     * @var null|int
      */
-    protected $perPage = null;
+    protected $perPage;
 
     /**
      * @param Client $client
@@ -38,7 +38,7 @@ abstract class AbstractApi implements ApiInterface
     }
 
     /**
-     * @return int|null
+     * @return null|int
      */
     public function getPerPage()
     {
@@ -46,11 +46,11 @@ abstract class AbstractApi implements ApiInterface
     }
 
     /**
-     * @param Client $client
+     * @param null|int $perPage
      */
     public function setPerPage($perPage)
     {
-        $this->perPage = (int) $perPage;
+        $this->perPage = (null === $perPage ? $perPage : (int) $perPage);
         return $this;
     }
 

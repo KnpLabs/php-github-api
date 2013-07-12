@@ -24,15 +24,27 @@ class ResultPager implements ResultPagerInterface
      * @var array pagination
      * Comes from pagination headers in Github API results
      */
-    protected $pagination = null;
+    protected $pagination;
 
-    public function __construct( Client $client )
+
+    /**
+     * The Github client to use for pagination. This must be the same
+     * instance that you got the Api instance from, i.e.:
+     *
+     * $client = new \Github\Client();
+     * $api = $client->api('someApi');
+     * $pager = new \Github\ResultPager($client);
+     *
+     * @param \Github\Client $client
+     *
+     */
+    public function __construct(Client $client)
     {
         $this->client = $client;
     }
 
     /**
-     *  @return null|array pagination result of last request
+     * {@inheritdoc}
      */
     public function getPagination()
     {
@@ -42,10 +54,8 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetch( ApiInterface $api, $method )
+    public function fetch(ApiInterface $api, $method, array $parameters = array())
     {
-        $parameters = array_slice(func_get_args(),2);
-
         $result = call_user_func_array(array($api, $method), $parameters);
         $this->postFetch();
 
@@ -55,9 +65,10 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetchAll( ApiInterface $api, $method )
+    public function fetchAll(ApiInterface $api, $method, array $parameters = array())
     {
-        $parameters = array_slice(func_get_args(),2);
+        // get the perPage from the api
+        $perPage = $api->getPerPage();
 
         // Set parameters per_page to GitHub max to minimize number of requests
         $api->setPerPage(100);
@@ -69,6 +80,9 @@ class ResultPager implements ResultPagerInterface
         while ($this->hasNext()) {
             $result = array_merge($result, $this->fetchNext());
         }
+
+        // restore the perPage
+        $api->setPerPage($perPage);
 
         return $result;
     }
@@ -134,11 +148,7 @@ class ResultPager implements ResultPagerInterface
      */
     protected function has($key)
     {
-        if (!empty($this->pagination) and isset($this->pagination[$key])) {
-            return true;
-        }
-
-        return false;
+        return !empty($this->pagination) && isset($this->pagination[$key]);
     }
 
     /**
@@ -146,12 +156,11 @@ class ResultPager implements ResultPagerInterface
      */
     protected function get($key)
     {
-        if ( $this->has($key) ) {
+        if ($this->has($key)) {
             $result = $this->client->getHttpClient()->get($this->pagination[$key]);
             $this->postFetch();
 
             return $result->getContent();
         }
     }
-
 }
