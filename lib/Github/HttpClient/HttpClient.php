@@ -163,7 +163,9 @@ class HttpClient implements HttpClientInterface
      */
     public function request($path, array $parameters = array(), $httpMethod = 'GET', array $headers = array())
     {
-        $path = trim($this->options['base_url'].$path, '/');
+        if (!empty($this->options['base_url']) && 0 !== strpos($path, $this->options['base_url'])) {
+            $path = trim($this->options['base_url'].$path, '/');
+        }
 
         $request = $this->createRequest($httpMethod, $path);
         $request->addHeaders($headers);
