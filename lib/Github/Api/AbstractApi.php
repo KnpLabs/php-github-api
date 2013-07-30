@@ -51,6 +51,7 @@ abstract class AbstractApi implements ApiInterface
     public function setPerPage($perPage)
     {
         $this->perPage = (null === $perPage ? $perPage : (int) $perPage);
+
         return $this;
     }
 

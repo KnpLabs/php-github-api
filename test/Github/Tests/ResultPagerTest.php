@@ -24,7 +24,7 @@ class ResultPagerTest extends \PHPUnit_Framework_TestCase
     public function shouldGetAllResults()
     {
         $amountLoops  = 3;
-        $content      = array(1,2,3,4,5,6,7,8,9,10);
+        $content      = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         $responseMock = new TestResponse($amountLoops, $content);
 
         // httpClient mock
