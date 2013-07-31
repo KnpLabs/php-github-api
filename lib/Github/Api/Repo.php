@@ -55,24 +55,49 @@ class Repo extends AbstractApi
      * Create repository
      * @link http://developer.github.com/v3/repos/
      *
-     * @param  string  $name             name of the repository
-     * @param  string  $description      repository description
-     * @param  string  $homepage         homepage url
-     * @param  boolean $public           `true` for public, `false` for private
-     * @param  null|string $organization username of organization if applicable
+     * @param  string      $name             name of the repository
+     * @param  string      $description      repository description
+     * @param  string      $homepage         homepage url
+     * @param  boolean     $public           `true` for public, `false` for private
+     * @param  null|string $organization     username of organization if applicable
+     * @param  boolean     $hasIssues        `true` to enable issues for this repository, `false` to disable them
+     * @param  boolean     $hasWiki          `true` to enable the wiki for this repository, `false` to disable it
+     * @param  boolean     $hadDownloads     `true` to enable downloads for this repository, `false` to disable them
+     * @param  integer     $teamId           The id of the team that will be granted access to this repository. This is only valid when creating a repo in an organization.
+     * @param  boolean     $autoInit         `true` to create an initial commit with empty README, `false` for no initial commit
      *
      * @return array                     returns repository data
      */
-    public function create($name, $description = '', $homepage = '', $public = true, $organization = null)
-    {
+    public function create(
+        $name,
+        $description = '',
+        $homepage = '',
+        $public = true,
+        $organization = null,
+        $hasIssues = false,
+        $hasWiki = false,
+        $hasDownloads = false,
+        $teamId = null,
+        $autoInit = false
+    ) {
         $path = null !== $organization ? 'orgs/'.$organization.'/repos' : 'user/repos';
 
-        return $this->post($path, array(
-            'name'        => $name,
-            'description' => $description,
-            'homepage'    => $homepage,
-            'private'     => !$public
-        ));
+        $parameters = array(
+            'name'          => $name,
+            'description'   => $description,
+            'homepage'      => $homepage,
+            'private'       => !$public,
+            'has_issues'    => $hasIssues,
+            'has_wiki'      => $hasWiki,
+            'has_downloads' => $hasDownloads,
+            'auto_init'     => $autoInit
+        );
+
+        if ($organization && $teamId) {
+            $parameters['team_id'] = $teamId;
+        }
+
+        return $this->post($path, $parameters);
     }
 
     /**
