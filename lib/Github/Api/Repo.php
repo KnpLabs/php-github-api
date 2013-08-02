@@ -331,4 +331,19 @@ class Repo extends AbstractApi
             'page' => $page
         ));
     }
+
+
+    /**
+     * @param  string  $username
+     * @param  string  $repository
+     * @param  integer $page
+     *
+     * @return array
+     */
+    public function stargazers($username, $repository, $page = 1)
+    {
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/stargazers', array(
+            'page' => $page
+        ));
+    }
 }
