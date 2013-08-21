@@ -331,4 +331,25 @@ class Repo extends AbstractApi
             'page' => $page
         ));
     }
+
+    /**
+     * Perform a merge
+     * @link http://developer.github.com/v3/repos/merging/
+     *
+     * @param string $username
+     * @param string $repository
+     * @param string $base The name of the base branch that the head will be merged into.
+     * @param string $head The head to merge. This can be a branch name or a commit SHA1.
+     * @param string $message Commit message to use for the merge commit. If omitted, a default message will be used.
+     *
+     * @return array|null
+     */
+    public function merge($username, $repository, $base, $head, $message = null)
+    {
+        return $this->post('repos/'.urlencode($username).'/'.urlencode($repository).'/merges', array(
+            'base'           => $base,
+            'head'           => $head,
+            'commit_message' => $message
+        ));
+    }
 }
