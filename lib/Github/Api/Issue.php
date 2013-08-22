@@ -52,6 +52,24 @@ class Issue extends AbstractApi
     }
 
     /**
+     * List issues by organization
+     * @link http://developer.github.com/v3/issues/
+     *
+     * @param  string  $organization     the organization
+     * @param  string  $state            the issue state, can be open or closed
+     * @param  array   $params           the additional parameters like milestone, assignees, labels, sort, direction
+     * @return array                     list of issues found
+     */
+    public function org($organization, $state, array $params = array())
+    {
+        if (!in_array($state, array('open', 'closed'))) {
+            $state = 'open';
+        }
+
+        return $this->get('orgs/'.urlencode($organization).'/issues', array_merge(array('page' => 1, 'state' => $state), $params));
+    }
+
+    /**
      * Get extended information about an issue by its username, repo and number
      * @link http://developer.github.com/v3/issues/
      *
