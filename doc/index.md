@@ -13,6 +13,7 @@ APIs:
 * [Pull Requests](pull_requests.md)
   * [Comments](pull_request/comments.md)
 * [Repositories](repos.md)
+  * [Releases](repo/releases.md)
 * [Users](users.md)
 
 Additional features:

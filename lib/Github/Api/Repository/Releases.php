@@ -37,7 +37,7 @@ class Releases extends AbstractApi
     }
 
     /**
-     * Delete a download in selected repository
+     * Delete a download in selected repository (Not thoroughly tested!)
      *
      * @param  string  $username         the user who owns the repo
      * @param  string  $repository       the name of the repo
