@@ -55,7 +55,8 @@ class HttpClient implements HttpClientInterface
     public function __construct(array $options = array(), ClientInterface $client = null)
     {
         $client = $client ?: new Curl();
-        $client->setTimeout($this->options['timeout']);
+        $timeout = isset($options['timeout']) ? $options['timeout'] : $this->options['timeout'];
+        $client->setTimeout($timeout);
         $client->setVerifyPeer(false);
 
         $this->options = array_merge($this->options, $options);
