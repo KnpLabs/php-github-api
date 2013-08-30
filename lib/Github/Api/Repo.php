@@ -38,6 +38,20 @@ class Repo extends AbstractApi
     }
 
     /**
+     * List all repositories for an organization
+     * @link http://developer.github.com/v3/repos/#list-organization-repositories
+     *
+     * @param  string $organization     the name of the organization
+     * @param  array  $params
+     *
+     * @return array                    list of organization repositories
+     */
+    public function org($organization, array $params = array())
+    {
+        return $this->get('orgs/'.$organization.'/repos', array_merge(array('start_page' => 1), $params));
+    }
+
+    /**
      * Get extended information about a repository by its username and repository name
      * @link http://developer.github.com/v3/repos/
      *
