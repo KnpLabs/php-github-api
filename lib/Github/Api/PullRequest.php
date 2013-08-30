@@ -102,13 +102,13 @@ class PullRequest extends AbstractApi
         return $this->post('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls', $params);
     }
 
-    public function update($username, $repository, array $params)
+    public function update($username, $repository, $id, array $params)
     {
         if (isset($params['state']) && !in_array($params['state'], array('open', 'closed'))) {
             $params['state'] = 'open';
         }
 
-        return $this->patch('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls', $params);
+        return $this->patch('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls/'.urlencode($id), $params);
     }
 
     public function merged($username, $repository, $id)
