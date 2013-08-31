@@ -27,7 +27,7 @@ class TestResponse
      */
     public function getPagination()
     {
-        if($this->loopCount){
+        if ($this->loopCount) {
             $returnArray = array(
                 'next' => 'http://github.com/' . $this->loopCount
             );

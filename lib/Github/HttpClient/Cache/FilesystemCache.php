@@ -67,4 +67,3 @@ class FilesystemCache implements CacheInterface
         return sprintf('%s%s%s', rtrim($this->path, DIRECTORY_SEPARATOR), DIRECTORY_SEPARATOR, md5($id));
     }
 }
-
