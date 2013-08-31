@@ -3,9 +3,7 @@
 namespace Github;
 
 use Github\Api\ApiInterface;
-use Github\Exception\InvalidArgumentException;
 use Github\HttpClient\HttpClient;
-use Github\HttpClient\HttpClientInterface;
 
 /**
  * Pager class for supporting pagination in github classes
@@ -25,7 +23,6 @@ class ResultPager implements ResultPagerInterface
      * Comes from pagination headers in Github API results
      */
     protected $pagination;
-
 
     /**
      * The Github client to use for pagination. This must be the same

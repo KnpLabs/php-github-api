@@ -2,9 +2,6 @@
 
 namespace Github;
 
-use Buzz\Client\Curl;
-use Buzz\Client\ClientInterface;
-
 use Github\Api\ApiInterface;
 use Github\Exception\InvalidArgumentException;
 use Github\HttpClient\HttpClient;
@@ -72,9 +69,7 @@ class Client
      */
     public function __construct(HttpClientInterface $httpClient = null)
     {
-        if (null !== $httpClient) {
-            $this->httpClient = $httpClient;
-        }
+        $this->httpClient = $httpClient;
     }
 
     /**
@@ -149,11 +144,11 @@ class Client
     /**
      * Authenticate a user for all next requests
      *
-     * @param string      $tokenOrLogin  GitHub private token/username/client ID
-     * @param null|string $password      GitHub password/secret (optionally can contain $authMethod)
-     * @param null|string $authMethod    One of the AUTH_* class constants
+     * @param string      $tokenOrLogin GitHub private token/username/client ID
+     * @param null|string $password     GitHub password/secret (optionally can contain $authMethod)
+     * @param null|string $authMethod   One of the AUTH_* class constants
      *
-     * @throws InvalidArgumentException  If no authentication method was given
+     * @throws InvalidArgumentException If no authentication method was given
      */
     public function authenticate($tokenOrLogin, $password = null, $authMethod = null)
     {
@@ -220,7 +215,6 @@ class Client
 
         return $this->options[$name];
     }
-
 
     /**
      * @param string $name

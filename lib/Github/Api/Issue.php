@@ -21,10 +21,10 @@ class Issue extends AbstractApi
      * List issues by username, repo and state
      * @link http://developer.github.com/v3/issues/
      *
-     * @param  string  $username         the username
-     * @param  string  $repository       the repository
-     * @param  array   $params           the additional parameters like milestone, assignees, labels, sort, direction
-     * @return array                     list of issues found
+     * @param  string $username   the username
+     * @param  string $repository the repository
+     * @param  array  $params     the additional parameters like milestone, assignees, labels, sort, direction
+     * @return array  list of issues found
      */
     public function all($username, $repository, array $params = array())
     {
@@ -35,12 +35,12 @@ class Issue extends AbstractApi
      * Search issues by username, repo, state and keyword
      * @link http://developer.github.com/v3/search/#search-issues
      *
-     * @param  string  $username         the username
-     * @param  string  $repository       the repository
-     * @param  string  $state            the issue state, can be open or closed
-     * @param  string  $keyword          the keyword to filter issues by
+     * @param string $username   the username
+     * @param string $repository the repository
+     * @param string $state      the issue state, can be open or closed
+     * @param string $keyword    the keyword to filter issues by
      *
-     * @return array                     list of issues found
+     * @return array list of issues found
      */
     public function find($username, $repository, $state, $keyword)
     {
@@ -55,10 +55,10 @@ class Issue extends AbstractApi
      * List issues by organization
      * @link http://developer.github.com/v3/issues/
      *
-     * @param  string  $organization     the organization
-     * @param  string  $state            the issue state, can be open or closed
-     * @param  array   $params           the additional parameters like milestone, assignees, labels, sort, direction
-     * @return array                     list of issues found
+     * @param  string $organization the organization
+     * @param  string $state        the issue state, can be open or closed
+     * @param  array  $params       the additional parameters like milestone, assignees, labels, sort, direction
+     * @return array  list of issues found
      */
     public function org($organization, $state, array $params = array())
     {
@@ -73,10 +73,10 @@ class Issue extends AbstractApi
      * Get extended information about an issue by its username, repo and number
      * @link http://developer.github.com/v3/issues/
      *
-     * @param  string  $username         the username
-     * @param  string  $repository       the repository
-     * @param  string  $id               the issue number
-     * @return array                     information about the issue
+     * @param  string $username   the username
+     * @param  string $repository the repository
+     * @param  string $id         the issue number
+     * @return array  information about the issue
      */
     public function show($username, $repository, $id)
     {
@@ -88,10 +88,10 @@ class Issue extends AbstractApi
      * The issue is assigned to the authenticated user. Requires authentication.
      * @link http://developer.github.com/v3/issues/
      *
-     * @param  string  $username         the username
-     * @param  string  $repository       the repository
-     * @param  array   $params           the new issue data
-     * @return array                     information about the issue
+     * @param  string $username   the username
+     * @param  string $repository the repository
+     * @param  array  $params     the new issue data
+     * @return array  information about the issue
      *
      * @throws MissingArgumentException
      */
@@ -108,12 +108,12 @@ class Issue extends AbstractApi
      * Update issue information's by username, repo and issue number. Requires authentication.
      * @link http://developer.github.com/v3/issues/
      *
-     * @param   string  $username         the username
-     * @param   string  $repository       the repository
-     * @param   string  $id               the issue number
-     * @param   array   $params           key=>value user attributes to update.
-     *                                    key can be title or body
-     * @return  array                     information about the issue
+     * @param string $username   the username
+     * @param string $repository the repository
+     * @param string $id         the issue number
+     * @param array  $params     key=>value user attributes to update.
+     *                           key can be title or body
+     * @return array information about the issue
      */
     public function update($username, $repository, $id, array $params)
     {

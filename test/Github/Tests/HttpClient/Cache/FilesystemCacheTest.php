@@ -41,4 +41,3 @@ class FilesystemCacheTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($cache->getModifiedSince('test2'));
     }
 }
-
