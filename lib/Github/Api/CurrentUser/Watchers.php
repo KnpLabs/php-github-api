@@ -14,7 +14,7 @@ class Watchers extends AbstractApi
      * List repositories watched by the authenticated user
      * @link http://developer.github.com/v3/repos/watching/
      *
-     * @param  integer  $page
+     * @param  integer $page
      * @return array
      */
     public function all($page = 1)
@@ -28,8 +28,8 @@ class Watchers extends AbstractApi
      * Check that the authenticated user watches a repository
      * @link http://developer.github.com/v3/repos/watching/
      *
-     * @param  string  $username         the user who owns the repo
-     * @param  string  $repository       the name of the repo
+     * @param  string $username   the user who owns the repo
+     * @param  string $repository the name of the repo
      * @return array
      */
     public function check($username, $repository)
@@ -41,8 +41,8 @@ class Watchers extends AbstractApi
      * Make the authenticated user watch a repository
      * @link http://developer.github.com/v3/repos/watching/
      *
-     * @param  string  $username         the user who owns the repo
-     * @param  string  $repository       the name of the repo
+     * @param  string $username   the user who owns the repo
+     * @param  string $repository the name of the repo
      * @return array
      */
     public function watch($username, $repository)
@@ -54,8 +54,8 @@ class Watchers extends AbstractApi
      * Make the authenticated user unwatch a repository
      * @link http://developer.github.com/v3/repos/watching/
      *
-     * @param  string  $username         the user who owns the repo
-     * @param  string  $repository       the name of the repo
+     * @param  string $username   the user who owns the repo
+     * @param  string $repository the name of the repo
      * @return array
      */
     public function unwatch($username, $repository)

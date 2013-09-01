@@ -100,4 +100,14 @@ class CurrentUser extends AbstractApi
             'page' => $page
         ));
     }
+
+    /**
+     *  @link http://developer.github.com/changes/2012-9-5-watcher-api/
+     */
+    public function starred($page = 1)
+    {
+        return $this->get('user/starred', array(
+            'page' => $page
+        ));
+    }
 }

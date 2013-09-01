@@ -31,7 +31,7 @@ class Statuses extends AbstractApi
      * @param string $username
      * @param string $repository
      * @param string $sha
-     * @param array $params
+     * @param array  $params
      *
      * @return array
      *

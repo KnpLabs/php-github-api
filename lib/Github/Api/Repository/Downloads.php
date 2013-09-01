@@ -14,8 +14,8 @@ class Downloads extends AbstractApi
      * List downloads in selected repository
      * @link http://developer.github.com/v3/repos/downloads/#list-downloads-for-a-repository
      *
-     * @param  string  $username         the user who owns the repo
-     * @param  string  $repository       the name of the repo
+     * @param string $username   the user who owns the repo
+     * @param string $repository the name of the repo
      *
      * @return array
      */
@@ -28,9 +28,9 @@ class Downloads extends AbstractApi
      * Get a download in selected repository
      * @link http://developer.github.com/v3/repos/downloads/#get-a-single-download
      *
-     * @param  string  $username         the user who owns the repo
-     * @param  string  $repository       the name of the repo
-     * @param  integer $id               the id of the download file
+     * @param string  $username   the user who owns the repo
+     * @param string  $repository the name of the repo
+     * @param integer $id         the id of the download file
      *
      * @return array
      */
@@ -43,9 +43,9 @@ class Downloads extends AbstractApi
      * Delete a download in selected repository
      * @link http://developer.github.com/v3/repos/downloads/#delete-a-download
      *
-     * @param  string  $username         the user who owns the repo
-     * @param  string  $repository       the name of the repo
-     * @param  integer $id               the id of the download file
+     * @param string  $username   the user who owns the repo
+     * @param string  $repository the name of the repo
+     * @param integer $id         the id of the download file
      *
      * @return array
      */

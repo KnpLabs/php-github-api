@@ -17,14 +17,14 @@ class PullRequest extends AbstractApi
      * Get a listing of a project's pull requests by the username, repository and (optionally) state.
      * @link http://developer.github.com/v3/pulls/
      *
-     * @param  string $username          the username
-     * @param  string $repository        the repository
-     * @param  string $state             the state of the fetched pull requests.
-     *                                   The API seems to automatically default to 'open'
-     * @param integer $page              the page
-     * @param integer $perPage           the per page
+     * @param string  $username   the username
+     * @param string  $repository the repository
+     * @param string  $state      the state of the fetched pull requests.
+     *                            The API seems to automatically default to 'open'
+     * @param integer $page       the page
+     * @param integer $perPage    the per page
      *
-     * @return array                     array of pull requests for the project
+     * @return array array of pull requests for the project
      */
     public function all($username, $repository, $state = null, $page = 1, $perPage = 30)
     {
@@ -41,11 +41,11 @@ class PullRequest extends AbstractApi
      * Show all details of a pull request, including the discussions.
      * @link http://developer.github.com/v3/pulls/
      *
-     * @param  string $username          the username
-     * @param  string $repository        the repository
-     * @param  string $id                the ID of the pull request for which details are retrieved
+     * @param string $username   the username
+     * @param string $repository the repository
+     * @param string $id         the ID of the pull request for which details are retrieved
      *
-     * @return array                     array of pull requests for the project
+     * @return array array of pull requests for the project
      */
     public function show($username, $repository, $id)
     {
@@ -71,13 +71,13 @@ class PullRequest extends AbstractApi
      * Create a pull request
      * @link   http://developer.github.com/v3/pulls/
      *
-     * @param  string $username   the username
-     * @param  string $repository the repository
-     * @param  array  $params     A String of the branch or commit SHA that you want your changes to be pulled to.
-     *                            A String of the branch or commit SHA of your changes. Typically this will be a branch.
-     *                            If the branch is in a fork of the original repository, specify the username first:
-     *                            "my-user:some-branch". The String title of the Pull Request. The String body of
-     *                            the Pull Request. The issue number. Used when title and body is not set.
+     * @param string $username   the username
+     * @param string $repository the repository
+     * @param array  $params     A String of the branch or commit SHA that you want your changes to be pulled to.
+     *                           A String of the branch or commit SHA of your changes. Typically this will be a branch.
+     *                           If the branch is in a fork of the original repository, specify the username first:
+     *                           "my-user:some-branch". The String title of the Pull Request. The String body of
+     *                           the Pull Request. The issue number. Used when title and body is not set.
      *
      * @return array
      *
@@ -102,13 +102,13 @@ class PullRequest extends AbstractApi
         return $this->post('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls', $params);
     }
 
-    public function update($username, $repository, array $params)
+    public function update($username, $repository, $id, array $params)
     {
         if (isset($params['state']) && !in_array($params['state'], array('open', 'closed'))) {
             $params['state'] = 'open';
         }
 
-        return $this->patch('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls', $params);
+        return $this->patch('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls/'.urlencode($id), $params);
     }
 
     public function merged($username, $repository, $id)

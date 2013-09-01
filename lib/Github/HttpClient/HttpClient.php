@@ -3,8 +3,6 @@
 namespace Github\HttpClient;
 
 use Buzz\Client\ClientInterface;
-use Buzz\Message\MessageInterface;
-use Buzz\Message\RequestInterface;
 use Buzz\Listener\ListenerInterface;
 
 use Github\Exception\ErrorException;
@@ -55,7 +53,8 @@ class HttpClient implements HttpClientInterface
     public function __construct(array $options = array(), ClientInterface $client = null)
     {
         $client = $client ?: new Curl();
-        $client->setTimeout($this->options['timeout']);
+        $timeout = isset($options['timeout']) ? $options['timeout'] : $this->options['timeout'];
+        $client->setTimeout($timeout);
         $client->setVerifyPeer(false);
 
         $this->options = array_merge($this->options, $options);

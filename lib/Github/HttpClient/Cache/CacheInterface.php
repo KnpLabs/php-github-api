@@ -12,16 +12,16 @@ use Github\HttpClient\Message\Response;
 interface CacheInterface
 {
     /**
-     * @param  string $id   The id of the cached resource
+     * @param string $id The id of the cached resource
      *
      * @return null|integer The modified since timestamp
      */
     public function getModifiedSince($id);
 
     /**
-     * @param  string $id The id of the cached resource
+     * @param string $id The id of the cached resource
      *
-     * @return Response   The cached response object
+     * @return Response The cached response object
      *
      * @throws \InvalidArgumentException If cache data don't exists
      */
@@ -35,4 +35,3 @@ interface CacheInterface
      */
     public function set($id, Response $response);
 }
-
