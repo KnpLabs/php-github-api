@@ -68,7 +68,16 @@ class RepoTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('user/repos', array('name' => 'l3l0Repo', 'description' => '', 'homepage' => '', 'private' => false))
+            ->with('user/repos', array(
+                'name'          => 'l3l0Repo',
+                'description'   => '',
+                'homepage'      => '',
+                'private'       => false,
+                'has_issues'    => false,
+                'has_wiki'      => false,
+                'has_downloads' => false,
+                'auto_init'     => false
+            ))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->create('l3l0Repo'));
@@ -84,7 +93,16 @@ class RepoTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('orgs/KnpLabs/repos', array('name' => 'KnpLabsRepo', 'description' => '', 'homepage' => '', 'private' => false))
+            ->with('orgs/KnpLabs/repos', array(
+                'name'          => 'KnpLabsRepo',
+                'description'   => '',
+                'homepage'      => '',
+                'private'       => false,
+                'has_issues'    => false,
+                'has_wiki'      => false,
+                'has_downloads' => false,
+                'auto_init'     => false
+            ))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->create('KnpLabsRepo', '', '', true, 'KnpLabs'));
@@ -228,7 +246,16 @@ class RepoTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('user/repos', array('name' => 'l3l0Repo', 'description' => 'test', 'homepage' => 'http://l3l0.eu', 'private' => true))
+            ->with('user/repos', array(
+                'name'          => 'l3l0Repo',
+                'description'   => 'test',
+                'homepage'      => 'http://l3l0.eu',
+                'private'       => true,
+                'has_issues'    => false,
+                'has_wiki'      => false,
+                'has_downloads' => false,
+                'auto_init'     => false
+            ))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->create('l3l0Repo', 'test', 'http://l3l0.eu', false));
