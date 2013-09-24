@@ -6,6 +6,26 @@ use Github\Tests\Api\TestCase;
 
 class LabelsTest extends TestCase
 {
+
+    /**
+     * @test
+     */
+    public function shouldGetProjectLabels()
+    {
+        $expectedValue = array(
+            array('name' => 'l3l0repo'),
+            array('name' => 'other'),
+        );
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('repos/KnpLabs/php-github-api/labels', array())
+            ->will($this->returnValue($expectedValue));
+
+        $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api'));
+    }
+
     /**
      * @test
      */
@@ -20,6 +40,40 @@ class LabelsTest extends TestCase
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', '123'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldCreateLabel()
+    {
+        $expectedValue = array(array('name' => 'label', 'color' => 'FFFFFF'));
+        $data = array('name' => 'label');
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('post')
+            ->with('repos/KnpLabs/php-github-api/labels', $data + array('color' => 'FFFFFF'))
+            ->will($this->returnValue($expectedValue));
+
+        $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', $data));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldCreateLabelWithColor()
+    {
+        $expectedValue = array(array('name' => 'label', 'color' => '111111'));
+        $data = array('name' => 'label', 'color' => '111111');
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('post')
+            ->with('repos/KnpLabs/php-github-api/labels', $data)
+            ->will($this->returnValue($expectedValue));
+
+        $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', $data));
     }
 
     /**
