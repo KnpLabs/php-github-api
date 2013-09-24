@@ -11,9 +11,25 @@ use Github\Exception\InvalidArgumentException;
  */
 class Labels extends AbstractApi
 {
-    public function all($username, $repository, $issue)
+    public function all($username, $repository, $issue = null)
     {
+        if ($issue === null) {
+            return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/labels');
+        }
+
         return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/issues/'.urlencode($issue).'/labels');
+    }
+
+    public function create($username, $repository, array $params)
+    {
+        if (!isset($params['name'])) {
+            throw new MissingArgumentException('name');
+        }
+        if (!isset($params['color'])) {
+            $params['color'] = 'FFFFFF';
+        }
+
+        return $this->post('repos/'.urlencode($username).'/'.urlencode($repository).'/labels', $params);
     }
 
     public function add($username, $repository, $issue, $labels)
