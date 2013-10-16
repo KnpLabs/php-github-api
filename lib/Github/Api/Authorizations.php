@@ -18,7 +18,7 @@ class Authorizations extends AbstractApi
 
     public function show($number)
     {
-        return $this->get('authorizations/'.urlencode($number));
+        return $this->get('authorizations/'.rawurlencode($number));
     }
 
     public function create(array $params)
@@ -28,16 +28,16 @@ class Authorizations extends AbstractApi
 
     public function update($id, array $params)
     {
-        return $this->patch('authorizations/'.urlencode($id), $params);
+        return $this->patch('authorizations/'.rawurlencode($id), $params);
     }
 
     public function remove($id)
     {
-        return $this->delete('authorizations/'.urlencode($id));
+        return $this->delete('authorizations/'.rawurlencode($id));
     }
 
     public function check($id, $token)
     {
-        return $this->get('authorizations/'.urlencode($id).'/tokens/'.urlencode($token));
+        return $this->get('authorizations/'.rawurlencode($id).'/tokens/'.rawurlencode($token));
     }
 }

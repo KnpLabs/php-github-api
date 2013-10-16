@@ -13,12 +13,12 @@ class Comments extends AbstractApi
 {
     public function all($username, $repository, $pullRequest)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls/'.urlencode($pullRequest).'/comments');
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($pullRequest).'/comments');
     }
 
     public function show($username, $repository, $comment)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls/comments/'.urlencode($comment));
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/comments/'.rawurlencode($comment));
     }
 
     public function create($username, $repository, $pullRequest, array $params)
@@ -32,7 +32,7 @@ class Comments extends AbstractApi
             throw new MissingArgumentException(array('commit_id', 'path', 'position'));
         }
 
-        return $this->post('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls/'.urlencode($pullRequest).'/comments', $params);
+        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($pullRequest).'/comments', $params);
     }
 
     public function update($username, $repository, $comment, array $params)
@@ -41,11 +41,11 @@ class Comments extends AbstractApi
             throw new MissingArgumentException('body');
         }
 
-        return $this->patch('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls/comments/'.urlencode($comment), $params);
+        return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/comments/'.rawurlencode($comment), $params);
     }
 
     public function remove($username, $repository, $comment)
     {
-        return $this->delete('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls/comments/'.urlencode($comment));
+        return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/comments/'.rawurlencode($comment));
     }
 }

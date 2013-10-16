@@ -33,7 +33,7 @@ class Notifications extends AbstractApi
      */
     public function allInRepository($username, $repository, array $params = array())
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/notifications', $params);
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/notifications', $params);
     }
 
     /**
@@ -57,7 +57,7 @@ class Notifications extends AbstractApi
      */
     public function markAsReadInRepository($username, $repository, array $params = array())
     {
-        return $this->put('repos/'.urlencode($username).'/'.urlencode($repository).'/notifications', $params);
+        return $this->put('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/notifications', $params);
     }
 
     /**
@@ -69,7 +69,7 @@ class Notifications extends AbstractApi
      */
     public function markAsRead($id, array $params)
     {
-        return $this->patch('notifications/threads/'.urlencode($id), $params);
+        return $this->patch('notifications/threads/'.rawurlencode($id), $params);
     }
 
     /**
@@ -80,7 +80,7 @@ class Notifications extends AbstractApi
      */
     public function show($id)
     {
-        return $this->get('notifications/threads/'.urlencode($id));
+        return $this->get('notifications/threads/'.rawurlencode($id));
     }
 
     /**
@@ -91,7 +91,7 @@ class Notifications extends AbstractApi
      */
     public function showSubscription($id)
     {
-        return $this->get('notifications/threads/'.urlencode($id).'/subscription');
+        return $this->get('notifications/threads/'.rawurlencode($id).'/subscription');
     }
 
     /**
@@ -103,7 +103,7 @@ class Notifications extends AbstractApi
      */
     public function createSubscription($id, array $params)
     {
-        return $this->put('notifications/threads/'.urlencode($id).'/subscription', $params);
+        return $this->put('notifications/threads/'.rawurlencode($id).'/subscription', $params);
     }
 
     /**
@@ -114,6 +114,6 @@ class Notifications extends AbstractApi
      */
     public function removeSubscription($id)
     {
-        return $this->delete('notifications/threads/'.urlencode($id).'/subscription');
+        return $this->delete('notifications/threads/'.rawurlencode($id).'/subscription');
     }
 }

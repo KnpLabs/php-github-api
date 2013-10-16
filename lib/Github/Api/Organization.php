@@ -24,12 +24,12 @@ class Organization extends AbstractApi
      */
     public function show($organization)
     {
-        return $this->get('orgs/'.urlencode($organization));
+        return $this->get('orgs/'.rawurlencode($organization));
     }
 
     public function update($organization, array $params)
     {
-        return $this->patch('orgs/'.urlencode($organization), $params);
+        return $this->patch('orgs/'.rawurlencode($organization), $params);
     }
 
     /**
@@ -43,7 +43,7 @@ class Organization extends AbstractApi
      */
     public function repositories($organization, $type = 'all')
     {
-        return $this->get('orgs/'.urlencode($organization).'/repos', array(
+        return $this->get('orgs/'.rawurlencode($organization).'/repos', array(
             'type' => $type
         ));
     }

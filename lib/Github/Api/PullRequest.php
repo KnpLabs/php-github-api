@@ -34,7 +34,7 @@ class PullRequest extends AbstractApi
             'state' => $state,
         );
 
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls', $parameters);
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls', $parameters);
     }
 
     /**
@@ -49,17 +49,17 @@ class PullRequest extends AbstractApi
      */
     public function show($username, $repository, $id)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls/'.urlencode($id));
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id));
     }
 
     public function commits($username, $repository, $id)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls/'.urlencode($id).'/commits');
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/commits');
     }
 
     public function files($username, $repository, $id)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls/'.urlencode($id).'/files');
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/files');
     }
 
     public function comments()
@@ -99,7 +99,7 @@ class PullRequest extends AbstractApi
             throw new MissingArgumentException(array('issue', 'body'));
         }
 
-        return $this->post('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls', $params);
+        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls', $params);
     }
 
     public function update($username, $repository, $id, array $params)
@@ -108,17 +108,17 @@ class PullRequest extends AbstractApi
             $params['state'] = 'open';
         }
 
-        return $this->patch('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls/'.urlencode($id), $params);
+        return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id), $params);
     }
 
     public function merged($username, $repository, $id)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls/'.urlencode($id).'/merge');
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/merge');
     }
 
     public function merge($username, $repository, $id, $message = null)
     {
-        return $this->put('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls/'.urlencode($id).'/merge', array(
+        return $this->put('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/merge', array(
             'commit_message' => $message
         ));
     }

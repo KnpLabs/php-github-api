@@ -33,7 +33,7 @@ class Followers extends AbstractApi
      */
     public function check($username)
     {
-        return $this->get('user/following/'.urlencode($username));
+        return $this->get('user/following/'.rawurlencode($username));
     }
 
     /**
@@ -45,7 +45,7 @@ class Followers extends AbstractApi
      */
     public function follow($username)
     {
-        return $this->put('user/following/'.urlencode($username));
+        return $this->put('user/following/'.rawurlencode($username));
     }
 
     /**
@@ -57,6 +57,6 @@ class Followers extends AbstractApi
      */
     public function unfollow($username)
     {
-        return $this->delete('user/following/'.urlencode($username));
+        return $this->delete('user/following/'.rawurlencode($username));
     }
 }
