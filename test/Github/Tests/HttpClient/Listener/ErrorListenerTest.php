@@ -124,6 +124,7 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
                 array(
                     'code'     => $errorCode,
                     'field'    => 'test',
+                    'value'    => 'wrong',
                     'resource' => 'fake'
                 )
             )
