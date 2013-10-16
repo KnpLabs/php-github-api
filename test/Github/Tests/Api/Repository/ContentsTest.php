@@ -120,7 +120,7 @@ class ContentsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/mads379/scala.tmbundle/contents/Syntaxes/Simple%20Build%20Tool.tmLanguage', array('ref' => null))
+            ->with('repos/mads379/scala.tmbundle/contents/Syntaxes%2FSimple%20Build%20Tool.tmLanguage', array('ref' => null))
             ->will($this->returnValue($getValue));
 
         $this->assertEquals($expectedValue, $api->download('mads379', 'scala.tmbundle', 'Syntaxes/Simple Build Tool.tmLanguage'));

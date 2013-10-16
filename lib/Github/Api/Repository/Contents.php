@@ -44,7 +44,7 @@ class Contents extends AbstractApi
     {
         $url = 'repos/'.urlencode($username).'/'.urlencode($repository).'/contents';
         if (null !== $path) {
-            $url .= '/'.urlencode($path);
+            $url .= '/'.rawurlencode($path);
         }
 
         return $this->get($url, array(
