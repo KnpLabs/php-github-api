@@ -21,7 +21,7 @@ class User extends AbstractApi
      */
     public function find($keyword)
     {
-        return $this->get('legacy/user/search/'.urlencode($keyword));
+        return $this->get('legacy/user/search/'.rawurlencode($keyword));
     }
 
     /**
@@ -33,7 +33,7 @@ class User extends AbstractApi
      */
     public function show($username)
     {
-        return $this->get('users/'.urlencode($username));
+        return $this->get('users/'.rawurlencode($username));
     }
 
     /**
@@ -45,7 +45,7 @@ class User extends AbstractApi
      */
     public function following($username)
     {
-        return $this->get('users/'.urlencode($username).'/following');
+        return $this->get('users/'.rawurlencode($username).'/following');
     }
 
     /**
@@ -57,7 +57,7 @@ class User extends AbstractApi
      */
     public function followers($username)
     {
-        return $this->get('users/'.urlencode($username).'/followers');
+        return $this->get('users/'.rawurlencode($username).'/followers');
     }
 
     /**
@@ -69,7 +69,7 @@ class User extends AbstractApi
      */
     public function watched($username)
     {
-        return $this->get('users/'.urlencode($username).'/watched');
+        return $this->get('users/'.rawurlencode($username).'/watched');
     }
 
     /**
@@ -81,7 +81,7 @@ class User extends AbstractApi
      */
     public function repositories($username)
     {
-        return $this->get('users/'.urlencode($username).'/repos');
+        return $this->get('users/'.rawurlencode($username).'/repos');
     }
 
     /**
@@ -93,7 +93,7 @@ class User extends AbstractApi
      */
     public function gists($username)
     {
-        return $this->get('users/'.urlencode($username).'/gists');
+        return $this->get('users/'.rawurlencode($username).'/gists');
     }
 
     /**
@@ -105,7 +105,7 @@ class User extends AbstractApi
      */
     public function keys($username)
     {
-        return $this->get('users/'.urlencode($username).'/keys');
+        return $this->get('users/'.rawurlencode($username).'/keys');
     }
 
     /**
@@ -119,6 +119,6 @@ class User extends AbstractApi
      */
     public function publicEvents($username)
     {
-        return $this->get('users/' . urlencode($username) . '/events/public');
+        return $this->get('users/'.rawurlencode($username) . '/events/public');
     }
 }

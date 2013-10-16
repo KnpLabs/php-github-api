@@ -36,15 +36,15 @@ class Comments extends AbstractApi
     public function all($username, $repository, $sha = null)
     {
         if (null === $sha) {
-            return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/comments');
+            return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/comments');
         }
 
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/commits/'.urlencode($sha).'/comments');
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/commits/'.rawurlencode($sha).'/comments');
     }
 
     public function show($username, $repository, $comment)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/comments/'.urlencode($comment));
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/comments/'.rawurlencode($comment));
     }
 
     public function create($username, $repository, $sha, array $params)
@@ -53,7 +53,7 @@ class Comments extends AbstractApi
             throw new MissingArgumentException('body');
         }
 
-        return $this->post('repos/'.urlencode($username).'/'.urlencode($repository).'/commits/'.urlencode($sha).'/comments', $params);
+        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/commits/'.rawurlencode($sha).'/comments', $params);
     }
 
     public function update($username, $repository, $comment, array $params)
@@ -62,11 +62,11 @@ class Comments extends AbstractApi
             throw new MissingArgumentException('body');
         }
 
-        return $this->patch('repos/'.urlencode($username).'/'.urlencode($repository).'/comments/'.urlencode($comment), $params);
+        return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/comments/'.rawurlencode($comment), $params);
     }
 
     public function remove($username, $repository, $comment)
     {
-        return $this->delete('repos/'.urlencode($username).'/'.urlencode($repository).'/comments/'.urlencode($comment));
+        return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/comments/'.rawurlencode($comment));
     }
 }
