@@ -13,12 +13,12 @@ class DeployKeys extends AbstractApi
 {
     public function all($username, $repository)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/keys');
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/keys');
     }
 
     public function show($username, $repository, $id)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/keys/'.urlencode($id));
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/keys/'.rawurlencode($id));
     }
 
     public function create($username, $repository, array $params)
@@ -27,7 +27,7 @@ class DeployKeys extends AbstractApi
             throw new MissingArgumentException(array('title', 'key'));
         }
 
-        return $this->post('repos/'.urlencode($username).'/'.urlencode($repository).'/keys', $params);
+        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/keys', $params);
     }
 
     public function update($username, $repository, $id, array $params)
@@ -36,11 +36,11 @@ class DeployKeys extends AbstractApi
             throw new MissingArgumentException(array('title', 'key'));
         }
 
-        return $this->patch('repos/'.urlencode($username).'/'.urlencode($repository).'/keys/'.urlencode($id), $params);
+        return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/keys/'.rawurlencode($id), $params);
     }
 
     public function remove($username, $repository, $id)
     {
-        return $this->delete('repos/'.urlencode($username).'/'.urlencode($repository).'/keys/'.urlencode($id));
+        return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/keys/'.rawurlencode($id));
     }
 }

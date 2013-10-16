@@ -24,7 +24,7 @@ class Contents extends AbstractApi
      */
     public function readme($username, $repository, $reference = null)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/readme', array(
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/readme', array(
             'ref' => $reference
         ));
     }
@@ -42,9 +42,9 @@ class Contents extends AbstractApi
      */
     public function show($username, $repository, $path = null, $reference = null)
     {
-        $url = 'repos/'.urlencode($username).'/'.urlencode($repository).'/contents';
+        $url = 'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents';
         if (null !== $path) {
-            $url .= '/'.urlencode($path);
+            $url .= '/'.rawurlencode($path);
         }
 
         return $this->get($url, array(
@@ -69,7 +69,7 @@ class Contents extends AbstractApi
             $format = 'tarball';
         }
 
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/'.urlencode($format), array(
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/'.rawurlencode($format), array(
             'ref' => $reference
         ));
     }

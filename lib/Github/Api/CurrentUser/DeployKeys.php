@@ -31,7 +31,7 @@ class DeployKeys extends AbstractApi
      */
     public function show($id)
     {
-        return $this->get('user/keys/'.urlencode($id));
+        return $this->get('user/keys/'.rawurlencode($id));
     }
 
     /**
@@ -68,7 +68,7 @@ class DeployKeys extends AbstractApi
             throw new MissingArgumentException(array('title', 'key'));
         }
 
-        return $this->patch('user/keys/'.urlencode($id), $params);
+        return $this->patch('user/keys/'.rawurlencode($id), $params);
     }
 
     /**
@@ -80,6 +80,6 @@ class DeployKeys extends AbstractApi
      */
     public function remove($id)
     {
-        return $this->delete('user/keys/'.urlencode($id));
+        return $this->delete('user/keys/'.rawurlencode($id));
     }
 }

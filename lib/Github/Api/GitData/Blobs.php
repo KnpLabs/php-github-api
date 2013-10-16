@@ -22,7 +22,7 @@ class Blobs extends AbstractApi
 
     public function show($username, $repository, $sha)
     {
-        $response = $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/git/blobs/'.urlencode($sha));
+        $response = $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/blobs/'.rawurlencode($sha));
 
         return $response;
     }
@@ -33,6 +33,6 @@ class Blobs extends AbstractApi
             throw new MissingArgumentException(array('content', 'encoding'));
         }
 
-        return $this->post('repos/'.urlencode($username).'/'.urlencode($repository).'/git/blobs', $params);
+        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/blobs', $params);
     }
 }

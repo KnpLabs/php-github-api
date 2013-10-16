@@ -16,11 +16,11 @@ class Forks extends AbstractApi
             $params['sort'] = 'newest';
         }
 
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/forks', array_merge(array('page' => 1), $params));
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/forks', array_merge(array('page' => 1), $params));
     }
 
     public function create($username, $repository, array $params = array())
     {
-        return $this->post('repos/'.urlencode($username).'/'.urlencode($repository).'/forks', $params);
+        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/forks', $params);
     }
 }

@@ -34,7 +34,7 @@ class Repo extends AbstractApi
      */
     public function find($keyword, array $params)
     {
-        return $this->get('legacy/repos/search/'.urlencode($keyword), array_merge(array('start_page' => 1), $params));
+        return $this->get('legacy/repos/search/'.rawurlencode($keyword), array_merge(array('start_page' => 1), $params));
     }
 
     /**
@@ -62,7 +62,7 @@ class Repo extends AbstractApi
      */
     public function show($username, $repository)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository));
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository));
     }
 
     /**
@@ -126,7 +126,7 @@ class Repo extends AbstractApi
      */
     public function update($username, $repository, array $values)
     {
-        return $this->patch('repos/'.urlencode($username).'/'.urlencode($repository), $values);
+        return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository), $values);
     }
 
     /**
@@ -140,7 +140,7 @@ class Repo extends AbstractApi
      */
     public function remove($username, $repository)
     {
-        return $this->delete('repos/'.urlencode($username).'/'.urlencode($repository));
+        return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository));
     }
 
     /**
@@ -265,9 +265,9 @@ class Repo extends AbstractApi
      */
     public function branches($username, $repository, $branch = null)
     {
-        $url = 'repos/'.urlencode($username).'/'.urlencode($repository).'/branches';
+        $url = 'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches';
         if (null !== $branch) {
-            $url .= '/'.urlencode($branch);
+            $url .= '/'.rawurlencode($branch);
         }
 
         return $this->get($url);
@@ -285,7 +285,7 @@ class Repo extends AbstractApi
      */
     public function contributors($username, $repository, $includingAnonymous = false)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/contributors', array(
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contributors', array(
             'anon' => $includingAnonymous ?: null
         ));
     }
@@ -301,7 +301,7 @@ class Repo extends AbstractApi
      */
     public function languages($username, $repository)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/languages');
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/languages');
     }
 
     /**
@@ -315,7 +315,7 @@ class Repo extends AbstractApi
      */
     public function tags($username, $repository)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/tags');
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/tags');
     }
 
     /**
@@ -329,7 +329,7 @@ class Repo extends AbstractApi
      */
     public function teams($username, $repository)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/teams');
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/teams');
     }
 
     /**
@@ -341,7 +341,7 @@ class Repo extends AbstractApi
      */
     public function watchers($username, $repository, $page = 1)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/watchers', array(
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/watchers', array(
             'page' => $page
         ));
     }
@@ -360,7 +360,7 @@ class Repo extends AbstractApi
      */
     public function merge($username, $repository, $base, $head, $message = null)
     {
-        return $this->post('repos/'.urlencode($username).'/'.urlencode($repository).'/merges', array(
+        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/merges', array(
             'base'           => $base,
             'head'           => $head,
             'commit_message' => $message

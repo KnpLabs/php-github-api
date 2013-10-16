@@ -21,7 +21,7 @@ class Downloads extends AbstractApi
      */
     public function all($username, $repository)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/downloads');
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/downloads');
     }
 
     /**
@@ -36,7 +36,7 @@ class Downloads extends AbstractApi
      */
     public function show($username, $repository, $id)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/downloads/'.urlencode($id));
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/downloads/'.rawurlencode($id));
     }
 
     /**
@@ -51,6 +51,6 @@ class Downloads extends AbstractApi
      */
     public function remove($username, $repository, $id)
     {
-        return $this->delete('repos/'.urlencode($username).'/'.urlencode($repository).'/downloads/'.urlencode($id));
+        return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/downloads/'.rawurlencode($id));
     }
 }
