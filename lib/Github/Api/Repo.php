@@ -8,6 +8,7 @@ use Github\Api\Repository\Commits;
 use Github\Api\Repository\Contents;
 use Github\Api\Repository\DeployKeys;
 use Github\Api\Repository\Downloads;
+use Github\Api\Repository\Releases;
 use Github\Api\Repository\Forks;
 use Github\Api\Repository\Hooks;
 use Github\Api\Repository\Labels;
@@ -196,6 +197,17 @@ class Repo extends AbstractApi
     public function downloads()
     {
         return new Downloads($this->client);
+    }
+
+    /**
+     * Manage the releases of a repository (Currently Undocumented)
+     * @link http://developer.github.com/v3/repos/ 
+     *
+     * @return Releases
+     */
+    public function releases()
+    {
+        return new Releases($this->client);
     }
 
     /**
