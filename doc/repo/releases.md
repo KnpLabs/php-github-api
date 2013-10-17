@@ -16,6 +16,16 @@ $releases = $client->api('repo')->releases()->all('twbs', 'bootstrap');
 $release = $client->api('repo')->releases()->show('twbs', 'bootstrap', $id);
 ```
 
+### Create a release
+```php
+$release = $client->api('repo')->releases()->create('twbs', 'bootstrap', array('tag_name' => 'v1.1'));
+```
+
+### Edit a release
+```php
+$release = $client->api('repo')->releases()->edit('twbs', 'bootstrap', $id, array('name' => 'New release name'));
+```
+
 ### Remove a release
 
 This works, but isn't thoroughly tested, use at your own risk.

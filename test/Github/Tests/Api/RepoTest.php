@@ -407,6 +407,16 @@ class RepoTest extends TestCase
         $this->assertInstanceOf('Github\Api\Repository\Statuses', $api->statuses());
     }
 
+    /**
+     * @test
+     */
+    public function shouldGetReleasesApiObject()
+    {
+        $api = $this->getApiMock();
+
+        $this->assertInstanceOf('Github\Api\Repository\Releases', $api->releases());
+    }
+
     protected function getApiClass()
     {
         return 'Github\Api\Repo';
