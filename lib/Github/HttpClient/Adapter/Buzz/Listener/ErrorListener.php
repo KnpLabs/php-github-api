@@ -1,6 +1,6 @@
 <?php
 
-namespace Github\HttpClient\Listener;
+namespace Github\HttpClient\Adapter\Buzz\Listener;
 
 use Buzz\Listener\ListenerInterface;
 use Buzz\Message\MessageInterface;
@@ -40,7 +40,7 @@ class ErrorListener implements ListenerInterface
      */
     public function postSend(RequestInterface $request, MessageInterface $response)
     {
-        /** @var $response \Github\HttpClient\Message\Response */
+        /** @var $response \Github\HttpClient\ResponseInterface */
         if ($response->isClientError() || $response->isServerError()) {
             $remaining = $response->getHeader('X-RateLimit-Remaining');
 
@@ -57,7 +57,7 @@ class ErrorListener implements ListenerInterface
                     foreach ($content['errors'] as $error) {
                         switch ($error['code']) {
                             case 'missing':
-                                $errors[] = sprintf('The %s %s does not exist, for resource "%s"', $error['field'], $error['value'], $error['resource']);
+                                $errors[] = sprintf('Resource "%s" not exists anymore', $error['resource']);
                                 break;
 
                             case 'missing_field':

@@ -1,8 +1,8 @@
 <?php
 
-namespace Github\Tests\HttpClient;
+namespace Github\Tests\HttpClient\Adapter\Buzz\Listener;
 
-use Github\HttpClient\Listener\ErrorListener;
+use Github\HttpClient\Adapter\Buzz\Listener\ErrorListener;
 
 class ErrorListenerTest extends \PHPUnit_Framework_TestCase
 {
@@ -11,12 +11,12 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldPassIfResponseNotHaveErrorStatus()
     {
-        $response = $this->getMock('Github\HttpClient\Message\Response');
+        $response = $this->getMock('Github\HttpClient\Adapter\Buzz\Message\Response');
         $response->expects($this->once())
             ->method('isClientError')
             ->will($this->returnValue(false));
 
-        $listener = new ErrorListener(array('api_limit' => 5000));
+        $listener = new ErrorListener();
         $listener->postSend($this->getMock('Buzz\Message\RequestInterface'), $response);
     }
 
@@ -26,7 +26,7 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldFailWhenApiLimitWasExceed()
     {
-        $response = $this->getMock('Github\HttpClient\Message\Response');
+        $response = $this->getMock('Github\HttpClient\Adapter\Buzz\Message\Response');
         $response->expects($this->once())
             ->method('isClientError')
             ->will($this->returnValue(true));
@@ -35,7 +35,7 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
             ->with('X-RateLimit-Remaining')
             ->will($this->returnValue(0));
 
-        $listener = new ErrorListener(array('api_limit' => 5000));
+        $listener = new ErrorListener();
         $listener->postSend($this->getMock('Buzz\Message\RequestInterface'), $response);
     }
 
@@ -45,7 +45,7 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldNotPassWhenContentWasNotValidJson()
     {
-        $response = $this->getMock('Github\HttpClient\Message\Response');
+        $response = $this->getMock('Github\HttpClient\Adapter\Buzz\Message\Response');
         $response->expects($this->once())
             ->method('isClientError')
             ->will($this->returnValue(true));
@@ -57,7 +57,7 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
             ->method('getContent')
             ->will($this->returnValue('fail'));
 
-        $listener = new ErrorListener(array('api_limit' => 5000));
+        $listener = new ErrorListener();
         $listener->postSend($this->getMock('Buzz\Message\RequestInterface'), $response);
     }
 
@@ -67,7 +67,7 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldNotPassWhenContentWasValidJsonButStatusIsNotCovered()
     {
-        $response = $this->getMock('Github\HttpClient\Message\Response');
+        $response = $this->getMock('Github\HttpClient\Adapter\Buzz\Message\Response');
         $response->expects($this->once())
             ->method('isClientError')
             ->will($this->returnValue(true));
@@ -82,7 +82,7 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
             ->method('getStatusCode')
             ->will($this->returnValue(404));
 
-        $listener = new ErrorListener(array('api_limit' => 5000));
+        $listener = new ErrorListener();
         $listener->postSend($this->getMock('Buzz\Message\RequestInterface'), $response);
     }
 
@@ -92,7 +92,7 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldNotPassWhen400IsSent()
     {
-        $response = $this->getMock('Github\HttpClient\Message\Response');
+        $response = $this->getMock('Github\HttpClient\Adapter\Buzz\Message\Response');
         $response->expects($this->once())
             ->method('isClientError')
             ->will($this->returnValue(true));
@@ -107,7 +107,7 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
             ->method('getStatusCode')
             ->will($this->returnValue(400));
 
-        $listener = new ErrorListener(array('api_limit' => 5000));
+        $listener = new ErrorListener();
         $listener->postSend($this->getMock('Buzz\Message\RequestInterface'), $response);
     }
 
@@ -130,7 +130,7 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $response = $this->getMock('Github\HttpClient\Message\Response');
+        $response = $this->getMock('Github\HttpClient\Adapter\Buzz\Message\Response');
         $response->expects($this->once())
             ->method('isClientError')
             ->will($this->returnValue(true));

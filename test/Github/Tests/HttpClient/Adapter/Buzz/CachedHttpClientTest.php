@@ -1,9 +1,9 @@
 <?php
 
-namespace Github\Tests\HttpClient;
+namespace Github\Tests\HttpClient\Adapter\Buzz;
 
-use Github\HttpClient\CachedHttpClient;
-use Github\HttpClient\Message\Response;
+use Github\HttpClient\Adapter\Buzz\CachedHttpClient;
+use Github\HttpClient\Adapter\Buzz\Message\Response;
 
 class CachedHttpClientTest extends HttpClientTest
 {

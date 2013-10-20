@@ -1,6 +1,6 @@
 <?php
 
-namespace Github\HttpClient;
+namespace Github\HttpClient\Adapter\Buzz;
 
 use Github\HttpClient\Cache\CacheInterface;
 use Github\HttpClient\Cache\FilesystemCache;

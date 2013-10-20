@@ -3,7 +3,7 @@
 namespace Github\Tests;
 
 use Github\Client;
-use Github\Exception\InvalidArgumentException;
+use Github\HttpClient\Adapter\Buzz\Listener\AuthListener;
 
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
@@ -14,7 +14,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $client = new Client();
 
-        $this->assertInstanceOf('Github\HttpClient\HttpClient', $client->getHttpClient());
+        $this->assertInstanceOf('Github\HttpClient\HttpClientInterface', $client->getHttpClient());
     }
 
     /**
@@ -22,57 +22,10 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldPassHttpClientInterfaceToConstructor()
     {
-        $client = new Client($this->getHttpClientMock());
-
-        $this->assertInstanceOf('Github\HttpClient\HttpClientInterface', $client->getHttpClient());
-    }
-
-    /**
-     * @test
-     * @dataProvider getAuthenticationFullData
-     */
-    public function shouldAuthenticateUsingAllGivenParameters($login, $password, $method)
-    {
         $httpClient = $this->getHttpClientMock();
-        $httpClient->expects($this->once())
-            ->method('authenticate')
-            ->with($login, $password, $method);
-
         $client = new Client($httpClient);
-        $client->authenticate($login, $password, $method);
-    }
 
-    public function getAuthenticationFullData()
-    {
-        return array(
-            array('login', 'password', Client::AUTH_HTTP_PASSWORD),
-            array('token', null, Client::AUTH_HTTP_TOKEN),
-            array('token', null, Client::AUTH_URL_TOKEN),
-            array('client_id', 'client_secret', Client::AUTH_URL_CLIENT_ID),
-        );
-    }
-
-    /**
-     * @test
-     * @dataProvider getAuthenticationPartialData
-     */
-    public function shouldAuthenticateUsingGivenParameters($token, $method)
-    {
-        $httpClient = $this->getHttpClientMock();
-        $httpClient->expects($this->once())
-            ->method('authenticate')
-            ->with($token, null, $method);
-
-        $client = new Client($httpClient);
-        $client->authenticate($token, $method);
-    }
-
-    public function getAuthenticationPartialData()
-    {
-        return array(
-            array('token', Client::AUTH_HTTP_TOKEN),
-            array('token', Client::AUTH_URL_TOKEN),
-        );
+        $this->assertEquals($httpClient, $client->getHttpClient());
     }
 
     /**
@@ -92,7 +45,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldClearHeadersLazy()
     {
-        $httpClient = $this->getHttpClientMock(array('clearHeaders'));
+        $httpClient = $this->getHttpClientMock();
         $httpClient->expects($this->once())->method('clearHeaders');
 
         $client = new Client($httpClient);
@@ -174,7 +127,11 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     public function getHttpClientMock(array $methods = array())
     {
         $methods = array_merge(
-            array('get', 'post', 'patch', 'put', 'delete', 'request', 'setOption', 'setHeaders', 'authenticate'),
+            array(
+                'get', 'post', 'patch', 'put', 'delete', 'request',
+                'setOption', 'setHeaders', 'clearHeaders', 'authenticate',
+                'getLastRequest', 'getLastResponse', 'getAPILimit', 'getAPIRemaining'
+            ),
             $methods
         );
 
