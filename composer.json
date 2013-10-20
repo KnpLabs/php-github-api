@@ -25,7 +25,7 @@
         "phpunit/phpunit":  ">=3.6.0"
     },
     "suggests": {
-        "kriswallsmith/buzz": "You may use old Buzz adapter for your project"
+        "kriswallsmith/buzz": "You may use old Buzz(>=0.7) adapter for your project"
     },
     "autoload": {
         "psr-0": { "Github\\": "lib/" }
