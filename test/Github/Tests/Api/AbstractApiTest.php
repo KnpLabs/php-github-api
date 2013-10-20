@@ -12,13 +12,15 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
     public function shouldPassGETRequestToClient()
     {
         $expectedArray = array('value');
+        $response = $this->getResponseMock($expectedArray);
 
         $httpClient = $this->getHttpMock();
         $httpClient
-            ->expects($this->any())
-            ->method('get')
-            ->with('/path', array('param1' => 'param1value'), array('header1' => 'header1value'))
-            ->will($this->returnValue($expectedArray));
+            ->expects($this->once())
+            ->method('request')
+            ->with('/path', array('param1' => 'param1value'), 'GET', array('header1' => 'header1value'))
+            ->will($this->returnValue($response));
+
         $client = $this->getClientMock();
         $client->setHttpClient($httpClient);
 
@@ -37,9 +39,10 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
         $httpClient = $this->getHttpMock();
         $httpClient
             ->expects($this->once())
-            ->method('post')
-            ->with('/path', array('param1' => 'param1value'), array('option1' => 'option1value'))
-            ->will($this->returnValue($expectedArray));
+            ->method('request')
+            ->with('/path', array('param1' => 'param1value'), 'POST', array('option1' => 'option1value'))
+            ->will($this->returnValue($this->getResponseMock($expectedArray)));
+
         $client = $this->getClientMock();
         $client->setHttpClient($httpClient);
 
@@ -58,9 +61,9 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
         $httpClient = $this->getHttpMock();
         $httpClient
             ->expects($this->once())
-            ->method('patch')
-            ->with('/path', array('param1' => 'param1value'), array('option1' => 'option1value'))
-            ->will($this->returnValue($expectedArray));
+            ->method('request')
+            ->with('/path', array('param1' => 'param1value'), 'PATCH', array('option1' => 'option1value'))
+            ->will($this->returnValue($this->getResponseMock($expectedArray)));
         $client = $this->getClientMock();
         $client->setHttpClient($httpClient);
 
@@ -79,9 +82,9 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
         $httpClient = $this->getHttpMock();
         $httpClient
             ->expects($this->once())
-            ->method('put')
-            ->with('/path', array('param1' => 'param1value'), array('option1' => 'option1value'))
-            ->will($this->returnValue($expectedArray));
+            ->method('request')
+            ->with('/path', array('param1' => 'param1value'), 'PUT', array('option1' => 'option1value'))
+            ->will($this->returnValue($this->getResponseMock($expectedArray)));
         $client = $this->getClientMock();
         $client->setHttpClient($httpClient);
 
@@ -100,9 +103,9 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
         $httpClient = $this->getHttpMock();
         $httpClient
             ->expects($this->once())
-            ->method('delete')
-            ->with('/path', array('param1' => 'param1value'), array('option1' => 'option1value'))
-            ->will($this->returnValue($expectedArray));
+            ->method('request')
+            ->with('/path', array('param1' => 'param1value'), 'DELETE', array('option1' => 'option1value'))
+            ->will($this->returnValue($this->getResponseMock($expectedArray)));
         $client = $this->getClientMock();
         $client->setHttpClient($httpClient);
 
@@ -134,7 +137,7 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
 
     protected function getHttpClientMock()
     {
-        $mock = $this->getMock('Buzz\Client\ClientInterface', array('setTimeout', 'setVerifyPeer', 'send'));
+        $mock = $this->getMock('Buzz\Client\ClientInterface', array('setTimeout', 'setVerifyPeer', 'send', 'request'));
         $mock
             ->expects($this->any())
             ->method('setTimeout')
@@ -146,6 +149,28 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
         $mock
             ->expects($this->any())
             ->method('send');
+
+        return $mock;
+    }
+
+    protected function getResponseMock($expectedValue, $times = 1)
+    {
+        $mock = $this
+            ->getMockBuilder('Github\\HttpClient\\ResponseInterface')
+            ->setMethods(array(
+                'getContent', 'getPagination',
+                'isNotModified', 'getHeaderAsString',
+                'getStatusCode', 'getRawBody',
+                'getAdapterResponse'
+            ))
+            ->getMock()
+        ;
+
+        $mock
+            ->expects($this->exactly($times))
+            ->method('getContent')
+            ->will($this->returnValue($expectedValue))
+        ;
 
         return $mock;
     }

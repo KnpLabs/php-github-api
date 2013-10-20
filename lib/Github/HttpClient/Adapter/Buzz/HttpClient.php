@@ -45,8 +45,8 @@ class HttpClient extends AbstractAdapter
      */
     protected $headers = array();
 
-    private $lastResponse;
-    private $lastRequest;
+    protected $lastResponse;
+    protected $lastRequest;
 
     /**
      * @param array           $options

@@ -3,7 +3,6 @@
 namespace Github\Tests\HttpClient\Adapter\Buzz;
 
 use Github\Client;
-use Github\HttpClient\Adapter\Buzz\Listener\AuthListener;
 use Github\HttpClient\Adapter\Buzz\HttpClient;
 use Github\HttpClient\Adapter\Buzz\Message\Request;
 use Github\HttpClient\Adapter\Buzz\Message\Response;
@@ -34,16 +33,6 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(666, $httpClient->getOption('timeout'));
     }
 
-    public function getAuthenticationFullData()
-    {
-        return array(
-            array('login', 'password', Client::AUTH_HTTP_PASSWORD),
-            array('token', null, Client::AUTH_HTTP_TOKEN),
-            array('token', null, Client::AUTH_URL_TOKEN),
-            array('client_id', 'client_secret', Client::AUTH_URL_CLIENT_ID),
-        );
-    }
-
     /**
      * @test
      */
@@ -72,8 +61,6 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
 
         $httpClient = new HttpClient(array(), $client);
         $httpClient->post($path, $parameters, $headers);
-
-        $this->assertEquals('{"a":"b"}', $httpClient->getLastRequest()->getContent());
     }
 
     /**
@@ -87,8 +74,6 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
 
         $httpClient = new HttpClient(array(), $client);
         $httpClient->post($path);
-
-        $this->assertEmpty($httpClient->getLastRequest()->getContent());
     }
 
     /**
