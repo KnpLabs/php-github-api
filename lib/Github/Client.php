@@ -4,7 +4,7 @@ namespace Github;
 
 use Github\Api\ApiInterface;
 use Github\Exception\InvalidArgumentException;
-use Github\HttpClient\Adapter\Buzz\HttpClient;
+use Github\HttpClient\Adapter\Guzzle\HttpClient;
 use Github\HttpClient\HttpClientInterface;
 
 /**

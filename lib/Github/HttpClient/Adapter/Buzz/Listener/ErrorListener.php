@@ -40,7 +40,7 @@ class ErrorListener implements ListenerInterface
      */
     public function postSend(RequestInterface $request, MessageInterface $response)
     {
-        /** @var $response \Github\HttpClient\ResponseInterface */
+        /** @var $response \Buzz\Message\Response */
         if ($response->isClientError() || $response->isServerError()) {
             $remaining = $response->getHeader('X-RateLimit-Remaining');
 

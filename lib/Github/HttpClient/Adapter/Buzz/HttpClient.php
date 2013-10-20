@@ -230,7 +230,7 @@ class HttpClient extends AbstractAdapter
      *
      * @return Request
      */
-    private function createRequest($httpMethod, $url)
+    protected function createRequest($httpMethod, $url)
     {
         $request = new BuzzRequest($httpMethod);
         $request->setHeaders($this->headers);
@@ -242,7 +242,7 @@ class HttpClient extends AbstractAdapter
     /**
      * @return Response
      */
-    private function createResponse()
+    protected function createResponse()
     {
         return new BuzzResponse();
     }

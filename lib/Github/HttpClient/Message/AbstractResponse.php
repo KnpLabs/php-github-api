@@ -2,6 +2,7 @@
 
 namespace Github\HttpClient\Message;
 
+use Github\Exception\InvalidJsonResponse;
 use Github\HttpClient\ResponseInterface;
 
 abstract class AbstractResponse implements ResponseInterface

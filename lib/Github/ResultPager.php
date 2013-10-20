@@ -14,7 +14,7 @@ use Github\HttpClient\HttpClient;
 class ResultPager implements ResultPagerInterface
 {
     /**
-     * @var Github\Client client
+     * @var \Github\Client client
      */
     protected $client;
 
