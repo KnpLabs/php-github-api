@@ -1,11 +1,13 @@
 <?php
 
-namespace Github\Tests\HttpClient;
+namespace Github\Tests\HttpClient\Adapter\Buzz;
 
+use Buzz\Message\Response as BuzzResponse;
+use Buzz\Message\Request as BuzzRequest;
 use Github\Client;
-use Github\HttpClient\HttpClient;
-use Github\HttpClient\Message\Request;
-use Github\HttpClient\Message\Response;
+use Github\HttpClient\Adapter\Buzz\HttpClient;
+use Github\HttpClient\Adapter\Buzz\Message\Request;
+use Github\HttpClient\Adapter\Buzz\Message\Response;
 
 class HttpClientTest extends \PHPUnit_Framework_TestCase
 {
@@ -31,29 +33,6 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $httpClient->setOption('timeout', 666);
 
         $this->assertEquals(666, $httpClient->getOption('timeout'));
-    }
-
-    /**
-     * @test
-     * @dataProvider getAuthenticationFullData
-     */
-    public function shouldAuthenticateUsingAllGivenParameters($login, $password, $method)
-    {
-        $client = new TestHttpClient();
-        $client->authenticate($login, $password, $method);
-
-        $this->assertCount(2, $client->listeners);
-        $this->assertInstanceOf('Github\HttpClient\Listener\AuthListener', $client->listeners['Github\HttpClient\Listener\AuthListener']);
-    }
-
-    public function getAuthenticationFullData()
-    {
-        return array(
-            array('login', 'password', Client::AUTH_HTTP_PASSWORD),
-            array('token', null, Client::AUTH_HTTP_TOKEN),
-            array('token', null, Client::AUTH_URL_TOKEN),
-            array('client_id', 'client_secret', Client::AUTH_URL_CLIENT_ID),
-        );
     }
 
     /**
@@ -84,8 +63,6 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
 
         $httpClient = new HttpClient(array(), $client);
         $httpClient->post($path, $parameters, $headers);
-
-        $this->assertEquals('{"a":"b"}', $httpClient->getLastRequest()->getContent());
     }
 
     /**
@@ -99,8 +76,6 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
 
         $httpClient = new HttpClient(array(), $client);
         $httpClient->post($path);
-
-        $this->assertEmpty($httpClient->getLastRequest()->getContent());
     }
 
     /**
@@ -171,8 +146,8 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $parameters = array('a' => 'b');
         $headers    = array('c' => 'd');
 
-        $response = new Response();
-        $response->addHeader("Link:<page1>; rel=\"page2\", \n<page3>; rel=\"page4\"");
+        $response = new Response(new BuzzResponse());
+        $response->getAdapterResponse()->addHeader("Link:<page1>; rel=\"page2\", \n<page3>; rel=\"page4\"");
 
         $client = $this->getBrowserMock();
 
@@ -191,10 +166,30 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $parameters = array('a' => 'b');
         $headers    = array('c' => 'd');
 
-        $message = $this->getMock('Github\HttpClient\Message\Response');
+        $buzzMessage = $this
+            ->getMockBuilder('Buzz\Message\Response')
+            ->getMock();
+
+        $buzzMessage->expects($this->once())
+            ->method('isClientError')
+            ->will($this->returnValue(false));
+
+        $buzzMessage->expects($this->once())
+            ->method('isServerError')
+            ->will($this->returnValue(false));
+
+        $message = $this
+            ->getMockBuilder('Github\HttpClient\Adapter\Buzz\Message\Response')
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $message->expects($this->once())
             ->method('getContent')
             ->will($this->returnValue('Just raw context'));
+
+        $message->expects($this->exactly(2))
+            ->method('getAdapterResponse')
+            ->will($this->returnValue($buzzMessage));
 
         $client = $this->getBrowserMock();
 
@@ -204,7 +199,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $response = $httpClient->get($path, $parameters, $headers);
 
         $this->assertEquals("Just raw context", $response->getContent());
-        $this->assertInstanceOf('Buzz\Message\MessageInterface', $response);
+        $this->assertInstanceOf('Buzz\Message\MessageInterface', $response->getAdapterResponse());
     }
 
     /**
@@ -217,14 +212,72 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $parameters = array('a' => 'b');
         $headers    = array('c' => 'd');
 
-        $response = new Response();
-        $response->addHeader('HTTP/1.1 403 Forbidden');
-        $response->addHeader('X-RateLimit-Remaining: 0');
+        $response = new Response(new BuzzResponse());
+        $response->getAdapterResponse()->addHeader('HTTP/1.1 403 Forbidden');
+        $response->getAdapterResponse()->addHeader('X-RateLimit-Remaining: 0');
 
         $httpClient = new TestHttpClient(array(), $this->getBrowserMock());
         $httpClient->fakeResponse = $response;
 
         $httpClient->get($path, $parameters, $headers);
+    }
+
+    /**
+     * @test
+     * @dataProvider getAuthenticationFullData
+     */
+    public function shouldAuthenticateUsingAllGivenParameters($login, $password, $method)
+    {
+        $httpClient = new HttpClient();
+
+        $n = count($httpClient->getListeners());
+
+        $httpClient->authenticate($method, $login, $password);
+
+        $listeners = $httpClient->getListeners();
+        $this->assertCount($n + 1, $listeners);
+
+        $listener = array_pop($listeners);
+        $this->assertEquals($method, $listener->getMethod());
+        $this->assertEquals(array('tokenOrLogin' => $login, 'password' => $password), $listener->getOptions());
+    }
+
+    public function getAuthenticationFullData()
+    {
+        return array(
+            array('login', 'password', Client::AUTH_HTTP_PASSWORD),
+            array('token', null, Client::AUTH_HTTP_TOKEN),
+            array('token', null, Client::AUTH_URL_TOKEN),
+            array('client_id', 'client_secret', Client::AUTH_URL_CLIENT_ID),
+        );
+    }
+
+    /**
+     * @test
+     * @dataProvider getAuthenticationPartialData
+     */
+    public function shouldAuthenticateUsingGivenParameters($token, $method)
+    {
+        $httpClient = new HttpClient();
+
+        $n = count($httpClient->getListeners());
+
+        $httpClient->authenticate($method, $token);
+
+        $listeners = $httpClient->getListeners();
+        $this->assertCount($n + 1, $listeners);
+
+        $listener = array_pop($listeners);
+        $this->assertEquals($method, $listener->getMethod());
+        $this->assertEquals(array('tokenOrLogin' => $token, 'password' => null), $listener->getOptions());
+    }
+
+    public function getAuthenticationPartialData()
+    {
+        return array(
+            array('token', Client::AUTH_HTTP_TOKEN),
+            array('token', Client::AUTH_URL_TOKEN),
+        );
     }
 
     protected function getBrowserMock(array $methods = array())
@@ -259,7 +312,7 @@ class TestHttpClient extends HttpClient
         $response = $this->createResponse();
         if (0 < count($this->listeners)) {
             foreach ($this->listeners as $listener) {
-                $listener->postSend($request, $response);
+                $listener->postSend($request->getAdapterRequest(), $response->getAdapterResponse());
             }
         }
 
@@ -268,11 +321,11 @@ class TestHttpClient extends HttpClient
 
     protected function createRequest($httpMethod, $url)
     {
-        return new Request($httpMethod);
+        return new Request(new BuzzRequest($httpMethod));
     }
 
     protected function createResponse()
     {
-        return $this->fakeResponse ?: new Response();
+        return $this->fakeResponse ?: new Response(new BuzzResponse());
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Github\HttpClient\Listener;
+namespace Github\HttpClient\Adapter\Buzz\Listener;
 
 use Buzz\Listener\ListenerInterface;
 use Buzz\Message\MessageInterface;
@@ -40,7 +40,7 @@ class ErrorListener implements ListenerInterface
      */
     public function postSend(RequestInterface $request, MessageInterface $response)
     {
-        /** @var $response \Github\HttpClient\Message\Response */
+        /** @var $response \Buzz\Message\Response */
         if ($response->isClientError() || $response->isServerError()) {
             $remaining = $response->getHeader('X-RateLimit-Remaining');
 

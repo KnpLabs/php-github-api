@@ -1,11 +1,11 @@
 <?php
 
-namespace Github\Tests\HttpClient;
+namespace Github\Tests\HttpClient\Adapter\Buzz\Listener;
 
 use Github\Client;
-use Github\Exception\InvalidArgumentException;
-use Github\HttpClient\Listener\AuthListener;
-use Github\HttpClient\Message\Request;
+use Github\HttpClient\Adapter\Buzz\Listener\AuthListener;
+use Github\HttpClient\Adapter\Buzz\Message\Request;
+use Buzz\Message\Request as BuzzRequest;
 
 class AuthListenerTest extends \PHPUnit_Framework_TestCase
 {
@@ -156,7 +156,7 @@ class AuthListenerTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldSetTokenInUrlForAuthUrlMethod()
     {
-        $request = new Request(Request::METHOD_GET, '/res');
+        $request = new BuzzRequest(BuzzRequest::METHOD_GET, '/res');
 
         $listener = new AuthListener(Client::AUTH_URL_TOKEN, array('tokenOrLogin' => 'test'));
         $listener->preSend($request);
@@ -169,7 +169,7 @@ class AuthListenerTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldSetClientDetailsInUrlForAuthUrlMethod()
     {
-        $request = new Request(Request::METHOD_GET, '/res');
+        $request = new BuzzRequest(BuzzRequest::METHOD_GET, '/res');
 
         $listener = new AuthListener(Client::AUTH_URL_CLIENT_ID, array('tokenOrLogin' => 'clientId', 'password' => 'clientSsecret'));
         $listener->preSend($request);

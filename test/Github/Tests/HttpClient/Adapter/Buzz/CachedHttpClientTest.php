@@ -1,9 +1,10 @@
 <?php
 
-namespace Github\Tests\HttpClient;
+namespace Github\Tests\HttpClient\Adapter\Buzz;
 
-use Github\HttpClient\CachedHttpClient;
-use Github\HttpClient\Message\Response;
+use Buzz\Message\Response as BuzzResponse;
+use Github\HttpClient\Adapter\Buzz\CachedHttpClient;
+use Github\HttpClient\Adapter\Buzz\Message\Response;
 
 class CachedHttpClientTest extends HttpClientTest
 {
@@ -20,7 +21,7 @@ class CachedHttpClientTest extends HttpClientTest
         );
         $httpClient->setCache($cache);
 
-        $cache->expects($this->once())->method('set')->with('test', new Response);
+        $cache->expects($this->once())->method('set')->with('test', new Response(new BuzzResponse()));
 
         $httpClient->get('test');
     }
@@ -35,7 +36,7 @@ class CachedHttpClientTest extends HttpClientTest
 
         $cache = $this->getCacheMock();
 
-        $response = new Response;
+        $response = new BuzzResponse();
         $response->addHeader('HTTP/1.1 304 Not Modified');
 
         $httpClient = new TestCachedHttpClient(
@@ -60,7 +61,7 @@ class CachedHttpClientTest extends HttpClientTest
 
         $cache = $this->getCacheMock();
 
-        $response = new Response;
+        $response = new BuzzResponse();
         $response->addHeader('HTTP/1.1 200 OK');
 
         $httpClient = new TestCachedHttpClient(
@@ -70,7 +71,7 @@ class CachedHttpClientTest extends HttpClientTest
         $httpClient->setCache($cache);
         $httpClient->fakeResponse = $response;
 
-        $cache->expects($this->once())->method('set')->with('test', $response);
+        $cache->expects($this->once())->method('set')->with('test', new Response($response));
         $cache->expects($this->once())->method('getModifiedSince')->with('test')->will($this->returnValue(1256953732));
 
         $httpClient->get('test');
@@ -88,6 +89,6 @@ class TestCachedHttpClient extends CachedHttpClient
 
     protected function createResponse()
     {
-        return $this->fakeResponse ?: new Response();
+        return $this->fakeResponse ?: new BuzzResponse();
     }
 }

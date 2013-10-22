@@ -4,7 +4,7 @@ namespace Github;
 
 use Github\Api\ApiInterface;
 use Github\Exception\InvalidArgumentException;
-use Github\HttpClient\HttpClient;
+use Github\HttpClient\Adapter\Guzzle\HttpClient;
 use Github\HttpClient\HttpClientInterface;
 
 /**
@@ -161,7 +161,35 @@ class Client
             $password   = null;
         }
 
-        $this->getHttpClient()->authenticate($tokenOrLogin, $password, $authMethod);
+        switch ($authMethod) {
+            case Client::AUTH_HTTP_PASSWORD:
+                if (!$tokenOrLogin || !$password) {
+                    throw new InvalidArgumentException('You need to set username with password!');
+                }
+                break;
+            case Client::AUTH_HTTP_TOKEN:
+                if (!$tokenOrLogin) {
+                    throw new InvalidArgumentException('You need to set OAuth token!');
+                }
+                break;
+            case Client::AUTH_URL_CLIENT_ID:
+                if (!$tokenOrLogin || !$password) {
+                    throw new InvalidArgumentException('You need to set client_id and client_secret!');
+                }
+                break;
+            case Client::AUTH_URL_TOKEN:
+                if (!$tokenOrLogin) {
+                    throw new InvalidArgumentException('You need to set OAuth token!');
+                }
+                break;
+        }
+
+        $this->getHttpClient()->authenticate($authMethod, $tokenOrLogin, $password);
+    }
+
+    public function executeRequest($method, $path, $parameters, $headers)
+    {
+        return $this->getHttpClient()->request($path, $parameters, $method, $headers)->getContent();
     }
 
     /**

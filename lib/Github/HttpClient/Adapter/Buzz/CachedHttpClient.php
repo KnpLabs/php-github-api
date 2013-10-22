@@ -1,9 +1,10 @@
 <?php
 
-namespace Github\HttpClient;
+namespace Github\HttpClient\Adapter\Buzz;
 
 use Github\HttpClient\Cache\CacheInterface;
 use Github\HttpClient\Cache\FilesystemCache;
+use Github\HttpClient\Adapter\Buzz\Message\Response;
 
 /**
  * Performs requests on GitHub API using If-Modified-Since headers.
@@ -44,16 +45,16 @@ class CachedHttpClient extends HttpClient
      */
     public function request($path, array $parameters = array(), $httpMethod = 'GET', array $headers = array())
     {
-        $response = parent::request($path, $parameters, $httpMethod, $headers);
+        $buzzResponse = parent::request($path, $parameters, $httpMethod, $headers);
 
         $key = trim($this->options['base_url'].$path, '/');
-        if (304 == $response->getStatusCode()) {
+        if (304 == $buzzResponse->getStatusCode()) {
             return $this->getCache()->get($key);
         }
 
-        $this->getCache()->set($key, $response);
+        $this->getCache()->set($key, new Response($buzzResponse));
 
-        return $response;
+        return $buzzResponse;
     }
 
     /**

@@ -97,7 +97,7 @@ class ResultPagerTest extends \PHPUnit_Framework_TestCase
         );
 
         // response mock
-        $responseMock = $this->getMock('Github\HttpClient\Message\Response');
+        $responseMock = $this->getMock('Github\HttpClient\Message\AbstractResponse');
         $responseMock
             ->expects($this->any())
             ->method('getPagination')
@@ -187,7 +187,7 @@ class ResultPagerTest extends \PHPUnit_Framework_TestCase
     protected function getResponseMock(array $pagination)
     {
         // response mock
-        $responseMock = $this->getMock('Github\HttpClient\Message\Response');
+        $responseMock = $this->getMock('Github\HttpClient\Message\AbstractResponse');
         $responseMock
             ->expects($this->any())
             ->method('getPagination')
@@ -211,22 +211,7 @@ class ResultPagerTest extends \PHPUnit_Framework_TestCase
 
     protected function getHttpClientMock($responseMock = null)
     {
-        // mock the client interface
-        $clientInterfaceMock = $this->getMock('Buzz\Client\ClientInterface', array('setTimeout', 'setVerifyPeer', 'send'));
-        $clientInterfaceMock
-            ->expects($this->any())
-            ->method('setTimeout')
-            ->with(10);
-        $clientInterfaceMock
-            ->expects($this->any())
-            ->method('setVerifyPeer')
-            ->with(false);
-        $clientInterfaceMock
-            ->expects($this->any())
-            ->method('send');
-
-        // create the httpClient mock
-        $httpClientMock = $this->getMock('Github\HttpClient\HttpClient', array(), array(array(), $clientInterfaceMock));
+        $httpClientMock = $this->getMock('Github\HttpClient\AbstractAdapter', array());
 
         if ($responseMock) {
             $httpClientMock

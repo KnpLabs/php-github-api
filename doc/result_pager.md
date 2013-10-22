@@ -21,7 +21,7 @@ $client = new Github\Client();
 
 $organizationApi = $client->api('organization');
 
-$paginator  = new Github\ResultPager( $client );
+$paginator  = new Github\ResultPager($client);
 $parameters = array('github');
 $result     = $paginator->fetch($organizationApi, 'repositories', $parameters);
 ```

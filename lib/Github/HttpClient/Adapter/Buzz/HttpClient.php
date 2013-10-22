@@ -1,24 +1,26 @@
 <?php
 
-namespace Github\HttpClient;
+namespace Github\HttpClient\Adapter\Buzz;
 
+use Buzz\Client\Curl;
 use Buzz\Client\ClientInterface;
 use Buzz\Listener\ListenerInterface;
-
+use Buzz\Message\Request as BuzzRequest;
+use Buzz\Message\Response as BuzzResponse;
 use Github\Exception\ErrorException;
 use Github\Exception\RuntimeException;
-use Github\HttpClient\Listener\AuthListener;
-use Github\HttpClient\Listener\ErrorListener;
-use Github\HttpClient\Message\Request;
-use Github\HttpClient\Message\Response;
-use Buzz\Client\Curl;
+use Github\HttpClient\AbstractAdapter;
+use Github\HttpClient\Adapter\Buzz\Listener\AuthListener;
+use Github\HttpClient\Adapter\Buzz\Listener\ErrorListener;
+use Github\HttpClient\Adapter\Buzz\Message\Request;
+use Github\HttpClient\Adapter\Buzz\Message\Response;
 
 /**
  * Performs requests on GitHub API. API documentation should be self-explanatory.
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
-class HttpClient implements HttpClientInterface
+class HttpClient extends AbstractAdapter
 {
     /**
      * @var array
@@ -43,8 +45,8 @@ class HttpClient implements HttpClientInterface
      */
     protected $headers = array();
 
-    private $lastResponse;
-    private $lastRequest;
+    protected $lastResponse;
+    protected $lastRequest;
 
     /**
      * @param array           $options
@@ -63,19 +65,6 @@ class HttpClient implements HttpClientInterface
         $this->addListener(new ErrorListener($this->options));
 
         $this->clearHeaders();
-    }
-
-    public function authenticate($tokenOrLogin, $password, $authMethod)
-    {
-         $this->addListener(
-            new AuthListener(
-                $authMethod,
-                array(
-                     'tokenOrLogin' => $tokenOrLogin,
-                     'password'     => $password
-                )
-            )
-        );
     }
 
     /**
@@ -111,6 +100,16 @@ class HttpClient implements HttpClientInterface
     public function addListener(ListenerInterface $listener)
     {
         $this->listeners[get_class($listener)] = $listener;
+    }
+
+    /**
+     * Returns listeners
+     *
+     * @return array
+     */
+    public function getListeners()
+    {
+        return $this->listeners;
     }
 
     /**
@@ -172,11 +171,8 @@ class HttpClient implements HttpClientInterface
             $request->setContent(json_encode($parameters, empty($parameters) ? JSON_FORCE_OBJECT : 0));
         }
 
-        $hasListeners = 0 < count($this->listeners);
-        if ($hasListeners) {
-            foreach ($this->listeners as $listener) {
-                $listener->preSend($request);
-            }
+        foreach ($this->listeners as $listener) {
+            $listener->preSend($request);
         }
 
         $response = $this->createResponse();
@@ -189,24 +185,30 @@ class HttpClient implements HttpClientInterface
             throw new RuntimeException($e->getMessage());
         }
 
-        $this->lastRequest  = $request;
-        $this->lastResponse = $response;
-
-        if ($hasListeners) {
-            foreach ($this->listeners as $listener) {
-                $listener->postSend($request, $response);
-            }
+        foreach ($this->listeners as $listener) {
+            $listener->postSend($request, $response);
         }
+
+        $this->lastRequest  = new Request($request);
+        $this->lastResponse = new Response($response);
 
         return $response;
     }
 
     /**
-     * @return Request
+     * {@inheritdoc}
      */
-    public function getLastRequest()
+    public function authenticate($method, $tokenOrLogin, $password = null)
     {
-        return $this->lastRequest;
+        $this->addListener(
+            new AuthListener(
+                $method,
+                array(
+                    'tokenOrLogin' => $tokenOrLogin,
+                    'password'     => $password
+                )
+            )
+        );
     }
 
     /**
@@ -221,11 +223,11 @@ class HttpClient implements HttpClientInterface
      * @param string $httpMethod
      * @param string $url
      *
-     * @return Request
+     * @return BuzzRequest
      */
     protected function createRequest($httpMethod, $url)
     {
-        $request = new Request($httpMethod);
+        $request = new BuzzRequest($httpMethod);
         $request->setHeaders($this->headers);
         $request->fromUrl($url);
 
@@ -233,10 +235,10 @@ class HttpClient implements HttpClientInterface
     }
 
     /**
-     * @return Response
+     * @return BuzzResponse
      */
     protected function createResponse()
     {
-        return new Response();
+        return new BuzzResponse();
     }
 }
