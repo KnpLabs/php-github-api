@@ -12,6 +12,16 @@ use Github\Exception\MissingArgumentException;
 class Assets extends AbstractApi
 {
     /**
+     * @deprecated Will be removed as soon as gh releases api gets stable
+     */
+    public function configure()
+    {
+        $this->client->setHeaders(array(
+            'Accept: application/vnd.github.manifold-preview'
+        ));
+    }
+
+    /**
      * Get all release's assets in selected repository
      * GET /repos/:owner/:repo/releases/:id/assets
      *
