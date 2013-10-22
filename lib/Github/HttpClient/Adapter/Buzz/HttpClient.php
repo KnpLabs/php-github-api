@@ -171,11 +171,8 @@ class HttpClient extends AbstractAdapter
             $request->setContent(json_encode($parameters, empty($parameters) ? JSON_FORCE_OBJECT : 0));
         }
 
-        $hasListeners = 0 < count($this->listeners);
-        if ($hasListeners) {
-            foreach ($this->listeners as $listener) {
-                $listener->preSend($request);
-            }
+        foreach ($this->listeners as $listener) {
+            $listener->preSend($request);
         }
 
         $response = $this->createResponse();
@@ -188,10 +185,8 @@ class HttpClient extends AbstractAdapter
             throw new RuntimeException($e->getMessage());
         }
 
-        if ($hasListeners) {
-            foreach ($this->listeners as $listener) {
-                $listener->postSend($request, $response);
-            }
+        foreach ($this->listeners as $listener) {
+            $listener->postSend($request, $response);
         }
 
         $this->lastRequest  = new Request($request);
@@ -228,7 +223,7 @@ class HttpClient extends AbstractAdapter
      * @param string $httpMethod
      * @param string $url
      *
-     * @return Request
+     * @return BuzzRequest
      */
     protected function createRequest($httpMethod, $url)
     {
@@ -240,7 +235,7 @@ class HttpClient extends AbstractAdapter
     }
 
     /**
-     * @return Response
+     * @return BuzzResponse
      */
     protected function createResponse()
     {

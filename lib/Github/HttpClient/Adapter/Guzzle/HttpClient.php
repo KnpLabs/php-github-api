@@ -2,13 +2,14 @@
 
 namespace Github\HttpClient\Adapter\Guzzle;
 
-use Github\Client as GithubClient;
+use Github\Client;
 use Github\Exception\RuntimeException;
 use Github\HttpClient\Adapter\Guzzle\Message\Response;
 use Github\HttpClient\AbstractAdapter;
 use Guzzle\Common\Event;
 use Guzzle\Http\ClientInterface;
-use Guzzle\Http\Client;
+use Guzzle\Http\Client as GuzzleClient;
+use Guzzle\Common\Exception\GuzzleException;
 
 class HttpClient extends AbstractAdapter
 {
@@ -23,15 +24,15 @@ class HttpClient extends AbstractAdapter
      */
     public function __construct(array $options = array(), ClientInterface $client = null)
     {
-        $client = $client ? : new Client();
+        $client = $client ? : new GuzzleClient();
 
         $client->setBaseUrl($this->options['base_url']);
         $client->setSslVerification(false);
 
-        $opts = $client->getConfig(Client::CURL_OPTIONS);
+        $opts = $client->getConfig(GuzzleClient::CURL_OPTIONS);
         $opts[CURLOPT_TIMEOUT] = $this->options['timeout'];
 
-        $client->getConfig()->set(Client::CURL_OPTIONS, $opts);
+        $client->getConfig()->set(GuzzleClient::CURL_OPTIONS, $opts);
 
         $this->options = array_merge($this->options, $options);
         $this->client = $client;
@@ -96,7 +97,7 @@ class HttpClient extends AbstractAdapter
 
         try {
             $response = new Response($request->send());
-        } catch (\Guzzle\Common\Exception\GuzzleException $e) {
+        } catch (GuzzleException $e) {
             throw new RuntimeException($e->getMessage());
         }
 
@@ -112,18 +113,23 @@ class HttpClient extends AbstractAdapter
     public function authenticate($method, $tokenOrLogin, $password = null)
     {
         switch ($method) {
-            case GithubClient::AUTH_HTTP_PASSWORD:
-                $this->client->getEventDispatcher()->addListener('request.create', function (Event $event) {
-                    $event['request']->setHeader('Authorization', sprintf('Basic ', base64_encode($tokenOrLogin . ':' . $password)));
-                });
+            case Client::AUTH_HTTP_PASSWORD:
+                $handler = function (Event $event) use ($tokenOrLogin, $password) {
+                    $event['request']->setHeader(
+                        'Authorization',
+                        sprintf('Basic ', base64_encode($tokenOrLogin . ':' . $password))
+                    );
+                };
                 break;
-            case GithubClient::AUTH_HTTP_TOKEN:
-                $this->client->getEventDispatcher()->addListener('request.create', function (Event $event) {
+
+            case Client::AUTH_HTTP_TOKEN:
+                $handler = function (Event $event) use ($tokenOrLogin, $password) {
                     $event['request']->setHeader('Authorization', sprintf('token ', $tokenOrLogin));
-                });
+                };
                 break;
-            case GithubClient::AUTH_URL_CLIENT_ID:
-                $this->client->getEventDispatcher()->addListener('request.create', function (Event $event) {
+
+            case Client::AUTH_URL_CLIENT_ID:
+                $handler = function (Event $event) use ($tokenOrLogin, $password) {
                     $url = $event['request']->getUrl();
 
                     $parameters = array(
@@ -131,22 +137,28 @@ class HttpClient extends AbstractAdapter
                         'client_secret' => $password,
                     );
 
-                    $url .= (false === strpos($url, '?') ? '?' : '&') . utf8_encode(http_build_query($parameters, '', '&'));
+                    $url .= (false === strpos($url, '?') ? '?' : '&');
+                    $url .= utf8_encode(http_build_query($parameters, '', '&'));
 
                     $event['request']->setUrl($url);
-                });
+                };
                 break;
-            case GithubClient::AUTH_URL_TOKEN:
-                $this->client->getEventDispatcher()->addListener('request.create', function (Event $event) {
+
+            case Client::AUTH_URL_TOKEN:
+                $handler = function (Event $event) use ($tokenOrLogin, $password) {
                     $url = $event['request']->getUrl();
-                    $url .= (false === strpos($url, '?') ? '?' : '&') . utf8_encode(http_build_query(array('access_token' => $tokenOrLogin), '', '&'));
+                    $url .= (false === strpos($url, '?') ? '?' : '&');
+                    $url .= utf8_encode(http_build_query(array('access_token' => $tokenOrLogin), '', '&'));
 
                     $event['request']->setUrl($url);
-                });
+                };
                 break;
+
             default:
                 throw new RuntimeException(sprintf('%s not yet implemented', $method));
                 break;
         }
+
+        $this->client->getEventDispatcher()->addListener('request.create', $handler);
     }
 }
