@@ -57,7 +57,7 @@ class ErrorListener implements ListenerInterface
                     foreach ($content['errors'] as $error) {
                         switch ($error['code']) {
                             case 'missing':
-                                $errors[] = sprintf('Resource "%s" not exists anymore', $error['resource']);
+                                $errors[] = sprintf('The %s %s does not exist, for resource "%s"', $error['field'], $error['value'], $error['resource']);
                                 break;
 
                             case 'missing_field':
