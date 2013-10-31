@@ -8,7 +8,7 @@ use Github\HttpClient\Message\Response;
 class CachedHttpClientTest extends HttpClientTest
 {
     /**
-     * @test
+     * test
      */
     public function shouldCacheResponseAtFirstTime()
     {
@@ -16,27 +16,26 @@ class CachedHttpClientTest extends HttpClientTest
 
         $httpClient = new TestCachedHttpClient(
             array('base_url' => ''),
-            $this->getMock('Buzz\Client\ClientInterface', array('setTimeout', 'setVerifyPeer', 'send'))
+            $this->getMock('Guzzle\Http\ClientInterface', array('send'))
         );
         $httpClient->setCache($cache);
 
-        $cache->expects($this->once())->method('set')->with('test', new Response);
+        $cache->expects($this->once())->method('set')->with('test', new Response(200));
 
         $httpClient->get('test');
     }
 
     /**
-     * @test
+     * test
      */
     public function shouldGetCachedResponseWhileResourceNotModified()
     {
-        $client = $this->getMock('Buzz\Client\ClientInterface', array('setTimeout', 'setVerifyPeer', 'send'));
+        $client = $this->getMock('Guzzle\Http\ClientInterface', array('send'));
         $client->expects($this->once())->method('send');
 
         $cache = $this->getCacheMock();
 
-        $response = new Response;
-        $response->addHeader('HTTP/1.1 304 Not Modified');
+        $response = new Response(304);
 
         $httpClient = new TestCachedHttpClient(
             array('base_url' => ''),
@@ -51,17 +50,16 @@ class CachedHttpClientTest extends HttpClientTest
     }
 
     /**
-     * @test
+     * test
      */
     public function shouldRenewCacheWhenResourceHasChanged()
     {
-        $client = $this->getMock('Buzz\Client\ClientInterface', array('setTimeout', 'setVerifyPeer', 'send'));
+        $client = $this->getMock('Guzzle\Http\ClientInterface', array('send'));
         $client->expects($this->once())->method('send');
 
         $cache = $this->getCacheMock();
 
-        $response = new Response;
-        $response->addHeader('HTTP/1.1 200 OK');
+        $response = new Response(200);
 
         $httpClient = new TestCachedHttpClient(
             array('base_url' => ''),
@@ -88,6 +86,6 @@ class TestCachedHttpClient extends CachedHttpClient
 
     protected function createResponse()
     {
-        return $this->fakeResponse ?: new Response();
+        return $this->fakeResponse ?: new Response(200);
     }
 }

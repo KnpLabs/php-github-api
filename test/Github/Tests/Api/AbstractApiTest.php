@@ -134,15 +134,7 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
 
     protected function getHttpClientMock()
     {
-        $mock = $this->getMock('Buzz\Client\ClientInterface', array('setTimeout', 'setVerifyPeer', 'send'));
-        $mock
-            ->expects($this->any())
-            ->method('setTimeout')
-            ->with(10);
-        $mock
-            ->expects($this->any())
-            ->method('setVerifyPeer')
-            ->with(false);
+        $mock = $this->getMock('Guzzle\Http\Client', array('send'));
         $mock
             ->expects($this->any())
             ->method('send');

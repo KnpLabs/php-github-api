@@ -8,15 +8,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
 
     protected function getApiMock()
     {
-        $httpClient = $this->getMock('Buzz\Client\ClientInterface', array('setTimeout', 'setVerifyPeer', 'send'));
-        $httpClient
-            ->expects($this->any())
-            ->method('setTimeout')
-            ->with(10);
-        $httpClient
-            ->expects($this->any())
-            ->method('setVerifyPeer')
-            ->with(false);
+        $httpClient = $this->getMock('Guzzle\Http\Client', array('send'));
         $httpClient
             ->expects($this->any())
             ->method('send');

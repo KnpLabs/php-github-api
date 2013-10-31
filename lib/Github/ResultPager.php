@@ -3,7 +3,6 @@
 namespace Github;
 
 use Github\Api\ApiInterface;
-use Github\HttpClient\HttpClient;
 
 /**
  * Pager class for supporting pagination in github classes
@@ -14,7 +13,7 @@ use Github\HttpClient\HttpClient;
 class ResultPager implements ResultPagerInterface
 {
     /**
-     * @var Github\Client client
+     * @var \Github\Client client
      */
     protected $client;
 

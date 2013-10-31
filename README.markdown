@@ -15,7 +15,7 @@ Uses [GitHub API v3](http://developer.github.com/v3/). The object API is very si
 ## Requirements
 
 * PHP >= 5.3.2 with [cURL](http://php.net/manual/en/book.curl.php) extension,
-* [Buzz](https://github.com/kriswallsmith/Buzz) library,
+* [Guzzle](https://github.com/guzzle/guzzle) library,
 * (optional) PHPUnit to run tests.
 
 ## Autoload

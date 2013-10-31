@@ -2,9 +2,10 @@
 
 namespace Github\HttpClient\Listener;
 
-use Buzz\Listener\ListenerInterface;
-use Buzz\Message\MessageInterface;
-use Buzz\Message\RequestInterface;
+use Guzzle\Common\Event;
+use Guzzle\Http\Message\Response as GuzzleResponse;
+
+use Github\HttpClient\Message\Response;
 use Github\Exception\ApiLimitExceedException;
 use Github\Exception\ErrorException;
 use Github\Exception\RuntimeException;
@@ -13,7 +14,7 @@ use Github\Exception\ValidationFailedException;
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
-class ErrorListener implements ListenerInterface
+class ErrorListener
 {
     /**
      * @var array
@@ -31,18 +32,14 @@ class ErrorListener implements ListenerInterface
     /**
      * {@inheritDoc}
      */
-    public function preSend(RequestInterface $request)
+    public function onRequestError(Event $event)
     {
-    }
+        /** @var $request \Guzzle\Http\Message\Request */
+        $request = $event['request'];
+        $response = $this->createResponse($request->getResponse());
 
-    /**
-     * {@inheritDoc}
-     */
-    public function postSend(RequestInterface $request, MessageInterface $response)
-    {
-        /** @var $response \Github\HttpClient\Message\Response */
         if ($response->isClientError() || $response->isServerError()) {
-            $remaining = $response->getHeader('X-RateLimit-Remaining');
+            $remaining = (string) $response->getHeader('X-RateLimit-Remaining');
 
             if (null !== $remaining && 1 > $remaining && 'rate_limit' !== substr($request->getResource(), 1, 10)) {
                 throw new ApiLimitExceedException($this->options['api_limit']);
@@ -84,6 +81,15 @@ class ErrorListener implements ListenerInterface
             }
 
             throw new RuntimeException(isset($content['message']) ? $content['message'] : $content, $response->getStatusCode());
+        };
+    }
+
+    protected function createResponse(GuzzleResponse $response)
+    {
+        if (!($response instanceof Response)) {
+            return Response::fromMessage($response);
+        } else {
+            return $response;
         }
     }
 }

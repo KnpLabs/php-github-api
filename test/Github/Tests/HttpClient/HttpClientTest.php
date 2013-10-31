@@ -4,8 +4,9 @@ namespace Github\Tests\HttpClient;
 
 use Github\Client;
 use Github\HttpClient\HttpClient;
-use Github\HttpClient\Message\Request;
 use Github\HttpClient\Message\Response;
+use Guzzle\Plugin\Mock\MockPlugin;
+use Guzzle\Http\Client as GuzzleClient;
 
 class HttpClientTest extends \PHPUnit_Framework_TestCase
 {
@@ -39,11 +40,16 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldAuthenticateUsingAllGivenParameters($login, $password, $method)
     {
-        $client = new TestHttpClient();
-        $client->authenticate($login, $password, $method);
+        $client = new GuzzleClient();
 
-        $this->assertCount(2, $client->listeners);
-        $this->assertInstanceOf('Github\HttpClient\Listener\AuthListener', $client->listeners['Github\HttpClient\Listener\AuthListener']);
+        $httpClient = new TestHttpClient(array(), $client);
+        $httpClient->authenticate($login, $password, $method);
+
+        $this->assertCount(1, $client->getEventDispatcher()->getListeners('request.create'));
+        $this->assertInstanceOf(
+            'Github\HttpClient\Listener\AuthListener',
+            current(current($client->getEventDispatcher()->getListeners('request.create')))
+        );
     }
 
     public function getAuthenticationFullData()
@@ -81,11 +87,12 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $headers    = array('c' => 'd');
 
         $client = $this->getBrowserMock();
+        $client->expects($this->once())
+            ->method('send')
+            ->with($this->anything(), $this->isType('array'), '{"a":"b"}');
 
         $httpClient = new HttpClient(array(), $client);
         $httpClient->post($path, $parameters, $headers);
-
-        $this->assertEquals('{"a":"b"}', $httpClient->getLastRequest()->getContent());
     }
 
     /**
@@ -97,10 +104,12 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
 
         $client = $this->getBrowserMock();
 
+        $client->expects($this->once())
+            ->method('send')
+            ->with($this->anything(), $this->isType('array'), $this->isEmpty());
+
         $httpClient = new HttpClient(array(), $client);
         $httpClient->post($path);
-
-        $this->assertEmpty($httpClient->getLastRequest()->getContent());
     }
 
     /**
@@ -171,8 +180,8 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $parameters = array('a' => 'b');
         $headers    = array('c' => 'd');
 
-        $response = new Response();
-        $response->addHeader("Link:<page1>; rel=\"page2\", \n<page3>; rel=\"page4\"");
+        $response = new Response(200);
+        $response->addHeader('Link', "<page1>; rel=\"page2\", \n<page3>; rel=\"page4\"");
 
         $client = $this->getBrowserMock();
 
@@ -191,20 +200,21 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $parameters = array('a' => 'b');
         $headers    = array('c' => 'd');
 
-        $message = $this->getMock('Github\HttpClient\Message\Response');
+        $message = $this->getMock('Github\HttpClient\Message\Response', array(), array(200));
         $message->expects($this->once())
-            ->method('getContent')
+            ->method('getBody')
             ->will($this->returnValue('Just raw context'));
 
         $client = $this->getBrowserMock();
+        $client->expects($this->once())
+            ->method('send')
+            ->will($this->returnValue($message));
 
         $httpClient = new TestHttpClient(array(), $client);
-        $httpClient->fakeResponse = $message;
-
         $response = $httpClient->get($path, $parameters, $headers);
 
-        $this->assertEquals("Just raw context", $response->getContent());
-        $this->assertInstanceOf('Buzz\Message\MessageInterface', $response);
+        $this->assertEquals("Just raw context", $response->getBody());
+        $this->assertInstanceOf('Guzzle\Http\Message\MessageInterface', $response);
     }
 
     /**
@@ -217,22 +227,25 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $parameters = array('a' => 'b');
         $headers    = array('c' => 'd');
 
-        $response = new Response();
-        $response->addHeader('HTTP/1.1 403 Forbidden');
-        $response->addHeader('X-RateLimit-Remaining: 0');
+        $response = new Response(403);
+        $response->addHeader('X-RateLimit-Remaining', 0);
 
-        $httpClient = new TestHttpClient(array(), $this->getBrowserMock());
-        $httpClient->fakeResponse = $response;
+        $mockPlugin = new MockPlugin();
+        $mockPlugin->addResponse($response);
 
+        $client = new GuzzleClient('http://123.com/');
+        $client->addSubscriber($mockPlugin);
+
+        $httpClient = new TestHttpClient(array(), $client);
         $httpClient->get($path, $parameters, $headers);
     }
 
     protected function getBrowserMock(array $methods = array())
     {
         return $this->getMock(
-            'Buzz\Client\ClientInterface',
+            'Guzzle\Http\Client',
             array_merge(
-                array('setTimeout', 'setVerifyPeer', 'send'),
+                array('send'),
                 $methods
             )
         );
@@ -241,38 +254,15 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
 
 class TestHttpClient extends HttpClient
 {
-    public $fakeResponse;
-    public $listeners;
-
     public function getOption($name, $default = null)
     {
         return isset($this->options[$name]) ? $this->options[$name] : $default;
     }
 
-    public function clearHeaders()
-    {
-    }
-
     public function request($path, array $parameters = array(), $httpMethod = 'GET', array $headers = array())
     {
-        $request  = $this->createRequest($httpMethod, $path);
-        $response = $this->createResponse();
-        if (0 < count($this->listeners)) {
-            foreach ($this->listeners as $listener) {
-                $listener->postSend($request, $response);
-            }
-        }
+        $request = $this->createRequest($httpMethod, $path);
 
-        return $response;
-    }
-
-    protected function createRequest($httpMethod, $url)
-    {
-        return new Request($httpMethod);
-    }
-
-    protected function createResponse()
-    {
-        return $this->fakeResponse ?: new Response();
+        return $this->client->send($request, $headers, $parameters);
     }
 }
