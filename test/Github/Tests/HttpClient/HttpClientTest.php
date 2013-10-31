@@ -41,15 +41,17 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     public function shouldAuthenticateUsingAllGivenParameters($login, $password, $method)
     {
         $client = new GuzzleClient();
+        $listeners = $client->getEventDispatcher()->getListeners('request.before_send');
+        $this->assertCount(1, $listeners);
 
         $httpClient = new TestHttpClient(array(), $client);
         $httpClient->authenticate($login, $password, $method);
 
-        $this->assertCount(1, $client->getEventDispatcher()->getListeners('request.create'));
-        $this->assertInstanceOf(
-            'Github\HttpClient\Listener\AuthListener',
-            current(current($client->getEventDispatcher()->getListeners('request.create')))
-        );
+        $listeners = $client->getEventDispatcher()->getListeners('request.before_send');
+        $this->assertCount(2, $listeners);
+
+        $authListener = $listeners[1][0];
+        $this->assertInstanceOf('Github\HttpClient\Listener\AuthListener', $authListener);
     }
 
     public function getAuthenticationFullData()
@@ -88,8 +90,8 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
 
         $client = $this->getBrowserMock();
         $client->expects($this->once())
-            ->method('send')
-            ->with($this->anything(), $this->isType('array'), '{"a":"b"}');
+            ->method('createRequest')
+            ->with('POST', $path, $this->isType('array'), '{"a":"b"}');
 
         $httpClient = new HttpClient(array(), $client);
         $httpClient->post($path, $parameters, $headers);
@@ -103,10 +105,9 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $path       = '/some/path';
 
         $client = $this->getBrowserMock();
-
         $client->expects($this->once())
-            ->method('send')
-            ->with($this->anything(), $this->isType('array'), $this->isEmpty());
+            ->method('createRequest')
+            ->with('POST', $path, $this->isType('array'));
 
         $httpClient = new HttpClient(array(), $client);
         $httpClient->post($path);
@@ -242,13 +243,19 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
 
     protected function getBrowserMock(array $methods = array())
     {
-        return $this->getMock(
+        $mock = $this->getMock(
             'Guzzle\Http\Client',
             array_merge(
-                array('send'),
+                array('send', 'createRequest'),
                 $methods
             )
         );
+
+        $mock->expects($this->any())
+            ->method('createRequest')
+            ->will($this->returnValue($this->getMock('Guzzle\Http\Message\Request', array(), array('GET', 'some'))));
+
+        return $mock;
     }
 }
 
@@ -261,7 +268,7 @@ class TestHttpClient extends HttpClient
 
     public function request($path, array $parameters = array(), $httpMethod = 'GET', array $headers = array())
     {
-        $request = $this->createRequest($httpMethod, $path);
+        $request = $this->client->createRequest($httpMethod, $path);
 
         return $this->client->send($request, $headers, $parameters);
     }

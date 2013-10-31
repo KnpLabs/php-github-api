@@ -131,13 +131,11 @@ class HttpClient implements HttpClientInterface
             ? null : json_encode($parameters, empty($parameters) ? JSON_FORCE_OBJECT : 0)
         ;
 
-        $request = $this->client->createRequest($httpMethod, $path, array_merge($this->headers, $headers), $requestBody);
+        $request = $this->createRequest($httpMethod, $path, $requestBody, $headers);
         $request->addHeaders($headers);
 
         try {
-            $response = Response::fromMessage(
-                $this->client->send($request)
-            );
+            $response = $this->createResponse($this->client->send($request));
         } catch (\LogicException $e) {
             throw new ErrorException($e->getMessage());
         } catch (\RuntimeException $e) {
@@ -174,5 +172,15 @@ class HttpClient implements HttpClientInterface
     public function getLastResponse()
     {
         return $this->lastResponse;
+    }
+
+    protected function createRequest($httpMethod, $path, $requestBody, array $headers = array())
+    {
+        return $this->client->createRequest($httpMethod, $path, array_merge($this->headers, $headers), $requestBody);
+    }
+
+    protected function createResponse($response)
+    {
+        return Response::fromMessage($response);
     }
 }

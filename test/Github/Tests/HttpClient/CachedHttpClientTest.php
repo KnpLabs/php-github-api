@@ -8,39 +8,30 @@ use Github\HttpClient\Message\Response;
 class CachedHttpClientTest extends HttpClientTest
 {
     /**
-     * test
+     * @test
      */
     public function shouldCacheResponseAtFirstTime()
     {
         $cache = $this->getCacheMock();
+        $response = new Response(200);
 
-        $httpClient = new TestCachedHttpClient(
-            array('base_url' => ''),
-            $this->getMock('Guzzle\Http\ClientInterface', array('send'))
-        );
+        $httpClient = $this->getHttpClientMock($response);
         $httpClient->setCache($cache);
 
-        $cache->expects($this->once())->method('set')->with('test', new Response(200));
+        $cache->expects($this->once())->method('set')->with('test', $response);
 
         $httpClient->get('test');
     }
 
     /**
-     * test
+     * @test
      */
     public function shouldGetCachedResponseWhileResourceNotModified()
     {
-        $client = $this->getMock('Guzzle\Http\ClientInterface', array('send'));
-        $client->expects($this->once())->method('send');
-
         $cache = $this->getCacheMock();
-
         $response = new Response(304);
 
-        $httpClient = new TestCachedHttpClient(
-            array('base_url' => ''),
-            $client
-        );
+        $httpClient = $this->getHttpClientMock($response);
         $httpClient->setCache($cache);
         $httpClient->fakeResponse = $response;
 
@@ -50,23 +41,15 @@ class CachedHttpClientTest extends HttpClientTest
     }
 
     /**
-     * test
+     * @test
      */
     public function shouldRenewCacheWhenResourceHasChanged()
     {
-        $client = $this->getMock('Guzzle\Http\ClientInterface', array('send'));
-        $client->expects($this->once())->method('send');
-
         $cache = $this->getCacheMock();
-
         $response = new Response(200);
 
-        $httpClient = new TestCachedHttpClient(
-            array('base_url' => ''),
-            $client
-        );
+        $httpClient = $this->getHttpClientMock($response);
         $httpClient->setCache($cache);
-        $httpClient->fakeResponse = $response;
 
         $cache->expects($this->once())->method('set')->with('test', $response);
         $cache->expects($this->once())->method('getModifiedSince')->with('test')->will($this->returnValue(1256953732));
@@ -78,14 +61,19 @@ class CachedHttpClientTest extends HttpClientTest
     {
         return $this->getMock('Github\HttpClient\Cache\CacheInterface');
     }
-}
 
-class TestCachedHttpClient extends CachedHttpClient
-{
-    public $fakeResponse;
-
-    protected function createResponse()
+    private function getHttpClientMock($response)
     {
-        return $this->fakeResponse ?: new Response(200);
+        $mock = $this
+            ->getMockBuilder('Github\HttpClient\CachedHttpClient')
+            ->setConstructorArgs(array(array('base_url' => ''), $this->getBrowserMock()))
+            ->setMethods(array('createResponse'))
+            ->getMock();
+
+        $mock->expects($this->any())
+            ->method('createResponse')
+            ->will($this->returnValue($response));
+
+        return $mock;
     }
 }
