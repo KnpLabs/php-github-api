@@ -3,6 +3,7 @@
 namespace Github\Api;
 
 use Github\Client;
+use Github\HttpClient\Message\ResponseMediator;
 
 /**
  * Abstract class for Api classes
@@ -65,7 +66,7 @@ abstract class AbstractApi implements ApiInterface
         }
         $response = $this->client->getHttpClient()->get($path, $parameters, $requestHeaders);
 
-        return $response->getContent();
+        return ResponseMediator::getContent($response);
     }
 
     /**
@@ -75,7 +76,7 @@ abstract class AbstractApi implements ApiInterface
     {
         $response = $this->client->getHttpClient()->post($path, $parameters, $requestHeaders);
 
-        return $response->getContent();
+        return ResponseMediator::getContent($response);
     }
 
     /**
@@ -85,7 +86,7 @@ abstract class AbstractApi implements ApiInterface
     {
         $response = $this->client->getHttpClient()->patch($path, $parameters, $requestHeaders);
 
-        return $response->getContent();
+        return ResponseMediator::getContent($response);
     }
 
     /**
@@ -95,7 +96,7 @@ abstract class AbstractApi implements ApiInterface
     {
         $response = $this->client->getHttpClient()->put($path, $parameters, $requestHeaders);
 
-        return $response->getContent();
+        return ResponseMediator::getContent($response);
     }
 
     /**
@@ -105,6 +106,6 @@ abstract class AbstractApi implements ApiInterface
     {
         $response = $this->client->getHttpClient()->delete($path, $parameters, $requestHeaders);
 
-        return $response->getContent();
+        return ResponseMediator::getContent($response);
     }
 }

@@ -2,15 +2,15 @@
 
 namespace Github\HttpClient;
 
-use Github\HttpClient\Listener\AuthListener;
-use Github\HttpClient\Listener\ErrorListener;
 use Guzzle\Http\Client as GuzzleClient;
 use Guzzle\Http\ClientInterface;
 use Guzzle\Http\Message\Request;
+use Guzzle\Http\Message\Response;
 
 use Github\Exception\ErrorException;
 use Github\Exception\RuntimeException;
-use Github\HttpClient\Message\Response;
+use Github\HttpClient\Listener\AuthListener;
+use Github\HttpClient\Listener\ErrorListener;
 
 /**
  * Performs requests on GitHub API. API documentation should be self-explanatory.
@@ -135,7 +135,7 @@ class HttpClient implements HttpClientInterface
         $request->addHeaders($headers);
 
         try {
-            $response = $this->createResponse($this->client->send($request));
+            $response = $this->client->send($request);
         } catch (\LogicException $e) {
             throw new ErrorException($e->getMessage());
         } catch (\RuntimeException $e) {
@@ -177,10 +177,5 @@ class HttpClient implements HttpClientInterface
     protected function createRequest($httpMethod, $path, $requestBody, array $headers = array())
     {
         return $this->client->createRequest($httpMethod, $path, array_merge($this->headers, $headers), $requestBody);
-    }
-
-    protected function createResponse($response)
-    {
-        return Response::fromMessage($response);
     }
 }

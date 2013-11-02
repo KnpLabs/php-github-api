@@ -2,10 +2,10 @@
 
 namespace Github\HttpClient\Listener;
 
+use Github\HttpClient\Message\ResponseMediator;
 use Guzzle\Common\Event;
-use Guzzle\Http\Message\Response as GuzzleResponse;
+use Guzzle\Http\Message\Response;
 
-use Github\HttpClient\Message\Response;
 use Github\Exception\ApiLimitExceedException;
 use Github\Exception\ErrorException;
 use Github\Exception\RuntimeException;
@@ -36,7 +36,7 @@ class ErrorListener
     {
         /** @var $request \Guzzle\Http\Message\Request */
         $request = $event['request'];
-        $response = $this->createResponse($request->getResponse());
+        $response = $request->getResponse();
 
         if ($response->isClientError() || $response->isServerError()) {
             $remaining = (string) $response->getHeader('X-RateLimit-Remaining');
@@ -45,7 +45,7 @@ class ErrorListener
                 throw new ApiLimitExceedException($this->options['api_limit']);
             }
 
-            $content = $response->getContent();
+            $content = ResponseMediator::getContent($response);
             if (is_array($content) && isset($content['message'])) {
                 if (400 == $response->getStatusCode()) {
                     throw new ErrorException($content['message'], 400);
@@ -82,14 +82,5 @@ class ErrorListener
 
             throw new RuntimeException(isset($content['message']) ? $content['message'] : $content, $response->getStatusCode());
         };
-    }
-
-    protected function createResponse(GuzzleResponse $response)
-    {
-        if (!($response instanceof Response)) {
-            return Response::fromMessage($response);
-        } else {
-            return $response;
-        }
     }
 }

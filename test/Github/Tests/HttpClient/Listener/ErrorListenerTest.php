@@ -11,7 +11,7 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldPassIfResponseNotHaveErrorStatus()
     {
-        $response = $this->getMockBuilder('Github\HttpClient\Message\Response')->disableOriginalConstructor()->getMock();
+        $response = $this->getMockBuilder('Guzzle\Http\Message\Response')->disableOriginalConstructor()->getMock();
         $response->expects($this->once())
             ->method('isClientError')
             ->will($this->returnValue(false));
@@ -26,7 +26,7 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldFailWhenApiLimitWasExceed()
     {
-        $response = $this->getMockBuilder('Github\HttpClient\Message\Response')->disableOriginalConstructor()->getMock();
+        $response = $this->getMockBuilder('Guzzle\Http\Message\Response')->disableOriginalConstructor()->getMock();
         $response->expects($this->once())
             ->method('isClientError')
             ->will($this->returnValue(true));
@@ -45,7 +45,7 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldNotPassWhenContentWasNotValidJson()
     {
-        $response = $this->getMockBuilder('Github\HttpClient\Message\Response')->disableOriginalConstructor()->getMock();
+        $response = $this->getMockBuilder('Guzzle\Http\Message\Response')->disableOriginalConstructor()->getMock();
         $response->expects($this->once())
             ->method('isClientError')
             ->will($this->returnValue(true));
@@ -54,7 +54,7 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
             ->with('X-RateLimit-Remaining')
             ->will($this->returnValue(5000));
         $response->expects($this->once())
-            ->method('getContent')
+            ->method('getBody')
             ->will($this->returnValue('fail'));
 
         $listener = new ErrorListener(array('api_limit' => 5000));
@@ -67,7 +67,7 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldNotPassWhenContentWasValidJsonButStatusIsNotCovered()
     {
-        $response = $this->getMockBuilder('Github\HttpClient\Message\Response')->disableOriginalConstructor()->getMock();
+        $response = $this->getMockBuilder('Guzzle\Http\Message\Response')->disableOriginalConstructor()->getMock();
         $response->expects($this->once())
             ->method('isClientError')
             ->will($this->returnValue(true));
@@ -76,8 +76,8 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
             ->with('X-RateLimit-Remaining')
             ->will($this->returnValue(5000));
         $response->expects($this->once())
-            ->method('getContent')
-            ->will($this->returnValue(array('message' => 'test')));
+            ->method('getBody')
+            ->will($this->returnValue(json_encode(array('message' => 'test'))));
         $response->expects($this->any())
             ->method('getStatusCode')
             ->will($this->returnValue(404));
@@ -92,7 +92,7 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldNotPassWhen400IsSent()
     {
-        $response = $this->getMockBuilder('Github\HttpClient\Message\Response')->disableOriginalConstructor()->getMock();
+        $response = $this->getMockBuilder('Guzzle\Http\Message\Response')->disableOriginalConstructor()->getMock();
         $response->expects($this->once())
             ->method('isClientError')
             ->will($this->returnValue(true));
@@ -101,8 +101,8 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
             ->with('X-RateLimit-Remaining')
             ->will($this->returnValue(5000));
         $response->expects($this->once())
-            ->method('getContent')
-            ->will($this->returnValue(array('message' => 'test')));
+            ->method('getBody')
+            ->will($this->returnValue(json_encode(array('message' => 'test'))));
         $response->expects($this->any())
             ->method('getStatusCode')
             ->will($this->returnValue(400));
@@ -118,7 +118,7 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldNotPassWhen422IsSentWithErrorCode($errorCode)
     {
-        $content = array(
+        $content = json_encode(array(
             'message' => 'Validation Failed',
             'errors'  => array(
                 array(
@@ -128,9 +128,9 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
                     'resource' => 'fake'
                 )
             )
-        );
+        ));
 
-        $response = $this->getMockBuilder('Github\HttpClient\Message\Response')->disableOriginalConstructor()->getMock();
+        $response = $this->getMockBuilder('Guzzle\Http\Message\Response')->disableOriginalConstructor()->getMock();
         $response->expects($this->once())
             ->method('isClientError')
             ->will($this->returnValue(true));
@@ -139,7 +139,7 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
             ->with('X-RateLimit-Remaining')
             ->will($this->returnValue(5000));
         $response->expects($this->once())
-            ->method('getContent')
+            ->method('getBody')
             ->will($this->returnValue($content));
         $response->expects($this->any())
             ->method('getStatusCode')

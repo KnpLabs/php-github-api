@@ -4,7 +4,8 @@ namespace Github\Tests\HttpClient;
 
 use Github\Client;
 use Github\HttpClient\HttpClient;
-use Github\HttpClient\Message\Response;
+use Github\HttpClient\Message\ResponseMediator;
+use Guzzle\Http\Message\Response;
 use Guzzle\Plugin\Mock\MockPlugin;
 use Guzzle\Http\Client as GuzzleClient;
 
@@ -189,7 +190,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $httpClient = new HttpClient(array(), $client);
         $httpClient->request($path, $parameters, 'HEAD', $headers);
 
-        $this->assertEquals(array('page2' => 'page1', 'page4' => 'page3'), $response->getPagination());
+        $this->assertEquals(array('page2' => 'page1', 'page4' => 'page3'), ResponseMediator::getPagination($response));
     }
 
     /**
@@ -201,7 +202,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $parameters = array('a' => 'b');
         $headers    = array('c' => 'd');
 
-        $message = $this->getMock('Github\HttpClient\Message\Response', array(), array(200));
+        $message = $this->getMock('Guzzle\Http\Message\Response', array(), array(200));
         $message->expects($this->once())
             ->method('getBody')
             ->will($this->returnValue('Just raw context'));

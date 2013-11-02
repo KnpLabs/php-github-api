@@ -2,7 +2,7 @@
 
 namespace Github\HttpClient\Cache;
 
-use Github\HttpClient\Message\Response;
+use Guzzle\Http\Message\Response;
 
 class FilesystemCache implements CacheInterface
 {

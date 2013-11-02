@@ -2,7 +2,7 @@
 
 namespace Github\Tests\HttpClient\Cache;
 
-use Github\HttpClient\Message\Response;
+use Guzzle\Http\Message\Response;
 use Github\HttpClient\Cache\FilesystemCache;
 
 class FilesystemCacheTest extends \PHPUnit_Framework_TestCase
