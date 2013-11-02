@@ -2,16 +2,15 @@
 
 namespace Github\HttpClient;
 
-use Buzz\Client\ClientInterface;
-use Buzz\Listener\ListenerInterface;
+use Guzzle\Http\Client as GuzzleClient;
+use Guzzle\Http\ClientInterface;
+use Guzzle\Http\Message\Request;
+use Guzzle\Http\Message\Response;
 
 use Github\Exception\ErrorException;
 use Github\Exception\RuntimeException;
 use Github\HttpClient\Listener\AuthListener;
 use Github\HttpClient\Listener\ErrorListener;
-use Github\HttpClient\Message\Request;
-use Github\HttpClient\Message\Response;
-use Buzz\Client\Curl;
 
 /**
  * Performs requests on GitHub API. API documentation should be self-explanatory.
@@ -20,9 +19,6 @@ use Buzz\Client\Curl;
  */
 class HttpClient implements HttpClientInterface
 {
-    /**
-     * @var array
-     */
     protected $options = array(
         'base_url'    => 'https://api.github.com/',
 
@@ -30,17 +26,11 @@ class HttpClient implements HttpClientInterface
         'timeout'     => 10,
 
         'api_limit'   => 5000,
-        'api_version' => 'beta',
+        'api_version' => 'v3',
 
         'cache_dir'   => null
     );
-    /**
-     * @var array
-     */
-    protected $listeners = array();
-    /**
-     * @var array
-     */
+
     protected $headers = array();
 
     private $lastResponse;
@@ -52,30 +42,12 @@ class HttpClient implements HttpClientInterface
      */
     public function __construct(array $options = array(), ClientInterface $client = null)
     {
-        $client = $client ?: new Curl();
-        $timeout = isset($options['timeout']) ? $options['timeout'] : $this->options['timeout'];
-        $client->setTimeout($timeout);
-        $client->setVerifyPeer(false);
-
         $this->options = array_merge($this->options, $options);
+        $client = $client ?: new GuzzleClient($options['base_url'], $this->options);
         $this->client  = $client;
 
-        $this->addListener(new ErrorListener($this->options));
-
+        $this->addListener('request.error', array(new ErrorListener($this->options), 'onRequestError'));
         $this->clearHeaders();
-    }
-
-    public function authenticate($tokenOrLogin, $password, $authMethod)
-    {
-         $this->addListener(
-            new AuthListener(
-                $authMethod,
-                array(
-                     'tokenOrLogin' => $tokenOrLogin,
-                     'password'     => $password
-                )
-            )
-        );
     }
 
     /**
@@ -105,12 +77,9 @@ class HttpClient implements HttpClientInterface
         );
     }
 
-    /**
-     * @param ListenerInterface $listener
-     */
-    public function addListener(ListenerInterface $listener)
+    public function addListener($eventName, $listener)
     {
-        $this->listeners[get_class($listener)] = $listener;
+        $this->client->getEventDispatcher()->addListener($eventName, $listener);
     }
 
     /**
@@ -118,11 +87,7 @@ class HttpClient implements HttpClientInterface
      */
     public function get($path, array $parameters = array(), array $headers = array())
     {
-        if (0 < count($parameters)) {
-            $path .= (false === strpos($path, '?') ? '?' : '&').http_build_query($parameters, '', '&');
-        }
-
-        return $this->request($path, array(), 'GET', $headers);
+        return $this->request($path, $parameters, 'GET', $headers);
     }
 
     /**
@@ -162,27 +127,15 @@ class HttpClient implements HttpClientInterface
      */
     public function request($path, array $parameters = array(), $httpMethod = 'GET', array $headers = array())
     {
-        if (!empty($this->options['base_url']) && 0 !== strpos($path, $this->options['base_url'])) {
-            $path = trim($this->options['base_url'].$path, '/');
-        }
+        $requestBody = count($parameters) === 0
+            ? null : json_encode($parameters, empty($parameters) ? JSON_FORCE_OBJECT : 0)
+        ;
 
-        $request = $this->createRequest($httpMethod, $path);
+        $request = $this->createRequest($httpMethod, $path, $requestBody, $headers);
         $request->addHeaders($headers);
-        if (count($parameters) > 0) {
-            $request->setContent(json_encode($parameters, empty($parameters) ? JSON_FORCE_OBJECT : 0));
-        }
-
-        $hasListeners = 0 < count($this->listeners);
-        if ($hasListeners) {
-            foreach ($this->listeners as $listener) {
-                $listener->preSend($request);
-            }
-        }
-
-        $response = $this->createResponse();
 
         try {
-            $this->client->send($request, $response);
+            $response = $this->client->send($request);
         } catch (\LogicException $e) {
             throw new ErrorException($e->getMessage());
         } catch (\RuntimeException $e) {
@@ -192,13 +145,17 @@ class HttpClient implements HttpClientInterface
         $this->lastRequest  = $request;
         $this->lastResponse = $response;
 
-        if ($hasListeners) {
-            foreach ($this->listeners as $listener) {
-                $listener->postSend($request, $response);
-            }
-        }
-
         return $response;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function authenticate($tokenOrLogin, $password = null, $method)
+    {
+        $this->addListener('request.before_send', array(
+            new AuthListener($tokenOrLogin, $password, $method), 'onRequestBeforeSend'
+        ));
     }
 
     /**
@@ -217,26 +174,8 @@ class HttpClient implements HttpClientInterface
         return $this->lastResponse;
     }
 
-    /**
-     * @param string $httpMethod
-     * @param string $url
-     *
-     * @return Request
-     */
-    protected function createRequest($httpMethod, $url)
+    protected function createRequest($httpMethod, $path, $requestBody, array $headers = array())
     {
-        $request = new Request($httpMethod);
-        $request->setHeaders($this->headers);
-        $request->fromUrl($url);
-
-        return $request;
-    }
-
-    /**
-     * @return Response
-     */
-    protected function createResponse()
-    {
-        return new Response();
+        return $this->client->createRequest($httpMethod, $path, array_merge($this->headers, $headers), $requestBody);
     }
 }

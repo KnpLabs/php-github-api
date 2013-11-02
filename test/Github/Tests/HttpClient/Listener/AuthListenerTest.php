@@ -2,61 +2,21 @@
 
 namespace Github\Tests\HttpClient;
 
+use Guzzle\Http\Message\Request;
+
 use Github\Client;
-use Github\Exception\InvalidArgumentException;
 use Github\HttpClient\Listener\AuthListener;
-use Github\HttpClient\Message\Request;
 
 class AuthListenerTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
-     * @expectedException InvalidArgumentException
+     * @expectedException \RuntimeException
      */
     public function shouldHaveKnownMethodName()
     {
-        $listener = new AuthListener('unknown', array('tokenOrLogin' => 'test'));
-        $listener->preSend($this->getMock('Buzz\Message\RequestInterface'));
-    }
-
-    /**
-     * @test
-     * @expectedException InvalidArgumentException
-     */
-    public function shouldHaveLoginAndPasswordForAuthPassMethod()
-    {
-        $listener = new AuthListener(Client::AUTH_HTTP_PASSWORD, array('tokenOrLogin' => 'test'));
-        $listener->preSend($this->getMock('Buzz\Message\RequestInterface'));
-    }
-
-    /**
-     * @test
-     * @expectedException InvalidArgumentException
-     */
-    public function shouldHaveTokenForHttpTokenMethod()
-    {
-        $listener = new AuthListener(Client::AUTH_HTTP_TOKEN, array('password' => 'pass'));
-        $listener->preSend($this->getMock('Buzz\Message\RequestInterface'));
-    }
-
-    /**
-     * @test
-     * @expectedException InvalidArgumentException
-     */
-    public function shouldHaveTokenForUrlTokenMethod()
-    {
-        $listener = new AuthListener(Client::AUTH_URL_TOKEN, array('password' => 'login'));
-        $listener->preSend($this->getMock('Buzz\Message\RequestInterface'));
-    }
-
-    /**
-     * @test
-     * @expectedException InvalidArgumentException
-     */
-    public function shouldHaveClientIdAndSecretForUrlClientIdMethod()
-    {
-        $listener = new AuthListener(Client::AUTH_URL_CLIENT_ID, array('password' => 'login'));
-        $listener->preSend($this->getMock('Buzz\Message\RequestInterface'));
+        $listener = new AuthListener('test', null, 'unknown');
+        $listener->onRequestBeforeSend($this->getEventMock());
     }
 
     /**
@@ -64,7 +24,7 @@ class AuthListenerTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldDoNothingForHaveNullMethod()
     {
-        $request = $this->getMock('Buzz\Message\RequestInterface');
+        $request = $this->getMock('Guzzle\Http\Message\RequestInterface');
         $request->expects($this->never())
             ->method('addHeader');
         $request->expects($this->never())
@@ -72,8 +32,8 @@ class AuthListenerTest extends \PHPUnit_Framework_TestCase
         $request->expects($this->never())
             ->method('getUrl');
 
-        $listener = new AuthListener(null, array('password' => 'pass', 'tokenOrLogin' => 'test'));
-        $listener->preSend($request);
+        $listener = new AuthListener('test', 'pass', null);
+        $listener->onRequestBeforeSend($this->getEventMock($request));
     }
 
     /**
@@ -81,7 +41,7 @@ class AuthListenerTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldDoNothingForPostSend()
     {
-        $request = $this->getMock('Buzz\Message\RequestInterface');
+        $request = $this->getMock('Guzzle\Http\Message\RequestInterface');
         $request->expects($this->never())
             ->method('addHeader');
         $request->expects($this->never())
@@ -89,22 +49,8 @@ class AuthListenerTest extends \PHPUnit_Framework_TestCase
         $request->expects($this->never())
             ->method('getUrl');
 
-        $response = $this->getMock('Buzz\Message\MessageInterface');
-        $response->expects($this->never())
-            ->method('addHeader');
-        $response->expects($this->never())
-            ->method('setContent');
-        $response->expects($this->never())
-            ->method('setHeaders');
-        $response->expects($this->never())
-            ->method('getContent');
-        $response->expects($this->never())
-            ->method('__toString');
-        $response->expects($this->never())
-            ->method('getHeader');
-
-        $listener = new AuthListener(Client::AUTH_HTTP_PASSWORD, array('tokenOrLogin' => 'login', 'password' => 'mypasswd'));
-        $listener->postSend($request, $response);
+        $listener = new AuthListener('login', 'somepassphrase', Client::AUTH_HTTP_PASSWORD);
+        $listener->onRequestBeforeSend($this->getEventMock($request));
     }
 
     /**
@@ -112,19 +58,19 @@ class AuthListenerTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldSetAuthBasicHeaderForAuthPassMethod()
     {
-        $expected = 'Basic '.base64_encode('login:mypasswd');
+        $expected = 'Basic '.base64_encode('login2:pass42323');
 
-        $request = $this->getMock('Buzz\Message\RequestInterface');
+        $request = $this->getMock('Guzzle\Http\Message\RequestInterface');
         $request->expects($this->once())
-            ->method('addHeader')
-            ->with('Authorization: '.$expected);
+            ->method('setHeader')
+            ->with('Authorization', $expected);
         $request->expects($this->once())
             ->method('getHeader')
             ->with('Authorization')
             ->will($this->returnValue($expected));
 
-        $listener = new AuthListener(Client::AUTH_HTTP_PASSWORD, array('tokenOrLogin' => 'login', 'password' => 'mypasswd'));
-        $listener->preSend($request);
+        $listener = new AuthListener('login2', 'pass42323', Client::AUTH_HTTP_PASSWORD);
+        $listener->onRequestBeforeSend($this->getEventMock($request));
 
         $this->assertEquals($expected, $request->getHeader('Authorization'));
     }
@@ -136,17 +82,17 @@ class AuthListenerTest extends \PHPUnit_Framework_TestCase
     {
         $expected = 'token test';
 
-        $request = $this->getMock('Buzz\Message\RequestInterface');
+        $request = $this->getMock('Guzzle\Http\Message\RequestInterface');
         $request->expects($this->once())
-            ->method('addHeader')
-            ->with('Authorization: '.$expected);
+            ->method('setHeader')
+            ->with('Authorization', $expected);
         $request->expects($this->once())
             ->method('getHeader')
             ->with('Authorization')
             ->will($this->returnValue($expected));
 
-        $listener = new AuthListener(Client::AUTH_HTTP_TOKEN, array('tokenOrLogin' => 'test'));
-        $listener->preSend($request);
+        $listener = new AuthListener('test', null, Client::AUTH_HTTP_TOKEN);
+        $listener->onRequestBeforeSend($this->getEventMock($request));
 
         $this->assertEquals($expected, $request->getHeader('Authorization'));
     }
@@ -156,10 +102,10 @@ class AuthListenerTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldSetTokenInUrlForAuthUrlMethod()
     {
-        $request = new Request(Request::METHOD_GET, '/res');
+        $request = new Request('GET', '/res');
 
-        $listener = new AuthListener(Client::AUTH_URL_TOKEN, array('tokenOrLogin' => 'test'));
-        $listener->preSend($request);
+        $listener = new AuthListener('test', null, Client::AUTH_URL_TOKEN);
+        $listener->onRequestBeforeSend($this->getEventMock($request));
 
         $this->assertEquals('/res?access_token=test', $request->getUrl());
     }
@@ -169,11 +115,24 @@ class AuthListenerTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldSetClientDetailsInUrlForAuthUrlMethod()
     {
-        $request = new Request(Request::METHOD_GET, '/res');
+        $request = new Request('GET', '/res');
 
-        $listener = new AuthListener(Client::AUTH_URL_CLIENT_ID, array('tokenOrLogin' => 'clientId', 'password' => 'clientSsecret'));
-        $listener->preSend($request);
+        $listener = new AuthListener('clientId', 'clientSecret', Client::AUTH_URL_CLIENT_ID);
+        $listener->onRequestBeforeSend($this->getEventMock($request));
 
-        $this->assertEquals('/res?client_id=clientId&client_secret=clientSsecret', $request->getUrl());
+        $this->assertEquals('/res?client_id=clientId&client_secret=clientSecret', $request->getUrl());
+    }
+
+    private function getEventMock($request = null)
+    {
+        $mock = $this->getMockBuilder('Guzzle\Common\Event')->getMock();
+
+        if ($request) {
+            $mock->expects($this->any())
+                ->method('offsetGet')
+                ->will($this->returnValue($request));
+        }
+
+        return $mock;
     }
 }

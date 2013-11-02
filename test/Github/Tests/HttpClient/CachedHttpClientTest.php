@@ -3,7 +3,7 @@
 namespace Github\Tests\HttpClient;
 
 use Github\HttpClient\CachedHttpClient;
-use Github\HttpClient\Message\Response;
+use Guzzle\Http\Message\Response;
 
 class CachedHttpClientTest extends HttpClientTest
 {
@@ -13,15 +13,17 @@ class CachedHttpClientTest extends HttpClientTest
     public function shouldCacheResponseAtFirstTime()
     {
         $cache = $this->getCacheMock();
+        $response = new Response(200);
 
-        $httpClient = new TestCachedHttpClient(
-            array('base_url' => ''),
-            $this->getMock('Buzz\Client\ClientInterface', array('setTimeout', 'setVerifyPeer', 'send'))
-        );
+        $client = $this->getBrowserMock();
+        $client->expects($this->once())
+            ->method('send')
+            ->will($this->returnValue($response));
+
+        $httpClient = new CachedHttpClient(array('base_url' => ''), $client);
         $httpClient->setCache($cache);
 
-        $cache->expects($this->once())->method('set')->with('test', new Response);
-
+        $cache->expects($this->once())->method('set')->with('test', $response);
         $httpClient->get('test');
     }
 
@@ -30,18 +32,15 @@ class CachedHttpClientTest extends HttpClientTest
      */
     public function shouldGetCachedResponseWhileResourceNotModified()
     {
-        $client = $this->getMock('Buzz\Client\ClientInterface', array('setTimeout', 'setVerifyPeer', 'send'));
-        $client->expects($this->once())->method('send');
-
         $cache = $this->getCacheMock();
+        $response = new Response(304);
 
-        $response = new Response;
-        $response->addHeader('HTTP/1.1 304 Not Modified');
+        $client = $this->getBrowserMock();
+        $client->expects($this->once())
+            ->method('send')
+            ->will($this->returnValue($response));
 
-        $httpClient = new TestCachedHttpClient(
-            array('base_url' => ''),
-            $client
-        );
+        $httpClient = new CachedHttpClient(array('base_url' => ''), $client);
         $httpClient->setCache($cache);
         $httpClient->fakeResponse = $response;
 
@@ -55,20 +54,16 @@ class CachedHttpClientTest extends HttpClientTest
      */
     public function shouldRenewCacheWhenResourceHasChanged()
     {
-        $client = $this->getMock('Buzz\Client\ClientInterface', array('setTimeout', 'setVerifyPeer', 'send'));
-        $client->expects($this->once())->method('send');
-
         $cache = $this->getCacheMock();
+        $response = new Response(200);
 
-        $response = new Response;
-        $response->addHeader('HTTP/1.1 200 OK');
+        $client = $this->getBrowserMock();
+        $client->expects($this->once())
+            ->method('send')
+            ->will($this->returnValue($response));
 
-        $httpClient = new TestCachedHttpClient(
-            array('base_url' => ''),
-            $client
-        );
+        $httpClient = new CachedHttpClient(array('base_url' => ''), $client);
         $httpClient->setCache($cache);
-        $httpClient->fakeResponse = $response;
 
         $cache->expects($this->once())->method('set')->with('test', $response);
         $cache->expects($this->once())->method('getModifiedSince')->with('test')->will($this->returnValue(1256953732));
@@ -79,15 +74,5 @@ class CachedHttpClientTest extends HttpClientTest
     public function getCacheMock()
     {
         return $this->getMock('Github\HttpClient\Cache\CacheInterface');
-    }
-}
-
-class TestCachedHttpClient extends CachedHttpClient
-{
-    public $fakeResponse;
-
-    protected function createResponse()
-    {
-        return $this->fakeResponse ?: new Response();
     }
 }

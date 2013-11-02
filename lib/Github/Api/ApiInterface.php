@@ -2,6 +2,8 @@
 
 namespace Github\Api;
 
+use Github\Client;
+
 /**
  * Api interface
  *
@@ -9,4 +11,9 @@ namespace Github\Api;
  */
 interface ApiInterface
 {
+    public function __construct(Client $client);
+
+    public function getPerPage();
+
+    public function setPerPage($perPage);
 }
