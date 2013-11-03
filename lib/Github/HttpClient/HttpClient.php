@@ -43,7 +43,7 @@ class HttpClient implements HttpClientInterface
     public function __construct(array $options = array(), ClientInterface $client = null)
     {
         $this->options = array_merge($this->options, $options);
-        $client = $client ?: new GuzzleClient($options['base_url'], $this->options);
+	$client = $client ?: new GuzzleClient($this->options['base_url'], $this->options);
         $this->client  = $client;
 
         $this->addListener('request.error', array(new ErrorListener($this->options), 'onRequestError'));
