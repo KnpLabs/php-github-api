@@ -61,9 +61,9 @@ class CachedHttpClient extends HttpClient
      *
      * {@inheritdoc}
      */
-    protected function createRequest($httpMethod, $path, $requestBody, array $headers = array())
+    protected function createRequest($httpMethod, $path, array $parameters = array(), array $headers = array())
     {
-        $request = parent::createRequest($httpMethod, $path, $requestBody, $headers = array());
+        $request = parent::createRequest($httpMethod, $path, $parameters, $headers = array());
 
         if ($modifiedAt = $this->getCache()->getModifiedSince($path)) {
             $modifiedAt = new \DateTime('@'.$modifiedAt);

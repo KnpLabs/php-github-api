@@ -43,7 +43,7 @@ class HttpClient implements HttpClientInterface
     public function __construct(array $options = array(), ClientInterface $client = null)
     {
         $this->options = array_merge($this->options, $options);
-	$client = $client ?: new GuzzleClient($this->options['base_url'], $this->options);
+        $client = $client ?: new GuzzleClient($this->options['base_url'], $this->options);
         $this->client  = $client;
 
         $this->addListener('request.error', array(new ErrorListener($this->options), 'onRequestError'));
@@ -127,11 +127,7 @@ class HttpClient implements HttpClientInterface
      */
     public function request($path, array $parameters = array(), $httpMethod = 'GET', array $headers = array())
     {
-        $requestBody = count($parameters) === 0
-            ? null : json_encode($parameters, empty($parameters) ? JSON_FORCE_OBJECT : 0)
-        ;
-
-        $request = $this->createRequest($httpMethod, $path, $requestBody, $headers);
+        $request = $this->createRequest($httpMethod, $path, $parameters, $headers);
         $request->addHeaders($headers);
 
         try {
@@ -174,8 +170,24 @@ class HttpClient implements HttpClientInterface
         return $this->lastResponse;
     }
 
-    protected function createRequest($httpMethod, $path, $requestBody, array $headers = array())
+    protected function createRequest($httpMethod, $path, array $parameters = array(), array $headers = array())
     {
-        return $this->client->createRequest($httpMethod, $path, array_merge($this->headers, $headers), $requestBody);
+        if ('GET' !== $httpMethod) {
+            $requestBody = count($parameters) === 0
+                ? null : json_encode($parameters, empty($parameters) ? JSON_FORCE_OBJECT : 0)
+            ;
+            $options = array();
+        } else {
+            $requestBody = null;
+            $options = array('query' => $parameters);
+        }
+
+        return $this->client->createRequest(
+            $httpMethod,
+            $path,
+            array_merge($this->headers, $headers),
+            $requestBody,
+            $options
+        );
     }
 }
