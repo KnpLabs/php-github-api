@@ -13,16 +13,6 @@ use Github\Exception\MissingArgumentException;
 class Releases extends AbstractApi
 {
     /**
-     * @deprecated Will be removed as soon as gh releases api gets stable
-     */
-    public function configure()
-    {
-        $this->client->setHeaders(array(
-            'Accept: application/vnd.github.manifold-preview'
-        ));
-    }
-
-    /**
      * List releases in selected repository
      *
      * @param  string  $username         the user who owns the repo
