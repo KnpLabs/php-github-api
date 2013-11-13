@@ -42,6 +42,26 @@ class AssetsTest extends TestCase
 
     /**
      * @test
+     * @requires PHP 5.3.4
+     */
+    public function shouldCreateReleaseAsset()
+    {
+        $name = 'asset.gzip';
+        $body = 'assetCreatedData';
+        $contentType = 'application/gzip';
+        $releaseId = '12345';
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+          ->method('postRaw')
+          ->with('repos/KnpLabs/php-github-api/releases/'. $releaseId .'/assets?name='.$name)
+          ->will($this->returnValue($body));
+
+        $this->assertEquals($body, $api->create('KnpLabs', 'php-github-api', $releaseId, $name, $contentType, $body));
+    }
+
+    /**
+     * @test
      */
     public function shouldEditReleaseAsset()
     {
