@@ -38,12 +38,12 @@ class TestHttpClient implements HttpClientInterface
         $this->requests['get'][] = $path;
     }
 
-    public function post($path, array $parameters = array(), array $headers = array())
+    public function post($path, $body = null, array $headers = array())
     {
         $this->requests['post'][] = $path;
     }
 
-    public function patch($path, array $parameters = array(), array $headers = array())
+    public function patch($path, $body = null, array $headers = array())
     {
         $this->requests['patch'][] = $path;
     }
@@ -53,7 +53,7 @@ class TestHttpClient implements HttpClientInterface
         $this->requests['put'][] = $path;
     }
 
-    public function delete($path, array $parameters = array(), array $headers = array())
+    public function delete($path, $body = null, array $headers = array())
     {
         $this->requests['delete'][] = $path;
     }

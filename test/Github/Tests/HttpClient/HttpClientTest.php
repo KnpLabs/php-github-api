@@ -86,16 +86,16 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     public function shouldDoPOSTRequest()
     {
         $path       = '/some/path';
-        $parameters = array('a' => 'b');
+        $body       = 'a = b';
         $headers    = array('c' => 'd');
 
         $client = $this->getBrowserMock();
         $client->expects($this->once())
             ->method('createRequest')
-            ->with('POST', $path, $this->isType('array'), '{"a":"b"}');
+            ->with('POST', $path, $this->isType('array'), $body);
 
         $httpClient = new HttpClient(array(), $client);
-        $httpClient->post($path, $parameters, $headers);
+        $httpClient->post($path, $body, $headers);
     }
 
     /**
@@ -120,13 +120,13 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     public function shouldDoPATCHRequest()
     {
         $path       = '/some/path';
-        $parameters = array('a' => 'b');
+        $body       = 'a = b';
         $headers    = array('c' => 'd');
 
         $client = $this->getBrowserMock();
 
         $httpClient = new HttpClient(array(), $client);
-        $httpClient->patch($path, $parameters, $headers);
+        $httpClient->patch($path, $body, $headers);
     }
 
     /**
@@ -135,13 +135,13 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     public function shouldDoDELETERequest()
     {
         $path       = '/some/path';
-        $parameters = array('a' => 'b');
+        $body       = 'a = b';
         $headers    = array('c' => 'd');
 
         $client = $this->getBrowserMock();
 
         $httpClient = new HttpClient(array(), $client);
-        $httpClient->delete($path, $parameters, $headers);
+        $httpClient->delete($path, $body, $headers);
     }
 
     /**
@@ -164,13 +164,13 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     public function shouldDoCustomRequest()
     {
         $path       = '/some/path';
-        $parameters = array('a' => 'b');
+        $body       = 'a = b';
         $options    = array('c' => 'd');
 
         $client = $this->getBrowserMock();
 
         $httpClient = new HttpClient(array(), $client);
-        $httpClient->request($path, $parameters, 'HEAD', $options);
+        $httpClient->request($path, $body, 'HEAD', $options);
     }
 
     /**
@@ -179,7 +179,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     public function shouldHandlePagination()
     {
         $path       = '/some/path';
-        $parameters = array('a' => 'b');
+        $body       = 'a = b';
         $headers    = array('c' => 'd');
 
         $response = new Response(200);
@@ -188,7 +188,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $client = $this->getBrowserMock();
 
         $httpClient = new HttpClient(array(), $client);
-        $httpClient->request($path, $parameters, 'HEAD', $headers);
+        $httpClient->request($path, $body, 'HEAD', $headers);
 
         $this->assertEquals(array('page2' => 'page1', 'page4' => 'page3'), ResponseMediator::getPagination($response));
     }
@@ -199,7 +199,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     public function shouldAllowToReturnRawContent()
     {
         $path       = '/some/path';
-        $parameters = array('a' => 'b');
+        $parameters = array('a = b');
         $headers    = array('c' => 'd');
 
         $message = $this->getMock('Guzzle\Http\Message\Response', array(), array(200));
@@ -226,7 +226,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     public function shouldThrowExceptionWhenApiIsExceeded()
     {
         $path       = '/some/path';
-        $parameters = array('a' => 'b');
+        $parameters = array('a = b');
         $headers    = array('c' => 'd');
 
         $response = new Response(403);
@@ -267,10 +267,10 @@ class TestHttpClient extends HttpClient
         return isset($this->options[$name]) ? $this->options[$name] : $default;
     }
 
-    public function request($path, array $parameters = array(), $httpMethod = 'GET', array $headers = array())
+    public function request($path, $body, $httpMethod = 'GET', array $headers = array(), array $options = array())
     {
         $request = $this->client->createRequest($httpMethod, $path);
 
-        return $this->client->send($request, $headers, $parameters);
+        return $this->client->send($request);
     }
 }
