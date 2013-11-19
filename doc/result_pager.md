@@ -36,12 +36,12 @@ Get next page:
 $paginator->fetchNext();
 ```
 
-Check for pervious page:
+Check for previous page:
 ```php
 $paginator->hasPrevious();
 ```
 
-Get prevrious page:
+Get previous page:
 ```php
 $paginator->fetchPrevious();
 ```
