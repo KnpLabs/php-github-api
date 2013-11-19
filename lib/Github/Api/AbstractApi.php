@@ -69,6 +69,9 @@ abstract class AbstractApi implements ApiInterface
         if (null !== $this->perPage && !isset($parameters['per_page'])) {
             $parameters['per_page'] = $this->perPage;
         }
+        if (array_key_exists('ref', $parameters) && is_null($parameters['ref'])) {
+            unset($parameters['ref']);
+        }
         $response = $this->client->getHttpClient()->get($path, $parameters, $requestHeaders);
 
         return ResponseMediator::getContent($response);

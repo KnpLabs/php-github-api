@@ -3,6 +3,7 @@
 namespace Github\Tests\Api;
 
 use Github\Api\AbstractApi;
+use Guzzle\Http\Message\Response;
 
 class AbstractApiTest extends \PHPUnit_Framework_TestCase
 {
@@ -111,6 +112,26 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedArray, $api->delete('/path', array('param1' => 'param1value'), array('option1' => 'option1value')));
     }
 
+    /**
+     * @test
+     */
+    public function shouldNotPassEmptyRefToClient()
+    {
+        $expectedResponse = new Response('value');
+
+        $httpClient = $this->getHttpMock();
+        $httpClient
+            ->expects($this->any())
+            ->method('get')
+            ->with('/path', array())
+            ->will($this->returnValue($expectedResponse));
+        $client = $this->getClientMock();
+        $client->setHttpClient($httpClient);
+
+        $api = new ExposedAbstractApiTestInstance($client);
+        $api->get('/path', array('ref' => null));
+    }
+
     protected function getAbstractApiObject($client)
     {
         return new AbstractApiTestInstance($client);
@@ -191,5 +212,16 @@ class AbstractApiTestInstance extends AbstractApi
     public function delete($path, array $parameters = array(), $requestHeaders = array())
     {
         return $this->client->getHttpClient()->delete($path, $parameters, $requestHeaders);
+    }
+}
+
+class ExposedAbstractApiTestInstance extends AbstractApi
+{
+    /**
+     * {@inheritDoc}
+     */
+    public function get($path, array $parameters = array(), $requestHeaders = array())
+    {
+        return parent::get($path, $parameters, $requestHeaders);
     }
 }
