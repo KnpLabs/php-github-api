@@ -26,58 +26,59 @@ interface HttpClientInterface
      * Send a POST request
      *
      * @param string $path       Request path
-     * @param array  $parameters POST Parameters
+     * @param mixed  $body       Request body
      * @param array  $headers    Reconfigure the request headers for this call only
      *
      * @return array Data
      */
-    public function post($path, array $parameters = array(), array $headers = array());
+    public function post($path, $body = null, array $headers = array());
 
     /**
      * Send a PATCH request
      *
      * @param string $path       Request path
-     * @param array  $parameters PATCH Parameters
+     * @param mixed  $body       Reuqest body
      * @param array  $headers    Reconfigure the request headers for this call only
      *
+     * @internal param array $parameters Request body
      * @return array Data
      */
-    public function patch($path, array $parameters = array(), array $headers = array());
+    public function patch($path, $body = null, array $headers = array());
 
     /**
      * Send a PUT request
      *
      * @param string $path       Request path
-     * @param array  $parameters PUT Parameters
+     * @param mixed  $body       Request body
      * @param array  $headers    Reconfigure the request headers for this call only
      *
      * @return array Data
      */
-    public function put($path, array $parameters = array(), array $headers = array());
+    public function put($path, $body, array $headers = array());
 
     /**
      * Send a DELETE request
      *
      * @param string $path       Request path
-     * @param array  $parameters DELETE Parameters
+     * @param mixed  $body       Request body
      * @param array  $headers    Reconfigure the request headers for this call only
      *
      * @return array Data
      */
-    public function delete($path, array $parameters = array(), array $headers = array());
+    public function delete($path, $body = null, array $headers = array());
 
     /**
      * Send a request to the server, receive a response,
      * decode the response and returns an associative array
      *
-     * @param string $path       Request API path
-     * @param array  $parameters Parameters
+     * @param string $path       Request path
+     * @param mixed  $body       Request body
      * @param string $httpMethod HTTP method to use
      * @param array  $headers    Request headers
      *
      * @return array Data
      */
-    public function request($path, array $parameters = array(), $httpMethod = 'GET', array $headers = array());
+    public function request($path, $body, $httpMethod = 'GET', array $headers = array());
 
     /**
      * Change an option value.

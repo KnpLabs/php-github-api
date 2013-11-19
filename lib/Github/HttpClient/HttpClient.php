@@ -87,47 +87,47 @@ class HttpClient implements HttpClientInterface
      */
     public function get($path, array $parameters = array(), array $headers = array())
     {
-        return $this->request($path, $parameters, 'GET', $headers);
+        return $this->request($path, null, 'GET', $headers, array('query' => $parameters));
     }
 
     /**
      * {@inheritDoc}
      */
-    public function post($path, array $parameters = array(), array $headers = array())
+    public function post($path, $body = null, array $headers = array())
     {
-        return $this->request($path, $parameters, 'POST', $headers);
+        return $this->request($path, $body, 'POST', $headers);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function patch($path, array $parameters = array(), array $headers = array())
+    public function patch($path, $body = null, array $headers = array())
     {
-        return $this->request($path, $parameters, 'PATCH', $headers);
+        return $this->request($path, $body, 'PATCH', $headers);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function delete($path, array $parameters = array(), array $headers = array())
+    public function delete($path, $body = null, array $headers = array())
     {
-        return $this->request($path, $parameters, 'DELETE', $headers);
+        return $this->request($path, $body, 'DELETE', $headers);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function put($path, array $parameters = array(), array $headers = array())
+    public function put($path, $body, array $headers = array())
     {
-        return $this->request($path, $parameters, 'PUT', $headers);
+        return $this->request($path, $body, 'PUT', $headers);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function request($path, array $parameters = array(), $httpMethod = 'GET', array $headers = array())
+    public function request($path, $body = null, $httpMethod = 'GET', array $headers = array(), array $options = array())
     {
-        $request = $this->createRequest($httpMethod, $path, $parameters, $headers);
+        $request = $this->createRequest($httpMethod, $path, $body, $headers, $options);
         $request->addHeaders($headers);
 
         try {
@@ -170,23 +170,13 @@ class HttpClient implements HttpClientInterface
         return $this->lastResponse;
     }
 
-    protected function createRequest($httpMethod, $path, array $parameters = array(), array $headers = array())
+    protected function createRequest($httpMethod, $path, $body = null, array $headers = array(), array $options = array())
     {
-        if ('GET' !== $httpMethod) {
-            $requestBody = count($parameters) === 0
-                ? null : json_encode($parameters, empty($parameters) ? JSON_FORCE_OBJECT : 0)
-            ;
-            $options = array();
-        } else {
-            $requestBody = null;
-            $options = array('query' => $parameters);
-        }
-
         return $this->client->createRequest(
             $httpMethod,
             $path,
             array_merge($this->headers, $headers),
-            $requestBody,
+            $body,
             $options
         );
     }
