@@ -102,7 +102,7 @@ See the `doc` directory for more detailed documentation.
 ### Contributors
 
 - Thanks to [Thibault Duplessis aka. ornicar](http://github.com/ornicar) for his first version of this library.
-- Thanks to [Joseph Bielawski aka. stloyed](http://github.com/stloyd) for his contributions and support.
+- Thanks to [Joseph Bielawski aka. stloyd](http://github.com/stloyd) for his contributions and support.
 - Thanks to [noloh](http://github.com/noloh) for his contribution on the Object API.
 - Thanks to [bshaffer](http://github.com/bshaffer) for his contribution on the Repo API.
 - Thanks to [Rolf van de Krol](http://github.com/rolfvandekrol) for his countless contributions.
