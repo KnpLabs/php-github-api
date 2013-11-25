@@ -37,7 +37,7 @@ interface HttpClientInterface
      * Send a PATCH request
      *
      * @param string $path       Request path
-     * @param mixed  $body       Reuqest body
+     * @param mixed  $body       Request body
      * @param array  $headers    Reconfigure the request headers for this call only
      *
      * @internal param array $parameters Request body
