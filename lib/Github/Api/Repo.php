@@ -143,6 +143,20 @@ class Repo extends AbstractApi
     {
         return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository));
     }
+    
+    /**
+     * Get the readme content for a repository by its username and repository name
+     * @link http://developer.github.com/v3/repos/contents/#get-the-readme
+     *
+     * @param string $username   the user who owns the repository
+     * @param string $repository the name of the repository
+     *
+     * @return array the readme content
+     */
+    public function readme($username, $repository)
+    {
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/readme');
+    }
 
     /**
      * Manage the collaborators of a repository
