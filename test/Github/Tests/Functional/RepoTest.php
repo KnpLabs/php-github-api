@@ -10,6 +10,23 @@ class RepoTest extends TestCase
     /**
      * @test
      */
+    public function shouldShowPRDiffIfHeaderIsPresent()
+    {
+        $this->client->setHeaders(
+            array('Accept' => sprintf(
+                'application/vnd.github.%s.diff',
+                $this->client->getOption('api_version')
+            ))
+        );
+
+        $diff = $this->client->api('pull_request')->show('KnpLabs', 'php-github-api', '92');
+
+        $this->assertTrue('string' === gettype($diff));
+    }
+
+    /**
+     * @test
+     */
     public function shouldRetrieveContributorsList()
     {
         $username = 'KnpLabs';
