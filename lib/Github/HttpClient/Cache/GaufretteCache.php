@@ -40,7 +40,7 @@ class GaufretteCache implements CacheInterface
      */
     public function set($id, Response $response)
     {
-        $this->filesystem->write($id, serialize($response));
+        $this->filesystem->write($id, serialize($response), true);
     }
 
     /**
