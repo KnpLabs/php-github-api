@@ -5,6 +5,11 @@ namespace Github\HttpClient\Cache;
 use Guzzle\Http\Message\Response;
 use Gaufrette\Filesystem;
 
+/**
+ * Gaufrette Cache
+ *
+ * @author Massimiliano Arione <massimiliano.arione@bee-lab.net>
+ */
 class GaufretteCache implements CacheInterface
 {
     /**
