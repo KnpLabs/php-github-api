@@ -51,7 +51,5 @@ class GaufretteCache implements CacheInterface
         if ($this->filesystem->has($id)) {
             return $this->filesystem->mtime($id);
         }
-
-        return null;
     }
 }
