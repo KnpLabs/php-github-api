@@ -46,12 +46,11 @@ class CachedHttpClient extends HttpClient
     {
         $response = parent::request($path, $body, $httpMethod, $headers, $options);
 
-        $key = trim($this->options['base_url'].$path, '/');
         if (304 == $response->getStatusCode()) {
-            return $this->getCache()->get($key);
+            return $this->getCache()->get($path);
         }
 
-        $this->getCache()->set($key, $response);
+        $this->getCache()->set($path, $response);
 
         return $response;
     }
@@ -72,6 +71,12 @@ class CachedHttpClient extends HttpClient
             $request->addHeader(
                 'If-Modified-Since',
                 sprintf('%s GMT', $modifiedAt->format('l, d-M-y H:i:s'))
+            );
+        }
+        if ($etag = $this->getCache()->getETag($path)) {
+            $request->addHeader(
+                'If-None-Match',
+                $etag
             );
         }
 
