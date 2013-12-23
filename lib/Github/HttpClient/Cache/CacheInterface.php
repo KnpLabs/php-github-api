@@ -14,9 +14,23 @@ interface CacheInterface
     /**
      * @param string $id The id of the cached resource
      *
+     * @return bool if present
+     */
+    public function has($id);
+
+    /**
+     * @param string $id The id of the cached resource
+     *
      * @return null|integer The modified since timestamp
      */
     public function getModifiedSince($id);
+
+    /**
+     * @param string $id The id of the cached resource
+     *
+     * @return null|string The ETag value
+     */
+    public function getETag($id);
 
     /**
      * @param string $id The id of the cached resource

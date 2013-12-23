@@ -41,6 +41,15 @@ class GaufretteCache implements CacheInterface
     public function set($id, Response $response)
     {
         $this->filesystem->write($id, serialize($response), true);
+        $this->filesystem->write($id.'.etag', $response->getHeader('ETag'), true);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function has($id)
+    {
+        $this->filesystem->has($id);
     }
 
     /**
@@ -50,6 +59,13 @@ class GaufretteCache implements CacheInterface
     {
         if ($this->filesystem->has($id)) {
             return $this->filesystem->mtime($id);
+        }
+    }
+
+    public function getETag($id)
+    {
+        if ($this->filesystem->has($id)) {
+            return $this->filesystem->read($id.'.etag');
         }
     }
 }
