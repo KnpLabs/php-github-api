@@ -367,7 +367,7 @@ class Repo extends AbstractApi
      */
     public function watchers($username, $repository, $page = 1)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/watchers', array(
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/subscribers', array(
             'page' => $page
         ));
     }

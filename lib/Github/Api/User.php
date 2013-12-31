@@ -69,7 +69,7 @@ class User extends AbstractApi
      */
     public function watched($username)
     {
-        return $this->get('users/'.rawurlencode($username).'/watched');
+        return $this->get('users/'.rawurlencode($username).'/subscriptions');
     }
 
     /**
