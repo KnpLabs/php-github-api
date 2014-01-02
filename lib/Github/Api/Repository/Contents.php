@@ -53,6 +53,96 @@ class Contents extends AbstractApi
     }
 
     /**
+     * Creates a new file in a repository
+     * @link http://developer.github.com/v3/repos/contents/#create-a-file
+     *
+     * @param string      $username   the user who owns the repository
+     * @param string      $repository the name of the repository
+     * @param string      $path       path to file
+     * @param string      $content    contents of the new file
+     * @param string      $message    the commit message
+     * @param null|string $branch     name of a branch
+     *
+     * @return array information about the new file
+     */
+    public function create($username, $repository, $path, $content, $message, $branch = null)
+    {
+        $url = 'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
+
+        $parameters = array(
+          'content' => base64_encode($content),
+          'message' => $message,
+        );
+
+        if (null !== $branch) {
+            $parameters['branch'] = $branch;
+        }
+
+        return $this->put($url, $parameters);
+    }
+
+    /**
+     * Updates the contents of a file in a repository
+     * @link http://developer.github.com/v3/repos/contents/#update-a-file
+     *
+     * @param string      $username   the user who owns the repository
+     * @param string      $repository the name of the repository
+     * @param string      $path       path to file
+     * @param string      $content    contents of the new file
+     * @param string      $message    the commit message
+     * @param string      $sha        blob SHA of the file being replaced
+     * @param null|string $branch     name of a branch
+     *
+     * @return array information about the updated file
+     */
+    public function update($username, $repository, $path, $content, $message, $sha, $branch = null)
+    {
+        $url = 'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
+
+        $parameters = array(
+          'content' => base64_encode($content),
+          'message' => $message,
+          'sha'     => $sha,
+        );
+
+        if (null !== $branch) {
+            $parameters['branch'] = $branch;
+        }
+
+        return $this->put($url, $parameters);
+    }
+
+
+    /**
+     * Deletes a file from a repository
+     * @link http://developer.github.com/v3/repos/contents/#delete-a-file
+     *
+     * @param string      $username   the user who owns the repository
+     * @param string      $repository the name of the repository
+     * @param string      $path       path to file
+     * @param string      $message    the commit message
+     * @param string      $sha        blob SHA of the file being deleted
+     * @param null|string $branch     name of a branch
+     *
+     * @return array information about the updated file
+     */
+    public function rm($username, $repository, $path, $message, $sha, $branch = null)
+    {
+        $url = 'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
+
+        $parameters = array(
+          'message' => $message,
+          'sha'     => $sha,
+        );
+
+        if (null !== $branch) {
+            $parameters['branch'] = $branch;
+        }
+
+        return $this->delete($url, $parameters);
+    }
+
+    /**
      * Get content of archives in a repository
      * @link http://developer.github.com/v3/repos/contents/
      *
