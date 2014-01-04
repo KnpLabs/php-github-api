@@ -31,7 +31,7 @@ class Repo extends AbstractApi
      * @param string $keyword the search query
      * @param array  $params
      *
-     * @return array list of founded repositories
+     * @return array list of found repositories
      */
     public function find($keyword, array $params)
     {
