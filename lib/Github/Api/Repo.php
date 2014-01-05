@@ -37,6 +37,20 @@ class Repo extends AbstractApi
     {
         return $this->get('legacy/repos/search/'.rawurlencode($keyword), array_merge(array('start_page' => 1), $params));
     }
+    
+    /**
+     * Get contributor commit statistics for a repository
+     * @link http://developer.github.com/v3/repos/statistics/#contributors
+     * 
+     * @param string $username   the user who owns the repository
+     * @param string $repository the name of the repository
+     * 
+     * @return array list of contributors and their commit statistics
+     */
+    public function statistics($username, $repository)
+    {
+	    return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/stats/contributors');
+    }
 
     /**
      * List all repositories for an organization
