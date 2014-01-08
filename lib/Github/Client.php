@@ -166,6 +166,10 @@ class Client
             $password   = null;
         }
 
+        if (null === $authMethod) {
+            $authMethod = self::AUTH_HTTP_PASSWORD;
+        }
+
         $this->getHttpClient()->authenticate($tokenOrLogin, $password, $authMethod);
     }
 
