@@ -33,7 +33,7 @@ class Repo extends AbstractApi
      *
      * @return array list of found repositories
      */
-    public function find($keyword, array $params)
+    public function find($keyword, array $params = array())
     {
         return $this->get('legacy/repos/search/'.rawurlencode($keyword), array_merge(array('start_page' => 1), $params));
     }
