@@ -74,17 +74,17 @@ class UserTest extends TestCase
     /**
      * @test
      */
-    public function shouldGetWatchedRepositories()
+    public function shouldGetSubscriptionsToRepositories()
     {
         $expectedArray = array(array('id' => 1, 'name' => 'l3l0repo'));
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('users/l3l0/watched')
+            ->with('users/l3l0/subscriptions')
             ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($expectedArray, $api->watched('l3l0'));
+        $this->assertEquals($expectedArray, $api->subscriptions('l3l0'));
     }
 
     /**

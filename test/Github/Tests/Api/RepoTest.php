@@ -111,17 +111,17 @@ class RepoTest extends TestCase
     /**
      * @test
      */
-    public function shouldGetRepositoryWatchers()
+    public function shouldGetRepositorySubscribers()
     {
         $expectedArray = array(array('id' => 1, 'username' => 'l3l0'));
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/watchers', array('page' => 2))
+            ->with('repos/KnpLabs/php-github-api/subscribers', array('page' => 2))
             ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($expectedArray, $api->watchers('KnpLabs', 'php-github-api', 2));
+        $this->assertEquals($expectedArray, $api->subscribers('KnpLabs', 'php-github-api', 2));
     }
 
     /**
