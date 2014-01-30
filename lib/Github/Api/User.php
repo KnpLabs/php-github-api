@@ -62,7 +62,7 @@ class User extends AbstractApi
 
     /**
      * Request the repository that a specific user is watching
-     * @link http://developer.github.com/v3/repos/watching/
+     * @deprecated see subscriptions method
      *
      * @param  string $username the username
      * @return array  list of watched repositories
@@ -70,6 +70,18 @@ class User extends AbstractApi
     public function watched($username)
     {
         return $this->get('users/'.rawurlencode($username).'/watched');
+    }
+
+    /**
+     * Request the repository that a specific user is watching
+     * @link http://developer.github.com/v3/activity/watching/
+     *
+     * @param  string $username the username
+     * @return array  list of watched repositories
+     */
+    public function subscriptions($username)
+    {
+        return $this->get('users/'.rawurlencode($username).'/subscriptions');
     }
 
     /**

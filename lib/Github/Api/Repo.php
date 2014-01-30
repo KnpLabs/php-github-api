@@ -373,6 +373,7 @@ class Repo extends AbstractApi
     }
 
     /**
+     * @deprecated see subscribers method
      * @param string  $username
      * @param string  $repository
      * @param integer $page
@@ -382,6 +383,20 @@ class Repo extends AbstractApi
     public function watchers($username, $repository, $page = 1)
     {
         return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/watchers', array(
+            'page' => $page
+        ));
+    }
+
+    /**
+     * @param string  $username
+     * @param string  $repository
+     * @param integer $page
+     *
+     * @return array
+     */
+    public function subscribers($username, $repository, $page = 1)
+    {
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/subscribers', array(
             'page' => $page
         ));
     }
