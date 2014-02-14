@@ -40,7 +40,7 @@ class Repo extends AbstractApi
     
     /**
      * Get the last year of commit activity for a repository grouped by week
-	 * @link http://developer.github.com/v3/repos/statistics/#commit-activity
+     * @link http://developer.github.com/v3/repos/statistics/#commit-activity
      * 
      * @param string $username   the user who owns the repository
      * @param string $repository the name of the repository
