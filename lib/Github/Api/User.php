@@ -73,6 +73,21 @@ class User extends AbstractApi
     }
 
     /**
+     * Request starred repositories that a specific user has starred
+     * @link http://developer.github.com/v3/activity/starring/
+     *
+     * @param  string $username the username
+     * @param  int $page the page number of the paginated result set
+     * @return array list of starred repositories
+     */
+    public function starred($username, $page = 1)
+    {
+        return $this->get('users/'.rawurlencode($username).'/starred', array(
+            'page' => $page
+        ));
+    }
+
+    /**
      * Request the repository that a specific user is watching
      * @link http://developer.github.com/v3/activity/watching/
      *
