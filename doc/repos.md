@@ -230,3 +230,11 @@ To include non GitHub users, add a third parameter to true:
 ```php
 $contributors = $client->api('repo')->contributors('ornicar', 'php-github-api', true);
 ```
+
+### Get the commit activity of a repository
+
+```php
+$activity = $client->api('repo')->activity('ornicar', 'php-github-api');
+```
+
+Returns an array of commit activity group by week.
