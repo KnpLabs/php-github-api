@@ -97,6 +97,12 @@ Returns an array of followed users.
 $users = $client->api('user')->watched('ornicar');
 ```
 
+### Get repos that a specific user has starred
+
+```php
+$users = $client->api('user')->starred('ornicar');
+```
+
 For authenticated user use.
 
 > Requires [authentication](security.md).
