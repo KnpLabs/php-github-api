@@ -82,6 +82,11 @@ class HttpClient implements HttpClientInterface
         $this->client->getEventDispatcher()->addListener($eventName, $listener);
     }
 
+    public function addSubscriber($subscriber)
+    {
+        $this->client->addSubscriber($subscriber);
+    }
+
     /**
      * {@inheritDoc}
      */
