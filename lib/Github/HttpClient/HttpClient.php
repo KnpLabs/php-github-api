@@ -11,6 +11,7 @@ use Github\Exception\ErrorException;
 use Github\Exception\RuntimeException;
 use Github\HttpClient\Listener\AuthListener;
 use Github\HttpClient\Listener\ErrorListener;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Performs requests on GitHub API. API documentation should be self-explanatory.
@@ -82,7 +83,7 @@ class HttpClient implements HttpClientInterface
         $this->client->getEventDispatcher()->addListener($eventName, $listener);
     }
 
-    public function addSubscriber($subscriber)
+    public function addSubscriber(EventSubscriberInterface $subscriber)
     {
         $this->client->addSubscriber($subscriber);
     }
