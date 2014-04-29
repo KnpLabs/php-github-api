@@ -311,20 +311,23 @@ class Repo extends AbstractApi
      * Get the branch(es) of a repository
      * @link http://developer.github.com/v3/repos/
      *
-     * @param string $username   the username
-     * @param string $repository the name of the repository
-     * @param string $branch     the name of the branch
+     * @param string  $username   the username
+     * @param string  $repository the name of the repository
+     * @param string  $branch     the name of the branch
+     * @param integer $page
      *
      * @return array list of the repository branches
      */
-    public function branches($username, $repository, $branch = null)
+    public function branches($username, $repository, $branch = null, $page = 1)
     {
         $url = 'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches';
         if (null !== $branch) {
             $url .= '/'.rawurlencode($branch);
         }
 
-        return $this->get($url);
+        return $this->get($url, array(
+            'page' => $page
+        ));
     }
 
     /**
