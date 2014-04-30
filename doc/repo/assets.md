@@ -16,7 +16,7 @@ $asset = $client->api('repo')->releases()->assets()->show('twbs', 'bootstrap', $
 ### Create an asset
 
 ```php
-$asset = $client->api('repo')->releases()->assets()->show('twbs', 'bootstrap', $releaseId, $name, $contentType, $content);
+$asset = $client->api('repo')->releases()->assets()->create('twbs', 'bootstrap', $releaseId, $name, $contentType, $content);
 ```
 
 ### Edit an asset
