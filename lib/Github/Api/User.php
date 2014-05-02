@@ -109,7 +109,9 @@ class User extends AbstractApi
      */
     public function repositories($username, $sort = 'full_name')
     {
-        return $this->get('users/'.rawurlencode($username).'/repos?sort=' . rawurlencode($sort));
+        return $this->get('users/'.rawurlencode($username).'/repos', array(
+            'sort' => $sort
+        ));
     }
 
     /**
