@@ -5,6 +5,7 @@ namespace Github\Api\Repository;
 use Github\Api\AbstractApi;
 use Github\Exception\InvalidArgumentException;
 use Github\Exception\ErrorException;
+use Github\Exception\MissingArgumentException;
 
 /**
  * @link   http://developer.github.com/v3/repos/contents/
@@ -62,10 +63,13 @@ class Contents extends AbstractApi
      * @param string      $content    contents of the new file
      * @param string      $message    the commit message
      * @param null|string $branch     name of a branch
+     * @param null|array  $committer  information about the committer
+     *
+     * @throws MissingArgumentException
      *
      * @return array information about the new file
      */
-    public function create($username, $repository, $path, $content, $message, $branch = null)
+    public function create($username, $repository, $path, $content, $message, $branch = null, array $committer = null)
     {
         $url = 'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
 
@@ -76,6 +80,13 @@ class Contents extends AbstractApi
 
         if (null !== $branch) {
             $parameters['branch'] = $branch;
+        }
+
+        if (null !== $committer) {
+            if (!isset($committer['name'], $committer['email'])) {
+                throw new MissingArgumentException(array('name', 'email'));
+            }
+            $parameters['committer'] = $committer;
         }
 
         return $this->put($url, $parameters);
@@ -92,10 +103,13 @@ class Contents extends AbstractApi
      * @param string      $message    the commit message
      * @param string      $sha        blob SHA of the file being replaced
      * @param null|string $branch     name of a branch
+     * @param null|array  $committer  information about the committer
+     *
+     * @throws MissingArgumentException
      *
      * @return array information about the updated file
      */
-    public function update($username, $repository, $path, $content, $message, $sha, $branch = null)
+    public function update($username, $repository, $path, $content, $message, $sha, $branch = null, array $committer = null)
     {
         $url = 'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
 
@@ -107,6 +121,13 @@ class Contents extends AbstractApi
 
         if (null !== $branch) {
             $parameters['branch'] = $branch;
+        }
+
+        if (null !== $committer) {
+            if (!isset($committer['name'], $committer['email'])) {
+                throw new MissingArgumentException(array('name', 'email'));
+            }
+            $parameters['committer'] = $committer;
         }
 
         return $this->put($url, $parameters);
@@ -123,10 +144,13 @@ class Contents extends AbstractApi
      * @param string      $message    the commit message
      * @param string      $sha        blob SHA of the file being deleted
      * @param null|string $branch     name of a branch
+     * @param null|array  $committer  information about the committer
+     *
+     * @throws MissingArgumentException
      *
      * @return array information about the updated file
      */
-    public function rm($username, $repository, $path, $message, $sha, $branch = null)
+    public function rm($username, $repository, $path, $message, $sha, $branch = null, array $committer = null)
     {
         $url = 'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
 
@@ -137,6 +161,13 @@ class Contents extends AbstractApi
 
         if (null !== $branch) {
             $parameters['branch'] = $branch;
+        }
+
+        if (null !== $committer) {
+            if (!isset($committer['name'], $committer['email'])) {
+                throw new MissingArgumentException(array('name', 'email'));
+            }
+            $parameters['committer'] = $committer;
         }
 
         return $this->delete($url, $parameters);

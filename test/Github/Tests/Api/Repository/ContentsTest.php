@@ -41,6 +41,122 @@ class ContentsTest extends TestCase
     /**
      * @test
      */
+    public function shouldCreateNewFile()
+    {
+        $expectedArray = array('content' => 'some data');
+        $content       = '<?php //..';
+        $message       = 'a commit message';
+        $branch        = 'master';
+        $committer     = array('name' => 'committer name', 'email' => 'email@example.com');
+        $parameters    = array(
+            'content'   => base64_encode($content),
+            'message'   => $message,
+            'committer' => $committer,
+            'branch'    => $branch,
+        );
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('put')
+            ->with('repos/KnpLabs/php-github-api/contents/test%2FGithub%2FTests%2FApi%2FRepository%2FContentsTest.php', $parameters)
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->create('KnpLabs', 'php-github-api', 'test/Github/Tests/Api/Repository/ContentsTest.php', $content, $message, $branch, $committer));
+    }
+
+    /**
+     * @test
+     * @expectedException        Github\Exception\MissingArgumentException
+     * @expectedExceptionMessage One or more of required ("name", "email") parameters is missing!
+     */
+    public function shouldThrowExceptionWhenCreateNewFileWithInvalidCommitter()
+    {
+        $committer = array('invalid_key' => 'some data');
+        $api       = $this->getApiMock();
+        $api->create('KnpLabs', 'php-github-api', 'test/Github/Tests/Api/Repository/ContentsTest.php', 'some content', 'a commit message', null, $committer);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldUpdateFile()
+    {
+        $expectedArray = array('content' => 'some data');
+        $content       = '<?php //..';
+        $message       = 'a commit message';
+        $sha           = 'a sha';
+        $branch        = 'master';
+        $committer     = array('name' => 'committer name', 'email' => 'email@example.com');
+        $parameters    = array(
+            'content'   => base64_encode($content),
+            'message'   => $message,
+            'committer' => $committer,
+            'branch'    => $branch,
+            'sha'       => $sha,
+        );
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('put')
+            ->with('repos/KnpLabs/php-github-api/contents/test%2FGithub%2FTests%2FApi%2FRepository%2FContentsTest.php', $parameters)
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->update('KnpLabs', 'php-github-api', 'test/Github/Tests/Api/Repository/ContentsTest.php', $content, $message, $sha, $branch, $committer));
+    }
+
+    /**
+     * @test
+     * @expectedException        Github\Exception\MissingArgumentException
+     * @expectedExceptionMessage One or more of required ("name", "email") parameters is missing!
+     */
+    public function shouldThrowExceptionWhenUpdateFileWithInvalidCommitter()
+    {
+        $committer = array('invalid_key' => 'some data');
+        $api       = $this->getApiMock();
+        $api->update('KnpLabs', 'php-github-api', 'test/Github/Tests/Api/Repository/ContentsTest.php', 'some content', 'a commit message', null, null, $committer);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldDeleteFile()
+    {
+        $expectedArray = array('content' => 'some data');
+        $message       = 'a commit message';
+        $sha           = 'a sha';
+        $branch        = 'master';
+        $committer     = array('name' => 'committer name', 'email' => 'email@example.com');
+        $parameters    = array(
+            'message'   => $message,
+            'committer' => $committer,
+            'branch'    => $branch,
+            'sha'       => $sha,
+        );
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('delete')
+            ->with('repos/KnpLabs/php-github-api/contents/test%2FGithub%2FTests%2FApi%2FRepository%2FContentsTest.php', $parameters)
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->rm('KnpLabs', 'php-github-api', 'test/Github/Tests/Api/Repository/ContentsTest.php', $message, $sha, $branch, $committer));
+    }
+
+    /**
+     * @test
+     * @expectedException        Github\Exception\MissingArgumentException
+     * @expectedExceptionMessage One or more of required ("name", "email") parameters is missing!
+     */
+    public function shouldThrowExceptionWhenDeleteFileWithInvalidCommitter()
+    {
+        $committer = array('invalid_key' => 'some data');
+        $api       = $this->getApiMock();
+        $api->rm('KnpLabs', 'php-github-api', 'test/Github/Tests/Api/Repository/ContentsTest.php', 'a commit message', null, null, $committer);
+    }
+
+    /**
+     * @test
+     */
     public function shouldFetchTarballArchiveWhenFormatNotRecognized()
     {
         $expectedValue = 'tar';
