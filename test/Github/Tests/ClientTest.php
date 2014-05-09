@@ -168,6 +168,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
             array('authorization', 'Github\Api\Authorizations'),
             array('authorizations', 'Github\Api\Authorizations'),
+
+            array('meta', 'Github\Api\Meta')
         );
     }
 
