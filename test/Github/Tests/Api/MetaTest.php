@@ -9,11 +9,10 @@ class MetaTest extends TestCase
      */
     public function shouldGetInformationService()
     {
-
         $expectedArray = array(
             'hooks' => array(
                 '127.0.0.1/32'
-            ), 
+            ),
             'git' => array(
                 '127.0.0.1/32'
             ),
