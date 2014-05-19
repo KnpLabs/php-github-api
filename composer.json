@@ -1,5 +1,5 @@
 {
-    "name": "guillermoandrae/php-github-api",
+    "name": "knplabs/github-api",
     "type": "library",
     "description": "GitHub API v3 client",
     "homepage": "https://github.com/guillermoandrae/php-github-api",
