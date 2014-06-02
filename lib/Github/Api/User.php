@@ -25,6 +25,21 @@ class User extends AbstractApi
     }
 
     /**
+     * Request all users:
+     * @link https://developer.github.com/v3/users/#get-all-users
+     *
+     * @param integer|null $id ID of the last user that you've seen
+     * @return array list of users found
+     */
+    public function all($id = null)
+    {
+        if (!is_integer($id)) {
+            return $this->get('users');
+        }
+        return $this->get('users?since=' . rawurldecode($id));
+    }
+
+    /**
      * Get extended information about a user by its username
      * @link http://developer.github.com/v3/users/
      *
