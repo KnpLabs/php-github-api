@@ -139,6 +139,10 @@ class Client
                 $api = new Api\Authorizations($this);
                 break;
 
+            case 'meta':
+                $api = new Api\Meta($this);
+                break;
+
             default:
                 throw new InvalidArgumentException(sprintf('Undefined api instance called: "%s"', $name));
         }

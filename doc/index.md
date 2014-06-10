@@ -17,6 +17,7 @@ APIs:
   * [Releases](repo/releases.md)
     * [Assets](repo/assets.md)
 * [Users](users.md)
+* [Meta](meta.md)
 
 Additional features:
 
