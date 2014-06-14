@@ -21,9 +21,11 @@ class Authorizations extends AbstractApi
         return $this->get('authorizations/'.rawurlencode($number));
     }
 
-    public function create(array $params)
+    public function create(array $params, $OTPCode = null)
     {
-        return $this->post('authorizations', $params);
+        $headers = null === $OTPCode ? array() : array('X-GitHub-OTP' => $OTPCode);
+
+        return $this->post('authorizations', $params, $headers);
     }
 
     public function update($id, array $params)

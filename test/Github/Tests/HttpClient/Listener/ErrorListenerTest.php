@@ -149,6 +149,38 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
         $listener->onRequestError($this->getEventMock($response));
     }
 
+    /**
+     * @test
+     * @expectedException \Github\Exception\TwoFactorAuthenticationRequiredException
+     */
+    public function shouldThrowTwoFactorAuthenticationRequiredException()
+    {
+        $response = $this->getMockBuilder('Guzzle\Http\Message\Response')->disableOriginalConstructor()->getMock();
+        $response->expects($this->once())
+            ->method('isClientError')
+            ->will($this->returnValue(true));
+        $response->expects($this->any())
+            ->method('getStatusCode')
+            ->will($this->returnValue(401));
+        $response->expects($this->any())
+            ->method('getHeader')
+            ->will($this->returnCallback(function ($name) {
+                switch ($name) {
+                    case 'X-RateLimit-Remaining':
+                        return 5000;
+                    case 'X-GitHub-OTP':
+                        return 'required; sms';
+                }
+            }));
+        $response->expects($this->any())
+            ->method('hasHeader')
+            ->with('X-GitHub-OTP')
+            ->will($this->returnValue(true));
+
+        $listener = new ErrorListener(array());
+        $listener->onRequestError($this->getEventMock($response));
+    }
+
     public function getErrorCodesProvider()
     {
         return array(

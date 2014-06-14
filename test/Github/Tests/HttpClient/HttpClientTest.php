@@ -242,6 +242,29 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $httpClient->get($path, $parameters, $headers);
     }
 
+    /**
+     * @test
+     * @expectedException \Github\Exception\TwoFactorAuthenticationRequiredException
+     */
+    public function shouldForwardTwoFactorAuthenticationExceptionWhenItHappens()
+    {
+        $path       = '/some/path';
+        $parameters = array('a = b');
+        $headers    = array('c' => 'd');
+
+        $response = new Response(401);
+        $response->addHeader('X-GitHub-OTP', 'required; sms');
+
+        $mockPlugin = new MockPlugin();
+        $mockPlugin->addResponse($response);
+
+        $client = new GuzzleClient('http://123.com/');
+        $client->addSubscriber($mockPlugin);
+
+        $httpClient = new TestHttpClient(array(), $client);
+        $httpClient->get($path, $parameters, $headers);
+    }
+
     protected function getBrowserMock(array $methods = array())
     {
         $mock = $this->getMock(
