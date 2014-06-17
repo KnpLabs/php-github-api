@@ -2,6 +2,7 @@
 
 namespace Github\HttpClient;
 
+use Github\Exception\TwoFactorAuthenticationRequiredException;
 use Guzzle\Http\Client as GuzzleClient;
 use Guzzle\Http\ClientInterface;
 use Guzzle\Http\Message\Request;
@@ -139,9 +140,11 @@ class HttpClient implements HttpClientInterface
         try {
             $response = $this->client->send($request);
         } catch (\LogicException $e) {
-            throw new ErrorException($e->getMessage());
+            throw new ErrorException($e->getMessage(), $e->getCode(), $e);
+        } catch (TwoFactorAuthenticationRequiredException $e) {
+            throw $e;
         } catch (\RuntimeException $e) {
-            throw new RuntimeException($e->getMessage());
+            throw new RuntimeException($e->getMessage(), $e->getCode(), $e);
         }
 
         $this->lastRequest  = $request;
