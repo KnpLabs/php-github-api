@@ -25,7 +25,11 @@ class PullRequest extends AbstractApi
      */
     public function all($username, $repository, array $params = array())
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls', $params );
+		$parameters = array_merge(array(
+		    'page' => 1,
+		    'per_page' => 30
+		), $params);
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls', $parameters);
     }
 
     /**
