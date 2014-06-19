@@ -135,7 +135,6 @@ class HttpClient implements HttpClientInterface
     public function request($path, $body = null, $httpMethod = 'GET', array $headers = array(), array $options = array())
     {
         $request = $this->createRequest($httpMethod, $path, $body, $headers, $options);
-        $request->addHeaders($headers);
 
         try {
             $response = $this->client->send($request);
