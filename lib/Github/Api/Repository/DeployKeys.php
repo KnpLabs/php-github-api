@@ -11,9 +11,25 @@ use Github\Exception\MissingArgumentException;
  */
 class DeployKeys extends AbstractApi
 {
-    public function all($username, $repository)
+    /**
+     * Get all deploy keys for a repository
+     * @link https://developer.github.com/v3/repos/keys/#list
+     *
+     * @param  string $username   the username
+     * @param  string $repository the repository
+     * @param  int    $page       the page
+     * @param  int    $perPage    the number of results by page
+     *
+     * @return array list of deploy keys collaborators for the repository
+     */
+    public function all($username, $repository, $page=1, $perPage=30)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/keys');
+        $parameters = array(
+            'page' => $page,
+            'per_page' => $perPage
+        );
+
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/keys', $parameters);
     }
 
     public function show($username, $repository, $id)

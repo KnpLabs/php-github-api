@@ -11,7 +11,18 @@ use Github\Exception\MissingArgumentException;
  */
 class Labels extends AbstractApi
 {
-    public function all($username, $repository)
+    /**
+     * Get all labels for a repository
+     * @link https://developer.github.com/v3/issues/labels/#list-all-labels-for-this-repository
+     *
+     * @param  string $username   the username
+     * @param  string $repository the repository
+     * @param  int    $page       the page
+     * @param  int    $perPage    the number of results by page
+     *
+     * @return array list of labels for the repository
+     */
+    public function all($username, $repository, $page=1, $perPage=30)
     {
         return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels');
     }

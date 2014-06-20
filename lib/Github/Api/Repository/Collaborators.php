@@ -10,9 +10,25 @@ use Github\Api\AbstractApi;
  */
 class Collaborators extends AbstractApi
 {
-    public function all($username, $repository)
+    /**
+     * Get all collaborators for a repository
+     * @link https://developer.github.com/v3/repos/collaborators/#list
+     *
+     * @param  string $username   the username
+     * @param  string $repository the repository
+     * @param  int    $page       the page
+     * @param  int    $perPage    the number of results by page
+     *
+     * @return array list of collaborators for the repository
+     */
+    public function all($username, $repository, $page=1, $perPage=30)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/collaborators');
+        $parameters = array(
+            'page'     => $page,
+            'per_page' => $perPage
+        );
+
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/collaborators', $parameters);
     }
 
     public function check($username, $repository, $collaborator)

@@ -15,11 +15,19 @@ class Emails extends AbstractApi
      * List emails for the authenticated user
      * @link http://developer.github.com/v3/users/emails/
      *
+     * @param  int    $page       the page
+     * @param  int    $perPage    the number of results by page
+     *
      * @return array
      */
-    public function all()
+    public function all($page=1, $perPage=30)
     {
-        return $this->get('user/emails');
+        $parameters = array(
+            'page' => $page,
+            'per_page' => $perPage
+        );
+
+        return $this->get('user/emails', $parameters);
     }
 
     /**
