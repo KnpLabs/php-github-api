@@ -82,7 +82,7 @@ class PullRequest extends AbstractApi
      *
      * @return array array of files from the pull request
      */
-    public function files($username, $repository, $id, $page=1, $perPage=30)
+    public function files($username, $repository, $id, $page = 1, $perPage = 30)
     {
         $parameters = array(
             'page'     => $page,

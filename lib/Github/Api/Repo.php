@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 namespace Github\Api;
 
@@ -319,7 +319,7 @@ class Repo extends AbstractApi
      *
      * @return array list of the repository branches
      */
-    public function branches($username, $repository, $branch = null, $page=1, $perPage=30)
+    public function branches($username, $repository, $branch = null, $page = 1, $perPage = 30)
     {
         $url = 'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches';
         if (null !== $branch) {
@@ -345,7 +345,7 @@ class Repo extends AbstractApi
      *
      * @return array list of the repo contributors
      */
-    public function contributors($username, $repository, $includingAnonymous = false, $page=1, $perPage=30)
+    public function contributors($username, $repository, $includingAnonymous = false, $page = 1, $perPage = 30)
     {
         return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contributors', array(
             'anon'     => $includingAnonymous ?: null,
@@ -379,7 +379,7 @@ class Repo extends AbstractApi
      *
      * @return array list of the repository tags
      */
-    public function tags($username, $repository, $page=1, $perPage=30)
+    public function tags($username, $repository, $page = 1, $perPage = 30)
     {
         $parameters = array(
             'page'     => $page,

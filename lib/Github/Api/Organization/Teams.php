@@ -18,7 +18,7 @@ class Teams extends AbstractApi
      *
      * @return array of the organization teams
      */
-    public function all($organization, $page=1, $perPage=30)
+    public function all($organization, $page = 1, $perPage = 30)
     {
         return $this->get('orgs/'.rawurlencode($organization).'/teams');
     }

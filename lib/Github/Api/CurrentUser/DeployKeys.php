@@ -20,7 +20,7 @@ class DeployKeys extends AbstractApi
      *
      * @return array
      */
-    public function all($page=1, $perPage=30)
+    public function all($page = 1, $perPage = 30)
     {
         $parameters = array(
             'page' => $page,

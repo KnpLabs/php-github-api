@@ -22,7 +22,7 @@ class Labels extends AbstractApi
      *
      * @return array list of labels for the repository
      */
-    public function all($username, $repository, $page=1, $perPage=30)
+    public function all($username, $repository, $page = 1, $perPage = 30)
     {
         return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels');
     }
