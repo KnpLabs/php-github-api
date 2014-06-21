@@ -120,4 +120,12 @@ class CurrentUser extends AbstractApi
             'page' => $page
         ));
     }
+    
+    /**
+     *  @link https://developer.github.com/v3/activity/watching/#list-repositories-being-watched
+     */
+    public function subscriptions()
+    {
+        return $this->get('user/subscriptions');
+    }
 }
