@@ -6,7 +6,7 @@ use Github\Api\AbstractApi;
 use Github\Exception\MissingArgumentException;
 
 /**
- * @link   http://developer.github.com/v3/issues/hooks/
+ * @link   http://developer.github.com/v3/repos/hooks/
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class Hooks extends AbstractApi
