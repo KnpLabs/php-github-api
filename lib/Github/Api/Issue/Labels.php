@@ -20,7 +20,7 @@ class Labels extends AbstractApi
      *
      * @return array list of the labels
      */
-    public function all($username, $repository, $issue = null, $page=1, $perPage=30)
+    public function all($username, $repository, $issue = null, $page = 1, $perPage = 30)
     {
         $parameters = array('page' => $page, 'per_page' => $perPage);
         if ($issue === null) {

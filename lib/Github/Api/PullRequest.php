@@ -60,7 +60,7 @@ class PullRequest extends AbstractApi
      *
      * @return array array of commits from the pull request
      */
-    public function commits($username, $repository, $id, $page=1, $perPage=30)
+    public function commits($username, $repository, $id, $page = 1, $perPage = 30)
     {
         $parameters = array(
             'page'     => $page,

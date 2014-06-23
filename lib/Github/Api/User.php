@@ -148,7 +148,7 @@ class User extends AbstractApi
      * @param  string $username the username
      * @return array  list of the user public keys
      */
-    public function keys($username, $key=1, $perPage=30)
+    public function keys($username, $key = 1, $perPage = 30)
     {
         $parameters = array(
             'page'     => $page,
