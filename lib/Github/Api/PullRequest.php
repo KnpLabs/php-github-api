@@ -89,7 +89,7 @@ class PullRequest extends AbstractApi
             'per_page' => $perPage
         );
 
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/files', $paramters);
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/files', $parameters);
     }
 
     public function comments()

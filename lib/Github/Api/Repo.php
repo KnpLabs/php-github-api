@@ -329,7 +329,7 @@ class Repo extends AbstractApi
         return $this->get($url, array(
             'page'     => $page,
             'per_page' => $perPage
-        );
+        ));
     }
 
     /**
@@ -400,7 +400,7 @@ class Repo extends AbstractApi
      *
      * @return array list of the languages
      */
-    public function teams($username, $repository)
+    public function teams($username, $repository, $page = 1, $perPage = 30)
     {
         $parameters = array(
             'page'     => $page,

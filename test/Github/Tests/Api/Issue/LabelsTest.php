@@ -20,7 +20,7 @@ class LabelsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/labels', array())
+            ->with('repos/KnpLabs/php-github-api/labels', array('page' => 1, 'per_page' => 30))
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api'));
