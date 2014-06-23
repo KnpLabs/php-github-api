@@ -119,11 +119,14 @@ class User extends AbstractApi
      * @link http://developer.github.com/v3/repos/
      *
      * @param  string $username the username
+	 * @param  string $sort the repository order
      * @return array  list of the user repositories
      */
-    public function repositories($username)
+    public function repositories($username, $sort = 'full_name')
     {
-        return $this->get('users/'.rawurlencode($username).'/repos');
+        return $this->get('users/'.rawurlencode($username).'/repos', array(
+            'sort' => $sort
+        ));
     }
 
     /**
