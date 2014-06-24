@@ -33,7 +33,7 @@ class PullRequestTest extends TestCase
             ->with('repos/ezsystems/ezpublish/pulls', array('state' => 'open', 'per_page' => 30, 'page' => 1))
             ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($expectedArray, $api->all('ezsystems', 'ezpublish', 'open'));
+        $this->assertEquals($expectedArray, $api->all('ezsystems', 'ezpublish', array('state' => 'open')));
     }
 
     /**
@@ -49,7 +49,7 @@ class PullRequestTest extends TestCase
             ->with('repos/ezsystems/ezpublish/pulls', array('state' => 'closed', 'per_page' => 30, 'page' => 1))
             ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($expectedArray, $api->all('ezsystems', 'ezpublish', 'closed'));
+        $this->assertEquals($expectedArray, $api->all('ezsystems', 'ezpublish', array('state' => 'closed')));
     }
 
     /**
