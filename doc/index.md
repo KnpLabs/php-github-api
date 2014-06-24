@@ -4,6 +4,7 @@ Navigation
 APIs:
 * [Authorizations](authorizations.md)
 * [Commits](commits.md)
+* [Enterprise](enterprise.md)
 * [Gists](gists.md)
 * [Issues](issues.md)
   * [Comments](issue/comments.md)
