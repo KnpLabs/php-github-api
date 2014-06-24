@@ -21,7 +21,7 @@ class Downloads extends AbstractApi
      *
      * @return array
      */
-    public function all($username, $repository, $page=1, $perPage=30)
+    public function all($username, $repository, $page = 1, $perPage = 30)
     {
         $parameters = array(
             'page'     => $page,

@@ -21,7 +21,7 @@ class Collaborators extends AbstractApi
      *
      * @return array list of collaborators for the repository
      */
-    public function all($username, $repository, $page=1, $perPage=30)
+    public function all($username, $repository, $page = 1, $perPage = 30)
     {
         $parameters = array(
             'page'     => $page,
