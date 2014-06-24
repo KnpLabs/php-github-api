@@ -87,6 +87,11 @@ class Client
                 $api = new Api\CurrentUser($this);
                 break;
 
+            case 'ent':
+            case 'enterprise':
+                $api = new Api\Enterprise($this);
+                break;
+
             case 'git':
             case 'git_data':
                 $api = new Api\GitData($this);
