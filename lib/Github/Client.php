@@ -87,6 +87,11 @@ class Client
                 $api = new Api\CurrentUser($this);
                 break;
 
+            case 'ent':
+            case 'enterprise':
+                $api = new Api\Enterprise($this);
+                break;
+
             case 'git':
             case 'git_data':
                 $api = new Api\GitData($this);
@@ -178,6 +183,17 @@ class Client
     }
 
     /**
+     * Sets the URL of your GitHub Enterprise instance.
+     *
+     * @param string $enterpriseUrl URL of the API in the form of http(s)://hostname
+     */
+    public function setEnterpriseUrl($enterpriseUrl)
+    {
+        $baseUrl = (substr($enterpriseUrl, -1) == '/') ? substr($enterpriseUrl, 0, -1) : $enterpriseUrl;
+        $this->getHttpClient()->client->setBaseUrl($baseUrl . '/api/v3');
+    }
+
+    /**
      * @return HttpClient
      */
     public function getHttpClient()
@@ -241,11 +257,21 @@ class Client
         if (!array_key_exists($name, $this->options)) {
             throw new InvalidArgumentException(sprintf('Undefined option called: "%s"', $name));
         }
-
-        if ('api_version' == $name && !in_array($value, array('v3', 'beta'))) {
-            throw new InvalidArgumentException(sprintf('Invalid API version ("%s"), valid are: %s', $name, implode(', ', array('v3', 'beta'))));
+        $supportedApiVersions = $this->getSupportedApiVersions();
+        if ('api_version' == $name && !in_array($value, $supportedApiVersions)) {
+            throw new InvalidArgumentException(sprintf('Invalid API version ("%s"), valid are: %s', $name, implode(', ', $supportedApiVersions)));
         }
 
         $this->options[$name] = $value;
+    }
+
+    /**
+     * Returns an array of valid API versions supported by this client.
+     *
+     * @return array
+     */
+    public function getSupportedApiVersions()
+    {
+        return array('v3', 'beta');
     }
 }
