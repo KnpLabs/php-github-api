@@ -23,6 +23,29 @@ class UserTest extends TestCase
     /**
      * @test
      */
+    public function shouldGetUserOrganizations()
+    {
+        $expectedArray = array(array(
+            'id' => 202732,
+            'url' => 'https://api.github.com/orgs/KnpLabs',
+            'repos_url' => 'https://api.github.com/orgs/KnpLabs/repos',
+            'events_url' => 'https://api.github.com/orgs/KnpLabs/events',
+            'members_url' => 'https://api.github.com/orgs/KnpLabs/members{/member}',
+            'public_members_url' => 'https://api.github.com/orgs/KnpLabs/public_members{/member}'
+        ));
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('users/l3l0/orgs')
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->organizations('l3l0'));
+    }
+
+    /**
+     * @test
+     */
     public function shouldGetAllUsers()
     {
         $expectedArray = array(
