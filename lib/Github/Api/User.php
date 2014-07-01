@@ -52,6 +52,18 @@ class User extends AbstractApi
     }
 
     /**
+     * Get extended information about a user by its username
+     * @link https://developer.github.com/v3/orgs/
+     *
+     * @param  string $username the username to show
+     * @return array  information about organizations that user belongs to
+     */
+    public function organizations($username)
+    {
+        return $this->get('users/'.rawurlencode($username).'/orgs');
+    }
+
+    /**
      * Request the users that a specific user is following
      * @link http://developer.github.com/v3/users/followers/
      *
