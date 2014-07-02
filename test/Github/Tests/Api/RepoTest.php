@@ -198,7 +198,7 @@ class RepoTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/contributors', array('anon' => null))
+            ->with('repos/KnpLabs/php-github-api/contributors', array('anon' => null, 'page' => 1, 'per_page' => 30))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->contributors('KnpLabs', 'php-github-api', false));
@@ -214,7 +214,7 @@ class RepoTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/contributors', array('anon' => true))
+            ->with('repos/KnpLabs/php-github-api/contributors', array('anon' => true, 'page' => 1, 'per_page' => 30))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->contributors('KnpLabs', 'php-github-api', true));

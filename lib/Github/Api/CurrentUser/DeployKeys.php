@@ -15,10 +15,18 @@ class DeployKeys extends AbstractApi
      * List deploy keys for the authenticated user
      * @link http://developer.github.com/v3/repos/keys/
      *
+     * @param  int    $page       the page
+     * @param  int    $perPage    the number of results by page
+     *
      * @return array
      */
-    public function all()
+    public function all($page = 1, $perPage = 30)
     {
+        $parameters = array(
+            'page' => $page,
+            'per_page' => $perPage
+        );
+
         return $this->get('user/keys');
     }
 

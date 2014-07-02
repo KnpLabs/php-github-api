@@ -11,13 +11,23 @@ use Github\Exception\InvalidArgumentException;
  */
 class Labels extends AbstractApi
 {
-    public function all($username, $repository, $issue = null)
+    /**
+     * @param  string $username   the username
+     * @param  string $repository the repository
+     * @param  int    $issue      the issue number
+     * @param  int    $page       the page
+     * @param  int    $perPage    the number of results by page
+     *
+     * @return array list of the labels
+     */
+    public function all($username, $repository, $issue = null, $page = 1, $perPage = 30)
     {
+        $parameters = array('page' => $page, 'per_page' => $perPage);
         if ($issue === null) {
-            return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels');
+            return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels', $parameters);
         }
 
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/labels');
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/labels', $parameters);
     }
 
     public function create($username, $repository, array $params)

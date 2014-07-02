@@ -37,14 +37,14 @@ class Repo extends AbstractApi
     {
         return $this->get('legacy/repos/search/'.rawurlencode($keyword), array_merge(array('start_page' => 1), $params));
     }
-    
+
     /**
      * Get the last year of commit activity for a repository grouped by week
      * @link http://developer.github.com/v3/repos/statistics/#commit-activity
-     * 
+     *
      * @param string $username   the user who owns the repository
      * @param string $repository the name of the repository
-     * 
+     *
      * @return array commit activity grouped by week
      */
     public function activity($username, $repository)
@@ -171,7 +171,7 @@ class Repo extends AbstractApi
     {
         return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository));
     }
-    
+
     /**
      * Get the readme content for a repository by its username and repository name
      * @link http://developer.github.com/v3/repos/contents/#get-the-readme
@@ -243,7 +243,7 @@ class Repo extends AbstractApi
 
     /**
      * Manage the releases of a repository (Currently Undocumented)
-     * @link http://developer.github.com/v3/repos/ 
+     * @link http://developer.github.com/v3/repos/
      *
      * @return Releases
      */
@@ -314,33 +314,43 @@ class Repo extends AbstractApi
      * @param string $username   the username
      * @param string $repository the name of the repository
      * @param string $branch     the name of the branch
+     * @param int    $page       the page paginate with per_page
+     * @param int    $perPage    the number of restults by page
      *
      * @return array list of the repository branches
      */
-    public function branches($username, $repository, $branch = null)
+    public function branches($username, $repository, $branch = null, $page = 1, $perPage = 30)
     {
         $url = 'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches';
         if (null !== $branch) {
             $url .= '/'.rawurlencode($branch);
         }
 
-        return $this->get($url);
+        return $this->get($url, array(
+            'page'     => $page,
+            'per_page' => $perPage
+        ));
     }
 
     /**
      * Get the contributors of a repository
-     * @link http://developer.github.com/v3/repos/
+     * @link https://developer.github.com/v3/repos/#list-contributors
      *
      * @param string  $username           the user who owns the repository
      * @param string  $repository         the name of the repository
-     * @param boolean $includingAnonymous by default, the list only shows GitHub users.
+     * @param boolean $includingAnonymous by default, the list only shows GitHub users
      *                                    You can include non-users too by setting this to true
+     * @param int     $page               the page
+     * @param int     $perPage            the number of results by page
+     *
      * @return array list of the repo contributors
      */
-    public function contributors($username, $repository, $includingAnonymous = false)
+    public function contributors($username, $repository, $includingAnonymous = false, $page = 1, $perPage = 30)
     {
         return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contributors', array(
-            'anon' => $includingAnonymous ?: null
+            'anon'     => $includingAnonymous ?: null,
+            'page'     => $page,
+            'per_page' => $perPage
         ));
     }
 
@@ -362,28 +372,42 @@ class Repo extends AbstractApi
      * Get the tags of a repository
      * @link http://developer.github.com/v3/repos/
      *
-     * @param string $username   the user who owns the repository
-     * @param string $repository the name of the repository
+     * @param  string $username   the user who owns the repository
+     * @param  string $repository the name of the repository
+     * @param  int    $page       the page
+     * @param  int    $perPage    the number of results by page
      *
      * @return array list of the repository tags
      */
-    public function tags($username, $repository)
+    public function tags($username, $repository, $page = 1, $perPage = 30)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/tags');
+        $parameters = array(
+            'page'     => $page,
+            'per_page' => $perPage
+        );
+
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/tags', $parameters);
     }
 
     /**
      * Get the teams of a repository
      * @link http://developer.github.com/v3/repos/
      *
-     * @param string $username   the user who owns the repo
-     * @param string $repository the name of the repo
+     * @param  string $username   the user who owns the repo
+     * @param  string $repository the name of the repo
+     * @param  int    $page       the page
+     * @param  int    $perPage    the number of results by page
      *
      * @return array list of the languages
      */
-    public function teams($username, $repository)
+    public function teams($username, $repository, $page = 1, $perPage = 30)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/teams');
+        $parameters = array(
+            'page'     => $page,
+            'per_page' => $perPage
+        );
+
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/teams', $parameters);
     }
 
     /**

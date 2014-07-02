@@ -154,12 +154,20 @@ class User extends AbstractApi
      * Get the public keys for a user
      * @link http://developer.github.com/v3/users/keys/#list-public-keys-for-a-user
      *
+     * @param  int    $page       the page
+     * @param  int    $perPage    the number of results by page
+     *
      * @param  string $username the username
      * @return array  list of the user public keys
      */
-    public function keys($username)
+    public function keys($username, $key = 1, $perPage = 30)
     {
-        return $this->get('users/'.rawurlencode($username).'/keys');
+        $parameters = array(
+            'page'     => $page,
+            'per_page' => $perPage
+        );
+
+        return $this->get('users/'.rawurlencode($username).'/keys', $parameters);
     }
 
     /**

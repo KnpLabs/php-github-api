@@ -48,14 +48,48 @@ class PullRequest extends AbstractApi
         return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id));
     }
 
-    public function commits($username, $repository, $id)
+    /**
+     * Return all the commits from a pull request
+     * @link https://developer.github.com/v3/pulls/#list-commits-on-a-pull-request
+     *
+     * @param  string $username   the username
+     * @param  string $repository the repository
+     * @param  int    $id         the ID of the pull request
+     * @param  int    $page       the page paginate with per_page
+     * @param  int    $perPage    the number of restults by page
+     *
+     * @return array array of commits from the pull request
+     */
+    public function commits($username, $repository, $id, $page = 1, $perPage = 30)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/commits');
+        $parameters = array(
+            'page'     => $page,
+            'per_page' => $perPage
+        );
+
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/commits', $parameters);
     }
 
-    public function files($username, $repository, $id)
+    /**
+     * Return all the modified files from a pull request
+     * @link https://developer.github.com/v3/pulls/#list-pull-requests-files
+     *
+     * @param  string $username   the username
+     * @param  string $repository the repository
+     * @param  int    $id         the ID of the pull request
+     * @param  int    $page       the page paginate with per_page
+     * @param  int    $perPage    the number of restults by page
+     *
+     * @return array array of files from the pull request
+     */
+    public function files($username, $repository, $id, $page = 1, $perPage = 30)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/files');
+        $parameters = array(
+            'page'     => $page,
+            'per_page' => $perPage
+        );
+
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/files', $parameters);
     }
 
     public function comments()

@@ -11,7 +11,14 @@ use Github\Exception\MissingArgumentException;
  */
 class Teams extends AbstractApi
 {
-    public function all($organization)
+    /**
+     * @param  string $organization the organization
+     * @param  int    $page         the page paginated by with per_page
+     * @param  int    $perPage      the number of results by page
+     *
+     * @return array of the organization teams
+     */
+    public function all($organization, $page = 1, $perPage = 30)
     {
         return $this->get('orgs/'.rawurlencode($organization).'/teams');
     }

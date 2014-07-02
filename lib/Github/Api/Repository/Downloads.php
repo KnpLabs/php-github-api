@@ -14,14 +14,21 @@ class Downloads extends AbstractApi
      * List downloads in selected repository
      * @link http://developer.github.com/v3/repos/downloads/#list-downloads-for-a-repository
      *
-     * @param string $username   the user who owns the repo
-     * @param string $repository the name of the repo
+     * @param  string $username   the user who owns the repo
+     * @param  string $repository the name of the repo
+     * @param  int    $page       the page
+     * @param  int    $perPage    the number of results by page
      *
      * @return array
      */
-    public function all($username, $repository)
+    public function all($username, $repository, $page = 1, $perPage = 30)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/downloads');
+        $parameters = array(
+            'page'     => $page,
+            'per_page' => $perPage
+        );
+
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/downloads', $parameters);
     }
 
     /**

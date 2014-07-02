@@ -20,12 +20,19 @@ class Assets extends AbstractApi
      * @param  string  $username         the user who owns the repo
      * @param  string  $repository       the name of the repo
      * @param  integer $id               the id of the release
+     * @param  int     $page             the page paginate with per_page
+     * @param  int     $perPage          the number of restults by page
      *
      * @return array
      */
-    public function all($username, $repository, $id)
+    public function all($username, $repository, $id, $page = 1, $perPage = 30)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode($id).'/assets');
+        $parameters = array(
+            'page'     => $page,
+            'per_page' => $perPage
+        );
+
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode($id).'/assets', $parameters);
     }
 
     /**
