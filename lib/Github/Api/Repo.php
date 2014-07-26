@@ -37,14 +37,14 @@ class Repo extends AbstractApi
     {
         return $this->get('legacy/repos/search/'.rawurlencode($keyword), array_merge(array('start_page' => 1), $params));
     }
-    
+
     /**
      * Get the last year of commit activity for a repository grouped by week
      * @link http://developer.github.com/v3/repos/statistics/#commit-activity
-     * 
+     *
      * @param string $username   the user who owns the repository
      * @param string $repository the name of the repository
-     * 
+     *
      * @return array commit activity grouped by week
      */
     public function activity($username, $repository)
@@ -171,7 +171,7 @@ class Repo extends AbstractApi
     {
         return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository));
     }
-    
+
     /**
      * Get the readme content for a repository by its username and repository name
      * @link http://developer.github.com/v3/repos/contents/#get-the-readme
@@ -243,7 +243,7 @@ class Repo extends AbstractApi
 
     /**
      * Manage the releases of a repository (Currently Undocumented)
-     * @link http://developer.github.com/v3/repos/ 
+     * @link http://developer.github.com/v3/repos/
      *
      * @return Releases
      */
