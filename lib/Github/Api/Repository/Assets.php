@@ -67,7 +67,7 @@ class Assets extends AbstractApi
     public function create($username, $repository, $id, $name, $contentType, $content)
     {
         if (!defined('OPENSSL_TLSEXT_SERVER_NAME') || !OPENSSL_TLSEXT_SERVER_NAME) {
-            throw new ErrorException('Asset upload support requires Server Name Indication. This is not supported se your PHP version. See http://php.net/manual/en/openssl.constsni.php.');
+            throw new ErrorException('Asset upload support requires Server Name Indication. This is not supported by your PHP version. See http://php.net/manual/en/openssl.constsni.php.');
         }
 
         // Asset creation requires a separate endpoint, uploads.github.com.
