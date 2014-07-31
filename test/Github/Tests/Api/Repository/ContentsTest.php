@@ -3,6 +3,7 @@
 namespace Github\Tests\Api\Repository;
 
 use Github\Tests\Api\TestCase;
+use Github\Exception\TwoFactorAuthenticationRequiredException;
 
 class ContentsTest extends TestCase
 {
@@ -36,6 +37,83 @@ class ContentsTest extends TestCase
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->readme('KnpLabs', 'php-github-api'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReturnTrueWhenFileExists()
+    {
+        $responseMock = $this->getMockBuilder('\Guzzle\Http\Message\Response')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $responseMock->expects($this->any())
+            ->method('getStatusCode')
+            ->willReturn(200);
+
+        $api = $this->getApiMock();
+            $api->expects($this->once())
+            ->method('head')
+            ->with('repos/KnpLabs/php-github-api/contents/composer.json', array('ref' => null))
+            ->will($this->returnValue($responseMock));
+
+        $this->assertEquals(true, $api->exists('KnpLabs', 'php-github-api', 'composer.json'));
+    }
+
+    private function getGuzzleResponseMock()
+    {
+        $responseMock = $this->getMockBuilder('\Guzzle\Http\Message\Response')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        return $responseMock;
+    }
+
+    public function getFailureStubsForExistsTest()
+    {
+        $nonOkResponseMock =$this->getGuzzleResponseMock();
+
+        $nonOkResponseMock->expects($this->any())
+            ->method('getStatusCode')
+            ->willReturn(403);
+
+        return array(
+            array($this->throwException(new \ErrorException())),
+            array($this->returnValue($nonOkResponseMock))
+        );
+    }
+
+    /**
+     * @test
+     * @dataProvider getFailureStubsForExistsTest
+     */
+    public function shouldReturnFalseWhenFileIsNotFound(\PHPUnit_Framework_MockObject_Stub $failureStub)
+    {
+        $expectedValue = array('some-header' => 'value');
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('head')
+            ->with('repos/KnpLabs/php-github-api/contents/composer.json', array('ref' => null))
+            ->will($failureStub);
+
+        $this->assertFalse($api->exists('KnpLabs', 'php-github-api', 'composer.json'));
+    }
+
+    /**
+     * @test
+     * @expectedException \Github\Exception\TwoFactorAuthenticationRequiredException
+     */
+    public function shouldBubbleTwoFactorAuthenticationRequiredExceptionsWhenCheckingFileRequiringAuth()
+    {
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('head')
+            ->with('repos/KnpLabs/php-github-api/contents/composer.json', array('ref' => null))
+            ->will($this->throwException(new TwoFactorAuthenticationRequiredException(0)));
+
+        $api->exists('KnpLabs', 'php-github-api', 'composer.json');
     }
 
     /**
