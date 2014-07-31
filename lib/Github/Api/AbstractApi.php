@@ -12,7 +12,6 @@ use Github\HttpClient\Message\ResponseMediator;
  */
 abstract class AbstractApi implements ApiInterface
 {
-
     /**
      * The client
      *
@@ -28,7 +27,6 @@ abstract class AbstractApi implements ApiInterface
     protected $perPage;
 
     /**
-     *
      * @param Client $client
      */
     public function __construct(Client $client)
@@ -41,7 +39,6 @@ abstract class AbstractApi implements ApiInterface
     }
 
     /**
-     *
      * @return null|int
      */
     public function getPerPage()
@@ -50,7 +47,6 @@ abstract class AbstractApi implements ApiInterface
     }
 
     /**
-     *
      * @param null|int $perPage
      */
     public function setPerPage($perPage)
@@ -194,7 +190,7 @@ abstract class AbstractApi implements ApiInterface
     /**
      * Create a JSON encoded version of an array of parameters.
      *
-     * @param array $parameters         Request parameters
+     * @param array $parameters   Request parameters
      * @return null|string
      */
     protected function createJsonBody(array $parameters)
