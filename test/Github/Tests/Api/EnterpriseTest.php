@@ -35,4 +35,4 @@ class EnterpriseTest extends TestCase
         return 'Github\Api\Enterprise';
     }
 }
- 
+

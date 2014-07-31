@@ -79,7 +79,7 @@ class Releases extends AbstractApi
      *
      * @param  string  $username         the user who owns the repo
      * @param  string  $repository       the name of the repo
-     * @param  integer $id               the id of the release 
+     * @param  integer $id               the id of the release
      *
      * @return array
      */
