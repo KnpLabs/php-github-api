@@ -18,6 +18,13 @@ class CachedHttpClient extends HttpClient
      * @var CacheInterface
      */
     protected $cache;
+    
+    /**
+     * contains the lastResponse fetched from cache
+     * 
+     * @var Guzzle\Http\Message\Response 
+     */
+    private $lastCachedResponse;
 
     /**
      * @return CacheInterface
@@ -45,9 +52,12 @@ class CachedHttpClient extends HttpClient
     public function request($path, $body = null, $httpMethod = 'GET', array $headers = array(), array $options = array())
     {
         $response = parent::request($path, $body, $httpMethod, $headers, $options);
-
+        
         if (304 == $response->getStatusCode()) {
-            return $this->getCache()->get($path);
+            $cacheResponse = $this->getCache()->get($path);
+            $this->lastCachedResponse = $cacheResponse;
+            
+            return $cacheResponse;
         }
 
         $this->getCache()->set($path, $response);
@@ -81,5 +91,19 @@ class CachedHttpClient extends HttpClient
         }
 
         return $request;
+    }
+    
+     /**
+     * @return Guzzle\Http\Message\Response
+     */
+    public function getLastResponse($force = false)
+    {
+        
+        $lastResponse =  parent::getLastResponse();
+        if (304 != $lastResponse->getStatusCode()) {
+            $force = true;
+        }
+        
+        return ($force) ? $lastResponse : $this->lastCachedResponse;
     }
 }
