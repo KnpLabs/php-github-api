@@ -46,6 +46,12 @@ class AssetsTest extends TestCase
      */
     public function shouldCreateReleaseAsset()
     {
+        if (!defined('OPENSSL_TLSEXT_SERVER_NAME') || !OPENSSL_TLSEXT_SERVER_NAME) {
+            return $this->markTestSkipped(
+                'Asset upload support requires Server Name Indication. This is not supported be your PHP version.'
+            );
+        }
+
         $name = 'asset.gzip';
         $body = 'assetCreatedData';
         $contentType = 'application/gzip';
