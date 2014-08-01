@@ -33,12 +33,11 @@ $ php composer.phar install
 ```
 Now we can use autoloader from Composer by:
 
-```yaml
+```json
 {
     "require": {
-        "knplabs/github-api": "*"
-    },
-    "minimum-stability": "dev"
+        "knplabs/github-api": "~1.2"
+    }
 }
 ```
 
