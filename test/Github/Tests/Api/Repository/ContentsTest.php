@@ -61,15 +61,6 @@ class ContentsTest extends TestCase
         $this->assertEquals(true, $api->exists('KnpLabs', 'php-github-api', 'composer.json'));
     }
 
-    private function getGuzzleResponseMock()
-    {
-        $responseMock = $this->getMockBuilder('\Guzzle\Http\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        return $responseMock;
-    }
-
     public function getFailureStubsForExistsTest()
     {
         $nonOkResponseMock =$this->getGuzzleResponseMock();
@@ -323,5 +314,15 @@ class ContentsTest extends TestCase
     protected function getApiClass()
     {
         return 'Github\Api\Repository\Contents';
+    }
+
+
+    private function getGuzzleResponseMock()
+    {
+        $responseMock = $this->getMockBuilder('\Guzzle\Http\Message\Response')
+        ->disableOriginalConstructor()
+        ->getMock();
+
+        return $responseMock;
     }
 }

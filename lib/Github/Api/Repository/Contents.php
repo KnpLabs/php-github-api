@@ -118,11 +118,9 @@ class Contents extends AbstractApi
             if ($response->getStatusCode() != 200) {
                 return false;
             }
-        }
-        catch (TwoFactorAuthenticationRequiredException $ex) {
+        } catch (TwoFactorAuthenticationRequiredException $ex) {
             throw $ex;
-        }
-        catch (\Exception $ex) {
+        } catch (\Exception $ex) {
             return false;
         }
 
