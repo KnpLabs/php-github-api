@@ -78,6 +78,27 @@ abstract class AbstractApi implements ApiInterface
     }
 
     /**
+     * Send a HEAD request with query parameters
+     *
+     * @param string $path              Request path.
+     * @param array $parameters         HEAD parameters.
+     * @param array $requestHeaders     Request headers.
+     * @return \Guzzle\Http\Message\Response
+     */
+    protected function head($path, array $parameters = array(), $requestHeaders = array())
+    {
+        if (array_key_exists('ref', $parameters) && is_null($parameters['ref'])) {
+            unset($parameters['ref']);
+        }
+
+        $response = $this->client->getHttpClient()->request($path, null, 'HEAD', $requestHeaders, array(
+            'query' => $parameters
+        ));
+
+        return $response;
+    }
+
+    /**
      * Send a POST request with JSON-encoded parameters.
      *
      * @param string $path              Request path.
@@ -112,7 +133,6 @@ abstract class AbstractApi implements ApiInterface
         return ResponseMediator::getContent($response);
     }
 
-
     /**
      * Send a PATCH request with JSON-encoded parameters.
      *
@@ -131,7 +151,6 @@ abstract class AbstractApi implements ApiInterface
         return ResponseMediator::getContent($response);
     }
 
-
     /**
      * Send a PUT request with JSON-encoded parameters.
      *
@@ -149,7 +168,6 @@ abstract class AbstractApi implements ApiInterface
 
         return ResponseMediator::getContent($response);
     }
-
 
     /**
      * Send a DELETE request with JSON-encoded parameters.

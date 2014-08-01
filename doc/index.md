@@ -15,6 +15,7 @@ APIs:
 * [Pull Requests](pull_requests.md)
   * [Comments](pull_request/comments.md)
 * [Repositories](repos.md)
+  * [Contents](repo/contents.md)
   * [Releases](repo/releases.md)
     * [Assets](repo/assets.md)
 * [Users](users.md)

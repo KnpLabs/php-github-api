@@ -6,6 +6,7 @@ use Github\Api\AbstractApi;
 use Github\Exception\InvalidArgumentException;
 use Github\Exception\ErrorException;
 use Github\Exception\MissingArgumentException;
+use Github\Exception\TwoFactorAuthenticationRequiredException;
 
 /**
  * @link   http://developer.github.com/v3/repos/contents/
@@ -90,6 +91,40 @@ class Contents extends AbstractApi
         }
 
         return $this->put($url, $parameters);
+    }
+
+    /**
+     * Checks that a given path exists in a repository.
+     *
+     * @param string      $username the user who owns the repository
+     * @param string      $repository the name of the repository
+     * @param string      $path path of file to check
+     * @param null|string $reference reference to a branch or commit
+     * @return boolean
+     */
+    public function exists($username, $repository, $path, $reference = null)
+    {
+        $url = 'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents';
+
+        if (null !== $path) {
+            $url .= '/'.rawurlencode($path);
+        }
+
+        try {
+            $response = $this->head($url, array(
+                'ref' => $reference
+            ));
+
+            if ($response->getStatusCode() != 200) {
+                return false;
+            }
+        } catch (TwoFactorAuthenticationRequiredException $ex) {
+            throw $ex;
+        } catch (\Exception $ex) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
