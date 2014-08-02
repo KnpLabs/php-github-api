@@ -43,6 +43,18 @@ Now we can use autoloader from Composer by:
 
 > `php-github-api` follows the PSR-0 convention names for its classes, which means you can easily integrate `php-github-api` classes loading in your own autoloader.
 
+## Using Laravel?
+
+[Laravel GitHub](https://github.com/GrahamCampbell/Laravel-GitHub) by [Graham Campbell](https://github.com/GrahamCampbell) might interest you.
+
+```json
+{
+    "require": {
+        "graham-campbell/github": "0.1.*"
+    }
+}
+```
+
 ## Basic usage of `php-github-api` client
 
 ```php
