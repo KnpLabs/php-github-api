@@ -60,7 +60,7 @@ $data = array(
     'description' => 'This is new description'
 );
 
-$gist = $github->api('gists')->update($data);
+$gist = $github->api('gists')->update(1234, $data);
 ```
 
 You can update ``content`` of a previous file's version.
