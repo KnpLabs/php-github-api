@@ -10,13 +10,20 @@ use Github\Api\AbstractApi;
  */
 class Members extends AbstractApi
 {
-    public function all($organization, $type = null)
+    public function all($organization, $type = null, $filter = 'all')
     {
+        $parameters = array();
+        $path = 'orgs/'.rawurlencode($organization).'/';
         if (null === $type) {
-            return $this->get('orgs/'.rawurlencode($organization).'/members');
+           $path .= 'members';
+           if (null !== $filter) {
+               $parameters['filter'] = $filter;
+           }
+        } else {
+            $path .= 'public_members';
         }
 
-        return $this->get('orgs/'.rawurlencode($organization).'/public_members');
+        return $this->get($path, $parameters);
     }
 
     public function show($organization, $username)
