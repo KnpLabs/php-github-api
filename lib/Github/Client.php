@@ -120,6 +120,11 @@ class Client
                 $api = new Api\CurrentUser($this);
                 break;
 
+            case 'deployment':
+            case 'deployments':
+                $api = new Api\Deployment($this);
+                break;
+
             case 'ent':
             case 'enterprise':
                 $api = new Api\Enterprise($this);
