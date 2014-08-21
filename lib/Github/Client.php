@@ -310,7 +310,7 @@ class Client
      *
      * @throws InvalidArgumentException
      */
-    public function __call($name) {
+    public function __call($name, $args) {
         switch ($name) {
             case 'me':
             case 'currentUser':
