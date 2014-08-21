@@ -112,6 +112,7 @@ class Client
         switch ($name) {
             case 'me':
             case 'current_user':
+            case 'currentUser':
                 $api = new Api\CurrentUser($this);
                 break;
 
@@ -122,6 +123,7 @@ class Client
 
             case 'git':
             case 'git_data':
+            case 'gitData':
                 $api = new Api\GitData($this);
                 break;
 
@@ -145,7 +147,9 @@ class Client
                 break;
 
             case 'pr':
+            case 'pullRequest':
             case 'pull_request':
+            case 'pullRequests':
             case 'pull_requests':
                 $api = new Api\PullRequest($this);
                 break;
@@ -311,77 +315,6 @@ class Client
      * @throws InvalidArgumentException
      */
     public function __call($name, $args) {
-        switch ($name) {
-            case 'me':
-            case 'currentUser':
-                $api = new Api\CurrentUser($this);
-                break;
-
-            case 'ent':
-            case 'enterprise':
-                $api = new Api\Enterprise($this);
-                break;
-
-            case 'git':
-            case 'gitData':
-                $api = new Api\GitData($this);
-                break;
-
-            case 'gist':
-            case 'gists':
-                $api = new Api\Gists($this);
-                break;
-
-            case 'issue':
-            case 'issues':
-                $api = new Api\Issue($this);
-                break;
-
-            case 'markdown':
-                $api = new Api\Markdown($this);
-                break;
-
-            case 'organization':
-            case 'organizations':
-                $api = new Api\Organization($this);
-                break;
-
-            case 'pr':
-            case 'pullRequest':
-            case 'pullRequests':
-                $api = new Api\PullRequest($this);
-                break;
-
-            case 'repo':
-            case 'repos':
-            case 'repository':
-            case 'repositories':
-                $api = new Api\Repo($this);
-                break;
-
-            case 'team':
-            case 'teams':
-                $api = new Api\Organization\Teams($this);
-                break;
-
-            case 'user':
-            case 'users':
-                $api = new Api\User($this);
-                break;
-
-            case 'authorization':
-            case 'authorizations':
-                $api = new Api\Authorizations($this);
-                break;
-
-            case 'meta':
-                $api = new Api\Meta($this);
-                break;
-
-            default:
-                throw new InvalidArgumentException(sprintf('Undefined api instance called: "%s"', $name));
-        }
-
-        return $api;
+        return $this->api($name);
     }
 }
