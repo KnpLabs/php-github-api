@@ -4,6 +4,7 @@ namespace Github\Tests;
 
 use Github\Client;
 use Github\Exception\InvalidArgumentException;
+use Github\Exception\BadMethodCallException;
 
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
@@ -143,6 +144,16 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $client = new Client();
         $client->api('do_not_exist');
+    }
+
+    /**
+     * @test
+     * @expectedException BadMethodCallException
+     */
+    public function shouldNotGetMagicApiInstance()
+    {
+        $client = new Client();
+        $client->doNotExist();
     }
 
     public function getApiClassesProvider()

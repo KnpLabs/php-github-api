@@ -4,6 +4,7 @@ namespace Github;
 
 use Github\Api\ApiInterface;
 use Github\Exception\InvalidArgumentException;
+use Github\Exception\BadMethodCallException;
 use Github\HttpClient\HttpClient;
 use Github\HttpClient\HttpClientInterface;
 
