@@ -315,6 +315,10 @@ class Client
      * @throws InvalidArgumentException
      */
     public function __call($name, $args) {
-        return $this->api($name);
+        try {
+            return $this->api($name);
+        } catch (InvalidArgumentException $e) {
+            throw new BadMethodCallException(sprintf('Undefined method called: "%s"', $name));
+        }
     }
 }

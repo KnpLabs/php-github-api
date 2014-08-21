@@ -126,6 +126,17 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @dataProvider getApiClassesProvider
+     */
+    public function shouldGetMagicApiInstance($apiName, $class)
+    {
+        $client = new Client();
+
+        $this->assertInstanceOf($class, $client->$apiName());
+    }
+
+    /**
+     * @test
      * @expectedException InvalidArgumentException
      */
     public function shouldNotGetApiInstance()
@@ -142,9 +153,11 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
             array('me', 'Github\Api\CurrentUser'),
             array('current_user', 'Github\Api\CurrentUser'),
+            array('currentUser', 'Github\Api\CurrentUser'),
 
             array('git', 'Github\Api\GitData'),
             array('git_data', 'Github\Api\GitData'),
+            array('gitData', 'Github\Api\GitData'),
 
             array('gist', 'Github\Api\Gists'),
             array('gists', 'Github\Api\Gists'),
@@ -163,7 +176,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             array('repositories', 'Github\Api\Repo'),
 
             array('pr', 'Github\Api\PullRequest'),
+            array('pullRequest', 'Github\Api\PullRequest'),
             array('pull_request', 'Github\Api\PullRequest'),
+            array('pullRequests', 'Github\Api\PullRequest'),
             array('pull_requests', 'Github\Api\PullRequest'),
 
             array('authorization', 'Github\Api\Authorizations'),
