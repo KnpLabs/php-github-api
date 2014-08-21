@@ -4,11 +4,40 @@ namespace Github;
 
 use Github\Api\ApiInterface;
 use Github\Exception\InvalidArgumentException;
+use Github\Exception\BadMethodCallException;
 use Github\HttpClient\HttpClient;
 use Github\HttpClient\HttpClientInterface;
 
 /**
  * Simple yet very cool PHP GitHub client
+ *
+ * @method Api\CurrentUser currentUser()
+ * @method Api\CurrentUser me()
+ * @method Api\Enterprise ent()
+ * @method Api\Enterprise enterprise()
+ * @method Api\GitData git()
+ * @method Api\GitData gitData()
+ * @method Api\Gists gist()
+ * @method Api\Gists gists()
+ * @method Api\Issue issue()
+ * @method Api\Issue issues()
+ * @method Api\Markdown markdown()
+ * @method Api\Organization organization()
+ * @method Api\Organization organizations()
+ * @method Api\PullRequest pr()
+ * @method Api\PullRequest pullRequest()
+ * @method Api\PullRequest pullRequests()
+ * @method Api\Repo repo()
+ * @method Api\Repo repos()
+ * @method Api\Repo repository()
+ * @method Api\Repo repositories()
+ * @method Api\Organization team()
+ * @method Api\Organization teams()
+ * @method Api\User user()
+ * @method Api\User users()
+ * @method Api\Authorizations authorization()
+ * @method Api\Authorizations authorizations()
+ * @method Api\Meta meta()
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  *
@@ -84,6 +113,7 @@ class Client
         switch ($name) {
             case 'me':
             case 'current_user':
+            case 'currentUser':
                 $api = new Api\CurrentUser($this);
                 break;
 
@@ -94,6 +124,7 @@ class Client
 
             case 'git':
             case 'git_data':
+            case 'gitData':
                 $api = new Api\GitData($this);
                 break;
 
@@ -117,7 +148,9 @@ class Client
                 break;
 
             case 'pr':
+            case 'pullRequest':
             case 'pull_request':
+            case 'pullRequests':
             case 'pull_requests':
                 $api = new Api\PullRequest($this);
                 break;
@@ -273,5 +306,20 @@ class Client
     public function getSupportedApiVersions()
     {
         return array('v3', 'beta');
+    }
+
+    /**
+     * @param string $name
+     * 
+     * @return ApiInterface
+     *
+     * @throws InvalidArgumentException
+     */
+    public function __call($name, $args) {
+        try {
+            return $this->api($name);
+        } catch (InvalidArgumentException $e) {
+            throw new BadMethodCallException(sprintf('Undefined method called: "%s"', $name));
+        }
     }
 }
