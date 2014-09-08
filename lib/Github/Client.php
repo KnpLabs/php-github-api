@@ -162,6 +162,10 @@ class Client
                 $api = new Api\Repo($this);
                 break;
 
+            case 'search':
+                $api = new Api\Search($this);
+                break;
+
             case 'team':
             case 'teams':
                 $api = new Api\Organization\Teams($this);
@@ -310,7 +314,7 @@ class Client
 
     /**
      * @param string $name
-     * 
+     *
      * @return ApiInterface
      *
      * @throws InvalidArgumentException
