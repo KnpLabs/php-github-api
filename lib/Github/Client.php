@@ -31,6 +31,7 @@ use Github\HttpClient\HttpClientInterface;
  * @method Api\Repo repos()
  * @method Api\Repo repository()
  * @method Api\Repo repositories()
+ * @method Api\Search search()
  * @method Api\Organization team()
  * @method Api\Organization teams()
  * @method Api\User user()
