@@ -139,9 +139,9 @@ class User extends AbstractApi
     public function repositories($username, $type = 'owner', $sort = 'full_name', $direction = 'asc')
     {
         return $this->get('users/'.rawurlencode($username).'/repos', array(
-            $type,
-            $sort,
-            $direction
+            'type' => $type,
+            'sort' => $sort,
+            'direction' => $direction
         ));
     }
 
