@@ -3,7 +3,7 @@
 
 ### Usage examples
 
-Get all repositories of a organization
+#### Get all repositories of a organization
 
 ```php
 $client = new Github\Client();
@@ -15,7 +15,14 @@ $parameters = array('github');
 $result     = $paginator->fetchAll($organizationApi, 'repositories', $parameters);
 ```
 
-Get the first page
+Parameters of the `fetchAll` method:
+
+* The API object you're working with
+* The method of the API object you're using
+* The parameters of the method
+
+#### Get the first page
+
 ```php
 $client = new Github\Client();
 
@@ -26,22 +33,26 @@ $parameters = array('github');
 $result     = $paginator->fetch($organizationApi, 'repositories', $parameters);
 ```
 
-Check for a next page:
+#### Check for a next page:
+
 ```php
 $paginator->hasNext();
 ```
 
-Get next page:
+#### Get next page:
+
 ```php
 $paginator->fetchNext();
 ```
 
-Check for previous page:
+#### Check for previous page:
+
 ```php
 $paginator->hasPrevious();
 ```
 
-Get previous page:
+#### Get previous page:
+
 ```php
 $paginator->fetchPrevious();
 ```
