@@ -53,9 +53,9 @@ class Teams extends AbstractApi
         return $this->delete('teams/'.rawurlencode($team));
     }
 
-    public function members($team)
+    public function members($team,$page=1)
     {
-        return $this->get('teams/'.rawurlencode($team).'/members');
+      return $this->get('teams/'.rawurlencode($team).'/members' . '?page=' . $page);
     }
 
     public function check($team, $username)
