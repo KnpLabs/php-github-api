@@ -27,7 +27,7 @@ Returns an array of watched repos.
 ### Get repos that a authenticated user has starred
 
 ```php
-$activity = $client->api('current_user')->starred()->all();
+$activity = $client->api('current_user')->starring()->all();
 ```
 Returns an array of starred repos.
 
@@ -36,7 +36,7 @@ Returns an array of starred repos.
 ```php
 $owner = "KnpLabs";
 $repo = "php-github-api";
-$activity = $client->api('current_user')->starred()->check($owner, $repo);
+$activity = $client->api('current_user')->starring()->check($owner, $repo);
 ```
 Throws an Exception with code 404 in case that the repo is not starred by the authenticated user or NULL in case that it is starred by the authenticated user.
 
@@ -45,7 +45,7 @@ Throws an Exception with code 404 in case that the repo is not starred by the au
 ```php
 $owner = "KnpLabs";
 $repo = "php-github-api";
-$activity = $client->api('current_user')->starred()->star($owner, $repo);
+$activity = $client->api('current_user')->starring()->star($owner, $repo);
 ```
 Throws an Exception in case of failure or NULL in case of success.
 
@@ -54,7 +54,7 @@ Throws an Exception in case of failure or NULL in case of success.
 ```php
 $owner = "KnpLabs";
 $repo = "php-github-api";
-$activity = $client->api('current_user')->starred()->unstar($owner, $repo);
+$activity = $client->api('current_user')->starring()->unstar($owner, $repo);
 ```
 Throws an Exception in case of failure or NULL in case of success.
 

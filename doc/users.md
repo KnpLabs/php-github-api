@@ -136,7 +136,7 @@ For authenticated user use.
 > Requires [authentication](security.md).
 
 ```php
-$users = $client->api('current_user')->starred()->all();
+$users = $client->api('current_user')->starring()->all();
 ```
 
 Returns an array of starred repos.

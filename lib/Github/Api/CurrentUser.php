@@ -7,7 +7,7 @@ use Github\Api\CurrentUser\Emails;
 use Github\Api\CurrentUser\Followers;
 use Github\Api\CurrentUser\Notifications;
 use Github\Api\CurrentUser\Watchers;
-use Github\Api\CurrentUser\Starred;
+use Github\Api\CurrentUser\Starring;
 
 /**
  * @link   http://developer.github.com/v3/users/
@@ -123,12 +123,22 @@ class CurrentUser extends AbstractApi
             'page' => $page
         ));
     }
+    
+     /**
+     * @return Starring
+     */
+    public function starring()
+    {
+         return new Starring($this->client);
+    }
 
    /**
-     * @return Starred
+     * @Deprecated
      */
-    public function starred()
+    public function starred($page = 1)
     {
-         return new Starred($this->client);
+        return $this->get('user/starred', array(
+            'page' => $page
+        ));
     }
 }
