@@ -112,7 +112,10 @@ class CurrentUser extends AbstractApi
     {
         return new Watchers($this->client);
     }
-
+    
+    /**
+     * @Deprecated
+     */
     public function watched($page = 1)
     {
         return $this->get('user/watched', array(

@@ -119,7 +119,7 @@ For authenticated user use.
 > Requires [authentication](security.md).
 
 ```php
-$users = $client->api('current_user')->watched();
+$users = $client->api('current_user')->watchers()->all();
 ```
 
 Returns an array of watched repos.
