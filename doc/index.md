@@ -20,6 +20,7 @@ APIs:
     * [Assets](repo/assets.md)
 * [Users](users.md)
 * [Meta](meta.md)
+* [Activity](activity.md)
 
 Additional features:
 

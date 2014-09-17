@@ -108,6 +108,7 @@ $client->api('current_user')->follow()->unfollow('symfony');
 Returns an array of followed users.
 
 ### Get repos that a specific user is watching
+> See [more](activity.md).
 
 ```php
 $users = $client->api('user')->watched('ornicar');
@@ -124,6 +125,7 @@ $users = $client->api('current_user')->watched();
 Returns an array of watched repos.
 
 ### Get repos that a specific user has starred
+> See [more](activity.md).
 
 ```php
 $users = $client->api('user')->starred('ornicar');
