@@ -113,6 +113,16 @@ Returns an array of followed users.
 $users = $client->api('user')->watched('ornicar');
 ```
 
+For authenticated user use.
+
+> Requires [authentication](security.md).
+
+```php
+$users = $client->api('current_user')->watched();
+```
+
+Returns an array of watched repos.
+
 ### Get repos that a specific user has starred
 
 ```php
@@ -124,10 +134,10 @@ For authenticated user use.
 > Requires [authentication](security.md).
 
 ```php
-$users = $client->api('current_user')->watched();
+$users = $client->api('current_user')->starred()->all();
 ```
 
-Returns an array of watched repos.
+Returns an array of starred repos.
 
 ### Get the authenticated user emails
 
