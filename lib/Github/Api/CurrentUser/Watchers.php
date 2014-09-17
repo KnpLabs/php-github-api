@@ -5,14 +5,15 @@ namespace Github\Api\CurrentUser;
 use Github\Api\AbstractApi;
 
 /**
- * @link   http://developer.github.com/v3/repos/watching/
+ * @link   https://developer.github.com/v3/activity/watching/
  * @author Joseph Bielawski <stloyd@gmail.com>
+ * @revised Felipe Valtl de Mello <eu@felipe.im>
  */
 class Watchers extends AbstractApi
 {
     /**
      * List repositories watched by the authenticated user
-     * @link http://developer.github.com/v3/repos/watching/
+     * @link https://developer.github.com/v3/activity/watching/
      *
      * @param  integer $page
      * @return array
@@ -26,7 +27,7 @@ class Watchers extends AbstractApi
 
     /**
      * Check that the authenticated user watches a repository
-     * @link http://developer.github.com/v3/repos/watching/
+     * @link https://developer.github.com/v3/activity/watching/
      *
      * @param  string $username   the user who owns the repo
      * @param  string $repository the name of the repo
@@ -39,7 +40,7 @@ class Watchers extends AbstractApi
 
     /**
      * Make the authenticated user watch a repository
-     * @link http://developer.github.com/v3/repos/watching/
+     * @link https://developer.github.com/v3/activity/watching/
      *
      * @param  string $username   the user who owns the repo
      * @param  string $repository the name of the repo
@@ -52,7 +53,7 @@ class Watchers extends AbstractApi
 
     /**
      * Make the authenticated user unwatch a repository
-     * @link http://developer.github.com/v3/repos/watching/
+     * @link https://developer.github.com/v3/activity/watching/
      *
      * @param  string $username   the user who owns the repo
      * @param  string $repository the name of the repo

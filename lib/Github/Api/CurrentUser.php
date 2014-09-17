@@ -12,6 +12,7 @@ use Github\Api\CurrentUser\Starred;
 /**
  * @link   http://developer.github.com/v3/users/
  * @author Joseph Bielawski <stloyd@gmail.com>
+ * @revised Felipe Valtl de Mello <eu@felipe.im>
  */
 class CurrentUser extends AbstractApi
 {
