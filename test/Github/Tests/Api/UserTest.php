@@ -139,7 +139,7 @@ class UserTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('users/l3l0/repos', array('owner', 'full_name', 'asc'))
+            ->with('users/l3l0/repos', array('type' => 'owner', 'sort' => 'full_name', 'direction' => 'asc'))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->repositories('l3l0'));
