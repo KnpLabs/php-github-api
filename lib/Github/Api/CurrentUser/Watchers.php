@@ -48,7 +48,7 @@ class Watchers extends AbstractApi
      */
     public function watch($username, $repository)
     {
-        return $this->put('user/subscriptions/'.rawurlencode($username).'/'.rawurlencode($repository));
+        return $this->subscribe($username, $repository);
     }
 
     /**
@@ -62,7 +62,7 @@ class Watchers extends AbstractApi
      */
     public function unwatch($username, $repository)
     {
-        return $this->delete('user/subscriptions/'.rawurlencode($username).'/'.rawurlencode($repository));
+        return $this->unsubscribe($username, $repository);
     }
 
     /**
