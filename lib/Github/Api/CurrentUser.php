@@ -115,7 +115,7 @@ class CurrentUser extends AbstractApi
     }
     
     /**
-     * @Deprecated
+     * @Deprecated Use watchers() instead
      */
     public function watched($page = 1)
     {
@@ -133,7 +133,7 @@ class CurrentUser extends AbstractApi
     }
 
    /**
-     * @Deprecated
+     * @Deprecated Use starring() instead
      */
     public function starred($page = 1)
     {
