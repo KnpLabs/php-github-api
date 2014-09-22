@@ -39,7 +39,7 @@ class Watchers extends AbstractApi
 
     /**
      * Make the authenticated user watch a repository
-     * @deprecated The new command is subscribe(), not watch()
+     * @deprecated use subscribe()
      * @link https://developer.github.com/v3/activity/watching/
      *
      * @param  string $username   the user who owns the repo
@@ -53,7 +53,7 @@ class Watchers extends AbstractApi
 
     /**
      * Make the authenticated user unwatch a repository
-     * @deprecated The new command is unsubscribe(), not unwatch()
+     * @deprecated use unsubscribe()
      * @link https://developer.github.com/v3/activity/watching/
      *
      * @param  string $username   the user who owns the repo
