@@ -19,7 +19,7 @@ class WatchersTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('user/watched')
+            ->with('user/subscriptions')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all());
@@ -33,7 +33,7 @@ class WatchersTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('user/watched/l3l0/test')
+            ->with('user/subscriptions/l3l0/test')
             ->will($this->returnValue(null));
 
         $this->assertNull($api->check('l3l0', 'test'));
@@ -47,7 +47,7 @@ class WatchersTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with('user/watched/l3l0/test')
+            ->with('user/subscriptions/l3l0/test')
             ->will($this->returnValue(null));
 
         $this->assertNull($api->watch('l3l0', 'test'));
@@ -61,10 +61,38 @@ class WatchersTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('user/watched/l3l0/test')
+            ->with('user/subscriptions/l3l0/test')
             ->will($this->returnValue(null));
 
         $this->assertNull($api->unwatch('l3l0', 'test'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldSubscribeUser()
+    {
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('put')
+            ->with('user/subscriptions/l3l0/test')
+            ->will($this->returnValue(null));
+
+        $this->assertNull($api->subscribe('l3l0', 'test'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldUnsubscribeUser()
+    {
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('delete')
+            ->with('user/subscriptions/l3l0/test')
+            ->will($this->returnValue(null));
+
+        $this->assertNull($api->unsubscribe('l3l0', 'test'));
     }
 
     protected function getApiClass()

@@ -5,28 +5,28 @@ namespace Github\Api\CurrentUser;
 use Github\Api\AbstractApi;
 
 /**
- * @link   http://developer.github.com/v3/repos/watching/
+ * @link   https://developer.github.com/v3/activity/watching/
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class Watchers extends AbstractApi
 {
     /**
      * List repositories watched by the authenticated user
-     * @link http://developer.github.com/v3/repos/watching/
+     * @link https://developer.github.com/v3/activity/watching/
      *
      * @param  integer $page
      * @return array
      */
     public function all($page = 1)
     {
-        return $this->get('user/watched', array(
+        return $this->get('user/subscriptions', array(
             'page' => $page
         ));
     }
 
     /**
      * Check that the authenticated user watches a repository
-     * @link http://developer.github.com/v3/repos/watching/
+     * @link https://developer.github.com/v3/activity/watching/
      *
      * @param  string $username   the user who owns the repo
      * @param  string $repository the name of the repo
@@ -34,12 +34,13 @@ class Watchers extends AbstractApi
      */
     public function check($username, $repository)
     {
-        return $this->get('user/watched/'.rawurlencode($username).'/'.rawurlencode($repository));
+        return $this->get('user/subscriptions/'.rawurlencode($username).'/'.rawurlencode($repository));
     }
 
     /**
      * Make the authenticated user watch a repository
-     * @link http://developer.github.com/v3/repos/watching/
+     * @deprecated use subscribe()
+     * @link https://developer.github.com/v3/activity/watching/
      *
      * @param  string $username   the user who owns the repo
      * @param  string $repository the name of the repo
@@ -47,12 +48,13 @@ class Watchers extends AbstractApi
      */
     public function watch($username, $repository)
     {
-        return $this->put('user/watched/'.rawurlencode($username).'/'.rawurlencode($repository));
+        return $this->subscribe($username, $repository);
     }
 
     /**
      * Make the authenticated user unwatch a repository
-     * @link http://developer.github.com/v3/repos/watching/
+     * @deprecated use unsubscribe()
+     * @link https://developer.github.com/v3/activity/watching/
      *
      * @param  string $username   the user who owns the repo
      * @param  string $repository the name of the repo
@@ -60,6 +62,32 @@ class Watchers extends AbstractApi
      */
     public function unwatch($username, $repository)
     {
-        return $this->delete('user/watched/'.rawurlencode($username).'/'.rawurlencode($repository));
+        return $this->unsubscribe($username, $repository);
+    }
+
+    /**
+     * Make the authenticated user subscribe to a repository
+     * @link https://developer.github.com/v3/activity/watching/
+     *
+     * @param  string $username   the user who owns the repo
+     * @param  string $repository the name of the repo
+     * @return array
+     */
+    public function subscribe($username, $repository)
+    {
+        return $this->put('user/subscriptions/'.rawurlencode($username).'/'.rawurlencode($repository));
+    }
+
+    /**
+     * Make the authenticated user unsubscribe from a repository
+     * @link https://developer.github.com/v3/activity/watching/
+     *
+     * @param  string $username   the user who owns the repo
+     * @param  string $repository the name of the repo
+     * @return array
+     */
+    public function unsubscribe($username, $repository)
+    {
+        return $this->delete('user/subscriptions/'.rawurlencode($username).'/'.rawurlencode($repository));
     }
 }

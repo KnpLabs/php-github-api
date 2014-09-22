@@ -148,16 +148,18 @@ $client->api('repo')->collaborators()->remove('username', 'reponame', 'KnpLabs')
 
 Remove the 'username' collaborator from the 'reponame' repository.
 
-### Watch and unwatch a repository
+### Subscribe to and unsubscribe from a repository
 
 > Requires [authentication](security.md).
 
 ```php
-$client->api('current_user')->watchers()->watch('ornicar', 'php-github-api');
-$client->api('current_user')->watchers()->unwatch('ornicar', 'php-github-api');
+$client->api('current_user')->watchers()->subscribe('ornicar', 'php-github-api');
+$client->api('current_user')->watchers()->unsubscribe('ornicar', 'php-github-api');
 ```
 
-Watches or unwatches the 'php-github-api' repository owned by 'ornicar' and returns the repository.
+Subscribes to, or unsubscribes from, the 'php-github-api' repository owned by 'ornicar' and returns the repository.
+
+These methods were previously called watch() and unwatch(); those methods are deprecated, but are still present in the library, and perform exactly as subscribe() and unsubscribe(), respectively.
 
 ### Fork a repository
 
