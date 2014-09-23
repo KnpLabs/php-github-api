@@ -1,7 +1,7 @@
 {
-    "name": "knplabs/github-api",
+    "name": "canvaspop/github-api",
     "type": "library",
-    "description": "GitHub API v3 client",
+    "description": "GitHub API v3 client (forked from KnpLabs)",
     "homepage": "https://github.com/KnpLabs/php-github-api",
     "keywords": ["github", "gh", "api", "gist"],
     "license": "MIT",
