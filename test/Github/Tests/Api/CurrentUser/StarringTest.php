@@ -4,12 +4,12 @@ namespace Github\Tests\Api;
 
 use Github\Tests\Api\TestCase;
 
-class WatchersTest extends TestCase
+class StarringTest extends TestCase
 {
     /**
      * @test
      */
-    public function shouldGetWatchers()
+    public function shouldGetStarred()
     {
         $expectedValue = array(
             array('name' => 'l3l0/test'),
@@ -19,7 +19,7 @@ class WatchersTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('user/subscriptions')
+            ->with('user/starred')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all());
@@ -28,12 +28,12 @@ class WatchersTest extends TestCase
     /**
      * @test
      */
-    public function shouldCheckWatcher()
+    public function shouldCheckStar()
     {
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('user/subscriptions/l3l0/test')
+            ->with('user/starred/l3l0/test')
             ->will($this->returnValue(null));
 
         $this->assertNull($api->check('l3l0', 'test'));
@@ -42,33 +42,33 @@ class WatchersTest extends TestCase
     /**
      * @test
      */
-    public function shouldWatchUser()
+    public function shouldStarUser()
     {
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with('user/subscriptions/l3l0/test')
+            ->with('user/starred/l3l0/test')
             ->will($this->returnValue(null));
 
-        $this->assertNull($api->watch('l3l0', 'test'));
+        $this->assertNull($api->star('l3l0', 'test'));
     }
 
     /**
      * @test
      */
-    public function shouldUnwatchUser()
+    public function shouldUnstarUser()
     {
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('user/subscriptions/l3l0/test')
+            ->with('user/starred/l3l0/test')
             ->will($this->returnValue(null));
 
-        $this->assertNull($api->unwatch('l3l0', 'test'));
+        $this->assertNull($api->unstar('l3l0', 'test'));
     }
 
     protected function getApiClass()
     {
-        return 'Github\Api\CurrentUser\Watchers';
+        return 'Github\Api\CurrentUser\Starring';
     }
 }

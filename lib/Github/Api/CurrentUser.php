@@ -7,10 +7,12 @@ use Github\Api\CurrentUser\Emails;
 use Github\Api\CurrentUser\Followers;
 use Github\Api\CurrentUser\Notifications;
 use Github\Api\CurrentUser\Watchers;
+use Github\Api\CurrentUser\Starring;
 
 /**
  * @link   http://developer.github.com/v3/users/
  * @author Joseph Bielawski <stloyd@gmail.com>
+ * @revised Felipe Valtl de Mello <eu@felipe.im>
  */
 class CurrentUser extends AbstractApi
 {
@@ -111,16 +113,27 @@ class CurrentUser extends AbstractApi
     {
         return new Watchers($this->client);
     }
-
+    
+    /**
+     * @Deprecated Use watchers() instead
+     */
     public function watched($page = 1)
     {
         return $this->get('user/watched', array(
             'page' => $page
         ));
     }
+    
+     /**
+     * @return Starring
+     */
+    public function starring()
+    {
+         return new Starring($this->client);
+    }
 
-    /**
-     *  @link http://developer.github.com/changes/2012-9-5-watcher-api/
+   /**
+     * @Deprecated Use starring() instead
      */
     public function starred($page = 1)
     {
