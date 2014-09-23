@@ -12,6 +12,22 @@ $users = $client->api('user')->find('KnpLabs');
 
 Returns an array of found users.
 
+### Lists all users, in the order they signed up, since the last user you've seen
+
+```php
+$users = $client->api('user')->all(135);
+```
+
+Returns an array of all users that registered after the user whose ID is 135.
+
+### Lists all users, in the order they signed up
+
+```php
+$users = $client->api('user')->all();
+```
+
+Returns an array of all users.
+
 ### Get information about a user
 
 ```php
@@ -95,6 +111,12 @@ Returns an array of followed users.
 
 ```php
 $users = $client->api('user')->watched('ornicar');
+```
+
+### Get repos that a specific user has starred
+
+```php
+$users = $client->api('user')->starred('ornicar');
 ```
 
 For authenticated user use.

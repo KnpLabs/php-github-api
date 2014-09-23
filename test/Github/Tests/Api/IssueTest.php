@@ -164,7 +164,7 @@ class IssueTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('legacy/issues/search/KnpLabs/php-github-api/open/Invalid+Commits')
+            ->with('legacy/issues/search/KnpLabs/php-github-api/open/Invalid%20Commits')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->find('KnpLabs', 'php-github-api', 'open', 'Invalid Commits'));
@@ -180,7 +180,7 @@ class IssueTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('legacy/issues/search/KnpLabs/php-github-api/closed/Invalid+Commits')
+            ->with('legacy/issues/search/KnpLabs/php-github-api/closed/Invalid%20Commits')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->find('KnpLabs', 'php-github-api', 'closed', 'Invalid Commits'));
@@ -196,7 +196,7 @@ class IssueTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('legacy/issues/search/KnpLabs/php-github-api/open/Invalid+Commits')
+            ->with('legacy/issues/search/KnpLabs/php-github-api/open/Invalid%20Commits')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->find('KnpLabs', 'php-github-api', 'abc', 'Invalid Commits'));

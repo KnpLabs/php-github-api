@@ -25,7 +25,7 @@ $repos = $client->api('repo')->find('chess', array('language' => 'php'));
 You can specify the page number:
 
 ```php
-$repos = $client->api('repo')->find('chess', array('language' => 'php', 'starting_page' => 2));
+$repos = $client->api('repo')->find('chess', array('language' => 'php', 'start_page' => 2));
 ```
 
 ### Get extended information about a repository
@@ -76,7 +76,7 @@ Updates and returns the repository named 'my-new-repo' that is owned by 'usernam
 > Requires [authentication](security.md).
 
 ```php
-$client->api('repo')->delete('username', 'my-new-repo'); // Get the deletion token
+$client->api('repo')->remove('username', 'my-new-repo'); // Get the deletion token
 ```
 
 Deletes the my-new-repo repository.
@@ -230,3 +230,11 @@ To include non GitHub users, add a third parameter to true:
 ```php
 $contributors = $client->api('repo')->contributors('ornicar', 'php-github-api', true);
 ```
+
+### Get the commit activity of a repository
+
+```php
+$activity = $client->api('repo')->activity('ornicar', 'php-github-api');
+```
+
+Returns an array of commit activity group by week.

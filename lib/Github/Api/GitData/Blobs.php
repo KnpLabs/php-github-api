@@ -15,14 +15,14 @@ class Blobs extends AbstractApi
     {
         if ('raw' == $bodyType) {
             $this->client->setHeaders(array(
-                sprintf('Accept: application/vnd.github.%s.raw', $this->client->getOption('api_version'))
+                'Accept' => sprintf('application/vnd.github.%s.raw', $this->client->getOption('api_version'))
             ));
         }
     }
 
     public function show($username, $repository, $sha)
     {
-        $response = $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/git/blobs/'.urlencode($sha));
+        $response = $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/blobs/'.rawurlencode($sha));
 
         return $response;
     }
@@ -33,6 +33,6 @@ class Blobs extends AbstractApi
             throw new MissingArgumentException(array('content', 'encoding'));
         }
 
-        return $this->post('repos/'.urlencode($username).'/'.urlencode($repository).'/git/blobs', $params);
+        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/blobs', $params);
     }
 }

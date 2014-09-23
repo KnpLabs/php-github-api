@@ -13,7 +13,7 @@ class Commits extends AbstractApi
 {
     public function show($username, $repository, $sha)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/commits/'.urlencode($sha));
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/commits/'.rawurlencode($sha));
     }
 
     public function create($username, $repository, array $params)
@@ -22,6 +22,6 @@ class Commits extends AbstractApi
             throw new MissingArgumentException(array('message', 'tree', 'parents'));
         }
 
-        return $this->post('repos/'.urlencode($username).'/'.urlencode($repository).'/git/commits', $params);
+        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/commits', $params);
     }
 }

@@ -18,32 +18,32 @@ class Organization extends AbstractApi
      * Get extended information about an organization by its name
      * @link http://developer.github.com/v3/orgs/#get
      *
-     * @param  string  $organization     the organization to show
+     * @param string $organization the organization to show
      *
-     * @return array                     informations about the organization
+     * @return array informations about the organization
      */
     public function show($organization)
     {
-        return $this->get('orgs/'.urlencode($organization));
+        return $this->get('orgs/'.rawurlencode($organization));
     }
 
     public function update($organization, array $params)
     {
-        return $this->patch('orgs/'.urlencode($organization), $params);
+        return $this->patch('orgs/'.rawurlencode($organization), $params);
     }
 
     /**
      * List all repositories across all the organizations that you can access
      * @link http://developer.github.com/v3/repos/#list-organization-repositories
      *
-     * @param  string  $organization     the user name
-     * @param  string  $type             the type of repositories
+     * @param string $organization the user name
+     * @param string $type         the type of repositories
      *
-     * @return array                     the repositories
+     * @return array the repositories
      */
     public function repositories($organization, $type = 'all')
     {
-        return $this->get('orgs/'.urlencode($organization).'/repos', array(
+        return $this->get('orgs/'.rawurlencode($organization).'/repos', array(
             'type' => $type
         ));
     }

@@ -35,14 +35,14 @@ class Comments extends AbstractApi
 
     public function all($username, $repository, $issue, $page = 1)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/issues/'.urlencode($issue).'/comments', array(
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/comments', array(
             'page' => $page
         ));
     }
 
     public function show($username, $repository, $comment)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/issues/comments/'.urlencode($comment));
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/comments/'.rawurlencode($comment));
     }
 
     public function create($username, $repository, $issue, array $params)
@@ -51,7 +51,7 @@ class Comments extends AbstractApi
             throw new MissingArgumentException('body');
         }
 
-        return $this->post('repos/'.urlencode($username).'/'.urlencode($repository).'/issues/'.urlencode($issue).'/comments', $params);
+        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/comments', $params);
     }
 
     public function update($username, $repository, $comment, array $params)
@@ -60,11 +60,11 @@ class Comments extends AbstractApi
             throw new MissingArgumentException('body');
         }
 
-        return $this->patch('repos/'.urlencode($username).'/'.urlencode($repository).'/issues/comments/'.urlencode($comment), $params);
+        return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/comments/'.rawurlencode($comment), $params);
     }
 
     public function remove($username, $repository, $comment)
     {
-        return $this->delete('repos/'.urlencode($username).'/'.urlencode($repository).'/issues/comments/'.urlencode($comment));
+        return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/comments/'.rawurlencode($comment));
     }
 }

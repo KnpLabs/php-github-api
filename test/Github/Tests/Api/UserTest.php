@@ -23,6 +23,48 @@ class UserTest extends TestCase
     /**
      * @test
      */
+    public function shouldGetUserOrganizations()
+    {
+        $expectedArray = array(array(
+            'id' => 202732,
+            'url' => 'https://api.github.com/orgs/KnpLabs',
+            'repos_url' => 'https://api.github.com/orgs/KnpLabs/repos',
+            'events_url' => 'https://api.github.com/orgs/KnpLabs/events',
+            'members_url' => 'https://api.github.com/orgs/KnpLabs/members{/member}',
+            'public_members_url' => 'https://api.github.com/orgs/KnpLabs/public_members{/member}'
+        ));
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('users/l3l0/orgs')
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->organizations('l3l0'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetAllUsers()
+    {
+        $expectedArray = array(
+            array('id' => 1, 'username' => 'l3l0'),
+            array('id' => 2, 'username' => 'l3l0test')
+        );
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('users')
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->all());
+    }
+
+    /**
+     * @test
+     */
     public function shouldSearchUsers()
     {
         $expectedArray = array(
@@ -74,17 +116,17 @@ class UserTest extends TestCase
     /**
      * @test
      */
-    public function shouldGetWatchedRepositories()
+    public function shouldGetSubscriptionsToRepositories()
     {
         $expectedArray = array(array('id' => 1, 'name' => 'l3l0repo'));
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('users/l3l0/watched')
+            ->with('users/l3l0/subscriptions')
             ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($expectedArray, $api->watched('l3l0'));
+        $this->assertEquals($expectedArray, $api->subscriptions('l3l0'));
     }
 
     /**
@@ -97,7 +139,7 @@ class UserTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('users/l3l0/repos')
+            ->with('users/l3l0/repos', array('type' => 'owner', 'sort' => 'full_name', 'direction' => 'asc'))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->repositories('l3l0'));

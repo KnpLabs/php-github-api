@@ -10,37 +10,44 @@ use Github\Api\AbstractApi;
  */
 class Members extends AbstractApi
 {
-    public function all($organization, $type = null)
+    public function all($organization, $type = null, $filter = 'all')
     {
+        $parameters = array();
+        $path = 'orgs/'.rawurlencode($organization).'/';
         if (null === $type) {
-            return $this->get('orgs/'.urlencode($organization).'/members');
+           $path .= 'members';
+           if (null !== $filter) {
+               $parameters['filter'] = $filter;
+           }
+        } else {
+            $path .= 'public_members';
         }
 
-        return $this->get('orgs/'.urlencode($organization).'/public_members');
+        return $this->get($path, $parameters);
     }
 
     public function show($organization, $username)
     {
-        return $this->get('orgs/'.urlencode($organization).'/members/'.urlencode($username));
+        return $this->get('orgs/'.rawurlencode($organization).'/members/'.rawurlencode($username));
     }
 
     public function check($organization, $username)
     {
-        return $this->get('orgs/'.urlencode($organization).'/public_members/'.urlencode($username));
+        return $this->get('orgs/'.rawurlencode($organization).'/public_members/'.rawurlencode($username));
     }
 
     public function publicize($organization, $username)
     {
-        return $this->put('orgs/'.urlencode($organization).'/public_members/'.urlencode($username));
+        return $this->put('orgs/'.rawurlencode($organization).'/public_members/'.rawurlencode($username));
     }
 
     public function conceal($organization, $username)
     {
-        return $this->delete('orgs/'.urlencode($organization).'/public_members/'.urlencode($username));
+        return $this->delete('orgs/'.rawurlencode($organization).'/public_members/'.rawurlencode($username));
     }
 
     public function remove($organization, $username)
     {
-        return $this->delete('orgs/'.urlencode($organization).'/members/'.urlencode($username));
+        return $this->delete('orgs/'.rawurlencode($organization).'/members/'.rawurlencode($username));
     }
 }

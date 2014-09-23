@@ -53,7 +53,6 @@ class CommentsTest extends TestCase
         $api->create('KnpLabs', 'php-github-api', '123', $data);
     }
 
-
     /**
      * @test
      */

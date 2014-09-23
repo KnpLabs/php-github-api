@@ -5,7 +5,7 @@ namespace Github\Tests\Functional;
 /**
  * @group functional
  */
-class UsetTest extends TestCase
+class UserTest extends TestCase
 {
     /**
      * @test
@@ -58,7 +58,7 @@ class UsetTest extends TestCase
      */
     public function shouldGetFollowersUsers()
     {
-        $username = 'KnpLabs';
+        $username = 'cursedcoder';
 
         $users = $this->client->api('user')->followers($username);
         $user = array_pop($users);
@@ -93,6 +93,32 @@ class UsetTest extends TestCase
         $username = 'l3l0';
 
         $repos = $this->client->api('user')->watched($username);
+        $repo = array_pop($repos);
+
+        $this->assertArrayHasKey('id', $repo);
+        $this->assertArrayHasKey('name', $repo);
+        $this->assertArrayHasKey('description', $repo);
+        $this->assertArrayHasKey('url', $repo);
+        $this->assertArrayHasKey('has_wiki', $repo);
+        $this->assertArrayHasKey('has_issues', $repo);
+        $this->assertArrayHasKey('forks', $repo);
+        $this->assertArrayHasKey('updated_at', $repo);
+        $this->assertArrayHasKey('created_at', $repo);
+        $this->assertArrayHasKey('pushed_at', $repo);
+        $this->assertArrayHasKey('open_issues', $repo);
+        $this->assertArrayHasKey('ssh_url', $repo);
+        $this->assertArrayHasKey('git_url', $repo);
+        $this->assertArrayHasKey('svn_url', $repo);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetReposBeingStarred()
+    {
+        $username = 'l3l0';
+
+        $repos = $this->client->api('user')->starred($username);
         $repo = array_pop($repos);
 
         $this->assertArrayHasKey('id', $repo);

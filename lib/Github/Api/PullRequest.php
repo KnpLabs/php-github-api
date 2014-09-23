@@ -17,41 +17,45 @@ class PullRequest extends AbstractApi
      * Get a listing of a project's pull requests by the username, repository and (optionally) state.
      * @link http://developer.github.com/v3/pulls/
      *
-     * @param  string $username          the username
-     * @param  string $repository        the repository
-     * @param  string $state             the state of the fetched pull requests.
-     *                                   The API seems to automatically default to 'open'
+     * @param string  $username   the username
+     * @param string  $repository the repository
+     * @param array   $params     a list of extra parameters.
      *
-     * @return array                     array of pull requests for the project
+     * @return array array of pull requests for the project
      */
-    public function all($username, $repository, $state = null)
+    public function all($username, $repository, array $params = array())
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls', array('state' => $state));
+        $parameters = array_merge(array(
+            'page' => 1,
+            'per_page' => 30
+        ), $params);
+
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls', $parameters);
     }
 
     /**
      * Show all details of a pull request, including the discussions.
      * @link http://developer.github.com/v3/pulls/
      *
-     * @param  string $username          the username
-     * @param  string $repository        the repository
-     * @param  string $id                the ID of the pull request for which details are retrieved
+     * @param string $username   the username
+     * @param string $repository the repository
+     * @param string $id         the ID of the pull request for which details are retrieved
      *
-     * @return array                     array of pull requests for the project
+     * @return array array of pull requests for the project
      */
     public function show($username, $repository, $id)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls/'.urlencode($id));
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id));
     }
 
     public function commits($username, $repository, $id)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls/'.urlencode($id).'/commits');
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/commits');
     }
 
     public function files($username, $repository, $id)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls/'.urlencode($id).'/files');
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/files');
     }
 
     public function comments()
@@ -63,13 +67,13 @@ class PullRequest extends AbstractApi
      * Create a pull request
      * @link   http://developer.github.com/v3/pulls/
      *
-     * @param  string $username   the username
-     * @param  string $repository the repository
-     * @param  array  $params     A String of the branch or commit SHA that you want your changes to be pulled to.
-     *                            A String of the branch or commit SHA of your changes. Typically this will be a branch.
-     *                            If the branch is in a fork of the original repository, specify the username first:
-     *                            "my-user:some-branch". The String title of the Pull Request. The String body of
-     *                            the Pull Request. The issue number. Used when title and body is not set.
+     * @param string $username   the username
+     * @param string $repository the repository
+     * @param array  $params     A String of the branch or commit SHA that you want your changes to be pulled to.
+     *                           A String of the branch or commit SHA of your changes. Typically this will be a branch.
+     *                           If the branch is in a fork of the original repository, specify the username first:
+     *                           "my-user:some-branch". The String title of the Pull Request. The String body of
+     *                           the Pull Request. The issue number. Used when title and body is not set.
      *
      * @return array
      *
@@ -91,7 +95,7 @@ class PullRequest extends AbstractApi
             throw new MissingArgumentException(array('issue', 'body'));
         }
 
-        return $this->post('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls', $params);
+        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls', $params);
     }
 
     public function update($username, $repository, $id, array $params)
@@ -100,17 +104,17 @@ class PullRequest extends AbstractApi
             $params['state'] = 'open';
         }
 
-        return $this->patch('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls/'.urlencode($id), $params);
+        return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id), $params);
     }
 
     public function merged($username, $repository, $id)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls/'.urlencode($id).'/merge');
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/merge');
     }
 
     public function merge($username, $repository, $id, $message = null)
     {
-        return $this->put('repos/'.urlencode($username).'/'.urlencode($repository).'/pulls/'.urlencode($id).'/merge', array(
+        return $this->put('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/merge', array(
             'commit_message' => $message
         ));
     }

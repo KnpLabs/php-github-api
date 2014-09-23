@@ -77,13 +77,31 @@ class CurrentUser extends AbstractApi
     }
 
     /**
-     * @link http://developer.github.com/v3/repos/#list-your-repositories
+     * @link http://developer.github.com/v3/orgs/#list-user-organizations
      *
      * @return array
      */
-    public function repositories()
+    public function organizations()
     {
-        return $this->get('user/repos');
+        return $this->get('user/orgs');
+    }
+
+    /**
+     * @link http://developer.github.com/v3/repos/#list-your-repositories
+     *
+     * @param  string $type      role in the repository
+     * @param  string $sort      sort by
+     * @param  string $direction direction of sort, ask or desc
+
+     * @return array
+     */
+    public function repositories($type = 'owner', $sort = 'full_name', $direction = 'asc')
+    {
+        return $this->get('user/repos', array(
+            $type,
+            $sort,
+            $direction
+        ));
     }
 
     /**
@@ -97,6 +115,16 @@ class CurrentUser extends AbstractApi
     public function watched($page = 1)
     {
         return $this->get('user/watched', array(
+            'page' => $page
+        ));
+    }
+
+    /**
+     *  @link http://developer.github.com/changes/2012-9-5-watcher-api/
+     */
+    public function starred($page = 1)
+    {
+        return $this->get('user/starred', array(
             'page' => $page
         ));
     }

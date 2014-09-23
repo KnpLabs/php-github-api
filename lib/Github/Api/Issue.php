@@ -21,26 +21,26 @@ class Issue extends AbstractApi
      * List issues by username, repo and state
      * @link http://developer.github.com/v3/issues/
      *
-     * @param  string  $username         the username
-     * @param  string  $repository       the repository
-     * @param  array   $params           the additional parameters like milestone, assignees, labels, sort, direction
-     * @return array                     list of issues found
+     * @param  string $username   the username
+     * @param  string $repository the repository
+     * @param  array  $params     the additional parameters like milestone, assignees, labels, sort, direction
+     * @return array  list of issues found
      */
     public function all($username, $repository, array $params = array())
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/issues', array_merge(array('page' => 1), $params));
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues', array_merge(array('page' => 1), $params));
     }
 
     /**
      * Search issues by username, repo, state and keyword
      * @link http://developer.github.com/v3/search/#search-issues
      *
-     * @param  string  $username         the username
-     * @param  string  $repository       the repository
-     * @param  string  $state            the issue state, can be open or closed
-     * @param  string  $keyword          the keyword to filter issues by
+     * @param string $username   the username
+     * @param string $repository the repository
+     * @param string $state      the issue state, can be open or closed
+     * @param string $keyword    the keyword to filter issues by
      *
-     * @return array                     list of issues found
+     * @return array list of issues found
      */
     public function find($username, $repository, $state, $keyword)
     {
@@ -48,21 +48,39 @@ class Issue extends AbstractApi
             $state = 'open';
         }
 
-        return $this->get('legacy/issues/search/'.urlencode($username).'/'.urlencode($repository).'/'.urlencode($state).'/'.urlencode($keyword));
+        return $this->get('legacy/issues/search/'.rawurlencode($username).'/'.rawurlencode($repository).'/'.rawurlencode($state).'/'.rawurlencode($keyword));
+    }
+
+    /**
+     * List issues by organization
+     * @link http://developer.github.com/v3/issues/
+     *
+     * @param  string $organization the organization
+     * @param  string $state        the issue state, can be open or closed
+     * @param  array  $params       the additional parameters like milestone, assignees, labels, sort, direction
+     * @return array  list of issues found
+     */
+    public function org($organization, $state, array $params = array())
+    {
+        if (!in_array($state, array('open', 'closed'))) {
+            $state = 'open';
+        }
+
+        return $this->get('orgs/'.rawurlencode($organization).'/issues', array_merge(array('page' => 1, 'state' => $state), $params));
     }
 
     /**
      * Get extended information about an issue by its username, repo and number
      * @link http://developer.github.com/v3/issues/
      *
-     * @param  string  $username         the username
-     * @param  string  $repository       the repository
-     * @param  string  $id               the issue number
-     * @return array                     information about the issue
+     * @param  string $username   the username
+     * @param  string $repository the repository
+     * @param  string $id         the issue number
+     * @return array  information about the issue
      */
     public function show($username, $repository, $id)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/issues/'.urlencode($id));
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($id));
     }
 
     /**
@@ -70,10 +88,10 @@ class Issue extends AbstractApi
      * The issue is assigned to the authenticated user. Requires authentication.
      * @link http://developer.github.com/v3/issues/
      *
-     * @param  string  $username         the username
-     * @param  string  $repository       the repository
-     * @param  array   $params           the new issue data
-     * @return array                     information about the issue
+     * @param  string $username   the username
+     * @param  string $repository the repository
+     * @param  array  $params     the new issue data
+     * @return array  information about the issue
      *
      * @throws MissingArgumentException
      */
@@ -83,23 +101,23 @@ class Issue extends AbstractApi
             throw new MissingArgumentException(array('title', 'body'));
         }
 
-        return $this->post('repos/'.urlencode($username).'/'.urlencode($repository).'/issues', $params);
+        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues', $params);
     }
 
     /**
      * Update issue information's by username, repo and issue number. Requires authentication.
      * @link http://developer.github.com/v3/issues/
      *
-     * @param   string  $username         the username
-     * @param   string  $repository       the repository
-     * @param   string  $id               the issue number
-     * @param   array   $params           key=>value user attributes to update.
-     *                                    key can be title or body
-     * @return  array                     information about the issue
+     * @param string $username   the username
+     * @param string $repository the repository
+     * @param string $id         the issue number
+     * @param array  $params     key=>value user attributes to update.
+     *                           key can be title or body
+     * @return array information about the issue
      */
     public function update($username, $repository, $id, array $params)
     {
-        return $this->patch('repos/'.urlencode($username).'/'.urlencode($repository).'/issues/'.urlencode($id), $params);
+        return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($id), $params);
     }
 
     /**

@@ -13,18 +13,18 @@ class Events extends AbstractApi
     public function all($username, $repository, $issue = null, $page = 1)
     {
         if (null !== $issue) {
-            return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/issues/'.urlencode($issue).'/events', array(
+            return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/events', array(
                 'page' => $page
             ));
         }
 
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/issues/events', array(
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/events', array(
             'page' => $page
         ));
     }
 
     public function show($username, $repository, $event)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/issues/events/'.urlencode($event));
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/events/'.rawurlencode($event));
     }
 }

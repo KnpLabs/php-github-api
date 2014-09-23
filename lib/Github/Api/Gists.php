@@ -20,12 +20,12 @@ class Gists extends AbstractApi
             return $this->get('gists');
         }
 
-        return $this->get('gists/'.urlencode($type));
+        return $this->get('gists/'.rawurlencode($type));
     }
 
     public function show($number)
     {
-        return $this->get('gists/'.urlencode($number));
+        return $this->get('gists/'.rawurlencode($number));
     }
 
     public function create(array $params)
@@ -41,31 +41,31 @@ class Gists extends AbstractApi
 
     public function update($id, array $params)
     {
-        return $this->patch('gists/'.urlencode($id), $params);
+        return $this->patch('gists/'.rawurlencode($id), $params);
     }
 
     public function fork($id)
     {
-        return $this->post('gists/'.urlencode($id).'/fork');
+        return $this->post('gists/'.rawurlencode($id).'/fork');
     }
 
     public function remove($id)
     {
-        return $this->delete('gists/'.urlencode($id));
+        return $this->delete('gists/'.rawurlencode($id));
     }
 
     public function check($id)
     {
-        return $this->get('gists/'.urlencode($id).'/star');
+        return $this->get('gists/'.rawurlencode($id).'/star');
     }
 
     public function star($id)
     {
-        return $this->put('gists/'.urlencode($id).'/star');
+        return $this->put('gists/'.rawurlencode($id).'/star');
     }
 
     public function unstar($id)
     {
-        return $this->delete('gists/'.urlencode($id).'/star');
+        return $this->delete('gists/'.rawurlencode($id).'/star');
     }
 }

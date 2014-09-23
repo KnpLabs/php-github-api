@@ -11,9 +11,25 @@ use Github\Exception\InvalidArgumentException;
  */
 class Labels extends AbstractApi
 {
-    public function all($username, $repository, $issue)
+    public function all($username, $repository, $issue = null)
     {
-        return $this->get('repos/'.urlencode($username).'/'.urlencode($repository).'/issues/'.urlencode($issue).'/labels');
+        if ($issue === null) {
+            return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels');
+        }
+
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/labels');
+    }
+
+    public function create($username, $repository, array $params)
+    {
+        if (!isset($params['name'])) {
+            throw new MissingArgumentException('name');
+        }
+        if (!isset($params['color'])) {
+            $params['color'] = 'FFFFFF';
+        }
+
+        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels', $params);
     }
 
     public function add($username, $repository, $issue, $labels)
@@ -24,21 +40,21 @@ class Labels extends AbstractApi
             throw new InvalidArgumentException();
         }
 
-        return $this->post('repos/'.urlencode($username).'/'.urlencode($repository).'/issues/'.urlencode($issue).'/labels', $labels);
+        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/labels', $labels);
     }
 
     public function replace($username, $repository, $issue, array $params)
     {
-        return $this->put('repos/'.urlencode($username).'/'.urlencode($repository).'/issues/'.urlencode($issue).'/labels', $params);
+        return $this->put('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/labels', $params);
     }
 
     public function remove($username, $repository, $issue, $label)
     {
-        return $this->delete('repos/'.urlencode($username).'/'.urlencode($repository).'/issues/'.urlencode($issue).'/labels/'.urlencode($label));
+        return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/labels/'.rawurlencode($label));
     }
 
     public function clear($username, $repository, $issue)
     {
-        return $this->delete('repos/'.urlencode($username).'/'.urlencode($repository).'/issues/'.urlencode($issue).'/labels');
+        return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/labels');
     }
 }
