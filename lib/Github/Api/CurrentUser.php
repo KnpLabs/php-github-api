@@ -115,7 +115,7 @@ class CurrentUser extends AbstractApi
     }
     
     /**
-     * @Deprecated Use watchers() instead
+     * @deprecated Use watchers() instead
      */
     public function watched($page = 1)
     {
@@ -124,7 +124,7 @@ class CurrentUser extends AbstractApi
         ));
     }
     
-     /**
+    /**
      * @return Starring
      */
     public function starring()
@@ -132,8 +132,8 @@ class CurrentUser extends AbstractApi
          return new Starring($this->client);
     }
 
-   /**
-     * @Deprecated Use starring() instead
+    /**
+     * @deprecated Use starring() instead
      */
     public function starred($page = 1)
     {
