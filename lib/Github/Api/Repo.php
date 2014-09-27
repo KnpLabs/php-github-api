@@ -49,10 +49,10 @@ class Repo extends AbstractApi
      */
     public function activity($username, $repository)
     {
-	    return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/stats/commit_activity');
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/stats/commit_activity');
     }
 
-	/**
+    /**
 	 * Get contributor commit statistics for a repository
 	 * @link http://developer.github.com/v3/repos/statistics/#contributors
 	 *
@@ -61,10 +61,10 @@ class Repo extends AbstractApi
 	 *
 	 * @return array list of contributors and their commit statistics
 	 */
-	public function statistics($username, $repository)
-	{
-		return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/stats/contributors');
-	}
+    public function statistics($username, $repository)
+    {
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/stats/contributors');
+    }
 
     /**
      * List all repositories for an organization
