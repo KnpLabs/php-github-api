@@ -110,9 +110,9 @@ class CurrentUser extends AbstractApi
     public function repositories($type = 'owner', $sort = 'full_name', $direction = 'asc')
     {
         return $this->get('user/repos', array(
-            $type,
-            $sort,
-            $direction
+            'type' => $type,
+            'sort' => $sort,
+            'direction' => $direction
         ));
     }
 
