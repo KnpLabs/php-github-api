@@ -15,7 +15,7 @@ class ManagementConsole extends AbstractApi
      */
     public function configcheck($hash)
     {
-        return $this->get('/setup/api/configcheck', $hash);
+        return $this->getWithLicenseHash('/setup/api/configcheck', $hash);
     }
 
     /**
@@ -27,7 +27,7 @@ class ManagementConsole extends AbstractApi
      */
     public function settings($hash)
     {
-        return $this->get('/setup/api/settings', $hash);
+        return $this->getWithLicenseHash('/setup/api/settings', $hash);
     }
 
     /**
@@ -39,7 +39,7 @@ class ManagementConsole extends AbstractApi
      */
     public function maintenance($hash)
     {
-        return $this->get('/setup/api/maintenance', $hash);
+        return $this->getWithLicenseHash('/setup/api/maintenance', $hash);
     }
 
     /**
@@ -51,18 +51,17 @@ class ManagementConsole extends AbstractApi
      */
     public function keys($hash)
     {
-        return $this->get('/setup/api/settings/authorized-keys', $hash);
+        return $this->getWithLicenseHash('/setup/api/settings/authorized-keys', $hash);
     }
 
     /**
      * Sends an authenticated GET request.
      *
-     * @see \Github\Api\AbstractApi::get()
-     * @param string $uri
-     * @param array $hash
+     * @param string $uri the request URI
+     * @param string $hash md5 hash of your license
      * @return \Guzzle\Http\EntityBodyInterface|mixed|string
      */
-    protected function get($uri, $hash)
+    protected function getWithLicenseHash($uri, $hash)
     {
         return parent::get($uri, array('license_md5' => rawurlencode($hash)));
     }
