@@ -30,9 +30,18 @@ class EnterpriseTest extends TestCase
         $this->assertInstanceOf('Github\Api\Enterprise\License', $api->license());
     }
 
+    /**
+     * @test
+     */
+    public function shouldGetEnterpriseManagementConsoleApiObject()
+    {
+        $api = $this->getApiMock();
+
+        $this->assertInstanceOf('Github\Api\Enterprise\ManagementConsole', $api->console());
+    }
+
     protected function getApiClass()
     {
         return 'Github\Api\Enterprise';
     }
 }
-
