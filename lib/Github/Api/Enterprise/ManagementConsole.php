@@ -54,11 +54,6 @@ class ManagementConsole extends AbstractApi
         return $this->get('/setup/api/settings/authorized-keys', $hash);
     }
 
-    public function getClient()
-    {
-        return $this->client;
-    }
-
     /**
      * Sends an authenticated GET request.
      *
@@ -69,6 +64,6 @@ class ManagementConsole extends AbstractApi
      */
     protected function get($uri, $hash)
     {
-        return parent::get($uri, array('auth' => array('license', rawurlencode($hash))));
+        return parent::get($uri, array('license_md5' => rawurlencode($hash)));
     }
 }
