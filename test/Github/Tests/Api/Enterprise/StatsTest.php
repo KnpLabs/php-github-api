@@ -12,7 +12,7 @@ class StatsTest extends TestCase
     public function shouldShowStats()
     {
         $expectedJson = $this->getJson();
-        $expectedArray = json_decode($expectedJson);
+        $expectedArray = json_decode($expectedJson, true);
 
         $api = $this->getApiMock();
         $api->expects($this->once())

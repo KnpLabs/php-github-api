@@ -15,12 +15,12 @@ class ManagementConsoleTest extends TestCase
         { "status": "DONE", "key": "GitHub utilities" }, { "status": "DONE", "key": "GitHub applications" },
         { "status": "CONFIGURING", "key": "GitHub services" }, { "status": "PENDING", "key":
         "Reloading appliance services" } ] }';
-        $expectedArray = json_decode($expectedJson);
+        $expectedArray = json_decode($expectedJson, true);
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/setup/api/configcheck')
+            ->with('/setup/api/configcheck', array('license_md5' => $this->getLicenseHash()))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->configcheck($this->getLicenseHash()));
@@ -53,12 +53,12 @@ class ManagementConsoleTest extends TestCase
          "file", "bucket": null, "host_name": null, "key_id": null, "access_key": null }, "pages": { "enabled": true },
          "collectd": { "enabled": false, "server": "", "port": "", "encryption": "", "username": "foo", "password":
          "bar" } }, "run_list": [ "role[configure]" ] }';
-        $expectedArray = json_decode($expectedJson);
+        $expectedArray = json_decode($expectedJson, true);
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/setup/api/settings')
+            ->with('/setup/api/settings', array('license_md5' => $this->getLicenseHash()))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->settings($this->getLicenseHash()));
@@ -72,12 +72,12 @@ class ManagementConsoleTest extends TestCase
         $expectedJson = '{ "status": "scheduled", "scheduled_time": "Tuesday, January 22 at 15 => 34 -0800",
         "connection_services": [ { "name": "git operations", "number": 0 }, { "name": "mysql queries", "number": 233 },
         { "name": "resque jobs", "number": 54 } ] }';
-        $expectedArray = json_decode($expectedJson);
+        $expectedArray = json_decode($expectedJson, true);
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/setup/api/maintenance')
+            ->with('/setup/api/maintenance', array('license_md5' => $this->getLicenseHash()))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->maintenance($this->getLicenseHash()));
@@ -92,14 +92,13 @@ class ManagementConsoleTest extends TestCase
         "ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64" },
         { "key": "ssh-rsa AAAAB3NzaC1yc2EAAAAB...", "pretty-print":
         "ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64" } ]';
-        $expectedArray = json_decode($expectedJson);
+        $expectedArray = json_decode($expectedJson, true);
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/setup/api/settings/authorized-keys')
+            ->with('/setup/api/settings/authorized-keys', array('license_md5' => $this->getLicenseHash()))
             ->will($this->returnValue($expectedArray));
-
         $this->assertEquals($expectedArray, $api->keys($this->getLicenseHash()));
     }
 
