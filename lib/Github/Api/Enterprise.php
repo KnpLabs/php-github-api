@@ -4,6 +4,7 @@ namespace Github\Api;
 
 use Github\Api\Enterprise\Stats;
 use Github\Api\Enterprise\License;
+use Github\Api\Enterprise\Users;
 
 /**
  * Getting information about a GitHub Enterprise instance.
@@ -28,5 +29,13 @@ class Enterprise extends AbstractApi
     public function license()
     {
         return new License($this->client);
+    }
+
+    /**
+     * @return Users
+     */
+    public function users()
+    {
+        return new Users($this->client);
     }
 }
