@@ -32,7 +32,7 @@ class TeamsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('teams/KnpWorld/members/l3l0')
+            ->with('teams/KnpWorld/memberships/l3l0')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->check('KnpWorld', 'l3l0'));
@@ -96,7 +96,7 @@ class TeamsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with('teams/KnpWorld/members/l3l0')
+            ->with('teams/KnpWorld/memberships/l3l0')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->addMember('KnpWorld', 'l3l0'));
@@ -112,7 +112,7 @@ class TeamsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('teams/KnpWorld/members/l3l0')
+            ->with('teams/KnpWorld/memberships/l3l0')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->removeMember('KnpWorld', 'l3l0'));
