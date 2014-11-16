@@ -50,7 +50,7 @@ Now we can use autoloader from Composer by:
 ```json
 {
     "require": {
-        "graham-campbell/github": "0.1.*"
+        "graham-campbell/github": "~1.0"
     }
 }
 ```
