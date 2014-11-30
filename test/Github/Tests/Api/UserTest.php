@@ -75,7 +75,7 @@ class UserTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('legacy/user/search/l3l0')
+            ->with('search/users?q=l3l0')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->find('l3l0'));

@@ -33,29 +33,29 @@ class RepoTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('legacy/repos/search/php', array('myparam' => 2, 'start_page' => 1))
+            ->with('search/repositories?q=php')
             ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($expectedArray, $api->find('php', array('myparam' => 2)));
+        $this->assertEquals($expectedArray, $api->find('php'));
     }
 
     /**
      * @test
      */
-    public function shouldPaginateFoundRepositories()
+    public function shouldSearchRepositoriesWithOptions()
     {
         $expectedArray = array(
-            array('id' => 3, 'name' => 'fork of php'),
-            array('id' => 4, 'name' => 'fork of php-cs')
+            array('id' => 1, 'name' => 'php'),
+            array('id' => 2, 'name' => 'php-cs')
         );
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('legacy/repos/search/php', array('start_page' => 2))
+            ->with('search/repositories?q=php+language:javascript&sort=forks&order=asc')
             ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($expectedArray, $api->find('php', array('start_page' => 2)));
+        $this->assertEquals($expectedArray, $api->find('php',array('language'=>'javascript','sort'=>'forks','order'=>'asc')));
     }
 
     /**
