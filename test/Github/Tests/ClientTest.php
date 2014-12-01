@@ -186,6 +186,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             array('repository', 'Github\Api\Repo'),
             array('repositories', 'Github\Api\Repo'),
 
+            array('search', 'Github\Api\Search'),
+
             array('pr', 'Github\Api\PullRequest'),
             array('pullRequest', 'Github\Api\PullRequest'),
             array('pull_request', 'Github\Api\PullRequest'),
