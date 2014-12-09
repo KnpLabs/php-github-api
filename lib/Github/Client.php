@@ -155,6 +155,15 @@ class Client
                 $api = new Api\PullRequest($this);
                 break;
 
+            // ADD - SUPPORT FOR BRANCHES API
+            case 'ref';
+            case 'refs';
+            case 'reference';
+            case 'references';
+                $api = new Api\GitData\References($this);
+                break;
+            // END - SUPPORT FOR BRANCEHS API
+
             case 'repo':
             case 'repos':
             case 'repository':
