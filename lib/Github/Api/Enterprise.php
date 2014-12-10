@@ -2,6 +2,7 @@
 
 namespace Github\Api;
 
+use Github\Api\Enterprise\ManagementConsole;
 use Github\Api\Enterprise\Stats;
 use Github\Api\Enterprise\License;
 
@@ -28,5 +29,13 @@ class Enterprise extends AbstractApi
     public function license()
     {
         return new License($this->client);
+    }
+
+    /**
+     * @return ManagementConsole
+     */
+    public function console()
+    {
+        return new ManagementConsole($this->client);
     }
 }

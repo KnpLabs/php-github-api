@@ -1,10 +1,4 @@
 <?php
-/**
- * This file is part of the PHP GitHub API package.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
 
 namespace Github\Tests\Api;
 
@@ -30,9 +24,18 @@ class EnterpriseTest extends TestCase
         $this->assertInstanceOf('Github\Api\Enterprise\License', $api->license());
     }
 
+    /**
+     * @test
+     */
+    public function shouldGetEnterpriseManagementConsoleApiObject()
+    {
+        $api = $this->getApiMock();
+
+        $this->assertInstanceOf('Github\Api\Enterprise\ManagementConsole', $api->console());
+    }
+
     protected function getApiClass()
     {
         return 'Github\Api\Enterprise';
     }
 }
-
