@@ -31,6 +31,7 @@ use Github\HttpClient\HttpClientInterface;
  * @method Api\Repo repos()
  * @method Api\Repo repository()
  * @method Api\Repo repositories()
+ * @method Api\Search search()
  * @method Api\Organization team()
  * @method Api\Organization teams()
  * @method Api\User user()
@@ -160,6 +161,10 @@ class Client
             case 'repository':
             case 'repositories':
                 $api = new Api\Repo($this);
+                break;
+
+            case 'search':
+                $api = new Api\Search($this);
                 break;
 
             case 'team':
@@ -310,7 +315,7 @@ class Client
 
     /**
      * @param string $name
-     * 
+     *
      * @return ApiInterface
      *
      * @throws InvalidArgumentException
