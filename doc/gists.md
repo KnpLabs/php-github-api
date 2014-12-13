@@ -33,6 +33,12 @@ $gists = $github->api('gists')->all();
 $gist = $github->api('gists')->show(1);
 ```
 
+#### Get commits for a single gist
+
+```php
+$commits = $github->api('gists')->commits(1);
+```
+
 #### Create a gist
 
 ```php

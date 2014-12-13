@@ -44,6 +44,11 @@ class Gists extends AbstractApi
         return $this->patch('gists/'.rawurlencode($id), $params);
     }
 
+    public function commits($id)
+    {
+        return $this->get('gists/'.rawurlencode($id).'/commits');
+    }
+
     public function fork($id)
     {
         return $this->post('gists/'.rawurlencode($id).'/fork');
