@@ -60,17 +60,17 @@ class Teams extends AbstractApi
 
     public function check($team, $username)
     {
-        return $this->get('teams/'.rawurlencode($team).'/members/'.rawurlencode($username));
+        return $this->get('teams/'.rawurlencode($team).'/memberships/'.rawurlencode($username));
     }
 
     public function addMember($team, $username)
     {
-        return $this->put('teams/'.rawurlencode($team).'/members/'.rawurlencode($username));
+        return $this->put('teams/'.rawurlencode($team).'/memberships/'.rawurlencode($username));
     }
 
     public function removeMember($team, $username)
     {
-        return $this->delete('teams/'.rawurlencode($team).'/members/'.rawurlencode($username));
+        return $this->delete('teams/'.rawurlencode($team).'/memberships/'.rawurlencode($username));
     }
 
     public function repositories($team)
