@@ -164,7 +164,7 @@ class IssueTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('legacy/issues/search/KnpLabs/php-github-api/open/Invalid%20Commits')
+            ->with('search/issues?q=Invalid%20Commits+repo:KnpLabs/php-github-api+state:open')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->find('KnpLabs', 'php-github-api', 'open', 'Invalid Commits'));
@@ -180,10 +180,26 @@ class IssueTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('legacy/issues/search/KnpLabs/php-github-api/closed/Invalid%20Commits')
+            ->with('search/issues?q=Invalid%20Commits+repo:KnpLabs/php-github-api+state:closed')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->find('KnpLabs', 'php-github-api', 'closed', 'Invalid Commits'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldSearchAllIssues()
+    {
+        $expectedArray = array(array('id' => '123'));
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('search/issues?q=Invalid%20Commits+repo:KnpLabs/php-github-api')
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->find('KnpLabs', 'php-github-api', 'all', 'Invalid Commits'));
     }
 
     /**
@@ -196,7 +212,7 @@ class IssueTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('legacy/issues/search/KnpLabs/php-github-api/open/Invalid%20Commits')
+            ->with('search/issues?q=Invalid%20Commits+repo:KnpLabs/php-github-api+state:open')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->find('KnpLabs', 'php-github-api', 'abc', 'Invalid Commits'));

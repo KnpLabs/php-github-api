@@ -35,7 +35,11 @@ class Repo extends AbstractApi
      */
     public function find($keyword, array $params = array())
     {
-        return $this->get('legacy/repos/search/'.rawurlencode($keyword), array_merge(array('start_page' => 1), $params));
+        $url = 'search/repositories?q='.rawurlencode($keyword);
+        if (isset($params['language'])) $url.= '+language:'.$params['language'];
+        if (isset($params['sort'])) $url.= '&sort='.$params['sort'];
+        if (isset($params['order'])) $url.= '&order='.$params['order'];
+        return $this->get($url);
     }
 
     /**

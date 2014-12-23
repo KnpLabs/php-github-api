@@ -21,7 +21,7 @@ class User extends AbstractApi
      */
     public function find($keyword)
     {
-        return $this->get('legacy/user/search/'.rawurlencode($keyword));
+        return $this->get('search/users?q='.rawurlencode($keyword));
     }
 
     /**

@@ -37,18 +37,20 @@ class Issue extends AbstractApi
      *
      * @param string $username   the username
      * @param string $repository the repository
-     * @param string $state      the issue state, can be open or closed
+     * @param string $state      the issue state, can be open, closed or all
      * @param string $keyword    the keyword to filter issues by
      *
      * @return array list of issues found
      */
     public function find($username, $repository, $state, $keyword)
     {
-        if (!in_array($state, array('open', 'closed'))) {
+        if (!in_array($state, array('open', 'closed', 'all'))) {
             $state = 'open';
         }
 
-        return $this->get('legacy/issues/search/'.rawurlencode($username).'/'.rawurlencode($repository).'/'.rawurlencode($state).'/'.rawurlencode($keyword));
+        $url = 'search/issues?q='.rawurlencode($keyword).'+repo:'.rawurlencode($username).'/'.rawurlencode($repository);
+        if ($state!='all') $url .= '+state:'.rawurlencode($state);
+        return $this->get($url);
     }
 
     /**
