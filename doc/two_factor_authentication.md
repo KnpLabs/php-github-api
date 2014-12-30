@@ -7,7 +7,7 @@
 ```php
 try {
     $authorization = $github->api('authorizations')->create();
-} catch (Github\Exception\TwoFactorAuthenticationRequiredException $e {
+} catch (Github\Exception\TwoFactorAuthenticationRequiredException $e) {
     echo sprintf("Two factor authentication of type %s is required.", $e->getType());
 }
 ```
