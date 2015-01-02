@@ -41,8 +41,8 @@ Returns a list of users found by such criteria.
 You can sort results using 2-3 arguments.
 
 ```php
-$repos = $client->api('repo')->repositories('...', 'created', 'asc');
-$repos = $client->api('repo')->code('...........', 'indexed', 'desc');
-$repos = $client->api('repo')->issues('.........', 'comments', 'asc');
-$repos = $client->api('repo')->users('..........', 'followers', 'asc');
+$repos = $client->api('search')->repositories('...', 'created', 'asc');
+$repos = $client->api('search')->code('...........', 'indexed', 'desc');
+$repos = $client->api('search')->issues('.........', 'comments', 'asc');
+$repos = $client->api('search')->users('..........', 'followers', 'asc');
 ```
