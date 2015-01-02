@@ -5,6 +5,7 @@ namespace Github\Api;
 use Github\Api\Enterprise\ManagementConsole;
 use Github\Api\Enterprise\Stats;
 use Github\Api\Enterprise\License;
+use Github\Api\Enterprise\UserAdmin;
 
 /**
  * Getting information about a GitHub Enterprise instance.
@@ -37,5 +38,13 @@ class Enterprise extends AbstractApi
     public function console()
     {
         return new ManagementConsole($this->client);
+    }
+
+    /**
+     * @return UserAdmin
+     */
+    public function userAdmin()
+    {
+        return new UserAdmin($this->client);
     }
 }

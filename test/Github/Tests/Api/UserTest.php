@@ -161,38 +161,6 @@ class UserTest extends TestCase
         $this->assertEquals($expectedArray, $api->gists('l3l0'));
     }
 
-    /**
-     * @test
-     */
-    public function shouldSuspendUser()
-    {
-        $expectedArray = array();
-
-        $api = $this->getApiMock();
-        $api->expects($this->once())
-            ->method('put')
-            ->with('users/l3l0/suspended')
-            ->will($this->returnValue($expectedArray));
-        $this->assertEquals($expectedArray, $api->suspend('l3l0'));
-    }
-
-    /**
-     * @test
-     */
-    public function shouldUnsuspendUser()
-    {
-        $expectedArray = array();
-
-        $api = $this->getApiMock();
-        $api->expects($this->once())
-            ->method('delete')
-            ->with('users/l3l0/suspended')
-            ->will($this->returnValue($expectedArray));
-
-        $this->assertEquals($expectedArray, $api->unsuspend('l3l0'));
-    }
-
-
     protected function getApiClass()
     {
         return 'Github\Api\User';

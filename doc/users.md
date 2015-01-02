@@ -174,19 +174,3 @@ $emails = $client->api('current_user')->emails()->remove(array('first@provider.o
 ```
 
 Return an array of the authenticated user emails.
-
-### Suspend a user (Enterprise only)
-
-> Requires [authentication](security.md).
-
-```php
-$client->api('user')->suspend('ornicar');
-```
-
-### Unsuspend a user (Enterprise only)
-
-> Requires [authentication](security.md).
-
-```php
-$client->api('user')->unsuspend('ornicar');
-```
