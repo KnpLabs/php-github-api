@@ -25,7 +25,9 @@ class Assets extends AbstractApi
      */
     public function all($username, $repository, $id)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode($id).'/assets');
+        return $this->get(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode($id).'/assets'
+        );
     }
 
     /**
@@ -40,7 +42,9 @@ class Assets extends AbstractApi
      */
     public function show($username, $repository, $id)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/assets/'.rawurlencode($id));
+        return $this->get(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/assets/'.rawurlencode($id)
+        );
     }
 
     /**
@@ -67,7 +71,10 @@ class Assets extends AbstractApi
     public function create($username, $repository, $id, $name, $contentType, $content)
     {
         if (!defined('OPENSSL_TLSEXT_SERVER_NAME') || !OPENSSL_TLSEXT_SERVER_NAME) {
-            throw new ErrorException('Asset upload support requires Server Name Indication. This is not supported by your PHP version. See http://php.net/manual/en/openssl.constsni.php.');
+            throw new ErrorException(
+                'Asset upload support requires Server Name Indication. This is not supported by your PHP version. '
+                . 'See http://php.net/manual/en/openssl.constsni.php.'
+            );
         }
 
         // Asset creation requires a separate endpoint, uploads.github.com.
@@ -76,7 +83,12 @@ class Assets extends AbstractApi
         $baseUrl = $this->client->getHttpClient()->client->getBaseUrl();
         $this->client->getHttpClient()->client->setBaseUrl('https://uploads.github.com/');
 
-        $response = $this->postRaw('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode($id).'/assets?name='.$name, $content, array('Content-Type' => $contentType));
+        $response = $this->postRaw(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode($id).
+            '/assets?name='.$name,
+            $content,
+            array('Content-Type' => $contentType)
+        );
 
         // Reset the base url.
         $this->client->getHttpClient()->client->setBaseUrl($baseUrl);
@@ -103,7 +115,10 @@ class Assets extends AbstractApi
             throw new MissingArgumentException('name');
         }
 
-        return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/assets/'.rawurlencode($id), $params);
+        return $this->patch(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/assets/'.rawurlencode($id),
+            $params
+        );
     }
 
     /**
@@ -118,6 +133,8 @@ class Assets extends AbstractApi
      */
     public function remove($username, $repository, $id)
     {
-        return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/assets/'.rawurlencode($id));
+        return $this->delete(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/assets/'.rawurlencode($id)
+        );
     }
 }

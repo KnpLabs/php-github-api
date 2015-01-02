@@ -208,7 +208,11 @@ class Client
             throw new InvalidArgumentException('You need to specify authentication method!');
         }
 
-        if (null === $authMethod && in_array($password, array(self::AUTH_URL_TOKEN, self::AUTH_URL_CLIENT_ID, self::AUTH_HTTP_PASSWORD, self::AUTH_HTTP_TOKEN))) {
+        if (null === $authMethod &&
+            in_array(
+                $password,
+                array(self::AUTH_URL_TOKEN, self::AUTH_URL_CLIENT_ID, self::AUTH_HTTP_PASSWORD, self::AUTH_HTTP_TOKEN)
+            )) {
             $authMethod = $password;
             $password   = null;
         }
@@ -297,7 +301,9 @@ class Client
         }
         $supportedApiVersions = $this->getSupportedApiVersions();
         if ('api_version' == $name && !in_array($value, $supportedApiVersions)) {
-            throw new InvalidArgumentException(sprintf('Invalid API version ("%s"), valid are: %s', $name, implode(', ', $supportedApiVersions)));
+            throw new InvalidArgumentException(
+                sprintf('Invalid API version ("%s"), valid are: %s', $name, implode(', ', $supportedApiVersions))
+            );
         }
 
         $this->options[$name] = $value;
@@ -315,12 +321,14 @@ class Client
 
     /**
      * @param string $name
+     * @param array $args
      *
      * @return ApiInterface
      *
-     * @throws InvalidArgumentException
+     * @throws BadMethodCallException
      */
-    public function __call($name, $args) {
+    public function __call($name, $args)
+    {
         try {
             return $this->api($name);
         } catch (InvalidArgumentException $e) {

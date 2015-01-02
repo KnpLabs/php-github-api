@@ -47,7 +47,8 @@ class ErrorListener
             }
 
             if (401 === $response->getStatusCode()) {
-                if ($response->hasHeader('X-GitHub-OTP') && 0 === strpos((string) $response->getHeader('X-GitHub-OTP'), 'required;')) {
+                if ($response->hasHeader('X-GitHub-OTP') &&
+                    0 === strpos((string) $response->getHeader('X-GitHub-OTP'), 'required;')) {
                     $type = substr((string) $response->getHeader('X-GitHub-OTP'), 9);
 
                     throw new TwoFactorAuthenticationRequiredException($type);
@@ -63,19 +64,36 @@ class ErrorListener
                     foreach ($content['errors'] as $error) {
                         switch ($error['code']) {
                             case 'missing':
-                                $errors[] = sprintf('The %s %s does not exist, for resource "%s"', $error['field'], $error['value'], $error['resource']);
+                                $errors[] = sprintf(
+                                    'The %s %s does not exist, for resource "%s"',
+                                    $error['field'],
+                                    $error['value'],
+                                    $error['resource']
+                                );
                                 break;
 
                             case 'missing_field':
-                                $errors[] = sprintf('Field "%s" is missing, for resource "%s"', $error['field'], $error['resource']);
+                                $errors[] = sprintf(
+                                    'Field "%s" is missing, for resource "%s"',
+                                    $error['field'],
+                                    $error['resource']
+                                );
                                 break;
 
                             case 'invalid':
-                                $errors[] = sprintf('Field "%s" is invalid, for resource "%s"', $error['field'], $error['resource']);
+                                $errors[] = sprintf(
+                                    'Field "%s" is invalid, for resource "%s"',
+                                    $error['field'],
+                                    $error['resource']
+                                );
                                 break;
 
                             case 'already_exists':
-                                $errors[] = sprintf('Field "%s" already exists, for resource "%s"', $error['field'], $error['resource']);
+                                $errors[] = sprintf(
+                                    'Field "%s" already exists, for resource "%s"',
+                                    $error['field'],
+                                    $error['resource']
+                                );
                                 break;
 
                             default:
@@ -89,7 +107,10 @@ class ErrorListener
                 }
             }
 
-            throw new RuntimeException(isset($content['message']) ? $content['message'] : $content, $response->getStatusCode());
+            throw new RuntimeException(
+                isset($content['message']) ? $content['message'] : $content,
+                $response->getStatusCode()
+            );
         };
     }
 }

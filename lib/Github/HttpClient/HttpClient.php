@@ -132,8 +132,13 @@ class HttpClient implements HttpClientInterface
     /**
      * {@inheritDoc}
      */
-    public function request($path, $body = null, $httpMethod = 'GET', array $headers = array(), array $options = array())
-    {
+    public function request(
+        $path,
+        $body = null,
+        $httpMethod = 'GET',
+        array $headers = array(),
+        array $options = array()
+    ) {
         $request = $this->createRequest($httpMethod, $path, $body, $headers, $options);
 
         try {
@@ -155,7 +160,7 @@ class HttpClient implements HttpClientInterface
     /**
      * {@inheritDoc}
      */
-    public function authenticate($tokenOrLogin, $password = null, $method)
+    public function authenticate($tokenOrLogin, $password = null, $method = null)
     {
         $this->addListener('request.before_send', array(
             new AuthListener($tokenOrLogin, $password, $method), 'onRequestBeforeSend'
@@ -178,8 +183,13 @@ class HttpClient implements HttpClientInterface
         return $this->lastResponse;
     }
 
-    protected function createRequest($httpMethod, $path, $body = null, array $headers = array(), array $options = array())
-    {
+    protected function createRequest(
+        $httpMethod,
+        $path,
+        $body = null,
+        array $headers = array(),
+        array $options = array()
+    ) {
         return $this->client->createRequest(
             $httpMethod,
             $path,

@@ -90,6 +90,8 @@ class Teams extends AbstractApi
 
     public function removeRepository($team, $username, $repository)
     {
-        return $this->delete('teams/'.rawurlencode($team).'/repos/'.rawurlencode($username).'/'.rawurlencode($repository));
+        return $this->delete(
+            'teams/'.rawurlencode($team).'/repos/'.rawurlencode($username).'/'.rawurlencode($repository)
+        );
     }
 }
