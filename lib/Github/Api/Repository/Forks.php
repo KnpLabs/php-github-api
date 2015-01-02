@@ -16,7 +16,10 @@ class Forks extends AbstractApi
             $params['sort'] = 'newest';
         }
 
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/forks', array_merge(array('page' => 1), $params));
+        return $this->get(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/forks',
+            array_merge(array('page' => 1), $params)
+        );
     }
 
     public function create($username, $repository, array $params = array())

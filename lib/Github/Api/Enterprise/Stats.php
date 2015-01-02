@@ -99,7 +99,7 @@ class Stats extends AbstractApi
     /**
      * Returns the number of organization-owned repositories, root repositories, forks, pushed commits, and wikis
      *
-     * @return array array with totals of organization-owned repositories, root repositories, forks, pushed commits, and wikis
+     * @return array totals of organization-owned repositories, root repositories, forks, pushed commits, and wikis
      */
     public function repos()
     {

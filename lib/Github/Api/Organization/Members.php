@@ -15,10 +15,10 @@ class Members extends AbstractApi
         $parameters = array();
         $path = 'orgs/'.rawurlencode($organization).'/';
         if (null === $type) {
-           $path .= 'members';
-           if (null !== $filter) {
-               $parameters['filter'] = $filter;
-           }
+            $path .= 'members';
+            if (null !== $filter) {
+                $parameters['filter'] = $filter;
+            }
         } else {
             $path .= 'public_members';
         }

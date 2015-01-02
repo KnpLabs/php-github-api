@@ -76,5 +76,4 @@ class Search extends AbstractApi
     {
         return $this->get('/search/users', array('q' => $q, 'sort' => $sort, 'order' => $order));
     }
-
 }

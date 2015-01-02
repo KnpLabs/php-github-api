@@ -23,12 +23,17 @@ class Milestones extends AbstractApi
             $params['direction'] = 'desc';
         }
 
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones', array_merge(array('page' => 1, 'state' => 'open', 'sort' => 'due_date', 'direction' => 'desc'), $params));
+        return $this->get(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones',
+            array_merge(array('page' => 1, 'state' => 'open', 'sort' => 'due_date', 'direction' => 'desc'), $params)
+        );
     }
 
     public function show($username, $repository, $id)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones/'.rawurlencode($id));
+        return $this->get(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones/'.rawurlencode($id)
+        );
     }
 
     public function create($username, $repository, array $params)
@@ -49,16 +54,24 @@ class Milestones extends AbstractApi
             $params['state'] = 'open';
         }
 
-        return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones/'.rawurlencode($milestone), $params);
+        return $this->patch(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones/'.rawurlencode($milestone),
+            $params
+        );
     }
 
     public function remove($username, $repository, $milestone)
     {
-        return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones/'.rawurlencode($milestone));
+        return $this->delete(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones/'.rawurlencode($milestone)
+        );
     }
 
     public function labels($username, $repository, $milestone)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones/'.rawurlencode($milestone).'/labels');
+        return $this->get(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones/'.rawurlencode($milestone)
+            .'/labels'
+        );
     }
 }
