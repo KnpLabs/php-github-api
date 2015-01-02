@@ -41,9 +41,9 @@ class ErrorListener
 
         if ($response->isClientError() || $response->isServerError()) {
             $remaining = (string) $response->getHeader('X-RateLimit-Remaining');
-            $limit = $response->getHeader('X-RateLimit-Limit');
 
             if (null != $remaining && 1 > $remaining && 'rate_limit' !== substr($request->getResource(), 1, 10)) {
+                $limit = $response->getHeader('X-RateLimit-Limit');
                 throw new ApiLimitExceedException($limit);
             }
 
