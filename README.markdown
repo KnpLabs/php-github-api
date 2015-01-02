@@ -90,7 +90,7 @@ Using cache, the client will get cached responses if resources haven't changed s
 
 ## Documentation
 
-See the `doc` directory for more detailed documentation.
+See the [doc/ directory](doc/index.md) for more detailed documentation.
 
 ## License
 
