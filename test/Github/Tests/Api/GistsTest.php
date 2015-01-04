@@ -71,6 +71,22 @@ class GistsTest extends TestCase
     /**
      * @test
      */
+    public function shouldShowCommit()
+    {
+        $expectedArray = array('version' => 'abc');
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('gists/123/abc')
+            ->will($this->returnValue($expectedArray));
+
+       $this->assertEquals($expectedArray, $api->commit(123, 'abc'));
+    }
+
+    /**
+     * @test
+     */
     public function shouldForkGist()
     {
         $expectedArray = array('id' => '123');
