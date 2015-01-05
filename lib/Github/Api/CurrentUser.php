@@ -89,6 +89,16 @@ class CurrentUser extends AbstractApi
     }
 
     /**
+     * @link https://developer.github.com/v3/orgs/teams/#list-user-teams
+     *
+     * @return array
+     */
+    public function teams()
+    {
+        return $this->get('user/teams');
+    }
+
+    /**
      * @link http://developer.github.com/v3/repos/#list-your-repositories
      *
      * @param  string $type      role in the repository
@@ -113,7 +123,7 @@ class CurrentUser extends AbstractApi
     {
         return new Watchers($this->client);
     }
-    
+
     /**
      * @deprecated Use watchers() instead
      */
@@ -123,7 +133,7 @@ class CurrentUser extends AbstractApi
             'page' => $page
         ));
     }
-    
+
     /**
      * @return Starring
      */
