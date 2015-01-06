@@ -27,6 +27,12 @@ abstract class AbstractApi implements ApiInterface
     protected $perPage;
 
     /**
+     * number of page to get (Github pagination)
+     * @var null|int
+     */
+    protected $pageNumber;
+
+    /**
      * @param Client $client
      */
     public function __construct(Client $client)
@@ -57,6 +63,24 @@ abstract class AbstractApi implements ApiInterface
     }
 
     /**
+     * @return null|int
+     */
+    public function getPageNumber()
+    {
+        return $this->pageNumber;
+    }
+
+    /**
+     * @param null|int $pageNumber
+     */
+    public function setPageNumber($pageNumber)
+    {
+        $this->pageNumber = (null === $pageNumber ? $pageNumber : (int) $pageNumber);
+
+        return $this;
+    }
+
+    /**
      * Send a GET request with query parameters.
      *
      * @param string $path              Request path.
@@ -68,6 +92,9 @@ abstract class AbstractApi implements ApiInterface
     {
         if (null !== $this->perPage && !isset($parameters['per_page'])) {
             $parameters['per_page'] = $this->perPage;
+        }
+        if (null !== $this->pageNumber && !isset($parameters['page'])) {
+            $parameters['page'] = $this->pageNumber;
         }
         if (array_key_exists('ref', $parameters) && is_null($parameters['ref'])) {
             unset($parameters['ref']);

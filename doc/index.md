@@ -24,7 +24,7 @@ APIs:
 
 Additional features:
 
-* [Pagination support](result_pager.md)
+* [Pagination support](pagination.md)
 * [Authentication & Security](security.md)
 * [Request any Route](request_any_route.md)
 * [Customize `php-github-api` and testing](customize.md)

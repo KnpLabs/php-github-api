@@ -132,6 +132,52 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
         $api->get('/path', array('ref' => null));
     }
 
+    /**
+     * @test
+     */
+    public function shouldPassPageArgumentWhenPageNumberIsSet()
+    {
+        $expectedResponse = new Response(200, null, 'Response');
+
+        $httpClient = $this->getHttpMock();
+        $httpClient
+            ->expects($this->any())
+            ->method('get')
+            ->with('/path', array('page' => 2))
+            ->will($this->returnValue($expectedResponse));
+        $client = $this->getClientMock();
+        $client->setHttpClient($httpClient);
+
+        $api = new ExposedAbstractApiTestInstance($client);
+        $result = $api
+            ->setPageNumber(2)
+            ->get('/path');
+        $this->assertEquals('Response', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldNotPassPageArgumentWhenPageNumberIsSetThroughParametersArgument()
+    {
+        $expectedResponse = new Response(200, null, 'Response');
+
+        $httpClient = $this->getHttpMock();
+        $httpClient
+            ->expects($this->any())
+            ->method('get')
+            ->with('/path', array('page' => 3))
+            ->will($this->returnValue($expectedResponse));
+        $client = $this->getClientMock();
+        $client->setHttpClient($httpClient);
+
+        $api = new ExposedAbstractApiTestInstance($client);
+        $api->setPageNumber(2);
+        $result = $api
+            ->get('/path', array('page' => 3));
+        $this->assertEquals('Response', $result);
+    }
+
     protected function getAbstractApiObject($client)
     {
         return new AbstractApiTestInstance($client);
