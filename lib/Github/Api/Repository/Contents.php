@@ -225,9 +225,8 @@ class Contents extends AbstractApi
             $format = 'tarball';
         }
 
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/'.rawurlencode($format), array(
-            'ref' => $reference
-        ));
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/'.rawurlencode($format).
+            ((null !== $reference) ? ('/'.rawurlencode($reference)) : ''));
     }
 
     /**
