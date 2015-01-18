@@ -39,6 +39,22 @@ class GistsTest extends TestCase
     /**
      * @test
      */
+    public function shouldGetPagedGists()
+    {
+        $expectedArray = array(array('id' => '123'));
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('gists', array('page' => 2))
+            ->will($this->returnValue($expectedArray));
+
+       $this->assertEquals($expectedArray, $api->all(null, 2));
+    }
+
+    /**
+     * @test
+     */
     public function shouldShowGist()
     {
         $expectedArray = array('id' => '123');
