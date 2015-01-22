@@ -422,15 +422,15 @@ class RepoTest extends TestCase
      */
     public function shouldGetCommitActivity()
     {
-	$expectedArray = array(array('days' => array(0, 3, 26, 20, 39, 1, 0), 'total' => 89, 'week' => 1336280400));
+        $expectedArray = array(array('days' => array(0, 3, 26, 20, 39, 1, 0), 'total' => 89, 'week' => 1336280400));
 
-	$api = $this->getApiMock();
-	$api->expects($this->once())
-	    ->method('get')
-	    ->with('repos/KnpLabs/php-github-api/stats/commit_activity')
-	    ->will($this->returnValue($expectedArray));
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('repos/KnpLabs/php-github-api/stats/commit_activity')
+            ->will($this->returnValue($expectedArray));
 
-	$this->assertEquals($expectedArray, $api->activity('KnpLabs', 'php-github-api'));
+        $this->assertEquals($expectedArray, $api->activity('KnpLabs', 'php-github-api'));
     }
 
     protected function getApiClass()
