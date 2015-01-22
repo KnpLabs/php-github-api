@@ -21,8 +21,8 @@ class CachedHttpClient extends HttpClient
     
     /**
      * contains the lastResponse fetched from cache
-     * 
-     * @var Guzzle\Http\Message\Response 
+     *
+     * @var Guzzle\Http\Message\Response
      */
     private $lastCachedResponse;
 
