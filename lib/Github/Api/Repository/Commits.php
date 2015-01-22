@@ -15,10 +15,10 @@ class Commits extends AbstractApi
         return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/commits', $params);
     }
 
-    public function compare($username, $repository, $base, $head, $mediaType = NULL)
+    public function compare($username, $repository, $base, $head, $mediaType = null)
     {
         $headers = array();
-        if (NULL !== $mediaType) {
+        if (null !== $mediaType) {
             $headers['Accept'] = $mediaType;
         }
         return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/compare/'.rawurlencode($base).'...'.rawurlencode($head), array(), $headers);
