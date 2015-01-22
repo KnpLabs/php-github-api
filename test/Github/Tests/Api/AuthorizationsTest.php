@@ -17,7 +17,7 @@ class AuthorizationsTest extends TestCase
             ->with('authorizations')
             ->will($this->returnValue($expectedArray));
 
-       $this->assertEquals($expectedArray, $api->all());
+        $this->assertEquals($expectedArray, $api->all());
     }
 
     /**
@@ -34,7 +34,7 @@ class AuthorizationsTest extends TestCase
             ->with('authorizations/'.$id)
             ->will($this->returnValue($expectedArray));
 
-       $this->assertEquals($expectedArray, $api->show($id));
+        $this->assertEquals($expectedArray, $api->show($id));
     }
 
     /**
@@ -52,7 +52,7 @@ class AuthorizationsTest extends TestCase
             ->with('authorizations/'.$id.'/tokens/'.$token)
             ->will($this->returnValue($expectedArray));
 
-       $this->assertEquals($expectedArray, $api->check($id, $token));
+        $this->assertEquals($expectedArray, $api->check($id, $token));
     }
 
     /**

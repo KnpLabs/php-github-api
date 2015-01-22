@@ -110,7 +110,6 @@ class CachedHttpClient extends HttpClient
      */
     public function getLastResponse($force = false)
     {
-        
         $lastResponse =  parent::getLastResponse();
         if (304 != $lastResponse->getStatusCode()) {
             $force = true;
