@@ -320,7 +320,8 @@ class Client
      *
      * @throws InvalidArgumentException
      */
-    public function __call($name, $args) {
+    public function __call($name, $args)
+    {
         try {
             return $this->api($name);
         } catch (InvalidArgumentException $e) {
