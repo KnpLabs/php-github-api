@@ -10,7 +10,7 @@ class Deployment extends AbstractApi
     public function all($username, $repository, array $params = array())
     {   
         return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/deployments', array(),
-          ['Accept' => 'application/vnd.github.cannonball-preview+json']
+          array('Accept' => 'application/vnd.github.cannonball-preview+json')
         );
     }
 
