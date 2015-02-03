@@ -17,7 +17,7 @@ class GistsTest extends TestCase
             ->with('gists/starred')
             ->will($this->returnValue($expectedArray));
 
-       $this->assertEquals($expectedArray, $api->all('starred'));
+        $this->assertEquals($expectedArray, $api->all('starred'));
     }
 
     /**
@@ -33,7 +33,7 @@ class GistsTest extends TestCase
             ->with('gists')
             ->will($this->returnValue($expectedArray));
 
-       $this->assertEquals($expectedArray, $api->all());
+        $this->assertEquals($expectedArray, $api->all());
     }
 
     /**
@@ -49,7 +49,7 @@ class GistsTest extends TestCase
             ->with('gists/123')
             ->will($this->returnValue($expectedArray));
 
-       $this->assertEquals($expectedArray, $api->show(123));
+        $this->assertEquals($expectedArray, $api->show(123));
     }
 
     /**
@@ -65,7 +65,23 @@ class GistsTest extends TestCase
             ->with('gists/123/commits')
             ->will($this->returnValue($expectedArray));
 
-       $this->assertEquals($expectedArray, $api->commits(123));
+        $this->assertEquals($expectedArray, $api->commits(123));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldShowCommit()
+    {
+        $expectedArray = array('version' => 'abc');
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('gists/123/abc')
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->commit(123, 'abc'));
     }
 
     /**
@@ -81,7 +97,7 @@ class GistsTest extends TestCase
             ->with('gists/123/fork')
             ->will($this->returnValue($expectedArray));
 
-       $this->assertEquals($expectedArray, $api->fork(123));
+        $this->assertEquals($expectedArray, $api->fork(123));
     }
 
     /**
@@ -115,7 +131,7 @@ class GistsTest extends TestCase
             ->with('gists/123/star')
             ->will($this->returnValue($expectedArray));
 
-       $this->assertEquals($expectedArray, $api->check(123));
+        $this->assertEquals($expectedArray, $api->check(123));
     }
 
     /**
@@ -131,7 +147,7 @@ class GistsTest extends TestCase
             ->with('gists/123/star')
             ->will($this->returnValue($expectedArray));
 
-       $this->assertEquals($expectedArray, $api->star(123));
+        $this->assertEquals($expectedArray, $api->star(123));
     }
 
     /**
@@ -147,7 +163,7 @@ class GistsTest extends TestCase
             ->with('gists/123/star')
             ->will($this->returnValue($expectedArray));
 
-       $this->assertEquals($expectedArray, $api->unstar(123));
+        $this->assertEquals($expectedArray, $api->unstar(123));
     }
 
     /**
