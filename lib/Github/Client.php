@@ -143,6 +143,11 @@ class Client
                 $api = new Api\Markdown($this);
                 break;
 
+            case 'notification':
+            case 'notifications':
+                $api = new Api\Activity\Notification($this);
+                break;
+
             case 'organization':
             case 'organizations':
                 $api = new Api\Organization($this);
