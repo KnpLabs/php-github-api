@@ -22,6 +22,8 @@ use Github\HttpClient\HttpClientInterface;
  * @method Api\Issue issue()
  * @method Api\Issue issues()
  * @method Api\Markdown markdown()
+ * @method Api\Activity\Notification notification()
+ * @method Api\Activity\Notification notifications()
  * @method Api\Organization organization()
  * @method Api\Organization organizations()
  * @method Api\PullRequest pr()
