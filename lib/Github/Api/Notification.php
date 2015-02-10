@@ -1,10 +1,9 @@
 <?php
 
-namespace Github\Api\Activity;
+namespace Github\Api;
 
 use DateTime;
 use DateTimeInterface;
-use Github\Api\AbstractApi;
 
 /**
  * API for accessing Notifications from your Git/Github repositories.
