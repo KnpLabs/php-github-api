@@ -53,7 +53,7 @@ class ContentsTest extends TestCase
             ->willReturn(200);
 
         $api = $this->getApiMock();
-            $api->expects($this->once())
+        $api->expects($this->once())
             ->method('head')
             ->with('repos/KnpLabs/php-github-api/contents/composer.json', array('ref' => null))
             ->will($this->returnValue($responseMock));

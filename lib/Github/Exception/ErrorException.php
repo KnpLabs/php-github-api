@@ -9,5 +9,4 @@ namespace Github\Exception;
  */
 class ErrorException extends \ErrorException implements ExceptionInterface
 {
-
 }

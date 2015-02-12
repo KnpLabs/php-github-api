@@ -139,7 +139,7 @@ class CurrentUser extends AbstractApi
      */
     public function starring()
     {
-         return new Starring($this->client);
+        return new Starring($this->client);
     }
 
     /**
