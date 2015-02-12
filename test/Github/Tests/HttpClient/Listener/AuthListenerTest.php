@@ -3,7 +3,6 @@
 namespace Github\Tests\HttpClient;
 
 use Guzzle\Http\Message\Request;
-
 use Github\Client;
 use Github\HttpClient\Listener\AuthListener;
 
