@@ -105,7 +105,7 @@ class Repo extends AbstractApi
      * @param null|string $organization username of organization if applicable
      * @param boolean     $hasIssues    `true` to enable issues for this repository, `false` to disable them
      * @param boolean     $hasWiki      `true` to enable the wiki for this repository, `false` to disable it
-     * @param boolean     $hadDownloads `true` to enable downloads for this repository, `false` to disable them
+     * @param boolean     $hasDownloads `true` to enable downloads for this repository, `false` to disable them
      * @param integer     $teamId       The id of the team that will be granted access to this repository. This is only valid when creating a repo in an organization.
      * @param boolean     $autoInit     `true` to create an initial commit with empty README, `false` for no initial commit
      *
