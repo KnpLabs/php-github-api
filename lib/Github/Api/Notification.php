@@ -45,10 +45,9 @@ class Notification extends AbstractApi
      *
      * @link https://developer.github.com/v3/activity/notifications/#mark-as-read
      *
-     * @param DateTimeInterface $since
-     *
+     * @param \DateTime $since
      */
-    public function markRead(DateTimeInterface $since = null)
+    public function markRead(DateTime $since = null)
     {
         $parameters = array();
 
