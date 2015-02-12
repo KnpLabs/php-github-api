@@ -426,9 +426,9 @@ class RepoTest extends TestCase
 
         $api = $this->getApiMock();
         $api->expects($this->once())
-	    ->method('get')
-	    ->with('repos/KnpLabs/php-github-api/stats/commit_activity')
-	    ->will($this->returnValue($expectedArray));
+            ->method('get')
+            ->with('repos/KnpLabs/php-github-api/stats/commit_activity')
+            ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->activity('KnpLabs', 'php-github-api'));
     }
