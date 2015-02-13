@@ -15,7 +15,7 @@ use DateTime;
 class Notification extends AbstractApi
 {
     /**
-     * Get a listing of a notifications
+     * Get a listing of notifications
      * @link https://developer.github.com/v3/activity/notifications/
      *
      * @param bool $includingRead
