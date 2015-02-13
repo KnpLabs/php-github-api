@@ -3,7 +3,6 @@
 namespace Github\Api;
 
 use DateTime;
-use DateTimeInterface;
 
 /**
  * API for accessing Notifications from your Git/Github repositories.
