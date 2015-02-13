@@ -29,12 +29,12 @@ class NotificationTest extends TestCase
      */
     public function shouldGetNotificationsSince()
     {
-        $since = '2015-01-01 00:00:00';
+        $since = new DateTime('now');
 
         $parameters = array(
             'all' => false,
             'participating' => false,
-            'since' => $since,
+            'since' => $since->format(DateTime::ISO8601),
         );
 
         $api = $this->getApiMock();

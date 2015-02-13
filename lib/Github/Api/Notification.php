@@ -16,15 +16,16 @@ class Notification extends AbstractApi
 {
     /**
      * Get a listing of notifications
+     *
      * @link https://developer.github.com/v3/activity/notifications/
      *
-     * @param bool $includingRead
-     * @param bool $participating
-     * @param null $since
+     * @param bool          $includingRead
+     * @param bool          $participating
+     * @param DateTime|null $since
      *
      * @return array array of notifications
      */
-    public function all($includingRead = false, $participating = false, $since = null)
+    public function all($includingRead = false, $participating = false, DateTime $since = null)
     {
         $parameters = array(
             'all' => $includingRead,
@@ -32,7 +33,7 @@ class Notification extends AbstractApi
         );
 
         if($since !== null) {
-            $parameters['since'] = $since;
+            $parameters['since'] = $since->format(DateTime::ISO8601);
         }
 
         return $this->get('notifications', $parameters);
@@ -40,11 +41,11 @@ class Notification extends AbstractApi
 
     /**
      * Marks all notifications as read from the current date
-     * Optionally give DateTimeInterface to mark as read before that date
+     * Optionally give DateTime to mark as read before that date
      *
      * @link https://developer.github.com/v3/activity/notifications/#mark-as-read
      *
-     * @param \DateTime $since
+     * @param DateTime|null $since
      */
     public function markRead(DateTime $since = null)
     {
