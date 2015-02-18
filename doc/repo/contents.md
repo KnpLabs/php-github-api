@@ -31,7 +31,7 @@ $fileInfo = $client->api('repo')->contents()->create('knp-labs', 'php-github-api
 $committer = array('name' => 'KnpLabs', 'email' => 'info@knplabs.com');
 $oldFile = $client->api('repo')->contents()->show('knp-labs', 'php-github-api', $path, $branch);
 
-$fileInfo = $client->api('repo')->contents()->create('knp-labs', 'php-github-api', $path, $content, $commitMessage, $oldFile['sha'], $branch, $committer);
+$fileInfo = $client->api('repo')->contents()->update('knp-labs', 'php-github-api', $path, $content, $commitMessage, $oldFile['sha'], $branch, $committer);
 ```
 
 ### Remove a file
