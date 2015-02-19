@@ -40,6 +40,16 @@ class Authorizations extends AbstractApi
 
     public function check($id, $token)
     {
-        return $this->get('authorizations/'.rawurlencode($id).'/tokens/'.rawurlencode($token));
+        return $this->get('applications/'.rawurlencode($id).'/tokens/'.rawurlencode($token));
+    }
+
+    public function revoke($id, $token)
+    {
+        return $this->delete('applications/'.rawurlencode($id).'/tokens/'.rawurlencode($token));
+    }
+
+    public function revokeAll($id)
+    {
+        return $this->delete('applications/'.rawurlencode($id).'/tokens');
     }
 }
