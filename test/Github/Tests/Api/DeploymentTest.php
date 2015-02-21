@@ -37,7 +37,7 @@ class DeploymentTest extends TestCase
     public function shouldGetAllDeploymentsWithFilterParameters()
     {
         $api = $this->getApiMock();
-        $filterData = ["foo" => "bar", "bar" => "foo"];
+        $filterData = array("foo" => "bar", "bar" => "foo");
 
         $api->expects($this->once())
             ->method('get')
@@ -52,7 +52,7 @@ class DeploymentTest extends TestCase
     public function shouldCreateStatusUpdate()
     {
         $api = $this->getApiMock();
-        $statusData = ["state" => "pending", "description" => "waiting to start"];
+        $statusData = array("state" => "pending", "description" => "waiting to start");
 
         $api->expects($this->once())
             ->method('post')
@@ -68,7 +68,7 @@ class DeploymentTest extends TestCase
     public function shouldRejectStatusUpdateWithoutStateField()
     {
         $api = $this->getApiMock();
-        $statusData = [ "description" => "waiting to start"];
+        $statusData = array("description" => "waiting to start");
 
         $api->updateStatus("KnpLabs", "php-github-api", 1, $statusData);
     }
