@@ -12,6 +12,33 @@ $labels = $client->api('issue')->labels()->all('KnpLabs', 'php-github-api');
 List all project labels by username and repo.
 Returns an array of project labels.
 
+### Create a label
+
+```php
+$labels = $client->api('issue')->labels()->create('KnpLabs', 'php-github-api', array(
+    'name' => 'Bug',
+    'color' => 'FFFFFF',
+));
+```
+
+Create a new label in the repository.
+
+### Update a label
+
+```php
+$labels = $client->api('issue')->labels()->update('KnpLabs', 'php-github-api', 'Enhancement', 'Feature', 'FFFFFF');
+```
+
+Update the label name and color.
+
+### Delete a label
+
+```php
+$labels = $client->api('issue')->labels()->deleteLabel('KnpLabs', 'php-github-api', 'Bug');
+```
+
+Delete a new label from the repository.
+
 ### Add a label on an issue
 
 > Requires [authentication](../security.md).
