@@ -4,6 +4,7 @@ namespace Github\Api\Issue;
 
 use Github\Api\AbstractApi;
 use Github\Exception\InvalidArgumentException;
+use Github\Exception\MissingArgumentException;
 
 /**
  * @link   http://developer.github.com/v3/issues/labels/
