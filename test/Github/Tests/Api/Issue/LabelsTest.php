@@ -94,6 +94,23 @@ class LabelsTest extends TestCase
     /**
      * @test
      */
+    public function shouldUpdateLabel()
+    {
+        $expectedValue = array(array('name' => 'bar', 'color' => 'FFF'));
+        $data = array('name' => 'bar', 'color' => 'FFF');
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('patch')
+            ->with('repos/KnpLabs/php-github-api/labels/foo', $data)
+            ->will($this->returnValue($expectedValue));
+
+        $this->assertEquals($expectedValue, $api->update('KnpLabs', 'php-github-api', 'foo', 'bar', 'FFF'));
+    }
+
+    /**
+     * @test
+     */
     public function shouldRemoveLabel()
     {
         $expectedValue = array('someOutput');
