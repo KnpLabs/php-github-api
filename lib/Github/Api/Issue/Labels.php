@@ -33,6 +33,11 @@ class Labels extends AbstractApi
         return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels', $params);
     }
 
+    public function deleteLabel($username, $repository, $label)
+    {
+        return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels/'.rawurlencode($label));
+    }
+
     public function add($username, $repository, $issue, $labels)
     {
         if (is_string($labels)) {
