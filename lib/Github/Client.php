@@ -22,6 +22,8 @@ use Github\HttpClient\HttpClientInterface;
  * @method Api\Issue issue()
  * @method Api\Issue issues()
  * @method Api\Markdown markdown()
+ * @method Api\Notification notification()
+ * @method Api\Notification notifications()
  * @method Api\Organization organization()
  * @method Api\Organization organizations()
  * @method Api\PullRequest pr()
@@ -141,6 +143,11 @@ class Client
 
             case 'markdown':
                 $api = new Api\Markdown($this);
+                break;
+
+            case 'notification':
+            case 'notifications':
+                $api = new Api\Notification($this);
                 break;
 
             case 'organization':

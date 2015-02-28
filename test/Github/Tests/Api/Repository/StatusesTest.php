@@ -71,7 +71,7 @@ class StatusesTest extends TestCase
     }
 
     /**
-     * @test 
+     * @test
      */
     public function shouldCreateCommitStatus()
     {

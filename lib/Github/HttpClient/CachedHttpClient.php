@@ -22,7 +22,7 @@ class CachedHttpClient extends HttpClient
     /**
      * contains the lastResponse fetched from cache
      *
-     * @var \Guzzle\Http\Message\Response
+     * @var Guzzle\Http\Message\Response
      */
     private $lastCachedResponse;
 
@@ -110,7 +110,6 @@ class CachedHttpClient extends HttpClient
      */
     public function getLastResponse($force = false)
     {
-        
         $lastResponse =  parent::getLastResponse();
         if (304 != $lastResponse->getStatusCode()) {
             $force = true;
