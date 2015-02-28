@@ -1,5 +1,5 @@
 ## Two factor authentication
-[Back to the navigation](index.md)
+[Back to the navigation](README.md)
 
 
 ### Raising the exception

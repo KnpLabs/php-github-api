@@ -1,5 +1,5 @@
 ## Repositories API
-[Back to the navigation](index.md)
+[Back to the navigation](README.md)
 
 Searching repositories, getting repository information and managing repository information for authenticated users.
 Wrap [GitHub Repo API](http://developer.github.com/v3/repos/). All methods are described on that page.

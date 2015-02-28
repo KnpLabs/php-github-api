@@ -1,5 +1,5 @@
 ## Authorizations API
-[Back to the navigation](index.md)
+[Back to the navigation](README.md)
 
 Creating, deleting and listing authorizations. Wraps [GitHub Authorizations API](http://developer.github.com/v3/oauth/).
 

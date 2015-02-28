@@ -1,5 +1,5 @@
 ## Commits API
-[Back to the navigation](index.md)
+[Back to the navigation](README.md)
 
 Getting information on specific commits, the diffs they introduce, the files they've changed.
 Wrap [GitHub Commit API](http://developer.github.com/v3/git/commits/).

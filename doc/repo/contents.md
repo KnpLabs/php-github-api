@@ -1,5 +1,5 @@
 ## Repo / Contents API
-[Back to the "Repos API"](../repos.md) | [Back to the navigation](../index.md)
+[Back to the "Repos API"](../repos.md) | [Back to the navigation](../README.md)
 
 ### Get a repository's README
 

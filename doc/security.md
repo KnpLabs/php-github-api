@@ -1,5 +1,5 @@
 ## Authentication & Security
-[Back to the navigation](index.md)
+[Back to the navigation](README.md)
 
 Most GitHub services do not require authentication, but some do. For example the methods that allow you to change
 properties on Repositories and some others. Therefore this step is facultative.
