@@ -1,5 +1,5 @@
 ## Pull Requests / Review Comments API
-[Back to the "Pull Requests API"](../pull_requests.md) | [Back to the navigation](../index.md)
+[Back to the "Pull Requests API"](../pull_requests.md) | [Back to the navigation](../README.md)
 
 Review Comments are comments on a portion of the unified diff. These are separate from Commit Comments (which
 are applied directly to a commit, outside of the Pull Request view), and Issue Comments (which do not reference

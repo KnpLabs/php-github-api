@@ -1,5 +1,5 @@
 ## Gists API
-[Back to the navigation](index.md)
+[Back to the navigation](README.md)
 
 Creating, editing, deleting and listing gists. Wraps [GitHub Gists API](http://developer.github.com/v3/gists/).
 

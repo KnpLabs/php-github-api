@@ -1,5 +1,5 @@
 ## Search API
-[Back to the navigation](index.md)
+[Back to the navigation](README.md)
 
 Searching repositories, code, issues and users.
 Wrap [GitHub Search API](http://developer.github.com/v3/search/). All methods are described on that page.

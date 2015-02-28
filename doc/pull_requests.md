@@ -1,5 +1,5 @@
 ## Pull Requests API
-[Back to the navigation](index.md)
+[Back to the navigation](README.md)
 
 Additional APIs:
 * [Review Comments](pull_request/comments.md)

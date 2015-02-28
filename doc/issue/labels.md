@@ -1,5 +1,5 @@
 ## Issues / Labels API
-[Back to the "Issues API"](../issues.md) | [Back to the navigation](../index.md)
+[Back to the "Issues API"](../issues.md) | [Back to the navigation](../README.md)
 
 Wraps [GitHub Issue Labels API](http://developer.github.com/v3/issues/labels/).
 
