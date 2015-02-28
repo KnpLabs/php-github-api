@@ -1,5 +1,5 @@
 ## Repo / Releases API
-[Back to the "Repos API"](../repos.md) | [Back to the navigation](../index.md)
+[Back to the "Repos API"](../repos.md) | [Back to the navigation](../README.md)
 
 ### List all assets by release
 

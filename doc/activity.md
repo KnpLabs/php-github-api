@@ -1,5 +1,5 @@
 ## Activity API (incomplete)
-[Back to the navigation](index.md)
+[Back to the navigation](README.md)
 
 Access to Starring and Watching a Repository for [non] authenticated users.
 Wrap [GitHub Activity API](https://developer.github.com/v3/activity/).

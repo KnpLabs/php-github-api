@@ -1,5 +1,5 @@
 ## Customize `php-github-api` and testing
-[Back to the navigation](index.md)
+[Back to the navigation](README.md)
 
 ### Configure the http client
 
