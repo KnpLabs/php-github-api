@@ -100,7 +100,7 @@ See the [`doc` directory](doc/) for more detailed documentation.
 
 ### Sponsored by
 
-[![KnpLabs Team](http://knplabs.pl/bundles/knpcorporate/images/logo.png)](http://knplabs.com)
+[![KnpLabs Team](http://knplabs.com/front/images/knp-labs-logo.png)](http://knplabs.com)
 
 ### Contributors
 
