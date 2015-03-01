@@ -13,9 +13,13 @@ class Events extends AbstractApi
     public function all($username, $repository, $issue = null, $page = 1)
     {
         if (null !== $issue) {
-            return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/events', array(
-                'page' => $page
-            ));
+            return $this->get(
+                'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue)
+                .'/events',
+                array(
+                    'page' => $page
+                )
+            );
         }
 
         return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/events', array(
@@ -25,6 +29,8 @@ class Events extends AbstractApi
 
     public function show($username, $repository, $event)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/events/'.rawurlencode($event));
+        return $this->get(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/events/'.rawurlencode($event)
+        );
     }
 }

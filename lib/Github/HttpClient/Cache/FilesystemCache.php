@@ -44,7 +44,9 @@ class FilesystemCache implements CacheInterface
             throw new \InvalidArgumentException(sprintf('Cannot put content in file "%s"', $this->getPath($id)));
         }
         if (false === @file_put_contents($this->getPath($id).'.etag', $response->getHeader('ETag'))) {
-            throw new \InvalidArgumentException(sprintf('Cannot put content in file "%s"', $this->getPath($id).'.etag'));
+            throw new \InvalidArgumentException(
+                sprintf('Cannot put content in file "%s"', $this->getPath($id).'.etag')
+            );
         }
     }
 

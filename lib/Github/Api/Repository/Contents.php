@@ -144,8 +144,16 @@ class Contents extends AbstractApi
      *
      * @return array information about the updated file
      */
-    public function update($username, $repository, $path, $content, $message, $sha, $branch = null, array $committer = null)
-    {
+    public function update(
+        $username,
+        $repository,
+        $path,
+        $content,
+        $message,
+        $sha,
+        $branch = null,
+        array $committer = null
+    ) {
         $url = 'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
 
         $parameters = array(
@@ -251,15 +259,25 @@ class Contents extends AbstractApi
         }
 
         if (!isset($file['content'])) {
-            throw new ErrorException(sprintf('Unable to access "content" for file "%s" (possible keys: "%s").', $path, implode(', ', array_keys($file))));
+            throw new ErrorException(
+                sprintf(
+                    'Unable to access "content" for file "%s" (possible keys: "%s").',
+                    $path,
+                    implode(', ', array_keys($file))
+                )
+            );
         }
 
         if (!isset($file['encoding'])) {
-            throw new InvalidArgumentException(sprintf('Can\'t decode content of file "%s", as no encoding is defined.', $path));
+            throw new InvalidArgumentException(
+                sprintf('Can\'t decode content of file "%s", as no encoding is defined.', $path)
+            );
         }
 
         if ('base64' !== $file['encoding']) {
-            throw new InvalidArgumentException(sprintf('Encoding "%s" of file "%s" is not supported.', $file['encoding'], $path));
+            throw new InvalidArgumentException(
+                sprintf('Encoding "%s" of file "%s" is not supported.', $file['encoding'], $path)
+            );
         }
 
         return base64_decode($file['content']) ?: null;

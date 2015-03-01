@@ -13,7 +13,10 @@ class Trees extends AbstractApi
 {
     public function show($username, $repository, $sha, $recursive = false)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/trees/'.rawurlencode($sha), array('recursive' => $recursive ? 1 : null));
+        return $this->get(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/trees/'.rawurlencode($sha),
+            array('recursive' => $recursive ? 1 : null)
+        );
     }
 
     public function create($username, $repository, array $params)

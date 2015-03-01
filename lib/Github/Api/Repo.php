@@ -35,7 +35,10 @@ class Repo extends AbstractApi
      */
     public function find($keyword, array $params = array())
     {
-        return $this->get('legacy/repos/search/'.rawurlencode($keyword), array_merge(array('start_page' => 1), $params));
+        return $this->get(
+            'legacy/repos/search/'.rawurlencode($keyword),
+            array_merge(array('start_page' => 1), $params)
+        );
     }
 
     /**
@@ -106,8 +109,10 @@ class Repo extends AbstractApi
      * @param boolean     $hasIssues    `true` to enable issues for this repository, `false` to disable them
      * @param boolean     $hasWiki      `true` to enable the wiki for this repository, `false` to disable it
      * @param boolean     $hasDownloads `true` to enable downloads for this repository, `false` to disable them
-     * @param integer     $teamId       The id of the team that will be granted access to this repository. This is only valid when creating a repo in an organization.
-     * @param boolean     $autoInit     `true` to create an initial commit with empty README, `false` for no initial commit
+     * @param integer     $teamId       The id of the team that will be granted access to this repository.
+     *                                  This is only valid when creating a repo in an organization.
+     * @param boolean     $autoInit     `true` to create an initial commit with empty README, `false` for no initial
+     *                                  commit
      *
      * @return array returns repository data
      */
@@ -410,9 +415,10 @@ class Repo extends AbstractApi
      */
     public function subscribers($username, $repository, $page = 1)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/subscribers', array(
-            'page' => $page
-        ));
+        return $this->get(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/subscribers',
+            array('page' => $page)
+        );
     }
 
     /**
