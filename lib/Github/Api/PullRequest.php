@@ -15,11 +15,12 @@ class PullRequest extends AbstractApi
 {
     /**
      * Get a listing of a project's pull requests by the username, repository and (optionally) state.
+     *
      * @link http://developer.github.com/v3/pulls/
      *
-     * @param string  $username   the username
-     * @param string  $repository the repository
-     * @param array   $params     a list of extra parameters.
+     * @param string $username   the username
+     * @param string $repository the repository
+     * @param array  $params     a list of extra parameters.
      *
      * @return array array of pull requests for the project
      */
@@ -35,6 +36,7 @@ class PullRequest extends AbstractApi
 
     /**
      * Show all details of a pull request, including the discussions.
+     *
      * @link http://developer.github.com/v3/pulls/
      *
      * @param string $username   the username
@@ -64,7 +66,8 @@ class PullRequest extends AbstractApi
     }
 
     /**
-     * Create a pull request
+     * Create a pull request.
+     *
      * @link   http://developer.github.com/v3/pulls/
      *
      * @param string $username   the username
@@ -75,9 +78,9 @@ class PullRequest extends AbstractApi
      *                           "my-user:some-branch". The String title of the Pull Request. The String body of
      *                           the Pull Request. The issue number. Used when title and body is not set.
      *
-     * @return array
-     *
      * @throws MissingArgumentException
+     *
+     * @return array
      */
     public function create($username, $repository, array $params)
     {

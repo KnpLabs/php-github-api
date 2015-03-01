@@ -3,7 +3,7 @@
 namespace Github\Api;
 
 /**
- * Markdown Rendering API
+ * Markdown Rendering API.
  *
  * @link   http://developer.github.com/v3/markdown/
  * @author Joseph Bielawski <stloyd@gmail.com>

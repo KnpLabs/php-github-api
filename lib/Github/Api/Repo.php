@@ -25,7 +25,8 @@ use Github\Api\Repository\Statuses;
 class Repo extends AbstractApi
 {
     /**
-     * Search repositories by keyword:
+     * Search repositories by keyword.
+     *
      * @link http://developer.github.com/v3/search/#search-repositories
      *
      * @param string $keyword the search query
@@ -39,7 +40,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Get the last year of commit activity for a repository grouped by week
+     * Get the last year of commit activity for a repository grouped by week.
+     *
      * @link http://developer.github.com/v3/repos/statistics/#commit-activity
      *
      * @param string $username   the user who owns the repository
@@ -53,7 +55,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Get contributor commit statistics for a repository
+     * Get contributor commit statistics for a repository.
+     *
      * @link http://developer.github.com/v3/repos/statistics/#contributors
      *
      * @param string $username   the user who owns the repository
@@ -67,7 +70,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * List all repositories for an organization
+     * List all repositories for an organization.
+     *
      * @link http://developer.github.com/v3/repos/#list-organization-repositories
      *
      * @param string $organization the name of the organization
@@ -81,7 +85,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Get extended information about a repository by its username and repository name
+     * Get extended information about a repository by its username and repository name.
+     *
      * @link http://developer.github.com/v3/repos/
      *
      * @param string $username   the user who owns the repository
@@ -95,19 +100,20 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Create repository
+     * Create repository.
+     *
      * @link http://developer.github.com/v3/repos/
      *
      * @param string      $name         name of the repository
      * @param string      $description  repository description
      * @param string      $homepage     homepage url
-     * @param boolean     $public       `true` for public, `false` for private
+     * @param bool        $public       `true` for public, `false` for private
      * @param null|string $organization username of organization if applicable
-     * @param boolean     $hasIssues    `true` to enable issues for this repository, `false` to disable them
-     * @param boolean     $hasWiki      `true` to enable the wiki for this repository, `false` to disable it
-     * @param boolean     $hasDownloads `true` to enable downloads for this repository, `false` to disable them
-     * @param integer     $teamId       The id of the team that will be granted access to this repository. This is only valid when creating a repo in an organization.
-     * @param boolean     $autoInit     `true` to create an initial commit with empty README, `false` for no initial commit
+     * @param bool        $hasIssues    `true` to enable issues for this repository, `false` to disable them
+     * @param bool        $hasWiki      `true` to enable the wiki for this repository, `false` to disable it
+     * @param bool        $hasDownloads `true` to enable downloads for this repository, `false` to disable them
+     * @param int         $teamId       The id of the team that will be granted access to this repository. This is only valid when creating a repo in an organization.
+     * @param bool        $autoInit     `true` to create an initial commit with empty README, `false` for no initial commit
      *
      * @return array returns repository data
      */
@@ -144,7 +150,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Set information of a repository
+     * Set information of a repository.
+     *
      * @link http://developer.github.com/v3/repos/
      *
      * @param string $username   the user who owns the repository
@@ -159,7 +166,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Delete a repository
+     * Delete a repository.
+     *
      * @link http://developer.github.com/v3/repos/
      *
      * @param string $username   the user who owns the repository
@@ -173,7 +181,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Get the readme content for a repository by its username and repository name
+     * Get the readme content for a repository by its username and repository name.
+     *
      * @link http://developer.github.com/v3/repos/contents/#get-the-readme
      *
      * @param string $username   the user who owns the repository
@@ -187,7 +196,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Manage the collaborators of a repository
+     * Manage the collaborators of a repository.
+     *
      * @link http://developer.github.com/v3/repos/collaborators/
      *
      * @return Collaborators
@@ -198,7 +208,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Manage the comments of a repository
+     * Manage the comments of a repository.
+     *
      * @link http://developer.github.com/v3/repos/comments/
      *
      * @return Comments
@@ -209,7 +220,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Manage the commits of a repository
+     * Manage the commits of a repository.
+     *
      * @link http://developer.github.com/v3/repos/commits/
      *
      * @return Commits
@@ -220,7 +232,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Manage the content of a repository
+     * Manage the content of a repository.
+     *
      * @link http://developer.github.com/v3/repos/contents/
      *
      * @return Contents
@@ -231,7 +244,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Manage the content of a repository
+     * Manage the content of a repository.
+     *
      * @link http://developer.github.com/v3/repos/downloads/
      *
      * @return Downloads
@@ -242,7 +256,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Manage the releases of a repository (Currently Undocumented)
+     * Manage the releases of a repository (Currently Undocumented).
+     *
      * @link http://developer.github.com/v3/repos/
      *
      * @return Releases
@@ -253,7 +268,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Manage the deploy keys of a repository
+     * Manage the deploy keys of a repository.
+     *
      * @link http://developer.github.com/v3/repos/keys/
      *
      * @return DeployKeys
@@ -264,7 +280,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Manage the forks of a repository
+     * Manage the forks of a repository.
+     *
      * @link http://developer.github.com/v3/repos/forks/
      *
      * @return Forks
@@ -275,7 +292,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Manage the hooks of a repository
+     * Manage the hooks of a repository.
+     *
      * @link http://developer.github.com/v3/issues/jooks/
      *
      * @return Hooks
@@ -286,7 +304,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Manage the labels of a repository
+     * Manage the labels of a repository.
+     *
      * @link http://developer.github.com/v3/issues/labels/
      *
      * @return Labels
@@ -297,7 +316,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Manage the statuses of a repository
+     * Manage the statuses of a repository.
+     *
      * @link http://developer.github.com/v3/repos/statuses/
      *
      * @return Statuses
@@ -308,7 +328,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Get the branch(es) of a repository
+     * Get the branch(es) of a repository.
+     *
      * @link http://developer.github.com/v3/repos/
      *
      * @param string $username   the username
@@ -328,13 +349,15 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Get the contributors of a repository
+     * Get the contributors of a repository.
+     *
      * @link http://developer.github.com/v3/repos/
      *
-     * @param string  $username           the user who owns the repository
-     * @param string  $repository         the name of the repository
-     * @param boolean $includingAnonymous by default, the list only shows GitHub users.
-     *                                    You can include non-users too by setting this to true
+     * @param string $username           the user who owns the repository
+     * @param string $repository         the name of the repository
+     * @param bool   $includingAnonymous by default, the list only shows GitHub users.
+     *                                   You can include non-users too by setting this to true
+     *
      * @return array list of the repo contributors
      */
     public function contributors($username, $repository, $includingAnonymous = false)
@@ -345,7 +368,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Get the language breakdown of a repository
+     * Get the language breakdown of a repository.
+     *
      * @link http://developer.github.com/v3/repos/
      *
      * @param string $username   the user who owns the repository
@@ -359,7 +383,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Get the tags of a repository
+     * Get the tags of a repository.
+     *
      * @link http://developer.github.com/v3/repos/
      *
      * @param string $username   the user who owns the repository
@@ -373,7 +398,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Get the teams of a repository
+     * Get the teams of a repository.
+     *
      * @link http://developer.github.com/v3/repos/
      *
      * @param string $username   the user who owns the repo
@@ -388,9 +414,10 @@ class Repo extends AbstractApi
 
     /**
      * @deprecated see subscribers method
-     * @param string  $username
-     * @param string  $repository
-     * @param integer $page
+     *
+     * @param string $username
+     * @param string $repository
+     * @param int    $page
      *
      * @return array
      */
@@ -402,9 +429,9 @@ class Repo extends AbstractApi
     }
 
     /**
-     * @param string  $username
-     * @param string  $repository
-     * @param integer $page
+     * @param string $username
+     * @param string $repository
+     * @param int    $page
      *
      * @return array
      */
@@ -416,7 +443,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Perform a merge
+     * Perform a merge.
+     *
      * @link http://developer.github.com/v3/repos/merging/
      *
      * @param string $username

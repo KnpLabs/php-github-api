@@ -18,12 +18,13 @@ class Search extends AbstractApi
 {
 
     /**
-     * Search repositories by filter (q)
+     * Search repositories by filter (q).
+     *
      * @link https://developer.github.com/v3/search/#search-repositories
      *
-     * @param string $q          the filter
-     * @param string $sort       the sort field
-     * @param string $order      asc/desc
+     * @param string $q     the filter
+     * @param string $sort  the sort field
+     * @param string $order asc/desc
      *
      * @return array list of repositories found
      */
@@ -33,12 +34,13 @@ class Search extends AbstractApi
     }
 
     /**
-     * Search issues by filter (q)
+     * Search issues by filter (q).
+     *
      * @link https://developer.github.com/v3/search/#search-issues
      *
-     * @param string $q          the filter
-     * @param string $sort       the sort field
-     * @param string $order      asc/desc
+     * @param string $q     the filter
+     * @param string $sort  the sort field
+     * @param string $order asc/desc
      *
      * @return array list of issues found
      */
@@ -48,12 +50,13 @@ class Search extends AbstractApi
     }
 
     /**
-     * Search code by filter (q)
+     * Search code by filter (q).
+     *
      * @link https://developer.github.com/v3/search/#search-code
      *
-     * @param string $q          the filter
-     * @param string $sort       the sort field
-     * @param string $order      asc/desc
+     * @param string $q     the filter
+     * @param string $sort  the sort field
+     * @param string $order asc/desc
      *
      * @return array list of code found
      */
@@ -63,12 +66,13 @@ class Search extends AbstractApi
     }
 
     /**
-     * Search users by filter (q)
+     * Search users by filter (q).
+     *
      * @link https://developer.github.com/v3/search/#search-users
      *
-     * @param string $q          the filter
-     * @param string $sort       the sort field
-     * @param string $order      asc/desc
+     * @param string $q     the filter
+     * @param string $sort  the sort field
+     * @param string $order asc/desc
      *
      * @return array list of users found
      */

@@ -6,21 +6,21 @@ use Github\Client;
 use Github\HttpClient\Message\ResponseMediator;
 
 /**
- * Abstract class for Api classes
+ * Abstract class for Api classes.
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 abstract class AbstractApi implements ApiInterface
 {
     /**
-     * The client
+     * The client.
      *
      * @var Client
      */
     protected $client;
 
     /**
-     * number of items per page (GitHub pagination)
+     * Number of items per page (GitHub pagination).
      *
      * @var null|int
      */
@@ -59,9 +59,10 @@ abstract class AbstractApi implements ApiInterface
     /**
      * Send a GET request with query parameters.
      *
-     * @param string $path              Request path.
-     * @param array $parameters         GET parameters.
-     * @param array $requestHeaders     Request Headers.
+     * @param string $path           Request path.
+     * @param array  $parameters     GET parameters.
+     * @param array  $requestHeaders Request Headers.
+     *
      * @return \Guzzle\Http\EntityBodyInterface|mixed|string
      */
     protected function get($path, array $parameters = array(), $requestHeaders = array())
@@ -78,11 +79,12 @@ abstract class AbstractApi implements ApiInterface
     }
 
     /**
-     * Send a HEAD request with query parameters
+     * Send a HEAD request with query parameters.
      *
-     * @param string $path              Request path.
-     * @param array $parameters         HEAD parameters.
-     * @param array $requestHeaders     Request headers.
+     * @param string $path           Request path.
+     * @param array  $parameters     HEAD parameters.
+     * @param array  $requestHeaders Request headers.
+     *
      * @return \Guzzle\Http\Message\Response
      */
     protected function head($path, array $parameters = array(), $requestHeaders = array())
@@ -101,9 +103,9 @@ abstract class AbstractApi implements ApiInterface
     /**
      * Send a POST request with JSON-encoded parameters.
      *
-     * @param string $path              Request path.
-     * @param array $parameters         POST parameters to be JSON encoded.
-     * @param array $requestHeaders     Request headers.
+     * @param string $path           Request path.
+     * @param array  $parameters     POST parameters to be JSON encoded.
+     * @param array  $requestHeaders Request headers.
      */
     protected function post($path, array $parameters = array(), $requestHeaders = array())
     {
@@ -117,9 +119,10 @@ abstract class AbstractApi implements ApiInterface
     /**
      * Send a POST request with raw data.
      *
-     * @param string $path              Request path.
+     * @param string $path           Request path.
      * @param $body                     Request body.
-     * @param array $requestHeaders     Request headers.
+     * @param array  $requestHeaders Request headers.
+     *
      * @return \Guzzle\Http\EntityBodyInterface|mixed|string
      */
     protected function postRaw($path, $body, $requestHeaders = array())
@@ -136,9 +139,9 @@ abstract class AbstractApi implements ApiInterface
     /**
      * Send a PATCH request with JSON-encoded parameters.
      *
-     * @param string $path              Request path.
-     * @param array $parameters         POST parameters to be JSON encoded.
-     * @param array $requestHeaders     Request headers.
+     * @param string $path           Request path.
+     * @param array  $parameters     POST parameters to be JSON encoded.
+     * @param array  $requestHeaders Request headers.
      */
     protected function patch($path, array $parameters = array(), $requestHeaders = array())
     {
@@ -154,9 +157,9 @@ abstract class AbstractApi implements ApiInterface
     /**
      * Send a PUT request with JSON-encoded parameters.
      *
-     * @param string $path              Request path.
-     * @param array $parameters         POST parameters to be JSON encoded.
-     * @param array $requestHeaders     Request headers.
+     * @param string $path           Request path.
+     * @param array  $parameters     POST parameters to be JSON encoded.
+     * @param array  $requestHeaders Request headers.
      */
     protected function put($path, array $parameters = array(), $requestHeaders = array())
     {
@@ -172,9 +175,9 @@ abstract class AbstractApi implements ApiInterface
     /**
      * Send a DELETE request with JSON-encoded parameters.
      *
-     * @param string $path              Request path.
-     * @param array $parameters         POST parameters to be JSON encoded.
-     * @param array $requestHeaders     Request headers.
+     * @param string $path           Request path.
+     * @param array  $parameters     POST parameters to be JSON encoded.
+     * @param array  $requestHeaders Request headers.
      */
     protected function delete($path, array $parameters = array(), $requestHeaders = array())
     {
@@ -190,7 +193,8 @@ abstract class AbstractApi implements ApiInterface
     /**
      * Create a JSON encoded version of an array of parameters.
      *
-     * @param array $parameters   Request parameters
+     * @param array $parameters Request parameters
+     *
      * @return null|string
      */
     protected function createJsonBody(array $parameters)

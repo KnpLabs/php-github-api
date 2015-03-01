@@ -11,10 +11,12 @@ use Github\Api\AbstractApi;
 class Starring extends AbstractApi
 {
     /**
-     * List repositories starred by the authenticated user
+     * List repositories starred by the authenticated user.
+     *
      * @link https://developer.github.com/v3/activity/starring/
      *
-     * @param  integer $page
+     * @param int $page
+     *
      * @return array
      */
     public function all($page = 1)
@@ -25,11 +27,13 @@ class Starring extends AbstractApi
     }
 
     /**
-     * Check that the authenticated user starres a repository
+     * Check that the authenticated user starres a repository.
+     *
      * @link https://developer.github.com/v3/activity/starring/
      *
-     * @param  string $username   the user who owns the repo
-     * @param  string $repository the name of the repo
+     * @param string $username   the user who owns the repo
+     * @param string $repository the name of the repo
+     *
      * @return array
      */
     public function check($username, $repository)
@@ -38,11 +42,13 @@ class Starring extends AbstractApi
     }
 
     /**
-     * Make the authenticated user star a repository
+     * Make the authenticated user star a repository.
+     *
      * @link https://developer.github.com/v3/activity/starring/
      *
-     * @param  string $username   the user who owns the repo
-     * @param  string $repository the name of the repo
+     * @param string $username   the user who owns the repo
+     * @param string $repository the name of the repo
+     *
      * @return array
      */
     public function star($username, $repository)
@@ -51,11 +57,13 @@ class Starring extends AbstractApi
     }
 
     /**
-     * Make the authenticated user unstar a repository
+     * Make the authenticated user unstar a repository.
+     *
      * @link https://developer.github.com/v3/activity/starring
      *
-     * @param  string $username   the user who owns the repo
-     * @param  string $repository the name of the repo
+     * @param string $username   the user who owns the repo
+     * @param string $repository the name of the repo
+     *
      * @return array
      */
     public function unstar($username, $repository)

@@ -3,7 +3,7 @@
 namespace Github\Api;
 
 /**
- * Api interface
+ * Api interface.
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */

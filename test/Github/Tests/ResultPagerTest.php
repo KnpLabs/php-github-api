@@ -9,7 +9,7 @@ use Github\HttpClient\HttpClientInterface;
 use Github\Tests\Mock\TestResponse;
 
 /**
- * ResultPagerTest
+ * ResultPagerTest.
  *
  * @author Ramon de la Fuente <ramon@future500.nl>
  * @author Mitchel Verschoof <mitchel@future500.nl>

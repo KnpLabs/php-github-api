@@ -15,11 +15,11 @@ class Assets extends AbstractApi
 {
     /**
      * Get all release's assets in selected repository
-     * GET /repos/:owner/:repo/releases/:id/assets
+     * GET /repos/:owner/:repo/releases/:id/assets.
      *
-     * @param  string  $username         the user who owns the repo
-     * @param  string  $repository       the name of the repo
-     * @param  integer $id               the id of the release
+     * @param string $username   the user who owns the repo
+     * @param string $repository the name of the repo
+     * @param int    $id         the id of the release
      *
      * @return array
      */
@@ -30,11 +30,11 @@ class Assets extends AbstractApi
 
     /**
      * Get an asset in selected repository's release
-     * GET /repos/:owner/:repo/releases/assets/:id
+     * GET /repos/:owner/:repo/releases/assets/:id.
      *
-     * @param  string  $username         the user who owns the repo
-     * @param  string  $repository       the name of the repo
-     * @param  integer $id               the id of the asset
+     * @param string $username   the user who owns the repo
+     * @param string $repository the name of the repo
+     * @param int    $id         the id of the asset
      *
      * @return array
      */
@@ -45,19 +45,20 @@ class Assets extends AbstractApi
 
     /**
      * Create an asset for selected repository's release
-     * POST /repos/:owner/:repo/releases/:id/assets?name=:filename
+     * POST /repos/:owner/:repo/releases/:id/assets?name=:filename.
      *
      * Creating an asset requires support for server name indentification (SNI)
      * so this must be supported by your PHP version.
+     *
      * @see http://developer.github.com/v3/repos/releases/#upload-a-release-asset
      * @see http://php.net/manual/en/openssl.constsni.php
      *
-     * @param  string $username the user who owns the repo
-     * @param  string $repository the name of the repo
-     * @param  integer $id the id of the release
-     * @param  string $name the filename for the asset
-     * @param  string $contentType the content type for the asset
-     * @param  string $content the content of the asset
+     * @param string $username    the user who owns the repo
+     * @param string $repository  the name of the repo
+     * @param int    $id          the id of the release
+     * @param string $name        the filename for the asset
+     * @param string $contentType the content type for the asset
+     * @param string $content     the content of the asset
      *
      * @throws MissingArgumentException
      * @throws ErrorException
@@ -86,12 +87,12 @@ class Assets extends AbstractApi
 
     /**
      * Edit an asset in selected repository's release
-     * PATCH /repos/:owner/:repo/releases/assets/:id
+     * PATCH /repos/:owner/:repo/releases/assets/:id.
      *
-     * @param  string  $username         the user who owns the repo
-     * @param  string  $repository       the name of the repo
-     * @param  integer $id               the id of the asset
-     * @param  array   $params           request parameters
+     * @param string $username   the user who owns the repo
+     * @param string $repository the name of the repo
+     * @param int    $id         the id of the asset
+     * @param array  $params     request parameters
      *
      * @throws MissingArgumentException
      *
@@ -108,11 +109,11 @@ class Assets extends AbstractApi
 
     /**
      * Delete an asset in selected repository's release
-     * DELETE /repos/:owner/:repo/releases/assets/:id
+     * DELETE /repos/:owner/:repo/releases/assets/:id.
      *
-     * @param  string  $username         the user who owns the repo
-     * @param  string  $repository       the name of the repo
-     * @param  integer $id               the id of the asset
+     * @param string $username   the user who owns the repo
+     * @param string $repository the name of the repo
+     * @param int    $id         the id of the asset
      *
      * @return array
      */

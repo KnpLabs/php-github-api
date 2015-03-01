@@ -12,7 +12,8 @@ use Github\Exception\MissingArgumentException;
 class DeployKeys extends AbstractApi
 {
     /**
-     * List deploy keys for the authenticated user
+     * List deploy keys for the authenticated user.
+     *
      * @link http://developer.github.com/v3/repos/keys/
      *
      * @return array
@@ -23,10 +24,12 @@ class DeployKeys extends AbstractApi
     }
 
     /**
-     * Shows deploy key for the authenticated user
+     * Shows deploy key for the authenticated user.
+     *
      * @link http://developer.github.com/v3/repos/keys/
      *
-     * @param  string $id
+     * @param string $id
+     *
      * @return array
      */
     public function show($id)
@@ -35,13 +38,15 @@ class DeployKeys extends AbstractApi
     }
 
     /**
-     * Adds deploy key for the authenticated user
+     * Adds deploy key for the authenticated user.
+     *
      * @link http://developer.github.com/v3/repos/keys/
      *
-     * @param  array $params
-     * @return array
+     * @param array $params
      *
      * @throws MissingArgumentException
+     *
+     * @return array
      */
     public function create(array $params)
     {
@@ -53,14 +58,16 @@ class DeployKeys extends AbstractApi
     }
 
     /**
-     * Updates deploy key for the authenticated user
+     * Updates deploy key for the authenticated user.
+     *
      * @link http://developer.github.com/v3/repos/keys/
      *
-     * @param  string $id
-     * @param  array  $params
-     * @return array
+     * @param string $id
+     * @param array  $params
      *
      * @throws MissingArgumentException
+     *
+     * @return array
      */
     public function update($id, array $params)
     {
@@ -72,10 +79,12 @@ class DeployKeys extends AbstractApi
     }
 
     /**
-     * Removes deploy key for the authenticated user
+     * Removes deploy key for the authenticated user.
+     *
      * @link http://developer.github.com/v3/repos/keys/
      *
-     * @param  string $id
+     * @param string $id
+     *
      * @return array
      */
     public function remove($id)

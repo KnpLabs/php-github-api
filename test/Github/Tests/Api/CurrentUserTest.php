@@ -134,7 +134,7 @@ class CurrentUserTest extends TestCase
         $this->assertInstanceOf('Github\Api\CurrentUser\Watchers', $api->watchers());
     }
     
-     /**
+    /**
      * @test
      */
     public function shouldGetStarredApiObject()

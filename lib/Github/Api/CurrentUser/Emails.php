@@ -12,7 +12,8 @@ use Github\Exception\InvalidArgumentException;
 class Emails extends AbstractApi
 {
     /**
-     * List emails for the authenticated user
+     * List emails for the authenticated user.
+     *
      * @link http://developer.github.com/v3/users/emails/
      *
      * @return array
@@ -23,13 +24,15 @@ class Emails extends AbstractApi
     }
 
     /**
-     * Adds one or more email for the authenticated user
+     * Adds one or more email for the authenticated user.
+     *
      * @link http://developer.github.com/v3/users/emails/
      *
-     * @param  string|array $emails
-     * @return array
+     * @param string|array $emails
      *
      * @throws InvalidArgumentException
+     *
+     * @return array
      */
     public function add($emails)
     {
@@ -43,13 +46,15 @@ class Emails extends AbstractApi
     }
 
     /**
-     * Removes one or more email for the authenticated user
+     * Removes one or more email for the authenticated user.
+     *
      * @link http://developer.github.com/v3/users/emails/
      *
-     * @param  string|array $emails
-     * @return array
+     * @param string|array $emails
      *
      * @throws InvalidArgumentException
+     *
+     * @return array
      */
     public function remove($emails)
     {
