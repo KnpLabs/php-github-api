@@ -416,6 +416,23 @@ class Repo extends AbstractApi
     }
 
     /**
+     * Get the stargazers of the repository.
+     * 
+     * @link  https://developer.github.com/v3/activity/starring/#list-stargazers
+     * @param string  $username
+     * @param string  $repository
+     * @param integer $page
+     *
+     * @return array
+     */
+    public function stargazers($username, $repository, $page = 1)
+    {
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/stargazers', array(
+            'page' => $page
+        ));
+    }
+
+    /**
      * Perform a merge
      * @link http://developer.github.com/v3/repos/merging/
      *
