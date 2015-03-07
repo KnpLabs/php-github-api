@@ -16,6 +16,12 @@ $releases = $client->api('repo')->releases()->all('twbs', 'bootstrap');
 $release = $client->api('repo')->releases()->show('twbs', 'bootstrap', $id);
 ```
 
+### List one release by tag name
+
+```php
+$release = $client->api('repo')->releases()->showTag('twbs', 'bootstrap', $tag);
+```
+
 ### Create a release
 ```php
 $release = $client->api('repo')->releases()->create('twbs', 'bootstrap', array('tag_name' => 'v1.1'));
