@@ -40,6 +40,20 @@ class Releases extends AbstractApi
     }
 
     /**
+     * Get a release by tag name in selected repository
+     *
+     * @param  string  $username         the user who owns the repo
+     * @param  string  $repository       the name of the repo
+     * @param  string  $tag              the name of the tag
+     *
+     * @return array
+     */
+    public function showTag($username, $repository, $tag)
+    {
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/tags/'.rawurlencode($tag));
+    }
+
+    /**
      * Create new release in selected repository
      *
      * @param  string  $username

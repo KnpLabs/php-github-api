@@ -42,6 +42,22 @@ class ReleasesTest extends TestCase
     /**
      * @test
      */
+    public function shouldGetSingleRepositoryReleaseByTag()
+    {
+        $expectedValue = array('releaseData');
+        $tag = '1.0.0';
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('repos/KnpLabs/php-github-api/releases/tags/'.$tag)
+            ->will($this->returnValue($expectedValue));
+        $this->assertEquals($expectedValue, $api->showTag('KnpLabs', 'php-github-api', $tag));
+    }
+
+    /**
+     * @test
+     */
     public function shouldCreateRepositoryRelease()
     {
         $expectedValue = array('newReleaseData');
