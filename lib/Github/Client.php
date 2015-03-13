@@ -9,7 +9,7 @@ use Github\HttpClient\HttpClient;
 use Github\HttpClient\HttpClientInterface;
 
 /**
- * Simple yet very cool PHP GitHub client
+ * Simple yet very cool PHP GitHub client.
  *
  * @method Api\CurrentUser currentUser()
  * @method Api\CurrentUser me()
@@ -56,7 +56,7 @@ class Client
 
     /**
      * Constant for authentication method. Not indicates the new login, but allows
-     * usage of unauthenticated rate limited requests for given client_id + client_secret
+     * usage of unauthenticated rate limited requests for given client_id + client_secret.
      */
     const AUTH_URL_CLIENT_ID = 'url_client_id';
 
@@ -88,14 +88,14 @@ class Client
     );
 
     /**
-     * The Buzz instance used to communicate with GitHub
+     * The Buzz instance used to communicate with GitHub.
      *
      * @var HttpClient
      */
     private $httpClient;
 
     /**
-     * Instantiate a new GitHub client
+     * Instantiate a new GitHub client.
      *
      * @param null|HttpClientInterface $httpClient Github http client
      */
@@ -107,9 +107,9 @@ class Client
     /**
      * @param string $name
      *
-     * @return ApiInterface
-     *
      * @throws InvalidArgumentException
+     *
+     * @return ApiInterface
      */
     public function api($name)
     {
@@ -201,7 +201,7 @@ class Client
     }
 
     /**
-     * Authenticate a user for all next requests
+     * Authenticate a user for all next requests.
      *
      * @param string      $tokenOrLogin GitHub private token/username/client ID
      * @param null|string $password     GitHub password/secret (optionally can contain $authMethod)
@@ -259,7 +259,7 @@ class Client
     }
 
     /**
-     * Clears used headers
+     * Clears used headers.
      */
     public function clearHeaders()
     {
@@ -277,9 +277,9 @@ class Client
     /**
      * @param string $name
      *
-     * @return mixed
-     *
      * @throws InvalidArgumentException
+     *
+     * @return mixed
      */
     public function getOption($name)
     {
@@ -323,9 +323,9 @@ class Client
     /**
      * @param string $name
      *
-     * @return ApiInterface
-     *
      * @throws InvalidArgumentException
+     *
+     * @return ApiInterface
      */
     public function __call($name, $args)
     {

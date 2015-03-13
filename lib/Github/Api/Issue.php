@@ -12,19 +12,22 @@ use Github\Exception\MissingArgumentException;
  * Listing issues, searching, editing and closing your projects issues.
  *
  * @link   http://develop.github.com/p/issues.html
+ *
  * @author Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class Issue extends AbstractApi
 {
     /**
-     * List issues by username, repo and state
+     * List issues by username, repo and state.
+     *
      * @link http://developer.github.com/v3/issues/
      *
-     * @param  string $username   the username
-     * @param  string $repository the repository
-     * @param  array  $params     the additional parameters like milestone, assignees, labels, sort, direction
-     * @return array  list of issues found
+     * @param string $username   the username
+     * @param string $repository the repository
+     * @param array  $params     the additional parameters like milestone, assignees, labels, sort, direction
+     *
+     * @return array list of issues found
      */
     public function all($username, $repository, array $params = array())
     {
@@ -32,7 +35,8 @@ class Issue extends AbstractApi
     }
 
     /**
-     * Search issues by username, repo, state and keyword
+     * Search issues by username, repo, state and keyword.
+     *
      * @link http://developer.github.com/v3/search/#search-issues
      *
      * @param string $username   the username
@@ -52,13 +56,15 @@ class Issue extends AbstractApi
     }
 
     /**
-     * List issues by organization
+     * List issues by organization.
+     *
      * @link http://developer.github.com/v3/issues/
      *
-     * @param  string $organization the organization
-     * @param  string $state        the issue state, can be open or closed
-     * @param  array  $params       the additional parameters like milestone, assignees, labels, sort, direction
-     * @return array  list of issues found
+     * @param string $organization the organization
+     * @param string $state        the issue state, can be open or closed
+     * @param array  $params       the additional parameters like milestone, assignees, labels, sort, direction
+     *
+     * @return array list of issues found
      */
     public function org($organization, $state, array $params = array())
     {
@@ -70,13 +76,15 @@ class Issue extends AbstractApi
     }
 
     /**
-     * Get extended information about an issue by its username, repo and number
+     * Get extended information about an issue by its username, repo and number.
+     *
      * @link http://developer.github.com/v3/issues/
      *
-     * @param  string $username   the username
-     * @param  string $repository the repository
-     * @param  string $id         the issue number
-     * @return array  information about the issue
+     * @param string $username   the username
+     * @param string $repository the repository
+     * @param string $id         the issue number
+     *
+     * @return array information about the issue
      */
     public function show($username, $repository, $id)
     {
@@ -86,14 +94,16 @@ class Issue extends AbstractApi
     /**
      * Create a new issue for the given username and repo.
      * The issue is assigned to the authenticated user. Requires authentication.
+     *
      * @link http://developer.github.com/v3/issues/
      *
-     * @param  string $username   the username
-     * @param  string $repository the repository
-     * @param  array  $params     the new issue data
-     * @return array  information about the issue
+     * @param string $username   the username
+     * @param string $repository the repository
+     * @param array  $params     the new issue data
      *
      * @throws MissingArgumentException
+     *
+     * @return array information about the issue
      */
     public function create($username, $repository, array $params)
     {
@@ -106,6 +116,7 @@ class Issue extends AbstractApi
 
     /**
      * Update issue information's by username, repo and issue number. Requires authentication.
+     *
      * @link http://developer.github.com/v3/issues/
      *
      * @param string $username   the username
@@ -113,6 +124,7 @@ class Issue extends AbstractApi
      * @param string $id         the issue number
      * @param array  $params     key=>value user attributes to update.
      *                           key can be title or body
+     *
      * @return array information about the issue
      */
     public function update($username, $repository, $id, array $params)
@@ -121,7 +133,8 @@ class Issue extends AbstractApi
     }
 
     /**
-     * List an issue comments
+     * List an issue comments.
+     *
      * @link http://developer.github.com/v3/issues/comments/
      *
      * @return Comments
@@ -132,7 +145,8 @@ class Issue extends AbstractApi
     }
 
     /**
-     * List all project events
+     * List all project events.
+     *
      * @link http://developer.github.com/v3/issues/events/
      *
      * @return Events
@@ -143,7 +157,8 @@ class Issue extends AbstractApi
     }
 
     /**
-     * List all project labels
+     * List all project labels.
+     *
      * @link http://developer.github.com/v3/issues/labels/
      *
      * @return Labels
@@ -154,7 +169,8 @@ class Issue extends AbstractApi
     }
 
     /**
-     * List all project milestones
+     * List all project milestones.
+     *
      * @link http://developer.github.com/v3/issues/milestones/
      *
      * @return Milestones

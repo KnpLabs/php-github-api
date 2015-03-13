@@ -8,7 +8,7 @@ use Github\HttpClient\Cache\FilesystemCache;
 /**
  * Performs requests on GitHub API using If-Modified-Since headers.
  * Returns a cached version if not modified
- * Avoids increasing the X-Rate-Limit, which is cool
+ * Avoids increasing the X-Rate-Limit, which is cool.
  *
  * @author Florian Klein <florian.klein@free.fr>
  */
@@ -18,9 +18,9 @@ class CachedHttpClient extends HttpClient
      * @var CacheInterface
      */
     protected $cache;
-    
+
     /**
-     * contains the lastResponse fetched from cache
+     * Contains the lastResponse fetched from cache.
      *
      * @var Guzzle\Http\Message\Response
      */
@@ -52,11 +52,11 @@ class CachedHttpClient extends HttpClient
     public function request($path, $body = null, $httpMethod = 'GET', array $headers = array(), array $options = array())
     {
         $response = parent::request($path, $body, $httpMethod, $headers, $options);
-        
+
         if (304 == $response->getStatusCode()) {
             $cacheResponse = $this->getCache()->get($path);
             $this->lastCachedResponse = $cacheResponse;
-            
+
             return $cacheResponse;
         }
 
@@ -66,7 +66,7 @@ class CachedHttpClient extends HttpClient
     }
 
     /**
-     * Create requests with If-Modified-Since headers
+     * Create requests with If-Modified-Since headers.
      *
      * {@inheritdoc}
      */
@@ -92,8 +92,8 @@ class CachedHttpClient extends HttpClient
 
         return $request;
     }
-    
-     /**
+
+    /**
      * @return Guzzle\Http\Message\Response
      */
     public function getLastResponse($force = false)
@@ -102,7 +102,7 @@ class CachedHttpClient extends HttpClient
         if (304 != $lastResponse->getStatusCode()) {
             $force = true;
         }
-        
+
         return ($force) ? $lastResponse : $this->lastCachedResponse;
     }
 }

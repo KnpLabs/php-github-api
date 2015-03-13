@@ -7,7 +7,7 @@ use Github\Api\AbstractApi;
 class Stats extends AbstractApi
 {
     /**
-     * Returns the number of open and closed issues
+     * Returns the number of open and closed issues.
      *
      * @return array array with totals of open and closed issues
      */
@@ -17,7 +17,7 @@ class Stats extends AbstractApi
     }
 
     /**
-     * Returns the number of active and inactive hooks
+     * Returns the number of active and inactive hooks.
      *
      * @return array array with totals of active and inactive hooks
      */
@@ -27,7 +27,7 @@ class Stats extends AbstractApi
     }
 
     /**
-     * Returns the number of open and closed milestones
+     * Returns the number of open and closed milestones.
      *
      * @return array array with totals of open and closed milestones
      */
@@ -37,7 +37,7 @@ class Stats extends AbstractApi
     }
 
     /**
-     * Returns the number of organizations, teams, team members, and disabled organizations
+     * Returns the number of organizations, teams, team members, and disabled organizations.
      *
      * @return array array with totals of organizations, teams, team members, and disabled organizations
      */
@@ -47,7 +47,7 @@ class Stats extends AbstractApi
     }
 
     /**
-     * Returns the number of comments on issues, pull requests, commits, and gists
+     * Returns the number of comments on issues, pull requests, commits, and gists.
      *
      * @return array array with totals of comments on issues, pull requests, commits, and gists
      */
@@ -57,7 +57,7 @@ class Stats extends AbstractApi
     }
 
     /**
-     * Returns the number of GitHub Pages sites
+     * Returns the number of GitHub Pages sites.
      *
      * @return array array with totals of GitHub Pages sites
      */
@@ -67,7 +67,7 @@ class Stats extends AbstractApi
     }
 
     /**
-     * Returns the number of suspended and admin users
+     * Returns the number of suspended and admin users.
      *
      * @return array array with totals of suspended and admin users
      */
@@ -77,7 +77,7 @@ class Stats extends AbstractApi
     }
 
     /**
-     * Returns the number of private and public gists
+     * Returns the number of private and public gists.
      *
      * @return array array with totals of private and public gists
      */
@@ -87,7 +87,7 @@ class Stats extends AbstractApi
     }
 
     /**
-     * Returns the number of merged, mergeable, and unmergeable pull requests
+     * Returns the number of merged, mergeable, and unmergeable pull requests.
      *
      * @return array array with totals of merged, mergeable, and unmergeable pull requests
      */
@@ -97,7 +97,7 @@ class Stats extends AbstractApi
     }
 
     /**
-     * Returns the number of organization-owned repositories, root repositories, forks, pushed commits, and wikis
+     * Returns the number of organization-owned repositories, root repositories, forks, pushed commits, and wikis.
      *
      * @return array array with totals of organization-owned repositories, root repositories, forks, pushed commits, and wikis
      */
@@ -107,7 +107,7 @@ class Stats extends AbstractApi
     }
 
     /**
-     * Returns all of the statistics
+     * Returns all of the statistics.
      *
      * @return array array with all of the statistics
      */

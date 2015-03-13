@@ -47,9 +47,9 @@ class Statuses extends AbstractApi
      * @param string $sha
      * @param array  $params
      *
-     * @return array
-     *
      * @throws MissingArgumentException
+     *
+     * @return array
      */
     public function create($username, $repository, $sha, array $params = array())
     {

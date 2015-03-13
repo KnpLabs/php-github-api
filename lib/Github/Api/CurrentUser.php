@@ -12,7 +12,7 @@ use Github\Api\CurrentUser\Starring;
 /**
  * @link   http://developer.github.com/v3/users/
  * @author Joseph Bielawski <stloyd@gmail.com>
- * @revised Felipe Valtl de Mello <eu@felipe.im>
+ * @author Felipe Valtl de Mello <eu@felipe.im>
  */
 class CurrentUser extends AbstractApi
 {
@@ -52,8 +52,8 @@ class CurrentUser extends AbstractApi
     /**
      * @link http://developer.github.com/v3/issues/#list-issues
      *
-     * @param array   $params
-     * @param boolean $includeOrgIssues
+     * @param array $params
+     * @param bool  $includeOrgIssues
      *
      * @return array
      */
@@ -101,10 +101,10 @@ class CurrentUser extends AbstractApi
     /**
      * @link http://developer.github.com/v3/repos/#list-your-repositories
      *
-     * @param  string $type      role in the repository
-     * @param  string $sort      sort by
-     * @param  string $direction direction of sort, ask or desc
-
+     * @param string $type      role in the repository
+     * @param string $sort      sort by
+     * @param string $direction direction of sort, ask or desc
+     *
      * @return array
      */
     public function repositories($type = 'owner', $sort = 'full_name', $direction = 'asc')

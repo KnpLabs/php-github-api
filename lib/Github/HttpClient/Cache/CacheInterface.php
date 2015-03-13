@@ -5,7 +5,7 @@ namespace Github\HttpClient\Cache;
 use Guzzle\Http\Message\Response;
 
 /**
- * Caches github api responses
+ * Caches github api responses.
  *
  * @author Florian Klein <florian.klein@free.fr>
  */
@@ -21,7 +21,7 @@ interface CacheInterface
     /**
      * @param string $id The id of the cached resource
      *
-     * @return null|integer The modified since timestamp
+     * @return null|int The modified since timestamp
      */
     public function getModifiedSince($id);
 
@@ -35,9 +35,9 @@ interface CacheInterface
     /**
      * @param string $id The id of the cached resource
      *
-     * @return Response The cached response object
-     *
      * @throws \InvalidArgumentException If cache data don't exists
+     *
+     * @return Response The cached response object
      */
     public function get($id);
 

@@ -5,7 +5,7 @@ namespace Github\Api;
 use Github\Api\AbstractApi;
 
 /**
- * Creating, deleting and listing authorizations
+ * Creating, deleting and listing authorizations.
  *
  * @link   http://developer.github.com/v3/oauth/
  */

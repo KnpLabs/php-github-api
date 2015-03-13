@@ -6,7 +6,7 @@ use Guzzle\Http\Message\Response;
 use Gaufrette\Filesystem;
 
 /**
- * Gaufrette Cache
+ * Gaufrette Cache.
  *
  * @author Massimiliano Arione <massimiliano.arione@bee-lab.net>
  */

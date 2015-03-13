@@ -6,7 +6,7 @@ use Github\Api\ApiInterface;
 use Github\HttpClient\Message\ResponseMediator;
 
 /**
- * Pager class for supporting pagination in github classes
+ * Pager class for supporting pagination in github classes.
  *
  * @author Ramon de la Fuente <ramon@future500.nl>
  * @author Mitchel Verschoof <mitchel@future500.nl>
@@ -14,26 +14,31 @@ use Github\HttpClient\Message\ResponseMediator;
 class ResultPager implements ResultPagerInterface
 {
     /**
-     * @var \Github\Client client
+     * The GitHub Client to use for pagination.
+     *
+     * @var \Github\Client
      */
     protected $client;
 
     /**
-     * @var array pagination
-     * Comes from pagination headers in Github API results
+     * Comes from pagination headers in Github API results.
+     *
+     * @var array
      */
     protected $pagination;
 
     /**
-     * The Github client to use for pagination. This must be the same
-     * instance that you got the Api instance from, i.e.:
+     * The Github client to use for pagination.
+     *
+     * This must be the same instance that you got the Api instance from.
+     *
+     * Example code:
      *
      * $client = new \Github\Client();
      * $api = $client->api('someApi');
      * $pager = new \Github\ResultPager($client);
      *
      * @param \Github\Client $client
-     *
      */
     public function __construct(Client $client)
     {
@@ -67,7 +72,7 @@ class ResultPager implements ResultPagerInterface
         // get the perPage from the api
         $perPage = $api->getPerPage();
 
-        // Set parameters per_page to GitHub max to minimize number of requests
+        // set parameters per_page to GitHub max to minimize number of requests
         $api->setPerPage(100);
 
         $result = array();

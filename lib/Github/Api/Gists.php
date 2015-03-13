@@ -6,7 +6,7 @@ use Github\Api\AbstractApi;
 use Github\Exception\MissingArgumentException;
 
 /**
- * Creating, editing, deleting and listing gists
+ * Creating, editing, deleting and listing gists.
  *
  * @link   http://developer.github.com/v3/gists/
  * @author Joseph Bielawski <stloyd@gmail.com>
@@ -34,7 +34,7 @@ class Gists extends AbstractApi
             throw new MissingArgumentException('files');
         }
 
-        $params['public'] = (boolean) $params['public'];
+        $params['public'] = (bool) $params['public'];
 
         return $this->post('gists', $params);
     }
