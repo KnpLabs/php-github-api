@@ -37,7 +37,7 @@ $comment = $client->api('pull_request')->comments()->create('KnpLabs', 'php-gith
     'path'      => 'README.markdown',
     'position'  => 37,
     'line'      => 31
-);
+));
 ```
 
 This returns the details of the comment.
@@ -50,7 +50,7 @@ This returns the details of the comment.
 $comment = $client->api('pull_request')->comments()->create('KnpLabs', 'php-github-api', 8, array(
     'body'        => 'Yeah! Really nice change',
     'in_reply_to' => 2
-);
+));
 ```
 
 This returns the details of the comment.
@@ -62,7 +62,7 @@ This returns the details of the comment.
 ```php
 $comment = $client->api('pull_request')->comments()->update('KnpLabs', 'php-github-api', 2, array(
     'body' => 'Hell Yeah! Awesome change!'
-);
+));
 ```
 
 This returns the details of the updated comment.
