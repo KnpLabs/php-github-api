@@ -9,8 +9,6 @@ class CommentsTest extends TestCase
     /**
      * @test
      */
-
-// GET /gists/:gist_id/comments
     public function shouldGetAllGistComments()
     {
         $expectedValue = array(array('comment1data'), array('comment2data'));
@@ -40,7 +38,6 @@ class CommentsTest extends TestCase
         $this->assertEquals($expectedValue, $api->show(123, 123));
     }
 
-
     /**
      * @test
      */
@@ -51,12 +48,11 @@ class CommentsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('gists/123/comments', array("Test body"))
+            ->with('gists/123/comments', array('Test body'))
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->create('123', "Test body"));
+        $this->assertEquals($expectedValue, $api->create('123', 'Test body'));
     }
-
 
     /**
      * @test
