@@ -71,6 +71,16 @@ class GistsTest extends TestCase
     /**
      * @test
      */
+    public function shouldGetCommentsApiObject()
+    {
+        $api = $this->getApiMock();
+
+        $this->assertInstanceOf('Github\Api\Gist\Comments', $api->comments());
+    }
+
+    /**
+     * @test
+     */
     public function shouldForkGist()
     {
         $expectedArray = array('id' => '123');
