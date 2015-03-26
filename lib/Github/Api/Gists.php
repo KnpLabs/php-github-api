@@ -75,7 +75,7 @@ class Gists extends AbstractApi
     }
 
     /**
-     * List an gists comments.
+     * Get a gist's comments.
      *
      * @link http://developer.github.com/v3/gists/comments/
      *
@@ -85,5 +85,4 @@ class Gists extends AbstractApi
     {
         return new Comments($this->client);
     }
-
 }
