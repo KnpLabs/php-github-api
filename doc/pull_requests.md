@@ -83,7 +83,7 @@ $pullRequest = $client->api('pull_request')->create('ezsystems', 'ezpublish', ar
     'base'  => 'master',
     'head'  => 'testbranch',
     'issue' => 15
-);
+));
 ```
 
 This returns the details of the pull request.
