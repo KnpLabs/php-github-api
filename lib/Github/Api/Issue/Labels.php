@@ -4,6 +4,7 @@ namespace Github\Api\Issue;
 
 use Github\Api\AbstractApi;
 use Github\Exception\InvalidArgumentException;
+use Github\Exception\MissingArgumentException;
 
 /**
  * @link   http://developer.github.com/v3/issues/labels/
@@ -30,6 +31,21 @@ class Labels extends AbstractApi
         }
 
         return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels', $params);
+    }
+
+    public function deleteLabel($username, $repository, $label)
+    {
+        return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels/'.rawurlencode($label));
+    }
+
+    public function update($username, $repository, $label, $newName, $color)
+    {
+        $params = array(
+            'name' => $newName,
+            'color' => $color,
+        );
+
+        return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels/'.rawurlencode($label), $params);
     }
 
     public function add($username, $repository, $issue, $labels)

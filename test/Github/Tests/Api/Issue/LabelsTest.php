@@ -6,7 +6,6 @@ use Github\Tests\Api\TestCase;
 
 class LabelsTest extends TestCase
 {
-
     /**
      * @test
      */
@@ -74,6 +73,39 @@ class LabelsTest extends TestCase
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', $data));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldDeleteLabel()
+    {
+        $expectedValue = array('someOutput');
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('delete')
+            ->with('repos/KnpLabs/php-github-api/labels/foo')
+            ->will($this->returnValue($expectedValue));
+
+        $this->assertEquals($expectedValue, $api->deleteLabel('KnpLabs', 'php-github-api', 'foo'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldUpdateLabel()
+    {
+        $expectedValue = array(array('name' => 'bar', 'color' => 'FFF'));
+        $data = array('name' => 'bar', 'color' => 'FFF');
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('patch')
+            ->with('repos/KnpLabs/php-github-api/labels/foo', $data)
+            ->will($this->returnValue($expectedValue));
+
+        $this->assertEquals($expectedValue, $api->update('KnpLabs', 'php-github-api', 'foo', 'bar', 'FFF'));
     }
 
     /**
