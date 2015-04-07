@@ -2,8 +2,8 @@
 
 namespace Github\Api;
 
-use Github\Api\AbstractApi;
 use Github\Exception\MissingArgumentException;
+use Github\Api\Gist\Comments;
 
 /**
  * Creating, editing, deleting and listing gists.
@@ -72,5 +72,17 @@ class Gists extends AbstractApi
     public function unstar($id)
     {
         return $this->delete('gists/'.rawurlencode($id).'/star');
+    }
+
+    /**
+     * Get a gist's comments.
+     *
+     * @link http://developer.github.com/v3/gists/comments/
+     *
+     * @return Comments
+     */
+    public function comments()
+    {
+        return new Comments($this->client);
     }
 }
