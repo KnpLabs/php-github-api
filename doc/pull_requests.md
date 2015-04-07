@@ -67,7 +67,7 @@ $pullRequest = $client->api('pull_request')->create('ezsystems', 'ezpublish', ar
     'head'  => 'testbranch',
     'title' => 'My nifty pull request',
     'body'  => 'This pull request contains a bunch of enhancements and bug-fixes, happily shared with you'
-);
+));
 ```
 
 This returns the details of the pull request.
@@ -83,7 +83,7 @@ $pullRequest = $client->api('pull_request')->create('ezsystems', 'ezpublish', ar
     'base'  => 'master',
     'head'  => 'testbranch',
     'issue' => 15
-);
+));
 ```
 
 This returns the details of the pull request.
