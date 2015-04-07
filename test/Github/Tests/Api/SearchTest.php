@@ -16,7 +16,7 @@ class SearchTest extends TestCase
         $api->expects($this->once())
             ->method('get')
             ->with(
-                '/search/repositories',
+                'search/repositories',
                 array('q' => 'query text', 'sort' => 'updated', 'order' => 'desc')
             )
             ->will($this->returnValue($expectedArray));
@@ -36,7 +36,7 @@ class SearchTest extends TestCase
         $api->expects($this->once())
             ->method('get')
             ->with(
-                '/search/repositories',
+                'search/repositories',
                 array('q' => 'query text', 'sort' => 'created', 'order' => 'asc')
             )
             ->will($this->returnValue($expectedArray));
@@ -59,7 +59,7 @@ class SearchTest extends TestCase
         $api->expects($this->once())
             ->method('get')
             ->with(
-                '/search/issues',
+                'search/issues',
                 array('q' => 'query text', 'sort' => 'updated', 'order' => 'desc')
             )
             ->will($this->returnValue($expectedArray));
@@ -79,7 +79,7 @@ class SearchTest extends TestCase
         $api->expects($this->once())
             ->method('get')
             ->with(
-                '/search/issues',
+                'search/issues',
                 array('q' => 'query text', 'sort' => 'created', 'order' => 'asc')
             )
             ->will($this->returnValue($expectedArray));
@@ -102,7 +102,7 @@ class SearchTest extends TestCase
         $api->expects($this->once())
             ->method('get')
             ->with(
-                '/search/code',
+                'search/code',
                 array('q' => 'query text', 'sort' => 'updated', 'order' => 'desc')
             )
             ->will($this->returnValue($expectedArray));
@@ -122,7 +122,7 @@ class SearchTest extends TestCase
         $api->expects($this->once())
             ->method('get')
             ->with(
-                '/search/code',
+                'search/code',
                 array('q' => 'query text', 'sort' => 'created', 'order' => 'asc')
             )
             ->will($this->returnValue($expectedArray));
@@ -145,7 +145,7 @@ class SearchTest extends TestCase
         $api->expects($this->once())
             ->method('get')
             ->with(
-                '/search/users',
+                'search/users',
                 array('q' => 'query text', 'sort' => 'updated', 'order' => 'desc')
             )
             ->will($this->returnValue($expectedArray));
@@ -165,7 +165,7 @@ class SearchTest extends TestCase
         $api->expects($this->once())
             ->method('get')
             ->with(
-                '/search/users',
+                'search/users',
                 array('q' => 'query text', 'sort' => 'created', 'order' => 'asc')
             )
             ->will($this->returnValue($expectedArray));
