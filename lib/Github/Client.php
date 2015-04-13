@@ -220,13 +220,9 @@ class Client
             throw new InvalidArgumentException('You need to specify authentication method!');
         }
 
-        if (null === $authMethod && in_array($password, array(self::AUTH_URL_TOKEN, self::AUTH_URL_CLIENT_ID, self::AUTH_HTTP_PASSWORD, self::AUTH_HTTP_TOKEN))) {
+        if (null === $authMethod && in_array($password, array(self::AUTH_URL_TOKEN, self::AUTH_URL_CLIENT_ID, self::AUTH_HTTP_PASSWORD, self::AUTH_HTTP_TOKEN))){
             $authMethod = $password;
             $password   = null;
-        }
-
-        if (null === $authMethod) {
-            $authMethod = self::AUTH_HTTP_PASSWORD;
         }
 
         $this->getHttpClient()->authenticate($tokenOrLogin, $password, $authMethod);
