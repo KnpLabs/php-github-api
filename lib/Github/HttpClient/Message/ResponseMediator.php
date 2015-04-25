@@ -46,5 +46,7 @@ class ResponseMediator
         if (null !== $remainingCalls && 1 > $remainingCalls) {
             throw new ApiLimitExceedException($remainingCalls);
         }
+        
+        return $remainingCalls;
     }
 }
