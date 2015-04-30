@@ -212,7 +212,7 @@ Returns list of the forks of the 'php-github-api' owned by 'ornicar', including 
 ### Get the languages for a repository
 
 ```php
-$contributors = $client->api('repo')->languages('ornicar', 'php-github-api');
+$languages = $client->api('repo')->languages('ornicar', 'php-github-api');
 ```
 
 Returns a list of languages.
