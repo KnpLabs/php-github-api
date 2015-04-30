@@ -27,6 +27,13 @@ class CachedHttpClient extends HttpClient
     private $lastCachedResponse;
 
     /**
+     * $path + query parameter(s) if they exist.
+     *
+     * @var string
+     */
+    private $path;
+
+    /**
      * @return CacheInterface
      */
     public function getCache()
@@ -51,16 +58,18 @@ class CachedHttpClient extends HttpClient
      */
     public function request($path, $body = null, $httpMethod = 'GET', array $headers = array(), array $options = array())
     {
+        $this->formatPath($path, $options);
+
         $response = parent::request($path, $body, $httpMethod, $headers, $options);
 
         if (304 == $response->getStatusCode()) {
-            $cacheResponse = $this->getCache()->get($path);
+            $cacheResponse = $this->getCache()->get($this->path);
             $this->lastCachedResponse = $cacheResponse;
 
             return $cacheResponse;
         }
 
-        $this->getCache()->set($path, $response);
+        $this->getCache()->set($this->path, $response);
 
         return $response;
     }
@@ -74,7 +83,7 @@ class CachedHttpClient extends HttpClient
     {
         $request = parent::createRequest($httpMethod, $path, $body, $headers, $options);
 
-        if ($modifiedAt = $this->getCache()->getModifiedSince($path)) {
+        if ($modifiedAt = $this->getCache()->getModifiedSince($this->path)) {
             $modifiedAt = new \DateTime('@'.$modifiedAt);
             $modifiedAt->setTimezone(new \DateTimeZone('GMT'));
 
@@ -83,7 +92,7 @@ class CachedHttpClient extends HttpClient
                 sprintf('%s GMT', $modifiedAt->format('l, d-M-y H:i:s'))
             );
         }
-        if ($etag = $this->getCache()->getETag($path)) {
+        if ($etag = $this->getCache()->getETag($this->path)) {
             $request->addHeader(
                 'If-None-Match',
                 $etag
@@ -104,5 +113,32 @@ class CachedHttpClient extends HttpClient
         }
 
         return ($force) ? $lastResponse : $this->lastCachedResponse;
+    }
+
+    /**
+     * Format the path and add query parameters if they exist.
+     *
+     * @param string $path
+     * @param array  $options
+     * @return void
+     */
+    private function formatPath($path, array $options)
+    {
+        $this->path = $path;
+
+        if (array_key_exists('query', $options) && !empty($options['query'])) {
+            $this->path .= '?';
+
+            $i = 0;
+            foreach ($options['query'] as $key => $value) {
+                if ($i > 0) {
+                    $this->path .= '&';
+                }
+
+                $this->path .= $key . '=' . $value;
+
+                $i++;
+            }
+        }
     }
 }
