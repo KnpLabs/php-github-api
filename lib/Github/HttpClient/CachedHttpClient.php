@@ -27,11 +27,12 @@ class CachedHttpClient extends HttpClient
     private $lastCachedResponse;
 
     /**
-     * $path + query parameter(s) if they exist.
+     * Identifier used for the cache file(s).
+     * $path + encoded query parameter(s) if they exist.
      *
      * @var string
      */
-    private $path;
+    private $id;
 
     /**
      * @return CacheInterface
@@ -58,18 +59,16 @@ class CachedHttpClient extends HttpClient
      */
     public function request($path, $body = null, $httpMethod = 'GET', array $headers = array(), array $options = array())
     {
-        $this->formatPath($path, $options);
-
         $response = parent::request($path, $body, $httpMethod, $headers, $options);
 
         if (304 == $response->getStatusCode()) {
-            $cacheResponse = $this->getCache()->get($this->path);
+            $cacheResponse = $this->getCache()->get($this->id);
             $this->lastCachedResponse = $cacheResponse;
 
             return $cacheResponse;
         }
 
-        $this->getCache()->set($this->path, $response);
+        $this->getCache()->set($this->id, $response);
 
         return $response;
     }
@@ -82,8 +81,14 @@ class CachedHttpClient extends HttpClient
     protected function createRequest($httpMethod, $path, $body = null, array $headers = array(), array $options = array())
     {
         $request = parent::createRequest($httpMethod, $path, $body, $headers, $options);
+        
+        $this->id = $path;
 
-        if ($modifiedAt = $this->getCache()->getModifiedSince($this->path)) {
+        if (array_key_exists('query', $options) && !empty($options['query'])) {
+            $this->id .= '?' . $request->getQuery();
+        }
+
+        if ($modifiedAt = $this->getCache()->getModifiedSince($this->id)) {
             $modifiedAt = new \DateTime('@'.$modifiedAt);
             $modifiedAt->setTimezone(new \DateTimeZone('GMT'));
 
@@ -92,7 +97,7 @@ class CachedHttpClient extends HttpClient
                 sprintf('%s GMT', $modifiedAt->format('l, d-M-y H:i:s'))
             );
         }
-        if ($etag = $this->getCache()->getETag($this->path)) {
+        if ($etag = $this->getCache()->getETag($this->id)) {
             $request->addHeader(
                 'If-None-Match',
                 $etag
@@ -113,32 +118,5 @@ class CachedHttpClient extends HttpClient
         }
 
         return ($force) ? $lastResponse : $this->lastCachedResponse;
-    }
-
-    /**
-     * Format the path and add query parameters if they exist.
-     *
-     * @param string $path
-     * @param array  $options
-     * @return void
-     */
-    private function formatPath($path, array $options)
-    {
-        $this->path = $path;
-
-        if (array_key_exists('query', $options) && !empty($options['query'])) {
-            $this->path .= '?';
-
-            $i = 0;
-            foreach ($options['query'] as $key => $value) {
-                if ($i > 0) {
-                    $this->path .= '&';
-                }
-
-                $this->path .= $key . '=' . $value;
-
-                $i++;
-            }
-        }
     }
 }
