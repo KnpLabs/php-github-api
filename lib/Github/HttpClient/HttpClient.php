@@ -20,6 +20,11 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 class HttpClient implements HttpClientInterface
 {
+    /**
+     * Default Github Api options.
+     * 
+     * @var array
+     */
     protected $options = array(
         'base_url'    => 'https://api.github.com/',
 
@@ -36,6 +41,11 @@ class HttpClient implements HttpClientInterface
 
     private $lastResponse;
     private $lastRequest;
+    
+    /**
+     * @var ClientInterface | GuzzleClient
+     */
+    private $client;
 
     /**
      * @param array           $options
@@ -44,10 +54,12 @@ class HttpClient implements HttpClientInterface
     public function __construct(array $options = array(), ClientInterface $client = null)
     {
         $this->options = array_merge($this->options, $options);
-        $client = $client ?: new GuzzleClient($this->options['base_url'], $this->options);
-        $this->client  = $client;
+
+        $client       = $client ?: new GuzzleClient($this->options['base_url'], $this->options);
+        $this->client = $client;
 
         $this->addListener('request.error', array(new ErrorListener($this->options), 'onRequestError'));
+
         $this->clearHeaders();
     }
 
