@@ -36,7 +36,7 @@ Now we can use autoloader from Composer by:
 ```json
 {
     "require": {
-        "knplabs/github-api": "~1.2"
+        "knplabs/github-api": "~1.4"
     }
 }
 ```
