@@ -95,7 +95,7 @@ $client->api('current_user')->follow()->follow('symfony');
 
 Returns an array of followed users.
 
-### Unfollow a
+### Unfollow a user
 
 > Requires [authentication](security.md).
 
