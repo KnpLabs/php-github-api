@@ -6,6 +6,7 @@ APIs:
 * [Commits](commits.md)
 * [Enterprise](enterprise.md)
 * [Gists](gists.md)
+  * [Comments](gists/comments.md)
 * [Issues](issues.md)
   * [Comments](issue/comments.md)
   * [Labels](issue/labels.md)
