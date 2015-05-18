@@ -3,8 +3,6 @@
 namespace Github\Tests;
 
 use Github;
-use Github\Client;
-use Github\ResultPager;
 use Github\HttpClient\HttpClientInterface;
 use Github\Tests\Mock\TestResponse;
 
