@@ -1,7 +1,11 @@
 ## Gists API
 [Back to the navigation](README.md)
 
-Creating, editing, deleting and listing gists. Wraps [GitHub Gists API](http://developer.github.com/v3/gists/).
+Creating, editing, deleting and listing gists.
+Wraps [GitHub Gists API](http://developer.github.com/v3/gists/).
+
+Additional APIs:
+* [Comments](gists/comments.md)
 
 #### List all public gists.
 
