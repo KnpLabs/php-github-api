@@ -15,10 +15,10 @@ Wraps [GitHub Pull Request API](http://developer.github.com/v3/pulls/).
 ```php
 <?php
 
-$openPullRequests = $client->api('pull_request')->all('ezsystems', 'ezpublish', 'open');
+$openPullRequests = $client->api('pull_request')->all('ezsystems', 'ezpublish', array('state' => 'open'));
 ```
 
-The last parameter of the listPullRequests method default to 'open'. The call above is equivalent to:
+The state parameter of the listPullRequests method default to 'open'. The call above is equivalent to:
 
 ```php
 <?php
@@ -33,7 +33,7 @@ $openPullRequests = $client->api('pull_request')->all('ezsystems', 'ezpublish');
 ```php
 <?php
 
-$closedPullRequests = $client->api('pull_request')->all('ezsystems', 'ezpublish', 'closed');
+$closedPullRequests = $client->api('pull_request')->all('ezsystems', 'ezpublish', array('state' => 'closed'));
 ```
 
 ``$closedPullRequests`` contains an array of closed pull-requests for this repository.
