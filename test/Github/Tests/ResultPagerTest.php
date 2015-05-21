@@ -54,7 +54,7 @@ class ResultPagerTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      *
-     * results in a search api has different format:
+     * response in a search api has different format:
      *
      * {
      *  "total_count": 1,
