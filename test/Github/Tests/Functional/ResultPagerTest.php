@@ -30,7 +30,15 @@ class ResultPagerTest extends TestCase
     /**
      * @test
      *
-     * results in a search api has different format, see docs
+     * results in a search api has different format:
+     *
+     * {
+     *  "total_count": 1,
+     *  "incomplete_results": false,
+     *  "items": []
+     * }
+     *
+     * and we need to extract result from `items`
      */
     public function shouldGetAllResultsFromSearchApi()
     {
