@@ -90,7 +90,7 @@ class ResultPagerTest extends \PHPUnit_Framework_TestCase
 
         $method     = 'users';
         $paginator = new Github\ResultPager($clientMock);
-        $result    = $paginator->fetchAll($searchApiMock, $method);
+        $result    = $paginator->fetchAll($searchApiMock, $method, ['knplabs']);
 
         $this->assertEquals($amountLoops * count($content['items']), count($result));
     }
