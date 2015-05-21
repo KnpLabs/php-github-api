@@ -463,4 +463,14 @@ class Repo extends AbstractApi
             'commit_message' => $message
         ));
     }
+
+    /**
+     * @param string $username
+     * @param string $repository
+     * @return array
+     */
+    public function milestones($username, $repository)
+    {
+        return $this->get('repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/milestones');
+    }
 }
