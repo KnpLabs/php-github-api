@@ -3,6 +3,7 @@
 namespace Github;
 
 use Github\Api\ApiInterface;
+use Github\Api\Search;
 use Github\HttpClient\Message\ResponseMediator;
 
 /**
@@ -69,6 +70,8 @@ class ResultPager implements ResultPagerInterface
      */
     public function fetchAll(ApiInterface $api, $method, array $parameters = array())
     {
+        $isSearch = $api instanceof Search;
+
         // get the perPage from the api
         $perPage = $api->getPerPage();
 
@@ -79,8 +82,18 @@ class ResultPager implements ResultPagerInterface
         $result = call_user_func_array(array($api, $method), $parameters);
         $this->postFetch();
 
+        if ($isSearch) {
+            $result = isset($result['items']) ? $result['items'] : $result;
+        }
+
         while ($this->hasNext()) {
-            $result = array_merge($result, $this->fetchNext());
+            $next = $this->fetchNext();
+
+            if ($isSearch) {
+                $result = array_merge($result, $next['items']);
+            } else {
+                $result = array_merge($result, $next);
+            }
         }
 
         // restore the perPage
