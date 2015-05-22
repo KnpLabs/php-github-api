@@ -238,3 +238,14 @@ $activity = $client->api('repo')->activity('ornicar', 'php-github-api');
 ```
 
 Returns an array of commit activity group by week.
+
+### `Moved` repositories
+Github repositories can be moved to another org/user, but it remains the `id`.
+In case if you can't no more find repo, you can retrieve it by `id`:
+
+```php
+use Github\HttpClient\Message\ResponseMediator;
+
+$data = $client->getHttpClient()->get('/repositories/24560307');
+$repo = ResponseMediator::getContent($data);
+```
