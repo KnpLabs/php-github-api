@@ -40,9 +40,10 @@ class ErrorListener
 
         if ($response->isClientError() || $response->isServerError()) {
             $remaining = (string) $response->getHeader('X-RateLimit-Remaining');
+            $limit = $response->getHeader('X-RateLimit-Limit');
 
             if (null != $remaining && 1 > $remaining && 'rate_limit' !== substr($request->getResource(), 1, 10)) {
-                throw new ApiLimitExceedException($this->options['api_limit']);
+                throw new ApiLimitExceedException($limit);
             }
 
             if (401 === $response->getStatusCode()) {
