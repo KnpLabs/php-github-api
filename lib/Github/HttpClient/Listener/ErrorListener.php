@@ -42,7 +42,8 @@ class ErrorListener
             $remaining = (string) $response->getHeader('X-RateLimit-Remaining');
 
             if (null != $remaining && 1 > $remaining && 'rate_limit' !== substr($request->getResource(), 1, 10)) {
-                throw new ApiLimitExceedException($this->options['api_limit']);
+                $limit = $response->getHeader('X-RateLimit-Limit');
+                throw new ApiLimitExceedException($limit);
             }
 
             if (401 === $response->getStatusCode()) {
