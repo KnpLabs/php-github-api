@@ -3,6 +3,17 @@
 
 This Github API Endpoint is currently undocumented because it's new, but works just fine.
 
+### Get latest actual release
+
+```php
+$release = $client->api('repo')->releases()->latest('twbs', 'bootstrap');
+```
+
+### List releases for a tag
+
+```php
+$release = $client->api('repo')->releases()->all('twbs', 'bootstrap', 'd890eec');
+```
 
 ### List all releases
 

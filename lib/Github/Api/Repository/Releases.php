@@ -13,6 +13,33 @@ use Github\Exception\MissingArgumentException;
 class Releases extends AbstractApi
 {
     /**
+     * Get the latest release.
+     *
+     * @param $username
+     * @param $repository
+     * 
+     * @return array
+     */
+    public function latest($username, $repository)
+    {
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/latest');
+    }
+
+    /**
+     * List releases for a tag.
+     *
+     * @param $username
+     * @param $repository
+     * @param $tag
+     *
+     * @return array
+     */
+    public function tag($username, $repository, $tag)
+    {
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/tags/'.rawurlencode($tag));
+    }
+
+    /**
      * List releases in selected repository.
      *
      * @param string $username   the user who owns the repo
