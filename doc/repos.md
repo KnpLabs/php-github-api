@@ -249,3 +249,11 @@ use Github\HttpClient\Message\ResponseMediator;
 $data = $client->getHttpClient()->get('/repositories/24560307');
 $repo = ResponseMediator::getContent($data);
 ```
+
+### Get the milestones of a repository
+
+```php
+milestones = $client->api('repo')->milestones('ornicar', 'php-github-api');
+```
+
+Returns a list of milestones.

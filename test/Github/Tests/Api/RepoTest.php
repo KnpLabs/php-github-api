@@ -191,6 +191,22 @@ class RepoTest extends TestCase
     /**
      * @test
      */
+    public function shouldGetRepositoryMilestones()
+    {
+        $expectedArray = array('milestone1', 'milestone2');
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('repos/KnpLabs/php-github-api/milestones')
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->milestones('KnpLabs', 'php-github-api'));
+    }
+
+    /**
+     * @test
+     */
     public function shouldGetContributorsExcludingAnonymousOnes()
     {
         $expectedArray = array('contrib1', 'contrib2');
