@@ -49,10 +49,45 @@ class AuthorizationsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('authorizations/'.$id.'/tokens/'.$token)
+            ->with('applications/'.$id.'/tokens/'.$token)
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->check($id, $token));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldRevokeAuthorization()
+    {
+        $id = 123;
+        $token = 'abc';
+        $expectedArray = array('id' => $id);
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('delete')
+            ->with('applications/'.$id.'/tokens/'.$token)
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->revoke($id, $token));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldRevokeAllAuthorizations()
+    {
+        $id = 123;
+        $expectedArray = array('id' => $id);
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('delete')
+            ->with('applications/'.$id.'/tokens')
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->revokeAll($id));
     }
 
     /**
