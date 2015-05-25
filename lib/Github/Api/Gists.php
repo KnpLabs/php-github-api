@@ -54,6 +54,11 @@ class Gists extends AbstractApi
         return $this->post('gists/'.rawurlencode($id).'/fork');
     }
 
+    public function forks($id)
+    {
+        return $this->get('gists/'.rawurlencode($id).'/forks');
+    }
+
     public function remove($id)
     {
         return $this->delete('gists/'.rawurlencode($id));

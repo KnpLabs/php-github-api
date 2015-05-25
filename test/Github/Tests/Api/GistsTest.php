@@ -96,6 +96,22 @@ class GistsTest extends TestCase
 
     /**
      * @test
+     */
+    public function shouldListGistForks()
+    {
+        $expectedArray = array('id' => '123');
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('post')
+            ->with('gists/123/forks')
+            ->will($this->returnValue($expectedArray));
+
+        $api->forks(123);
+    }
+
+    /**
+     * @test
      * @expectedException Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateGistWithoutFile()
