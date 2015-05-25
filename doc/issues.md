@@ -7,6 +7,7 @@ Wraps [GitHub Issue API](http://developer.github.com/v3/issues/).
 Additional APIs:
 * [Comments](issue/comments.md)
 * [Labels](issue/labels.md)
+* [Milestones](issue/milestones.md)
 
 ### List issues in a project
 

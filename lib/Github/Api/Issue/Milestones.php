@@ -43,22 +43,22 @@ class Milestones extends AbstractApi
         return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones', $params);
     }
 
-    public function update($username, $repository, $milestone, array $params)
+    public function update($username, $repository, $id, array $params)
     {
         if (isset($params['state']) && !in_array($params['state'], array('open', 'closed'))) {
             $params['state'] = 'open';
         }
 
-        return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones/'.rawurlencode($milestone), $params);
+        return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones/'.rawurlencode($id), $params);
     }
 
-    public function remove($username, $repository, $milestone)
+    public function remove($username, $repository, $id)
     {
-        return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones/'.rawurlencode($milestone));
+        return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones/'.rawurlencode($id));
     }
 
-    public function labels($username, $repository, $milestone)
+    public function labels($username, $repository, $id)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones/'.rawurlencode($milestone).'/labels');
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones/'.rawurlencode($id).'/labels');
     }
 }
