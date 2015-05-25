@@ -103,12 +103,10 @@ class Authorizations extends AbstractApi
      *
      * @param $clientId
      * @param $token
-     *
-     * @return array
      */
     public function revoke($clientId, $token)
     {
-        return $this->delete('applications/'.rawurlencode($clientId).'/tokens/'.rawurlencode($token));
+        $this->delete('applications/'.rawurlencode($clientId).'/tokens/'.rawurlencode($token));
     }
 
     /**
