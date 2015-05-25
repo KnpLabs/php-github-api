@@ -103,7 +103,7 @@ class GistsTest extends TestCase
 
         $api = $this->getApiMock();
         $api->expects($this->once())
-            ->method('post')
+            ->method('get')
             ->with('gists/123/forks')
             ->will($this->returnValue($expectedArray));
 
