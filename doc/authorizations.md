@@ -60,11 +60,11 @@ $authorization = $github->api('authorizations')->reset(1234, 'token');
 #### Revoke an authorization
 
 ```php
-$authorization = $github->api('authorizations')->revoke(1234, 'token');
+$github->api('authorizations')->revoke(1234, 'token');
 ```
 
 #### Revoke all authorizations
 
 ```php
-$authorization = $github->api('authorizations')->revokeAll(1234);
+$github->api('authorizations')->revokeAll(1234);
 ```
