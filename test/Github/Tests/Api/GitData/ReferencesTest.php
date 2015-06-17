@@ -2,10 +2,24 @@
 
 namespace Github\Tests\Api;
 
-use Github\Tests\Api\TestCase;
-
 class ReferencesTest extends TestCase
 {
+    /**
+     * @test
+     */
+    public function shouldNotEscapeSlashesInReferences()
+    {
+        $expectedValue = array('reference' => 'some data');
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('repos/l3l0/l3l0repo/git/refs/master/some%2A%26%40%23branch/dasd1212')
+            ->will($this->returnValue($expectedValue));
+
+        $this->assertEquals($expectedValue, $api->show('l3l0', 'l3l0repo', 'master/some*&@#branch/dasd1212'));
+    }
+
     /**
      * @test
      */

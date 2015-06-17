@@ -28,7 +28,9 @@ class References extends AbstractApi
 
     public function show($username, $repository, $reference)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs/'.rawurlencode($reference));
+        $reference = $this->encodeReference($reference);
+
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs/'.$reference);
     }
 
     public function create($username, $repository, array $params)
@@ -46,11 +48,20 @@ class References extends AbstractApi
             throw new MissingArgumentException('sha');
         }
 
-        return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs/'.rawurlencode($reference), $params);
+        $reference = $this->encodeReference($reference);
+
+        return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs/'.$reference, $params);
     }
 
     public function remove($username, $repository, $reference)
     {
-        return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs/'.rawurlencode($reference));
+        $reference = $this->encodeReference($reference);
+
+        return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs/'.$reference);
+    }
+
+    private function encodeReference($rawReference)
+    {
+        return implode('/', array_map('rawurlencode', explode('/', $rawReference)));
     }
 }
