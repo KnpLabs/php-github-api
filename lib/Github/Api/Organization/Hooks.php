@@ -21,7 +21,7 @@ class Hooks extends AbstractApi
 
     /**
      * Get a single hook.
-     * @Link https://developer.github.com/v3/orgs/hooks/#get-single-hook
+     * @link https://developer.github.com/v3/orgs/hooks/#get-single-hook
      *
      * @param string $organization
      * @param int    $id
