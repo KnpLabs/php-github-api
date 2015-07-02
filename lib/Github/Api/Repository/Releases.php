@@ -17,7 +17,7 @@ class Releases extends AbstractApi
      *
      * @param $username
      * @param $repository
-     * 
+     *
      * @return array
      */
     public function latest($username, $repository)

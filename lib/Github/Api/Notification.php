@@ -32,7 +32,7 @@ class Notification extends AbstractApi
             'participating' => $participating
         );
 
-        if($since !== null) {
+        if ($since !== null) {
             $parameters['since'] = $since->format(DateTime::ISO8601);
         }
 
@@ -51,7 +51,7 @@ class Notification extends AbstractApi
     {
         $parameters = array();
 
-        if($since !== null) {
+        if ($since !== null) {
             $parameters['last_read_at'] = $since->format(DateTime::ISO8601);
         }
 
