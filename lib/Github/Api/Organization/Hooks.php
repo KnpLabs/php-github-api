@@ -43,8 +43,7 @@ class Hooks extends AbstractApi
      */
     public function create($organization, array $params)
     {
-        if (!isset($params['name'], $params['config']))
-        {
+        if (!isset($params['name'], $params['config'])) {
             throw new MissingArgumentException(array('name', 'config'));
         }
 
@@ -63,8 +62,7 @@ class Hooks extends AbstractApi
      */
     public function update($organization, $id, array $params)
     {
-        if (!isset($params['config']))
-        {
+        if (!isset($params['config'])) {
             throw new MissingArgumentException(array('config'));
         }
 
