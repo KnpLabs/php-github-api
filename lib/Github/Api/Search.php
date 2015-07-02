@@ -16,7 +16,6 @@ use Github\Exception\MissingArgumentException;
  */
 class Search extends AbstractApi
 {
-
     /**
      * Search repositories by filter (q).
      *
