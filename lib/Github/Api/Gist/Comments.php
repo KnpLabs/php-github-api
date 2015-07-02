@@ -22,12 +22,12 @@ class Comments extends AbstractApi
 
     public function create($gist, $body)
     {
-        return $this->post('gists/'.rawurlencode($gist).'/comments', array($body));
+        return $this->post('gists/'.rawurlencode($gist).'/comments', array('body' => $body));
     }
 
     public function update($gist, $comment_id, $body)
     {
-        return $this->patch('gists/'.rawurlencode($gist).'/comments/'.rawurlencode($comment_id), array($body));
+        return $this->patch('gists/'.rawurlencode($gist).'/comments/'.rawurlencode($comment_id), array('body' => $body));
     }
 
     public function remove($gist, $comment)
