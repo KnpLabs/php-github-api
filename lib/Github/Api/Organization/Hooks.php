@@ -86,8 +86,8 @@ class Hooks extends AbstractApi
      * Delete a hook.
      *
      * @link https://developer.github.com/v3/orgs/hooks/#delete-a-hook
-     * @param $organization
-     * @param $id
+     * @param string $organization
+     * @param int    $id
      * @return null
      */
     public function remove($organization, $id)
