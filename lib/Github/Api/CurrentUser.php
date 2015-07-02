@@ -5,6 +5,7 @@ namespace Github\Api;
 use Github\Api\CurrentUser\DeployKeys;
 use Github\Api\CurrentUser\Emails;
 use Github\Api\CurrentUser\Followers;
+use Github\Api\CurrentUser\Memberships;
 use Github\Api\CurrentUser\Notifications;
 use Github\Api\CurrentUser\Watchers;
 use Github\Api\CurrentUser\Starring;
@@ -76,6 +77,14 @@ class CurrentUser extends AbstractApi
     public function notifications()
     {
         return new Notifications($this->client);
+    }
+
+    /**
+     * @return Memberships
+     */
+    public function memberships()
+    {
+        return new Memberships($this->client);
     }
 
     /**
