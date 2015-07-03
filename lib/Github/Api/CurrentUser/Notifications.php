@@ -41,6 +41,8 @@ class Notifications extends AbstractApi
     }
 
     /**
+     * Mark all notifications as read.
+     *
      * @link http://developer.github.com/v3/activity/notifications/#mark-as-read
      *
      * @param array $params
@@ -53,6 +55,8 @@ class Notifications extends AbstractApi
     }
 
     /**
+     * Mark all notifications for a repository as read.
+     *
      * @link http://developer.github.com/v3/activity/notifications/#mark-notifications-as-read-in-a-repository
      *
      * @param string $username   the user who owns the repo
@@ -67,6 +71,8 @@ class Notifications extends AbstractApi
     }
 
     /**
+     * Mark a notification as read.
+     *
      * @link http://developer.github.com/v3/activity/notifications/#mark-a-thread-as-read
      *
      * @param string $id     the notification number
@@ -80,6 +86,8 @@ class Notifications extends AbstractApi
     }
 
     /**
+     * Show a notification.
+     *
      * @link http://developer.github.com/v3/activity/notifications/#view-a-single-thread
      *
      * @param string $id the notification number
@@ -92,6 +100,8 @@ class Notifications extends AbstractApi
     }
 
     /**
+     * Show a subscription.
+     *
      * @link http://developer.github.com/v3/activity/notifications/#get-a-thread-subscription
      *
      * @param string $id the notification number
@@ -104,6 +114,8 @@ class Notifications extends AbstractApi
     }
 
     /**
+     * Create a subscription.
+     *
      * @link http://developer.github.com/v3/activity/notifications/#set-a-thread-subscription
      *
      * @param string $id     the notification number
@@ -117,6 +129,8 @@ class Notifications extends AbstractApi
     }
 
     /**
+     * Delete a subscription.
+     *
      * @link http://developer.github.com/v3/activity/notifications/#delete-a-thread-subscription
      *
      * @param string $id the notification number

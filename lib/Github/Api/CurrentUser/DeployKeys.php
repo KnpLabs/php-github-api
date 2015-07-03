@@ -44,7 +44,7 @@ class DeployKeys extends AbstractApi
      *
      * @param array $params
      *
-     * @throws MissingArgumentException
+     * @throws \Github\Exception\MissingArgumentException
      *
      * @return array
      */
@@ -65,7 +65,7 @@ class DeployKeys extends AbstractApi
      * @param string $id
      * @param array  $params
      *
-     * @throws MissingArgumentException
+     * @throws \Github\Exception\MissingArgumentException
      *
      * @return array
      */

@@ -30,7 +30,7 @@ class Emails extends AbstractApi
      *
      * @param string|array $emails
      *
-     * @throws InvalidArgumentException
+     * @throws \Github\Exception\InvalidArgumentException
      *
      * @return array
      */
@@ -52,7 +52,7 @@ class Emails extends AbstractApi
      *
      * @param string|array $emails
      *
-     * @throws InvalidArgumentException
+     * @throws \Github\Exception\InvalidArgumentException
      *
      * @return array
      */
