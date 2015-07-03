@@ -5,7 +5,6 @@ namespace Github\HttpClient\Listener;
 use Github\Exception\TwoFactorAuthenticationRequiredException;
 use Github\HttpClient\Message\ResponseMediator;
 use Guzzle\Common\Event;
-use Guzzle\Http\Message\Response;
 use Github\Exception\ApiLimitExceedException;
 use Github\Exception\ErrorException;
 use Github\Exception\RuntimeException;

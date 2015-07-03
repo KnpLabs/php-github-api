@@ -173,7 +173,6 @@ class Contents extends AbstractApi
         return $this->put($url, $parameters);
     }
 
-
     /**
      * Deletes a file from a repository.
      *

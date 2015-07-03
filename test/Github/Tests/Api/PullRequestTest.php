@@ -190,7 +190,7 @@ class PullRequestTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreatePullRequestWithoutBase()
     {
@@ -209,7 +209,7 @@ class PullRequestTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreatePullRequestWithoutHead()
     {
@@ -228,7 +228,7 @@ class PullRequestTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreatePullRequestUsingTitleButWithoutBody()
     {
@@ -247,7 +247,7 @@ class PullRequestTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreatePullRequestWithoutIssueIdOrTitle()
     {

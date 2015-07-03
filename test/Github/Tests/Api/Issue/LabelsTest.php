@@ -175,7 +175,7 @@ class LabelsTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\InvalidArgumentException
+     * @expectedException \Github\Exception\InvalidArgumentException
      */
     public function shouldNotAddWhenDoNotHaveLabelsToAdd()
     {

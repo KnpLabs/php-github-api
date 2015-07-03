@@ -2,12 +2,6 @@
 
 namespace Github\Api;
 
-use Github\Api\Issue\Comments;
-use Github\Api\Issue\Events;
-use Github\Api\Issue\Labels;
-use Github\Api\Issue\Milestones;
-use Github\Exception\MissingArgumentException;
-
 /**
  * Implement the Search API.
  *
