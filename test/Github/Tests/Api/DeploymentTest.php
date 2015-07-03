@@ -63,7 +63,7 @@ class DeploymentTest extends TestCase
 
     /**
      * @test
-     * @expectedException GitHub\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldRejectStatusUpdateWithoutStateField()
     {

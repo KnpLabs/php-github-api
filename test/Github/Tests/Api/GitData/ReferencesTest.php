@@ -119,7 +119,7 @@ class ReferencesTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateReferenceWithoutShaParam()
     {
@@ -134,7 +134,7 @@ class ReferencesTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateReferenceWithoutRefsParam()
     {
@@ -166,7 +166,7 @@ class ReferencesTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNoUpdateReferenceWithoutSha()
     {

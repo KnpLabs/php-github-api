@@ -41,7 +41,7 @@ class MilestonesTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateMilestoneWithoutTitle()
     {

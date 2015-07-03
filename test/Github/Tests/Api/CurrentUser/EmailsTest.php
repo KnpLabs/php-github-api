@@ -2,8 +2,6 @@
 
 namespace Github\Tests\Api;
 
-use Github\Tests\Api\TestCase;
-
 class EmailsTest extends TestCase
 {
     /**
@@ -56,7 +54,7 @@ class EmailsTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\InvalidArgumentException
+     * @expectedException \Github\Exception\InvalidArgumentException
      */
     public function shouldNotRemoveEmailsWhenAreNotPass()
     {
@@ -101,7 +99,7 @@ class EmailsTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\InvalidArgumentException
+     * @expectedException \Github\Exception\InvalidArgumentException
      */
     public function shouldNotAddEmailsWhenAreNotPass()
     {

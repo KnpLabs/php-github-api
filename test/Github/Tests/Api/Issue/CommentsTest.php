@@ -40,7 +40,7 @@ class CommentsTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateWithoutBody()
     {
@@ -72,7 +72,7 @@ class CommentsTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotUpdateWithoutBody()
     {

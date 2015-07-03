@@ -5,7 +5,6 @@ namespace Github\Api\Repository;
 use Github\Api\AbstractApi;
 use Github\Exception\ErrorException;
 use Github\Exception\MissingArgumentException;
-use Github\HttpClient\HttpClient;
 
 /**
  * @link   http://developer.github.com/v3/repos/releases/
