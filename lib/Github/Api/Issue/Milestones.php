@@ -11,6 +11,15 @@ use Github\Exception\MissingArgumentException;
  */
 class Milestones extends AbstractApi
 {
+    /**
+     * Get all milestones for a repository.
+     *
+     * @param string $username
+     * @param string $repository
+     * @param array  $params
+     *
+     * @return array
+     */
     public function all($username, $repository, array $params = array())
     {
         if (isset($params['state']) && !in_array($params['state'], array('open', 'closed', 'all'))) {
@@ -23,14 +32,39 @@ class Milestones extends AbstractApi
             $params['direction'] = 'desc';
         }
 
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones', array_merge(array('page' => 1, 'state' => 'open', 'sort' => 'due_date', 'direction' => 'desc'), $params));
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones', array_merge(array(
+            'page'      => 1,
+            'state'     => 'open',
+            'sort'      => 'due_date',
+            'direction' => 'desc'
+        ), $params));
     }
 
+    /**
+     * Get a milestone for a repository.
+     *
+     * @param string $username
+     * @param string $repository
+     * @param int    $id
+     *
+     * @return array
+     */
     public function show($username, $repository, $id)
     {
         return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones/'.rawurlencode($id));
     }
 
+    /**
+     * Create a milestone for a repository.
+     *
+     * @param string $username
+     * @param string $repository
+     * @param array  $params
+     *
+     * @return array
+     *
+     * @throws \Github\Exception\MissingArgumentException
+     */
     public function create($username, $repository, array $params)
     {
         if (!isset($params['title'])) {
@@ -43,6 +77,16 @@ class Milestones extends AbstractApi
         return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones', $params);
     }
 
+    /**
+     * Update a milestone for a repository.
+     *
+     * @param string $username
+     * @param string $repository
+     * @param int    $id
+     * @param array  $params
+     *
+     * @return array
+     */
     public function update($username, $repository, $id, array $params)
     {
         if (isset($params['state']) && !in_array($params['state'], array('open', 'closed'))) {
@@ -52,11 +96,29 @@ class Milestones extends AbstractApi
         return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones/'.rawurlencode($id), $params);
     }
 
+    /**
+     * Delete a milestone for a repository.
+     *
+     * @param string $username
+     * @param string $repository
+     * @param int    $id
+     *
+     * @return null
+     */
     public function remove($username, $repository, $id)
     {
         return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones/'.rawurlencode($id));
     }
 
+    /**
+     * Get the labels of a milestone
+     *
+     * @param string $username
+     * @param string $repository
+     * @param int    $id
+     *
+     * @return array
+     */
     public function labels($username, $repository, $id)
     {
         return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones/'.rawurlencode($id).'/labels');
