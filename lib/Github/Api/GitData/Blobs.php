@@ -11,6 +11,11 @@ use Github\Exception\MissingArgumentException;
  */
 class Blobs extends AbstractApi
 {
+    /**
+     * Configure the Acccept header depending on the blob type.
+     *
+     * @param string|null $bodyType
+     */
     public function configure($bodyType = null)
     {
         if ('raw' == $bodyType) {
@@ -20,6 +25,15 @@ class Blobs extends AbstractApi
         }
     }
 
+    /**
+     * Show a blob of a sha for a repository.
+     *
+     * @param string $username
+     * @param string $repository
+     * @param string $sha
+     *
+     * @return array
+     */
     public function show($username, $repository, $sha)
     {
         $response = $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/blobs/'.rawurlencode($sha));
@@ -27,6 +41,17 @@ class Blobs extends AbstractApi
         return $response;
     }
 
+    /**
+     * Create a blob of a sha for a repository.
+     *
+     * @param string $username
+     * @param string $repository
+     * @param array  $params
+     *
+     * @return array
+     *
+     * @throws \Github\Exception\MissingArgumentException
+     */
     public function create($username, $repository, array $params)
     {
         if (!isset($params['content'], $params['encoding'])) {
