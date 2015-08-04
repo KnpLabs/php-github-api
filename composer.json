@@ -1,8 +1,8 @@
 {
-    "name": "knplabs/github-api",
+    "name": "transitscreen/github-api",
     "type": "library",
     "description": "GitHub API v3 client",
-    "homepage": "https://github.com/KnpLabs/php-github-api",
+    "homepage": "https://github.com/TransitScreen/github-api",
     "keywords": ["github", "gh", "api", "gist"],
     "license": "MIT",
     "authors": [
