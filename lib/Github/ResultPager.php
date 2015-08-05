@@ -11,6 +11,7 @@ use Github\HttpClient\Message\ResponseMediator;
  *
  * @author Ramon de la Fuente <ramon@future500.nl>
  * @author Mitchel Verschoof <mitchel@future500.nl>
+ * @author Graham Campbell <graham@alt-three.com>
  */
 class ResultPager implements ResultPagerInterface
 {
@@ -98,6 +99,14 @@ class ResultPager implements ResultPagerInterface
         $api->setPerPage($perPage);
 
         return $result;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getIterator(ApiInterface $api, $method, array $parameters = array()))
+    {
+        return new ResultIterator($this, $api, $method, $parameters);
     }
 
     /**
