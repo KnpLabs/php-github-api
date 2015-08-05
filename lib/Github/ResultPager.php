@@ -78,9 +78,7 @@ class ResultPager implements ResultPagerInterface
         // set parameters per_page to GitHub max to minimize number of requests
         $api->setPerPage(100);
 
-        $result = array();
-        $result = call_user_func_array(array($api, $method), $parameters);
-        $this->postFetch();
+        $result = $this->fetch($api, $method, $parameters);
 
         if ($isSearch) {
             $result = isset($result['items']) ? $result['items'] : $result;
