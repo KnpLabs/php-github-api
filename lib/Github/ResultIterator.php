@@ -148,7 +148,7 @@ class ResultIterator implements Iterator
     protected function getNext()
     {
         if (!$this->pager->hasNext()) {
-            return [];
+            return array();
         }
 
         $next = $this->fetchNext();

@@ -104,7 +104,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function getIterator(ApiInterface $api, $method, array $parameters = array()))
+    public function getIterator(ApiInterface $api, $method, array $parameters = array())
     {
         return new ResultIterator($this, $api, $method, $parameters);
     }
