@@ -23,7 +23,7 @@ Returns an array of issues.
 $issues = $client->api('issue')->find('KnpLabs', 'php-github-api', 'closed', 'bug');
 ```
 
-Returns an array of closed issues matching the "bug" term. For more complex searches, use the [search api](../search.md) which supports the advanced github search syntax.
+Returns an array of closed issues matching the "bug" term. For more complex searches, use the [search api](search.md) which supports the advanced github search syntax.
 
 ### Get information about an issue
 
