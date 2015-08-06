@@ -74,4 +74,18 @@ class Organization extends AbstractApi
     {
         return new Teams($this->client);
     }
+
+    /**
+     * @link http://developer.github.com/v3/issues/#list-issues
+     *
+     * @param $organization
+     * @param array $params
+     * @param int $page
+     *
+     * @return array
+     */
+    public function issues($organization, array $params = array(), $page = 1)
+    {
+        return $this->get('orgs/'.rawurlencode($organization).'/issues', array_merge(array('page' => $page), $params));
+    }
 }
