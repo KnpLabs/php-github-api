@@ -1,8 +1,8 @@
-## Users API
+## Meta API
 [Back to the navigation](README.md)
 
 
-Wrap [GitHub User API](http://developer.github.com/v3/meta/).
+Wrap [GitHub Meta API](http://developer.github.com/v3/meta/).
 
 ### Get information about GitHub services
 
