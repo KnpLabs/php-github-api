@@ -14,13 +14,13 @@ class Comments extends AbstractApi
     /**
      * Configure the body type.
      *
-     * @param string $bodyType
+     * @param string|null $bodyType
      */
     public function configure($bodyType = null)
     {
         switch ($bodyType) {
             case 'raw':
-                $header = 'Accept: application/vnd.github.%s.raw+json';;
+                $header = 'Accept: application/vnd.github.%s.raw+json';
                 break;
 
             case 'text':
@@ -41,10 +41,11 @@ class Comments extends AbstractApi
     /**
      * Get all comments for an issue.
      *
-     * @param        string g$username
+     * @param string $username
      * @param string $repository
      * @param int    $issue
      * @param int    $page
+     *
      * @return array
      */
     public function all($username, $repository, $issue, $page = 1)
@@ -60,6 +61,7 @@ class Comments extends AbstractApi
      * @param string $username
      * @param string $repository
      * @param int    $comment
+     *
      * @return array
      */
     public function show($username, $repository, $comment)
@@ -74,8 +76,9 @@ class Comments extends AbstractApi
      * @param string $repository
      * @param int    $issue
      * @param array  $params
-     * @return array
+     *
      * @throws \Github\Exception\MissingArgumentException
+     * @return array
      */
     public function create($username, $repository, $issue, array $params)
     {
@@ -93,8 +96,9 @@ class Comments extends AbstractApi
      * @param string $repository
      * @param int    $comment
      * @param array  $params
-     * @return array
+     *
      * @throws \Github\Exception\MissingArgumentException
+     * @return array
      */
     public function update($username, $repository, $comment, array $params)
     {
@@ -111,6 +115,7 @@ class Comments extends AbstractApi
      * @param string $username
      * @param string $repository
      * @param int    $comment
+     *
      * @return array
      */
     public function remove($username, $repository, $comment)
