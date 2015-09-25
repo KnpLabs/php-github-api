@@ -14,6 +14,7 @@ class Milestones extends AbstractApi
     /**
      * Get all milestones for a repository.
      *
+     * @link https://developer.github.com/v3/issues/milestones/#list-milestones-for-a-repository
      * @param string $username
      * @param string $repository
      * @param array  $params
@@ -43,6 +44,7 @@ class Milestones extends AbstractApi
     /**
      * Get a milestone for a repository.
      *
+     * @link https://developer.github.com/v3/issues/milestones/#get-a-single-milestone
      * @param string $username
      * @param string $repository
      * @param int    $id
@@ -57,6 +59,7 @@ class Milestones extends AbstractApi
     /**
      * Create a milestone for a repository.
      *
+     * @link https://developer.github.com/v3/issues/milestones/#create-a-milestone
      * @param string $username
      * @param string $repository
      * @param array  $params
@@ -80,6 +83,7 @@ class Milestones extends AbstractApi
     /**
      * Update a milestone for a repository.
      *
+     * @link https://developer.github.com/v3/issues/milestones/#update-a-milestone
      * @param string $username
      * @param string $repository
      * @param int    $id
@@ -99,6 +103,7 @@ class Milestones extends AbstractApi
     /**
      * Delete a milestone for a repository.
      *
+     * @link https://developer.github.com/v3/issues/milestones/#delete-a-milestone
      * @param string $username
      * @param string $repository
      * @param int    $id
@@ -113,6 +118,7 @@ class Milestones extends AbstractApi
     /**
      * Get the labels of a milestone
      *
+     * @link https://developer.github.com/v3/issues/labels/#get-labels-for-every-issue-in-a-milestone
      * @param string $username
      * @param string $repository
      * @param int    $id

@@ -13,6 +13,7 @@ class Events extends AbstractApi
     /**
      * Get all events for an issue.
      *
+     * @link https://developer.github.com/v3/issues/events/#list-events-for-an-issue
      * @param string   $username
      * @param string   $repository
      * @param int|null $issue
@@ -35,6 +36,7 @@ class Events extends AbstractApi
     /**
      * Display an event for an issue.
      *
+     * @link https://developer.github.com/v3/issues/events/#get-a-single-event
      * @param $username
      * @param $repository
      * @param $event

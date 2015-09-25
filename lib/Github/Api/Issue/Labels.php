@@ -15,6 +15,7 @@ class Labels extends AbstractApi
     /**
      * Get all labels for a repository or the labels for a specific issue.
      *
+     * @link https://developer.github.com/v3/issues/labels/#list-labels-on-an-issue
      * @param string   $username
      * @param string   $repository
      * @param int|null $issue
@@ -58,6 +59,7 @@ class Labels extends AbstractApi
     /**
      * Delete a label for a repository.
      *
+     * @link https://developer.github.com/v3/issues/labels/#remove-a-label-from-an-issue
      * @param string $username
      * @param string $repository
      * @param string $label
@@ -93,6 +95,7 @@ class Labels extends AbstractApi
     /**
      * Add a label to an issue.
      *
+     * @link https://developer.github.com/v3/issues/labels/#remove-a-label-from-an-issue
      * @param string $username
      * @param string $repository
      * @param int    $issue
@@ -116,6 +119,7 @@ class Labels extends AbstractApi
     /**
      * Replace labels for an issue.
      *
+     * @link https://developer.github.com/v3/issues/labels/#replace-all-labels-for-an-issue
      * @param string $username
      * @param string $repository
      * @param int    $issue
@@ -131,6 +135,7 @@ class Labels extends AbstractApi
     /**
      * Remove a label for an issue
      *
+     * @link https://developer.github.com/v3/issues/labels/#remove-a-label-from-an-issue
      * @param string $username
      * @param string $repository
      * @param string $issue
@@ -146,6 +151,7 @@ class Labels extends AbstractApi
     /**
      * Remove all labels from an issue.
      *
+     * @link https://developer.github.com/v3/issues/labels/#replace-all-labels-for-an-issue
      * @param string $username
      * @param string $repository
      * @param string $issue
