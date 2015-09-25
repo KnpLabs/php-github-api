@@ -18,24 +18,13 @@ class Comments extends AbstractApi
      */
     public function configure($bodyType = null)
     {
-        switch ($bodyType) {
-            case 'raw':
-                $header = 'Accept: application/vnd.github.%s.raw+json';
-                break;
-
-            case 'text':
-                $header = 'Accept: application/vnd.github.%s.text+json';
-                break;
-
-            case 'html':
-                $header = 'Accept: application/vnd.github.%s.html+json';
-                break;
-
-            default:
-                $header = 'Accept: application/vnd.github.%s.full+json';
+        if (!in_array($bodyType, array('raw', 'text', 'html'))) {
+            $bodyType = 'full';
         }
 
-        $this->client->setHeaders(array(sprintf($header, $this->client->getOption('api_version'))));
+        $this->client->setHeaders(array(
+            sprintf('Accept: application/vnd.github.%s.%s+json', $this->client->getOption('api_version'), $bodyType)
+        ));
     }
 
     /**
