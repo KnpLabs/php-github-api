@@ -9,4 +9,5 @@ namespace Github\Exception;
  */
 class ValidationFailedException extends ErrorException
 {
+    //
 }

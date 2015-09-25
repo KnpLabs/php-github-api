@@ -4,4 +4,5 @@ namespace Github\Exception;
 
 interface ExceptionInterface
 {
+    //
 }
