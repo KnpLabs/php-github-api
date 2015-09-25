@@ -11,28 +11,34 @@ use Github\Exception\MissingArgumentException;
  */
 class Comments extends AbstractApi
 {
+    /**
+     * Configure the body type.
+     *
+     * @link https://developer.github.com/v3/issues/comments/#custom-media-types
+     * @param string|null $bodyType
+     */
     public function configure($bodyType = null)
     {
-        switch ($bodyType) {
-            case 'raw':
-                $header = sprintf('Accept: application/vnd.github.%s.raw+json', $this->client->getOption('api_version'));
-                break;
-
-            case 'text':
-                $header = sprintf('Accept: application/vnd.github.%s.text+json', $this->client->getOption('api_version'));
-                break;
-
-            case 'html':
-                $header = sprintf('Accept: application/vnd.github.%s.html+json', $this->client->getOption('api_version'));
-                break;
-
-            default:
-                $header = sprintf('Accept: application/vnd.github.%s.full+json', $this->client->getOption('api_version'));
+        if (!in_array($bodyType, array('raw', 'text', 'html'))) {
+            $bodyType = 'full';
         }
 
-        $this->client->setHeaders(array($header));
+        $this->client->setHeaders(array(
+            sprintf('Accept: application/vnd.github.%s.%s+json', $this->client->getOption('api_version'), $bodyType)
+        ));
     }
 
+    /**
+     * Get all comments for an issue.
+     *
+     * @link https://developer.github.com/v3/issues/comments/#list-comments-on-an-issue
+     * @param string $username
+     * @param string $repository
+     * @param int    $issue
+     * @param int    $page
+     *
+     * @return array
+     */
     public function all($username, $repository, $issue, $page = 1)
     {
         return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/comments', array(
@@ -40,11 +46,33 @@ class Comments extends AbstractApi
         ));
     }
 
+    /**
+     * Get a comment for an issue.
+     *
+     * @link https://developer.github.com/v3/issues/comments/#get-a-single-comment
+     * @param string $username
+     * @param string $repository
+     * @param int    $comment
+     *
+     * @return array
+     */
     public function show($username, $repository, $comment)
     {
         return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/comments/'.rawurlencode($comment));
     }
 
+    /**
+     * Create a comment for an issue.
+     *
+     * @link https://developer.github.com/v3/issues/comments/#create-a-comment
+     * @param string $username
+     * @param string $repository
+     * @param int    $issue
+     * @param array  $params
+     *
+     * @throws \Github\Exception\MissingArgumentException
+     * @return array
+     */
     public function create($username, $repository, $issue, array $params)
     {
         if (!isset($params['body'])) {
@@ -54,6 +82,18 @@ class Comments extends AbstractApi
         return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/comments', $params);
     }
 
+    /**
+     * Update a comment for an issue.
+     *
+     * @link https://developer.github.com/v3/issues/comments/#edit-a-comment
+     * @param string $username
+     * @param string $repository
+     * @param int    $comment
+     * @param array  $params
+     *
+     * @throws \Github\Exception\MissingArgumentException
+     * @return array
+     */
     public function update($username, $repository, $comment, array $params)
     {
         if (!isset($params['body'])) {
@@ -63,6 +103,16 @@ class Comments extends AbstractApi
         return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/comments/'.rawurlencode($comment), $params);
     }
 
+    /**
+     * Delete a comment for an issue.
+     *
+     * @link https://developer.github.com/v3/issues/comments/#delete-a-comment
+     * @param string $username
+     * @param string $repository
+     * @param int    $comment
+     *
+     * @return array
+     */
     public function remove($username, $repository, $comment)
     {
         return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/comments/'.rawurlencode($comment));
