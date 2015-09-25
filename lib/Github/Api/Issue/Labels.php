@@ -36,6 +36,7 @@ class Labels extends AbstractApi
     /**
      * Create a label for a repository.
      *
+     * @link https://developer.github.com/v3/issues/labels/#create-a-label
      * @param string $username
      * @param string $repository
      * @param array  $params
@@ -74,6 +75,7 @@ class Labels extends AbstractApi
     /**
      * Edit a label for a repository
      *
+     * @link https://developer.github.com/v3/issues/labels/#update-a-label
      * @param string $username
      * @param string $repository
      * @param string $label
