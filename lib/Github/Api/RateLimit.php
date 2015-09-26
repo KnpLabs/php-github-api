@@ -10,7 +10,6 @@ namespace Github\Api;
  */
 class RateLimit extends AbstractApi
 {
-
     /**
      * Get rate limits
      *
@@ -42,5 +41,4 @@ class RateLimit extends AbstractApi
         $response = $this->getRateLimits();
         return $response['resources']['search']['limit'];
     }
-
 }
