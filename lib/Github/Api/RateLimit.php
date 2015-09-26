@@ -13,7 +13,7 @@ class RateLimit extends AbstractApi
     /**
      * Get rate limits
      *
-     * @return \Guzzle\Http\EntityBodyInterface|mixed|string
+     * @return array
      */
     public function getRateLimits()
     {
