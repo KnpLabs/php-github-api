@@ -37,5 +37,4 @@ class RateLimitTest extends TestCase
     {
         return 'Github\Api\RateLimit';
     }
-    
 }
