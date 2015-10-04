@@ -1,14 +1,14 @@
 <?php
 
-$finder = Symfony\CS\Finder\DefaultFinder::create()
-    ->in(__DIR__);
+require __DIR__.'/vendor/autoload.php';
 
-$fixers = array(
-    'long_array_syntax',
-);
+use SLLH\StyleCIBridge\ConfigBridge;
 
-return Symfony\CS\Config\Config::create()
-    ->setUsingCache(true)
-    ->level(Symfony\CS\FixerInterface::PSR2_LEVEL)
-    ->fixers($fixers)
-    ->finder($finder);
+$config = ConfigBridge::create();
+$config->setUsingCache(true);
+
+if (method_exists($config, 'setRiskyAllowed')) {
+    $config->setRiskyAllowed(true);
+}
+
+return $config;
