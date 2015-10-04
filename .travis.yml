@@ -8,8 +8,19 @@ php:
   - 5.6
   - hhvm
 
+matrix:
+  fast_finish: true
+  include:
+    - php: 5.6
+      env: GUZZLE_VERSION=4.*
+    - php: 5.6
+      env: GUZZLE_VERSION=5.*
+    - php: 5.6
+      env: GUZZLE_VERSION=6.*
+
 before_script:
   - travis_retry composer self-update
+  - if [ "$GUZZLE_VERSION" != "" ]; then composer require "guzzlehttp/guzzle:${GUZZLE_VERSION}" --no-update; fi;
   - travis_retry composer install --no-interaction --prefer-source --dev
 
 script:

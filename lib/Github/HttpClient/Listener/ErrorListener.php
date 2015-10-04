@@ -9,6 +9,7 @@ use Github\Exception\ApiLimitExceedException;
 use Github\Exception\ErrorException;
 use Github\Exception\RuntimeException;
 use Github\Exception\ValidationFailedException;
+use GuzzleHttp\Event\ErrorEvent;
 
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
@@ -29,15 +30,21 @@ class ErrorListener
     }
 
     /**
-     * {@inheritDoc}
+     * @param ErrorEvent|Event $event
+     *
+     * @throws ErrorException
+     * @throws ValidationFailedException
      */
-    public function onRequestError(Event $event)
+    public function onRequestError($event)
     {
-        /** @var $request \Guzzle\Http\Message\Request */
+        /** @var $request \GuzzleHttp\Message\Request|\Guzzle\Http\Message\Request */
         $request = $event['request'];
-        $response = $request->getResponse();
+        $response = $event instanceof ErrorEvent ? $event->getResponse() : $request->getResponse();
 
-        if ($response->isClientError() || $response->isServerError()) {
+        $statusCode = $response->getStatusCode();
+        $isClientError = $statusCode >= 400 && $statusCode < 500;
+        $isServerError = $statusCode >= 500 && $statusCode < 600;
+        if ($isClientError || $isServerError) {
             $remaining = (string) $response->getHeader('X-RateLimit-Remaining');
             $limit = $response->getHeader('X-RateLimit-Limit');
 

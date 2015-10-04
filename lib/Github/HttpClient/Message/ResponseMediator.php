@@ -2,14 +2,24 @@
 
 namespace Github\HttpClient\Message;
 
-use Guzzle\Http\Message\Response;
 use Github\Exception\ApiLimitExceedException;
+use GuzzleHttp\Message\ResponseInterface;
 
 class ResponseMediator
 {
-    public static function getContent(Response $response)
+    /**
+     * @param \GuzzleHttp\Message\ResponseInterface|\Psr\Http\Message\ResponseInterface $response
+     *
+     * @return mixed
+     */
+    public static function getContent(ResponseInterface $response)
     {
-        $body    = $response->getBody(true);
+        // Guzzle < 6 BC
+        if (!$response instanceof \GuzzleHttp\Message\ResponseInterface && !$response instanceof \Psr\Http\Message\ResponseInterface) {
+            throw new \InvalidArgumentException('Argument 1 of '.__METHOD__.' must be on instance of \GuzzleHttp\Message\ResponseInterface or \Psr\Http\Message\ResponseInterface');
+        }
+
+        $body    = $response->getBody()->getContents();
         $content = json_decode($body, true);
 
         if (JSON_ERROR_NONE !== json_last_error()) {
@@ -19,8 +29,18 @@ class ResponseMediator
         return $content;
     }
 
-    public static function getPagination(Response $response)
+    /**
+     * @param \GuzzleHttp\Message\ResponseInterface|\Psr\Http\Message\ResponseInterface $response $response
+     *
+     * @return array|null
+     */
+    public static function getPagination($response)
     {
+        // Guzzle < 6 BC
+        if (!$response instanceof \GuzzleHttp\Message\ResponseInterface && !$response instanceof \Psr\Http\Message\ResponseInterface) {
+            throw new \InvalidArgumentException('Argument 1 of '.__METHOD__.' must be on instance of \GuzzleHttp\Message\ResponseInterface or \Psr\Http\Message\ResponseInterface');
+        }
+
         $header = (string) $response->getHeader('Link');
 
         if (empty($header)) {
@@ -39,14 +59,24 @@ class ResponseMediator
         return $pagination;
     }
 
-    public static function getApiLimit(Response $response)
+    /**
+     * @param \GuzzleHttp\Message\ResponseInterface|\Psr\Http\Message\ResponseInterface $response $response
+     *
+     * @return string
+     */
+    public static function getApiLimit($response)
     {
+        // Guzzle < 6 BC
+        if (!$response instanceof \GuzzleHttp\Message\ResponseInterface && !$response instanceof \Psr\Http\Message\ResponseInterface) {
+            throw new \InvalidArgumentException('Argument 1 of '.__METHOD__.' must be on instance of \GuzzleHttp\Message\ResponseInterface or \Psr\Http\Message\ResponseInterface');
+        }
+
         $remainingCalls = (string) $response->getHeader('X-RateLimit-Remaining');
 
         if (null !== $remainingCalls && 1 > $remainingCalls) {
             throw new ApiLimitExceedException($remainingCalls);
         }
-        
+
         return $remainingCalls;
     }
 }
