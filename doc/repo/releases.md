@@ -1,7 +1,7 @@
 ## Repo / Releases API
 [Back to the "Repos API"](../repos.md) | [Back to the navigation](../README.md)
 
-This Github API Endpoint is currently undocumented because it's new, but works just fine.
+Provides information about releases for a repository. Wraps [GitHub Releases API](https://developer.github.com/v3/repos/releases/).
 
 ### Get latest actual release
 
