@@ -67,6 +67,7 @@ class Deployment extends AbstractApi
         if (!isset($params['state'])) {
             throw new MissingArgumentException(array('state'));
         }
+
         return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/deployments/'.rawurlencode($id).'/statuses', $params);
     }
 
