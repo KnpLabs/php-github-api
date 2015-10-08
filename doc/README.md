@@ -19,6 +19,7 @@ APIs:
   * [Contents](repo/contents.md)
   * [Releases](repo/releases.md)
     * [Assets](repo/assets.md)
+  * [Tags](repo/tags.md)
   * [Deployments](repo/deployments.md)
 * [Users](users.md)
 * [Meta](meta.md)
