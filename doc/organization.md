@@ -11,12 +11,12 @@ Additional APIs:
 [GitHub Issues API](https://developer.github.com/v3/issues/).
 
 ```php
-$issues = $client->api('orgs')->issues('KnpLabs', 'php-github-api', array('state' => 'open'));
+$issues = $client->api('organizations')->issues('KnpLabs', 'php-github-api', array('state' => 'open'));
 ```
 You can specify the page number:
 
 ```php
-$issues = $client->api('orgs')->issues('KnpLabs', 'php-github-api', array('state' => 'open'), 2);
+$issues = $client->api('organizations')->issues('KnpLabs', 'php-github-api', array('state' => 'open'), 2);
 ```
 
 Returns an array of issues.
