@@ -4,6 +4,20 @@
 Searching repositories, getting repository information and managing repository information for authenticated users.
 Wrap [GitHub Repo API](http://developer.github.com/v3/repos/). All methods are described on that page.
 
+### List all repositories
+
+#### Simple call
+
+```php
+$repos = $client->api('repo')->all();
+```
+
+#### Start from a specific repository id
+
+```php
+$repos = $client->api('repo')->all(1337);
+```
+
 ### Search repos by keyword
 
 #### Simple search

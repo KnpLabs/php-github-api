@@ -40,6 +40,23 @@ class Repo extends AbstractApi
     }
 
     /**
+     * List all public repositories.
+     *
+     * @link https://developer.github.com/v3/repos/#list-all-public-repositories
+     *
+     * @param int|null $id The integer ID of the last Repository that you’ve seen.
+     *
+     * @return array list of users found
+     */
+    public function all($id = null)
+    {
+        if (!is_int($id)) {
+            return $this->get('repositories');
+        }
+        return $this->get('repositories?since=' . rawurldecode($id));
+    }
+
+    /**
      * Get the last year of commit activity for a repository grouped by week.
      *
      * @link http://developer.github.com/v3/repos/statistics/#commit-activity
