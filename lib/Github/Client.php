@@ -29,6 +29,7 @@ use Github\HttpClient\HttpClientInterface;
  * @method Api\PullRequest pr()
  * @method Api\PullRequest pullRequest()
  * @method Api\PullRequest pullRequests()
+ * @method Api\RateLimit ratelimit()
  * @method Api\Repo repo()
  * @method Api\Repo repos()
  * @method Api\Repo repository()
@@ -166,6 +167,11 @@ class Client
             case 'pullRequests':
             case 'pull_requests':
                 $api = new Api\PullRequest($this);
+                break;
+
+            case 'rateLimit':
+            case 'rate_limit':
+                $api = new Api\RateLimit($this);
                 break;
 
             case 'repo':

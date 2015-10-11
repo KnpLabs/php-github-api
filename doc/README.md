@@ -15,6 +15,7 @@ APIs:
   * [Teams](organization/teams.md)
 * [Pull Requests](pull_requests.md)
   * [Comments](pull_request/comments.md)
+* [Rate Limits](rate_limits.md)
 * [Repositories](repos.md)
   * [Contents](repo/contents.md)
   * [Releases](repo/releases.md)
