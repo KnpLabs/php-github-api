@@ -21,6 +21,7 @@ class Commits extends AbstractApi
         if (null !== $mediaType) {
             $headers['Accept'] = $mediaType;
         }
+
         return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/compare/'.rawurlencode($base).'...'.rawurlencode($head), array(), $headers);
     }
 
