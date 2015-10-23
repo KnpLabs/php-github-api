@@ -68,6 +68,14 @@ class HttpClient implements HttpClientInterface
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public function setBaseUrl($baseUrl)
+    {
+        $this->client->setBaseUrl($baseUrl);
+    }
+
+    /**
      * Clears used headers.
      */
     public function clearHeaders()
