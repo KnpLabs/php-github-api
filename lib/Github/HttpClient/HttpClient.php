@@ -68,7 +68,7 @@ class HttpClient implements HttpClientInterface
     }
 
     /**
-     * Clears used headers
+     * Clears used headers.
      */
     public function clearHeaders()
     {

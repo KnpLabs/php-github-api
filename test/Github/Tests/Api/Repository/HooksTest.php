@@ -56,7 +56,7 @@ class HooksTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateHookWithoutName()
     {
@@ -71,7 +71,7 @@ class HooksTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateHookWithoutColor()
     {
@@ -103,7 +103,7 @@ class HooksTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotUpdateHookWithoutName()
     {
@@ -118,7 +118,7 @@ class HooksTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotUpdateHookWithoutConfig()
     {

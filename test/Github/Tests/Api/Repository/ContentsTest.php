@@ -135,7 +135,7 @@ class ContentsTest extends TestCase
 
     /**
      * @test
-     * @expectedException        Github\Exception\MissingArgumentException
+     * @expectedException        \Github\Exception\MissingArgumentException
      * @expectedExceptionMessage One or more of required ("name", "email") parameters is missing!
      */
     public function shouldThrowExceptionWhenCreateNewFileWithInvalidCommitter()
@@ -175,7 +175,7 @@ class ContentsTest extends TestCase
 
     /**
      * @test
-     * @expectedException        Github\Exception\MissingArgumentException
+     * @expectedException        \Github\Exception\MissingArgumentException
      * @expectedExceptionMessage One or more of required ("name", "email") parameters is missing!
      */
     public function shouldThrowExceptionWhenUpdateFileWithInvalidCommitter()
@@ -213,7 +213,7 @@ class ContentsTest extends TestCase
 
     /**
      * @test
-     * @expectedException        Github\Exception\MissingArgumentException
+     * @expectedException        \Github\Exception\MissingArgumentException
      * @expectedExceptionMessage One or more of required ("name", "email") parameters is missing!
      */
     public function shouldThrowExceptionWhenDeleteFileWithInvalidCommitter()
@@ -331,7 +331,6 @@ class ContentsTest extends TestCase
     {
         return 'Github\Api\Repository\Contents';
     }
-
 
     private function getGuzzleResponseMock()
     {

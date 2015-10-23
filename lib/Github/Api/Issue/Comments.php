@@ -11,29 +11,34 @@ use Github\Exception\MissingArgumentException;
  */
 class Comments extends AbstractApi
 {
+    /**
+     * Configure the body type.
+     *
+     * @link https://developer.github.com/v3/issues/comments/#custom-media-types
+     * @param string|null $bodyType
+     */
     public function configure($bodyType = null)
     {
-        $apiVersion = $this->client->getOption('api_version');
-        switch ($bodyType) {
-            case 'raw':
-                $header = sprintf('Accept: application/vnd.github.%s.raw+json', $apiVersion);
-                break;
-
-            case 'text':
-                $header = sprintf('Accept: application/vnd.github.%s.text+json', $apiVersion);
-                break;
-
-            case 'html':
-                $header = sprintf('Accept: application/vnd.github.%s.html+json', $apiVersion);
-                break;
-
-            default:
-                $header = sprintf('Accept: application/vnd.github.%s.full+json', $apiVersion);
+        if (!in_array($bodyType, array('raw', 'text', 'html'))) {
+            $bodyType = 'full';
         }
 
-        $this->client->setHeaders(array($header));
+        $this->client->setHeaders(array(
+            sprintf('Accept: application/vnd.github.%s.%s+json', $this->client->getOption('api_version'), $bodyType)
+        ));
     }
 
+    /**
+     * Get all comments for an issue.
+     *
+     * @link https://developer.github.com/v3/issues/comments/#list-comments-on-an-issue
+     * @param string $username
+     * @param string $repository
+     * @param int    $issue
+     * @param int    $page
+     *
+     * @return array
+     */
     public function all($username, $repository, $issue, $page = 1)
     {
         return $this->get(
@@ -42,6 +47,16 @@ class Comments extends AbstractApi
         );
     }
 
+    /**
+     * Get a comment for an issue.
+     *
+     * @link https://developer.github.com/v3/issues/comments/#get-a-single-comment
+     * @param string $username
+     * @param string $repository
+     * @param int    $comment
+     *
+     * @return array
+     */
     public function show($username, $repository, $comment)
     {
         return $this->get(
@@ -49,6 +64,18 @@ class Comments extends AbstractApi
         );
     }
 
+    /**
+     * Create a comment for an issue.
+     *
+     * @link https://developer.github.com/v3/issues/comments/#create-a-comment
+     * @param string $username
+     * @param string $repository
+     * @param int    $issue
+     * @param array  $params
+     *
+     * @throws \Github\Exception\MissingArgumentException
+     * @return array
+     */
     public function create($username, $repository, $issue, array $params)
     {
         if (!isset($params['body'])) {
@@ -61,6 +88,18 @@ class Comments extends AbstractApi
         );
     }
 
+    /**
+     * Update a comment for an issue.
+     *
+     * @link https://developer.github.com/v3/issues/comments/#edit-a-comment
+     * @param string $username
+     * @param string $repository
+     * @param int    $comment
+     * @param array  $params
+     *
+     * @throws \Github\Exception\MissingArgumentException
+     * @return array
+     */
     public function update($username, $repository, $comment, array $params)
     {
         if (!isset($params['body'])) {
@@ -73,6 +112,16 @@ class Comments extends AbstractApi
         );
     }
 
+    /**
+     * Delete a comment for an issue.
+     *
+     * @link https://developer.github.com/v3/issues/comments/#delete-a-comment
+     * @param string $username
+     * @param string $repository
+     * @param int    $comment
+     *
+     * @return array
+     */
     public function remove($username, $repository, $comment)
     {
         return $this->delete(

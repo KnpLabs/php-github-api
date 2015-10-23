@@ -3,7 +3,7 @@
 namespace Github\Exception;
 
 /**
- * MissingArgumentException
+ * MissingArgumentException.
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */

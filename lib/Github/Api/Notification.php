@@ -15,7 +15,7 @@ use DateTime;
 class Notification extends AbstractApi
 {
     /**
-     * Get a listing of notifications
+     * Get a listing of notifications.
      *
      * @link https://developer.github.com/v3/activity/notifications/
      *
@@ -41,7 +41,7 @@ class Notification extends AbstractApi
 
     /**
      * Marks all notifications as read from the current date
-     * Optionally give DateTime to mark as read before that date
+     * Optionally give DateTime to mark as read before that date.
      *
      * @link https://developer.github.com/v3/activity/notifications/#mark-as-read
      *

@@ -12,10 +12,12 @@ use Github\Api\AbstractApi;
 class Watchers extends AbstractApi
 {
     /**
-     * List repositories watched by the authenticated user
+     * List repositories watched by the authenticated user.
+     *
      * @link https://developer.github.com/v3/activity/watching/
      *
-     * @param  integer $page
+     * @param int $page
+     *
      * @return array
      */
     public function all($page = 1)
@@ -26,11 +28,13 @@ class Watchers extends AbstractApi
     }
 
     /**
-     * Check that the authenticated user watches a repository
+     * Check that the authenticated user watches a repository.
+     *
      * @link https://developer.github.com/v3/activity/watching/
      *
-     * @param  string $username   the user who owns the repo
-     * @param  string $repository the name of the repo
+     * @param string $username   the user who owns the repo
+     * @param string $repository the name of the repo
+     *
      * @return array
      */
     public function check($username, $repository)
@@ -39,11 +43,13 @@ class Watchers extends AbstractApi
     }
 
     /**
-     * Make the authenticated user watch a repository
+     * Make the authenticated user watch a repository.
+     *
      * @link https://developer.github.com/v3/activity/watching/
      *
-     * @param  string $username   the user who owns the repo
-     * @param  string $repository the name of the repo
+     * @param string $username   the user who owns the repo
+     * @param string $repository the name of the repo
+     *
      * @return array
      */
     public function watch($username, $repository)
@@ -52,11 +58,13 @@ class Watchers extends AbstractApi
     }
 
     /**
-     * Make the authenticated user unwatch a repository
+     * Make the authenticated user unwatch a repository.
+     *
      * @link https://developer.github.com/v3/activity/watching/
      *
-     * @param  string $username   the user who owns the repo
-     * @param  string $repository the name of the repo
+     * @param string $username   the user who owns the repo
+     * @param string $repository the name of the repo
+     *
      * @return array
      */
     public function unwatch($username, $repository)

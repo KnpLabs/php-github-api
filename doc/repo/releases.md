@@ -1,8 +1,19 @@
 ## Repo / Releases API
-[Back to the "Repos API"](../repos.md) | [Back to the navigation](../index.md)
+[Back to the "Repos API"](../repos.md) | [Back to the navigation](../README.md)
 
-This Github API Endpoint is currently undocumented because it's new, but works just fine.
+Provides information about releases for a repository. Wraps [GitHub Releases API](https://developer.github.com/v3/repos/releases/).
 
+### Get latest actual release
+
+```php
+$release = $client->api('repo')->releases()->latest('twbs', 'bootstrap');
+```
+
+### List releases for a tag
+
+```php
+$release = $client->api('repo')->releases()->all('twbs', 'bootstrap', 'd890eec');
+```
 
 ### List all releases
 

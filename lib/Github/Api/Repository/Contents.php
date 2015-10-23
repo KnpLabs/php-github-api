@@ -15,7 +15,8 @@ use Github\Exception\TwoFactorAuthenticationRequiredException;
 class Contents extends AbstractApi
 {
     /**
-     * Get content of README file in a repository
+     * Get content of README file in a repository.
+     *
      * @link http://developer.github.com/v3/repos/contents/
      *
      * @param string      $username   the user who owns the repository
@@ -32,7 +33,8 @@ class Contents extends AbstractApi
     }
 
     /**
-     * Get contents of any file or directory in a repository
+     * Get contents of any file or directory in a repository.
+     *
      * @link http://developer.github.com/v3/repos/contents/
      *
      * @param string      $username   the user who owns the repository
@@ -55,7 +57,8 @@ class Contents extends AbstractApi
     }
 
     /**
-     * Creates a new file in a repository
+     * Creates a new file in a repository.
+     *
      * @link http://developer.github.com/v3/repos/contents/#create-a-file
      *
      * @param string      $username   the user who owns the repository
@@ -96,11 +99,12 @@ class Contents extends AbstractApi
     /**
      * Checks that a given path exists in a repository.
      *
-     * @param string      $username the user who owns the repository
+     * @param string      $username   the user who owns the repository
      * @param string      $repository the name of the repository
-     * @param string      $path path of file to check
-     * @param null|string $reference reference to a branch or commit
-     * @return boolean
+     * @param string      $path       path of file to check
+     * @param null|string $reference  reference to a branch or commit
+     *
+     * @return bool
      */
     public function exists($username, $repository, $path, $reference = null)
     {
@@ -128,7 +132,8 @@ class Contents extends AbstractApi
     }
 
     /**
-     * Updates the contents of a file in a repository
+     * Updates the contents of a file in a repository.
+     *
      * @link http://developer.github.com/v3/repos/contents/#update-a-file
      *
      * @param string      $username   the user who owns the repository
@@ -176,9 +181,9 @@ class Contents extends AbstractApi
         return $this->put($url, $parameters);
     }
 
-
     /**
-     * Deletes a file from a repository
+     * Deletes a file from a repository.
+     *
      * @link http://developer.github.com/v3/repos/contents/#delete-a-file
      *
      * @param string      $username   the user who owns the repository
@@ -217,7 +222,8 @@ class Contents extends AbstractApi
     }
 
     /**
-     * Get content of archives in a repository
+     * Get content of archives in a repository.
+     *
      * @link http://developer.github.com/v3/repos/contents/
      *
      * @param string      $username   the user who owns the repository
@@ -238,17 +244,17 @@ class Contents extends AbstractApi
     }
 
     /**
-     * Get the contents of a file in a repository
+     * Get the contents of a file in a repository.
      *
      * @param string      $username   the user who owns the repository
      * @param string      $repository the name of the repository
      * @param string      $path       path to file
      * @param null|string $reference  reference to a branch or commit
      *
-     * @return null|string content of file, or null in case of base64_decode failure
-     *
      * @throws InvalidArgumentException If $path is not a file or if its encoding is different from base64
      * @throws ErrorException           If $path doesn't include a 'content' index
+     *
+     * @return null|string content of file, or null in case of base64_decode failure
      */
     public function download($username, $repository, $path, $reference = null)
     {

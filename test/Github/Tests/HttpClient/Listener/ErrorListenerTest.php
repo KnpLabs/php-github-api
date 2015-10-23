@@ -30,10 +30,14 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
         $response->expects($this->once())
             ->method('isClientError')
             ->will($this->returnValue(true));
-        $response->expects($this->once())
+        $response->expects($this->at(1))
             ->method('getHeader')
             ->with('X-RateLimit-Remaining')
             ->will($this->returnValue(0));
+        $response->expects($this->at(2))
+            ->method('getHeader')
+            ->with('X-RateLimit-Limit')
+            ->will($this->returnValue(5000));
 
         $listener = new ErrorListener(array('api_limit' => 5000));
         $listener->onRequestError($this->getEventMock($response));
@@ -49,10 +53,15 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
         $response->expects($this->once())
             ->method('isClientError')
             ->will($this->returnValue(true));
-        $response->expects($this->once())
+        $response->expects($this->at(1))
             ->method('getHeader')
             ->with('X-RateLimit-Remaining')
             ->will($this->returnValue(5000));
+        $response->expects($this->at(2))
+            ->method('getHeader')
+            ->with('X-RateLimit-Limit')
+            ->will($this->returnValue(5000));
+
         $response->expects($this->once())
             ->method('getBody')
             ->will($this->returnValue('fail'));
@@ -71,9 +80,13 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
         $response->expects($this->once())
             ->method('isClientError')
             ->will($this->returnValue(true));
-        $response->expects($this->once())
+        $response->expects($this->at(1))
             ->method('getHeader')
             ->with('X-RateLimit-Remaining')
+            ->will($this->returnValue(5000));
+        $response->expects($this->at(2))
+            ->method('getHeader')
+            ->with('X-RateLimit-Limit')
             ->will($this->returnValue(5000));
         $response->expects($this->once())
             ->method('getBody')
@@ -96,9 +109,13 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
         $response->expects($this->once())
             ->method('isClientError')
             ->will($this->returnValue(true));
-        $response->expects($this->once())
+        $response->expects($this->at(1))
             ->method('getHeader')
             ->with('X-RateLimit-Remaining')
+            ->will($this->returnValue(5000));
+        $response->expects($this->at(2))
+            ->method('getHeader')
+            ->with('X-RateLimit-Limit')
             ->will($this->returnValue(5000));
         $response->expects($this->once())
             ->method('getBody')
@@ -134,9 +151,13 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
         $response->expects($this->once())
             ->method('isClientError')
             ->will($this->returnValue(true));
-        $response->expects($this->once())
+        $response->expects($this->at(1))
             ->method('getHeader')
             ->with('X-RateLimit-Remaining')
+            ->will($this->returnValue(5000));
+        $response->expects($this->at(2))
+            ->method('getHeader')
+            ->with('X-RateLimit-Limit')
             ->will($this->returnValue(5000));
         $response->expects($this->once())
             ->method('getBody')
@@ -170,6 +191,8 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
                         return 5000;
                     case 'X-GitHub-OTP':
                         return 'required; sms';
+                    case 'X-RateLimit-Limit':
+                        return 5000;
                 }
             }));
         $response->expects($this->any())

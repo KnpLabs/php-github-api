@@ -56,7 +56,7 @@ class DeployKeysTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateDeployKeyWithoutName()
     {
@@ -71,7 +71,7 @@ class DeployKeysTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateDeployKeyWithoutColor()
     {
@@ -103,7 +103,7 @@ class DeployKeysTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotUpdateDeployKeyWithoutTitle()
     {
@@ -118,7 +118,7 @@ class DeployKeysTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotUpdateDeployKeyWithoutKey()
     {

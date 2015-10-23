@@ -1,5 +1,5 @@
 ## Notification API
-[Back to the navigation](index.md)
+[Back to the navigation](README.md)
 
 Listing notifications and marking them as read.
 Wraps [GitHub Notification API](https://developer.github.com/v3/activity/notifications/).

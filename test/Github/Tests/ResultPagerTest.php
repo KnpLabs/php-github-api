@@ -3,13 +3,11 @@
 namespace Github\Tests;
 
 use Github;
-use Github\Client;
-use Github\ResultPager;
 use Github\HttpClient\HttpClientInterface;
 use Github\Tests\Mock\TestResponse;
 
 /**
- * ResultPagerTest
+ * ResultPagerTest.
  *
  * @author Ramon de la Fuente <ramon@future500.nl>
  * @author Mitchel Verschoof <mitchel@future500.nl>
@@ -51,6 +49,50 @@ class ResultPagerTest extends \PHPUnit_Framework_TestCase
         $result    = $paginator->fetchAll($memberApiMock, $method, $parameters);
 
         $this->assertEquals($amountLoops * count($content), count($result));
+    }
+
+    /**
+     * @test
+     *
+     * response in a search api has different format:
+     *
+     * {
+     *  "total_count": 1,
+     *  "incomplete_results": false,
+     *  "items": []
+     * }
+     *
+     * and we need to extract result from `items`
+     */
+    public function shouldGetAllSearchResults()
+    {
+        $amountLoops  = 3;
+
+        $content      = array(
+            'total_count' => 12,
+            'items' => array(1, 2, 3, 4)
+        );
+        $responseMock = new TestResponse($amountLoops, $content);
+
+        $httpClientMock = $this->getHttpClientMock($responseMock);
+        $httpClientMock
+            ->expects($this->exactly($amountLoops))
+            ->method('get')
+            ->will($this->returnValue($responseMock));
+
+        $clientMock = $this->getClientMock($httpClientMock);
+
+        $searchApiMock = $this->getApiMock('Github\Api\Search');
+        $searchApiMock
+            ->expects($this->once())
+            ->method('users')
+            ->will($this->returnValue(array()));
+
+        $method     = 'users';
+        $paginator = new Github\ResultPager($clientMock);
+        $result    = $paginator->fetchAll($searchApiMock, $method, array('knplabs'));
+
+        $this->assertEquals($amountLoops * count($content['items']), count($result));
     }
 
     /**

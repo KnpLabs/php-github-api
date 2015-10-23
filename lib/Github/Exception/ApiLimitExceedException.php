@@ -3,7 +3,7 @@
 namespace Github\Exception;
 
 /**
- * ApiLimitExceedException
+ * ApiLimitExceedException.
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */

@@ -71,6 +71,16 @@ class GistsTest extends TestCase
     /**
      * @test
      */
+    public function shouldGetCommentsApiObject()
+    {
+        $api = $this->getApiMock();
+
+        $this->assertInstanceOf('Github\Api\Gist\Comments', $api->comments());
+    }
+
+    /**
+     * @test
+     */
     public function shouldForkGist()
     {
         $expectedArray = array('id' => '123');
@@ -86,7 +96,23 @@ class GistsTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     */
+    public function shouldListGistForks()
+    {
+        $expectedArray = array('id' => '123');
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('gists/123/forks')
+            ->will($this->returnValue($expectedArray));
+
+        $api->forks(123);
+    }
+
+    /**
+     * @test
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateGistWithoutFile()
     {

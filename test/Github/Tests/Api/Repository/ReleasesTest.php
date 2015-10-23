@@ -9,6 +9,42 @@ class ReleasesTest extends TestCase
     /**
      * @test
      */
+    public function shouldGetLatestRelease()
+    {
+        $expectedValue = array('latest_release_data');
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('repos/KnpLabs/php-github-api/releases/latest')
+            ->will($this->returnValue($expectedValue));
+
+        $this->assertEquals($expectedValue, $api->latest('KnpLabs', 'php-github-api'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetReleaseByTag()
+    {
+        $expectedValue = array('latest_release_data');
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('repos/KnpLabs/php-github-api/releases/tags/5f078080e01e0365690920d618f12342d2c941c8')
+            ->will($this->returnValue($expectedValue));
+
+        $this->assertEquals($expectedValue, $api->tag(
+            'KnpLabs',
+            'php-github-api',
+            '5f078080e01e0365690920d618f12342d2c941c8'
+        ));
+    }
+
+    /**
+     * @test
+     */
     public function shouldGetAllRepositoryReleases()
     {
         $expectedValue = array(array('release1data'), array('release2data'));
@@ -58,7 +94,7 @@ class ReleasesTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateRepositoryReleaseWithoutTagName()
     {

@@ -3,7 +3,7 @@
 namespace Github\Exception;
 
 /**
- * RuntimeException
+ * RuntimeException.
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */

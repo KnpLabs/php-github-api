@@ -1,6 +1,7 @@
 # PHP GitHub API
 
 [![Build Status](https://secure.travis-ci.org/KnpLabs/php-github-api.png)](http://travis-ci.org/KnpLabs/php-github-api)
+[![StyleCI](https://styleci.io/repos/3948501/shield)](https://styleci.io/repos/3948501)
 
 A simple Object Oriented wrapper for GitHub API, written with PHP5.
 
@@ -36,7 +37,7 @@ Now we can use autoloader from Composer by:
 ```json
 {
     "require": {
-        "knplabs/github-api": "~1.2"
+        "knplabs/github-api": "~1.4"
     }
 }
 ```
@@ -90,7 +91,7 @@ Using cache, the client will get cached responses if resources haven't changed s
 
 ## Documentation
 
-See the `doc` directory for more detailed documentation.
+See the [`doc` directory](doc/) for more detailed documentation.
 
 ## License
 
@@ -100,7 +101,7 @@ See the `doc` directory for more detailed documentation.
 
 ### Sponsored by
 
-[![KnpLabs Team](http://knplabs.pl/bundles/knpcorporate/images/logo.png)](http://knplabs.com)
+[![KnpLabs Team](http://knplabs.com/front/images/knp-labs-logo.png)](http://knplabs.com)
 
 ### Contributors
 

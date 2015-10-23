@@ -184,7 +184,7 @@ class TeamsTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateTeamWithoutName()
     {
@@ -250,7 +250,7 @@ class TeamsTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotUpdateTeamWithoutName()
     {

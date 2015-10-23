@@ -7,7 +7,7 @@ use Github\Api\AbstractApi;
 class UserAdmin extends AbstractApi
 {
     /**
-     * Suspend a user
+     * Suspend a user.
      *
      * @link https://developer.github.com/v3/users/administration/#suspend-a-user
      *
@@ -21,7 +21,7 @@ class UserAdmin extends AbstractApi
     }
 
     /**
-     * Unsuspend a user
+     * Unsuspend a user.
      *
      * @link https://developer.github.com/v3/users/administration/#unsuspend-a-user
      *
