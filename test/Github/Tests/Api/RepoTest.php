@@ -61,6 +61,48 @@ class RepoTest extends TestCase
     /**
      * @test
      */
+    public function shouldGetAllRepositories()
+    {
+        $expectedArray = array(
+            array('id' => 1, 'name' => 'dummy project'),
+            array('id' => 2, 'name' => 'awesome another project'),
+            array('id' => 3, 'name' => 'fork of php'),
+            array('id' => 4, 'name' => 'fork of php-cs'),
+        );
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('repositories')
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->all());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetAllRepositoriesStartingIndex()
+    {
+        $expectedArray = array(
+            array('id' => 1, 'name' => 'dummy project'),
+            array('id' => 2, 'name' => 'awesome another project'),
+            array('id' => 3, 'name' => 'fork of php'),
+            array('id' => 4, 'name' => 'fork of php-cs'),
+        );
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('repositories?since=2')
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->all(2));
+    }
+
+    /**
+     * @test
+     */
     public function shouldCreateRepositoryUsingNameOnly()
     {
         $expectedArray = array('id' => 1, 'name' => 'l3l0Repo');
@@ -186,6 +228,22 @@ class RepoTest extends TestCase
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->languages('KnpLabs', 'php-github-api'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetRepositoryMilestones()
+    {
+        $expectedArray = array('milestone1', 'milestone2');
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('repos/KnpLabs/php-github-api/milestones')
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->milestones('KnpLabs', 'php-github-api'));
     }
 
     /**
@@ -422,15 +480,15 @@ class RepoTest extends TestCase
      */
     public function shouldGetCommitActivity()
     {
-	$expectedArray = array(array('days' => array(0, 3, 26, 20, 39, 1, 0), 'total' => 89, 'week' => 1336280400));
+        $expectedArray = array(array('days' => array(0, 3, 26, 20, 39, 1, 0), 'total' => 89, 'week' => 1336280400));
 
-	$api = $this->getApiMock();
-	$api->expects($this->once())
-	    ->method('get')
-	    ->with('repos/KnpLabs/php-github-api/stats/commit_activity')
-	    ->will($this->returnValue($expectedArray));
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('repos/KnpLabs/php-github-api/stats/commit_activity')
+            ->will($this->returnValue($expectedArray));
 
-	$this->assertEquals($expectedArray, $api->activity('KnpLabs', 'php-github-api'));
+        $this->assertEquals($expectedArray, $api->activity('KnpLabs', 'php-github-api'));
     }
 
     protected function getApiClass()

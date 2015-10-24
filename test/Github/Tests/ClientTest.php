@@ -3,7 +3,6 @@
 namespace Github\Tests;
 
 use Github\Client;
-use Github\Exception\InvalidArgumentException;
 use Github\Exception\BadMethodCallException;
 
 class ClientTest extends \PHPUnit_Framework_TestCase
@@ -78,7 +77,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException InvalidArgumentException
+     * @expectedException \Github\Exception\InvalidArgumentException
      */
     public function shouldThrowExceptionWhenAuthenticatingWithoutMethodSet()
     {
@@ -138,7 +137,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException InvalidArgumentException
+     * @expectedException \Github\Exception\InvalidArgumentException
      */
     public function shouldNotGetApiInstance()
     {

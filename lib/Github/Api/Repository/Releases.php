@@ -13,10 +13,37 @@ use Github\Exception\MissingArgumentException;
 class Releases extends AbstractApi
 {
     /**
-     * List releases in selected repository
+     * Get the latest release.
      *
-     * @param  string  $username         the user who owns the repo
-     * @param  string  $repository       the name of the repo
+     * @param $username
+     * @param $repository
+     *
+     * @return array
+     */
+    public function latest($username, $repository)
+    {
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/latest');
+    }
+
+    /**
+     * List releases for a tag.
+     *
+     * @param $username
+     * @param $repository
+     * @param $tag
+     *
+     * @return array
+     */
+    public function tag($username, $repository, $tag)
+    {
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/tags/'.rawurlencode($tag));
+    }
+
+    /**
+     * List releases in selected repository.
+     *
+     * @param string $username   the user who owns the repo
+     * @param string $repository the name of the repo
      *
      * @return array
      */
@@ -26,11 +53,11 @@ class Releases extends AbstractApi
     }
 
     /**
-     * Get a release in selected repository
+     * Get a release in selected repository.
      *
-     * @param  string  $username         the user who owns the repo
-     * @param  string  $repository       the name of the repo
-     * @param  integer $id               the id of the release
+     * @param string $username   the user who owns the repo
+     * @param string $repository the name of the repo
+     * @param int    $id         the id of the release
      *
      * @return array
      */
@@ -42,11 +69,11 @@ class Releases extends AbstractApi
     }
 
     /**
-     * Create new release in selected repository
+     * Create new release in selected repository.
      *
-     * @param  string  $username
-     * @param  string  $repository
-     * @param  array   $params
+     * @param string $username
+     * @param string $repository
+     * @param array  $params
      *
      * @throws MissingArgumentException
      *
@@ -62,12 +89,12 @@ class Releases extends AbstractApi
     }
 
     /**
-     * Edit release in selected repository
+     * Edit release in selected repository.
      *
-     * @param  string  $username
-     * @param  string  $repository
-     * @param  integer $id
-     * @param  array   $params
+     * @param string $username
+     * @param string $repository
+     * @param int    $id
+     * @param array  $params
      *
      * @return array
      */
@@ -80,11 +107,11 @@ class Releases extends AbstractApi
     }
 
     /**
-     * Delete a release in selected repository (Not thoroughly tested!)
+     * Delete a release in selected repository (Not thoroughly tested!).
      *
-     * @param  string  $username         the user who owns the repo
-     * @param  string  $repository       the name of the repo
-     * @param  integer $id               the id of the release
+     * @param string $username   the user who owns the repo
+     * @param string $repository the name of the repo
+     * @param int    $id         the id of the release
      *
      * @return array
      */

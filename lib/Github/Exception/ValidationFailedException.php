@@ -3,11 +3,10 @@
 namespace Github\Exception;
 
 /**
- * ValidationFailedException
+ * ValidationFailedException.
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class ValidationFailedException extends ErrorException
 {
-
 }

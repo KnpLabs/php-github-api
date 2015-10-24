@@ -11,6 +11,15 @@ use Github\Exception\MissingArgumentException;
  */
 class Commits extends AbstractApi
 {
+    /**
+     * Show a commit for a repository.
+     *
+     * @param string $username
+     * @param string $repository
+     * @param string $sha
+     *
+     * @return array
+     */
     public function show($username, $repository, $sha)
     {
         return $this->get(
@@ -18,6 +27,17 @@ class Commits extends AbstractApi
         );
     }
 
+    /**
+     * Create a commit for a repository.
+     *
+     * @param string $username
+     * @param string $repository
+     * @param array  $params
+     *
+     * @return array
+     *
+     * @throws \Github\Exception\MissingArgumentException
+     */
     public function create($username, $repository, array $params)
     {
         if (!isset($params['message'], $params['tree'], $params['parents'])) {

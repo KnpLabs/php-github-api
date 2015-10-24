@@ -21,7 +21,7 @@ class ResponseMediator
 
     public static function getPagination(Response $response)
     {
-        $header = $response->getHeader('Link');
+        $header = (string) $response->getHeader('Link');
 
         if (empty($header)) {
             return null;
@@ -41,10 +41,12 @@ class ResponseMediator
 
     public static function getApiLimit(Response $response)
     {
-        $remainingCalls = $response->getHeader('X-RateLimit-Remaining');
+        $remainingCalls = (string) $response->getHeader('X-RateLimit-Remaining');
 
         if (null !== $remainingCalls && 1 > $remainingCalls) {
             throw new ApiLimitExceedException($remainingCalls);
         }
+        
+        return $remainingCalls;
     }
 }

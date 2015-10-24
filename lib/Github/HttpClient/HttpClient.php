@@ -7,7 +7,6 @@ use Guzzle\Http\Client as GuzzleClient;
 use Guzzle\Http\ClientInterface;
 use Guzzle\Http\Message\Request;
 use Guzzle\Http\Message\Response;
-
 use Github\Exception\ErrorException;
 use Github\Exception\RuntimeException;
 use Github\HttpClient\Listener\AuthListener;
@@ -69,7 +68,7 @@ class HttpClient implements HttpClientInterface
     }
 
     /**
-     * Clears used headers
+     * Clears used headers.
      */
     public function clearHeaders()
     {

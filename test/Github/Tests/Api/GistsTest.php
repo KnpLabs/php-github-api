@@ -17,7 +17,7 @@ class GistsTest extends TestCase
             ->with('gists/starred')
             ->will($this->returnValue($expectedArray));
 
-       $this->assertEquals($expectedArray, $api->all('starred'));
+        $this->assertEquals($expectedArray, $api->all('starred'));
     }
 
     /**
@@ -33,7 +33,7 @@ class GistsTest extends TestCase
             ->with('gists')
             ->will($this->returnValue($expectedArray));
 
-       $this->assertEquals($expectedArray, $api->all());
+        $this->assertEquals($expectedArray, $api->all());
     }
 
     /**
@@ -49,7 +49,7 @@ class GistsTest extends TestCase
             ->with('gists/123')
             ->will($this->returnValue($expectedArray));
 
-       $this->assertEquals($expectedArray, $api->show(123));
+        $this->assertEquals($expectedArray, $api->show(123));
     }
 
     /**
@@ -65,7 +65,17 @@ class GistsTest extends TestCase
             ->with('gists/123/commits')
             ->will($this->returnValue($expectedArray));
 
-       $this->assertEquals($expectedArray, $api->commits(123));
+        $this->assertEquals($expectedArray, $api->commits(123));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetCommentsApiObject()
+    {
+        $api = $this->getApiMock();
+
+        $this->assertInstanceOf('Github\Api\Gist\Comments', $api->comments());
     }
 
     /**
@@ -81,12 +91,28 @@ class GistsTest extends TestCase
             ->with('gists/123/fork')
             ->will($this->returnValue($expectedArray));
 
-       $this->assertEquals($expectedArray, $api->fork(123));
+        $this->assertEquals($expectedArray, $api->fork(123));
     }
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     */
+    public function shouldListGistForks()
+    {
+        $expectedArray = array('id' => '123');
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('gists/123/forks')
+            ->will($this->returnValue($expectedArray));
+
+        $api->forks(123);
+    }
+
+    /**
+     * @test
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateGistWithoutFile()
     {
@@ -115,7 +141,7 @@ class GistsTest extends TestCase
             ->with('gists/123/star')
             ->will($this->returnValue($expectedArray));
 
-       $this->assertEquals($expectedArray, $api->check(123));
+        $this->assertEquals($expectedArray, $api->check(123));
     }
 
     /**
@@ -131,7 +157,7 @@ class GistsTest extends TestCase
             ->with('gists/123/star')
             ->will($this->returnValue($expectedArray));
 
-       $this->assertEquals($expectedArray, $api->star(123));
+        $this->assertEquals($expectedArray, $api->star(123));
     }
 
     /**
@@ -147,7 +173,7 @@ class GistsTest extends TestCase
             ->with('gists/123/star')
             ->will($this->returnValue($expectedArray));
 
-       $this->assertEquals($expectedArray, $api->unstar(123));
+        $this->assertEquals($expectedArray, $api->unstar(123));
     }
 
     /**

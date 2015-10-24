@@ -3,11 +3,10 @@
 namespace Github\Exception;
 
 /**
- * RuntimeException
+ * RuntimeException.
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class RuntimeException extends \RuntimeException implements ExceptionInterface
 {
-
 }

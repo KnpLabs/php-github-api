@@ -1,5 +1,5 @@
 ## Enterprise API
-[Back to the navigation](index.md)
+[Back to the navigation](README.md)
 
 Provides information about a GitHub Enterprise installation. Wraps [GitHub Enterprise API](http://developer.github.com/v3/enterprise/).
 

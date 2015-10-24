@@ -1,5 +1,5 @@
 ## Issues API
-[Back to the navigation](index.md)
+[Back to the navigation](README.md)
 
 Listing issues, searching, editing and closing your projects issues.
 Wraps [GitHub Issue API](http://developer.github.com/v3/issues/).
@@ -7,6 +7,7 @@ Wraps [GitHub Issue API](http://developer.github.com/v3/issues/).
 Additional APIs:
 * [Comments](issue/comments.md)
 * [Labels](issue/labels.md)
+* [Milestones](issue/milestones.md)
 
 ### List issues in a project
 
@@ -22,7 +23,7 @@ Returns an array of issues.
 $issues = $client->api('issue')->find('KnpLabs', 'php-github-api', 'closed', 'bug');
 ```
 
-Returns an array of closed issues matching the "bug" term.
+Returns an array of closed issues matching the "bug" term. For more complex searches, use the [search api](search.md) which supports the advanced GitHub search syntax.
 
 ### Get information about an issue
 

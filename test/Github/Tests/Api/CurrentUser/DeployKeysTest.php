@@ -2,8 +2,6 @@
 
 namespace Github\Tests\Api;
 
-use Github\Tests\Api\TestCase;
-
 class DeployKeysTest extends TestCase
 {
     /**
@@ -57,7 +55,7 @@ class DeployKeysTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateKeyWithoutTitleParam()
     {
@@ -72,7 +70,7 @@ class DeployKeysTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateKeyWithoutKeyParam()
     {
@@ -104,7 +102,7 @@ class DeployKeysTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotUpdateKeyWithoutTitleParam()
     {
@@ -119,7 +117,7 @@ class DeployKeysTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotUpdateKeyWithoutKeyParam()
     {

@@ -3,7 +3,7 @@
 namespace Github\Api;
 
 /**
- * Getting GitHub service information
+ * Getting GitHub service information.
  *
  * @link   https://developer.github.com/v3/meta/
  * @author Claude Dioudonnat <claude.dioudonnat@gmail.com>
@@ -11,7 +11,7 @@ namespace Github\Api;
 class Meta extends AbstractApi
 {
     /**
-     * Get the ip address of the hook and git servers for the GitHub.com service
+     * Get the ip address of the hook and git servers for the GitHub.com service.
      *
      * @return array Informations about the service of GitHub.com
      */

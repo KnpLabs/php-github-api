@@ -53,7 +53,7 @@ class ContentsTest extends TestCase
             ->willReturn(200);
 
         $api = $this->getApiMock();
-            $api->expects($this->once())
+        $api->expects($this->once())
             ->method('head')
             ->with('repos/KnpLabs/php-github-api/contents/composer.json', array('ref' => null))
             ->will($this->returnValue($responseMock));
@@ -135,7 +135,7 @@ class ContentsTest extends TestCase
 
     /**
      * @test
-     * @expectedException        Github\Exception\MissingArgumentException
+     * @expectedException        \Github\Exception\MissingArgumentException
      * @expectedExceptionMessage One or more of required ("name", "email") parameters is missing!
      */
     public function shouldThrowExceptionWhenCreateNewFileWithInvalidCommitter()
@@ -175,7 +175,7 @@ class ContentsTest extends TestCase
 
     /**
      * @test
-     * @expectedException        Github\Exception\MissingArgumentException
+     * @expectedException        \Github\Exception\MissingArgumentException
      * @expectedExceptionMessage One or more of required ("name", "email") parameters is missing!
      */
     public function shouldThrowExceptionWhenUpdateFileWithInvalidCommitter()
@@ -213,7 +213,7 @@ class ContentsTest extends TestCase
 
     /**
      * @test
-     * @expectedException        Github\Exception\MissingArgumentException
+     * @expectedException        \Github\Exception\MissingArgumentException
      * @expectedExceptionMessage One or more of required ("name", "email") parameters is missing!
      */
     public function shouldThrowExceptionWhenDeleteFileWithInvalidCommitter()
@@ -233,7 +233,7 @@ class ContentsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/tarball', array('ref' => null))
+            ->with('repos/KnpLabs/php-github-api/tarball')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->archive('KnpLabs', 'php-github-api', 'someFormat'));
@@ -249,7 +249,7 @@ class ContentsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/tarball', array('ref' => null))
+            ->with('repos/KnpLabs/php-github-api/tarball')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->archive('KnpLabs', 'php-github-api', 'tarball'));
@@ -265,10 +265,26 @@ class ContentsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/zipball', array('ref' => null))
+            ->with('repos/KnpLabs/php-github-api/zipball')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->archive('KnpLabs', 'php-github-api', 'zipball'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldFetchZipballArchiveByReference()
+    {
+        $expectedValue = 'zip';
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('repos/KnpLabs/php-github-api/zipball/master')
+            ->will($this->returnValue($expectedValue));
+
+        $this->assertEquals($expectedValue, $api->archive('KnpLabs', 'php-github-api', 'zipball', 'master'));
     }
 
     /**
@@ -315,7 +331,6 @@ class ContentsTest extends TestCase
     {
         return 'Github\Api\Repository\Contents';
     }
-
 
     private function getGuzzleResponseMock()
     {

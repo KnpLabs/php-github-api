@@ -17,7 +17,7 @@ class AuthorizationsTest extends TestCase
             ->with('authorizations')
             ->will($this->returnValue($expectedArray));
 
-       $this->assertEquals($expectedArray, $api->all());
+        $this->assertEquals($expectedArray, $api->all());
     }
 
     /**
@@ -34,25 +34,7 @@ class AuthorizationsTest extends TestCase
             ->with('authorizations/'.$id)
             ->will($this->returnValue($expectedArray));
 
-       $this->assertEquals($expectedArray, $api->show($id));
-    }
-
-    /**
-     * @test
-     */
-    public function shouldCheckAuthorization()
-    {
-        $id = 123;
-        $token = 'abc';
-        $expectedArray = array('id' => $id);
-
-        $api = $this->getApiMock();
-        $api->expects($this->once())
-            ->method('get')
-            ->with('authorizations/'.$id.'/tokens/'.$token)
-            ->will($this->returnValue($expectedArray));
-
-       $this->assertEquals($expectedArray, $api->check($id, $token));
+        $this->assertEquals($expectedArray, $api->show($id));
     }
 
     /**
@@ -102,6 +84,71 @@ class AuthorizationsTest extends TestCase
             ->with('authorizations/'.$id);
 
         $api->remove($id);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldCheckAuthorization()
+    {
+        $id = 123;
+        $token = 'abc';
+        $expectedArray = array('id' => $id);
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('applications/'.$id.'/tokens/'.$token)
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->check($id, $token));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldResetAuthorization()
+    {
+        $id = 123;
+        $token = 'abcde';
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('post')
+            ->with('applications/'.$id.'/tokens/'.$token);
+
+        $api->reset($id, $token);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldRevokeAuthorization()
+    {
+        $id = 123;
+        $token = 'abcde';
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('delete')
+            ->with('applications/'.$id.'/tokens/'.$token);
+
+        $api->revoke($id, $token);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldRevokeAllAuthorizations()
+    {
+        $id = 123;
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('delete')
+            ->with('applications/'.$id.'/tokens');
+
+        $api->revokeAll($id);
     }
 
     protected function getApiClass()

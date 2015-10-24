@@ -61,6 +61,7 @@ class StatsTest extends TestCase
 
     /**
      * @param string $key
+     *
      * @return mixed
      */
     protected function getStatsData($key = '')
