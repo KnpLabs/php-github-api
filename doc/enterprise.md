@@ -22,7 +22,7 @@ $repositories = $client->api('user')->repositories('ornicar');
 ```
 
 ### Authentication
-The Admin Stats, License, and User Administration API endpoints are only accessible to GitHub Enterprise site administrators. The Management Console API endpoints are only accessible via the Management Console password.
+The Admin Stats, License, and User Administration API endpoints are only accessible to GitHub Enterprise site administrators. The Management Console API endpoints are only accessible via the [Management Console password](https://developer.github.com/v3/enterprise/management_console/#authentication).
 
 ### User Administration
 
