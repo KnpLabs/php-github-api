@@ -11,13 +11,13 @@ class ManagementConsole extends AbstractApi
      *
      * @link https://developer.github.com/v3/enterprise/management_console/#check-configuration-status
      *
-     * @param string $hash md5 hash of your license
+     * @param string $password the password for the management console
      *
      * @return array array of configuration status information
      */
-    public function configcheck($hash)
+    public function configcheck($password)
     {
-        return $this->getWithLicenseHash('/setup/api/configcheck', $hash);
+        return $this->getWithLicenseHash('/setup/api/configcheck', $password);
     }
 
     /**
@@ -25,13 +25,13 @@ class ManagementConsole extends AbstractApi
      *
      * @link https://developer.github.com/v3/enterprise/management_console/#retrieve-settings
      *
-     * @param string $hash md5 hash of your license
+     * @param string $password the password for the management console
      *
      * @return array array of settings
      */
-    public function settings($hash)
+    public function settings($password)
     {
-        return $this->getWithLicenseHash('/setup/api/settings', $hash);
+        return $this->getWithLicenseHash('/setup/api/settings', $password);
     }
 
     /**
@@ -39,13 +39,13 @@ class ManagementConsole extends AbstractApi
      *
      * @link https://developer.github.com/v3/enterprise/management_console/#check-maintenance-status
      *
-     * @param string $hash md5 hash of your license
+     * @param string $password the password for the management console
      *
      * @return array array of maintenance status information
      */
-    public function maintenance($hash)
+    public function maintenance($password)
     {
-        return $this->getWithLicenseHash('/setup/api/maintenance', $hash);
+        return $this->getWithLicenseHash('/setup/api/maintenance', $password);
     }
 
     /**
@@ -53,25 +53,25 @@ class ManagementConsole extends AbstractApi
      *
      * @link https://developer.github.com/v3/enterprise/management_console/#retrieve-authorized-ssh-keys
      *
-     * @param string $hash md5 hash of your license
+     * @param string $password the password for the management console
      *
      * @return array array of authorized keys
      */
-    public function keys($hash)
+    public function keys($password)
     {
-        return $this->getWithLicenseHash('/setup/api/settings/authorized-keys', $hash);
+        return $this->getWithLicenseHash('/setup/api/settings/authorized-keys', $password);
     }
 
     /**
      * Sends an authenticated GET request.
      *
      * @param string $uri  the request URI
-     * @param string $hash md5 hash of your license
+     * @param string $password the password for the management console
      *
      * @return \Guzzle\Http\EntityBodyInterface|mixed|string
      */
-    protected function getWithLicenseHash($uri, $hash)
+    protected function getWithLicenseHash($uri, $password)
     {
-        return $this->get($uri, array('license_md5' => rawurlencode($hash)));
+        return $this->get($uri, array('api_key' => rawurlencode($password)));
     }
 }
