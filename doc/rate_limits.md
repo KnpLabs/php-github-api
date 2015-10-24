@@ -7,17 +7,17 @@ Wraps [GitHub Rate Limit API](http://developer.github.com/v3/rate_limit/).
 #### Get All Rate Limits.
 
 ```php
-$rateLimits = $github->api('rate_limit')->getRateLimits();
+$rateLimits = $client->api('rate_limit')->getRateLimits();
 ```
 
 #### Get Core Rate Limit
 
 ```php
-$coreLimit = $github->api('rate_limit')->getCoreLimit();
+$coreLimit = $client->api('rate_limit')->getCoreLimit();
 ```
 
 #### Get Search Rate Limit
 
 ```php
-$searchLimit = $github->api('rate_limit)->getSearchLimit');
+$searchLimit = $client->api('rate_limit)->getSearchLimit');
 ```
