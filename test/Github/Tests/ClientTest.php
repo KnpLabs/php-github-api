@@ -155,6 +155,18 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $client->doNotExist();
     }
 
+    /**
+     * @test
+     */
+    public function shouldSetEnterpriseUrl()
+    {
+        $expectedEnterpriseUrl = 'https://ghe.local';
+        $httpClient = $this->getHttpClientMock();
+        $httpClient->expects($this->once())->method('setBaseUrl')->with($expectedEnterpriseUrl . '/api/v3');
+        $client = new Client($httpClient);
+        $client->setEnterpriseUrl($expectedEnterpriseUrl);
+    }
+
     public function getApiClassesProvider()
     {
         return array(
@@ -203,7 +215,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     public function getHttpClientMock(array $methods = array())
     {
         $methods = array_merge(
-            array('get', 'post', 'patch', 'put', 'delete', 'request', 'setOption', 'setHeaders', 'authenticate'),
+            array('get', 'post', 'patch', 'put', 'delete', 'request', 'setOption', 'setHeaders', 'setBaseUrl', 'authenticate'),
             $methods
         );
 

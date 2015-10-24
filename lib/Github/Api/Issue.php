@@ -31,7 +31,10 @@ class Issue extends AbstractApi
      */
     public function all($username, $repository, array $params = array())
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues', array_merge(array('page' => 1), $params));
+        return $this->get(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues',
+            array_merge(array('page' => 1), $params)
+        );
     }
 
     /**
@@ -52,7 +55,10 @@ class Issue extends AbstractApi
             $state = 'open';
         }
 
-        return $this->get('legacy/issues/search/'.rawurlencode($username).'/'.rawurlencode($repository).'/'.rawurlencode($state).'/'.rawurlencode($keyword));
+        return $this->get(
+            'legacy/issues/search/'.rawurlencode($username).'/'.rawurlencode($repository).'/'.rawurlencode($state).'/'
+            .rawurlencode($keyword)
+        );
     }
 
     /**
@@ -72,7 +78,10 @@ class Issue extends AbstractApi
             $state = 'open';
         }
 
-        return $this->get('orgs/'.rawurlencode($organization).'/issues', array_merge(array('page' => 1, 'state' => $state), $params));
+        return $this->get(
+            'orgs/'.rawurlencode($organization).'/issues',
+            array_merge(array('page' => 1, 'state' => $state), $params)
+        );
     }
 
     /**
@@ -129,7 +138,10 @@ class Issue extends AbstractApi
      */
     public function update($username, $repository, $id, array $params)
     {
-        return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($id), $params);
+        return $this->patch(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($id),
+            $params
+        );
     }
 
     /**

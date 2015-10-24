@@ -18,7 +18,9 @@ class Labels extends AbstractApi
 
     public function show($username, $repository, $label)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels/'.rawurlencode($label));
+        return $this->get(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels/'.rawurlencode($label)
+        );
     }
 
     public function create($username, $repository, array $params)
@@ -36,11 +38,16 @@ class Labels extends AbstractApi
             throw new MissingArgumentException(array('name', 'color'));
         }
 
-        return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels/'.rawurlencode($label), $params);
+        return $this->patch(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels/'.rawurlencode($label),
+            $params
+        );
     }
 
     public function remove($username, $repository, $label)
     {
-        return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels/'.rawurlencode($label));
+        return $this->delete(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels/'.rawurlencode($label)
+        );
     }
 }

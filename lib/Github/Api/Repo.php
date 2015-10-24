@@ -36,7 +36,10 @@ class Repo extends AbstractApi
      */
     public function find($keyword, array $params = array())
     {
-        return $this->get('legacy/repos/search/'.rawurlencode($keyword), array_merge(array('start_page' => 1), $params));
+        return $this->get(
+            'legacy/repos/search/'.rawurlencode($keyword),
+            array_merge(array('start_page' => 1), $params)
+        );
     }
 
     /**
@@ -455,9 +458,10 @@ class Repo extends AbstractApi
      */
     public function subscribers($username, $repository, $page = 1)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/subscribers', array(
-            'page' => $page
-        ));
+        return $this->get(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/subscribers',
+            array('page' => $page)
+        );
     }
 
     /**

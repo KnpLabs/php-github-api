@@ -47,17 +47,23 @@ class PullRequest extends AbstractApi
      */
     public function show($username, $repository, $id)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id));
+        return $this->get(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id)
+        );
     }
 
     public function commits($username, $repository, $id)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/commits');
+        return $this->get(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/commits'
+        );
     }
 
     public function files($username, $repository, $id)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/files');
+        return $this->get(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/files'
+        );
     }
 
     public function comments()
@@ -107,18 +113,24 @@ class PullRequest extends AbstractApi
             $params['state'] = 'open';
         }
 
-        return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id), $params);
+        return $this->patch(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id),
+            $params
+        );
     }
 
     public function merged($username, $repository, $id)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/merge');
+        return $this->get(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/merge'
+        );
     }
 
     public function merge($username, $repository, $id, $message = '')
     {
-        return $this->put('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/merge', array(
-            'commit_message' => $message
-        ));
+        return $this->put(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/merge',
+            array('commit_message' => $message)
+        );
     }
 }

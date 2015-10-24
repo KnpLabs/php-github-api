@@ -53,7 +53,9 @@ class Milestones extends AbstractApi
      */
     public function show($username, $repository, $id)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones/'.rawurlencode($id));
+        return $this->get(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones/'.rawurlencode($id)
+        );
     }
 
     /**

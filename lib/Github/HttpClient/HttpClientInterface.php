@@ -100,6 +100,13 @@ interface HttpClientInterface
     public function setHeaders(array $headers);
 
     /**
+     * Set base URL.
+     *
+     * @param string $baseUrl
+     */
+    public function setBaseUrl($baseUrl);
+
+    /**
      * Authenticate a user for all next requests.
      *
      * @param string      $tokenOrLogin GitHub private token/username/client ID

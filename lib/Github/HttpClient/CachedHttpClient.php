@@ -40,7 +40,9 @@ class CachedHttpClient extends HttpClient
     public function getCache()
     {
         if (null === $this->cache) {
-            $this->cache = new FilesystemCache($this->options['cache_dir'] ?: sys_get_temp_dir().DIRECTORY_SEPARATOR.'php-github-api-cache');
+            $this->cache = new FilesystemCache(
+                $this->options['cache_dir'] ?: sys_get_temp_dir().DIRECTORY_SEPARATOR.'php-github-api-cache'
+            );
         }
 
         return $this->cache;
@@ -57,8 +59,13 @@ class CachedHttpClient extends HttpClient
     /**
      * {@inheritdoc}
      */
-    public function request($path, $body = null, $httpMethod = 'GET', array $headers = array(), array $options = array())
-    {
+    public function request(
+        $path,
+        $body = null,
+        $httpMethod = 'GET',
+        array $headers = array(),
+        array $options = array()
+    ) {
         $response = parent::request($path, $body, $httpMethod, $headers, $options);
 
         if (304 == $response->getStatusCode()) {
@@ -78,8 +85,13 @@ class CachedHttpClient extends HttpClient
      *
      * {@inheritdoc}
      */
-    protected function createRequest($httpMethod, $path, $body = null, array $headers = array(), array $options = array())
-    {
+    protected function createRequest(
+        $httpMethod,
+        $path,
+        $body = null,
+        array $headers = array(),
+        array $options = array()
+    ) {
         $request = parent::createRequest($httpMethod, $path, $body, $headers, $options);
         
         $this->id = $path;

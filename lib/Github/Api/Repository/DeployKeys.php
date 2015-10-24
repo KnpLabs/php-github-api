@@ -36,7 +36,10 @@ class DeployKeys extends AbstractApi
             throw new MissingArgumentException(array('title', 'key'));
         }
 
-        return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/keys/'.rawurlencode($id), $params);
+        return $this->patch(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/keys/'.rawurlencode($id),
+            $params
+        );
     }
 
     public function remove($username, $repository, $id)
