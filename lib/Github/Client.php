@@ -250,7 +250,7 @@ class Client
     public function setEnterpriseUrl($enterpriseUrl)
     {
         $baseUrl = (substr($enterpriseUrl, -1) == '/') ? substr($enterpriseUrl, 0, -1) : $enterpriseUrl;
-        $this->getHttpClient()->client->setBaseUrl($baseUrl . '/api/v3');
+        $this->getHttpClient()->setBaseUrl($baseUrl . '/api/v3');
     }
 
     /**
