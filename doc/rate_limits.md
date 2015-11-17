@@ -19,5 +19,5 @@ $coreLimit = $client->api('rate_limit')->getCoreLimit();
 #### Get Search Rate Limit
 
 ```php
-$searchLimit = $client->api('rate_limit)->getSearchLimit');
+$searchLimit = $client->api('rate_limit')->getSearchLimit();
 ```
