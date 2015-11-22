@@ -35,7 +35,9 @@ class Tags extends AbstractApi
      */
     public function show($username, $repository, $sha)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/tags/'.rawurlencode($sha));
+        return $this->get(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/tags/'.rawurlencode($sha)
+        );
     }
 
     /**

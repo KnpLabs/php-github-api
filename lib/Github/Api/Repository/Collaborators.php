@@ -17,16 +17,22 @@ class Collaborators extends AbstractApi
 
     public function check($username, $repository, $collaborator)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/collaborators/'.rawurlencode($collaborator));
+        return $this->get(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/collaborators/'.rawurlencode($collaborator)
+        );
     }
 
     public function add($username, $repository, $collaborator)
     {
-        return $this->put('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/collaborators/'.rawurlencode($collaborator));
+        return $this->put(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/collaborators/'.rawurlencode($collaborator)
+        );
     }
 
     public function remove($username, $repository, $collaborator)
     {
-        return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/collaborators/'.rawurlencode($collaborator));
+        return $this->delete(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/collaborators/'.rawurlencode($collaborator)
+        );
     }
 }

@@ -44,6 +44,8 @@ class Events extends AbstractApi
      */
     public function show($username, $repository, $event)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/events/'.rawurlencode($event));
+        return $this->get(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/events/'.rawurlencode($event)
+        );
     }
 }

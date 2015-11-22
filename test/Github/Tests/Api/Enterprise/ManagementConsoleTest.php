@@ -20,10 +20,10 @@ class ManagementConsoleTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/setup/api/configcheck', array('license_md5' => $this->getLicenseHash()))
+            ->with('/setup/api/configcheck', array('api_key' => $this->getPassword()))
             ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($expectedArray, $api->configcheck($this->getLicenseHash()));
+        $this->assertEquals($expectedArray, $api->configcheck($this->getPassword()));
     }
 
     /**
@@ -58,10 +58,10 @@ class ManagementConsoleTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/setup/api/settings', array('license_md5' => $this->getLicenseHash()))
+            ->with('/setup/api/settings', array('api_key' => $this->getPassword()))
             ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($expectedArray, $api->settings($this->getLicenseHash()));
+        $this->assertEquals($expectedArray, $api->settings($this->getPassword()));
     }
 
     /**
@@ -77,10 +77,10 @@ class ManagementConsoleTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/setup/api/maintenance', array('license_md5' => $this->getLicenseHash()))
+            ->with('/setup/api/maintenance', array('api_key' => $this->getPassword()))
             ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($expectedArray, $api->maintenance($this->getLicenseHash()));
+        $this->assertEquals($expectedArray, $api->maintenance($this->getPassword()));
     }
 
     /**
@@ -97,12 +97,12 @@ class ManagementConsoleTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/setup/api/settings/authorized-keys', array('license_md5' => $this->getLicenseHash()))
+            ->with('/setup/api/settings/authorized-keys', array('api_key' => $this->getPassword()))
             ->will($this->returnValue($expectedArray));
-        $this->assertEquals($expectedArray, $api->keys($this->getLicenseHash()));
+        $this->assertEquals($expectedArray, $api->keys($this->getPassword()));
     }
 
-    protected function getLicenseHash()
+    protected function getPassword()
     {
         return '1234567890abcdefghijklmnopqrstuv';
     }

@@ -41,9 +41,10 @@ class Comments extends AbstractApi
      */
     public function all($username, $repository, $issue, $page = 1)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/comments', array(
-            'page' => $page
-        ));
+        return $this->get(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/comments',
+            array('page' => $page)
+        );
     }
 
     /**
@@ -58,7 +59,9 @@ class Comments extends AbstractApi
      */
     public function show($username, $repository, $comment)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/comments/'.rawurlencode($comment));
+        return $this->get(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/comments/'.rawurlencode($comment)
+        );
     }
 
     /**
@@ -79,7 +82,10 @@ class Comments extends AbstractApi
             throw new MissingArgumentException('body');
         }
 
-        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/comments', $params);
+        return $this->post(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/comments',
+            $params
+        );
     }
 
     /**
@@ -100,7 +106,10 @@ class Comments extends AbstractApi
             throw new MissingArgumentException('body');
         }
 
-        return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/comments/'.rawurlencode($comment), $params);
+        return $this->patch(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/comments/'.rawurlencode($comment),
+            $params
+        );
     }
 
     /**
@@ -115,6 +124,8 @@ class Comments extends AbstractApi
      */
     public function remove($username, $repository, $comment)
     {
-        return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/comments/'.rawurlencode($comment));
+        return $this->delete(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/comments/'.rawurlencode($comment)
+        );
     }
 }

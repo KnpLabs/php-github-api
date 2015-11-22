@@ -36,16 +36,23 @@ class Hooks extends AbstractApi
             throw new MissingArgumentException(array('name', 'config'));
         }
 
-        return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/hooks/'.rawurlencode($id), $params);
+        return $this->patch(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/hooks/'.rawurlencode($id),
+            $params
+        );
     }
 
     public function test($username, $repository, $id)
     {
-        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/hooks/'.rawurlencode($id).'/test');
+        return $this->post(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/hooks/'.rawurlencode($id).'/test'
+        );
     }
 
     public function remove($username, $repository, $id)
     {
-        return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/hooks/'.rawurlencode($id));
+        return $this->delete(
+            'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/hooks/'.rawurlencode($id)
+        );
     }
 }
