@@ -29,7 +29,7 @@ use Github\HttpClient\HttpClientInterface;
  * @method Api\PullRequest pr()
  * @method Api\PullRequest pullRequest()
  * @method Api\PullRequest pullRequests()
- * @method Api\RateLimit ratelimit()
+ * @method Api\RateLimit rateLimit()
  * @method Api\Repo repo()
  * @method Api\Repo repos()
  * @method Api\Repo repository()
