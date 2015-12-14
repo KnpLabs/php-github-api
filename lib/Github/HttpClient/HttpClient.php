@@ -3,14 +3,13 @@
 namespace Github\HttpClient;
 
 use Github\Exception\TwoFactorAuthenticationRequiredException;
-use Guzzle\Http\Client as GuzzleClient;
-use Guzzle\Http\ClientInterface;
-use Guzzle\Http\Message\Request;
-use Guzzle\Http\Message\Response;
 use Github\Exception\ErrorException;
 use Github\Exception\RuntimeException;
 use Github\HttpClient\Listener\AuthListener;
 use Github\HttpClient\Listener\ErrorListener;
+use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Event\SubscriberInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -34,7 +33,14 @@ class HttpClient implements HttpClientInterface
 
     protected $headers = array();
 
+    /**
+     * @var \GuzzleHttp\Message\Response|\GuzzleHttp\Psr7\Response
+     */
     private $lastResponse;
+
+    /**
+     * @var \GuzzleHttp\Message\Request|\GuzzleHttp\Psr7\Request
+     */
     private $lastRequest;
 
     /**
@@ -44,8 +50,11 @@ class HttpClient implements HttpClientInterface
     public function __construct(array $options = array(), ClientInterface $client = null)
     {
         $this->options = array_merge($this->options, $options);
-        $client = $client ?: new GuzzleClient($this->options['base_url'], $this->options);
-        $this->client  = $client;
+
+        if (null === $client) {
+            $client = new Client($this->options);
+        }
+        $this->client = $client;
 
         $this->addListener('request.error', array(new ErrorListener($this->options), 'onRequestError'));
         $this->clearHeaders();
@@ -80,12 +89,18 @@ class HttpClient implements HttpClientInterface
 
     public function addListener($eventName, $listener)
     {
-        $this->client->getEventDispatcher()->addListener($eventName, $listener);
+        $this->client->getEmitter()->on($eventName, $listener);
     }
 
-    public function addSubscriber(EventSubscriberInterface $subscriber)
+    /**
+     * @param SubscriberInterface $subscriber
+     *
+     * @deprecated since version 1.6, will be removed in 2.0
+     */
+    public function addSubscriber(SubscriberInterface $subscriber)
     {
-        $this->client->addSubscriber($subscriber);
+        @trigger_error(__METHOD__.' method is deprecated since version 1.6 and will be dropped in 2.0');
+        $this->client->getEmitter()->attach($subscriber);
     }
 
     /**
@@ -162,7 +177,7 @@ class HttpClient implements HttpClientInterface
     }
 
     /**
-     * @return Request
+     * @return \GuzzleHttp\Message\Request|\Guzzle\Http\Message\Request
      */
     public function getLastRequest()
     {
@@ -170,7 +185,7 @@ class HttpClient implements HttpClientInterface
     }
 
     /**
-     * @return Response
+     * @return \GuzzleHttp\Message\Response|\Guzzle\Http\Message\Response
      */
     public function getLastResponse()
     {
