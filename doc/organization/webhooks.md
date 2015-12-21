@@ -9,7 +9,7 @@ Additional APIs:
 
 ### List webhooks for an organization
 
-> Requires [authentication](security.md).
+> Requires [authentication](../security.md).
 
 ```php
 $webhooks = $client->organization()->all('KnpLabs');
@@ -19,7 +19,7 @@ Returns an array of webhooks for the organization.
 
 ### Get a webhook for an organization
 
-> Requires [authentication](security.md).
+> Requires [authentication](../security.md).
 
 ```php
 $webhook = $client->organization()->show('KnpLabs', 123);
@@ -29,7 +29,7 @@ Returns the webhook with the ID 123 as an array for the organization.
 
 ### Create a new webhook for an organization
 
-> Requires [authentication](security.md).
+> Requires [authentication](../security.md).
 
 ```php
 $webhook = $client->organization()->create('KnpLabs', array(
@@ -53,7 +53,7 @@ The create webhook will be returned as an array.
 
 ### Update an existing webhook for an organization
 
-> Requires [authentication](security.md).
+> Requires [authentication](../security.md).
 
 ```php
 $success = $client->organization()->update('KnpLabs', 123, array(
@@ -76,7 +76,7 @@ In case of success, an array of informations about the webhook will be returned.
 
 ### Ping a webhook for an organization
 
-> Requires [authentication](security.md).
+> Requires [authentication](../security.md).
 
 ```php
 $client->organization()->pings('KnpLabs', 123);
@@ -86,7 +86,7 @@ No content is returned.
 
 ### Delete a webhook for an organization
 
-> Requires [authentication](security.md).
+> Requires [authentication](../security.md).
 
 ```php
 $client->organization()->delete('KnpLabs', 123);
