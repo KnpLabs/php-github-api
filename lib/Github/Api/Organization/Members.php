@@ -10,7 +10,7 @@ use Github\Api\AbstractApi;
  */
 class Members extends AbstractApi
 {
-    public function all($organization, $type = null, $filter = 'all')
+    public function all($organization, $type = null, $filter = 'all', $role = null)
     {
         $parameters = array();
         $path = 'orgs/'.rawurlencode($organization).'/';
@@ -18,6 +18,9 @@ class Members extends AbstractApi
             $path .= 'members';
             if (null !== $filter) {
                 $parameters['filter'] = $filter;
+            }
+            if (null !== $role) {
+                $parameters['role'] = $role;
             }
         } else {
             $path .= 'public_members';
