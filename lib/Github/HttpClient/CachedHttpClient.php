@@ -68,7 +68,9 @@ class CachedHttpClient extends HttpClient
             return $cacheResponse;
         }
 
-        $this->getCache()->set($this->id, $response);
+        if ($httpMethod == 'GET') {
+            $this->getCache()->set($this->id, $response);
+        }
 
         return $response;
     }
