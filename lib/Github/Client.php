@@ -110,7 +110,7 @@ class Client
      *
      * @throws InvalidArgumentException
      *
-     * @return ApiInterface
+     * @return Api\CurrentUser|Api\Deployment|Api\Enterprise|Api\GitData|Api\Gists|Api\Issue|Api\Markdown|Api\Notification|Api\Organization|Api\PullRequest|Api\RateLimit|Api\Repo|Api\Search|Api\Organization\Teams|Api\User|Api\Authorizations|Api\Meta
      */
     public function api($name)
     {
