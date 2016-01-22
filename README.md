@@ -33,13 +33,8 @@ Then we have to install our dependencies using:
 $ php composer.phar install
 ```
 Now we can use autoloader from Composer by:
-
-```json
-{
-    "require": {
-        "knplabs/github-api": "~1.4"
-    }
-}
+```bash
+$ php composer.phar require knplabs/github-api
 ```
 
 > `php-github-api` follows the PSR-0 convention names for its classes, which means you can easily integrate `php-github-api` classes loading in your own autoloader.
