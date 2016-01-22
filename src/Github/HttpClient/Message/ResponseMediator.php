@@ -2,14 +2,14 @@
 
 namespace Github\HttpClient\Message;
 
-use Guzzle\Http\Message\Response;
 use Github\Exception\ApiLimitExceedException;
+use Psr\Http\Message\ResponseInterface;
 
 class ResponseMediator
 {
-    public static function getContent(Response $response)
+    public static function getContent(ResponseInterface $response)
     {
-        $body    = $response->getBody(true);
+        $body    = $response->getBody();
         $content = json_decode($body, true);
 
         if (JSON_ERROR_NONE !== json_last_error()) {
@@ -19,7 +19,7 @@ class ResponseMediator
         return $content;
     }
 
-    public static function getPagination(Response $response)
+    public static function getPagination(ResponseInterface $response)
     {
         $header = (string) $response->getHeader('Link');
 
@@ -39,14 +39,14 @@ class ResponseMediator
         return $pagination;
     }
 
-    public static function getApiLimit(Response $response)
+    public static function getApiLimit(ResponseInterface $response)
     {
         $remainingCalls = (string) $response->getHeader('X-RateLimit-Remaining');
 
         if (null !== $remainingCalls && 1 > $remainingCalls) {
             throw new ApiLimitExceedException($remainingCalls);
         }
-        
+
         return $remainingCalls;
     }
 }
