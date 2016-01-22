@@ -136,6 +136,30 @@ $client->api('repo')->keys()->remove('username', 'reponame', 12345);
 
 Removes the key with id 12345 from the 'reponame' repository and returns a list of the deploy keys for the repository.
 
+### Add a hook to a repository
+
+> Requires [authentication](security.md).
+
+```php
+$client->api('repo')->hooks()->create('username', 'reponame', $params);
+```
+
+### Remove a hook from a repository
+
+> Requires [authentication](security.md).
+
+```php
+$client->api('repo')->hooks()->remove('username', 'reponame', $id);
+```
+
+### Return a list of all hooks for the 'reponame' repository
+
+> Requires [authentication](security.md).
+
+```php
+$client->api('repo')->hooks()->show('username', 'reponame');
+```
+
 ### Get the collaborators for a repository
 
 ```php
