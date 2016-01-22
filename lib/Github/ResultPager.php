@@ -11,6 +11,7 @@ use Github\HttpClient\Message\ResponseMediator;
  *
  * @author Ramon de la Fuente <ramon@future500.nl>
  * @author Mitchel Verschoof <mitchel@future500.nl>
+ * @author Graham Campbell <graham@alt-three.com>
  */
 class ResultPager implements ResultPagerInterface
 {
@@ -78,9 +79,7 @@ class ResultPager implements ResultPagerInterface
         // set parameters per_page to GitHub max to minimize number of requests
         $api->setPerPage(100);
 
-        $result = array();
-        $result = call_user_func_array(array($api, $method), $parameters);
-        $this->postFetch();
+        $result = $this->fetch($api, $method, $parameters);
 
         if ($isSearch) {
             $result = isset($result['items']) ? $result['items'] : $result;
@@ -100,6 +99,14 @@ class ResultPager implements ResultPagerInterface
         $api->setPerPage($perPage);
 
         return $result;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getIterator(ApiInterface $api, $method, array $parameters = array())
+    {
+        return new ResultIterator($this, $api, $method, $parameters);
     }
 
     /**

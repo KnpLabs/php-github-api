@@ -9,6 +9,7 @@ use Github\Api\ApiInterface;
  *
  * @author Ramon de la Fuente <ramon@future500.nl>
  * @author Mitchel Verschoof <mitchel@future500.nl>
+ * @author Graham Campbell <graham@alt-three.com>
  */
 interface ResultPagerInterface
 {
@@ -40,6 +41,17 @@ interface ResultPagerInterface
      * @return array returns a merge of the results of the Api::$method() call
      */
     public function fetchAll(ApiInterface $api, $method, array $parameters = array());
+
+    /**
+     * Get an iterator for the results.
+     *
+     * @param ApiInterface $api        the Api instance
+     * @param string       $method     the method name to call on the Api instance
+     * @param array        $parameters the method parameters in an array
+     *
+     * @return \Github\ResultIterator
+     */
+    public function getIterator(ApiInterface $api, $method, array $parameters = array());
 
     /**
      * Method that performs the actual work to refresh the pagination property.
