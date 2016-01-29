@@ -7,6 +7,22 @@ class OrganizationTest extends TestCase
     /**
      * @test
      */
+    public function shouldGetAllOrganizations()
+    {
+        $expectedValue = array(array('login' => 'KnpLabs'));
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('organizations')
+            ->will($this->returnValue($expectedValue));
+
+        $this->assertEquals($expectedValue, $api->all());
+    }
+
+    /**
+     * @test
+     */
     public function shouldShowOrganization()
     {
         $expectedArray = array('id' => 1, 'name' => 'KnpLabs');
