@@ -20,9 +20,9 @@ class Organization extends AbstractApi
      *
      * @return array the organizations
      */
-    public function all()
+    public function all($since = '')
     {
-        return $this->get('organizations');
+        return $this->get('organizations?since='.rawurlencode($since));
     }
 
     /**
