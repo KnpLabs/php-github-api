@@ -16,6 +16,16 @@ use Github\Api\Organization\Teams;
 class Organization extends AbstractApi
 {
     /**
+     * @link https://developer.github.com/v3/orgs/#list-all-organizations
+     *
+     * @return array the organizations
+     */
+    public function all($since = '')
+    {
+        return $this->get('organizations?since='.rawurlencode($since));
+    }
+
+    /**
      * Get extended information about an organization by its name.
      *
      * @link http://developer.github.com/v3/orgs/#get
