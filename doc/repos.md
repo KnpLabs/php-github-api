@@ -157,7 +157,7 @@ $client->api('repo')->hooks()->remove('username', 'reponame', $id);
 > Requires [authentication](security.md).
 
 ```php
-$client->api('repo')->hooks()->show('username', 'reponame');
+$client->api('repo')->hooks()->all('username', 'reponame');
 ```
 
 ### Get the collaborators for a repository
