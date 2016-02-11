@@ -57,6 +57,22 @@ class MembersTest extends TestCase
     /**
      * @test
      */
+    public function shouldAddOrganizationMember()
+    {
+        $expectedValue = 'response';
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('put')
+            ->with('orgs/KnpLabs/memberships/l3l0')
+            ->will($this->returnValue($expectedValue));
+
+        $this->assertEquals($expectedValue, $api->add('KnpLabs', 'l3l0'));
+    }
+
+    /**
+     * @test
+     */
     public function shouldRemoveOrganizationMember()
     {
         $expectedValue = 'response';
