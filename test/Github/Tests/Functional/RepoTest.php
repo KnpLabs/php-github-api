@@ -45,6 +45,24 @@ class RepoTest extends TestCase
     /**
      * @test
      */
+    public function shouldNotDecodeRawBlob()
+    {
+        $api = $this->client->api('git_data')->blobs();
+        $api->configure('raw');
+
+        $contents = $api->show(
+            'KnpLabs',
+            'php-github-api',
+            'dc16d3e77fd4e40638cb722927ffe15fa85b1434'
+        );
+
+        $this->assertInternalType('string', $contents);
+        $this->assertStringStartsWith('{', $contents);
+    }
+
+    /**
+     * @test
+     */
     public function shouldRetrieveContributorsList()
     {
         $username = 'KnpLabs';

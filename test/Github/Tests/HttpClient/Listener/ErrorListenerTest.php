@@ -120,6 +120,9 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
         $response->expects($this->once())
             ->method('getBody')
             ->will($this->returnValue(json_encode(array('message' => 'test'))));
+        $response->expects($this->once())
+            ->method('getContentType')
+            ->will($this->returnValue('application/json'));
         $response->expects($this->any())
             ->method('getStatusCode')
             ->will($this->returnValue(400));
@@ -159,6 +162,9 @@ class ErrorListenerTest extends \PHPUnit_Framework_TestCase
             ->method('getHeader')
             ->with('X-RateLimit-Limit')
             ->will($this->returnValue(5000));
+        $response->expects($this->once())
+            ->method('getContentType')
+            ->will($this->returnValue('application/json'));
         $response->expects($this->once())
             ->method('getBody')
             ->will($this->returnValue($content));
