@@ -36,4 +36,9 @@ class TestResponse extends Response
 
         return $header;
     }
+
+    public function getContentType()
+    {
+        return 'application/json';
+    }
 }
