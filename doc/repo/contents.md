@@ -46,7 +46,7 @@ $fileInfo = $client->api('repo')->contents()->rm('knp-labs', 'php-github-api', $
 ### Get repository archive
 
 ```php
-// @todo Document
+$archive = $client->api('repo')->contents()->archive('knp-labs', 'php-github-api', $format, $reference);
 ```
 
 ### Download a file
