@@ -12,6 +12,7 @@ php:
 sudo: false
 
 install:
+  - composer config -g secure-http false
   - travis_retry composer install --no-interaction --prefer-source
 
 script:
