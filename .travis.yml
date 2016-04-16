@@ -14,11 +14,9 @@ php:
 
 sudo: false
 
-before_install:
-  - if [[ $php != '5.3.3' ]]; then composer require "ext-openssl:*"; fi
-
 install:
-  - travis_retry composer install --no-interaction --prefer-dist
+  - if [[ $php == '5.3.3' ]]; travis_retry composer install --no-interaction --prefer-src; fi
+  - if [[ $php != '5.3.3' ]]; travis_retry composer install --no-interaction --prefer-dist; fi
 
 script:
   - vendor/bin/phpunit --verbose --coverage-text
