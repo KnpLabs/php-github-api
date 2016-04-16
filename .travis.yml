@@ -12,7 +12,7 @@ php:
 sudo: false
 
 install:
-  - travis_retry composer install --no-interaction --prefer-source
+  - travis_retry composer install --no-interaction --prefer-dist
 
 script:
   - vendor/bin/phpunit --verbose --coverage-text
