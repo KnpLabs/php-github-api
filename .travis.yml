@@ -8,6 +8,7 @@ matrix:
     - php: 5.5
     - php: 7.6
     - php: 7.0
+  fast_finish: true
 
 php:
   - hhvm
