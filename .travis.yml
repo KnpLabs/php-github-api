@@ -15,7 +15,7 @@ php:
 sudo: false
 
 install:
-  - if [[ $php = '5.3.3' ]]; travis_retry composer install --no-interaction --prefer-src; fi
+  - if [[ $php = '5.3.3' ]]; travis_retry composer install --no-interaction --prefer-source; fi
   - if [[ $php != '5.3.3' ]]; travis_retry composer install --no-interaction --prefer-dist; fi
 
 script:
