@@ -12,6 +12,7 @@ use Github\Api\Repository\Releases;
 use Github\Api\Repository\Forks;
 use Github\Api\Repository\Hooks;
 use Github\Api\Repository\Labels;
+use Github\Api\Repository\Stargazers;
 use Github\Api\Repository\Statuses;
 
 /**
@@ -307,6 +308,18 @@ class Repo extends AbstractApi
     public function forks()
     {
         return new Forks($this->client);
+    }
+
+    /**
+     * Manage the stargazers of a repository.
+     *
+     * @link https://developer.github.com/v3/activity/starring/#list-stargazers
+     *
+     * @return Stargazers
+     */
+    public function stargazers()
+    {
+        return new Stargazers($this->client);
     }
 
     /**

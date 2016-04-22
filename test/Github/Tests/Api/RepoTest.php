@@ -468,6 +468,16 @@ class RepoTest extends TestCase
     /**
      * @test
      */
+    public function shouldGetStargazersApiObject()
+    {
+        $api = $this->getApiMock();
+
+        $this->assertInstanceOf('Github\Api\Repository\Stargazers', $api->stargazers());
+    }
+
+    /**
+     * @test
+     */
     public function shouldGetReleasesApiObject()
     {
         $api = $this->getApiMock();
