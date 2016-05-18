@@ -39,6 +39,11 @@ class Hooks extends AbstractApi
         return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/hooks/'.rawurlencode($id), $params);
     }
 
+    public function ping($username, $repository, $id)
+    {
+        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/hooks/'.rawurlencode($id).'/pings');
+    }
+
     public function test($username, $repository, $id)
     {
         return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/hooks/'.rawurlencode($id).'/test');
