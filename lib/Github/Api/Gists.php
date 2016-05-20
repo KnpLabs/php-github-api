@@ -14,13 +14,15 @@ use Github\Api\Gist\Comments;
  */
 class Gists extends AbstractApi
 {
-    public function all($type = null)
+    public function all($type = null, $page = 1)
     {
+        $params = array('page' => $page);
+
         if (!in_array($type, array('public', 'starred'))) {
-            return $this->get('gists');
+            return $this->get('gists', $params);
         }
 
-        return $this->get('gists/'.rawurlencode($type));
+        return $this->get('gists/'.rawurlencode($type), $params);
     }
 
     public function show($number)
