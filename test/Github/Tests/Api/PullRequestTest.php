@@ -143,7 +143,7 @@ class PullRequestTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with('repos/ezsystems/ezpublish/pulls/15/merge', array('commit_message' => 'Merged something', 'sha' => str_repeat('A', 40)))
+            ->with('repos/ezsystems/ezpublish/pulls/15/merge', array('commit_message' => 'Merged something', 'sha' => str_repeat('A', 40), 'squash' => false))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->merge('ezsystems', 'ezpublish', 15, 'Merged something', str_repeat('A', 40)));
