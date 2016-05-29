@@ -488,11 +488,16 @@ class Repo extends AbstractApi
      */
     public function merge($username, $repository, $base, $head, $message = null)
     {
-        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/merges', array(
-            'base'           => $base,
-            'head'           => $head,
-            'commit_message' => $message
-        ));
+        $parameters = array(
+            'base' => $base,
+            'head' => $head,
+        );
+
+        if (is_string($message)) {
+            $parameters['commit_message'] = $message;
+        }
+
+        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/merges', $parameters);
     }
 
     /**
