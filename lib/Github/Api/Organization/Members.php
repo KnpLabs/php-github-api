@@ -10,7 +10,7 @@ use Github\Api\AbstractApi;
  */
 class Members extends AbstractApi
 {
-    public function all($organization, $type = null, $filter = 'all')
+    public function all($organization, $type = null, $filter = 'all', $role = null)
     {
         $parameters = array();
         $path = 'orgs/'.rawurlencode($organization).'/';
@@ -18,6 +18,9 @@ class Members extends AbstractApi
             $path .= 'members';
             if (null !== $filter) {
                 $parameters['filter'] = $filter;
+            }
+            if (null !== $role) {
+                $parameters['role'] = $role;
             }
         } else {
             $path .= 'public_members';
@@ -31,9 +34,19 @@ class Members extends AbstractApi
         return $this->get('orgs/'.rawurlencode($organization).'/members/'.rawurlencode($username));
     }
 
+    public function member($organization, $username)
+    {
+        return $this->get('orgs/'.rawurlencode($organization).'/memberships/'.rawurlencode($username));
+    }
+
     public function check($organization, $username)
     {
         return $this->get('orgs/'.rawurlencode($organization).'/public_members/'.rawurlencode($username));
+    }
+
+    public function addMember($organization, $username)
+    {
+        return $this->put('orgs/'.rawurlencode($organization).'/memberships/'.rawurlencode($username));
     }
 
     public function publicize($organization, $username)
