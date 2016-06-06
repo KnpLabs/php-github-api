@@ -14,7 +14,7 @@ class TreesTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/git/trees/123', array('recursive' => null))
+            ->with('repos/KnpLabs/php-github-api/git/trees/123', array())
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 123));
