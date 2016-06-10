@@ -83,7 +83,7 @@ class Teams extends AbstractApi
         return $this->get('teams/'.rawurlencode($team).'/repos/'.rawurlencode($username).'/'.rawurlencode($repository));
     }
 
-    public function addRepository($team, $username, $repository, array $params)
+    public function addRepository($team, $username, $repository, $params = array())
     {
         if (isset($params['permission']) && !in_array($params['permission'], array('pull', 'push', 'admin'))) {
             $params['permission'] = 'pull';
