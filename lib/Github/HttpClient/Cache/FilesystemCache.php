@@ -2,7 +2,7 @@
 
 namespace Github\HttpClient\Cache;
 
-use Guzzle\Http\Message\Response;
+use Psr\Http\Message\ResponseInterface;
 
 class FilesystemCache implements CacheInterface
 {
@@ -25,7 +25,7 @@ class FilesystemCache implements CacheInterface
     public function get($id)
     {
         if (false !== $content = @file_get_contents($this->getPath($id))) {
-            return unserialize($content);
+            return ResponseSerializer::unserialize($content);
         }
 
         throw new \InvalidArgumentException(sprintf('File "%s" not found', $this->getPath($id)));
@@ -34,13 +34,13 @@ class FilesystemCache implements CacheInterface
     /**
      * {@inheritdoc}
      */
-    public function set($id, Response $response)
+    public function set($id, ResponseInterface $response)
     {
         if (!is_dir($this->path)) {
             @mkdir($this->path, 0777, true);
         }
 
-        if (false === @file_put_contents($this->getPath($id), serialize($response))) {
+        if (false === @file_put_contents($this->getPath($id), ResponseSerializer::serialize($response))) {
             throw new \InvalidArgumentException(sprintf('Cannot put content in file "%s"', $this->getPath($id)));
         }
         if (false === @file_put_contents($this->getPath($id).'.etag', $response->getHeader('ETag'))) {

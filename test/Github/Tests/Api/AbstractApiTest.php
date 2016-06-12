@@ -3,7 +3,7 @@
 namespace Github\Tests\Api;
 
 use Github\Api\AbstractApi;
-use Guzzle\Http\Message\Response;
+use GuzzleHttp\Psr7\Response;
 
 class AbstractApiTest extends \PHPUnit_Framework_TestCase
 {
@@ -14,15 +14,17 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
     {
         $expectedArray = array('value');
 
-        $httpClient = $this->getHttpMock();
+        $httpClient = $this->getHttpMethodsMock(array('get'));
         $httpClient
             ->expects($this->any())
             ->method('get')
-            ->with('/path', array('param1' => 'param1value'), array('header1' => 'header1value'))
-            ->will($this->returnValue($expectedArray));
-        $client = $this->getClientMock();
-        $client->setHttpClient($httpClient);
-
+            ->with('/path?param1=param1value', array('header1' => 'header1value'))
+            ->will($this->returnValue($this->getPSR7Response($expectedArray)));
+        $client = $this->getMock('Github\Client', array('getHttpClient'));
+        $client->expects($this->any())
+            ->method('getHttpClient')
+            ->willReturn($httpClient);
+        
         $api = $this->getAbstractApiObject($client);
 
         $this->assertEquals($expectedArray, $api->get('/path', array('param1' => 'param1value'), array('header1' => 'header1value')));
@@ -35,14 +37,17 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
     {
         $expectedArray = array('value');
 
-        $httpClient = $this->getHttpMock();
+        $httpClient = $this->getHttpMethodsMock(array('post'));
         $httpClient
             ->expects($this->once())
             ->method('post')
-            ->with('/path', array('param1' => 'param1value'), array('option1' => 'option1value'))
-            ->will($this->returnValue($expectedArray));
-        $client = $this->getClientMock();
-        $client->setHttpClient($httpClient);
+            ->with('/path', array('option1' => 'option1value'), json_encode(array('param1' => 'param1value')))
+            ->will($this->returnValue($this->getPSR7Response($expectedArray)));
+
+        $client = $this->getMock('Github\Client', array('getHttpClient'));
+        $client->expects($this->any())
+            ->method('getHttpClient')
+            ->willReturn($httpClient);
 
         $api = $this->getAbstractApiObject($client);
 
@@ -56,14 +61,17 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
     {
         $expectedArray = array('value');
 
-        $httpClient = $this->getHttpMock();
+        $httpClient = $this->getHttpMethodsMock(array('patch'));
         $httpClient
             ->expects($this->once())
             ->method('patch')
-            ->with('/path', array('param1' => 'param1value'), array('option1' => 'option1value'))
-            ->will($this->returnValue($expectedArray));
-        $client = $this->getClientMock();
-        $client->setHttpClient($httpClient);
+            ->with('/path', array('option1' => 'option1value'), json_encode(array('param1' => 'param1value')))
+            ->will($this->returnValue($this->getPSR7Response($expectedArray)));
+
+        $client = $this->getMock('Github\Client', array('getHttpClient'));
+        $client->expects($this->any())
+            ->method('getHttpClient')
+            ->willReturn($httpClient);
 
         $api = $this->getAbstractApiObject($client);
 
@@ -77,14 +85,17 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
     {
         $expectedArray = array('value');
 
-        $httpClient = $this->getHttpMock();
+        $httpClient = $this->getHttpMethodsMock(array('put'));
         $httpClient
             ->expects($this->once())
             ->method('put')
-            ->with('/path', array('param1' => 'param1value'), array('option1' => 'option1value'))
-            ->will($this->returnValue($expectedArray));
-        $client = $this->getClientMock();
-        $client->setHttpClient($httpClient);
+            ->with('/path', array('option1' => 'option1value'), json_encode(array('param1' => 'param1value')))
+            ->will($this->returnValue($this->getPSR7Response($expectedArray)));
+
+        $client = $this->getMock('Github\Client', array('getHttpClient'));
+        $client->expects($this->any())
+            ->method('getHttpClient')
+            ->willReturn($httpClient);
 
         $api = $this->getAbstractApiObject($client);
 
@@ -98,14 +109,18 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
     {
         $expectedArray = array('value');
 
-        $httpClient = $this->getHttpMock();
+        $httpClient = $this->getHttpMethodsMock(array('delete'));
         $httpClient
             ->expects($this->once())
             ->method('delete')
-            ->with('/path', array('param1' => 'param1value'), array('option1' => 'option1value'))
-            ->will($this->returnValue($expectedArray));
-        $client = $this->getClientMock();
-        $client->setHttpClient($httpClient);
+            ->with('/path', array('option1' => 'option1value'), json_encode(array('param1' => 'param1value')))
+            ->will($this->returnValue($this->getPSR7Response($expectedArray)));
+
+        $client = $this->getMock('Github\Client', array('getHttpClient'));
+        $client->expects($this->any())
+            ->method('getHttpClient')
+            ->willReturn($httpClient);
+
 
         $api = $this->getAbstractApiObject($client);
 
@@ -117,18 +132,21 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldNotPassEmptyRefToClient()
     {
-        $expectedResponse = new Response('value');
+        $expectedArray = array('value');
 
-        $httpClient = $this->getHttpMock();
+        $httpClient = $this->getHttpMethodsMock(array('get'));
         $httpClient
             ->expects($this->any())
             ->method('get')
             ->with('/path', array())
-            ->will($this->returnValue($expectedResponse));
-        $client = $this->getClientMock();
-        $client->setHttpClient($httpClient);
+            ->will($this->returnValue($this->getPSR7Response($expectedArray)));
 
-        $api = new ExposedAbstractApiTestInstance($client);
+        $client = $this->getMock('Github\Client', array('getHttpClient'));
+        $client->expects($this->any())
+            ->method('getHttpClient')
+            ->willReturn($httpClient);
+
+        $api = $this->getAbstractApiObject($client);
         $api->get('/path', array('ref' => null));
     }
 
@@ -142,25 +160,49 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
      */
     protected function getClientMock()
     {
-        return new \Github\Client($this->getHttpMock());
+        return new \Github\Client($this->getHttpMethodsMock());
     }
 
     /**
-     * @return \Github\HttpClient\HttpClientInterface
+     * Return a HttpMethods client mock
+     *
+     * @return \Http\Client\Common\HttpMethodsClient
      */
-    protected function getHttpMock()
+    protected function getHttpMethodsMock(array $methods = array())
     {
-        return $this->getMock('Github\HttpClient\HttpClient', array(), array(array(), $this->getHttpClientMock()));
-    }
-
-    protected function getHttpClientMock()
-    {
-        $mock = $this->getMock('Guzzle\Http\Client', array('send'));
+        $methods = array_merge(array('sendRequest'), $methods);
+        $mock = $this->getMock('Http\Client\Common\HttpMethodsClient', $methods, array(), '', false);
         $mock
             ->expects($this->any())
-            ->method('send');
+            ->method('sendRequest');
 
         return $mock;
+    }
+    /**
+     * @return \Http\Client\HttpClient
+     */
+    protected function getHttpClientMock()
+    {
+        $mock = $this->getMock('Http\Client\HttpClient', array('sendRequest'));
+        $mock
+            ->expects($this->any())
+            ->method('sendRequest');
+
+        return $mock;
+    }
+
+    /**
+     * @param $expectedArray
+     *
+     * @return Response
+     */
+    private function getPSR7Response($expectedArray)
+    {
+        return new Response(
+            200,
+            array('Content-Type' => 'application/json'),
+            \GuzzleHttp\Psr7\stream_for(json_encode($expectedArray))
+        );
     }
 }
 
@@ -171,7 +213,7 @@ class AbstractApiTestInstance extends AbstractApi
      */
     public function get($path, array $parameters = array(), $requestHeaders = array())
     {
-        return $this->client->getHttpClient()->get($path, $parameters, $requestHeaders);
+        return parent::get($path, $parameters, $requestHeaders);
     }
 
     /**
@@ -179,7 +221,7 @@ class AbstractApiTestInstance extends AbstractApi
      */
     public function post($path, array $parameters = array(), $requestHeaders = array())
     {
-        return $this->client->getHttpClient()->post($path, $parameters, $requestHeaders);
+        return parent::post($path, $parameters, $requestHeaders);
     }
 
     /**
@@ -187,7 +229,7 @@ class AbstractApiTestInstance extends AbstractApi
      */
     public function postRaw($path, $body, $requestHeaders = array())
     {
-        return $this->client->getHttpClient()->post($path, $body, $requestHeaders);
+        return parent::postRaw($path, $body, $requestHeaders);
     }
 
     /**
@@ -195,7 +237,7 @@ class AbstractApiTestInstance extends AbstractApi
      */
     public function patch($path, array $parameters = array(), $requestHeaders = array())
     {
-        return $this->client->getHttpClient()->patch($path, $parameters, $requestHeaders);
+        return parent::patch($path, $parameters, $requestHeaders);
     }
 
     /**
@@ -203,7 +245,7 @@ class AbstractApiTestInstance extends AbstractApi
      */
     public function put($path, array $parameters = array(), $requestHeaders = array())
     {
-        return $this->client->getHttpClient()->put($path, $parameters, $requestHeaders);
+        return parent::put($path, $parameters, $requestHeaders);
     }
 
     /**
@@ -211,10 +253,13 @@ class AbstractApiTestInstance extends AbstractApi
      */
     public function delete($path, array $parameters = array(), $requestHeaders = array())
     {
-        return $this->client->getHttpClient()->delete($path, $parameters, $requestHeaders);
+        return parent::delete($path, $parameters, $requestHeaders);
     }
 }
 
+/**
+ * @deprecated
+ */
 class ExposedAbstractApiTestInstance extends AbstractApi
 {
     /**

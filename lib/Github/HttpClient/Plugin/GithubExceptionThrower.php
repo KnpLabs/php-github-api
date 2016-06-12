@@ -1,53 +1,44 @@
 <?php
 
-namespace Github\HttpClient\Listener;
+namespace Github\HttpClient\Plugin;
 
+use Http\Client\Common\Plugin;
+use Psr\Http\Message\RequestInterface;
 use Github\Exception\TwoFactorAuthenticationRequiredException;
 use Github\HttpClient\Message\ResponseMediator;
-use Guzzle\Common\Event;
 use Github\Exception\ApiLimitExceedException;
 use Github\Exception\ErrorException;
 use Github\Exception\RuntimeException;
 use Github\Exception\ValidationFailedException;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class ErrorListener
+class GithubExceptionThrower implements Plugin
 {
     /**
-     * @var array
+     * {@inheritdoc}
      */
-    private $options;
-
-    /**
-     * @param array $options
-     */
-    public function __construct(array $options)
+    public function handleRequest(RequestInterface $request, callable $next, callable $first)
     {
-        $this->options = $options;
-    }
+        return $next($request)->then(function (ResponseInterface $response) use ($request) {
+            if ($response->getStatusCode() < 400 || $response->getStatusCode() > 600) {
+                return $response;
+            }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function onRequestError(Event $event)
-    {
-        /** @var $request \Guzzle\Http\Message\Request */
-        $request = $event['request'];
-        $response = $request->getResponse();
+            // If error:
+            $remaining = ResponseMediator::getHeader($response, 'X-RateLimit-Remaining');
+            $limit = ResponseMediator::getHeader($response, 'X-RateLimit-Limit');
 
-        if ($response->isClientError() || $response->isServerError()) {
-            $remaining = (string) $response->getHeader('X-RateLimit-Remaining');
-            $limit = $response->getHeader('X-RateLimit-Limit');
-
-            if (null != $remaining && 1 > $remaining && 'rate_limit' !== substr($request->getResource(), 1, 10)) {
+            if (null != $remaining && 1 > $remaining && 'rate_limit' !== substr($request->getRequestTarget(), 1, 10)) {
                 throw new ApiLimitExceedException($limit);
             }
 
             if (401 === $response->getStatusCode()) {
-                if ($response->hasHeader('X-GitHub-OTP') && 0 === strpos((string) $response->getHeader('X-GitHub-OTP'), 'required;')) {
-                    $type = substr((string) $response->getHeader('X-GitHub-OTP'), 9);
+                if ($response->hasHeader('X-GitHub-OTP') && 0 === strpos((string) ResponseMediator::getHeader($response, 'X-GitHub-OTP'), 'required;')) {
+                    $type = substr((string) ResponseMediator::getHeader($response, 'X-GitHub-OTP'), 9);
 
                     throw new TwoFactorAuthenticationRequiredException($type);
                 }
@@ -88,11 +79,11 @@ class ErrorListener
                         }
                     }
 
-                    throw new ValidationFailedException('Validation Failed: ' . implode(', ', $errors), 422);
+                    throw new ValidationFailedException('Validation Failed: '.implode(', ', $errors), 422);
                 }
             }
 
             throw new RuntimeException(isset($content['message']) ? $content['message'] : $content, $response->getStatusCode());
-        };
+        });
     }
 }

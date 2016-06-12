@@ -5,8 +5,20 @@ namespace Github;
 use Github\Api\ApiInterface;
 use Github\Exception\InvalidArgumentException;
 use Github\Exception\BadMethodCallException;
-use Github\HttpClient\HttpClient;
-use Github\HttpClient\HttpClientInterface;
+use Github\HttpClient\Cache\CacheInterface;
+use Github\HttpClient\Plugin\Authentication;
+use Github\HttpClient\Plugin\Cache;
+use Github\HttpClient\Plugin\GithubExceptionThrower;
+use Github\HttpClient\Plugin\History;
+use Github\HttpClient\Plugin\PathPrepend;
+use Http\Client\Common\HttpMethodsClient;
+use Http\Client\Common\Plugin;
+use Http\Client\Common\PluginClient;
+use Http\Client\HttpClient;
+use Http\Discovery\HttpClientDiscovery;
+use Http\Discovery\MessageFactoryDiscovery;
+use Http\Discovery\UriFactoryDiscovery;
+use Http\Message\MessageFactory;
 
 /**
  * Simple yet very cool PHP GitHub client.
@@ -77,32 +89,67 @@ class Client
      * @var array
      */
     private $options = array(
-        'base_url'    => 'https://api.github.com/',
-
-        'user_agent'  => 'php-github-api (http://github.com/KnpLabs/php-github-api)',
-        'timeout'     => 10,
-
-        'api_limit'   => 5000,
         'api_version' => 'v3',
-
-        'cache_dir'   => null
     );
 
     /**
-     * The Buzz instance used to communicate with GitHub.
+     * The object that sends HTTP messages
      *
      * @var HttpClient
      */
     private $httpClient;
 
     /**
+     * A HTTP client with all our plugins
+     *
+     * @var PluginClient
+     */
+    private $pluginClient;
+
+    /**
+     * @var MessageFactory
+     */
+    private $messageFactory;
+
+    /**
+     * @var Plugin[]
+     */
+    private $plugins = [];
+
+    /**
+     * True if we should create a new Plugin client at next request.
+     * @var bool
+     */
+    private $httpClientModified = true;
+
+    /**
+     * Http headers
+     * @var array
+     */
+    private $headers = [];
+
+    /**
+     * @var History
+     */
+    private $responseHistory;
+
+    /**
      * Instantiate a new GitHub client.
      *
-     * @param null|HttpClientInterface $httpClient Github http client
+     * @param HttpClient|null $httpClient
      */
-    public function __construct(HttpClientInterface $httpClient = null)
+    public function __construct(HttpClient $httpClient = null)
     {
-        $this->httpClient = $httpClient;
+        $this->httpClient = $httpClient ?: HttpClientDiscovery::find();
+        $this->messageFactory = MessageFactoryDiscovery::find();
+
+        $this->responseHistory = new History();
+        $this->addPlugin(new GithubExceptionThrower());
+        $this->addPlugin(new Plugin\HistoryPlugin($this->responseHistory));
+        $this->addPlugin(new Plugin\AddHostPlugin(UriFactoryDiscovery::find()->createUri('https://api.github.com/')));
+        $this->addPlugin(new Plugin\HeaderDefaultsPlugin(array(
+            'User-Agent'  => 'php-github-api (http://github.com/KnpLabs/php-github-api)',
+        )));
     }
 
     /**
@@ -235,7 +282,8 @@ class Client
             $authMethod = self::AUTH_HTTP_PASSWORD;
         }
 
-        $this->getHttpClient()->authenticate($tokenOrLogin, $password, $authMethod);
+        $this->removePlugin(Authentication::class);
+        $this->addPlugin(new Authentication($tokenOrLogin, $password, $authMethod));
     }
 
     /**
@@ -245,27 +293,60 @@ class Client
      */
     public function setEnterpriseUrl($enterpriseUrl)
     {
-        $baseUrl = (substr($enterpriseUrl, -1) == '/') ? substr($enterpriseUrl, 0, -1) : $enterpriseUrl;
-        $this->getHttpClient()->client->setBaseUrl($baseUrl . '/api/v3');
+        $this->removePlugin(Plugin\AddHostPlugin::class);
+        $this->removePlugin(PathPrepend::class);
+
+        $this->addPlugin(new Plugin\AddHostPlugin(UriFactoryDiscovery::find()->createUri($enterpriseUrl)));
+        $this->addPlugin(new PathPrepend(sprintf('/api/%s/', $this->getOption('api_version'))));
     }
 
     /**
-     * @return HttpClient
+     * Add a new plugin to the chain
+     *
+     * @param Plugin $plugin
+     */
+    protected function addPlugin(Plugin $plugin)
+    {
+        $this->plugins[] = $plugin;
+        $this->httpClientModified = true;
+    }
+
+    /**
+     * Remove a plugin by its fqn.
+     *
+     * @param string $fqn
+     */
+    protected function removePlugin($fqn)
+    {
+        foreach ($this->plugins as $idx => $plugin) {
+            if ($plugin instanceof $fqn) {
+                unset($this->plugins[$idx]);
+            }
+        }
+    }
+
+    /**
+     * @return HttpMethodsClient
      */
     public function getHttpClient()
     {
-        if (null === $this->httpClient) {
-            $this->httpClient = new HttpClient($this->options);
+        if ($this->httpClientModified) {
+            $this->httpClientModified = false;
+            $this->pluginClient = new HttpMethodsClient(
+                new PluginClient($this->httpClient, $this->plugins),
+                $this->messageFactory
+            );
         }
 
-        return $this->httpClient;
+        return $this->pluginClient;
     }
 
     /**
-     * @param HttpClientInterface $httpClient
+     * @param HttpClient $httpClient
      */
-    public function setHttpClient(HttpClientInterface $httpClient)
+    public function setHttpClient(HttpClient $httpClient)
     {
+        $this->httpClientModified = true;
         $this->httpClient = $httpClient;
     }
 
@@ -274,15 +355,39 @@ class Client
      */
     public function clearHeaders()
     {
-        $this->getHttpClient()->clearHeaders();
+        $this->headers = array(
+            'Accept' => sprintf('application/vnd.github.%s+json', $this->options['api_version']),
+        );
+
+        $this->removePlugin(Plugin\HeaderAppendPlugin::class);
+        $this->addPlugin(new Plugin\HeaderAppendPlugin($this->headers));
     }
 
     /**
      * @param array $headers
      */
-    public function setHeaders(array $headers)
+    public function addHeaders(array $headers)
     {
-        $this->getHttpClient()->setHeaders($headers);
+        $this->headers = array_merge($this->headers, $headers);
+
+        $this->removePlugin(Plugin\HeaderAppendPlugin::class);
+        $this->addPlugin(new Plugin\HeaderAppendPlugin($this->headers));
+    }
+
+    /**
+     * @param bool|CacheInterface $cache
+     */
+    public function useCache($cache = true)
+    {
+        $this->removePlugin(Cache::class);
+        if ($cache !== false) {
+            if ($cache instanceof CacheInterface) {
+                $plugin = new Cache($cache);
+            } else {
+                $plugin = new Cache();
+            }
+            $this->addPlugin($plugin);
+        }
     }
 
     /**
@@ -331,5 +436,14 @@ class Client
         } catch (InvalidArgumentException $e) {
             throw new BadMethodCallException(sprintf('Undefined method called: "%s"', $name));
         }
+    }
+
+    /**
+     *
+     * @return null|\Psr\Http\Message\ResponseInterface
+     */
+    public function getLastResponse()
+    {
+        return $this->responseHistory->getLastResponse();
     }
 }

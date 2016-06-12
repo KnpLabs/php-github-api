@@ -59,7 +59,7 @@ class ResultPager implements ResultPagerInterface
      */
     public function fetch(ApiInterface $api, $method, array $parameters = array())
     {
-        $result = call_user_func_array(array($api, $method), $parameters);
+        $result = $this->callApi($api, $method, $parameters);
         $this->postFetch();
 
         return $result;
@@ -78,8 +78,7 @@ class ResultPager implements ResultPagerInterface
         // set parameters per_page to GitHub max to minimize number of requests
         $api->setPerPage(100);
 
-        $result = array();
-        $result = call_user_func_array(array($api, $method), $parameters);
+        $result = $this->callApi($api, $method, $parameters);
         $this->postFetch();
 
         if ($isSearch) {
@@ -107,7 +106,7 @@ class ResultPager implements ResultPagerInterface
      */
     public function postFetch()
     {
-        $this->pagination = ResponseMediator::getPagination($this->client->getHttpClient()->getLastResponse());
+        $this->pagination = ResponseMediator::getPagination($this->client->getLastResponse());
     }
 
     /**
@@ -177,5 +176,17 @@ class ResultPager implements ResultPagerInterface
 
             return ResponseMediator::getContent($result);
         }
+    }
+
+    /**
+     * @param ApiInterface $api
+     * @param $method
+     * @param array $parameters
+     *
+     * @return mixed
+     */
+    protected function callApi(ApiInterface $api, $method, array $parameters)
+    {
+        return call_user_func_array(array($api, $method), $parameters);
     }
 }

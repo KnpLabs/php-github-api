@@ -4,6 +4,7 @@ namespace Github\Tests\Api\Repository;
 
 use Github\Tests\Api\TestCase;
 use Github\Exception\TwoFactorAuthenticationRequiredException;
+use GuzzleHttp\Psr7\Response;
 
 class ContentsTest extends TestCase
 {
@@ -44,34 +45,24 @@ class ContentsTest extends TestCase
      */
     public function shouldReturnTrueWhenFileExists()
     {
-        $responseMock = $this->getMockBuilder('\Guzzle\Http\Message\Response')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $responseMock->expects($this->any())
-            ->method('getStatusCode')
-            ->willReturn(200);
+        $response = new Response(200);
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('head')
             ->with('repos/KnpLabs/php-github-api/contents/composer.json', array('ref' => null))
-            ->will($this->returnValue($responseMock));
+            ->will($this->returnValue($response));
 
         $this->assertEquals(true, $api->exists('KnpLabs', 'php-github-api', 'composer.json'));
     }
 
     public function getFailureStubsForExistsTest()
     {
-        $nonOkResponseMock =$this->getGuzzleResponseMock();
-
-        $nonOkResponseMock->expects($this->any())
-            ->method('getStatusCode')
-            ->willReturn(403);
+        $response = new Response(403);
 
         return array(
             array($this->throwException(new \ErrorException())),
-            array($this->returnValue($nonOkResponseMock))
+            array($this->returnValue($response))
         );
     }
 
@@ -330,14 +321,5 @@ class ContentsTest extends TestCase
     protected function getApiClass()
     {
         return 'Github\Api\Repository\Contents';
-    }
-
-    private function getGuzzleResponseMock()
-    {
-        $responseMock = $this->getMockBuilder('\Guzzle\Http\Message\Response')
-        ->disableOriginalConstructor()
-        ->getMock();
-
-        return $responseMock;
     }
 }

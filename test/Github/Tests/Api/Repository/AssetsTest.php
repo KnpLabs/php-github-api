@@ -60,7 +60,7 @@ class AssetsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
           ->method('postRaw')
-          ->with('repos/KnpLabs/php-github-api/releases/'. $releaseId .'/assets?name='.$name)
+          ->with('https://uploads.github.com/repos/KnpLabs/php-github-api/releases/'. $releaseId .'/assets?name='.$name)
           ->will($this->returnValue($body));
 
         $this->assertEquals($body, $api->create('KnpLabs', 'php-github-api', $releaseId, $name, $contentType, $body));

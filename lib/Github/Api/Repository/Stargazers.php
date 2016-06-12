@@ -3,13 +3,17 @@
 namespace Github\Api\Repository;
 
 use Github\Api\AbstractApi;
+use Github\Api\AcceptHeaderTrait;
 
 /**
  * @link   https://developer.github.com/v3/activity/starring/#list-stargazers
  * @author Nicolas Dupont <nicolas@akeneo.com>
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
 class Stargazers extends AbstractApi
 {
+    use AcceptHeaderTrait;
+
     /**
      * Configure the body type
      *
@@ -20,11 +24,7 @@ class Stargazers extends AbstractApi
     public function configure($bodyType = null)
     {
         if ('star' === $bodyType) {
-            $this->client->setHeaders(
-                array(
-                    'Accept' => sprintf('application/vnd.github.%s.star+json', $this->client->getOption('api_version'))
-                )
-            );
+            $this->acceptHeaderValue = sprintf('application/vnd.github.%s.star+json', $this->client->getOption('api_version'));
         }
     }
 
