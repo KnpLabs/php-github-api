@@ -20,6 +20,11 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 class HttpClient implements HttpClientInterface
 {
+    /**
+     * @var ClientInterface
+     */
+    public $client;
+
     protected $options = array(
         'base_url'    => 'https://api.github.com/',
 
