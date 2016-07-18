@@ -73,7 +73,7 @@ $owner = "KnpLabs";
 $repo = "php-github-api";
 $activity = $client->api('current_user')->watchers()->check($owner, $repo);
 ```
-Throws an Exception with code 404 in case that the repo is not beeing watched by the authenticated user or NULL in case that it is beeing watched by the authenticated user.
+Throws an Exception with code 404 in case that the repo is not being watched by the authenticated user or NULL in case that it is being watched by the authenticated user.
 
 ### Watch a specific repo for authenticated user
 

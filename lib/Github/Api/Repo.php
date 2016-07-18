@@ -111,7 +111,7 @@ class Repo extends AbstractApi
      * @param string $username   the user who owns the repository
      * @param string $repository the name of the repository
      *
-     * @return array informations about the repository
+     * @return array information about the repository
      */
     public function show($username, $repository)
     {
@@ -177,7 +177,7 @@ class Repo extends AbstractApi
      * @param string $repository the name of the repository
      * @param array  $values     the key => value pairs to post
      *
-     * @return array informations about the repository
+     * @return array information about the repository
      */
     public function update($username, $repository, array $values)
     {

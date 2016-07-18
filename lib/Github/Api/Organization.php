@@ -32,7 +32,7 @@ class Organization extends AbstractApi
      *
      * @param string $organization the organization to show
      *
-     * @return array informations about the organization
+     * @return array information about the organization
      */
     public function show($organization)
     {
