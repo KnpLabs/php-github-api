@@ -72,7 +72,7 @@ $success = $client->organization()->update('KnpLabs', 123, array(
 Update an existing webhook with ID 123 for the organization.
 *url* parameter is required.
 
-In case of success, an array of informations about the webhook will be returned.
+In case of success, an array of information about the webhook will be returned.
 
 ### Ping a webhook for an organization
 

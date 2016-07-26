@@ -50,7 +50,7 @@ class User extends AbstractApi
      *
      * @param string $username the username to show
      *
-     * @return array informations about the user
+     * @return array information about the user
      */
     public function show($username)
     {

@@ -13,7 +13,7 @@ class Meta extends AbstractApi
     /**
      * Get the ip address of the hook and git servers for the GitHub.com service.
      *
-     * @return array Informations about the service of GitHub.com
+     * @return array Information about the service of GitHub.com
      */
     public function service()
     {

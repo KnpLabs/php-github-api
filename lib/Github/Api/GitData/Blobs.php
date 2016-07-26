@@ -12,7 +12,7 @@ use Github\Exception\MissingArgumentException;
 class Blobs extends AbstractApi
 {
     /**
-     * Configure the Acccept header depending on the blob type.
+     * Configure the Accept header depending on the blob type.
      *
      * @param string|null $bodyType
      */

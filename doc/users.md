@@ -36,7 +36,7 @@ $user = $client->api('user')->show('KnpLabs');
 
 Returns an array of information about the user.
 
-### Update user informations
+### Update user information
 
 > Requires [authentication](security.md).
 
