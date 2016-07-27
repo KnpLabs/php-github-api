@@ -68,7 +68,7 @@ class ManagementConsole extends AbstractApi
      * @param string $uri  the request URI
      * @param string $hash md5 hash of your license
      *
-     * @return \Guzzle\Http\EntityBodyInterface|mixed|string
+     * @return array|string
      */
     protected function getWithLicenseHash($uri, $hash)
     {

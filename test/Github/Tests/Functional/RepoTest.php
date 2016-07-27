@@ -12,7 +12,7 @@ class RepoTest extends TestCase
      */
     public function shouldShowPRDiffIfHeaderIsPresent()
     {
-        $this->client->setHeaders(
+        $this->client->addHeaders(
             array('Accept' => sprintf(
                 'application/vnd.github.%s.diff',
                 $this->client->getOption('api_version')

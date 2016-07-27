@@ -3,14 +3,18 @@
 namespace Github\Api\Issue;
 
 use Github\Api\AbstractApi;
+use Github\Api\AcceptHeaderTrait;
 use Github\Exception\MissingArgumentException;
 
 /**
  * @link   http://developer.github.com/v3/issues/comments/
  * @author Joseph Bielawski <stloyd@gmail.com>
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
 class Comments extends AbstractApi
 {
+    use AcceptHeaderTrait;
+
     /**
      * Configure the body type.
      *
@@ -23,9 +27,7 @@ class Comments extends AbstractApi
             $bodyType = 'full';
         }
 
-        $this->client->setHeaders(array(
-            sprintf('Accept: application/vnd.github.%s.%s+json', $this->client->getOption('api_version'), $bodyType)
-        ));
+        $this->acceptHeaderValue = sprintf('application/vnd.github.%s.%s+json', $this->client->getOption('api_version'), $bodyType);
     }
 
     /**

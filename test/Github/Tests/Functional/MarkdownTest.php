@@ -2,6 +2,8 @@
 
 namespace Github\Tests\Functional;
 
+use Github\Api\Markdown;
+
 /**
  * @group functional
  */
@@ -12,6 +14,7 @@ class MarkdownTest extends TestCase
      */
     public function shouldRetrieveParsedMarkdownContent()
     {
+        /** @var Markdown $api */
         $api = $this->client->api('markdown');
 
         $input  = 'Hello world github/linguist#1 **cool**, and #1!';

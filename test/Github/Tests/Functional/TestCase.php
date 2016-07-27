@@ -11,6 +11,9 @@ use Github\Exception\RuntimeException;
  */
 class TestCase extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var Client
+     */
     protected $client;
 
     public function setUp()

@@ -3,14 +3,18 @@
 namespace Github\Api\Repository;
 
 use Github\Api\AbstractApi;
+use Github\Api\AcceptHeaderTrait;
 use Github\Exception\MissingArgumentException;
 
 /**
  * @link   http://developer.github.com/v3/repos/comments/
  * @author Joseph Bielawski <stloyd@gmail.com>
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
 class Comments extends AbstractApi
 {
+    use AcceptHeaderTrait;
+    
     public function configure($bodyType = null)
     {
         switch ($bodyType) {
@@ -30,7 +34,7 @@ class Comments extends AbstractApi
                 $header = sprintf('Accept: application/vnd.github.%s.full+json', $this->client->getOption('api_version'));
         }
 
-        $this->client->setHeaders(array($header));
+        $this->acceptHeaderValue = $header;
     }
 
     public function all($username, $repository, $sha = null)

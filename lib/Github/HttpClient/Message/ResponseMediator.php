@@ -2,15 +2,20 @@
 
 namespace Github\HttpClient\Message;
 
-use Guzzle\Http\Message\Response;
 use Github\Exception\ApiLimitExceedException;
+use Psr\Http\Message\ResponseInterface;
 
 class ResponseMediator
 {
-    public static function getContent(Response $response)
+    /**
+     * @param ResponseInterface $response
+     *
+     * @return array|string
+     */
+    public static function getContent(ResponseInterface $response)
     {
-        $body = $response->getBody(true);
-        if (strpos($response->getContentType(), 'application/json') === 0) {
+        $body = $response->getBody()->__toString();
+        if (strpos($response->getHeaderLine('Content-Type'), 'application/json') === 0) {
             $content = json_decode($body, true);
             if (JSON_ERROR_NONE === json_last_error()) {
                 return $content;
@@ -20,14 +25,18 @@ class ResponseMediator
         return $body;
     }
 
-    public static function getPagination(Response $response)
+    /**
+     * @param ResponseInterface $response
+     *
+     * @return array|null
+     */
+    public static function getPagination(ResponseInterface $response)
     {
-        $header = (string) $response->getHeader('Link');
-
-        if (empty($header)) {
+        if (!$response->hasHeader('Link')) {
             return null;
         }
 
+        $header = self::getHeader($response, 'Link');
         $pagination = array();
         foreach (explode(',', $header) as $link) {
             preg_match('/<(.*)>; rel="(.*)"/i', trim($link, ','), $match);
@@ -40,14 +49,33 @@ class ResponseMediator
         return $pagination;
     }
 
-    public static function getApiLimit(Response $response)
+    /**
+     * @param ResponseInterface $response
+     *
+     * @return null|string
+     */
+    public static function getApiLimit(ResponseInterface $response)
     {
-        $remainingCalls = (string) $response->getHeader('X-RateLimit-Remaining');
+        $remainingCalls = self::getHeader($response, 'X-RateLimit-Remaining');
 
         if (null !== $remainingCalls && 1 > $remainingCalls) {
             throw new ApiLimitExceedException($remainingCalls);
         }
         
         return $remainingCalls;
+    }
+    
+    /**
+     * Get the value for a single header
+     * @param ResponseInterface $response
+     * @param string $name
+     *
+     * @return string|null
+     */
+    public static function getHeader(ResponseInterface $response, $name)
+    {
+        $headers = $response->getHeader($name);
+
+        return array_shift($headers);
     }
 }

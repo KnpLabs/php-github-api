@@ -2,8 +2,8 @@
 
 namespace Github\HttpClient\Cache;
 
-use Guzzle\Http\Message\Response;
 use Gaufrette\Filesystem;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Gaufrette Cache.
@@ -32,15 +32,15 @@ class GaufretteCache implements CacheInterface
     {
         $content = $this->filesystem->read($id);
 
-        return unserialize($content);
+        return ResponseSerializer::unserialize($content);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function set($id, Response $response)
+    public function set($id, ResponseInterface $response)
     {
-        $this->filesystem->write($id, serialize($response), true);
+        $this->filesystem->write($id, ResponseSerializer::serialize($response), true);
         $this->filesystem->write($id.'.etag', $response->getHeader('ETag'), true);
     }
 

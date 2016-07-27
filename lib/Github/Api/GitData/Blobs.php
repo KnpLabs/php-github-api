@@ -3,14 +3,18 @@
 namespace Github\Api\GitData;
 
 use Github\Api\AbstractApi;
+use Github\Api\AcceptHeaderTrait;
 use Github\Exception\MissingArgumentException;
 
 /**
  * @link   http://developer.github.com/v3/git/blobs/
  * @author Joseph Bielawski <stloyd@gmail.com>
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
 class Blobs extends AbstractApi
 {
+    use AcceptHeaderTrait;
+    
     /**
      * Configure the Accept header depending on the blob type.
      *
@@ -18,10 +22,8 @@ class Blobs extends AbstractApi
      */
     public function configure($bodyType = null)
     {
-        if ('raw' == $bodyType) {
-            $this->client->setHeaders(array(
-                'Accept' => sprintf('application/vnd.github.%s.raw', $this->client->getOption('api_version'))
-            ));
+        if ('raw' === $bodyType) {
+            $this->acceptHeaderValue = sprintf('application/vnd.github.%s.raw', $this->client->getOption('api_version'));
         }
     }
 

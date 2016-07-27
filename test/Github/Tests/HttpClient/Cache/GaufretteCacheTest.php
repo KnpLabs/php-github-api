@@ -2,8 +2,8 @@
 
 namespace Github\Tests\HttpClient\Cache;
 
-use Guzzle\Http\Message\Response;
 use Github\HttpClient\Cache\GaufretteCache;
+use GuzzleHttp\Psr7\Response;
 
 class GaufretteCacheTest extends \PHPUnit_Framework_TestCase
 {
