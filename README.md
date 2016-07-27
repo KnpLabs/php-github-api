@@ -1,4 +1,12 @@
-# PHP GitHub API
+# PHP GitHub API 2.0
+
+In 2.0 lib no longer uses guzzle 3.7, instead we have an HTTPlug abstraction layer. 
+
+For old version please check:
+
+* [branch](https://github.com/KnpLabs/php-github-api/tree/1.7)
+* [readme](https://github.com/KnpLabs/php-github-api/tree/1.7/README.md)
+* [docs](https://github.com/KnpLabs/php-github-api/tree/1.7/doc)
 
 [![Build Status](https://travis-ci.org/KnpLabs/php-github-api.svg?branch=master)](https://travis-ci.org/KnpLabs/php-github-api)
 [![StyleCI](https://styleci.io/repos/3948501/shield?style=flat)](https://styleci.io/repos/3948501)
