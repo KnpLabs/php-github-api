@@ -379,7 +379,7 @@ class Client
      */
     public function addCache(CacheItemPoolInterface $cachePool)
     {
-        $this->removePlugin(Plugin\CachePlugin::class);
+        $this->removeCache();
         $this->addPlugin(new Plugin\CachePlugin($cachePool));
     }
 
