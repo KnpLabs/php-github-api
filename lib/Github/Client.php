@@ -374,12 +374,21 @@ class Client
     }
 
     /**
+     * Add a cache plugin to cache responses locally.
      * @param CacheItemPoolInterface $cache
      */
-    public function useCache(CacheItemPoolInterface $cachePool)
+    public function addCache(CacheItemPoolInterface $cachePool)
     {
         $this->removePlugin(Plugin\CachePlugin::class);
         $this->addPlugin(new Plugin\CachePlugin($cachePool));
+    }
+
+    /**
+     * Remove the cache plugin
+     */
+    public function removeCache()
+    {
+        $this->removePlugin(Plugin\CachePlugin::class);
     }
 
     /**

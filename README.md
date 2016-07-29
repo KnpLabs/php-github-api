@@ -77,7 +77,12 @@ $client->connect('127.0.0.1', 6379);
 $pool = new RedisCachePool($client);
 
 $client = new \Github\Client();
-$client->useCache($pool);
+$client->addCache($pool);
+
+// Do some request
+
+// Stop using cache
+$client->removeCache();
 ```
 
 Using cache, the client will get cached responses if resources haven't changed since last time,
