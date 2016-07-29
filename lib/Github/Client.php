@@ -5,9 +5,7 @@ namespace Github;
 use Github\Api\ApiInterface;
 use Github\Exception\InvalidArgumentException;
 use Github\Exception\BadMethodCallException;
-use Github\HttpClient\Cache\CacheInterface;
 use Github\HttpClient\Plugin\Authentication;
-use Github\HttpClient\Plugin\Cache;
 use Github\HttpClient\Plugin\GithubExceptionThrower;
 use Github\HttpClient\Plugin\History;
 use Github\HttpClient\Plugin\PathPrepend;
@@ -19,6 +17,7 @@ use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Discovery\UriFactoryDiscovery;
 use Http\Message\MessageFactory;
+use Psr\Cache\CacheItemPoolInterface;
 
 /**
  * Simple yet very cool PHP GitHub client.
@@ -376,19 +375,21 @@ class Client
     }
 
     /**
-     * @param bool|CacheInterface $cache
+     * Add a cache plugin to cache responses locally.
+     * @param CacheItemPoolInterface $cache
      */
-    public function useCache($cache = true)
+    public function addCache(CacheItemPoolInterface $cachePool)
     {
-        $this->removePlugin(Cache::class);
-        if ($cache !== false) {
-            if ($cache instanceof CacheInterface) {
-                $plugin = new Cache($cache);
-            } else {
-                $plugin = new Cache();
-            }
-            $this->addPlugin($plugin);
-        }
+        $this->removeCache();
+        $this->addPlugin(new Plugin\CachePlugin($cachePool));
+    }
+
+    /**
+     * Remove the cache plugin
+     */
+    public function removeCache()
+    {
+        $this->removePlugin(Plugin\CachePlugin::class);
     }
 
     /**
