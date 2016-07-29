@@ -312,15 +312,16 @@ class Client
     }
 
     /**
-     * Remove a plugin by its fqn.
+     * Remove a plugin by its fully qualified class name (FQCN).
      *
-     * @param string $fqn
+     * @param string $fqcn
      */
-    protected function removePlugin($fqn)
+    protected function removePlugin($fqcn)
     {
         foreach ($this->plugins as $idx => $plugin) {
-            if ($plugin instanceof $fqn) {
+            if ($plugin instanceof $fqcn) {
                 unset($this->plugins[$idx]);
+                $this->httpClientModified = true;
             }
         }
     }
