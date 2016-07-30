@@ -313,7 +313,7 @@ class Client
      *
      * @param Plugin $plugin
      */
-    protected function addPlugin(Plugin $plugin)
+    public function addPlugin(Plugin $plugin)
     {
         $this->plugins[] = $plugin;
         $this->httpClientModified = true;
@@ -324,7 +324,7 @@ class Client
      *
      * @param string $fqcn
      */
-    protected function removePlugin($fqcn)
+    public function removePlugin($fqcn)
     {
         foreach ($this->plugins as $idx => $plugin) {
             if ($plugin instanceof $fqcn) {
