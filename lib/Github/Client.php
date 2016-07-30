@@ -15,8 +15,10 @@ use Http\Client\Common\PluginClient;
 use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\MessageFactoryDiscovery;
+use Http\Discovery\StreamFactoryDiscovery;
 use Http\Discovery\UriFactoryDiscovery;
 use Http\Message\MessageFactory;
+use Http\Message\SteamFactory;
 use Psr\Cache\CacheItemPoolInterface;
 
 /**
@@ -111,6 +113,11 @@ class Client
     private $messageFactory;
 
     /**
+     * @var StreamFactory
+     */
+    private $streamFactory;
+
+    /**
      * @var Plugin[]
      */
     private $plugins = [];
@@ -141,6 +148,7 @@ class Client
     {
         $this->httpClient = $httpClient ?: HttpClientDiscovery::find();
         $this->messageFactory = MessageFactoryDiscovery::find();
+        $this->streamFactory = StreamFactoryDiscovery::find();
 
         $this->responseHistory = new History();
         $this->addPlugin(new GithubExceptionThrower());
@@ -382,7 +390,7 @@ class Client
     public function addCache(CacheItemPoolInterface $cachePool)
     {
         $this->removeCache();
-        $this->addPlugin(new Plugin\CachePlugin($cachePool));
+        $this->addPlugin(new Plugin\CachePlugin($cachePool, $this->streamFactory));
     }
 
     /**
