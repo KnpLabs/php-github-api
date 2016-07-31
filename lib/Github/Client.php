@@ -158,6 +158,8 @@ class Client
         $this->addPlugin(new Plugin\HeaderDefaultsPlugin(array(
             'User-Agent'  => 'php-github-api (http://github.com/KnpLabs/php-github-api)',
         )));
+        // Add standard headers.
+        $this->clearHeaders();
     }
 
     /**
@@ -428,6 +430,12 @@ class Client
     {
         if (!array_key_exists($name, $this->options)) {
             throw new InvalidArgumentException(sprintf('Undefined option called: "%s"', $name));
+        }
+
+        if ($name === 'api_version') {
+            $this->addHeaders([
+                'Accept' => sprintf('application/vnd.github.%s+json', $value),
+            ]);
         }
 
         $this->options[$name] = $value;
