@@ -14,7 +14,7 @@ use Github\Exception\MissingArgumentException;
 class Blobs extends AbstractApi
 {
     use AcceptHeaderTrait;
-    
+
     /**
      * Configure the Accept header depending on the blob type.
      *
@@ -23,7 +23,7 @@ class Blobs extends AbstractApi
     public function configure($bodyType = null)
     {
         if ('raw' === $bodyType) {
-            $this->acceptHeaderValue = sprintf('application/vnd.github.%s.raw', $this->client->getOption('api_version'));
+            $this->acceptHeaderValue = sprintf('application/vnd.github.%s.raw', $this->client->getApiVersion());
         }
     }
 

@@ -24,7 +24,7 @@ class Stargazers extends AbstractApi
     public function configure($bodyType = null)
     {
         if ('star' === $bodyType) {
-            $this->acceptHeaderValue = sprintf('application/vnd.github.%s.star+json', $this->client->getOption('api_version'));
+            $this->acceptHeaderValue = sprintf('application/vnd.github.%s.star+json', $this->client->getApiVersion());
         }
     }
 

@@ -14,24 +14,24 @@ use Github\Exception\MissingArgumentException;
 class Comments extends AbstractApi
 {
     use AcceptHeaderTrait;
-    
+
     public function configure($bodyType = null)
     {
         switch ($bodyType) {
             case 'raw':
-                $header = sprintf('Accept: application/vnd.github.%s.raw+json', $this->client->getOption('api_version'));
+                $header = sprintf('Accept: application/vnd.github.%s.raw+json', $this->client->getApiVersion());
                 break;
 
             case 'text':
-                $header = sprintf('Accept: application/vnd.github.%s.text+json', $this->client->getOption('api_version'));
+                $header = sprintf('Accept: application/vnd.github.%s.text+json', $this->client->getApiVersion());
                 break;
 
             case 'html':
-                $header = sprintf('Accept: application/vnd.github.%s.html+json', $this->client->getOption('api_version'));
+                $header = sprintf('Accept: application/vnd.github.%s.html+json', $this->client->getApiVersion());
                 break;
 
             default:
-                $header = sprintf('Accept: application/vnd.github.%s.full+json', $this->client->getOption('api_version'));
+                $header = sprintf('Accept: application/vnd.github.%s.full+json', $this->client->getApiVersion());
         }
 
         $this->acceptHeaderValue = $header;
