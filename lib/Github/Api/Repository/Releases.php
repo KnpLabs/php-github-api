@@ -44,12 +44,13 @@ class Releases extends AbstractApi
      *
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
+     * @param array  $params     the additional parameters like milestone, assignees, labels, sort, direction
      *
      * @return array
      */
-    public function all($username, $repository)
+    public function all($username, $repository, array $params = [])
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases');
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases', $params);
     }
 
     /**
