@@ -48,7 +48,7 @@ class Releases extends AbstractApi
      *
      * @return array
      */
-    public function all($username, $repository, array $params = array())
+    public function all($username, $repository, array $params = [])
     {
         return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases', $params);
     }
