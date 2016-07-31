@@ -460,7 +460,6 @@ class Client
         return $this->responseHistory->getLastResponse();
     }
 
-
     /**
      * Make sure to move the cache plugin to the end of the chain
      */
@@ -473,6 +472,7 @@ class Client
                 unset($this->plugins[$i]);
 
                 $this->plugins[] = $cachePlugin;
+
                 return;
             }
         }
