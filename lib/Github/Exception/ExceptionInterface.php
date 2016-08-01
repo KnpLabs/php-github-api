@@ -2,6 +2,8 @@
 
 namespace Github\Exception;
 
-interface ExceptionInterface
+use Http\Client\Exception;
+
+interface ExceptionInterface extends Exception
 {
 }
