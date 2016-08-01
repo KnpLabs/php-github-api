@@ -6,8 +6,8 @@ For example:
 
 ```php
 $client = new Github\Client();
-echo $client->getApiVersion(); // prints "s3"
+echo $client->getApiVersion(); // prints "v3"
 
 $client = new Github\Client($httpClient, 'v2');
-echo $client->getApiVersion(); // prints "s2"
+echo $client->getApiVersion(); // prints "v2"
 ```
