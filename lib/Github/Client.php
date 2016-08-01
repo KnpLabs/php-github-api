@@ -89,7 +89,7 @@ class Client
     /**
      * @var string
      */
-    private $apiVersion = 'v3';
+    private $apiVersion;
 
     /**
      * The object that sends HTTP messages
@@ -141,8 +141,10 @@ class Client
      * Instantiate a new GitHub client.
      *
      * @param HttpClient|null $httpClient
+     * @param string|null     $apiVersion
+     * @param string|null     $enterpriseUrl
      */
-    public function __construct(HttpClient $httpClient = null)
+    public function __construct(HttpClient $httpClient = null, $apiVersion = null, $enterpriseUrl = null)
     {
         $this->httpClient = $httpClient ?: HttpClientDiscovery::find();
         $this->messageFactory = MessageFactoryDiscovery::find();
@@ -156,8 +158,12 @@ class Client
         $this->addPlugin(new Plugin\HeaderDefaultsPlugin(array(
             'User-Agent'  => 'php-github-api (http://github.com/KnpLabs/php-github-api)',
         )));
-        // Add standard headers.
-        $this->clearHeaders();
+
+        $this->setApiVersion($apiVersion ?: 'v3');
+
+        if ($enterpriseUrl) {
+            $this->setEnterpriseUrl($enterpriseUrl);
+        }
     }
 
     /**
