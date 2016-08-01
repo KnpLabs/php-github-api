@@ -159,7 +159,8 @@ class Client
             'User-Agent'  => 'php-github-api (http://github.com/KnpLabs/php-github-api)',
         )));
 
-        $this->setApiVersion($apiVersion ?: 'v3');
+        $this->apiVersion = $apiVersion ?: 'v3';
+        $this->addHeaders(['Accept' => sprintf('application/vnd.github.%s+json', $this->apiVersion)]);
 
         if ($enterpriseUrl) {
             $this->setEnterpriseUrl($enterpriseUrl);
@@ -305,7 +306,7 @@ class Client
      *
      * @param string $enterpriseUrl URL of the API in the form of http(s)://hostname
      */
-    public function setEnterpriseUrl($enterpriseUrl)
+    private function setEnterpriseUrl($enterpriseUrl)
     {
         $this->removePlugin(Plugin\AddHostPlugin::class);
         $this->removePlugin(PathPrepend::class);
@@ -373,21 +374,6 @@ class Client
     public function getApiVersion()
     {
         return $this->apiVersion;
-    }
-
-    /**
-     * @param string $apiVersion
-     *
-     * @return Client
-     */
-    public function setApiVersion($apiVersion)
-    {
-        $this->apiVersion = $apiVersion;
-        $this->addHeaders([
-            'Accept' => sprintf('application/vnd.github.%s+json', $apiVersion),
-        ]);
-
-        return $this;
     }
 
     /**
