@@ -16,12 +16,13 @@ class Tags extends AbstractApi
      *
      * @param string $username
      * @param string $repository
+     * @param array  $params     the additional parameters like milestone, assignees, labels, sort, direction
      *
      * @return array
      */
-    public function all($username, $repository)
+    public function all($username, $repository, array $params = [])
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs/tags');
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs/tags', $params);
     }
 
     /**
