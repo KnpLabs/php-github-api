@@ -15,7 +15,7 @@ class RepoTest extends TestCase
         $this->client->addHeaders(
             array('Accept' => sprintf(
                 'application/vnd.github.%s.diff',
-                $this->client->getOption('api_version')
+                $this->client->getApiVersion()
             ))
         );
 
