@@ -420,12 +420,13 @@ class Repo extends AbstractApi
      *
      * @param string $username   the user who owns the repository
      * @param string $repository the name of the repository
+     * @param array  $params     the additional parameters like milestone, assignees, labels, sort, direction
      *
      * @return array list of the repository tags
      */
-    public function tags($username, $repository)
+    public function tags($username, $repository, array $params = [])
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/tags');
+        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/tags', $params);
     }
 
     /**
