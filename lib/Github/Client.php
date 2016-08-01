@@ -18,7 +18,7 @@ use Http\Discovery\MessageFactoryDiscovery;
 use Http\Discovery\StreamFactoryDiscovery;
 use Http\Discovery\UriFactoryDiscovery;
 use Http\Message\MessageFactory;
-use Http\Message\SteamFactory;
+use Nyholm\Psr7\Factory\StreamFactory;
 use Psr\Cache\CacheItemPoolInterface;
 
 /**
@@ -309,7 +309,7 @@ class Client
     }
 
     /**
-     * Add a new plugin to the chain
+     * Add a new plugin to the end of the plugin chain.
      *
      * @param Plugin $plugin
      */
@@ -341,6 +341,8 @@ class Client
     {
         if ($this->httpClientModified) {
             $this->httpClientModified = false;
+            $this->pushBackCachePlugin();
+
             $this->pluginClient = new HttpMethodsClient(
                 new PluginClient($this->httpClient, $this->plugins),
                 $this->messageFactory
@@ -456,5 +458,23 @@ class Client
     public function getLastResponse()
     {
         return $this->responseHistory->getLastResponse();
+    }
+
+    /**
+     * Make sure to move the cache plugin to the end of the chain
+     */
+    private function pushBackCachePlugin()
+    {
+        $cachePlugin = null;
+        foreach ($this->plugins as $i => $plugin) {
+            if ($plugin instanceof Plugin\CachePlugin) {
+                $cachePlugin = $plugin;
+                unset($this->plugins[$i]);
+
+                $this->plugins[] = $cachePlugin;
+
+                return;
+            }
+        }
     }
 }
