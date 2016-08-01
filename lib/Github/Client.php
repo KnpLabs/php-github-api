@@ -87,11 +87,9 @@ class Client
     const AUTH_HTTP_TOKEN = 'http_token';
 
     /**
-     * @var array
+     * @var string
      */
-    private $options = array(
-        'api_version' => 'v3',
-    );
+    private $apiVersion = 'v3';
 
     /**
      * The object that sends HTTP messages
@@ -158,6 +156,8 @@ class Client
         $this->addPlugin(new Plugin\HeaderDefaultsPlugin(array(
             'User-Agent'  => 'php-github-api (http://github.com/KnpLabs/php-github-api)',
         )));
+        // Add standard headers.
+        $this->clearHeaders();
     }
 
     /**
@@ -305,7 +305,7 @@ class Client
         $this->removePlugin(PathPrepend::class);
 
         $this->addPlugin(new Plugin\AddHostPlugin(UriFactoryDiscovery::find()->createUri($enterpriseUrl)));
-        $this->addPlugin(new PathPrepend(sprintf('/api/%s/', $this->getOption('api_version'))));
+        $this->addPlugin(new PathPrepend(sprintf('/api/%s/', $this->getApiVersion())));
     }
 
     /**
@@ -362,12 +362,35 @@ class Client
     }
 
     /**
+     * @return string
+     */
+    public function getApiVersion()
+    {
+        return $this->apiVersion;
+    }
+
+    /**
+     * @param string $apiVersion
+     *
+     * @return Client
+     */
+    public function setApiVersion($apiVersion)
+    {
+        $this->apiVersion = $apiVersion;
+        $this->addHeaders([
+            'Accept' => sprintf('application/vnd.github.%s+json', $apiVersion),
+        ]);
+
+        return $this;
+    }
+
+    /**
      * Clears used headers.
      */
     public function clearHeaders()
     {
         $this->headers = array(
-            'Accept' => sprintf('application/vnd.github.%s+json', $this->options['api_version']),
+            'Accept' => sprintf('application/vnd.github.%s+json', $this->getApiVersion()),
         );
 
         $this->removePlugin(Plugin\HeaderAppendPlugin::class);
@@ -401,38 +424,6 @@ class Client
     public function removeCache()
     {
         $this->removePlugin(Plugin\CachePlugin::class);
-    }
-
-    /**
-     * @param string $name
-     *
-     * @throws InvalidArgumentException
-     *
-     * @return mixed
-     */
-    public function getOption($name)
-    {
-        if (!array_key_exists($name, $this->options)) {
-            throw new InvalidArgumentException(sprintf('Undefined option called: "%s"', $name));
-        }
-
-        return $this->options[$name];
-    }
-
-    /**
-     * @param string $name
-     * @param mixed  $value
-     *
-     * @throws InvalidArgumentException
-     * @throws InvalidArgumentException
-     */
-    public function setOption($name, $value)
-    {
-        if (!array_key_exists($name, $this->options)) {
-            throw new InvalidArgumentException(sprintf('Undefined option called: "%s"', $name));
-        }
-
-        $this->options[$name] = $value;
     }
 
     /**
