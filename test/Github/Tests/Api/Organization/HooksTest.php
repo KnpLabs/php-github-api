@@ -16,7 +16,7 @@ class HooksTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('orgs/KnpLabs/hooks')
+            ->with('/orgs/KnpLabs/hooks')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs'));
@@ -32,7 +32,7 @@ class HooksTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('orgs/KnpLabs/hooks/123')
+            ->with('/orgs/KnpLabs/hooks/123')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 123));
@@ -48,7 +48,7 @@ class HooksTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('orgs/KnpLabs/hooks/123')
+            ->with('/orgs/KnpLabs/hooks/123')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->remove('KnpLabs', 123));
@@ -95,7 +95,7 @@ class HooksTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('orgs/KnpLabs/hooks', $data)
+            ->with('/orgs/KnpLabs/hooks', $data)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->create('KnpLabs', $data));
@@ -127,7 +127,7 @@ class HooksTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
-            ->with('orgs/KnpLabs/hooks/123', $data)
+            ->with('/orgs/KnpLabs/hooks/123', $data)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->update('KnpLabs', 123, $data));
@@ -143,7 +143,7 @@ class HooksTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('orgs/KnpLabs/hooks/123/pings')
+            ->with('/orgs/KnpLabs/hooks/123/pings')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->ping('KnpLabs', 123));

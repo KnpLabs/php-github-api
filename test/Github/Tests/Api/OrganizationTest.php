@@ -14,7 +14,7 @@ class OrganizationTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('organizations?since=1')
+            ->with('/organizations?since=1')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all(1));
@@ -30,7 +30,7 @@ class OrganizationTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('orgs/KnpLabs')
+            ->with('/orgs/KnpLabs')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->show('KnpLabs'));
@@ -46,7 +46,7 @@ class OrganizationTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
-            ->with('orgs/KnpLabs', array('value' => 'toUpdate'))
+            ->with('/orgs/KnpLabs', array('value' => 'toUpdate'))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->update('KnpLabs', array('value' => 'toUpdate')));
@@ -62,7 +62,7 @@ class OrganizationTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('orgs/KnpLabs/repos', array('type' => 'all'))
+            ->with('/orgs/KnpLabs/repos', array('type' => 'all'))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->repositories('KnpLabs'));

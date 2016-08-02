@@ -27,7 +27,7 @@ class RateLimitTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('rate_limit')
+            ->with('/rate_limit')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->getRateLimits());

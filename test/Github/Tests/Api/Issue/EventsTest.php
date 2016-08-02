@@ -16,7 +16,7 @@ class EventsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/issues/events', array('page' => 1))
+            ->with('/repos/KnpLabs/php-github-api/issues/events', array('page' => 1))
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api'));
@@ -32,7 +32,7 @@ class EventsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/issues/123/events', array('page' => 1))
+            ->with('/repos/KnpLabs/php-github-api/issues/123/events', array('page' => 1))
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', 123));
@@ -48,7 +48,7 @@ class EventsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/issues/events/123')
+            ->with('/repos/KnpLabs/php-github-api/issues/events/123')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 123));

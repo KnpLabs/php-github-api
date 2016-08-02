@@ -16,7 +16,7 @@ class HooksTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/hooks')
+            ->with('/repos/KnpLabs/php-github-api/hooks')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api'));
@@ -32,7 +32,7 @@ class HooksTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/hooks/123')
+            ->with('/repos/KnpLabs/php-github-api/hooks/123')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 123));
@@ -48,7 +48,7 @@ class HooksTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('repos/KnpLabs/php-github-api/hooks/123')
+            ->with('/repos/KnpLabs/php-github-api/hooks/123')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->remove('KnpLabs', 'php-github-api', 123));
@@ -95,7 +95,7 @@ class HooksTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('repos/KnpLabs/php-github-api/hooks', $data)
+            ->with('/repos/KnpLabs/php-github-api/hooks', $data)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', $data));
@@ -142,7 +142,7 @@ class HooksTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
-            ->with('repos/KnpLabs/php-github-api/hooks/123', $data)
+            ->with('/repos/KnpLabs/php-github-api/hooks/123', $data)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->update('KnpLabs', 'php-github-api', 123, $data));
@@ -158,7 +158,7 @@ class HooksTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('repos/KnpLabs/php-github-api/hooks/123/test')
+            ->with('/repos/KnpLabs/php-github-api/hooks/123/test')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->test('KnpLabs', 'php-github-api', 123));

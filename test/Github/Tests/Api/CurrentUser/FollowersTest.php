@@ -17,7 +17,7 @@ class FollowersTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('user/following')
+            ->with('/user/following')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all());
@@ -31,7 +31,7 @@ class FollowersTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('user/following/l3l0')
+            ->with('/user/following/l3l0')
             ->will($this->returnValue(null));
 
         $this->assertNull($api->check('l3l0'));
@@ -45,7 +45,7 @@ class FollowersTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with('user/following/l3l0')
+            ->with('/user/following/l3l0')
             ->will($this->returnValue(null));
 
         $this->assertNull($api->follow('l3l0'));
@@ -59,7 +59,7 @@ class FollowersTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('user/following/l3l0')
+            ->with('/user/following/l3l0')
             ->will($this->returnValue(null));
 
         $this->assertNull($api->unfollow('l3l0'));

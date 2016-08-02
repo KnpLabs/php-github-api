@@ -17,7 +17,7 @@ class StarringTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('user/starred')
+            ->with('/user/starred')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all());
@@ -31,7 +31,7 @@ class StarringTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('user/starred/l3l0/test')
+            ->with('/user/starred/l3l0/test')
             ->will($this->returnValue(null));
 
         $this->assertNull($api->check('l3l0', 'test'));
@@ -45,7 +45,7 @@ class StarringTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with('user/starred/l3l0/test')
+            ->with('/user/starred/l3l0/test')
             ->will($this->returnValue(null));
 
         $this->assertNull($api->star('l3l0', 'test'));
@@ -59,7 +59,7 @@ class StarringTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('user/starred/l3l0/test')
+            ->with('/user/starred/l3l0/test')
             ->will($this->returnValue(null));
 
         $this->assertNull($api->unstar('l3l0', 'test'));

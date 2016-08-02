@@ -16,7 +16,7 @@ class CommentsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('gists/123/comments')
+            ->with('/gists/123/comments')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('123'));
@@ -32,7 +32,7 @@ class CommentsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('gists/123/comments/123')
+            ->with('/gists/123/comments/123')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->show(123, 123));
@@ -48,7 +48,7 @@ class CommentsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('gists/123/comments', array('body' => 'Test body'))
+            ->with('/gists/123/comments', array('body' => 'Test body'))
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->create('123', 'Test body'));
@@ -65,7 +65,7 @@ class CommentsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
-            ->with('gists/123/comments/233', $data)
+            ->with('/gists/123/comments/233', $data)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->update(123, 233, 'body test'));
@@ -81,7 +81,7 @@ class CommentsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('gists/123/comments/233')
+            ->with('/gists/123/comments/233')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->remove(123, 233));

@@ -15,7 +15,7 @@ class UserAdminTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with('users/l3l0/suspended')
+            ->with('/users/l3l0/suspended')
             ->will($this->returnValue($expectedArray));
         $this->assertEquals($expectedArray, $api->suspend('l3l0'));
     }
@@ -30,7 +30,7 @@ class UserAdminTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('users/l3l0/suspended')
+            ->with('/users/l3l0/suspended')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->unsuspend('l3l0'));

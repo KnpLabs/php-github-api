@@ -16,7 +16,7 @@ class StargazersTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/stargazers')
+            ->with('/repos/KnpLabs/php-github-api/stargazers')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api'));
@@ -32,7 +32,7 @@ class StargazersTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/stargazers')
+            ->with('/repos/KnpLabs/php-github-api/stargazers')
             ->will($this->returnValue($expectedValue));
         $api->configure('star');
 

@@ -23,7 +23,7 @@ class LicenseTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('enterprise/settings/license')
+            ->with('/enterprise/settings/license')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->show());

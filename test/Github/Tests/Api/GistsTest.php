@@ -14,7 +14,7 @@ class GistsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('gists/starred')
+            ->with('/gists/starred')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->all('starred'));
@@ -30,7 +30,7 @@ class GistsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('gists')
+            ->with('/gists')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->all());
@@ -46,7 +46,7 @@ class GistsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('gists/123')
+            ->with('/gists/123')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->show(123));
@@ -62,7 +62,7 @@ class GistsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('gists/123/commits')
+            ->with('/gists/123/commits')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->commits(123));
@@ -88,7 +88,7 @@ class GistsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('gists/123/fork')
+            ->with('/gists/123/fork')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->fork(123));
@@ -104,7 +104,7 @@ class GistsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('gists/123/forks')
+            ->with('/gists/123/forks')
             ->will($this->returnValue($expectedArray));
 
         $api->forks(123);
@@ -138,7 +138,7 @@ class GistsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('gists/123/star')
+            ->with('/gists/123/star')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->check(123));
@@ -154,7 +154,7 @@ class GistsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with('gists/123/star')
+            ->with('/gists/123/star')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->star(123));
@@ -170,7 +170,7 @@ class GistsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('gists/123/star')
+            ->with('/gists/123/star')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->unstar(123));
@@ -194,7 +194,7 @@ class GistsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('gists', $input);
+            ->with('/gists', $input);
 
         $api->create($input);
     }
@@ -220,7 +220,7 @@ class GistsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
-            ->with('gists/5', $input);
+            ->with('/gists/5', $input);
 
         $api->update(5, $input);
     }
@@ -233,7 +233,7 @@ class GistsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('gists/5');
+            ->with('/gists/5');
 
         $api->remove(5);
     }

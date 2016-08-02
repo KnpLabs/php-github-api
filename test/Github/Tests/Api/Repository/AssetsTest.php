@@ -17,7 +17,7 @@ class AssetsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/releases/'.$id.'/assets')
+            ->with('/repos/KnpLabs/php-github-api/releases/'.$id.'/assets')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', $id));
@@ -34,7 +34,7 @@ class AssetsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/releases/assets/'.$assetId)
+            ->with('/repos/KnpLabs/php-github-api/releases/assets/'.$assetId)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', $assetId));
@@ -78,7 +78,7 @@ class AssetsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
-            ->with('repos/KnpLabs/php-github-api/releases/assets/'.$assetId)
+            ->with('/repos/KnpLabs/php-github-api/releases/assets/'.$assetId)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->edit('KnpLabs', 'php-github-api', $assetId, $data));
@@ -111,7 +111,7 @@ class AssetsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('repos/KnpLabs/php-github-api/releases/assets/'.$assetId)
+            ->with('/repos/KnpLabs/php-github-api/releases/assets/'.$assetId)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->remove('KnpLabs', 'php-github-api', $assetId));

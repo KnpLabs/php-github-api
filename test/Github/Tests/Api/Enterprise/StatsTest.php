@@ -16,7 +16,7 @@ class StatsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('enterprise/stats/all')
+            ->with('/enterprise/stats/all')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->show('all'));
@@ -33,7 +33,7 @@ class StatsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with(sprintf('enterprise/stats/%s', $type))
+            ->with(sprintf('/enterprise/stats/%s', $type))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, call_user_func(array($api, $type)));
