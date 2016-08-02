@@ -15,7 +15,7 @@ class Memberships extends AbstractApi
      */
     public function all()
     {
-        return $this->get('user/memberships/orgs');
+        return $this->get('/user/memberships/orgs');
     }
 
     /**
@@ -29,7 +29,7 @@ class Memberships extends AbstractApi
      */
     public function organization($organization)
     {
-        return $this->get('user/memberships/orgs/'.rawurlencode($organization));
+        return $this->get('/user/memberships/orgs/'.rawurlencode($organization));
     }
 
     /**
@@ -43,6 +43,6 @@ class Memberships extends AbstractApi
      */
     public function edit($organization)
     {
-        return $this->patch('user/memberships/orgs/'.rawurlencode($organization), array('state' => 'active'));
+        return $this->patch('/user/memberships/orgs/'.rawurlencode($organization), array('state' => 'active'));
     }
 }

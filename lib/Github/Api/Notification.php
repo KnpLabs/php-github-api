@@ -36,7 +36,7 @@ class Notification extends AbstractApi
             $parameters['since'] = $since->format(DateTime::ISO8601);
         }
 
-        return $this->get('notifications', $parameters);
+        return $this->get('/notifications', $parameters);
     }
 
     /**
@@ -55,6 +55,6 @@ class Notification extends AbstractApi
             $parameters['last_read_at'] = $since->format(DateTime::ISO8601);
         }
 
-        $this->put('notifications', $parameters);
+        $this->put('/notifications', $parameters);
     }
 }

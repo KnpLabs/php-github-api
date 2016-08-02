@@ -25,9 +25,9 @@ class Labels extends AbstractApi
     public function all($username, $repository, $issue = null)
     {
         if ($issue === null) {
-            $path = 'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels';
+            $path = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels';
         } else {
-            $path = 'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/labels';
+            $path = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/labels';
         }
 
         return $this->get($path);
@@ -54,7 +54,7 @@ class Labels extends AbstractApi
             $params['color'] = 'FFFFFF';
         }
 
-        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels', $params);
+        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels', $params);
     }
 
     /**
@@ -69,7 +69,7 @@ class Labels extends AbstractApi
      */
     public function deleteLabel($username, $repository, $label)
     {
-        return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels/'.rawurlencode($label));
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels/'.rawurlencode($label));
     }
 
     /**
@@ -91,7 +91,7 @@ class Labels extends AbstractApi
             'color' => $color,
         );
 
-        return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels/'.rawurlencode($label), $params);
+        return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels/'.rawurlencode($label), $params);
     }
 
     /**
@@ -115,7 +115,7 @@ class Labels extends AbstractApi
             throw new InvalidArgumentException();
         }
 
-        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/labels', $labels);
+        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/labels', $labels);
     }
 
     /**
@@ -131,7 +131,7 @@ class Labels extends AbstractApi
      */
     public function replace($username, $repository, $issue, array $params)
     {
-        return $this->put('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/labels', $params);
+        return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/labels', $params);
     }
 
     /**
@@ -147,7 +147,7 @@ class Labels extends AbstractApi
      */
     public function remove($username, $repository, $issue, $label)
     {
-        return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/labels/'.rawurlencode($label));
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/labels/'.rawurlencode($label));
     }
 
     /**
@@ -162,6 +162,6 @@ class Labels extends AbstractApi
      */
     public function clear($username, $repository, $issue)
     {
-        return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/labels');
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/labels');
     }
 }

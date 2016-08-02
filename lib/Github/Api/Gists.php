@@ -17,15 +17,15 @@ class Gists extends AbstractApi
     public function all($type = null)
     {
         if (!in_array($type, array('public', 'starred'))) {
-            return $this->get('gists');
+            return $this->get('/gists');
         }
 
-        return $this->get('gists/'.rawurlencode($type));
+        return $this->get('/gists/'.rawurlencode($type));
     }
 
     public function show($number)
     {
-        return $this->get('gists/'.rawurlencode($number));
+        return $this->get('/gists/'.rawurlencode($number));
     }
 
     public function create(array $params)
@@ -36,47 +36,47 @@ class Gists extends AbstractApi
 
         $params['public'] = (bool) $params['public'];
 
-        return $this->post('gists', $params);
+        return $this->post('/gists', $params);
     }
 
     public function update($id, array $params)
     {
-        return $this->patch('gists/'.rawurlencode($id), $params);
+        return $this->patch('/gists/'.rawurlencode($id), $params);
     }
 
     public function commits($id)
     {
-        return $this->get('gists/'.rawurlencode($id).'/commits');
+        return $this->get('/gists/'.rawurlencode($id).'/commits');
     }
 
     public function fork($id)
     {
-        return $this->post('gists/'.rawurlencode($id).'/fork');
+        return $this->post('/gists/'.rawurlencode($id).'/fork');
     }
 
     public function forks($id)
     {
-        return $this->get('gists/'.rawurlencode($id).'/forks');
+        return $this->get('/gists/'.rawurlencode($id).'/forks');
     }
 
     public function remove($id)
     {
-        return $this->delete('gists/'.rawurlencode($id));
+        return $this->delete('/gists/'.rawurlencode($id));
     }
 
     public function check($id)
     {
-        return $this->get('gists/'.rawurlencode($id).'/star');
+        return $this->get('/gists/'.rawurlencode($id).'/star');
     }
 
     public function star($id)
     {
-        return $this->put('gists/'.rawurlencode($id).'/star');
+        return $this->put('/gists/'.rawurlencode($id).'/star');
     }
 
     public function unstar($id)
     {
-        return $this->delete('gists/'.rawurlencode($id).'/star');
+        return $this->delete('/gists/'.rawurlencode($id).'/star');
     }
 
     /**

@@ -23,9 +23,9 @@ class Events extends AbstractApi
     public function all($username, $repository, $issue = null, $page = 1)
     {
         if (null !== $issue) {
-            $path = 'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/events';
+            $path = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/events';
         } else {
-            $path = 'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/events';
+            $path = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/events';
         }
 
         return $this->get($path, array(
@@ -44,6 +44,6 @@ class Events extends AbstractApi
      */
     public function show($username, $repository, $event)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/events/'.rawurlencode($event));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/events/'.rawurlencode($event));
     }
 }

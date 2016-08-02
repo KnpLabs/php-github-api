@@ -15,6 +15,6 @@ class License extends AbstractApi
      */
     public function show()
     {
-        return $this->get('enterprise/settings/license');
+        return $this->get('/enterprise/settings/license');
     }
 }

@@ -22,7 +22,7 @@ class Statuses extends AbstractApi
      */
     public function show($username, $repository, $sha)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/commits/'.rawurlencode($sha).'/statuses');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/commits/'.rawurlencode($sha).'/statuses');
     }
 
     /**
@@ -36,7 +36,7 @@ class Statuses extends AbstractApi
      */
     public function combined($username, $repository, $sha)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/commits/'.rawurlencode($sha).'/status');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/commits/'.rawurlencode($sha).'/status');
     }
 
     /**
@@ -57,6 +57,6 @@ class Statuses extends AbstractApi
             throw new MissingArgumentException('state');
         }
 
-        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/statuses/'.rawurlencode($sha), $params);
+        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/statuses/'.rawurlencode($sha), $params);
     }
 }

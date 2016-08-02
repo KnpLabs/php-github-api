@@ -21,7 +21,7 @@ class Tags extends AbstractApi
      */
     public function all($username, $repository)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs/tags');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs/tags');
     }
 
     /**
@@ -35,7 +35,7 @@ class Tags extends AbstractApi
      */
     public function show($username, $repository, $sha)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/tags/'.rawurlencode($sha));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/tags/'.rawurlencode($sha));
     }
 
     /**
@@ -63,6 +63,6 @@ class Tags extends AbstractApi
             throw new MissingArgumentException(array('tagger.name', 'tagger.email', 'tagger.date'));
         }
 
-        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/tags', $params);
+        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/tags', $params);
     }
 }

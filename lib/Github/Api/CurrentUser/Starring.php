@@ -21,7 +21,7 @@ class Starring extends AbstractApi
      */
     public function all($page = 1)
     {
-        return $this->get('user/starred', array(
+        return $this->get('/user/starred', array(
             'page' => $page
         ));
     }
@@ -38,7 +38,7 @@ class Starring extends AbstractApi
      */
     public function check($username, $repository)
     {
-        return $this->get('user/starred/'.rawurlencode($username).'/'.rawurlencode($repository));
+        return $this->get('/user/starred/'.rawurlencode($username).'/'.rawurlencode($repository));
     }
 
     /**
@@ -53,7 +53,7 @@ class Starring extends AbstractApi
      */
     public function star($username, $repository)
     {
-        return $this->put('user/starred/'.rawurlencode($username).'/'.rawurlencode($repository));
+        return $this->put('/user/starred/'.rawurlencode($username).'/'.rawurlencode($repository));
     }
 
     /**
@@ -68,6 +68,6 @@ class Starring extends AbstractApi
      */
     public function unstar($username, $repository)
     {
-        return $this->delete('user/starred/'.rawurlencode($username).'/'.rawurlencode($repository));
+        return $this->delete('/user/starred/'.rawurlencode($username).'/'.rawurlencode($repository));
     }
 }

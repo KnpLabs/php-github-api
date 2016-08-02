@@ -19,12 +19,12 @@ class CurrentUser extends AbstractApi
 {
     public function show()
     {
-        return $this->get('user');
+        return $this->get('/user');
     }
 
     public function update(array $params)
     {
-        return $this->patch('user', $params);
+        return $this->patch('/user', $params);
     }
 
     /**
@@ -45,7 +45,7 @@ class CurrentUser extends AbstractApi
 
     public function followers($page = 1)
     {
-        return $this->get('user/followers', array(
+        return $this->get('/user/followers', array(
             'page' => $page
         ));
     }
@@ -60,7 +60,7 @@ class CurrentUser extends AbstractApi
      */
     public function issues(array $params = array(), $includeOrgIssues = true)
     {
-        return $this->get($includeOrgIssues ? 'issues' : 'user/issues', array_merge(array('page' => 1), $params));
+        return $this->get($includeOrgIssues ? '/issues' : '/user/issues', array_merge(array('page' => 1), $params));
     }
 
     /**
@@ -94,7 +94,7 @@ class CurrentUser extends AbstractApi
      */
     public function organizations()
     {
-        return $this->get('user/orgs');
+        return $this->get('/user/orgs');
     }
 
     /**
@@ -104,7 +104,7 @@ class CurrentUser extends AbstractApi
      */
     public function teams()
     {
-        return $this->get('user/teams');
+        return $this->get('/user/teams');
     }
 
     /**
@@ -118,7 +118,7 @@ class CurrentUser extends AbstractApi
      */
     public function repositories($type = 'owner', $sort = 'full_name', $direction = 'asc')
     {
-        return $this->get('user/repos', array(
+        return $this->get('/user/repos', array(
             'type' => $type,
             'sort' => $sort,
             'direction' => $direction
@@ -138,7 +138,7 @@ class CurrentUser extends AbstractApi
      */
     public function watched($page = 1)
     {
-        return $this->get('user/watched', array(
+        return $this->get('/user/watched', array(
             'page' => $page
         ));
     }
@@ -156,16 +156,16 @@ class CurrentUser extends AbstractApi
      */
     public function starred($page = 1)
     {
-        return $this->get('user/starred', array(
+        return $this->get('/user/starred', array(
             'page' => $page
         ));
     }
-    
+
     /**
      *  @link https://developer.github.com/v3/activity/watching/#list-repositories-being-watched
      */
     public function subscriptions()
     {
-        return $this->get('user/subscriptions');
+        return $this->get('/user/subscriptions');
     }
 }

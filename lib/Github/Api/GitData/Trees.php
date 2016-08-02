@@ -23,7 +23,7 @@ class Trees extends AbstractApi
      */
     public function show($username, $repository, $sha, $recursive = false)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/trees/'.rawurlencode($sha), $recursive ? array('recursive' => 1) : array());
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/trees/'.rawurlencode($sha), $recursive ? array('recursive' => 1) : array());
     }
 
     /**
@@ -58,6 +58,6 @@ class Trees extends AbstractApi
             }
         }
 
-        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/trees', $params);
+        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/trees', $params);
     }
 }

@@ -22,7 +22,7 @@ class Watchers extends AbstractApi
      */
     public function all($page = 1)
     {
-        return $this->get('user/subscriptions', array(
+        return $this->get('/user/subscriptions', array(
             'page' => $page
         ));
     }
@@ -39,7 +39,7 @@ class Watchers extends AbstractApi
      */
     public function check($username, $repository)
     {
-        return $this->get('user/subscriptions/'.rawurlencode($username).'/'.rawurlencode($repository));
+        return $this->get('/user/subscriptions/'.rawurlencode($username).'/'.rawurlencode($repository));
     }
 
     /**
@@ -54,7 +54,7 @@ class Watchers extends AbstractApi
      */
     public function watch($username, $repository)
     {
-        return $this->put('user/subscriptions/'.rawurlencode($username).'/'.rawurlencode($repository));
+        return $this->put('/user/subscriptions/'.rawurlencode($username).'/'.rawurlencode($repository));
     }
 
     /**
@@ -69,6 +69,6 @@ class Watchers extends AbstractApi
      */
     public function unwatch($username, $repository)
     {
-        return $this->delete('user/subscriptions/'.rawurlencode($username).'/'.rawurlencode($repository));
+        return $this->delete('/user/subscriptions/'.rawurlencode($username).'/'.rawurlencode($repository));
     }
 }

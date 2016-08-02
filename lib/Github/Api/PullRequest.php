@@ -31,7 +31,7 @@ class PullRequest extends AbstractApi
             'per_page' => 30
         ), $params);
 
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls', $parameters);
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls', $parameters);
     }
 
     /**
@@ -47,17 +47,17 @@ class PullRequest extends AbstractApi
      */
     public function show($username, $repository, $id)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id));
     }
 
     public function commits($username, $repository, $id)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/commits');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/commits');
     }
 
     public function files($username, $repository, $id)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/files');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/files');
     }
 
     public function comments()
@@ -98,7 +98,7 @@ class PullRequest extends AbstractApi
             throw new MissingArgumentException(array('issue', 'body'));
         }
 
-        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls', $params);
+        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls', $params);
     }
 
     public function update($username, $repository, $id, array $params)
@@ -107,12 +107,12 @@ class PullRequest extends AbstractApi
             $params['state'] = 'open';
         }
 
-        return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id), $params);
+        return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id), $params);
     }
 
     public function merged($username, $repository, $id)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/merge');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/merge');
     }
 
     public function merge($username, $repository, $id, $message, $sha, $squash = false, $title = null)
@@ -127,6 +127,6 @@ class PullRequest extends AbstractApi
             $params['commit_title'] = $title;
         }
 
-        return $this->put('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/merge', $params);
+        return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/merge', $params);
     }
 }
