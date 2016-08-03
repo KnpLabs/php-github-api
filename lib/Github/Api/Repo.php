@@ -37,7 +37,7 @@ class Repo extends AbstractApi
      */
     public function find($keyword, array $params = array())
     {
-        return $this->get('legacy/repos/search/'.rawurlencode($keyword), array_merge(array('start_page' => 1), $params));
+        return $this->get('/legacy/repos/search/'.rawurlencode($keyword), array_merge(array('start_page' => 1), $params));
     }
 
     /**
@@ -52,10 +52,10 @@ class Repo extends AbstractApi
     public function all($id = null)
     {
         if (!is_int($id)) {
-            return $this->get('repositories');
+            return $this->get('/repositories');
         }
 
-        return $this->get('repositories?since=' . rawurldecode($id));
+        return $this->get('/repositories?since=' . rawurldecode($id));
     }
 
     /**
@@ -70,7 +70,7 @@ class Repo extends AbstractApi
      */
     public function activity($username, $repository)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/stats/commit_activity');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/stats/commit_activity');
     }
 
     /**
@@ -85,7 +85,7 @@ class Repo extends AbstractApi
      */
     public function statistics($username, $repository)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/stats/contributors');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/stats/contributors');
     }
 
     /**
@@ -100,7 +100,7 @@ class Repo extends AbstractApi
      */
     public function org($organization, array $params = array())
     {
-        return $this->get('orgs/'.$organization.'/repos', array_merge(array('start_page' => 1), $params));
+        return $this->get('/orgs/'.$organization.'/repos', array_merge(array('start_page' => 1), $params));
     }
 
     /**
@@ -115,7 +115,7 @@ class Repo extends AbstractApi
      */
     public function show($username, $repository)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository));
     }
 
     /**
@@ -148,7 +148,7 @@ class Repo extends AbstractApi
         $teamId = null,
         $autoInit = false
     ) {
-        $path = null !== $organization ? 'orgs/'.$organization.'/repos' : 'user/repos';
+        $path = null !== $organization ? '/orgs/'.$organization.'/repos' : '/user/repos';
 
         $parameters = array(
             'name'          => $name,
@@ -181,7 +181,7 @@ class Repo extends AbstractApi
      */
     public function update($username, $repository, array $values)
     {
-        return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository), $values);
+        return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository), $values);
     }
 
     /**
@@ -196,7 +196,7 @@ class Repo extends AbstractApi
      */
     public function remove($username, $repository)
     {
-        return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository));
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository));
     }
 
     /**
@@ -211,7 +211,7 @@ class Repo extends AbstractApi
      */
     public function readme($username, $repository)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/readme');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/readme');
     }
 
     /**
@@ -371,7 +371,7 @@ class Repo extends AbstractApi
      */
     public function branches($username, $repository, $branch = null)
     {
-        $url = 'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches';
+        $url = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches';
         if (null !== $branch) {
             $url .= '/'.rawurlencode($branch);
         }
@@ -393,7 +393,7 @@ class Repo extends AbstractApi
      */
     public function contributors($username, $repository, $includingAnonymous = false)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contributors', array(
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contributors', array(
             'anon' => $includingAnonymous ?: null
         ));
     }
@@ -410,7 +410,7 @@ class Repo extends AbstractApi
      */
     public function languages($username, $repository)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/languages');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/languages');
     }
 
     /**
@@ -426,7 +426,7 @@ class Repo extends AbstractApi
      */
     public function tags($username, $repository, array $params = [])
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/tags', $params);
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/tags', $params);
     }
 
     /**
@@ -441,7 +441,7 @@ class Repo extends AbstractApi
      */
     public function teams($username, $repository)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/teams');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/teams');
     }
 
     /**
@@ -455,7 +455,7 @@ class Repo extends AbstractApi
      */
     public function watchers($username, $repository, $page = 1)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/watchers', array(
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/watchers', array(
             'page' => $page
         ));
     }
@@ -469,7 +469,7 @@ class Repo extends AbstractApi
      */
     public function subscribers($username, $repository, $page = 1)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/subscribers', array(
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/subscribers', array(
             'page' => $page
         ));
     }
@@ -498,7 +498,7 @@ class Repo extends AbstractApi
             $parameters['commit_message'] = $message;
         }
 
-        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/merges', $parameters);
+        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/merges', $parameters);
     }
 
     /**
@@ -508,6 +508,6 @@ class Repo extends AbstractApi
      */
     public function milestones($username, $repository)
     {
-        return $this->get('repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/milestones');
+        return $this->get('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/milestones');
     }
 }

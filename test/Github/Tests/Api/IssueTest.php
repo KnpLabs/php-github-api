@@ -19,7 +19,7 @@ class IssueTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/ornicar/php-github-api/issues', $sentData);
+            ->with('/repos/ornicar/php-github-api/issues', $sentData);
 
         $api->all('ornicar', 'php-github-api', $data);
     }
@@ -46,7 +46,7 @@ class IssueTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/ornicar/php-github-api/issues', $sentData)
+            ->with('/repos/ornicar/php-github-api/issues', $sentData)
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->all('ornicar', 'php-github-api', $data));
@@ -62,7 +62,7 @@ class IssueTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/ornicar/php-github-api/issues/14')
+            ->with('/repos/ornicar/php-github-api/issues/14')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->show('ornicar', 'php-github-api', 14));
@@ -81,7 +81,7 @@ class IssueTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('repos/ornicar/php-github-api/issues', $data);
+            ->with('/repos/ornicar/php-github-api/issues', $data);
 
         $api->create('ornicar', 'php-github-api', $data);
     }
@@ -132,7 +132,7 @@ class IssueTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
-            ->with('repos/ornicar/php-github-api/issues/14', $data);
+            ->with('/repos/ornicar/php-github-api/issues/14', $data);
 
         $api->update('ornicar', 'php-github-api', 14, $data);
     }
@@ -149,7 +149,7 @@ class IssueTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
-            ->with('repos/ornicar/php-github-api/issues/14', $data);
+            ->with('/repos/ornicar/php-github-api/issues/14', $data);
 
         $api->update('ornicar', 'php-github-api', 14, $data);
     }
@@ -164,7 +164,7 @@ class IssueTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('legacy/issues/search/KnpLabs/php-github-api/open/Invalid%20Commits')
+            ->with('/legacy/issues/search/KnpLabs/php-github-api/open/Invalid%20Commits')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->find('KnpLabs', 'php-github-api', 'open', 'Invalid Commits'));
@@ -180,7 +180,7 @@ class IssueTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('legacy/issues/search/KnpLabs/php-github-api/closed/Invalid%20Commits')
+            ->with('/legacy/issues/search/KnpLabs/php-github-api/closed/Invalid%20Commits')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->find('KnpLabs', 'php-github-api', 'closed', 'Invalid Commits'));
@@ -196,7 +196,7 @@ class IssueTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('legacy/issues/search/KnpLabs/php-github-api/open/Invalid%20Commits')
+            ->with('/legacy/issues/search/KnpLabs/php-github-api/open/Invalid%20Commits')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->find('KnpLabs', 'php-github-api', 'abc', 'Invalid Commits'));

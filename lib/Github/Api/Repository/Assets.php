@@ -24,7 +24,7 @@ class Assets extends AbstractApi
      */
     public function all($username, $repository, $id)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode($id).'/assets');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode($id).'/assets');
     }
 
     /**
@@ -39,7 +39,7 @@ class Assets extends AbstractApi
      */
     public function show($username, $repository, $id)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/assets/'.rawurlencode($id));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/assets/'.rawurlencode($id));
     }
 
     /**
@@ -97,7 +97,7 @@ class Assets extends AbstractApi
             throw new MissingArgumentException('name');
         }
 
-        return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/assets/'.rawurlencode($id), $params);
+        return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/assets/'.rawurlencode($id), $params);
     }
 
     /**
@@ -112,6 +112,6 @@ class Assets extends AbstractApi
      */
     public function remove($username, $repository, $id)
     {
-        return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/assets/'.rawurlencode($id));
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/assets/'.rawurlencode($id));
     }
 }

@@ -17,7 +17,7 @@ class RateLimit extends AbstractApi
      */
     public function getRateLimits()
     {
-        return $this->get('rate_limit');
+        return $this->get('/rate_limit');
     }
 
     /**
@@ -28,7 +28,7 @@ class RateLimit extends AbstractApi
     public function getCoreLimit()
     {
         $response = $this->getRateLimits();
-        
+
         return $response['resources']['core']['limit'];
     }
 
@@ -40,7 +40,7 @@ class RateLimit extends AbstractApi
     public function getSearchLimit()
     {
         $response = $this->getRateLimits();
-        
+
         return $response['resources']['search']['limit'];
     }
 }

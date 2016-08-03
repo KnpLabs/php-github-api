@@ -19,7 +19,7 @@ class StatusesTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/commits/commitSHA123456/statuses')
+            ->with('/repos/KnpLabs/php-github-api/commits/commitSHA123456/statuses')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 'commitSHA123456'));
@@ -49,7 +49,7 @@ class StatusesTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/commits/commitSHA123456/status')
+            ->with('/repos/KnpLabs/php-github-api/commits/commitSHA123456/status')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->combined('KnpLabs', 'php-github-api', 'commitSHA123456'));
@@ -81,7 +81,7 @@ class StatusesTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('repos/KnpLabs/php-github-api/statuses/commitSHA123456', $data)
+            ->with('/repos/KnpLabs/php-github-api/statuses/commitSHA123456', $data)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', 'commitSHA123456', $data));

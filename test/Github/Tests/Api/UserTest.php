@@ -14,7 +14,7 @@ class UserTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('users/l3l0')
+            ->with('/users/l3l0')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->show('l3l0'));
@@ -37,7 +37,7 @@ class UserTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('users/l3l0/orgs')
+            ->with('/users/l3l0/orgs')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->organizations('l3l0'));
@@ -56,7 +56,7 @@ class UserTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('users')
+            ->with('/users')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->all());
@@ -75,7 +75,7 @@ class UserTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('legacy/user/search/l3l0')
+            ->with('/legacy/user/search/l3l0')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->find('l3l0'));
@@ -91,7 +91,7 @@ class UserTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('users/l3l0/following')
+            ->with('/users/l3l0/following')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->following('l3l0'));
@@ -107,7 +107,7 @@ class UserTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('users/l3l0/followers')
+            ->with('/users/l3l0/followers')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->followers('l3l0'));
@@ -123,7 +123,7 @@ class UserTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('users/l3l0/subscriptions')
+            ->with('/users/l3l0/subscriptions')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->subscriptions('l3l0'));
@@ -139,7 +139,7 @@ class UserTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('users/l3l0/repos', array('type' => 'owner', 'sort' => 'full_name', 'direction' => 'asc'))
+            ->with('/users/l3l0/repos', array('type' => 'owner', 'sort' => 'full_name', 'direction' => 'asc'))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->repositories('l3l0'));
@@ -155,7 +155,7 @@ class UserTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('users/l3l0/gists')
+            ->with('/users/l3l0/gists')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->gists('l3l0'));

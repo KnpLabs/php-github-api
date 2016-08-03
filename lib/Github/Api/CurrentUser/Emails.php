@@ -20,7 +20,7 @@ class Emails extends AbstractApi
      */
     public function all()
     {
-        return $this->get('user/emails');
+        return $this->get('/user/emails');
     }
 
     /**
@@ -42,7 +42,7 @@ class Emails extends AbstractApi
             throw new InvalidArgumentException();
         }
 
-        return $this->post('user/emails', $emails);
+        return $this->post('/user/emails', $emails);
     }
 
     /**
@@ -64,6 +64,6 @@ class Emails extends AbstractApi
             throw new InvalidArgumentException();
         }
 
-        return $this->delete('user/emails', $emails);
+        return $this->delete('/user/emails', $emails);
     }
 }

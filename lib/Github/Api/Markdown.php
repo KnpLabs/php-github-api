@@ -31,7 +31,7 @@ class Markdown extends AbstractApi
             $params['context'] = $context;
         }
 
-        return $this->post('markdown', $params);
+        return $this->post('/markdown', $params);
     }
 
     /**
@@ -41,7 +41,7 @@ class Markdown extends AbstractApi
      */
     public function renderRaw($file)
     {
-        return $this->post('markdown/raw', array(
+        return $this->post('/markdown/raw', array(
             'file' => $file
         ));
     }

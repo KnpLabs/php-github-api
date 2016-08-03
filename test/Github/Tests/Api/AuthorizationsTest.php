@@ -14,7 +14,7 @@ class AuthorizationsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('authorizations')
+            ->with('/authorizations')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->all());
@@ -31,7 +31,7 @@ class AuthorizationsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('authorizations/'.$id)
+            ->with('/authorizations/'.$id)
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->show($id));
@@ -49,7 +49,7 @@ class AuthorizationsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('authorizations', $input);
+            ->with('/authorizations', $input);
 
         $api->create($input);
     }
@@ -67,7 +67,7 @@ class AuthorizationsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
-            ->with('authorizations/'.$id, $input);
+            ->with('/authorizations/'.$id, $input);
 
         $api->update($id, $input);
     }
@@ -81,7 +81,7 @@ class AuthorizationsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('authorizations/'.$id);
+            ->with('/authorizations/'.$id);
 
         $api->remove($id);
     }
@@ -98,7 +98,7 @@ class AuthorizationsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('applications/'.$id.'/tokens/'.$token)
+            ->with('/applications/'.$id.'/tokens/'.$token)
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->check($id, $token));
@@ -115,7 +115,7 @@ class AuthorizationsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('applications/'.$id.'/tokens/'.$token);
+            ->with('/applications/'.$id.'/tokens/'.$token);
 
         $api->reset($id, $token);
     }
@@ -131,7 +131,7 @@ class AuthorizationsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('applications/'.$id.'/tokens/'.$token);
+            ->with('/applications/'.$id.'/tokens/'.$token);
 
         $api->revoke($id, $token);
     }
@@ -146,7 +146,7 @@ class AuthorizationsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('applications/'.$id.'/tokens');
+            ->with('/applications/'.$id.'/tokens');
 
         $api->revokeAll($id);
     }

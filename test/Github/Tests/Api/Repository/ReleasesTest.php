@@ -16,7 +16,7 @@ class ReleasesTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/releases/latest')
+            ->with('/repos/KnpLabs/php-github-api/releases/latest')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->latest('KnpLabs', 'php-github-api'));
@@ -32,7 +32,7 @@ class ReleasesTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/releases/tags/5f078080e01e0365690920d618f12342d2c941c8')
+            ->with('/repos/KnpLabs/php-github-api/releases/tags/5f078080e01e0365690920d618f12342d2c941c8')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->tag(
@@ -52,7 +52,7 @@ class ReleasesTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/releases')
+            ->with('/repos/KnpLabs/php-github-api/releases')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api'));
@@ -69,7 +69,7 @@ class ReleasesTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/releases/'.$id)
+            ->with('/repos/KnpLabs/php-github-api/releases/'.$id)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', $id));
@@ -86,7 +86,7 @@ class ReleasesTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('repos/KnpLabs/php-github-api/releases')
+            ->with('/repos/KnpLabs/php-github-api/releases')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', $data));
@@ -119,7 +119,7 @@ class ReleasesTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
-            ->with('repos/KnpLabs/php-github-api/releases/'.$id)
+            ->with('/repos/KnpLabs/php-github-api/releases/'.$id)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->edit('KnpLabs', 'php-github-api', $id, $data));
@@ -136,7 +136,7 @@ class ReleasesTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('repos/KnpLabs/php-github-api/releases/'.$id)
+            ->with('/repos/KnpLabs/php-github-api/releases/'.$id)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->remove('KnpLabs', 'php-github-api', $id));

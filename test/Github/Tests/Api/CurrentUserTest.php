@@ -14,7 +14,7 @@ class CurrentUserTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('user')
+            ->with('/user')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->show());
@@ -30,7 +30,7 @@ class CurrentUserTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
-            ->with('user', array('value' => 'toChange'))
+            ->with('/user', array('value' => 'toChange'))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->update(array('value' => 'toChange')));
@@ -46,7 +46,7 @@ class CurrentUserTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('user/followers', array('page' => 1))
+            ->with('/user/followers', array('page' => 1))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->followers(1));
@@ -62,7 +62,7 @@ class CurrentUserTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('issues', array('page' => 1, 'some' => 'param'))
+            ->with('/issues', array('page' => 1, 'some' => 'param'))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->issues(array('some' => 'param')));
@@ -78,7 +78,7 @@ class CurrentUserTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('user/watched', array('page' => 1))
+            ->with('/user/watched', array('page' => 1))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->watched(1));

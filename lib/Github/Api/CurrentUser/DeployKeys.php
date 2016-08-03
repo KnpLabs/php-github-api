@@ -20,7 +20,7 @@ class DeployKeys extends AbstractApi
      */
     public function all()
     {
-        return $this->get('user/keys');
+        return $this->get('/user/keys');
     }
 
     /**
@@ -34,7 +34,7 @@ class DeployKeys extends AbstractApi
      */
     public function show($id)
     {
-        return $this->get('user/keys/'.rawurlencode($id));
+        return $this->get('/user/keys/'.rawurlencode($id));
     }
 
     /**
@@ -54,7 +54,7 @@ class DeployKeys extends AbstractApi
             throw new MissingArgumentException(array('title', 'key'));
         }
 
-        return $this->post('user/keys', $params);
+        return $this->post('/user/keys', $params);
     }
 
     /**
@@ -75,7 +75,7 @@ class DeployKeys extends AbstractApi
             throw new MissingArgumentException(array('title', 'key'));
         }
 
-        return $this->patch('user/keys/'.rawurlencode($id), $params);
+        return $this->patch('/user/keys/'.rawurlencode($id), $params);
     }
 
     /**
@@ -89,6 +89,6 @@ class DeployKeys extends AbstractApi
      */
     public function remove($id)
     {
-        return $this->delete('user/keys/'.rawurlencode($id));
+        return $this->delete('/user/keys/'.rawurlencode($id));
     }
 }

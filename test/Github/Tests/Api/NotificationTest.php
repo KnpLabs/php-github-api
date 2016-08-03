@@ -19,7 +19,7 @@ class NotificationTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('notifications', $parameters);
+            ->with('/notifications', $parameters);
 
         $api->all();
     }
@@ -40,7 +40,7 @@ class NotificationTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('notifications', $parameters);
+            ->with('/notifications', $parameters);
 
         $api->all(false, false, $since);
     }
@@ -58,7 +58,7 @@ class NotificationTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('notifications', $parameters);
+            ->with('/notifications', $parameters);
 
         $api->all(true, true);
     }
@@ -73,7 +73,7 @@ class NotificationTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with('notifications', $parameters);
+            ->with('/notifications', $parameters);
 
         $api->markRead();
     }
@@ -92,7 +92,7 @@ class NotificationTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with('notifications', $parameters);
+            ->with('/notifications', $parameters);
 
         $api->markRead($since);
     }

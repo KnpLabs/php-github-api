@@ -21,7 +21,7 @@ class References extends AbstractApi
      */
     public function all($username, $repository)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs');
     }
 
     /**
@@ -34,7 +34,7 @@ class References extends AbstractApi
      */
     public function branches($username, $repository)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs/heads');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs/heads');
     }
 
     /**
@@ -47,7 +47,7 @@ class References extends AbstractApi
      */
     public function tags($username, $repository)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs/tags');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs/tags');
     }
 
     /**
@@ -63,7 +63,7 @@ class References extends AbstractApi
     {
         $reference = $this->encodeReference($reference);
 
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs/'.$reference);
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs/'.$reference);
     }
 
     /**
@@ -83,7 +83,7 @@ class References extends AbstractApi
             throw new MissingArgumentException(array('ref', 'sha'));
         }
 
-        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs', $params);
+        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs', $params);
     }
 
     /**
@@ -106,7 +106,7 @@ class References extends AbstractApi
 
         $reference = $this->encodeReference($reference);
 
-        return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs/'.$reference, $params);
+        return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs/'.$reference, $params);
     }
 
     /**
@@ -122,7 +122,7 @@ class References extends AbstractApi
     {
         $reference = $this->encodeReference($reference);
 
-        return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs/'.$reference);
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs/'.$reference);
     }
 
     /**

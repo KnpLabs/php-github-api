@@ -16,7 +16,7 @@ class DownloadsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/downloads')
+            ->with('/repos/KnpLabs/php-github-api/downloads')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api'));
@@ -32,7 +32,7 @@ class DownloadsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/downloads/l3l0')
+            ->with('/repos/KnpLabs/php-github-api/downloads/l3l0')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 'l3l0'));
@@ -48,7 +48,7 @@ class DownloadsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('repos/KnpLabs/php-github-api/downloads/l3l0')
+            ->with('/repos/KnpLabs/php-github-api/downloads/l3l0')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->remove('KnpLabs', 'php-github-api', 'l3l0'));

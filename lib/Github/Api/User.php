@@ -22,7 +22,7 @@ class User extends AbstractApi
      */
     public function find($keyword)
     {
-        return $this->get('legacy/user/search/'.rawurlencode($keyword));
+        return $this->get('/legacy/user/search/'.rawurlencode($keyword));
     }
 
     /**
@@ -37,10 +37,10 @@ class User extends AbstractApi
     public function all($id = null)
     {
         if (!is_int($id)) {
-            return $this->get('users');
+            return $this->get('/users');
         }
 
-        return $this->get('users?since=' . rawurldecode($id));
+        return $this->get('/users?since=' . rawurldecode($id));
     }
 
     /**
@@ -54,7 +54,7 @@ class User extends AbstractApi
      */
     public function show($username)
     {
-        return $this->get('users/'.rawurlencode($username));
+        return $this->get('/users/'.rawurlencode($username));
     }
 
     /**
@@ -68,7 +68,7 @@ class User extends AbstractApi
      */
     public function organizations($username)
     {
-        return $this->get('users/'.rawurlencode($username).'/orgs');
+        return $this->get('/users/'.rawurlencode($username).'/orgs');
     }
 
     /**
@@ -82,7 +82,7 @@ class User extends AbstractApi
      */
     public function following($username)
     {
-        return $this->get('users/'.rawurlencode($username).'/following');
+        return $this->get('/users/'.rawurlencode($username).'/following');
     }
 
     /**
@@ -96,7 +96,7 @@ class User extends AbstractApi
      */
     public function followers($username)
     {
-        return $this->get('users/'.rawurlencode($username).'/followers');
+        return $this->get('/users/'.rawurlencode($username).'/followers');
     }
 
     /**
@@ -110,7 +110,7 @@ class User extends AbstractApi
      */
     public function watched($username)
     {
-        return $this->get('users/'.rawurlencode($username).'/watched');
+        return $this->get('/users/'.rawurlencode($username).'/watched');
     }
 
     /**
@@ -125,7 +125,7 @@ class User extends AbstractApi
      */
     public function starred($username, $page = 1)
     {
-        return $this->get('users/'.rawurlencode($username).'/starred', array(
+        return $this->get('/users/'.rawurlencode($username).'/starred', array(
             'page' => $page
         ));
     }
@@ -141,7 +141,7 @@ class User extends AbstractApi
      */
     public function subscriptions($username)
     {
-        return $this->get('users/'.rawurlencode($username).'/subscriptions');
+        return $this->get('/users/'.rawurlencode($username).'/subscriptions');
     }
 
     /**
@@ -158,7 +158,7 @@ class User extends AbstractApi
      */
     public function repositories($username, $type = 'owner', $sort = 'full_name', $direction = 'asc')
     {
-        return $this->get('users/'.rawurlencode($username).'/repos', array(
+        return $this->get('/users/'.rawurlencode($username).'/repos', array(
             'type' => $type,
             'sort' => $sort,
             'direction' => $direction
@@ -176,7 +176,7 @@ class User extends AbstractApi
      */
     public function gists($username)
     {
-        return $this->get('users/'.rawurlencode($username).'/gists');
+        return $this->get('/users/'.rawurlencode($username).'/gists');
     }
 
     /**
@@ -190,7 +190,7 @@ class User extends AbstractApi
      */
     public function keys($username)
     {
-        return $this->get('users/'.rawurlencode($username).'/keys');
+        return $this->get('/users/'.rawurlencode($username).'/keys');
     }
 
     /**
@@ -204,6 +204,6 @@ class User extends AbstractApi
      */
     public function publicEvents($username)
     {
-        return $this->get('users/'.rawurlencode($username) . '/events/public');
+        return $this->get('/users/'.rawurlencode($username) . '/events/public');
     }
 }

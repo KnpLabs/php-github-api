@@ -14,7 +14,7 @@ class PullRequestTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/ezsystems/ezpublish/pulls')
+            ->with('/repos/ezsystems/ezpublish/pulls')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->all('ezsystems', 'ezpublish'));
@@ -30,7 +30,7 @@ class PullRequestTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/ezsystems/ezpublish/pulls', array('state' => 'open', 'per_page' => 30, 'page' => 1))
+            ->with('/repos/ezsystems/ezpublish/pulls', array('state' => 'open', 'per_page' => 30, 'page' => 1))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->all('ezsystems', 'ezpublish', array('state' => 'open')));
@@ -46,7 +46,7 @@ class PullRequestTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/ezsystems/ezpublish/pulls', array('state' => 'closed', 'per_page' => 30, 'page' => 1))
+            ->with('/repos/ezsystems/ezpublish/pulls', array('state' => 'closed', 'per_page' => 30, 'page' => 1))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->all('ezsystems', 'ezpublish', array('state' => 'closed')));
@@ -63,7 +63,7 @@ class PullRequestTest extends TestCase
 
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/ezsystems/ezpublish/pulls/15')
+            ->with('/repos/ezsystems/ezpublish/pulls/15')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->show('ezsystems', 'ezpublish', '15'));
@@ -79,7 +79,7 @@ class PullRequestTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/ezsystems/ezpublish/pulls/15/commits')
+            ->with('/repos/ezsystems/ezpublish/pulls/15/commits')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->commits('ezsystems', 'ezpublish', '15'));
@@ -95,7 +95,7 @@ class PullRequestTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/ezsystems/ezpublish/pulls/15/files')
+            ->with('/repos/ezsystems/ezpublish/pulls/15/files')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->files('ezsystems', 'ezpublish', '15'));
@@ -111,7 +111,7 @@ class PullRequestTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
-            ->with('repos/ezsystems/ezpublish/pulls/15', array('state' => 'open', 'some' => 'param'))
+            ->with('/repos/ezsystems/ezpublish/pulls/15', array('state' => 'open', 'some' => 'param'))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->update('ezsystems', 'ezpublish', 15, array('state' => 'aa', 'some' => 'param')));
@@ -127,7 +127,7 @@ class PullRequestTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/ezsystems/ezpublish/pulls/15/merge')
+            ->with('/repos/ezsystems/ezpublish/pulls/15/merge')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->merged('ezsystems', 'ezpublish', 15));
@@ -143,7 +143,7 @@ class PullRequestTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with('repos/ezsystems/ezpublish/pulls/15/merge', array('commit_message' => 'Merged something', 'sha' => str_repeat('A', 40), 'squash' => false))
+            ->with('/repos/ezsystems/ezpublish/pulls/15/merge', array('commit_message' => 'Merged something', 'sha' => str_repeat('A', 40), 'squash' => false))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->merge('ezsystems', 'ezpublish', 15, 'Merged something', str_repeat('A', 40)));
@@ -164,7 +164,7 @@ class PullRequestTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('repos/ezsystems/ezpublish/pulls', $data);
+            ->with('/repos/ezsystems/ezpublish/pulls', $data);
 
         $api->create('ezsystems', 'ezpublish', $data);
     }
@@ -183,7 +183,7 @@ class PullRequestTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('repos/ezsystems/ezpublish/pulls', $data);
+            ->with('/repos/ezsystems/ezpublish/pulls', $data);
 
         $api->create('ezsystems', 'ezpublish', $data);
     }

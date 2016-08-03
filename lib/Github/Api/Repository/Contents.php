@@ -27,7 +27,7 @@ class Contents extends AbstractApi
      */
     public function readme($username, $repository, $reference = null)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/readme', array(
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/readme', array(
             'ref' => $reference
         ));
     }
@@ -46,7 +46,7 @@ class Contents extends AbstractApi
      */
     public function show($username, $repository, $path = null, $reference = null)
     {
-        $url = 'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents';
+        $url = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents';
         if (null !== $path) {
             $url .= '/'.rawurlencode($path);
         }
@@ -75,7 +75,7 @@ class Contents extends AbstractApi
      */
     public function create($username, $repository, $path, $content, $message, $branch = null, array $committer = null)
     {
-        $url = 'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
+        $url = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
 
         $parameters = array(
           'content' => base64_encode($content),
@@ -108,7 +108,7 @@ class Contents extends AbstractApi
      */
     public function exists($username, $repository, $path, $reference = null)
     {
-        $url = 'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents';
+        $url = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents';
 
         if (null !== $path) {
             $url .= '/'.rawurlencode($path);
@@ -151,7 +151,7 @@ class Contents extends AbstractApi
      */
     public function update($username, $repository, $path, $content, $message, $sha, $branch = null, array $committer = null)
     {
-        $url = 'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
+        $url = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
 
         $parameters = array(
           'content' => base64_encode($content),
@@ -192,7 +192,7 @@ class Contents extends AbstractApi
      */
     public function rm($username, $repository, $path, $message, $sha, $branch = null, array $committer = null)
     {
-        $url = 'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
+        $url = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
 
         $parameters = array(
           'message' => $message,
@@ -231,7 +231,7 @@ class Contents extends AbstractApi
             $format = 'tarball';
         }
 
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/'.rawurlencode($format).
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/'.rawurlencode($format).
             ((null !== $reference) ? ('/'.rawurlencode($reference)) : ''));
     }
 

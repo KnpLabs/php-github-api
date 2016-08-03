@@ -17,6 +17,6 @@ class Meta extends AbstractApi
      */
     public function service()
     {
-        return $this->get('meta');
+        return $this->get('/meta');
     }
 }

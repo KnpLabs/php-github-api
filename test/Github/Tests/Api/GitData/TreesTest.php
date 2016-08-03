@@ -14,7 +14,7 @@ class TreesTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/git/trees/123', array())
+            ->with('/repos/KnpLabs/php-github-api/git/trees/123', array())
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 123));
@@ -46,7 +46,7 @@ class TreesTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('repos/KnpLabs/php-github-api/git/trees', $data)
+            ->with('/repos/KnpLabs/php-github-api/git/trees', $data)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', $data));
@@ -78,7 +78,7 @@ class TreesTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('repos/KnpLabs/php-github-api/git/trees', $data)
+            ->with('/repos/KnpLabs/php-github-api/git/trees', $data)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', $data));

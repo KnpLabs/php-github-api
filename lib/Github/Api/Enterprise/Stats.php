@@ -123,6 +123,6 @@ class Stats extends AbstractApi
      */
     public function show($type)
     {
-        return $this->get('enterprise/stats/' . rawurlencode($type));
+        return $this->get('/enterprise/stats/' . rawurlencode($type));
     }
 }

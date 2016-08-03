@@ -154,7 +154,7 @@ class Client
         $this->addPlugin(new GithubExceptionThrower());
         $this->addPlugin(new Plugin\HistoryPlugin($this->responseHistory));
         $this->addPlugin(new Plugin\RedirectPlugin());
-        $this->addPlugin(new Plugin\AddHostPlugin(UriFactoryDiscovery::find()->createUri('https://api.github.com/')));
+        $this->addPlugin(new Plugin\AddHostPlugin(UriFactoryDiscovery::find()->createUri('https://api.github.com')));
         $this->addPlugin(new Plugin\HeaderDefaultsPlugin(array(
             'User-Agent'  => 'php-github-api (http://github.com/KnpLabs/php-github-api)',
         )));

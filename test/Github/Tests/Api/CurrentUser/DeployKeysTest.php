@@ -14,7 +14,7 @@ class DeployKeysTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('user/keys/12')
+            ->with('/user/keys/12')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->show(12));
@@ -30,7 +30,7 @@ class DeployKeysTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('user/keys')
+            ->with('/user/keys')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all());
@@ -47,7 +47,7 @@ class DeployKeysTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('user/keys', $data)
+            ->with('/user/keys', $data)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->create($data));
@@ -94,7 +94,7 @@ class DeployKeysTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
-            ->with('user/keys/123', $data)
+            ->with('/user/keys/123', $data)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->update(123, $data));
@@ -140,7 +140,7 @@ class DeployKeysTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('user/keys/123')
+            ->with('/user/keys/123')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->remove(123));

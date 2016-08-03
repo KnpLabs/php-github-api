@@ -22,7 +22,7 @@ class Organization extends AbstractApi
      */
     public function all($since = '')
     {
-        return $this->get('organizations?since='.rawurlencode($since));
+        return $this->get('/organizations?since='.rawurlencode($since));
     }
 
     /**
@@ -36,12 +36,12 @@ class Organization extends AbstractApi
      */
     public function show($organization)
     {
-        return $this->get('orgs/'.rawurlencode($organization));
+        return $this->get('/orgs/'.rawurlencode($organization));
     }
 
     public function update($organization, array $params)
     {
-        return $this->patch('orgs/'.rawurlencode($organization), $params);
+        return $this->patch('/orgs/'.rawurlencode($organization), $params);
     }
 
     /**
@@ -56,7 +56,7 @@ class Organization extends AbstractApi
      */
     public function repositories($organization, $type = 'all')
     {
-        return $this->get('orgs/'.rawurlencode($organization).'/repos', array(
+        return $this->get('/orgs/'.rawurlencode($organization).'/repos', array(
             'type' => $type
         ));
     }
@@ -96,6 +96,6 @@ class Organization extends AbstractApi
      */
     public function issues($organization, array $params = array(), $page = 1)
     {
-        return $this->get('orgs/'.rawurlencode($organization).'/issues', array_merge(array('page' => $page), $params));
+        return $this->get('/orgs/'.rawurlencode($organization).'/issues', array_merge(array('page' => $page), $params));
     }
 }

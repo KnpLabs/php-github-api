@@ -22,7 +22,7 @@ class Commits extends AbstractApi
      */
     public function show($username, $repository, $sha)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/commits/'.rawurlencode($sha));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/commits/'.rawurlencode($sha));
     }
 
     /**
@@ -42,6 +42,6 @@ class Commits extends AbstractApi
             throw new MissingArgumentException(array('message', 'tree', 'parents'));
         }
 
-        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/commits', $params);
+        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/commits', $params);
     }
 }

@@ -14,7 +14,7 @@ class TagsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/git/tags/123')
+            ->with('/repos/KnpLabs/php-github-api/git/tags/123')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 123));
@@ -30,7 +30,7 @@ class TagsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/git/refs/tags')
+            ->with('/repos/KnpLabs/php-github-api/git/refs/tags')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api'));
@@ -57,7 +57,7 @@ class TagsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('repos/KnpLabs/php-github-api/git/tags', $data)
+            ->with('/repos/KnpLabs/php-github-api/git/tags', $data)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', $data));
