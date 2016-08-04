@@ -402,12 +402,14 @@ class Client
 
     /**
      * Add a cache plugin to cache responses locally.
+     *
      * @param CacheItemPoolInterface $cache
+     * @param array                  $config
      */
-    public function addCache(CacheItemPoolInterface $cachePool)
+    public function addCache(CacheItemPoolInterface $cachePool, array $config = [])
     {
         $this->removeCache();
-        $this->addPlugin(new Plugin\CachePlugin($cachePool, $this->streamFactory));
+        $this->addPlugin(new Plugin\CachePlugin($cachePool, $this->streamFactory, $config));
     }
 
     /**
