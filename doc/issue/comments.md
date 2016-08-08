@@ -52,7 +52,7 @@ $client->api('issue')->comments()->create('KnpLabs', 'php-github-api', 4, array(
 > Requires [authentication](../security.md).
 
 ```php
-$client->api('issue')->comments()->create('KnpLabs', 'php-github-api', 33793831, array('body' => 'My updated comment'));
+$client->api('issue')->comments()->update('KnpLabs', 'php-github-api', 33793831, array('body' => 'My updated comment'));
 ```
 
 * `KnpLabs` : the owner of the repository
