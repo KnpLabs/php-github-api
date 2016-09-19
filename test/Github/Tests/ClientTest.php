@@ -24,7 +24,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldPassHttpClientInterfaceToConstructor()
     {
-        $client = new Client($this->getMock('Http\Client\HttpClient'));
+        $httpClientMock = $this->getMockBuilder('Http\Client\HttpClient')
+            ->getMock();
+        $client = new Client($httpClientMock);
 
         $this->assertInstanceOf('Http\Client\HttpClient', $client->getHttpClient());
     }
@@ -35,7 +37,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldAuthenticateUsingAllGivenParameters($login, $password, $method)
     {
-        $client = $this->getMock('Github\Client', array('addPlugin', 'removePlugin'));
+        $client = $this->getMockBuilder('Github\Client')
+            ->setMethods(array('addPlugin', 'removePlugin'))
+            ->getMock();
         $client->expects($this->once())
             ->method('addPlugin')
             ->with($this->equalTo(new Authentication($login, $password, $method)));
@@ -63,7 +67,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldAuthenticateUsingGivenParameters($token, $method)
     {
-        $client = $this->getMock('Github\Client', array('addPlugin', 'removePlugin'));
+        $client = $this->getMockBuilder('Github\Client')
+            ->setMethods(array('addPlugin', 'removePlugin'))
+            ->getMock();
         $client->expects($this->once())
             ->method('addPlugin')
             ->with($this->equalTo(new Authentication($token, null, $method)));
@@ -99,7 +105,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldClearHeaders()
     {
-        $client = $this->getMock('Github\Client', array('addPlugin', 'removePlugin'));
+        $client = $this->getMockBuilder('Github\Client')
+            ->setMethods(array('addPlugin', 'removePlugin'))
+            ->getMock();
         $client->expects($this->once())
             ->method('addPlugin')
             ->with($this->isInstanceOf(Plugin\HeaderAppendPlugin::class));
@@ -118,7 +126,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $headers = array('header1', 'header2');
 
-        $client = $this->getMock('Github\Client', array('addPlugin', 'removePlugin'));
+        $client = $this->getMockBuilder('Github\Client')
+            ->setMethods(array('addPlugin', 'removePlugin'))
+            ->getMock();
         $client->expects($this->once())
             ->method('addPlugin')
             // TODO verify that headers exists
