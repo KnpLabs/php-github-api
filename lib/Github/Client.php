@@ -252,6 +252,11 @@ class Client
                 $api = new Api\Organization\Teams($this);
                 break;
 
+            case 'member':
+            case 'members':
+                $api = new Api\Organization\Members($this);
+                break;
+
             case 'user':
             case 'users':
                 $api = new Api\User($this);
