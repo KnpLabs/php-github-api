@@ -87,6 +87,12 @@ class Client
     const AUTH_HTTP_TOKEN = 'http_token';
 
     /**
+     * Constant for authentication method. Indicates JSON Web Token
+     * authentication required for integration access to the API.
+     */
+    const AUTH_JWT = 'jwt';
+
+    /**
      * @var string
      */
     private $apiVersion;

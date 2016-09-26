@@ -71,6 +71,10 @@ class Authentication implements Plugin
                 $request = $request->withUri($uri);
                 break;
 
+            case Client::AUTH_JWT:
+                $request = $request->withHeader('Authorization', sprintf('Bearer %s', $this->tokenOrLogin));
+                break;
+
             default:
                 throw new RuntimeException(sprintf('%s not yet implemented', $this->method));
                 break;
