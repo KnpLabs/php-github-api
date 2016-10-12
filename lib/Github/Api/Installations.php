@@ -23,6 +23,7 @@ class Installations extends AbstractApi
         if ($userId) {
             $paramters['user_id'] = $userId;
         }
+
         return $this->post('/installations/'.rawurlencode($installationId).'/access_tokens', $parameters);
     }
 }
