@@ -7,6 +7,7 @@ APIs:
 * [Enterprise](enterprise.md)
 * [Gists](gists.md)
   * [Comments](gists/comments.md)
+* [Integrations](integrations.md)
 * [Issues](issues.md)
   * [Comments](issue/comments.md)
   * [Labels](issue/labels.md)
