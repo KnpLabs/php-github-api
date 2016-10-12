@@ -3,10 +3,10 @@
 namespace Github\Api;
 
 /**
- * @link   https://developer.github.com/early-access/integrations/authentication/
+ * @link   https://developer.github.com/v3/integrations/
  * @author Nils Adermann <naderman@naderman.de>
  */
-class Installations extends AbstractApi
+class Integrations extends AbstractApi
 {
     /**
      * Create an access token for an installation
@@ -17,11 +17,11 @@ class Installations extends AbstractApi
      *
      * @return array token and token metadata
      */
-    public function createAccessToken($installationId, $userId = null)
+    public function createInstallationToken($installationId, $userId = null)
     {
         $parameters = array();
         if ($userId) {
-            $paramters['user_id'] = $userId;
+            $parameters['user_id'] = $userId;
         }
 
         return $this->post('/installations/'.rawurlencode($installationId).'/access_tokens', $parameters);
