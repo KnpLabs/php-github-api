@@ -210,9 +210,9 @@ class Client
                 $api = new Api\Gists($this);
                 break;
 
-            case 'installation':
-            case 'installations':
-                $api = new Api\Installations($this);
+            case 'integration':
+            case 'integrations':
+                $api = new Api\Integrations($this);
                 break;
 
             case 'issue':
