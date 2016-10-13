@@ -32,8 +32,8 @@ class Hooks extends AbstractApi
 
     public function update($username, $repository, $id, array $params)
     {
-        if (!isset($params['name'], $params['config'])) {
-            throw new MissingArgumentException(array('name', 'config'));
+        if (!isset($params['config'])) {
+            throw new MissingArgumentException(array('config'));
         }
 
         return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/hooks/'.rawurlencode($id), $params);
