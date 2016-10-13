@@ -30,10 +30,11 @@ class GithubExceptionThrower implements Plugin
 
             // If error:
             $remaining = ResponseMediator::getHeader($response, 'X-RateLimit-Remaining');
-            $limit = ResponseMediator::getHeader($response, 'X-RateLimit-Limit');
-
             if (null != $remaining && 1 > $remaining && 'rate_limit' !== substr($request->getRequestTarget(), 1, 10)) {
-                throw new ApiLimitExceedException($limit);
+                $limit = ResponseMediator::getHeader($response, 'X-RateLimit-Limit');
+                $reset = ResponseMediator::getHeader($response, 'X-RateLimit-Reset');
+                
+                throw new ApiLimitExceedException($limit, $reset);
             }
 
             if (401 === $response->getStatusCode()) {
