@@ -63,6 +63,8 @@ From `$client` object, you can access to all GitHub.
 
 ## Cache usage
 
+This example uses the PSR6 cache pool [redis-adapter](https://github.com/php-cache/redis-adapter). See http://www.php-cache.com/ for alternatives.
+
 ```php
 <?php
 
