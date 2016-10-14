@@ -87,6 +87,12 @@ class Client
     const AUTH_HTTP_TOKEN = 'http_token';
 
     /**
+     * Constant for authentication method. Indicates JSON Web Token
+     * authentication required for integration access to the API.
+     */
+    const AUTH_JWT = 'jwt';
+
+    /**
      * @var string
      */
     private $apiVersion;
@@ -204,6 +210,11 @@ class Client
                 $api = new Api\Gists($this);
                 break;
 
+            case 'integration':
+            case 'integrations':
+                $api = new Api\Integrations($this);
+                break;
+
             case 'issue':
             case 'issues':
                 $api = new Api\Issue($this);
@@ -293,7 +304,7 @@ class Client
             throw new InvalidArgumentException('You need to specify authentication method!');
         }
 
-        if (null === $authMethod && in_array($password, array(self::AUTH_URL_TOKEN, self::AUTH_URL_CLIENT_ID, self::AUTH_HTTP_PASSWORD, self::AUTH_HTTP_TOKEN))) {
+        if (null === $authMethod && in_array($password, array(self::AUTH_URL_TOKEN, self::AUTH_URL_CLIENT_ID, self::AUTH_HTTP_PASSWORD, self::AUTH_HTTP_TOKEN, self::AUTH_JWT))) {
             $authMethod = $password;
             $password   = null;
         }
