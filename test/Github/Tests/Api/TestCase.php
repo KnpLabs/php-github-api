@@ -8,7 +8,9 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
 
     protected function getApiMock()
     {
-        $httpClient = $this->getMock('Http\Client\HttpClient', array('sendRequest'));
+        $httpClient = $this->getMockBuilder('Http\Client\HttpClient')
+            ->setMethods(array('sendRequest'))
+            ->getMock();
         $httpClient
             ->expects($this->any())
             ->method('sendRequest');
