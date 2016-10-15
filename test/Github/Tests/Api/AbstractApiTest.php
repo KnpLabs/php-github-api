@@ -29,7 +29,10 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
         
         $api = $this->getAbstractApiObject($client);
 
-        $this->assertEquals($expectedArray, $api->get('/path', array('param1' => 'param1value'), array('header1' => 'header1value')));
+        $method = new \ReflectionMethod($api, 'get');
+        $method->setAccessible(true);
+
+        $this->assertEquals($expectedArray, $method->invokeArgs($api, ['/path', array('param1' => 'param1value'), array('header1' => 'header1value')]));
     }
 
     /**
@@ -54,8 +57,10 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
             ->willReturn($httpClient);
 
         $api = $this->getAbstractApiObject($client);
+        $method = new \ReflectionMethod($api, 'post');
+        $method->setAccessible(true);
 
-        $this->assertEquals($expectedArray, $api->post('/path', array('param1' => 'param1value'), array('option1' => 'option1value')));
+        $this->assertEquals($expectedArray, $method->invokeArgs($api, ['/path', array('param1' => 'param1value'), array('option1' => 'option1value')]));
     }
 
     /**
@@ -80,8 +85,10 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
             ->willReturn($httpClient);
 
         $api = $this->getAbstractApiObject($client);
+        $method = new \ReflectionMethod($api, 'patch');
+        $method->setAccessible(true);
 
-        $this->assertEquals($expectedArray, $api->patch('/path', array('param1' => 'param1value'), array('option1' => 'option1value')));
+        $this->assertEquals($expectedArray, $method->invokeArgs($api, ['/path', array('param1' => 'param1value'), array('option1' => 'option1value')]));
     }
 
     /**
@@ -106,8 +113,10 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
             ->willReturn($httpClient);
 
         $api = $this->getAbstractApiObject($client);
+        $method = new \ReflectionMethod($api, 'put');
+        $method->setAccessible(true);
 
-        $this->assertEquals($expectedArray, $api->put('/path', array('param1' => 'param1value'), array('option1' => 'option1value')));
+        $this->assertEquals($expectedArray, $method->invokeArgs($api, ['/path', array('param1' => 'param1value'), array('option1' => 'option1value')]));
     }
 
     /**
@@ -133,8 +142,10 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
 
 
         $api = $this->getAbstractApiObject($client);
+        $method = new \ReflectionMethod($api, 'delete');
+        $method->setAccessible(true);
 
-        $this->assertEquals($expectedArray, $api->delete('/path', array('param1' => 'param1value'), array('option1' => 'option1value')));
+        $this->assertEquals($expectedArray, $method->invokeArgs($api, ['/path', array('param1' => 'param1value'), array('option1' => 'option1value')]));
     }
 
     /**
@@ -159,12 +170,22 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
             ->willReturn($httpClient);
 
         $api = $this->getAbstractApiObject($client);
-        $api->get('/path', array('ref' => null));
+        $method = new \ReflectionMethod($api, 'get');
+        $method->setAccessible(true);
+
+        $this->assertInternalType('array', $method->invokeArgs($api, ['/path', array('ref' => null)]));
     }
 
+    /**
+     * @param $client
+     * @return AbstractApi
+     */
     protected function getAbstractApiObject($client)
     {
-        return new AbstractApiTestInstance($client);
+        return $this->getMockBuilder(AbstractApi::class)
+            ->setMethods(null)
+            ->setConstructorArgs([$client])
+            ->getMock();
     }
 
     /**
@@ -221,70 +242,5 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
             array('Content-Type' => 'application/json'),
             \GuzzleHttp\Psr7\stream_for(json_encode($expectedArray))
         );
-    }
-}
-
-class AbstractApiTestInstance extends AbstractApi
-{
-    /**
-     * {@inheritDoc}
-     */
-    public function get($path, array $parameters = array(), $requestHeaders = array())
-    {
-        return parent::get($path, $parameters, $requestHeaders);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function post($path, array $parameters = array(), $requestHeaders = array())
-    {
-        return parent::post($path, $parameters, $requestHeaders);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function postRaw($path, $body, $requestHeaders = array())
-    {
-        return parent::postRaw($path, $body, $requestHeaders);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function patch($path, array $parameters = array(), $requestHeaders = array())
-    {
-        return parent::patch($path, $parameters, $requestHeaders);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function put($path, array $parameters = array(), $requestHeaders = array())
-    {
-        return parent::put($path, $parameters, $requestHeaders);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function delete($path, array $parameters = array(), $requestHeaders = array())
-    {
-        return parent::delete($path, $parameters, $requestHeaders);
-    }
-}
-
-/**
- * @deprecated
- */
-class ExposedAbstractApiTestInstance extends AbstractApi
-{
-    /**
-     * {@inheritDoc}
-     */
-    public function get($path, array $parameters = array(), $requestHeaders = array())
-    {
-        return parent::get($path, $parameters, $requestHeaders);
     }
 }
