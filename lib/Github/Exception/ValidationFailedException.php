@@ -3,7 +3,7 @@
 namespace Github\Exception;
 
 /**
- * ValidationFailedException.
+ * When GitHub returns with a HTTP response that says our request is invalid.
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
