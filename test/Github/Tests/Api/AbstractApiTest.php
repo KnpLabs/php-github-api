@@ -32,7 +32,7 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
         $method = new \ReflectionMethod($api, 'get');
         $method->setAccessible(true);
 
-        $this->assertEquals($expectedArray, $method->invokeArgs($api, ['/path', array('param1' => 'param1value'), array('header1' => 'header1value')]));
+        $this->assertEquals($expectedArray, $method->invokeArgs($api, ['/path', ['param1' => 'param1value'], ['header1' => 'header1value']]));
     }
 
     /**
