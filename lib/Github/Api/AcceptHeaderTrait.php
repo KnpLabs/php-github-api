@@ -11,37 +11,37 @@ trait AcceptHeaderTrait
 {
     protected $acceptHeaderValue = null;
 
-    protected function get($path, array $parameters = array(), $requestHeaders = array())
+    protected function get($path, array $parameters = array(), array $requestHeaders = array())
     {
         return parent::get($path, $parameters, $this->mergeHeaders($requestHeaders));
     }
 
-    protected function head($path, array $parameters = array(), $requestHeaders = array())
+    protected function head($path, array $parameters = array(), array $requestHeaders = array())
     {
         return parent::head($path, $parameters, $this->mergeHeaders($requestHeaders));
     }
 
-    protected function post($path, array $parameters = array(), $requestHeaders = array())
+    protected function post($path, array $parameters = array(), array $requestHeaders = array())
     {
         return parent::post($path, $parameters, $this->mergeHeaders($requestHeaders));
     }
 
-    protected function postRaw($path, $body, $requestHeaders = array())
+    protected function postRaw($path, $body, array $requestHeaders = array())
     {
         return parent::postRaw($path, $body, $this->mergeHeaders($requestHeaders));
     }
 
-    protected function patch($path, array $parameters = array(), $requestHeaders = array())
+    protected function patch($path, array $parameters = array(), array $requestHeaders = array())
     {
         return parent::patch($path, $parameters, $this->mergeHeaders($requestHeaders));
     }
 
-    protected function put($path, array $parameters = array(), $requestHeaders = array())
+    protected function put($path, array $parameters = array(), array $requestHeaders = array())
     {
         return parent::put($path, $parameters, $this->mergeHeaders($requestHeaders));
     }
 
-    protected function delete($path, array $parameters = array(), $requestHeaders = array())
+    protected function delete($path, array $parameters = array(), array $requestHeaders = array())
     {
         return parent::delete($path, $parameters, $this->mergeHeaders($requestHeaders));
     }
