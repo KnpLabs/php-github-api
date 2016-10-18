@@ -188,7 +188,7 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
      * @param $methodName
      * @return ReflectionMethod
      */
-    public function getMethodReflection($api, $methodName)
+    protected function getMethodReflection($api, $methodName)
     {
         $method = new ReflectionMethod($api, $methodName);
         $method->setAccessible(true);
