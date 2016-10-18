@@ -105,21 +105,6 @@ class HooksTest extends TestCase
      * @test
      * @expectedException \Github\Exception\MissingArgumentException
      */
-    public function shouldNotUpdateHookWithoutName()
-    {
-        $data = array('config' => 'someconf');
-
-        $api = $this->getApiMock();
-        $api->expects($this->never())
-            ->method('patch');
-
-        $api->update('KnpLabs', 'php-github-api', 123, $data);
-    }
-
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotUpdateHookWithoutConfig()
     {
         $data = array('name' => 'test');
