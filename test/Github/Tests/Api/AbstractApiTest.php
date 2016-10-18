@@ -4,6 +4,7 @@ namespace Github\Tests\Api;
 
 use Github\Api\AbstractApi;
 use GuzzleHttp\Psr7\Response;
+use ReflectionMethod;
 
 class AbstractApiTest extends \PHPUnit_Framework_TestCase
 {
@@ -29,8 +30,7 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
         
         $api = $this->getAbstractApiObject($client);
 
-        $method = new \ReflectionMethod($api, 'get');
-        $method->setAccessible(true);
+        $method = $this->getMethodReflection($api, 'get');
 
         $this->assertEquals($expectedArray, $method->invokeArgs($api, ['/path', ['param1' => 'param1value'], ['header1' => 'header1value']]));
     }
@@ -57,8 +57,7 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
             ->willReturn($httpClient);
 
         $api = $this->getAbstractApiObject($client);
-        $method = new \ReflectionMethod($api, 'post');
-        $method->setAccessible(true);
+        $method = $this->getMethodReflection($api, 'post');
 
         $this->assertEquals($expectedArray, $method->invokeArgs($api, ['/path', array('param1' => 'param1value'), array('option1' => 'option1value')]));
     }
@@ -85,8 +84,7 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
             ->willReturn($httpClient);
 
         $api = $this->getAbstractApiObject($client);
-        $method = new \ReflectionMethod($api, 'patch');
-        $method->setAccessible(true);
+        $method = $this->getMethodReflection($api, 'patch');
 
         $this->assertEquals($expectedArray, $method->invokeArgs($api, ['/path', array('param1' => 'param1value'), array('option1' => 'option1value')]));
     }
@@ -113,8 +111,7 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
             ->willReturn($httpClient);
 
         $api = $this->getAbstractApiObject($client);
-        $method = new \ReflectionMethod($api, 'put');
-        $method->setAccessible(true);
+        $method = $this->getMethodReflection($api, 'put');
 
         $this->assertEquals($expectedArray, $method->invokeArgs($api, ['/path', array('param1' => 'param1value'), array('option1' => 'option1value')]));
     }
@@ -142,8 +139,7 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
 
 
         $api = $this->getAbstractApiObject($client);
-        $method = new \ReflectionMethod($api, 'delete');
-        $method->setAccessible(true);
+        $method = $this->getMethodReflection($api, 'delete');
 
         $this->assertEquals($expectedArray, $method->invokeArgs($api, ['/path', array('param1' => 'param1value'), array('option1' => 'option1value')]));
     }
@@ -170,8 +166,7 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
             ->willReturn($httpClient);
 
         $api = $this->getAbstractApiObject($client);
-        $method = new \ReflectionMethod($api, 'get');
-        $method->setAccessible(true);
+        $method = $this->getMethodReflection($api, 'get');
 
         $this->assertInternalType('array', $method->invokeArgs($api, ['/path', array('ref' => null)]));
     }
@@ -186,6 +181,19 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
             ->setMethods(null)
             ->setConstructorArgs([$client])
             ->getMock();
+    }
+
+    /**
+     * @param $api
+     * @param $methodName
+     * @return ReflectionMethod
+     */
+    public function getMethodReflection($api, $methodName)
+    {
+        $method = new ReflectionMethod($api, $methodName);
+        $method->setAccessible(true);
+
+        return $method;
     }
 
     /**
