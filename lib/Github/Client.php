@@ -439,7 +439,7 @@ class Client
     /**
      * @param string $name
      *
-     * @throws InvalidArgumentException
+     * @throws BadMethodCallException
      *
      * @return ApiInterface
      */

@@ -27,7 +27,7 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
         $client->expects($this->any())
             ->method('getHttpClient')
             ->willReturn($httpClient);
-        
+
         $api = $this->getAbstractApiObject($client);
 
         $method = $this->getMethodReflection($api, 'get');

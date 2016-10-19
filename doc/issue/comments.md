@@ -11,7 +11,7 @@ $comments = $client->api('issue')->comments()->all('KnpLabs', 'php-github-api', 
 
 * `KnpLabs` : the owner of the repository
 * `php-github-api` : the name of the repository
-* `4` : the id of the issue
+* `4` : the issue number
 * You can select another page of comments using one more parameter (default: 1)
 
 Returns an array of comments.
@@ -41,7 +41,7 @@ $client->api('issue')->comments()->create('KnpLabs', 'php-github-api', 4, array(
 
 * `KnpLabs` : the owner of the repository
 * `php-github-api` : the name of the repository
-* `4` : the id of the issue
+* `4` : the issue number
 * You can set a `body` and optionally a `title`
 
 
