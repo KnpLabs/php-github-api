@@ -8,6 +8,7 @@ use Github\Api\Repository\Commits;
 use Github\Api\Repository\Contents;
 use Github\Api\Repository\DeployKeys;
 use Github\Api\Repository\Downloads;
+use Github\Api\Repository\Projects;
 use Github\Api\Repository\Releases;
 use Github\Api\Repository\Forks;
 use Github\Api\Repository\Hooks;
@@ -509,5 +510,10 @@ class Repo extends AbstractApi
     public function milestones($username, $repository)
     {
         return $this->get('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/milestones');
+    }
+
+    public function projects()
+    {
+        return new Projects($this->client);
     }
 }
