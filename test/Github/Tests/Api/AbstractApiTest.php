@@ -26,7 +26,7 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
         $client->expects($this->any())
             ->method('getHttpClient')
             ->willReturn($httpClient);
-        
+
         $api = $this->getAbstractApiObject($client);
 
         $this->assertEquals($expectedArray, $api->get('/path', array('param1' => 'param1value'), array('header1' => 'header1value')));
@@ -229,7 +229,7 @@ class AbstractApiTestInstance extends AbstractApi
     /**
      * {@inheritDoc}
      */
-    public function get($path, array $parameters = array(), $requestHeaders = array())
+    public function get($path, array $parameters = array(), array $requestHeaders = array())
     {
         return parent::get($path, $parameters, $requestHeaders);
     }
@@ -237,7 +237,7 @@ class AbstractApiTestInstance extends AbstractApi
     /**
      * {@inheritDoc}
      */
-    public function post($path, array $parameters = array(), $requestHeaders = array())
+    public function post($path, array $parameters = array(), array $requestHeaders = array())
     {
         return parent::post($path, $parameters, $requestHeaders);
     }
@@ -245,7 +245,7 @@ class AbstractApiTestInstance extends AbstractApi
     /**
      * {@inheritDoc}
      */
-    public function postRaw($path, $body, $requestHeaders = array())
+    public function postRaw($path, $body, array $requestHeaders = array())
     {
         return parent::postRaw($path, $body, $requestHeaders);
     }
@@ -253,7 +253,7 @@ class AbstractApiTestInstance extends AbstractApi
     /**
      * {@inheritDoc}
      */
-    public function patch($path, array $parameters = array(), $requestHeaders = array())
+    public function patch($path, array $parameters = array(), array $requestHeaders = array())
     {
         return parent::patch($path, $parameters, $requestHeaders);
     }
@@ -261,7 +261,7 @@ class AbstractApiTestInstance extends AbstractApi
     /**
      * {@inheritDoc}
      */
-    public function put($path, array $parameters = array(), $requestHeaders = array())
+    public function put($path, array $parameters = array(), array $requestHeaders = array())
     {
         return parent::put($path, $parameters, $requestHeaders);
     }
@@ -269,7 +269,7 @@ class AbstractApiTestInstance extends AbstractApi
     /**
      * {@inheritDoc}
      */
-    public function delete($path, array $parameters = array(), $requestHeaders = array())
+    public function delete($path, array $parameters = array(), array $requestHeaders = array())
     {
         return parent::delete($path, $parameters, $requestHeaders);
     }
@@ -283,7 +283,7 @@ class ExposedAbstractApiTestInstance extends AbstractApi
     /**
      * {@inheritDoc}
      */
-    public function get($path, array $parameters = array(), $requestHeaders = array())
+    public function get($path, array $parameters = array(), array $requestHeaders = array())
     {
         return parent::get($path, $parameters, $requestHeaders);
     }
