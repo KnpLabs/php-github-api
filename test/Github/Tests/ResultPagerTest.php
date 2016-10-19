@@ -101,7 +101,8 @@ class ResultPagerTest extends \PHPUnit_Framework_TestCase
         $result = 'foo';
         $method = 'bar';
         $parameters = array('baz');
-        $api = $this->createMock('Github\Api\ApiInterface');
+        $api = $this->getMockBuilder('Github\Api\ApiInterface')
+            ->getMock();
 
         $paginator = $this->getMockBuilder('Github\ResultPager')
             ->disableOriginalConstructor()
