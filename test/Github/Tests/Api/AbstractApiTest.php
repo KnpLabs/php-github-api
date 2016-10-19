@@ -4,7 +4,7 @@ namespace Github\Tests\Api;
 
 use Github\Api\AbstractApi;
 use GuzzleHttp\Psr7\Response;
-use ReflectionMethod;
+use Nyholm\NSA;
 
 class AbstractApiTest extends \PHPUnit_Framework_TestCase
 {
@@ -29,10 +29,7 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
             ->willReturn($httpClient);
 
         $api = $this->getAbstractApiObject($client);
-
-        $method = $this->getMethodReflection($api, 'get');
-
-        $this->assertEquals($expectedArray, $method->invokeArgs($api, ['/path', ['param1' => 'param1value'], ['header1' => 'header1value']]));
+        $this->assertEquals($expectedArray, NSA::invokeMethod($api, 'get', '/path', ['param1' => 'param1value'], ['header1' => 'header1value']));
     }
 
     /**
@@ -57,9 +54,7 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
             ->willReturn($httpClient);
 
         $api = $this->getAbstractApiObject($client);
-        $method = $this->getMethodReflection($api, 'post');
-
-        $this->assertEquals($expectedArray, $method->invokeArgs($api, ['/path', array('param1' => 'param1value'), array('option1' => 'option1value')]));
+        $this->assertEquals($expectedArray, NSA::invokeMethod($api, 'post', '/path', array('param1' => 'param1value'), array('option1' => 'option1value')));
     }
 
     /**
@@ -84,9 +79,7 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
             ->willReturn($httpClient);
 
         $api = $this->getAbstractApiObject($client);
-        $method = $this->getMethodReflection($api, 'patch');
-
-        $this->assertEquals($expectedArray, $method->invokeArgs($api, ['/path', array('param1' => 'param1value'), array('option1' => 'option1value')]));
+        $this->assertEquals($expectedArray, NSA::invokeMethod($api, 'patch', '/path', array('param1' => 'param1value'), array('option1' => 'option1value')));
     }
 
     /**
@@ -111,9 +104,7 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
             ->willReturn($httpClient);
 
         $api = $this->getAbstractApiObject($client);
-        $method = $this->getMethodReflection($api, 'put');
-
-        $this->assertEquals($expectedArray, $method->invokeArgs($api, ['/path', array('param1' => 'param1value'), array('option1' => 'option1value')]));
+        $this->assertEquals($expectedArray, NSA::invokeMethod($api, 'put', '/path', array('param1' => 'param1value'), array('option1' => 'option1value')));
     }
 
     /**
@@ -139,9 +130,7 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
 
 
         $api = $this->getAbstractApiObject($client);
-        $method = $this->getMethodReflection($api, 'delete');
-
-        $this->assertEquals($expectedArray, $method->invokeArgs($api, ['/path', array('param1' => 'param1value'), array('option1' => 'option1value')]));
+        $this->assertEquals($expectedArray, NSA::invokeMethod($api, 'delete', '/path', array('param1' => 'param1value'), array('option1' => 'option1value')));
     }
 
     /**
@@ -166,9 +155,7 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
             ->willReturn($httpClient);
 
         $api = $this->getAbstractApiObject($client);
-        $method = $this->getMethodReflection($api, 'get');
-
-        $this->assertInternalType('array', $method->invokeArgs($api, ['/path', array('ref' => null)]));
+        $this->assertInternalType('array', NSA::invokeMethod($api, 'get', '/path', array('ref' => null)));
     }
 
     /**
@@ -181,19 +168,6 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
             ->setMethods(null)
             ->setConstructorArgs([$client])
             ->getMock();
-    }
-
-    /**
-     * @param $api
-     * @param $methodName
-     * @return ReflectionMethod
-     */
-    protected function getMethodReflection($api, $methodName)
-    {
-        $method = new ReflectionMethod($api, $methodName);
-        $method->setAccessible(true);
-
-        return $method;
     }
 
     /**
