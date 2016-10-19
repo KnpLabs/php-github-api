@@ -90,6 +90,36 @@ class Repo extends AbstractApi
     }
 
     /**
+     * Get a weekly aggregate of the number of additions and deletions pushed to a repository.
+     *
+     * @link http://developer.github.com/v3/repos/statistics/#code-frequency
+     *
+     * @param string $username   the user who owns the repository
+     * @param string $repository the name of the repository
+     *
+     * @return array list of weeks and their commit statistics
+     */
+    public function frequency($username, $repository)
+    {
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/stats/code_frequency');
+    }
+
+    /**
+     * Get the weekly commit count for the repository owner and everyone else.
+     *
+     * @link http://developer.github.com/v3/repos/statistics/#participation
+     *
+     * @param string $username   the user who owns the repository
+     * @param string $repository the name of the repository
+     *
+     * @return array list of weekly commit count grouped by 'all' and 'owner'
+     */
+    public function participation($username, $repository)
+    {
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/stats/participation');
+    }
+
+    /**
      * List all repositories for an organization.
      *
      * @link http://developer.github.com/v3/repos/#list-organization-repositories
