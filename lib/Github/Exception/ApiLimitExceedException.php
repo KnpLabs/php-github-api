@@ -9,8 +9,24 @@ namespace Github\Exception;
  */
 class ApiLimitExceedException extends RuntimeException
 {
-    public function __construct($limit = 5000, $code = 0, $previous = null)
+    private $limit;
+    private $reset;
+
+    public function __construct($limit = 5000, $reset = 1800, $code = 0, $previous = null)
     {
-        parent::__construct('You have reached GitHub hour limit! Actual limit is: '. $limit, $code, $previous);
+        $this->limit = (int) $limit;
+        $this->reset = (int) $reset;
+
+        parent::__construct(sprintf('You have reached GitHub hourly limit! Actual limit is: %d', $limit), $code, $previous);
+    }
+
+    public function getLimit()
+    {
+        return $this->limit;
+    }
+
+    public function getResetTime()
+    {
+        return $this->reset;
     }
 }
