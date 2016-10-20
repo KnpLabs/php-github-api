@@ -2,8 +2,13 @@
 
 namespace Github\Tests\Api;
 
+use ReflectionMethod;
+
 abstract class TestCase extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @return string
+     */
     abstract protected function getApiClass();
 
     /**
@@ -24,5 +29,18 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
             ->setMethods(array('get', 'post', 'postRaw', 'patch', 'delete', 'put', 'head'))
             ->setConstructorArgs(array($client))
             ->getMock();
+    }
+
+    /**
+     * @param object $object
+     * @param string $methodName
+     * @return ReflectionMethod
+     */
+    protected function getMethod($object, $methodName)
+    {
+        $method = new ReflectionMethod($object, $methodName);
+        $method->setAccessible(true);
+
+        return $method;
     }
 }
