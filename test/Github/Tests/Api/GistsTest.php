@@ -75,7 +75,7 @@ class GistsTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Gist\Comments', $api->comments());
+        $this->assertInstanceOf(\Github\Api\Gist\Comments::class, $api->comments());
     }
 
     /**
@@ -238,8 +238,11 @@ class GistsTest extends TestCase
         $api->remove(5);
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Gists';
+        return \Github\Api\Gists::class;
     }
 }

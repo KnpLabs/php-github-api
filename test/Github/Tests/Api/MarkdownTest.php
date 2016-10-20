@@ -85,8 +85,11 @@ class MarkdownTest extends TestCase
         $api->renderRaw($file);
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Markdown';
+        return \Github\Api\Markdown::class;
     }
 }

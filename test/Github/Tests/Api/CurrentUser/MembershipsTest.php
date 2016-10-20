@@ -84,8 +84,11 @@ class MembershipsTest extends TestCase
         $this->assertEquals($expectedValue, $api->edit('invitocat'));
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\CurrentUser\Memberships';
+        return \Github\Api\CurrentUser\Memberships::class;
     }
 }

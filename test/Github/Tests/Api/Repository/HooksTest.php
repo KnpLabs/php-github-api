@@ -149,8 +149,11 @@ class HooksTest extends TestCase
         $this->assertEquals($expectedValue, $api->test('KnpLabs', 'php-github-api', 123));
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Repository\Hooks';
+        return \Github\Api\Repository\Hooks::class;
     }
 }

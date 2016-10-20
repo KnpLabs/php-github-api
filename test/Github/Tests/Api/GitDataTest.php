@@ -11,7 +11,7 @@ class GitDataTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\GitData\Blobs', $api->blobs());
+        $this->assertInstanceOf(\Github\Api\GitData\Blobs::class, $api->blobs());
     }
 
     /**
@@ -21,7 +21,7 @@ class GitDataTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\GitData\Commits', $api->commits());
+        $this->assertInstanceOf(\Github\Api\GitData\Commits::class, $api->commits());
     }
 
     /**
@@ -31,7 +31,7 @@ class GitDataTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\GitData\References', $api->references());
+        $this->assertInstanceOf(\Github\Api\GitData\References::class, $api->references());
     }
 
     /**
@@ -41,7 +41,7 @@ class GitDataTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\GitData\Tags', $api->tags());
+        $this->assertInstanceOf(\Github\Api\GitData\Tags::class, $api->tags());
     }
 
     /**
@@ -51,11 +51,14 @@ class GitDataTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\GitData\Trees', $api->trees());
+        $this->assertInstanceOf(\Github\Api\GitData\Trees::class, $api->trees());
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\GitData';
+        return \Github\Api\GitData::class;
     }
 }

@@ -146,8 +146,11 @@ class DeployKeysTest extends TestCase
         $this->assertEquals($expectedValue, $api->remove(123));
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\CurrentUser\DeployKeys';
+        return \Github\Api\CurrentUser\DeployKeys::class;
     }
 }

@@ -120,8 +120,11 @@ class CardsTest extends TestCase
         $this->assertEquals($expectedValue, $api->move('KnpLabs', 'php-github-api', 123, $data));
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Repository\Cards';
+        return \Github\Api\Repository\Cards::class;
     }
 }

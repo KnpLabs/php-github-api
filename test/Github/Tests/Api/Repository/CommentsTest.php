@@ -149,8 +149,11 @@ class CommentsTest extends TestCase
         $this->assertEquals($expectedValue, $api->remove('KnpLabs', 'php-github-api', 123));
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Repository\Comments';
+        return \Github\Api\Repository\Comments::class;
     }
 }

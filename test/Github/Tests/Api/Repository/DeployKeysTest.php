@@ -148,8 +148,11 @@ class DeployKeysTest extends TestCase
         $this->assertEquals($expectedValue, $api->update('KnpLabs', 'php-github-api', 123, $data));
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Repository\DeployKeys';
+        return \Github\Api\Repository\DeployKeys::class;
     }
 }

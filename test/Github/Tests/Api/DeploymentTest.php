@@ -86,8 +86,11 @@ class DeploymentTest extends TestCase
         $api->getStatuses('KnpLabs', 'php-github-api', 1);
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Deployment';
+        return \Github\Api\Deployment::class;
     }
 }

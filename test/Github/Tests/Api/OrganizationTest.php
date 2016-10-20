@@ -75,7 +75,7 @@ class OrganizationTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Organization\Members', $api->members());
+        $this->assertInstanceOf(\Github\Api\Organization\Members::class, $api->members());
     }
 
     /**
@@ -85,11 +85,14 @@ class OrganizationTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Organization\Teams', $api->teams());
+        $this->assertInstanceOf(\Github\Api\Organization\Teams::class, $api->teams());
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Organization';
+        return \Github\Api\Organization::class;
     }
 }
