@@ -4,9 +4,8 @@ namespace Github\Tests\Api;
 
 use Github\Api\AbstractApi;
 use GuzzleHttp\Psr7\Response;
-use ReflectionMethod;
 
-class AbstractApiTest extends \PHPUnit_Framework_TestCase
+class AbstractApiTest extends TestCase
 {
     /**
      * @test
@@ -30,9 +29,10 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
 
         $api = $this->getAbstractApiObject($client);
 
-        $method = $this->getMethodReflection($api, 'get');
+        $actual = $this->getMethod($api, 'get')
+            ->invokeArgs($api, ['/path', ['param1' => 'param1value'], ['header1' => 'header1value']]);
 
-        $this->assertEquals($expectedArray, $method->invokeArgs($api, ['/path', ['param1' => 'param1value'], ['header1' => 'header1value']]));
+        $this->assertEquals($expectedArray, $actual);
     }
 
     /**
@@ -57,9 +57,10 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
             ->willReturn($httpClient);
 
         $api = $this->getAbstractApiObject($client);
-        $method = $this->getMethodReflection($api, 'post');
+        $actual = $this->getMethod($api, 'post')
+            ->invokeArgs($api, ['/path', ['param1' => 'param1value'], ['option1' => 'option1value']]);
 
-        $this->assertEquals($expectedArray, $method->invokeArgs($api, ['/path', array('param1' => 'param1value'), array('option1' => 'option1value')]));
+        $this->assertEquals($expectedArray, $actual);
     }
 
     /**
@@ -84,9 +85,10 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
             ->willReturn($httpClient);
 
         $api = $this->getAbstractApiObject($client);
-        $method = $this->getMethodReflection($api, 'patch');
+        $actual = $this->getMethod($api, 'patch')
+            ->invokeArgs($api, ['/path', ['param1' => 'param1value'], ['option1' => 'option1value']]);
 
-        $this->assertEquals($expectedArray, $method->invokeArgs($api, ['/path', array('param1' => 'param1value'), array('option1' => 'option1value')]));
+        $this->assertEquals($expectedArray, $actual);
     }
 
     /**
@@ -111,9 +113,10 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
             ->willReturn($httpClient);
 
         $api = $this->getAbstractApiObject($client);
-        $method = $this->getMethodReflection($api, 'put');
+        $actual = $this->getMethod($api, 'put')
+            ->invokeArgs($api, ['/path', ['param1' => 'param1value'], ['option1' => 'option1value']]);
 
-        $this->assertEquals($expectedArray, $method->invokeArgs($api, ['/path', array('param1' => 'param1value'), array('option1' => 'option1value')]));
+        $this->assertEquals($expectedArray, $actual);
     }
 
     /**
@@ -139,9 +142,10 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
 
 
         $api = $this->getAbstractApiObject($client);
-        $method = $this->getMethodReflection($api, 'delete');
+        $actual = $this->getMethod($api, 'delete')
+            ->invokeArgs($api, ['/path', ['param1' => 'param1value'], ['option1' => 'option1value']]);
 
-        $this->assertEquals($expectedArray, $method->invokeArgs($api, ['/path', array('param1' => 'param1value'), array('option1' => 'option1value')]));
+        $this->assertEquals($expectedArray, $actual);
     }
 
     /**
@@ -166,34 +170,29 @@ class AbstractApiTest extends \PHPUnit_Framework_TestCase
             ->willReturn($httpClient);
 
         $api = $this->getAbstractApiObject($client);
-        $method = $this->getMethodReflection($api, 'get');
+        $actual = $this->getMethod($api, 'get')->invokeArgs($api, ['/path', ['ref' => null]]);
 
-        $this->assertInternalType('array', $method->invokeArgs($api, ['/path', array('ref' => null)]));
+        $this->assertInternalType('array', $actual);
     }
 
     /**
      * @param $client
-     * @return AbstractApi
+     * @return \PHPUnit_Framework_MockObject_MockObject
      */
     protected function getAbstractApiObject($client)
     {
-        return $this->getMockBuilder(AbstractApi::class)
+        return $this->getMockBuilder($this->getApiClass())
             ->setMethods(null)
             ->setConstructorArgs([$client])
             ->getMock();
     }
 
     /**
-     * @param $api
-     * @param $methodName
-     * @return ReflectionMethod
+     * @return string
      */
-    protected function getMethodReflection($api, $methodName)
+    protected function getApiClass()
     {
-        $method = new ReflectionMethod($api, $methodName);
-        $method->setAccessible(true);
-
-        return $method;
+        return AbstractApi::class;
     }
 
     /**
