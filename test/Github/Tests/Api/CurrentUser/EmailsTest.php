@@ -110,8 +110,11 @@ class EmailsTest extends TestCase
         $api->add(array());
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\CurrentUser\Emails';
+        return \Github\Api\CurrentUser\Emails::class;
     }
 }

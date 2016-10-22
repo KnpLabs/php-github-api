@@ -151,8 +151,11 @@ class AuthorizationsTest extends TestCase
         $api->revokeAll($id);
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Authorizations';
+        return \Github\Api\Authorizations::class;
     }
 }

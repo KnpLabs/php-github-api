@@ -117,8 +117,11 @@ class AssetsTest extends TestCase
         $this->assertEquals($expectedValue, $api->remove('KnpLabs', 'php-github-api', $assetId));
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Repository\Assets';
+        return \Github\Api\Repository\Assets::class;
     }
 }

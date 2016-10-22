@@ -11,7 +11,7 @@ class EnterpriseTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Enterprise\Stats', $api->stats());
+        $this->assertInstanceOf(\Github\Api\Enterprise\Stats::class, $api->stats());
     }
 
     /**
@@ -21,7 +21,7 @@ class EnterpriseTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Enterprise\License', $api->license());
+        $this->assertInstanceOf(\Github\Api\Enterprise\License::class, $api->license());
     }
 
     /**
@@ -31,7 +31,7 @@ class EnterpriseTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Enterprise\ManagementConsole', $api->console());
+        $this->assertInstanceOf(\Github\Api\Enterprise\ManagementConsole::class, $api->console());
     }
 
     /**
@@ -41,11 +41,14 @@ class EnterpriseTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Enterprise\UserAdmin', $api->userAdmin());
+        $this->assertInstanceOf(\Github\Api\Enterprise\UserAdmin::class, $api->userAdmin());
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Enterprise';
+        return \Github\Api\Enterprise::class;
     }
 }

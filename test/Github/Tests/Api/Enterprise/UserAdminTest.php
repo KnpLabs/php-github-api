@@ -36,8 +36,11 @@ class UserAdminTest extends TestCase
         $this->assertEquals($expectedArray, $api->unsuspend('l3l0'));
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Enterprise\UserAdmin';
+        return \Github\Api\Enterprise\UserAdmin::class;
     }
 }

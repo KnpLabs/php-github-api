@@ -39,8 +39,11 @@ class StargazersTest extends TestCase
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api'));
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Repository\Stargazers';
+        return \Github\Api\Repository\Stargazers::class;
     }
 }

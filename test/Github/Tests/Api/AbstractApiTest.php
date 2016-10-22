@@ -20,7 +20,7 @@ class AbstractApiTest extends TestCase
             ->method('get')
             ->with('/path?param1=param1value', array('header1' => 'header1value'))
             ->will($this->returnValue($this->getPSR7Response($expectedArray)));
-        $client = $this->getMockBuilder('Github\Client')
+        $client = $this->getMockBuilder(\Github\Client::class)
             ->setMethods(array('getHttpClient'))
             ->getMock();
         $client->expects($this->any())
@@ -49,7 +49,7 @@ class AbstractApiTest extends TestCase
             ->with('/path', array('option1' => 'option1value'), json_encode(array('param1' => 'param1value')))
             ->will($this->returnValue($this->getPSR7Response($expectedArray)));
 
-        $client = $this->getMockBuilder('Github\Client')
+        $client = $this->getMockBuilder(\Github\Client::class)
             ->setMethods(array('getHttpClient'))
             ->getMock();
         $client->expects($this->any())
@@ -77,7 +77,7 @@ class AbstractApiTest extends TestCase
             ->with('/path', array('option1' => 'option1value'), json_encode(array('param1' => 'param1value')))
             ->will($this->returnValue($this->getPSR7Response($expectedArray)));
 
-        $client = $this->getMockBuilder('Github\Client')
+        $client = $this->getMockBuilder(\Github\Client::class)
             ->setMethods(array('getHttpClient'))
             ->getMock();
         $client->expects($this->any())
@@ -162,7 +162,7 @@ class AbstractApiTest extends TestCase
             ->with('/path', array())
             ->will($this->returnValue($this->getPSR7Response($expectedArray)));
 
-        $client = $this->getMockBuilder('Github\Client')
+        $client = $this->getMockBuilder(\Github\Client::class)
             ->setMethods(array('getHttpClient'))
             ->getMock();
         $client->expects($this->any())
@@ -212,7 +212,7 @@ class AbstractApiTest extends TestCase
     protected function getHttpMethodsMock(array $methods = array())
     {
         $methods = array_merge(array('sendRequest'), $methods);
-        $mock = $this->getMockBuilder('Http\Client\Common\HttpMethodsClient')
+        $mock = $this->getMockBuilder(\Http\Client\Common\HttpMethodsClient::class)
             ->disableOriginalConstructor()
             ->setMethods($methods)
             ->getMock();
@@ -227,7 +227,7 @@ class AbstractApiTest extends TestCase
      */
     protected function getHttpClientMock()
     {
-        $mock = $this->getMockBuilder('Http\Client\HttpClient')
+        $mock = $this->getMockBuilder(\Http\Client\HttpClient::class)
             ->setMethods(array('sendRequest'))
             ->getMock();
         $mock

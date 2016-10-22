@@ -87,8 +87,11 @@ class CommentsTest extends TestCase
         $this->assertEquals($expectedValue, $api->remove(123, 233));
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Gist\Comments';
+        return \Github\Api\Gist\Comments::class;
     }
 }

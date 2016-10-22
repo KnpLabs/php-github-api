@@ -70,8 +70,11 @@ class CollaboratorsTest extends TestCase
         $this->assertEquals($expectedValue, $api->remove('KnpLabs', 'php-github-api', 'l3l0'));
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Repository\Collaborators';
+        return \Github\Api\Repository\Collaborators::class;
     }
 }

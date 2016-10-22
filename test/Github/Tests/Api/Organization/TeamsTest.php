@@ -297,8 +297,11 @@ class TeamsTest extends TestCase
         $this->assertEquals($expectedValue, $api->update('KnpWorld', $data));
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Organization\Teams';
+        return \Github\Api\Organization\Teams::class;
     }
 }

@@ -55,8 +55,11 @@ class ForksTest extends TestCase
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', array('sort' => 'oldes')));
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Repository\Forks';
+        return \Github\Api\Repository\Forks::class;
     }
 }

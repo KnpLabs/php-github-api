@@ -29,8 +29,11 @@ class LicenseTest extends TestCase
         $this->assertEquals($expectedArray, $api->show());
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Enterprise\License';
+        return \Github\Api\Enterprise\License::class;
     }
 }

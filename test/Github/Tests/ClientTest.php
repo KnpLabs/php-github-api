@@ -2,6 +2,7 @@
 
 namespace Github\Tests;
 
+use Github\Api;
 use Github\Client;
 use Github\Exception\BadMethodCallException;
 use Github\HttpClient\Plugin\Authentication;
@@ -16,7 +17,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $client = new Client();
 
-        $this->assertInstanceOf('\Http\Client\HttpClient', $client->getHttpClient());
+        $this->assertInstanceOf(\Http\Client\HttpClient::class, $client->getHttpClient());
     }
 
     /**
@@ -24,11 +25,11 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldPassHttpClientInterfaceToConstructor()
     {
-        $httpClientMock = $this->getMockBuilder('Http\Client\HttpClient')
+        $httpClientMock = $this->getMockBuilder(\Http\Client\HttpClient::class)
             ->getMock();
         $client = new Client($httpClientMock);
 
-        $this->assertInstanceOf('Http\Client\HttpClient', $client->getHttpClient());
+        $this->assertInstanceOf(\Http\Client\HttpClient::class, $client->getHttpClient());
     }
 
     /**
@@ -37,7 +38,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldAuthenticateUsingAllGivenParameters($login, $password, $method)
     {
-        $client = $this->getMockBuilder('Github\Client')
+        $client = $this->getMockBuilder(\Github\Client::class)
             ->setMethods(array('addPlugin', 'removePlugin'))
             ->getMock();
         $client->expects($this->once())
@@ -67,7 +68,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldAuthenticateUsingGivenParameters($token, $method)
     {
-        $client = $this->getMockBuilder('Github\Client')
+        $client = $this->getMockBuilder(\Github\Client::class)
             ->setMethods(array('addPlugin', 'removePlugin'))
             ->getMock();
         $client->expects($this->once())
@@ -105,7 +106,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldClearHeaders()
     {
-        $client = $this->getMockBuilder('Github\Client')
+        $client = $this->getMockBuilder(\Github\Client::class)
             ->setMethods(array('addPlugin', 'removePlugin'))
             ->getMock();
         $client->expects($this->once())
@@ -126,7 +127,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $headers = array('header1', 'header2');
 
-        $client = $this->getMockBuilder('Github\Client')
+        $client = $this->getMockBuilder(\Github\Client::class)
             ->setMethods(array('addPlugin', 'removePlugin'))
             ->getMock();
         $client->expects($this->once())
@@ -186,45 +187,45 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     public function getApiClassesProvider()
     {
         return array(
-            array('user', 'Github\Api\User'),
-            array('users', 'Github\Api\User'),
+            array('user', Api\User::class),
+            array('users', Api\User::class),
 
-            array('me', 'Github\Api\CurrentUser'),
-            array('current_user', 'Github\Api\CurrentUser'),
-            array('currentUser', 'Github\Api\CurrentUser'),
+            array('me', Api\CurrentUser::class),
+            array('current_user', Api\CurrentUser::class),
+            array('currentUser', Api\CurrentUser::class),
 
-            array('git', 'Github\Api\GitData'),
-            array('git_data', 'Github\Api\GitData'),
-            array('gitData', 'Github\Api\GitData'),
+            array('git', Api\GitData::class),
+            array('git_data', Api\GitData::class),
+            array('gitData', Api\GitData::class),
 
-            array('gist', 'Github\Api\Gists'),
-            array('gists', 'Github\Api\Gists'),
+            array('gist', Api\Gists::class),
+            array('gists', Api\Gists::class),
 
-            array('issue', 'Github\Api\Issue'),
-            array('issues', 'Github\Api\Issue'),
+            array('issue', Api\Issue::class),
+            array('issues', Api\Issue::class),
 
-            array('markdown', 'Github\Api\Markdown'),
+            array('markdown', Api\Markdown::class),
 
-            array('organization', 'Github\Api\Organization'),
-            array('organizations', 'Github\Api\Organization'),
+            array('organization', Api\Organization::class),
+            array('organizations', Api\Organization::class),
 
-            array('repo', 'Github\Api\Repo'),
-            array('repos', 'Github\Api\Repo'),
-            array('repository', 'Github\Api\Repo'),
-            array('repositories', 'Github\Api\Repo'),
+            array('repo', Api\Repo::class),
+            array('repos', Api\Repo::class),
+            array('repository', Api\Repo::class),
+            array('repositories', Api\Repo::class),
 
-            array('search', 'Github\Api\Search'),
+            array('search', Api\Search::class),
 
-            array('pr', 'Github\Api\PullRequest'),
-            array('pullRequest', 'Github\Api\PullRequest'),
-            array('pull_request', 'Github\Api\PullRequest'),
-            array('pullRequests', 'Github\Api\PullRequest'),
-            array('pull_requests', 'Github\Api\PullRequest'),
+            array('pr', Api\PullRequest::class),
+            array('pullRequest', Api\PullRequest::class),
+            array('pull_request', Api\PullRequest::class),
+            array('pullRequests', Api\PullRequest::class),
+            array('pull_requests', Api\PullRequest::class),
 
-            array('authorization', 'Github\Api\Authorizations'),
-            array('authorizations', 'Github\Api\Authorizations'),
+            array('authorization', Api\Authorizations::class),
+            array('authorizations', Api\Authorizations::class),
 
-            array('meta', 'Github\Api\Meta')
+            array('meta', Api\Meta::class)
         );
     }
 }

@@ -134,8 +134,11 @@ class MembersTest extends TestCase
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'l3l0'));
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Organization\Members';
+        return \Github\Api\Organization\Members::class;
     }
 }

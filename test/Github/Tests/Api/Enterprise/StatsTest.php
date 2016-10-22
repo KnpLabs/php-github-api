@@ -83,8 +83,11 @@ class StatsTest extends TestCase
         }
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Enterprise\Stats';
+        return \Github\Api\Enterprise\Stats::class;
     }
 }

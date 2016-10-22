@@ -91,7 +91,7 @@ class CurrentUserTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\CurrentUser\DeployKeys', $api->keys());
+        $this->assertInstanceOf(\Github\Api\CurrentUser\DeployKeys::class, $api->keys());
     }
 
     /**
@@ -101,7 +101,7 @@ class CurrentUserTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\CurrentUser\Emails', $api->emails());
+        $this->assertInstanceOf(\Github\Api\CurrentUser\Emails::class, $api->emails());
     }
 
     /**
@@ -111,7 +111,7 @@ class CurrentUserTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\CurrentUser\Followers', $api->follow());
+        $this->assertInstanceOf(\Github\Api\CurrentUser\Followers::class, $api->follow());
     }
 
     /**
@@ -121,7 +121,7 @@ class CurrentUserTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\CurrentUser\Notifications', $api->notifications());
+        $this->assertInstanceOf(\Github\Api\CurrentUser\Notifications::class, $api->notifications());
     }
 
     /**
@@ -131,7 +131,7 @@ class CurrentUserTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\CurrentUser\Watchers', $api->watchers());
+        $this->assertInstanceOf(\Github\Api\CurrentUser\Watchers::class, $api->watchers());
     }
 
     /**
@@ -141,11 +141,14 @@ class CurrentUserTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\CurrentUser\Starring', $api->starring());
+        $this->assertInstanceOf(\Github\Api\CurrentUser\Starring::class, $api->starring());
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\CurrentUser';
+        return \Github\Api\CurrentUser::class;
     }
 }

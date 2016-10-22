@@ -372,7 +372,7 @@ class RepoTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Repository\Collaborators', $api->collaborators());
+        $this->assertInstanceOf(\Github\Api\Repository\Collaborators::class, $api->collaborators());
     }
 
     /**
@@ -382,7 +382,7 @@ class RepoTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Repository\Comments', $api->comments());
+        $this->assertInstanceOf(\Github\Api\Repository\Comments::class, $api->comments());
     }
 
     /**
@@ -392,7 +392,7 @@ class RepoTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Repository\Commits', $api->commits());
+        $this->assertInstanceOf(\Github\Api\Repository\Commits::class, $api->commits());
     }
 
     /**
@@ -402,7 +402,7 @@ class RepoTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Repository\Contents', $api->contents());
+        $this->assertInstanceOf(\Github\Api\Repository\Contents::class, $api->contents());
     }
 
     /**
@@ -412,7 +412,7 @@ class RepoTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Repository\DeployKeys', $api->keys());
+        $this->assertInstanceOf(\Github\Api\Repository\DeployKeys::class, $api->keys());
     }
 
     /**
@@ -422,7 +422,7 @@ class RepoTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Repository\Downloads', $api->downloads());
+        $this->assertInstanceOf(\Github\Api\Repository\Downloads::class, $api->downloads());
     }
 
     /**
@@ -432,7 +432,7 @@ class RepoTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Repository\Forks', $api->forks());
+        $this->assertInstanceOf(\Github\Api\Repository\Forks::class, $api->forks());
     }
 
     /**
@@ -442,7 +442,7 @@ class RepoTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Repository\Hooks', $api->hooks());
+        $this->assertInstanceOf(\Github\Api\Repository\Hooks::class, $api->hooks());
     }
 
     /**
@@ -452,7 +452,7 @@ class RepoTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Repository\Labels', $api->labels());
+        $this->assertInstanceOf(\Github\Api\Repository\Labels::class, $api->labels());
     }
 
     /**
@@ -462,7 +462,7 @@ class RepoTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Repository\Statuses', $api->statuses());
+        $this->assertInstanceOf(\Github\Api\Repository\Statuses::class, $api->statuses());
     }
 
     /**
@@ -472,7 +472,7 @@ class RepoTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Repository\Stargazers', $api->stargazers());
+        $this->assertInstanceOf(\Github\Api\Repository\Stargazers::class, $api->stargazers());
     }
 
     /**
@@ -482,7 +482,7 @@ class RepoTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Repository\Releases', $api->releases());
+        $this->assertInstanceOf(\Github\Api\Repository\Releases::class, $api->releases());
     }
 
     /**
@@ -501,8 +501,11 @@ class RepoTest extends TestCase
         $this->assertEquals($expectedArray, $api->activity('KnpLabs', 'php-github-api'));
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Repo';
+        return \Github\Api\Repo::class;
     }
 }

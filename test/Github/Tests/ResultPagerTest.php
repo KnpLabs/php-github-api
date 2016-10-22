@@ -31,7 +31,7 @@ class ResultPagerTest extends \PHPUnit_Framework_TestCase
         $response = new PaginatedResponse($amountLoops, $content);
 
         // httpClient mock
-        $httpClientMock = $this->getMockBuilder('Http\Client\HttpClient')
+        $httpClientMock = $this->getMockBuilder(\Http\Client\HttpClient::class)
             ->setMethods(array('sendRequest'))
             ->getMock();
         $httpClientMock
@@ -78,7 +78,7 @@ class ResultPagerTest extends \PHPUnit_Framework_TestCase
         $response = new PaginatedResponse($amountLoops, $content);
 
         // httpClient mock
-        $httpClientMock = $this->getMockBuilder('Http\Client\HttpClient')
+        $httpClientMock = $this->getMockBuilder(\Http\Client\HttpClient::class)
             ->setMethods(array('sendRequest'))
             ->getMock();
         $httpClientMock
@@ -101,10 +101,10 @@ class ResultPagerTest extends \PHPUnit_Framework_TestCase
         $result = 'foo';
         $method = 'bar';
         $parameters = array('baz');
-        $api = $this->getMockBuilder('Github\Api\ApiInterface')
+        $api = $this->getMockBuilder(\Github\Api\ApiInterface::class)
             ->getMock();
 
-        $paginator = $this->getMockBuilder('Github\ResultPager')
+        $paginator = $this->getMockBuilder(\Github\ResultPager::class)
             ->disableOriginalConstructor()
             ->setMethods(array('callApi', 'postFetch'))
             ->getMock();

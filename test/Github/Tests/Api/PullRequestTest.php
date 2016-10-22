@@ -270,11 +270,14 @@ class PullRequestTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\PullRequest\Comments', $api->comments());
+        $this->assertInstanceOf(\Github\Api\PullRequest\Comments::class, $api->comments());
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\PullRequest';
+        return \Github\Api\PullRequest::class;
     }
 }

@@ -97,8 +97,11 @@ class NotificationTest extends TestCase
         $api->markRead($since);
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Notification';
+        return \Github\Api\Notification::class;
     }
 }

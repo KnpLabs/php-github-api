@@ -209,7 +209,7 @@ class IssueTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Issue\Comments', $api->comments());
+        $this->assertInstanceOf(\Github\Api\Issue\Comments::class, $api->comments());
     }
 
     /**
@@ -219,7 +219,7 @@ class IssueTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Issue\Events', $api->events());
+        $this->assertInstanceOf(\Github\Api\Issue\Events::class, $api->events());
     }
 
     /**
@@ -229,7 +229,7 @@ class IssueTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Issue\Labels', $api->labels());
+        $this->assertInstanceOf(\Github\Api\Issue\Labels::class, $api->labels());
     }
 
     /**
@@ -239,11 +239,14 @@ class IssueTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Issue\Milestones', $api->milestones());
+        $this->assertInstanceOf(\Github\Api\Issue\Milestones::class, $api->milestones());
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Issue';
+        return \Github\Api\Issue::class;
     }
 }

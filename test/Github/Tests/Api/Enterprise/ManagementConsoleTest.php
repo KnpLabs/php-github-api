@@ -107,8 +107,11 @@ class ManagementConsoleTest extends TestCase
         return '1234567890abcdefghijklmnopqrstuv';
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Enterprise\ManagementConsole';
+        return \Github\Api\Enterprise\ManagementConsole::class;
     }
 }

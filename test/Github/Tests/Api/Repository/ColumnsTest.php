@@ -160,8 +160,11 @@ class ColumnsTest extends TestCase
         $this->assertInstanceOf('Github\Api\Repository\Cards', $api->cards());
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Repository\Columns';
+        return \Github\Api\Repository\Columns::class;
     }
 }

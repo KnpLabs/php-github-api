@@ -65,8 +65,11 @@ class StarringTest extends TestCase
         $this->assertNull($api->unstar('l3l0', 'test'));
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\CurrentUser\Starring';
+        return \Github\Api\CurrentUser\Starring::class;
     }
 }
