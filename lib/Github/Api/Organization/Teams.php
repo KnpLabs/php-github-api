@@ -89,7 +89,7 @@ class Teams extends AbstractApi
             $params['permission'] = 'pull';
         }
 
-        return $this->put('/teams/'.rawurlencode($team).'/repos/'.rawurlencode($username).'/'.rawurlencode($repository));
+        return $this->put('/teams/'.rawurlencode($team).'/repos/'.rawurlencode($username).'/'.rawurlencode($repository), $params);
     }
 
     public function removeRepository($team, $username, $repository)
