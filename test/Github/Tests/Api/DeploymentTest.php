@@ -51,7 +51,7 @@ class DeploymentTest extends TestCase
      */
     public function shouldShowProject()
     {
-      $expectedValue = array('id' => 123, 'ref' => 'master');
+        $expectedValue = array('id' => 123, 'ref' => 'master');
 
         $api = $this->getApiMock();
         $api->expects($this->once())
