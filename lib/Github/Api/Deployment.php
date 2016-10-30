@@ -26,6 +26,20 @@ class Deployment extends AbstractApi
     }
 
     /**
+     * Get a deployment in selected repository.
+     *
+     * @param string $username   the user who owns the repo
+     * @param string $repository the name of the repo
+     * @param int    $id         the id of the deployment
+     *
+     * @return array
+     */
+    public function show($username, $repository, $id)
+    {
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/deployments/'.rawurlencode($id));
+    }
+
+    /**
      * Create a new deployment for the given username and repo.
      * @link https://developer.github.com/v3/repos/deployments/#create-a-deployment
      *
