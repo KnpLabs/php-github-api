@@ -15,6 +15,12 @@ You can also filter the returned results (see [the documentation](https://develo
 $deployments = $client->api('deployment')->all('KnpLabs', 'php-github-api', array('environment' => 'production'));
 ```
 
+### List one deployment.
+
+```php
+$deployment = $client->api('deployment')->show('KnpLabs', 'php-github-api', $id);
+```
+
 #### Create a new deployments.
 
 The `ref` parameter is required.

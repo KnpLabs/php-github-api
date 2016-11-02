@@ -49,6 +49,22 @@ class DeploymentTest extends TestCase
     /**
      * @test
      */
+    public function shouldShowProject()
+    {
+        $expectedValue = array('id' => 123, 'ref' => 'master');
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/repos/KnpLabs/php-github-api/deployments/123')
+            ->will($this->returnValue($expectedValue));
+
+        $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 123));
+    }
+
+    /**
+     * @test
+     */
     public function shouldCreateStatusUpdate()
     {
         $api = $this->getApiMock();
