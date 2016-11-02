@@ -143,10 +143,42 @@ class PullRequestTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with('/repos/ezsystems/ezpublish/pulls/15/merge', array('commit_message' => 'Merged something', 'sha' => str_repeat('A', 40), 'squash' => false))
+            ->with('/repos/ezsystems/ezpublish/pulls/15/merge', array('commit_message' => 'Merged something', 'sha' => str_repeat('A', 40), 'merge_method' => 'merge'))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->merge('ezsystems', 'ezpublish', 15, 'Merged something', str_repeat('A', 40)));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldMergePullRequestWithSquashAsBool()
+    {
+        $expectedArray = array('some' => 'response');
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('put')
+            ->with('/repos/ezsystems/ezpublish/pulls/15/merge', array('commit_message' => 'Merged something', 'sha' => str_repeat('A', 40), 'merge_method' => 'squash'))
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->merge('ezsystems', 'ezpublish', 15, 'Merged something', str_repeat('A', 40), true));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldMergePullRequestWithMergeMethod()
+    {
+        $expectedArray = array('some' => 'response');
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('put')
+            ->with('/repos/ezsystems/ezpublish/pulls/15/merge', array('commit_message' => 'Merged something', 'sha' => str_repeat('A', 40), 'merge_method' => 'rebase'))
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->merge('ezsystems', 'ezpublish', 15, 'Merged something', str_repeat('A', 40), 'rebase'));
     }
 
     /**
