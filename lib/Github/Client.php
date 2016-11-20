@@ -235,6 +235,7 @@ class Client
                 break;
 
             case 'pr':
+            case 'pulls':
             case 'pullRequest':
             case 'pull_request':
             case 'pullRequests':
