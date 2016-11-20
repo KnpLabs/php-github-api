@@ -1,6 +1,6 @@
 <?php
 
-namespace Github\Tests\Api\Repository;
+namespace Github\Tests\Api\Project;
 
 use Github\Tests\Api\TestCase;
 
@@ -16,10 +16,10 @@ class ColumnsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/projects/123/columns')
+            ->with('/projects/123/columns')
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', 123));
+        $this->assertEquals($expectedValue, $api->all(123));
     }
 
     /**
@@ -32,10 +32,10 @@ class ColumnsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/projects/columns/123')
+            ->with('/projects/columns/123')
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 123));
+        $this->assertEquals($expectedValue, $api->show(123));
     }
 
     /**
@@ -50,7 +50,7 @@ class ColumnsTest extends TestCase
         $api->expects($this->never())
             ->method('post');
 
-        $api->create('KnpLabs', 'php-github-api', '123', $data);
+        $api->create('123', $data);
     }
 
     /**
@@ -64,10 +64,10 @@ class ColumnsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('/repos/KnpLabs/php-github-api/projects/123/columns', $data)
+            ->with('/projects/123/columns', $data)
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', 123, $data));
+        $this->assertEquals($expectedValue, $api->create(123, $data));
     }
 
     /**
@@ -82,7 +82,7 @@ class ColumnsTest extends TestCase
         $api->expects($this->never())
             ->method('post');
 
-        $api->update('KnpLabs', 'php-github-api', '123', $data);
+        $api->update('123', $data);
     }
 
     /**
@@ -96,10 +96,10 @@ class ColumnsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
-            ->with('/repos/KnpLabs/php-github-api/projects/columns/123', $data)
+            ->with('/projects/columns/123', $data)
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->update('KnpLabs', 'php-github-api', 123, $data));
+        $this->assertEquals($expectedValue, $api->update(123, $data));
     }
 
     /**
@@ -112,10 +112,10 @@ class ColumnsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('/repos/KnpLabs/php-github-api/projects/columns/123')
+            ->with('/projects/columns/123')
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->deleteColumn('KnpLabs', 'php-github-api', 123));
+        $this->assertEquals($expectedValue, $api->deleteColumn(123));
     }
 
     /**
@@ -130,7 +130,7 @@ class ColumnsTest extends TestCase
         $api->expects($this->never())
             ->method('post');
 
-        $api->move('KnpLabs', 'php-github-api', '123', $data);
+        $api->move('123', $data);
     }
 
     /**
@@ -144,10 +144,10 @@ class ColumnsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('/repos/KnpLabs/php-github-api/projects/columns/123/moves')
+            ->with('/projects/columns/123/moves')
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->move('KnpLabs', 'php-github-api', 123, $data));
+        $this->assertEquals($expectedValue, $api->move(123, $data));
     }
 
     /**
@@ -157,7 +157,7 @@ class ColumnsTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Repository\Cards', $api->cards());
+        $this->assertInstanceOf('Github\Api\Project\Cards', $api->cards());
     }
 
     /**
@@ -165,6 +165,6 @@ class ColumnsTest extends TestCase
      */
     protected function getApiClass()
     {
-        return \Github\Api\Repository\Columns::class;
+        return \Github\Api\Project\Columns::class;
     }
 }

@@ -233,6 +233,12 @@ class Client
             case 'organizations':
                 $api = new Api\Organization($this);
                 break;
+            case 'org_project':
+            case 'org_projects':
+            case 'organization_project':
+            case 'organization_projects':
+                $api = new Api\Organization\Projects($this);
+                break;
 
             case 'pr':
             case 'pullRequest':
