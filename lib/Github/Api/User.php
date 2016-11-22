@@ -175,7 +175,7 @@ class User extends AbstractApi
      */
     public function repos($username = null, array $options = array())
     {
-        $url = $username ? 'users/'.rawurldecode($username).'/repos' : 'user/repos';
+        $url = $username ? '/users/'.rawurldecode($username).'/repos' : '/user/repos';
 
         return $this->get($url, $options);
     }
