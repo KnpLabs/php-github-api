@@ -237,12 +237,15 @@ class Repo extends AbstractApi
      *
      * @param string $username   the user who owns the repository
      * @param string $repository the name of the repository
+     * @param string $format     one of formats: "raw" or "html"
      *
      * @return array the readme content
      */
-    public function readme($username, $repository)
+    public function readme($username, $repository, $format = 'raw')
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/readme');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/readme', [], [
+            'Accept' => "application/vnd.github.$format",
+        ]);
     }
 
     /**
