@@ -20,7 +20,7 @@ use Psr\Cache\CacheItemPoolInterface;
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-final class Builder
+class Builder
 {
     /**
      * The object that sends HTTP messages.
