@@ -123,7 +123,7 @@ class Client
         )));
 
         $this->apiVersion = $apiVersion ?: 'v3';
-        $this->getHttpClientBuilder()->addHeaders(['Accept' => sprintf('application/vnd.github.%s+json', $this->apiVersion)]);
+        $builder->addHeaders(['Accept' => sprintf('application/vnd.github.%s+json', $this->apiVersion)]);
 
         if ($enterpriseUrl) {
             $this->setEnterpriseUrl($enterpriseUrl);
