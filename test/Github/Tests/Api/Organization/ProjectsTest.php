@@ -1,6 +1,6 @@
 <?php
 
-namespace Github\Tests\Api\Repository;
+namespace Github\Tests\Api\Organization;
 
 use Github\Tests\Api\TestCase;
 
@@ -16,10 +16,10 @@ class ProjectsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/projects')
+            ->with('/orgs/KnpLabs/projects')
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api'));
+        $this->assertEquals($expectedValue, $api->all('KnpLabs'));
     }
 
     /**
@@ -34,7 +34,7 @@ class ProjectsTest extends TestCase
         $api->expects($this->never())
             ->method('post');
 
-        $api->create('KnpLabs', 'php-github-api', $data);
+        $api->create('KnpLabs', $data);
     }
 
     /**
@@ -48,10 +48,10 @@ class ProjectsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('/repos/KnpLabs/php-github-api/projects', $data)
+            ->with('/orgs/KnpLabs/projects', $data)
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', $data));
+        $this->assertEquals($expectedValue, $api->create('KnpLabs', $data));
     }
 
     /**
@@ -59,6 +59,6 @@ class ProjectsTest extends TestCase
      */
     protected function getApiClass()
     {
-        return \Github\Api\Repository\Projects::class;
+        return \Github\Api\Organization\Projects::class;
     }
 }

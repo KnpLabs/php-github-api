@@ -1,6 +1,6 @@
 <?php
 
-namespace Github\Tests\Api\Repository;
+namespace Github\Tests\Api\Project;
 
 use Github\Tests\Api\TestCase;
 
@@ -16,10 +16,10 @@ class CardsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/projects/columns/123/cards')
+            ->with('/projects/columns/123/cards')
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', 123));
+        $this->assertEquals($expectedValue, $api->all(123));
     }
 
     /**
@@ -32,10 +32,10 @@ class CardsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/projects/columns/cards/123')
+            ->with('/projects/columns/cards/123')
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 123));
+        $this->assertEquals($expectedValue, $api->show(123));
     }
 
     /**
@@ -49,10 +49,10 @@ class CardsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('/repos/KnpLabs/php-github-api/projects/columns/1234/cards', $data)
+            ->with('/projects/columns/1234/cards', $data)
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', '1234', $data));
+        $this->assertEquals($expectedValue, $api->create('1234', $data));
     }
 
     /**
@@ -66,10 +66,10 @@ class CardsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
-            ->with('/repos/KnpLabs/php-github-api/projects/columns/cards/123', $data)
+            ->with('/projects/columns/cards/123', $data)
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->update('KnpLabs', 'php-github-api', 123, $data));
+        $this->assertEquals($expectedValue, $api->update(123, $data));
     }
 
     /**
@@ -82,10 +82,10 @@ class CardsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('/repos/KnpLabs/php-github-api/projects/columns/cards/123')
+            ->with('/projects/columns/cards/123')
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->deleteCard('KnpLabs', 'php-github-api', 123));
+        $this->assertEquals($expectedValue, $api->deleteCard(123));
     }
 
     /**
@@ -100,7 +100,7 @@ class CardsTest extends TestCase
         $api->expects($this->never())
             ->method('post');
 
-        $api->move('KnpLabs', 'php-github-api', '123', $data);
+        $api->move('123', $data);
     }
 
     /**
@@ -114,10 +114,10 @@ class CardsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('/repos/KnpLabs/php-github-api/projects/columns/cards/123/moves')
+            ->with('/projects/columns/cards/123/moves')
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->move('KnpLabs', 'php-github-api', 123, $data));
+        $this->assertEquals($expectedValue, $api->move(123, $data));
     }
 
     /**
@@ -125,6 +125,6 @@ class CardsTest extends TestCase
      */
     protected function getApiClass()
     {
-        return \Github\Api\Repository\Cards::class;
+        return \Github\Api\Project\Cards::class;
     }
 }
