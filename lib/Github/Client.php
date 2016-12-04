@@ -111,21 +111,21 @@ class Client
     public function __construct(Builder $httpClientBuilder = null, $apiVersion = null, $enterpriseUrl = null)
     {
         $this->responseHistory = new History();
-        $this->httpClientBuilder = new Builder();
-        $this->httpClientBuilder->addDefaultHeaders([
+        $this->httpClientBuilder = $httpClientBuilder ?: new Builder();
+        $this->getHttpClientBuilder()->addDefaultHeaders([
             'Accept' => sprintf('application/vnd.github.%s+json', $this->getApiVersion()),
         ]);
 
-        $this->httpClientBuilder->addPlugin(new GithubExceptionThrower());
-        $this->httpClientBuilder->addPlugin(new Plugin\HistoryPlugin($this->responseHistory));
-        $this->httpClientBuilder->addPlugin(new Plugin\RedirectPlugin());
-        $this->httpClientBuilder->addPlugin(new Plugin\AddHostPlugin(UriFactoryDiscovery::find()->createUri('https://api.github.com')));
-        $this->httpClientBuilder->addPlugin(new Plugin\HeaderDefaultsPlugin(array(
+        $this->getHttpClientBuilder()->addPlugin(new GithubExceptionThrower());
+        $this->getHttpClientBuilder()->addPlugin(new Plugin\HistoryPlugin($this->responseHistory));
+        $this->getHttpClientBuilder()->addPlugin(new Plugin\RedirectPlugin());
+        $this->getHttpClientBuilder()->addPlugin(new Plugin\AddHostPlugin(UriFactoryDiscovery::find()->createUri('https://api.github.com')));
+        $this->getHttpClientBuilder()->addPlugin(new Plugin\HeaderDefaultsPlugin(array(
             'User-Agent' => 'php-github-api (http://github.com/KnpLabs/php-github-api)',
         )));
 
         $this->apiVersion = $apiVersion ?: 'v3';
-        $this->httpClientBuilder->addHeaders(['Accept' => sprintf('application/vnd.github.%s+json', $this->apiVersion)]);
+        $this->getHttpClientBuilder()->addHeaders(['Accept' => sprintf('application/vnd.github.%s+json', $this->apiVersion)]);
 
         if ($enterpriseUrl) {
             $this->setEnterpriseUrl($enterpriseUrl);
@@ -279,8 +279,8 @@ class Client
             $authMethod = self::AUTH_HTTP_PASSWORD;
         }
 
-        $this->httpClientBuilder->removePlugin(Authentication::class);
-        $this->httpClientBuilder->addPlugin(new Authentication($tokenOrLogin, $password, $authMethod));
+        $this->getHttpClientBuilder()->removePlugin(Authentication::class);
+        $this->getHttpClientBuilder()->addPlugin(new Authentication($tokenOrLogin, $password, $authMethod));
     }
 
     /**
@@ -290,11 +290,11 @@ class Client
      */
     private function setEnterpriseUrl($enterpriseUrl)
     {
-        $this->httpClientBuilder->removePlugin(Plugin\AddHostPlugin::class);
-        $this->httpClientBuilder->removePlugin(PathPrepend::class);
+        $this->getHttpClientBuilder()->removePlugin(Plugin\AddHostPlugin::class);
+        $this->getHttpClientBuilder()->removePlugin(PathPrepend::class);
 
-        $this->httpClientBuilder->addPlugin(new Plugin\AddHostPlugin(UriFactoryDiscovery::find()->createUri($enterpriseUrl)));
-        $this->httpClientBuilder->addPlugin(new PathPrepend(sprintf('/api/%s/', $this->getApiVersion())));
+        $this->getHttpClientBuilder()->addPlugin(new Plugin\AddHostPlugin(UriFactoryDiscovery::find()->createUri($enterpriseUrl)));
+        $this->getHttpClientBuilder()->addPlugin(new PathPrepend(sprintf('/api/%s/', $this->getApiVersion())));
     }
 
     /**
@@ -313,7 +313,7 @@ class Client
      */
     public function addCache(CacheItemPoolInterface $cachePool, array $config = [])
     {
-        $this->httpClientBuilder->addCache($cachePool, $config);
+        $this->getHttpClientBuilder()->addCache($cachePool, $config);
     }
 
     /**
@@ -321,7 +321,7 @@ class Client
      */
     public function removeCache()
     {
-        $this->httpClientBuilder->removeCache();
+        $this->getHttpClientBuilder()->removeCache();
     }
 
     /**
@@ -353,6 +353,14 @@ class Client
      */
     public function getHttpClient()
     {
-        return $this->httpClientBuilder->getHttpClient();
+        return $this->getHttpClientBuilder()->getHttpClient();
+    }
+
+    /**
+     * @return Builder
+     */
+    protected function getHttpClientBuilder()
+    {
+        return $this->httpClientBuilder;
     }
 }

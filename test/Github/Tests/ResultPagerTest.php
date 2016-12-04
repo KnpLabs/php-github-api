@@ -6,6 +6,7 @@ use Github\Api\Organization;
 use Github\Api\Organization\Members;
 use Github\Api\Search;
 use Github\Client;
+use Github\HttpClient\Builder;
 use Github\ResultPager;
 use Github\Tests\Mock\PaginatedResponse;
 use Http\Client\HttpClient;
@@ -39,7 +40,7 @@ class ResultPagerTest extends \PHPUnit_Framework_TestCase
             ->method('sendRequest')
             ->will($this->returnValue($response));
 
-        $client = new Client($httpClientMock);
+        $client = new Client(new Builder($httpClientMock));
 
         // memberApi Mock
         $memberApi = new Members($client);
@@ -86,7 +87,7 @@ class ResultPagerTest extends \PHPUnit_Framework_TestCase
             ->method('sendRequest')
             ->will($this->returnValue($response));
 
-        $client = new Client($httpClientMock);
+        $client = new Client(new Builder($httpClientMock));
 
         $searchApi = new Search($client);
         $method = 'users';

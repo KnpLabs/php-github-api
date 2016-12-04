@@ -2,6 +2,7 @@
 
 namespace Github\Tests\Api;
 
+use Github\HttpClient\Builder;
 use ReflectionMethod;
 
 abstract class TestCase extends \PHPUnit_Framework_TestCase
@@ -23,7 +24,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
             ->expects($this->any())
             ->method('sendRequest');
 
-        $client = new \Github\Client($httpClient);
+        $client = new \Github\Client(new Builder($httpClient));
 
         return $this->getMockBuilder($this->getApiClass())
             ->setMethods(array('get', 'post', 'postRaw', 'patch', 'delete', 'put', 'head'))

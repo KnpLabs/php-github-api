@@ -143,15 +143,6 @@ class Builder
     }
 
     /**
-     * @param HttpClient $httpClient
-     */
-    public function setHttpClient(HttpClient $httpClient)
-    {
-        $this->httpClientModified = true;
-        $this->httpClient = $httpClient;
-    }
-
-    /**
      * Clears used headers.
      */
     public function clearHeaders()
