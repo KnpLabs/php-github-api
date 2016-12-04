@@ -5,6 +5,21 @@ The change log describes what is "Added", "Removed", "Changed" or "Fixed" betwee
 
 ## 2.0.0-rc5 (UNRELEASED)
 
+### Changed
+
+First parameter of `Github\Client` has changed type from `\Http\Client\HttpClient` to 
+`Github\HttpClient\Builder`. To upgrade you need to change: 
+ 
+ ```php
+// Old way does not work:
+$github = new Github\Client($httpClient); 
+
+// New way will work:
+$github = new Github\Client(new Github\HttpClient\Builder($httpClient)); 
+ 
+ ```
+
+
 ### Added 
 
 - Support for JWT authentication
