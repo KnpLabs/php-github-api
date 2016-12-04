@@ -5,20 +5,14 @@ namespace Github;
 use Github\Api\ApiInterface;
 use Github\Exception\InvalidArgumentException;
 use Github\Exception\BadMethodCallException;
+use Github\HttpClient\Builder;
 use Github\HttpClient\Plugin\Authentication;
 use Github\HttpClient\Plugin\GithubExceptionThrower;
 use Github\HttpClient\Plugin\History;
 use Github\HttpClient\Plugin\PathPrepend;
 use Http\Client\Common\HttpMethodsClient;
 use Http\Client\Common\Plugin;
-use Http\Client\Common\PluginClient;
-use Http\Client\HttpClient;
-use Http\Discovery\HttpClientDiscovery;
-use Http\Discovery\MessageFactoryDiscovery;
-use Http\Discovery\StreamFactoryDiscovery;
 use Http\Discovery\UriFactoryDiscovery;
-use Http\Message\MessageFactory;
-use Nyholm\Psr7\Factory\StreamFactory;
 use Psr\Cache\CacheItemPoolInterface;
 
 /**
@@ -98,45 +92,9 @@ class Client
     private $apiVersion;
 
     /**
-     * The object that sends HTTP messages
-     *
-     * @var HttpClient
+     * @var Builder
      */
-    private $httpClient;
-
-    /**
-     * A HTTP client with all our plugins
-     *
-     * @var PluginClient
-     */
-    private $pluginClient;
-
-    /**
-     * @var MessageFactory
-     */
-    private $messageFactory;
-
-    /**
-     * @var StreamFactory
-     */
-    private $streamFactory;
-
-    /**
-     * @var Plugin[]
-     */
-    private $plugins = [];
-
-    /**
-     * True if we should create a new Plugin client at next request.
-     * @var bool
-     */
-    private $httpClientModified = true;
-
-    /**
-     * Http headers
-     * @var array
-     */
-    private $headers = [];
+    private $httpClientBuilder;
 
     /**
      * @var History
@@ -146,27 +104,28 @@ class Client
     /**
      * Instantiate a new GitHub client.
      *
-     * @param HttpClient|null $httpClient
-     * @param string|null     $apiVersion
-     * @param string|null     $enterpriseUrl
+     * @param Builder|null $httpClient
+     * @param string|null  $apiVersion
+     * @param string|null  $enterpriseUrl
      */
-    public function __construct(HttpClient $httpClient = null, $apiVersion = null, $enterpriseUrl = null)
+    public function __construct(Builder $httpClientBuilder = null, $apiVersion = null, $enterpriseUrl = null)
     {
-        $this->httpClient = $httpClient ?: HttpClientDiscovery::find();
-        $this->messageFactory = MessageFactoryDiscovery::find();
-        $this->streamFactory = StreamFactoryDiscovery::find();
-
         $this->responseHistory = new History();
-        $this->addPlugin(new GithubExceptionThrower());
-        $this->addPlugin(new Plugin\HistoryPlugin($this->responseHistory));
-        $this->addPlugin(new Plugin\RedirectPlugin());
-        $this->addPlugin(new Plugin\AddHostPlugin(UriFactoryDiscovery::find()->createUri('https://api.github.com')));
-        $this->addPlugin(new Plugin\HeaderDefaultsPlugin(array(
-            'User-Agent'  => 'php-github-api (http://github.com/KnpLabs/php-github-api)',
+        $this->httpClientBuilder = new Builder();
+        $this->httpClientBuilder->addDefaultHeaders([
+            'Accept' => sprintf('application/vnd.github.%s+json', $this->getApiVersion()),
+        ]);
+
+        $this->httpClientBuilder->addPlugin(new GithubExceptionThrower());
+        $this->httpClientBuilder->addPlugin(new Plugin\HistoryPlugin($this->responseHistory));
+        $this->httpClientBuilder->addPlugin(new Plugin\RedirectPlugin());
+        $this->httpClientBuilder->addPlugin(new Plugin\AddHostPlugin(UriFactoryDiscovery::find()->createUri('https://api.github.com')));
+        $this->httpClientBuilder->addPlugin(new Plugin\HeaderDefaultsPlugin(array(
+            'User-Agent' => 'php-github-api (http://github.com/KnpLabs/php-github-api)',
         )));
 
         $this->apiVersion = $apiVersion ?: 'v3';
-        $this->addHeaders(['Accept' => sprintf('application/vnd.github.%s+json', $this->apiVersion)]);
+        $this->httpClientBuilder->addHeaders(['Accept' => sprintf('application/vnd.github.%s+json', $this->apiVersion)]);
 
         if ($enterpriseUrl) {
             $this->setEnterpriseUrl($enterpriseUrl);
@@ -313,15 +272,15 @@ class Client
 
         if (null === $authMethod && in_array($password, array(self::AUTH_URL_TOKEN, self::AUTH_URL_CLIENT_ID, self::AUTH_HTTP_PASSWORD, self::AUTH_HTTP_TOKEN, self::AUTH_JWT))) {
             $authMethod = $password;
-            $password   = null;
+            $password = null;
         }
 
         if (null === $authMethod) {
             $authMethod = self::AUTH_HTTP_PASSWORD;
         }
 
-        $this->removePlugin(Authentication::class);
-        $this->addPlugin(new Authentication($tokenOrLogin, $password, $authMethod));
+        $this->httpClientBuilder->removePlugin(Authentication::class);
+        $this->httpClientBuilder->addPlugin(new Authentication($tokenOrLogin, $password, $authMethod));
     }
 
     /**
@@ -331,64 +290,11 @@ class Client
      */
     private function setEnterpriseUrl($enterpriseUrl)
     {
-        $this->removePlugin(Plugin\AddHostPlugin::class);
-        $this->removePlugin(PathPrepend::class);
+        $this->httpClientBuilder->removePlugin(Plugin\AddHostPlugin::class);
+        $this->httpClientBuilder->removePlugin(PathPrepend::class);
 
-        $this->addPlugin(new Plugin\AddHostPlugin(UriFactoryDiscovery::find()->createUri($enterpriseUrl)));
-        $this->addPlugin(new PathPrepend(sprintf('/api/%s/', $this->getApiVersion())));
-    }
-
-    /**
-     * Add a new plugin to the end of the plugin chain.
-     *
-     * @param Plugin $plugin
-     */
-    public function addPlugin(Plugin $plugin)
-    {
-        $this->plugins[] = $plugin;
-        $this->httpClientModified = true;
-    }
-
-    /**
-     * Remove a plugin by its fully qualified class name (FQCN).
-     *
-     * @param string $fqcn
-     */
-    public function removePlugin($fqcn)
-    {
-        foreach ($this->plugins as $idx => $plugin) {
-            if ($plugin instanceof $fqcn) {
-                unset($this->plugins[$idx]);
-                $this->httpClientModified = true;
-            }
-        }
-    }
-
-    /**
-     * @return HttpMethodsClient
-     */
-    public function getHttpClient()
-    {
-        if ($this->httpClientModified) {
-            $this->httpClientModified = false;
-            $this->pushBackCachePlugin();
-
-            $this->pluginClient = new HttpMethodsClient(
-                new PluginClient($this->httpClient, $this->plugins),
-                $this->messageFactory
-            );
-        }
-
-        return $this->pluginClient;
-    }
-
-    /**
-     * @param HttpClient $httpClient
-     */
-    public function setHttpClient(HttpClient $httpClient)
-    {
-        $this->httpClientModified = true;
-        $this->httpClient = $httpClient;
+        $this->httpClientBuilder->addPlugin(new Plugin\AddHostPlugin(UriFactoryDiscovery::find()->createUri($enterpriseUrl)));
+        $this->httpClientBuilder->addPlugin(new PathPrepend(sprintf('/api/%s/', $this->getApiVersion())));
     }
 
     /**
@@ -400,30 +306,6 @@ class Client
     }
 
     /**
-     * Clears used headers.
-     */
-    public function clearHeaders()
-    {
-        $this->headers = array(
-            'Accept' => sprintf('application/vnd.github.%s+json', $this->getApiVersion()),
-        );
-
-        $this->removePlugin(Plugin\HeaderAppendPlugin::class);
-        $this->addPlugin(new Plugin\HeaderAppendPlugin($this->headers));
-    }
-
-    /**
-     * @param array $headers
-     */
-    public function addHeaders(array $headers)
-    {
-        $this->headers = array_merge($this->headers, $headers);
-
-        $this->removePlugin(Plugin\HeaderAppendPlugin::class);
-        $this->addPlugin(new Plugin\HeaderAppendPlugin($this->headers));
-    }
-
-    /**
      * Add a cache plugin to cache responses locally.
      *
      * @param CacheItemPoolInterface $cache
@@ -431,16 +313,15 @@ class Client
      */
     public function addCache(CacheItemPoolInterface $cachePool, array $config = [])
     {
-        $this->removeCache();
-        $this->addPlugin(new Plugin\CachePlugin($cachePool, $this->streamFactory, $config));
+        $this->httpClientBuilder->addCache($cachePool, $config);
     }
 
     /**
-     * Remove the cache plugin
+     * Remove the cache plugin.
      */
     public function removeCache()
     {
-        $this->removePlugin(Plugin\CachePlugin::class);
+        $this->httpClientBuilder->removeCache();
     }
 
     /**
@@ -460,7 +341,6 @@ class Client
     }
 
     /**
-     *
      * @return null|\Psr\Http\Message\ResponseInterface
      */
     public function getLastResponse()
@@ -469,20 +349,10 @@ class Client
     }
 
     /**
-     * Make sure to move the cache plugin to the end of the chain
+     * @return HttpMethodsClient
      */
-    private function pushBackCachePlugin()
+    public function getHttpClient()
     {
-        $cachePlugin = null;
-        foreach ($this->plugins as $i => $plugin) {
-            if ($plugin instanceof Plugin\CachePlugin) {
-                $cachePlugin = $plugin;
-                unset($this->plugins[$i]);
-
-                $this->plugins[] = $cachePlugin;
-
-                return;
-            }
-        }
+        return $this->httpClientBuilder->getHttpClient();
     }
 }
