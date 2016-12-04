@@ -14,7 +14,7 @@ class DeployKeys extends AbstractApi
     /**
      * List deploy keys for the authenticated user.
      *
-     * @link http://developer.github.com/v3/repos/keys/
+     * @link https://developer.github.com/v3/users/keys/
      *
      * @return array
      */
@@ -26,7 +26,7 @@ class DeployKeys extends AbstractApi
     /**
      * Shows deploy key for the authenticated user.
      *
-     * @link http://developer.github.com/v3/repos/keys/
+     * @link https://developer.github.com/v3/users/keys/
      *
      * @param string $id
      *
@@ -40,7 +40,7 @@ class DeployKeys extends AbstractApi
     /**
      * Adds deploy key for the authenticated user.
      *
-     * @link http://developer.github.com/v3/repos/keys/
+     * @link https://developer.github.com/v3/users/keys/
      *
      * @param array $params
      *
@@ -60,7 +60,7 @@ class DeployKeys extends AbstractApi
     /**
      * Removes deploy key for the authenticated user.
      *
-     * @link http://developer.github.com/v3/repos/keys/
+     * @link https://developer.github.com/v3/users/keys/
      *
      * @param string $id
      *
