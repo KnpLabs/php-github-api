@@ -73,13 +73,6 @@ class Builder
     private $headers = [];
 
     /**
-     * Headers that will always be in the client.
-     *
-     * @var array
-     */
-    private $defaultHeaders = [];
-
-    /**
      * @param HttpClient     $httpClient
      * @param RequestFactory $requestFactory
      * @param StreamFactory  $streamFactory
@@ -147,7 +140,7 @@ class Builder
      */
     public function clearHeaders()
     {
-        $this->headers = $this->defaultHeaders;
+        $this->headers = [];
 
         $this->removePlugin(Plugin\HeaderAppendPlugin::class);
         $this->addPlugin(new Plugin\HeaderAppendPlugin($this->headers));
@@ -162,19 +155,6 @@ class Builder
 
         $this->removePlugin(Plugin\HeaderAppendPlugin::class);
         $this->addPlugin(new Plugin\HeaderAppendPlugin($this->headers));
-    }
-
-    /**
-     * Add default headers. Default headers will not be cleared when calling clearHeaders.
-     *
-     * @param array $headers
-     */
-    public function addDefaultHeaders(array $headers)
-    {
-        $this->defaultHeaders = array_merge($this->defaultHeaders, $headers);
-
-        $this->removePlugin(Plugin\HeaderAppendPlugin::class);
-        $this->addPlugin(new Plugin\HeaderAppendPlugin(array_merge($this->defaultHeaders, $this->headers)));
     }
 
     /**

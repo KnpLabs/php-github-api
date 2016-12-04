@@ -111,17 +111,15 @@ class Client
     public function __construct(Builder $httpClientBuilder = null, $apiVersion = null, $enterpriseUrl = null)
     {
         $this->responseHistory = new History();
-        $this->httpClientBuilder = $httpClientBuilder ?: new Builder();
-        $this->getHttpClientBuilder()->addDefaultHeaders([
-            'Accept' => sprintf('application/vnd.github.%s+json', $this->getApiVersion()),
-        ]);
+        $this->httpClientBuilder = $builder = $httpClientBuilder ?: new Builder();
 
-        $this->getHttpClientBuilder()->addPlugin(new GithubExceptionThrower());
-        $this->getHttpClientBuilder()->addPlugin(new Plugin\HistoryPlugin($this->responseHistory));
-        $this->getHttpClientBuilder()->addPlugin(new Plugin\RedirectPlugin());
-        $this->getHttpClientBuilder()->addPlugin(new Plugin\AddHostPlugin(UriFactoryDiscovery::find()->createUri('https://api.github.com')));
-        $this->getHttpClientBuilder()->addPlugin(new Plugin\HeaderDefaultsPlugin(array(
+        $builder->addPlugin(new GithubExceptionThrower());
+        $builder->addPlugin(new Plugin\HistoryPlugin($this->responseHistory));
+        $builder->addPlugin(new Plugin\RedirectPlugin());
+        $builder->addPlugin(new Plugin\AddHostPlugin(UriFactoryDiscovery::find()->createUri('https://api.github.com')));
+        $builder->addPlugin(new Plugin\HeaderDefaultsPlugin(array(
             'User-Agent' => 'php-github-api (http://github.com/KnpLabs/php-github-api)',
+            'Accept' => sprintf('application/vnd.github.%s+json', $this->getApiVersion()),
         )));
 
         $this->apiVersion = $apiVersion ?: 'v3';
@@ -290,11 +288,12 @@ class Client
      */
     private function setEnterpriseUrl($enterpriseUrl)
     {
-        $this->getHttpClientBuilder()->removePlugin(Plugin\AddHostPlugin::class);
-        $this->getHttpClientBuilder()->removePlugin(PathPrepend::class);
+        $builder = $this->getHttpClientBuilder();
+        $builder->removePlugin(Plugin\AddHostPlugin::class);
+        $builder->removePlugin(PathPrepend::class);
 
-        $this->getHttpClientBuilder()->addPlugin(new Plugin\AddHostPlugin(UriFactoryDiscovery::find()->createUri($enterpriseUrl)));
-        $this->getHttpClientBuilder()->addPlugin(new PathPrepend(sprintf('/api/%s/', $this->getApiVersion())));
+        $builder->addPlugin(new Plugin\AddHostPlugin(UriFactoryDiscovery::find()->createUri($enterpriseUrl)));
+        $builder->addPlugin(new PathPrepend(sprintf('/api/%s/', $this->getApiVersion())));
     }
 
     /**
