@@ -8,11 +8,10 @@
 yourself by calling `\Github\Client::setHttpClient`. A HTTP client must implement `Http\Client\HttpClient`. A list of
 community provided clients is found here: https://packagist.org/providers/php-http/client-implementation
 
-You can inject a HTTP client through `Github\Client#setHttpClient()` method:
+You can inject a HTTP client through the `Github\Client` constructor:
 
 ```php
-$client = new Github\Client();
-$client->setHttpClient(new Http\Adapter\Guzzle6\Client());
+$client = new Github\Client(new \Github\HttpClient\Builder(new Http\Adapter\Guzzle6\Client()));
 ```
 
 ### Configure the HTTP client
