@@ -5,7 +5,7 @@ APIs:
 * [Authorizations](authorizations.md)
 * [Commits](commits.md)
 * Current User
-  * [Deploy keys / Public keys](currentuser/deploykeys.md)
+  * [Public keys](currentuser/publickeys.md)
   * [Memberships](currentuser/memberships.md)
 * [Enterprise](enterprise.md)
 * [Gists](gists.md)
