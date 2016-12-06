@@ -54,7 +54,8 @@ The following sample code authenticates as an installation using [lcobucci/jwt](
 to generate a JSON Web Token (JWT).
 
 ```php
-$github = new Github\Client(new GuzzleClient(), 'machine-man-preview');
+$builder = new Github\HttpClient\Builder(new GuzzleClient());
+$github = new Github\Client($builder, 'machine-man-preview');
 
 $jwt = (new Builder)
     ->setIssuer($integrationId)

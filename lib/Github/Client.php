@@ -105,15 +105,14 @@ class Client
     /**
      * Instantiate a new GitHub client.
      *
-     * @param HttpClient|null $httpClient
-     * @param Builder|null    $httpClientBuilder If a builder is provided we assume that $httpClient is added to the builder already.
-     * @param string|null     $apiVersion
-     * @param string|null     $enterpriseUrl
+     * @param Builder|null $httpClientBuilder
+     * @param string|null  $apiVersion
+     * @param string|null  $enterpriseUrl
      */
-    public function __construct(HttpClient $httpClient = null, Builder $httpClientBuilder = null, $apiVersion = null, $enterpriseUrl = null)
+    public function __construct(Builder $httpClientBuilder = null, $apiVersion = null, $enterpriseUrl = null)
     {
         $this->responseHistory = new History();
-        $this->httpClientBuilder = $builder = $httpClientBuilder ?: new Builder($httpClient);
+        $this->httpClientBuilder = $builder = $httpClientBuilder ?: new Builder();
 
         $builder->addPlugin(new GithubExceptionThrower());
         $builder->addPlugin(new Plugin\HistoryPlugin($this->responseHistory));
@@ -130,6 +129,20 @@ class Client
         if ($enterpriseUrl) {
             $this->setEnterpriseUrl($enterpriseUrl);
         }
+    }
+
+    /**
+     * Create a Github\Client using a HttpClient.
+     *
+     * @param HttpClient $httpClient
+     *
+     * @return Client
+     */
+    public static function createFromHttpClient(HttpClient $httpClient)
+    {
+        $builder = new Builder($httpClient);
+
+        return new self($builder);
     }
 
     /**

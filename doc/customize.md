@@ -11,7 +11,7 @@ community provided clients is found here: https://packagist.org/providers/php-ht
 You can inject a HTTP client through the `Github\Client` constructor:
 
 ```php
-$client = new Github\Client(new Http\Adapter\Guzzle6\Client());
+$client = Github\Client::createFromHttpClient(new Http\Adapter\Guzzle6\Client());
 ```
 
 ### Configure the HTTP client
@@ -39,7 +39,7 @@ class CustomUserAgentPlugin implements Plugin
 $httpBuilder = new Github\HttpClient\Builder(new Http\Adapter\Guzzle6\Client());
 $httpBuilder->addPlugin(new CustomUserAgentPlugin());
 
-$client = new Github\Client(null, $httpBuilder);
+$client = new Github\Client($httpBuilder);
 ```
 
 ### Run Test Suite

@@ -29,7 +29,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $httpClientMock = $this->getMockBuilder(\Http\Client\HttpClient::class)
             ->getMock();
 
-        $client = new Client($httpClientMock);
+        $client = Client::createFromHttpClient($httpClientMock);
 
         $this->assertInstanceOf(\Http\Client\HttpClient::class, $client->getHttpClient());
     }
