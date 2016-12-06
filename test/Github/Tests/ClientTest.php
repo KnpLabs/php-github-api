@@ -24,12 +24,12 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function shouldPassHttpClientBulderInterfaceToConstructor()
+    public function shouldPassHttpClientInterfaceToConstructor()
     {
         $httpClientMock = $this->getMockBuilder(\Http\Client\HttpClient::class)
             ->getMock();
 
-        $client = new Client(new Builder($httpClientMock));
+        $client = new Client($httpClientMock);
 
         $this->assertInstanceOf(\Http\Client\HttpClient::class, $client->getHttpClient());
     }
