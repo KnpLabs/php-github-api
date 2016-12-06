@@ -4,6 +4,9 @@ Navigation
 APIs:
 * [Authorizations](authorizations.md)
 * [Commits](commits.md)
+* Current User
+  * [Deploy keys / Public keys](currentuser/deploykeys.md)
+  * [Memberships](currentuser/memberships.md)
 * [Enterprise](enterprise.md)
 * [Gists](gists.md)
   * [Comments](gists/comments.md)
