@@ -15,8 +15,8 @@ use Http\Message\StreamFactory;
 use Psr\Cache\CacheItemPoolInterface;
 
 /**
- * A builder that builds the API client. This will allow you to fluently add and remove
- * plugins.
+ * A builder that builds the API client.
+ * This will allow you to fluently add and remove plugins.
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */

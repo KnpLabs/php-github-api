@@ -2,12 +2,11 @@
 
 namespace Github\Tests\HttpClient;
 
-use Github\Api;
-use Github\Client;
-use Github\Exception\BadMethodCallException;
-use Github\HttpClient\Plugin\Authentication;
 use Http\Client\Common\Plugin;
 
+/**
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
+ */
 class BuilderTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -28,8 +27,6 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
 
         $builder->clearHeaders();
     }
-
-
 
     /**
      * @test
