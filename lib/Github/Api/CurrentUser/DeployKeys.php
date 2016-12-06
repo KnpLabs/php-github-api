@@ -58,27 +58,6 @@ class DeployKeys extends AbstractApi
     }
 
     /**
-     * Updates deploy key for the authenticated user.
-     *
-     * @link http://developer.github.com/v3/repos/keys/
-     *
-     * @param string $id
-     * @param array  $params
-     *
-     * @throws \Github\Exception\MissingArgumentException
-     *
-     * @return array
-     */
-    public function update($id, array $params)
-    {
-        if (!isset($params['title'], $params['key'])) {
-            throw new MissingArgumentException(array('title', 'key'));
-        }
-
-        return $this->patch('/user/keys/'.rawurlencode($id), $params);
-    }
-
-    /**
      * Removes deploy key for the authenticated user.
      *
      * @link http://developer.github.com/v3/repos/keys/

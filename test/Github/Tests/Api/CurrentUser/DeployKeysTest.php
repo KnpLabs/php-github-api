@@ -86,53 +86,6 @@ class DeployKeysTest extends TestCase
     /**
      * @test
      */
-    public function shouldUpdateKey()
-    {
-        $expectedValue = array('id' => '123', 'key' => 'ssh-rsa ...');
-        $data = array('title' => 'my key', 'key' => 'ssh-rsa ...');
-
-        $api = $this->getApiMock();
-        $api->expects($this->once())
-            ->method('patch')
-            ->with('/user/keys/123', $data)
-            ->will($this->returnValue($expectedValue));
-
-        $this->assertEquals($expectedValue, $api->update(123, $data));
-    }
-
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
-    public function shouldNotUpdateKeyWithoutTitleParam()
-    {
-        $data = array('key' => 'ssh-rsa ...');
-
-        $api = $this->getApiMock();
-        $api->expects($this->never())
-            ->method('patch');
-
-        $api->update(123, $data);
-    }
-
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
-    public function shouldNotUpdateKeyWithoutKeyParam()
-    {
-        $data = array('title' => 'my key');
-
-        $api = $this->getApiMock();
-        $api->expects($this->never())
-            ->method('patch');
-
-        $api->update(123, $data);
-    }
-
-    /**
-     * @test
-     */
     public function shouldRemoveKey()
     {
         $expectedValue = array('some value');
