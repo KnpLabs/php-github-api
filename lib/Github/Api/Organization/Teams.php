@@ -78,22 +78,22 @@ class Teams extends AbstractApi
         return $this->get('/teams/'.rawurlencode($team).'/repos');
     }
 
-    public function repository($team, $username, $repository)
+    public function repository($team, $organization, $repository)
     {
-        return $this->get('/teams/'.rawurlencode($team).'/repos/'.rawurlencode($username).'/'.rawurlencode($repository));
+        return $this->get('/teams/'.rawurlencode($team).'/repos/'.rawurlencode($organization).'/'.rawurlencode($repository));
     }
 
-    public function addRepository($team, $username, $repository, $params = array())
+    public function addRepository($team, $organization, $repository, $params = array())
     {
         if (isset($params['permission']) && !in_array($params['permission'], array('pull', 'push', 'admin'))) {
             $params['permission'] = 'pull';
         }
 
-        return $this->put('/teams/'.rawurlencode($team).'/repos/'.rawurlencode($username).'/'.rawurlencode($repository), $params);
+        return $this->put('/teams/'.rawurlencode($team).'/repos/'.rawurlencode($organization).'/'.rawurlencode($repository), $params);
     }
 
-    public function removeRepository($team, $username, $repository)
+    public function removeRepository($team, $organization, $repository)
     {
-        return $this->delete('/teams/'.rawurlencode($team).'/repos/'.rawurlencode($username).'/'.rawurlencode($repository));
+        return $this->delete('/teams/'.rawurlencode($team).'/repos/'.rawurlencode($organization).'/'.rawurlencode($repository));
     }
 }
