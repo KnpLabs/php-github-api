@@ -30,14 +30,14 @@ class Milestones extends AbstractApi
             $params['sort'] = 'due_date';
         }
         if (isset($params['direction']) && !in_array($params['direction'], array('asc', 'desc'))) {
-            $params['direction'] = 'desc';
+            $params['direction'] = 'asc';
         }
 
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones', array_merge(array(
             'page'      => 1,
             'state'     => 'open',
             'sort'      => 'due_date',
-            'direction' => 'desc'
+            'direction' => 'asc'
         ), $params));
     }
 
