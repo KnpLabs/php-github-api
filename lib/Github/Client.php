@@ -12,6 +12,7 @@ use Github\HttpClient\Plugin\History;
 use Github\HttpClient\Plugin\PathPrepend;
 use Http\Client\Common\HttpMethodsClient;
 use Http\Client\Common\Plugin;
+use Http\Client\HttpClient;
 use Http\Discovery\UriFactoryDiscovery;
 use Psr\Cache\CacheItemPoolInterface;
 
@@ -104,14 +105,15 @@ class Client
     /**
      * Instantiate a new GitHub client.
      *
-     * @param Builder|null $httpClient
-     * @param string|null  $apiVersion
-     * @param string|null  $enterpriseUrl
+     * @param HttpClient|null $httpClient
+     * @param Builder|null    $httpClientBuilder If a builder is provided we assume that $httpClient is added to the builder already.
+     * @param string|null     $apiVersion
+     * @param string|null     $enterpriseUrl
      */
-    public function __construct(Builder $httpClientBuilder = null, $apiVersion = null, $enterpriseUrl = null)
+    public function __construct(HttpClient $httpClient, Builder $httpClientBuilder = null, $apiVersion = null, $enterpriseUrl = null)
     {
         $this->responseHistory = new History();
-        $this->httpClientBuilder = $builder = $httpClientBuilder ?: new Builder();
+        $this->httpClientBuilder = $builder = $httpClientBuilder ?: new Builder($httpClient);
 
         $builder->addPlugin(new GithubExceptionThrower());
         $builder->addPlugin(new Plugin\HistoryPlugin($this->responseHistory));
