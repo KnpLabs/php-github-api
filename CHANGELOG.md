@@ -8,17 +8,16 @@ The change log describes what is "Added", "Removed", "Changed" or "Fixed" betwee
 ### Changed
 
 First parameter of `Github\Client` has changed type from `\Http\Client\HttpClient` to 
-`Github\HttpClient\Builder`. To upgrade you need to change: 
+`Github\HttpClient\Builder`. A factory class was also added. To upgrade you need to change: 
  
- ```php
+```php
 // Old way does not work:
 $github = new Github\Client($httpClient); 
 
 // New way will work:
 $github = new Github\Client(new Github\HttpClient\Builder($httpClient)); 
- 
- ```
-
+$github = Github\Client::createFromHttpClient($httpClient);  
+```
 
 ### Added 
 
