@@ -83,7 +83,7 @@ class CachedHttpClient extends HttpClient
     protected function createRequest($httpMethod, $path, $body = null, array $headers = array(), array $options = array())
     {
         $request = parent::createRequest($httpMethod, $path, $body, $headers, $options);
-        
+
         $this->id = $path;
 
         if (array_key_exists('query', $options) && !empty($options['query'])) {
@@ -115,7 +115,7 @@ class CachedHttpClient extends HttpClient
     public function getLastResponse($force = false)
     {
         $lastResponse =  parent::getLastResponse();
-        if (304 != $lastResponse->getStatusCode()) {
+        if ($lastResponse && 304 != $lastResponse->getStatusCode()) {
             $force = true;
         }
 
