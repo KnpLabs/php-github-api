@@ -24,7 +24,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
             ->expects($this->any())
             ->method('sendRequest');
 
-        $client = \Github\Client::createFromHttpClient($httpClient);
+        $client = \Github\Client::createWithHttpClient($httpClient);
 
         return $this->getMockBuilder($this->getApiClass())
             ->setMethods(array('get', 'post', 'postRaw', 'patch', 'delete', 'put', 'head'))

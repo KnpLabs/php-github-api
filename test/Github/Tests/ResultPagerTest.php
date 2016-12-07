@@ -40,7 +40,7 @@ class ResultPagerTest extends \PHPUnit_Framework_TestCase
             ->method('sendRequest')
             ->will($this->returnValue($response));
 
-        $client = \Github\Client::createFromHttpClient($httpClientMock);
+        $client = \Github\Client::createWithHttpClient($httpClientMock);
 
         // memberApi Mock
         $memberApi = new Members($client);
@@ -87,7 +87,7 @@ class ResultPagerTest extends \PHPUnit_Framework_TestCase
             ->method('sendRequest')
             ->will($this->returnValue($response));
 
-        $client = \Github\Client::createFromHttpClient($httpClientMock);
+        $client = \Github\Client::createWithHttpClient($httpClientMock);
 
         $searchApi = new Search($client);
         $method = 'users';

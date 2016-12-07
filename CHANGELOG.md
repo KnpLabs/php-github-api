@@ -16,7 +16,7 @@ $github = new Github\Client($httpClient);
 
 // New way will work:
 $github = new Github\Client(new Github\HttpClient\Builder($httpClient)); 
-$github = Github\Client::createFromHttpClient($httpClient);  
+$github = Github\Client::createWithHttpClient($httpClient);  
 ```
 
 ### Added 

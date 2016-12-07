@@ -138,7 +138,7 @@ class Client
      *
      * @return Client
      */
-    public static function createFromHttpClient(HttpClient $httpClient)
+    public static function createWithHttpClient(HttpClient $httpClient)
     {
         $builder = new Builder($httpClient);
 
