@@ -2,6 +2,7 @@
 
 namespace Github\Api;
 
+use Geocoder\Exception\InvalidArgument;
 use Github\Client;
 use Github\HttpClient\Message\ResponseMediator;
 
@@ -74,8 +75,11 @@ abstract class AbstractApi implements ApiInterface
             unset($parameters['ref']);
         }
         $response = $this->client->getHttpClient()->get($path, $parameters, $requestHeaders);
-
-        return ResponseMediator::getContent($response);
+        if ($response) {
+			return ResponseMediator::getContent($response);
+		} else {
+        	throw new \InvalidArgumentException(__METHOD__);
+		}
     }
 
     /**
