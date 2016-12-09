@@ -104,6 +104,6 @@ class DeployKeysTest extends TestCase
      */
     protected function getApiClass()
     {
-        return \Github\Api\CurrentUser\DeployKeys::class;
+        return \Github\Api\CurrentUser\PublicKeys::class;
     }
 }

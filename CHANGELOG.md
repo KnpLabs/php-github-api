@@ -29,7 +29,7 @@ $github = new Github\Client($httpClient);
 $github = new Github\Client(new Github\HttpClient\Builder($httpClient)); 
 $github = Github\Client::createWithHttpClient($httpClient);  
 ```
-
+- Renamed the currentuser `DeployKeys` api class to `PublicKeys` to reflect to github api name. 
 
 ## 2.0.0-rc4
 

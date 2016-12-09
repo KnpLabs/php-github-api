@@ -2,7 +2,7 @@
 
 namespace Github\Api;
 
-use Github\Api\CurrentUser\DeployKeys;
+use Github\Api\CurrentUser\PublicKeys;
 use Github\Api\CurrentUser\Emails;
 use Github\Api\CurrentUser\Followers;
 use Github\Api\CurrentUser\Memberships;
@@ -64,11 +64,11 @@ class CurrentUser extends AbstractApi
     }
 
     /**
-     * @return DeployKeys
+     * @return PublicKeys
      */
     public function keys()
     {
-        return new DeployKeys($this->client);
+        return new PublicKeys($this->client);
     }
 
     /**

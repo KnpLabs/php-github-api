@@ -91,7 +91,7 @@ class CurrentUserTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf(\Github\Api\CurrentUser\DeployKeys::class, $api->keys());
+        $this->assertInstanceOf(\Github\Api\CurrentUser\PublicKeys::class, $api->keys());
     }
 
     /**
