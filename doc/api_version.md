@@ -8,6 +8,6 @@ For example:
 $client = new Github\Client();
 echo $client->getApiVersion(); // prints "v3"
 
-$client = new Github\Client($httpClient, 'v2');
+$client = new Github\Client(new Github\HttpClient\Builder($httpClient), 'v2');
 echo $client->getApiVersion(); // prints "v2"
 ```
