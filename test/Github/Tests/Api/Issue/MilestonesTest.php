@@ -16,7 +16,7 @@ class MilestonesTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/milestones', array('page' => 1, 'state' => 'open', 'sort' => 'due_date', 'direction' => 'desc'))
+            ->with('/repos/KnpLabs/php-github-api/milestones', array('page' => 1, 'state' => 'open', 'sort' => 'due_date', 'direction' => 'asc'))
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api'));
@@ -132,7 +132,7 @@ class MilestonesTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/milestones', array('page' => 1, 'state' => 'open', 'sort' => 'due_date', 'direction' => 'desc'))
+            ->with('/repos/KnpLabs/php-github-api/milestones', array('page' => 1, 'state' => 'open', 'sort' => 'due_date', 'direction' => 'asc'))
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', array('sort' => 'completenes')));
@@ -148,7 +148,7 @@ class MilestonesTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/milestones', array('page' => 1, 'state' => 'open', 'sort' => 'due_date', 'direction' => 'desc'))
+            ->with('/repos/KnpLabs/php-github-api/milestones', array('page' => 1, 'state' => 'open', 'sort' => 'due_date', 'direction' => 'asc'))
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', array('state' => 'clos')));
@@ -164,10 +164,10 @@ class MilestonesTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/milestones', array('page' => 1, 'state' => 'open', 'sort' => 'due_date', 'direction' => 'desc'))
+            ->with('/repos/KnpLabs/php-github-api/milestones', array('page' => 1, 'state' => 'open', 'sort' => 'due_date', 'direction' => 'asc'))
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', array('direction' => 'des')));
+        $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', array('direction' => 'asc')));
     }
 
     /**
