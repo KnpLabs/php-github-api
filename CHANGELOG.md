@@ -13,6 +13,7 @@ The change log describes what is "Added", "Removed", "Changed" or "Fixed" betwee
 - API for Repo\Cards
 - API for Repo\Columns
 - API for Repo\Projects
+- API for User\MyRepositories
 - Methods in Repo API for frequency and participation
 
 ### Changed

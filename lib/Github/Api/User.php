@@ -145,11 +145,9 @@ class User extends AbstractApi
     }
 
     /**
-     * @deprecated use repos($username, $options) instead
+     * List public repositories for the specified user.
      *
-     * Get the repositories of a user.
-     *
-     * @link http://developer.github.com/v3/repos/
+     * @link https://developer.github.com/v3/repos/#list-user-repositories
      *
      * @param string $username  the username
      * @param string $type      role in the repository
@@ -160,24 +158,25 @@ class User extends AbstractApi
      */
     public function repositories($username, $type = 'owner', $sort = 'full_name', $direction = 'asc')
     {
-        return $this->repos($username, array(
+        return $this->get('/users/'.rawurlencode($username).'/repos', [
             'type' => $type,
             'sort' => $sort,
-            'direction' => $direction
-        ));
+            'direction' => $direction,
+        ]);
     }
 
     /**
-     * @param null $username
-     * @param array $options
+     * List repositories that are accessible to the authenticated user.
+     *
+     * @link https://developer.github.com/v3/repos/#list-your-repositories
+     *
+     * @param array $params visibility, affiliation, type, sort, direction
      *
      * @return array list of the user repositories
      */
-    public function repos($username = null, array $options = array())
+    public function myRepositories(array $params = [])
     {
-        $url = $username ? '/users/'.rawurldecode($username).'/repos' : '/user/repos';
-
-        return $this->get($url, $options);
+        return $this->get('/user/repos', $params);
     }
 
     /**
