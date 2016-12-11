@@ -3,7 +3,7 @@
 The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release. 
 
 
-## 2.0.0-rc5 (UNRELEASED)
+## 2.0.0
 
 ### Added 
 
