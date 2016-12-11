@@ -148,6 +148,21 @@ class UserTest extends TestCase
     /**
      * @test
      */
+    public function shouldGetMyRepositories()
+    {
+        $expectedArray = [['id' => 1, 'name' => 'l3l0repo']];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')->with('/user/repos', [])
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->myRepositories());
+    }
+
+    /**
+     * @test
+     */
     public function shouldGetUserGists()
     {
         $expectedArray = array(array('id' => 1, 'name' => 'l3l0repo'));
