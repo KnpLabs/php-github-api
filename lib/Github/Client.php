@@ -120,7 +120,6 @@ class Client
         $builder->addPlugin(new Plugin\AddHostPlugin(UriFactoryDiscovery::find()->createUri('https://api.github.com')));
         $builder->addPlugin(new Plugin\HeaderDefaultsPlugin(array(
             'User-Agent' => 'php-github-api (http://github.com/KnpLabs/php-github-api)',
-            'Accept' => sprintf('application/vnd.github.%s+json', $this->getApiVersion()),
         )));
 
         $this->apiVersion = $apiVersion ?: 'v3';
