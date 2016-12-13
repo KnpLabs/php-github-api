@@ -34,6 +34,10 @@ use Psr\Cache\CacheItemPoolInterface;
  * @method Api\Notification notifications()
  * @method Api\Organization organization()
  * @method Api\Organization organizations()
+ * @method Api\Organization\Projects orgProject()
+ * @method Api\Organization\Projects orgProjects()
+ * @method Api\Organization\Projects organizationProject()
+ * @method Api\Organization\Projects organizationProjects()
  * @method Api\PullRequest pr()
  * @method Api\PullRequest pullRequest()
  * @method Api\PullRequest pullRequests()
@@ -205,9 +209,13 @@ class Client
                 $api = new Api\Organization($this);
                 break;
             case 'org_project':
+            case 'orgProject':
             case 'org_projects':
+            case 'orgProjects':
             case 'organization_project':
+            case 'organizationProject':
             case 'organization_projects':
+            case 'organizationProjects':
                 $api = new Api\Organization\Projects($this);
                 break;
 
