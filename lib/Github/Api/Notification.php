@@ -57,4 +57,20 @@ class Notification extends AbstractApi
 
         $this->put('/notifications', $parameters);
     }
+    /**
+     * [UNDOCUMENTED] Gets a single notification using his ID
+     *
+     * @link https://developer.github.com/v3/activity/notifications/#view-a-single-thread
+     *
+     * @param ID|integer $id
+     */
+    public function id(integer $int)
+    {
+
+        if (!is_numeric($int)) {
+         // Error
+        }
+
+        return $this->get('/notifications/threads/.$id);
+    }
 }
