@@ -64,9 +64,9 @@ class Notification extends AbstractApi
      *
      * @param ID|integer $id
      */
-    public function id(integer $int)
+    public function id($id)
     {
-        if (!is_numeric($int)) {
+        if (!is_numeric($id)) {
             // Error
         }
 
