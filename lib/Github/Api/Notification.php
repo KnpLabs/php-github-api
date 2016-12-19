@@ -71,6 +71,6 @@ class Notification extends AbstractApi
          // Error
         }
 
-        return $this->get('/notifications/threads/.$id);
+        return $this->get('/notifications/threads/'.$id);
     }
 }
