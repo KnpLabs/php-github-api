@@ -68,7 +68,7 @@ class Notification extends AbstractApi
     {
 
         if (!is_numeric($int)) {
-         // Error
+            // Error
         }
 
         return $this->get('/notifications/threads/'.$id);
