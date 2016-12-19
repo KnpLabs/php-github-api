@@ -66,7 +66,6 @@ class Notification extends AbstractApi
      */
     public function id(integer $int)
     {
-
         if (!is_numeric($int)) {
             // Error
         }
