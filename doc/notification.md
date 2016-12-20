@@ -36,3 +36,10 @@ $client->api('notification')->markRead(new DateTime('2015/01/01'));
 ```
 
 Marks all notifications as read up until the current date, unless a date is given
+
+## Get a single notification using his ID
+
+```php
+$client->api('notification')->id($id);
+```
+Retrieves single notification data using his ID.
