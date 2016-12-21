@@ -102,7 +102,7 @@ class NotificationTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/notification'.$id);
+            ->with('/notification/'.$id);
 
         $api->id($id);
     }
