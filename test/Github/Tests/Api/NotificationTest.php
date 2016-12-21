@@ -98,7 +98,7 @@ class NotificationTest extends TestCase
     }
     public function shouldGetNotification()
     {
-        $id = id
+        $id = id;
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
