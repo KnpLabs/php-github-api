@@ -96,6 +96,17 @@ class NotificationTest extends TestCase
 
         $api->markRead($since);
     }
+    
+    public function shouldGetNotification()
+    {
+        $id = mt_rand(1, time());
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/notification/'.$id);
+
+        $api->id($id);
+    }
 
     /**
      * @return string
