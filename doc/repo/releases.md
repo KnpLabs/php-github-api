@@ -9,12 +9,12 @@ Provides information about releases for a repository. Wraps [GitHub Releases API
 $release = $client->api('repo')->releases()->latest('twbs', 'bootstrap');
 ```
 
-### Get latest release (including prereleases)
+The ```latest()``` method fetches only releases which are not marked "prerelease."  
 
-```php
-$release = $client->api('repo')->releases()->latestIncludingPrereleases('twbs', 'bootstrap');
+To obtain the latest release *including prereleases*, select the first element in the "all releases" function:
 ```
-
+$release = $client->api('repo')->releases()->all('username', 'repo')[0];
+```
 ### List releases for a tag
 
 ```php

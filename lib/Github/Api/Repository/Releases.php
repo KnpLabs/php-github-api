@@ -26,19 +26,6 @@ class Releases extends AbstractApi
     }
 
     /**
-     * Get the latest release including prereleases.
-     *
-     * @param $username
-     * @param $repository
-     *
-     * @return array
-     */
-    public function latestIncludingPrereleases($username, $repository)
-    {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases')[0];
-    }
-
-    /**
      * List releases for a tag.
      *
      * @param $username

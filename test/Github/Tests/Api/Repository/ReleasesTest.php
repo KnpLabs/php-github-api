@@ -25,22 +25,6 @@ class ReleasesTest extends TestCase
     /**
      * @test
      */
-    public function shouldGetLatestReleaseIncludingPrerelease()
-    {
-        $expectedValue = array('latest_release_data');
-
-        $api = $this->getApiMock();
-        $api->expects($this->once())
-            ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/releases')
-            ->will($this->returnValue($expectedValue));
-
-        $this->assertEquals($expectedValue[0], $api->latestIncludingPrereleases('KnpLabs', 'php-github-api'));
-    }
-
-    /**
-     * @test
-     */
     public function shouldGetReleaseByTag()
     {
         $expectedValue = array('latest_release_data');
