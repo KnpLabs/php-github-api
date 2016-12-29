@@ -35,7 +35,7 @@ class ReleasesTest extends TestCase
             ->with('/repos/KnpLabs/php-github-api/releases')
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->latestIncludingPrereleases('KnpLabs', 'php-github-api'));
+        $this->assertEquals($expectedValue[0], $api->latestIncludingPrereleases('KnpLabs', 'php-github-api'));
     }
 
     /**
