@@ -1,7 +1,9 @@
 <?php
 namespace Github\Api\Repository;
+
 use Github\Api\AbstractApi;
 use Github\Exception\MissingArgumentException;
+
 /**
  * @link   https://developer.github.com/v3/repos/traffic/
  * @author Miguel Piedrafita <soy@miguelpiedrafita.com>
@@ -42,7 +44,7 @@ class Traffic extends AbstractApi
      */
     public function views($owner, $repository)
     {
-     return $this->get('/repos/'.rawurlencode($owner).'/'.rawurlencode($repository).'/traffic/views');
+        return $this->get('/repos/'.rawurlencode($owner).'/'.rawurlencode($repository).'/traffic/views');
     }
     /**
      * @link https://developer.github.com/v3/repos/traffic/#clones
@@ -54,6 +56,6 @@ class Traffic extends AbstractApi
      */
     public function clones($owner, $repository)
     {
-     return $this->get('/repos/'.rawurlencode($owner).'/'.rawurlencode($repository).'/traffic/clones');
+        return $this->get('/repos/'.rawurlencode($owner).'/'.rawurlencode($repository).'/traffic/clones');
     }
 }
