@@ -15,6 +15,7 @@ use Github\Api\Repository\Hooks;
 use Github\Api\Repository\Labels;
 use Github\Api\Repository\Stargazers;
 use Github\Api\Repository\Statuses;
+use Github\Api\Repository\Traffic;
 
 /**
  * Searching repositories, getting repository information
