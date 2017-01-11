@@ -551,8 +551,8 @@ class Repo extends AbstractApi
         return new Projects($this->client);
     }
     
-     public function traffic()
-      {
-          return new Traffic($this->client);
-      }
+    public function traffic()
+    {
+        return new Traffic($this->client);
+    }
 }
