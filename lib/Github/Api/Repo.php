@@ -73,7 +73,8 @@ class Repo extends AbstractApi
           if (!is_int($id)) {
               return $this->get('/user/repos?affiliation=owner');
           }
-        return $this->get('/user/repos?affiliation=owner&since=' . rawurldecode($id));
+
+          return $this->get('/user/repos?affiliation=owner&since=' . rawurldecode($id));
       }
     /**
      * Get the last year of commit activity for a repository grouped by week.
