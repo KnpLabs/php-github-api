@@ -70,7 +70,7 @@ class Repo extends AbstractApi
        *
        * @return array list of users found
        */
-      public function owned($visibility = all, $sort = full_name, $id = null)
+      public function owned($visibility = 'all', $sort = 'full_name', $id = null)
       {
           if (!is_int($id)) {
               return $this->get('/user/repos?affiliation=owner');
