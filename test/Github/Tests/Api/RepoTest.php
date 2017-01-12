@@ -97,7 +97,7 @@ class RepoTest extends TestCase
             ->with('/user/repos?affiliation=owner')
             ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($expectedArray, $api->all());
+        $this->assertEquals($expectedArray, $api->owned());
     }
     /**
      * @test
