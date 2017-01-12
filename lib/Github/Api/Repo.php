@@ -62,13 +62,15 @@ class Repo extends AbstractApi
     /**
        * List all repositories owned by the user.
        *
-       * @link https://developer.github.com/v3/repos/#list-all-public-repositories
+       * @link https://developer.github.com/v3/repos/#list-your-repositories
        *
+       * @param int|null $id The integer ID of the last Repository that you’ve seen.
+       * @param string|all $visibility The repo visibility
        * @param int|null $id The integer ID of the last Repository that you’ve seen.
        *
        * @return array list of users found
        */
-      public function owned($id = null)
+      public function owned($visibility = all, $sort = full_name, $id = null)
       {
           if (!is_int($id)) {
               return $this->get('/user/repos?affiliation=owner');
