@@ -25,13 +25,13 @@ class TrafficTest extends TestCase
         // Call Comments::show
         $result = $api->show(123, 456);
 
-        // Verify that the result is the "Server response" as we expect. 
+        // Verify that the result is the "Server response" as we expect.
         $this->assertEquals($expectedValue, $result);
     }
 
     protected function getApiClass()
     {
-        // Tell the "getAPIMock" what class to mock. 
+        // Tell the "getAPIMock" what class to mock.
         return \Github\Api\Gist\Comments::class;
     }
 }
