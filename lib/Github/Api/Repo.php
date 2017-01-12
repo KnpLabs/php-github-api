@@ -66,7 +66,7 @@ class Repo extends AbstractApi
        *
        * @param int|null $id The integer ID of the last Repository that you’ve seen.
        * @param string|all $visibility The repo visibility
-       * @param int|null $id The integer ID of the last Repository that you’ve seen.
+       * @param string|full_name $sort How to sort the data.
        *
        * @return array list of users found
        */
