@@ -78,7 +78,7 @@ class User extends AbstractApi
      *
      * @return array information about organizations that authenticated user belongs to
      */
-    public function orgs($username)
+    public function orgs()
     {
         return $this->get('/user/orgs');
     }
