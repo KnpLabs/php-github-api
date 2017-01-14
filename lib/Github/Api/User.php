@@ -72,6 +72,17 @@ class User extends AbstractApi
     }
 
     /**
+     * Get user organizations
+     *
+     * @link https://developer.github.com/v3/orgs/#list-your-organizations
+     *
+     * @return array information about organizations that authenticated user belongs to
+     */
+    public function orgs($username)
+    {
+        return $this->get('/user/orgs');
+    }
+    /**
      * Request the users that a specific user is following.
      *
      * @link http://developer.github.com/v3/users/followers/
