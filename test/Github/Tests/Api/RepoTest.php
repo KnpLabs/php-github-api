@@ -78,7 +78,27 @@ class RepoTest extends TestCase
 
         $this->assertEquals($expectedArray, $api->all());
     }
+    
+/**
+     * @test
+     */
+    public function shouldGetOwnedRepositories()
+    {
+        $expectedArray = array(
+            array('id' => 1, 'name' => 'dummy project'),
+            array('id' => 2, 'name' => 'awesome another project'),
+            array('id' => 3, 'name' => 'fork of php'),
+            array('id' => 4, 'name' => 'fork of php-cs'),
+        );
 
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/user/repos?affiliation=owner')
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->owned());
+    }
     /**
      * @test
      */
