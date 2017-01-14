@@ -42,7 +42,7 @@ class UserTest extends TestCase
 
         $this->assertEquals($expectedArray, $api->organizations('l3l0'));
     }
-public function shouldGetUserOrgs()
+    public function shouldGetUserOrgs()
     {
         $expectedArray = array(array(
             'id' => 202732,
