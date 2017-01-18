@@ -64,9 +64,9 @@ class Repo extends AbstractApi
        *
        * @link https://developer.github.com/v3/repos/#list-your-repositories
        *
-       * @param int|null $id The integer ID of the last Repository that you’ve seen.
        * @param string|all $visibility The repo visibility
        * @param string|full_name $sort How to sort the data.
+       * @param int|null $id The integer ID of the last Repository that you’ve seen.
        *
        * @return array list of users found
        */
