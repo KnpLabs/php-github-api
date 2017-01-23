@@ -54,6 +54,7 @@ use Psr\Cache\CacheItemPoolInterface;
  * @method Api\Authorizations authorization()
  * @method Api\Authorizations authorizations()
  * @method Api\Meta meta()
+ * @method Api\GraphQL graphql()
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  *
@@ -267,7 +268,9 @@ class Client
             case 'meta':
                 $api = new Api\Meta($this);
                 break;
-
+            case 'graphql':
+                 $api = new Api\GraphQL($this);
+                 break;
             default:
                 throw new InvalidArgumentException(sprintf('Undefined api instance called: "%s"', $name));
         }
