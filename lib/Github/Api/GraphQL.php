@@ -1,5 +1,6 @@
 <?php
 namespace Github\Api;
+
 /**
  * GraphQL API.
  *
@@ -18,6 +19,7 @@ class GraphQL extends AbstractApi
         $params = array(
             'query' => $query
         );
+
         return $this->post('/graphql', $params);
     }
 }
