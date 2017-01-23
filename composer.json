@@ -1,8 +1,8 @@
 {
-    "name": "knplabs/github-api",
+    "name": "m1guelpf/github-api",
     "type": "library",
     "description": "GitHub API v3 client",
-    "homepage": "https://github.com/KnpLabs/php-github-api",
+    "homepage": "https://github.com/m1guelpf/php-github-api",
     "keywords": ["github", "gh", "api", "gist"],
     "license": "MIT",
     "authors": [
@@ -14,6 +14,11 @@
             "name": "Thibault Duplessis",
             "email": "thibault.duplessis@gmail.com",
             "homepage": "http://ornicar.github.com"
+        },
+        {
+            "name": "Miguel Piedrafita",
+            "email": "soy@miguelpiedrafita.com",
+            "homepage": "https://miguelpiedrafita.com"
         }
     ],
     "require": {
@@ -32,12 +37,10 @@
         "guzzlehttp/psr7": "^1.2",
         "sllh/php-cs-fixer-styleci-bridge": "^1.3"
     },
+    "replace": {
+        "knplabs/github-api": "dev-master"
+    },
     "autoload": {
         "psr-4": { "Github\\": "lib/Github/" }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "2.0.x-dev"
-        }
     }
 }
