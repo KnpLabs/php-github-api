@@ -42,5 +42,5 @@
     },
     "autoload": {
         "psr-4": { "Github\\": "lib/Github/" }
-    },
+    }
 }
