@@ -1,4 +1,4 @@
-## Customize `php-github-api` and testing
+## Customize `php-github-api`
 [Back to the navigation](README.md)
 
 
@@ -40,12 +40,4 @@ $httpBuilder = new Github\HttpClient\Builder(new Http\Adapter\Guzzle6\Client());
 $httpBuilder->addPlugin(new CustomUserAgentPlugin());
 
 $client = new Github\Client($httpBuilder);
-```
-
-### Run Test Suite
-
-The code is unit tested, there are also some functional tests. To run tests on your machine, from a CLI, run
-
-```bash
-$ phpunit
 ```
