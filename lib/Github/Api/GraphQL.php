@@ -13,7 +13,7 @@ class GraphQL extends AbstractApi
     /**
      * @param string $query
      *
-     * @return string
+     * @return array
      */
     public function graphql($query)
     {
