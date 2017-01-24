@@ -158,6 +158,19 @@ class Builder
     }
 
     /**
+     * @param string $header
+     * @param string $headerValue
+     */
+    public function addHeaderValue($header, $headerValue)
+    {
+        if (!isset($this->headers[$header])) {
+            $this->headers[$header] = $headerValue;
+        } else {
+            $this->headers[$header] = array_merge((array)$this->headers[$header], array($headerValue));
+        }
+    }
+
+    /**
      * Add a cache plugin to cache responses locally.
      *
      * @param CacheItemPoolInterface $cache

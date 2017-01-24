@@ -306,6 +306,16 @@ class PullRequestTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function shouldGetReviewApiObject()
+    {
+        $api = $this->getApiMock();
+
+        $this->assertInstanceOf(\Github\Api\PullRequest\Review::class, $api->reviews());
+    }
+
+    /**
      * @return string
      */
     protected function getApiClass()
