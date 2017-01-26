@@ -14,7 +14,7 @@ class GraphQLTest extends TestCase
             ->with('/graphql', 'bar')
             ->will($this->returnValue('foo'));
 
-        $result = $api->graphql('bar');
+        $result = $api->execute('bar');
         $this->assertEquals('foo', $result);
     }
 
