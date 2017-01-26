@@ -16,7 +16,7 @@ class GraphQL extends AbstractApi
      *
      * @return array
      */
-    public function graphql($query)
+    public function execute($query)
     {
         $params = array(
             'query' => $query
