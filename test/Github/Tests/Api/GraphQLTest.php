@@ -1,11 +1,13 @@
+<?php
+
 class GraphQLTest extends TestCase
 {
-    // ...
+    // GraphQL Tests
 
     /**
      * @test
      */
-    public function shouldShowGistComment()
+    public function shouldTestGraphQL()
     {
         $api = $this->getApiMock();
 
