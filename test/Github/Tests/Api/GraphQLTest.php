@@ -1,5 +1,7 @@
 <?php
 
+namespace Github\Tests\Api;
+
 class GraphQLTest extends TestCase
 {
     // GraphQL Tests
