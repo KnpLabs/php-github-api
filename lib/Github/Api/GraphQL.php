@@ -5,7 +5,7 @@ namespace Github\Api;
 /**
  * GraphQL API.
  *
- * @link   http://developer.github.com/v3/markdown/
+ * @link   https://developer.github.com/early-access/graphql/
  * @author Miguel Piedrafita <soy@miguelpiedrafita.com>
  */
 class GraphQL extends AbstractApi
