@@ -220,7 +220,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $httpClientMock->expects($this->once())
             ->method('sendRequest')
-            ->with($this->callback(function(RequestInterface $request) {
+            ->with($this->callback(function (RequestInterface $request) {
                 return (string) $request->getUri() === 'https://foobar.com/api/v3/enterprise/stats/all';
             }))
             ->willReturn(new Response(200, [], '[]'));
