@@ -7,7 +7,10 @@ use Github\Client;
 use Github\Exception\BadMethodCallException;
 use Github\HttpClient\Builder;
 use Github\HttpClient\Plugin\Authentication;
+use GuzzleHttp\Psr7\Response;
 use Http\Client\Common\Plugin;
+use Http\Client\HttpClient;
+use Psr\Http\Message\RequestInterface;
 
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
@@ -204,5 +207,26 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
             array('meta', Api\Meta::class)
         );
+    }
+
+    /**
+     * Make sure that the URL is correct when using enterprise.
+     */
+    public function testEnterpriseUrl()
+    {
+        $httpClientMock = $this->getMockBuilder(HttpClient::class)
+            ->setMethods(['sendRequest'])
+            ->getMock();
+
+        $httpClientMock->expects($this->once())
+            ->method('sendRequest')
+            ->with($this->callback(function(RequestInterface $request) {
+                return (string) $request->getUri() === 'https://foobar.com/api/v3/enterprise/stats/all';
+            }))
+            ->willReturn(new Response(200, [], '[]'));
+
+        $httpClientBuilder = new Builder($httpClientMock);
+        $client = new Client($httpClientBuilder, null, 'https://foobar.com');
+        $client->enterprise()->stats()->show('all');
     }
 }

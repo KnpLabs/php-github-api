@@ -315,7 +315,7 @@ class Client
         $builder->removePlugin(PathPrepend::class);
 
         $builder->addPlugin(new Plugin\AddHostPlugin(UriFactoryDiscovery::find()->createUri($enterpriseUrl)));
-        $builder->addPlugin(new PathPrepend(sprintf('/api/%s/', $this->getApiVersion())));
+        $builder->addPlugin(new PathPrepend(sprintf('/api/%s', $this->getApiVersion())));
     }
 
     /**
