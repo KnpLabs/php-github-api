@@ -2,6 +2,11 @@
 
 The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release. 
 
+## 2.0.2
+
+### Fixed
+
+- Bug with double slashes when using enterprise URL. 
 
 ## 2.0.0
 
