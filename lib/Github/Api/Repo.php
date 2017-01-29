@@ -15,6 +15,7 @@ use Github\Api\Repository\Hooks;
 use Github\Api\Repository\Labels;
 use Github\Api\Repository\Stargazers;
 use Github\Api\Repository\Statuses;
+use Github\Api\Repository\Traffic;
 
 /**
  * Searching repositories, getting repository information
@@ -59,6 +60,25 @@ class Repo extends AbstractApi
         return $this->get('/repositories?since=' . rawurldecode($id));
     }
 
+    /**
+       * List all repositories owned by the user.
+       *
+       * @link https://developer.github.com/v3/repos/#list-your-repositories
+       *
+       * @param int|null $id The integer ID of the last Repository that you’ve seen.
+       * @param string|all $visibility The repo visibility
+       * @param string|full_name $sort How to sort the data.
+       *
+       * @return array list of users found
+       */
+      public function owned($visibility = 'all', $sort = 'full_name', $id = null)
+      {
+          if (!is_int($id)) {
+              return $this->get('/user/repos?affiliation=owner');
+          }
+
+          return $this->get('/user/repos?affiliation=owner&since=' . rawurldecode($id));
+      }
     /**
      * Get the last year of commit activity for a repository grouped by week.
      *
@@ -548,5 +568,10 @@ class Repo extends AbstractApi
     public function projects()
     {
         return new Projects($this->client);
+    }
+    
+    public function traffic()
+    {
+        return new Traffic($this->client);
     }
 }
