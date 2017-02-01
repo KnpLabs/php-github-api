@@ -9,7 +9,7 @@ Provides information about releases for a repository. Wraps [GitHub Releases API
 $release = $client->api('repo')->releases()->latest('twbs', 'bootstrap');
 ```
 
-The `latest()` method fetches only releases which are not marked "prerelease" or "draft"
+The `latest()` method fetches only releases which are not marked "prerelease" or "draft".
 
 To obtain the latest release *including* prereleases and drafts, select the first element in the "all releases" function:
 ```php
