@@ -4,7 +4,6 @@ use Github\Tests\Api\TestCase;
 
 class TrafficTest extends TestCase
 {
-    // ...
 
     /**
      * @test
