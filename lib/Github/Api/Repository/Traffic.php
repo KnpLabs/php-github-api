@@ -45,7 +45,7 @@ class Traffic extends AbstractApi
      */
     public function views($owner, $repository, $per = 'day')
     {
-        return $this->get('/repos/'.rawurlencode($owner).'/'.rawurlencode($repository).'/traffic/views?per='.rawurlencode($per);
+        return $this->get('/repos/'.rawurlencode($owner).'/'.rawurlencode($repository).'/traffic/views?per='.rawurlencode($per));
     }
     /**
      * @link https://developer.github.com/v3/repos/traffic/#clones
