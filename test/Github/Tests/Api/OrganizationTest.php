@@ -62,7 +62,7 @@ class OrganizationTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/orgs/KnpLabs/repos', array('type' => 'all'))
+            ->with('/orgs/KnpLabs/repos', array('type' => 'all', 'page' => 1))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->repositories('KnpLabs'));
