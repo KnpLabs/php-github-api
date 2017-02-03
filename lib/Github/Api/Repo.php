@@ -9,6 +9,7 @@ use Github\Api\Repository\Contents;
 use Github\Api\Repository\DeployKeys;
 use Github\Api\Repository\Downloads;
 use Github\Api\Repository\Projects;
+use Github\Api\Repository\Protection;
 use Github\Api\Repository\Releases;
 use Github\Api\Repository\Forks;
 use Github\Api\Repository\Hooks;
@@ -411,6 +412,18 @@ class Repo extends AbstractApi
         }
 
         return $this->get($url);
+    }
+
+    /**
+     * Manage the protection of a repository branch.
+     *
+     * @link https://developer.github.com/v3/repos/branches/#get-branch-protection
+     *
+     * @return Protection
+     */
+    public function protection()
+    {
+        return new Protection($this->client);
     }
 
     /**
