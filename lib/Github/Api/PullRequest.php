@@ -3,6 +3,7 @@
 namespace Github\Api;
 
 use Github\Api\PullRequest\Comments;
+use Github\Api\PullRequest\Review;
 use Github\Exception\MissingArgumentException;
 
 /**
@@ -63,6 +64,11 @@ class PullRequest extends AbstractApi
     public function comments()
     {
         return new Comments($this->client);
+    }
+
+    public function reviews()
+    {
+        return new Review($this->client);
     }
 
     /**

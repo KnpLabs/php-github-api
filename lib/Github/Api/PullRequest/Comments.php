@@ -11,9 +11,13 @@ use Github\Exception\MissingArgumentException;
  */
 class Comments extends AbstractApi
 {
-    public function all($username, $repository, $pullRequest)
+    public function all($username, $repository, $pullRequest = null)
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($pullRequest).'/comments');
+        if (null !== $pullRequest) {
+            return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($pullRequest).'/comments');
+        }
+
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/comments');
     }
 
     public function show($username, $repository, $comment)
