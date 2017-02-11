@@ -61,7 +61,7 @@ $client->api('issue')->labels()->replace('KnpLabs', 'php-github-api', 4, array('
 
 Replace a label for an issue: by username, repo, issue number and array of labels.
 
-### Remove all labels fom an issue
+### Remove all labels from an issue
 
 > Requires [authentication](../security.md).
 
