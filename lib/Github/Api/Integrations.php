@@ -26,4 +26,60 @@ class Integrations extends AbstractApi
 
         return $this->post('/installations/'.rawurlencode($installationId).'/access_tokens', $parameters);
     }
+
+    /**
+     * Find all installations for the authenticated integration.
+     *
+     * @link https://developer.github.com/v3/integrations/#find-installations
+     *
+     * @return array
+     */
+    public function findInstallations()
+    {
+        return $this->get('/integration/installations');
+    }
+
+    /**
+     * List repositories that are accessible to the authenticated installation.
+     *
+     * @link https://developer.github.com/v3/integrations/installations/#list-repositories
+     *
+     * @param int $userId
+     *
+     * @return array
+     */
+    public function listRepositories($userId)
+    {
+        return $this->get('/installation/repositories', ['user_id' => $userId]);
+    }
+
+    /**
+     * Add a single repository to an installation.
+     *
+     * @link https://developer.github.com/v3/integrations/installations/#add-repository-to-installation
+     *
+     * @param int $installationId
+     * @param int $repositoryId
+     *
+     * @return array
+     */
+    public function addRepository($installationId, $repositoryId)
+    {
+        return $this->put('/installations/'.rawurlencode($installationId).'/repositories/'.rawurlencode($repositoryId));
+    }
+
+    /**
+     * Remove a single repository from an installation.
+     *
+     * @link https://developer.github.com/v3/integrations/installations/#remove-repository-from-installation
+     *
+     * @param int $installationId
+     * @param int $repositoryId
+     *
+     * @return array
+     */
+    public function removeRepository($installationId, $repositoryId)
+    {
+        return $this->delete('/installations/'.rawurlencode($installationId).'/repositories/'.rawurlencode($repositoryId));
+    }
 }
