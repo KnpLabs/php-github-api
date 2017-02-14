@@ -562,4 +562,102 @@ class Repo extends AbstractApi
     {
         return new Projects($this->client);
     }
+
+    /**
+     * Get the hooks for selected repository
+     * @link http://developer.github.com/v3/repos/hooks/#list
+     *
+     * @param  string  $username         the user who owns the repo
+     * @param  string  $repo             the name of the repo
+     *
+     * @return array
+     */
+    public function getRepoHooks($username, $repo)
+    {
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repo).'/hooks');
+    }
+
+    /**
+     * Get the hooks for selected repository
+     * @link http://developer.github.com/v3/repos/hooks/#get-single-hook
+     *
+     * @param  string  $username         the user who owns the repo
+     * @param  string  $repo             the name of the repo
+     * @param  integer $id               the id of the hook
+     *
+     * @return array
+     */
+    public function getRepoHook($username, $repo, $id)
+    {
+        return $this->get('repos/'.urlencode($username).'/'.urlencode($repo).'/hooks/'.urlencode($id));
+    }
+
+    /**
+     * Add hook informations by username and repo. Requires authentication.
+     * @link http://developer.github.com/v3/repos/hooks/#edit-a-hook
+     *
+     * @param   string  $username         the username
+     * @param   string  $repo             the repo
+     * @param   string  $name             the name of the service that is being called. @see https://api.github.com/hooks for the possible names.
+     * @param   array   $config           an array containing key/value pairs to provide settings for this hook
+     * @param   array   $events           Determines what events the hook is triggered for. Default: ["push"].
+     * @param   boolean $active           Determines whether the hook is actually triggered on pushes.
+     *
+     * @return  array                     information about the issue
+     */
+    public function addRepoHook($username, $repo, $name, $config, $events = array(), $active = true)
+    {
+        return $this->post('repos/'.urlencode($username).'/'.urlencode($repo).'/hooks/', array(
+            'name' => $name,
+            'config' => $config,
+            'events' => $events,
+            'active' => $active
+        ));
+    }
+
+    /**
+     * Update hook informations by username, repo and hook number. Requires authentication.
+     * @link http://developer.github.com/v3/repos/hooks/#edit-a-hook
+     *
+     * @param   string  $username         the username
+     * @param   string  $repo             the repo
+     * @param   string  $id               the hook id
+     * @param   array   $data             key=>value user attributes to update.
+     *
+     * @return  array                     information about the issue
+     */
+    public function updateRepoHook($username, $repo, $id, array $data)
+    {
+        return $this->patch('repos/'.urlencode($username).'/'.urlencode($repo).'/hooks/'.urlencode($id), $data);        
+    }
+
+    /**
+     * Delete a hook in selected repository
+     * @link http://developer.github.com/v3/repos/hooks/#delete-a-hook
+     *
+     * @param  string  $username         the user who owns the repo
+     * @param  string  $repo             the name of the repo
+     * @param  integer $id               the id of the hook
+     *
+     * @return array
+     */
+    public function deleteRepoHook($username, $repo, $id)
+    {
+        return $this->delete('repos/'.urlencode($username).'/'.urlencode($repo).'/hooks/'.urlencode($id));
+    }
+
+    /**
+     * Test a hook in selected repository
+     * @link http://developer.github.com/v3/repos/hooks/#test-a-hook
+     *
+     * @param  string  $username         the user who owns the repo
+     * @param  string  $repo             the name of the repo
+     * @param  integer $id               the id of the hook
+     *
+     * @return array
+     */
+    public function testRepoHook($username, $repo, $id)
+    {
+        return $this->post('repos/'.urlencode($username).'/'.urlencode($repo).'/hooks/'.urlencode($id)."/test");        
+    }
 }
