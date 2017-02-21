@@ -27,6 +27,8 @@ use Psr\Cache\CacheItemPoolInterface;
  * @method Api\GitData gitData()
  * @method Api\Gists gist()
  * @method Api\Gists gists()
+ * @method Api\Integrations integration()
+ * @method Api\Integrations integrations()
  * @method Api\Issue issue()
  * @method Api\Issue issues()
  * @method Api\Markdown markdown()
