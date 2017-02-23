@@ -168,6 +168,9 @@ class Builder
         } else {
             $this->headers[$header] = array_merge((array)$this->headers[$header], array($headerValue));
         }
+
+        $this->removePlugin(Plugin\HeaderAppendPlugin::class);
+        $this->addPlugin(new Plugin\HeaderAppendPlugin($this->headers));
     }
 
     /**

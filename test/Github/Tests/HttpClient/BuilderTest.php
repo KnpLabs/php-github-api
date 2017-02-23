@@ -49,4 +49,28 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
 
         $client->addHeaders($headers);
     }
+
+    /**
+     * @test
+     */
+    public function appendingHeaderShouldAddAndRemovePlugin()
+    {
+        $expectedHeaders = [
+            'Accept' => 'application/vnd.github.v3',
+        ];
+
+        $client = $this->getMockBuilder(\Github\HttpClient\Builder::class)
+            ->setMethods(array('removePlugin', 'addPlugin'))
+            ->getMock();
+
+        $client->expects($this->once())
+            ->method('removePlugin')
+            ->with(Plugin\HeaderAppendPlugin::class);
+
+        $client->expects($this->once())
+            ->method('addPlugin')
+            ->with(new Plugin\HeaderAppendPlugin($expectedHeaders));
+
+        $client->addHeaderValue('Accept', 'application/vnd.github.v3');
+    }
 }
