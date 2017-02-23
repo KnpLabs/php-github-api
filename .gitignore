@@ -3,6 +3,3 @@ phpunit.xml
 composer.lock
 composer.phar
 vendor/*
-
-# IDEs
-/.idea/
