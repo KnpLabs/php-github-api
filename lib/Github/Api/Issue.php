@@ -18,6 +18,22 @@ use Github\Exception\MissingArgumentException;
  */
 class Issue extends AbstractApi
 {
+    use AcceptHeaderTrait;
+
+    /**
+     * Configure the body type.
+     *
+     * @link https://developer.github.com/v3/issues/#custom-media-types
+     * @param string|null $bodyType
+     */
+    public function configure($bodyType = null)
+    {
+        if (!in_array($bodyType, array('text', 'html', 'full'))) {
+            $bodyType = 'raw';
+        }
+        $this->acceptHeaderValue = sprintf('application/vnd.github.%s.%s+json', $this->client->getApiVersion(), $bodyType);
+    }
+
     /**
      * List issues by username, repo and state.
      *
