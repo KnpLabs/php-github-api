@@ -12,6 +12,12 @@ $labels = $client->api('issue')->labels()->all('KnpLabs', 'php-github-api');
 List all project labels by username and repo.
 Returns an array of project labels.
 
+### Get a single label
+
+```php
+$label = $client->api('issue')->labels()->all('KnpLabs', 'php-github-api', 'label1');
+```
+
 ### Create a label
 
 ```php

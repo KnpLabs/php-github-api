@@ -61,6 +61,22 @@ class LabelsTest extends TestCase
     /**
      * @test
      */
+    public function shouldGetSingleLabel()
+    {
+        $expectedValue = array(array('name' => 'label1'));
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/repos/KnpLabs/php-github-api/labels/label1')
+            ->will($this->returnValue($expectedValue));
+
+        $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 'label1'));
+    }
+
+    /**
+     * @test
+     */
     public function shouldCreateLabelWithColor()
     {
         $expectedValue = array(array('name' => 'label', 'color' => '111111'));
