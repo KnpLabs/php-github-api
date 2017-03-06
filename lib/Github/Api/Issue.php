@@ -31,6 +31,7 @@ class Issue extends AbstractApi
         if (!in_array($bodyType, array('text', 'html', 'full'))) {
             $bodyType = 'raw';
         }
+
         $this->acceptHeaderValue = sprintf('application/vnd.github.%s.%s+json', $this->client->getApiVersion(), $bodyType);
     }
 

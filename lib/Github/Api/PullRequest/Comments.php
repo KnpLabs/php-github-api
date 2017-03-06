@@ -3,6 +3,7 @@
 namespace Github\Api\PullRequest;
 
 use Github\Api\AbstractApi;
+use Github\Api\AcceptHeaderTrait;
 use Github\Exception\MissingArgumentException;
 
 /**
@@ -11,6 +12,27 @@ use Github\Exception\MissingArgumentException;
  */
 class Comments extends AbstractApi
 {
+    use AcceptHeaderTrait;
+
+    /**
+     * Configure the body type.
+     *
+     * @link https://developer.github.com/v3/pulls/comments/#custom-media-types
+     * @param string|null $bodyType
+     */
+    public function configure($apiVersion = null, $bodyType = null)
+    {
+        if (!in_array($apiVersion, array('squirrel-girl-preview'))) {
+            $apiVersion = $this->client->getApiVersion();
+        }
+
+        if (!in_array($bodyType, array('text', 'html', 'full'))) {
+            $bodyType = 'raw';
+        }
+
+        $this->acceptHeaderValue = sprintf('application/vnd.github.%s.%s+json', $apiVersion, $bodyType);
+    }
+
     public function all($username, $repository, $pullRequest = null)
     {
         if (null !== $pullRequest) {

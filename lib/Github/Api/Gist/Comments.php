@@ -3,6 +3,7 @@
 namespace Github\Api\Gist;
 
 use Github\Api\AbstractApi;
+use Github\Api\AcceptHeaderTrait;
 
 /**
  * @link   https://developer.github.com/v3/gists/comments/
@@ -10,6 +11,23 @@ use Github\Api\AbstractApi;
  */
 class Comments extends AbstractApi
 {
+    use AcceptHeaderTrait;
+
+    /**
+     * Configure the body type.
+     *
+     * @link https://developer.github.com/v3/gists/comments/#custom-media-types
+     * @param string|null $bodyType
+     */
+    public function configure($bodyType = null)
+    {
+        if (!in_array($bodyType, array('text', 'html', 'full'))) {
+            $bodyType = 'raw';
+        }
+
+        $this->acceptHeaderValue = sprintf('application/vnd.github.%s.%s+json', $this->client->getApiVersion(), $bodyType);
+    }
+
     /**
      * Get all comments for a gist.
      *
