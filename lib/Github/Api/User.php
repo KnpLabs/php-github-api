@@ -129,11 +129,11 @@ class User extends AbstractApi
      *
      * @link http://developer.github.com/v3/activity/starring/
      *
-     * @param string $username the username
-     * @param int    $page     the page number of the paginated result set
-     * @param int    $perPage  the number of results per page
-     * @param string $sort     sort by (possible values: created, updated)
-     * @param int    $perPage  direction of sort (possible values: asc, desc)
+     * @param string $username  the username
+     * @param int    $page      the page number of the paginated result set
+     * @param int    $perPage   the number of results per page
+     * @param string $sort      sort by (possible values: created, updated)
+     * @param string $direction direction of sort (possible values: asc, desc)
      *
      * @return array list of starred repositories
      */
