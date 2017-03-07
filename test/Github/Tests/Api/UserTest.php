@@ -42,6 +42,7 @@ class UserTest extends TestCase
 
         $this->assertEquals($expectedArray, $api->organizations('l3l0'));
     }
+
     public function shouldGetUserOrgs()
     {
         $expectedArray = array(array(
@@ -61,6 +62,7 @@ class UserTest extends TestCase
 
         $this->assertEquals($expectedArray, $api->orgs());
     }
+
     /**
      * @test
      */
@@ -129,6 +131,22 @@ class UserTest extends TestCase
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->followers('l3l0'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetStarredToRepositories()
+    {
+        $expectedArray = array(array('id' => 1, 'name' => 'l3l0repo'));
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/users/l3l0/starred', ['page' => 2, 'per_page' => 30, 'sort' => 'created', 'direction' => 'desc'])
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->starred('l3l0', 2));
     }
 
     /**
