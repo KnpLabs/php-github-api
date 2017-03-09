@@ -75,7 +75,11 @@ abstract class AbstractApi implements ApiInterface
         }
 
         if (count($parameters) > 0) {
-            $path .= '?'.http_build_query($parameters);
+            if(strpos($path,"?")===false) {
+                $path .= '?'.http_build_query($parameters);
+            } else {
+                $path .= '&'.http_build_query($parameters);
+            }
         }
 
         $response = $this->client->getHttpClient()->get($path, $requestHeaders);
