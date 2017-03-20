@@ -75,7 +75,7 @@ abstract class AbstractApi implements ApiInterface
         }
 
         if (count($parameters) > 0) {
-            if (strpos($path,"?") === false) {
+            if (strpos($path, "?") === false) {
                 $path .= '?'.http_build_query($parameters);
             } else {
                 $path .= '&'.http_build_query($parameters);
