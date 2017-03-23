@@ -19,8 +19,9 @@ class Comments extends AbstractApi
      *
      * @link https://developer.github.com/v3/pulls/comments/#custom-media-types
      * @param string|null $bodyType
+     * @param string|null @apiVersion
      */
-    public function configure($apiVersion = null, $bodyType = null)
+    public function configure($bodyType = null, $apiVersion = null)
     {
         if (!in_array($apiVersion, array('squirrel-girl-preview'))) {
             $apiVersion = $this->client->getApiVersion();
