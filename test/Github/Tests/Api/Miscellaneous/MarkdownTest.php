@@ -1,6 +1,8 @@
 <?php
 
-namespace Github\Tests\Api;
+namespace Github\Tests\Api\Miscellaneous;
+
+use Github\Tests\Api\TestCase;
 
 class MarkdownTest extends TestCase
 {

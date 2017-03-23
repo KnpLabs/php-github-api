@@ -14,6 +14,10 @@ APIs:
 * [Issues](issues.md)
   * [Comments](issue/comments.md)
   * [Labels](issue/labels.md)
+* Miscellaneous
+  * [Emojis](miscellaneous/emojis.md)
+  * [Gitignore](miscellaneous/gitignore.md)
+  * [Markdown](miscellaneous/markdown.md)
 * [Organization](organization.md)
   * [Members](organization/members.md)
   * [Teams](organization/teams.md)
