@@ -2,11 +2,21 @@
 
 The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release. 
 
-## 2.0.2
+## 2.1.0
+
+### Added
+
+- Add support for retrieving a single notification info using his ID 
+- Add a function to get user organizations
+- Added GraphQL support
+- Add page variable to organization repo list (Organization::repositories())
+- Add support for pull request review. 
+- Add support for adding branch protection.
 
 ### Fixed
 
 - Bug with double slashes when using enterprise URL. 
+- Bug when headers not being passed to request (#529)
 
 ## 2.0.0
 
