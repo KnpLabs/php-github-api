@@ -129,15 +129,21 @@ class User extends AbstractApi
      *
      * @link http://developer.github.com/v3/activity/starring/
      *
-     * @param string $username the username
-     * @param int    $page     the page number of the paginated result set
+     * @param string $username  the username
+     * @param int    $page      the page number of the paginated result set
+     * @param int    $perPage   the number of results per page
+     * @param string $sort      sort by (possible values: created, updated)
+     * @param string $direction direction of sort (possible values: asc, desc)
      *
      * @return array list of starred repositories
      */
-    public function starred($username, $page = 1)
+    public function starred($username, $page = 1, $perPage = 30, $sort = 'created', $direction = 'desc')
     {
         return $this->get('/users/'.rawurlencode($username).'/starred', array(
-            'page' => $page
+            'page' => $page,
+            'per_page' => $perPage,
+            'sort' => $sort,
+            'direction' => $direction,
         ));
     }
 
