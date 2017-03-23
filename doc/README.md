@@ -12,8 +12,10 @@ APIs:
   * [Comments](gists/comments.md)
 * [Integrations](integrations.md)
 * [Issues](issues.md)
+  * [Assignees](issue/assignees.md)
   * [Comments](issue/comments.md)
   * [Labels](issue/labels.md)
+  * [Milestones](issue/milestones.md)
 * Miscellaneous
   * [Emojis](miscellaneous/emojis.md)
   * [Gitignore](miscellaneous/gitignore.md)

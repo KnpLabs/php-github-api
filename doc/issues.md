@@ -84,3 +84,15 @@ $client->api('issue')->all('KnpLabs', 'php-github-api', array('labels' => 'label
 ```
 
 Returns an array of issues matching the given label.
+
+### Lock an issue discussion
+
+```php
+$client->api('issue')->lock('KnpLabs', 'php-github-api', 4);
+```
+
+### Unlock an issue discussion
+
+```php
+$client->api('issue')->unlock('KnpLabs', 'php-github-api', 4);
+```
