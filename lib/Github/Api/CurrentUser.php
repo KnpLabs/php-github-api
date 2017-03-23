@@ -112,7 +112,7 @@ class CurrentUser extends AbstractApi
      *
      * @param string $type      role in the repository
      * @param string $sort      sort by
-     * @param string $direction direction of sort, ask or desc
+     * @param string $direction direction of sort, asc or desc
      *
      * @return array
      */
