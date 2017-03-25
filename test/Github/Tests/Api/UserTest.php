@@ -85,6 +85,25 @@ class UserTest extends TestCase
     /**
      * @test
      */
+    public function shouldGetAllUsersSince()
+    {
+        $expectedArray = array(
+            array('id' => 3, 'username' => 'test3'),
+            array('id' => 4, 'username' => 'test4')
+        );
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/users', ['since' => 2])
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->all(2));
+    }
+
+    /**
+     * @test
+     */
     public function shouldSearchUsers()
     {
         $expectedArray = array(

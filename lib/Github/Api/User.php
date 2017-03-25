@@ -40,7 +40,7 @@ class User extends AbstractApi
             return $this->get('/users');
         }
 
-        return $this->get('/users?since=' . rawurldecode($id));
+        return $this->get('/users', ['since' => rawurldecode($id)]);
     }
 
     /**
