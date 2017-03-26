@@ -58,6 +58,6 @@ class Traffic extends AbstractApi
      */
     public function clones($owner, $repository, $per = 'day')
     {
-        return $this->get('/repos/'.rawurlencode($owner).'/'.rawurlencode($repository).'/traffic/clones?per='.rawurlencode($per)');
+        return $this->get('/repos/'.rawurlencode($owner).'/'.rawurlencode($repository).'/traffic/clones?per='.rawurlencode($per));
     }
 }
