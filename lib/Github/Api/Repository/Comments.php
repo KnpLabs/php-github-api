@@ -15,6 +15,11 @@ class Comments extends AbstractApi
 {
     use AcceptHeaderTrait;
 
+    /**
+     * @param string|null $bodyType
+     *
+     * @return self
+     */
     public function configure($bodyType = null)
     {
         switch ($bodyType) {
@@ -35,6 +40,8 @@ class Comments extends AbstractApi
         }
 
         $this->acceptHeaderValue = $header;
+
+        return $this;
     }
 
     public function all($username, $repository, $sha = null)
