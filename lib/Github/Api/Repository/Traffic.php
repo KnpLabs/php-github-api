@@ -52,11 +52,12 @@ class Traffic extends AbstractApi
      *
      * @param string $owner
      * @param string $repository
+     * @param string|day $per
      *
      * @return array
      */
-    public function clones($owner, $repository)
+    public function clones($owner, $repository, $per = 'day')
     {
-        return $this->get('/repos/'.rawurlencode($owner).'/'.rawurlencode($repository).'/traffic/clones');
+        return $this->get('/repos/'.rawurlencode($owner).'/'.rawurlencode($repository).'/traffic/clones?per='.rawurlencode($per)');
     }
 }
