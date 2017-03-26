@@ -8,29 +8,72 @@ class TrafficTest extends TestCase
     /**
      * @test
      */
-    public function shoulddoSomething()
+    public function shouldgetReferers()
     {
-        // Create a variable with the "Server response".
-        $expectedValue = array('comment1');
+        $expectedValue = json_encode(["referrer" => "github.com","count" => 112,"uniques" => 15]);
 
-        // Get the API mock (see "getApiClass" below).
         $api = $this->getApiMock();
 
-        $api->expects($this->once())                    // Expect one call
-            ->method('get')                             // A GET request
-            ->with('/gists/123/comments/456')           // URI should be "/gists/123/comments/456"
-            ->will($this->returnValue($expectedValue)); // Should return the "Server response"
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/repos/knplabs/php-github-api/traffic/popular/referrers')
+            ->will($this->returnValue($expectedValue));
 
-        // Call Comments::show
-        $result = $api->show(123, 456);
+        $result = $api->referers('knplabs', 'php-github-api');
 
-        // Verify that the result is the "Server response" as we expect.
+        $this->assertEquals($expectedValue, $result);
+    }
+
+    public function shouldgetPaths()
+    {
+        $expectedValue = json_encode(["path" => "/knplabs/php-github-api","title" => "KnpLabs/php-github-api: A simple PHP GitHub API client, Object Oriented, tested and documented. For 5.5+.","count" => 203,"uniques" => 54]);
+
+        $api = $this->getApiMock();
+
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/repos/knplabs/php-github-api/traffic/popular/paths')
+            ->will($this->returnValue($expectedValue));
+
+        $result = $api->paths('knplabs', 'php-github-api');
+
+        $this->assertEquals($expectedValue, $result);
+    }
+
+    public function shouldgetViews()
+    {
+        $expectedValue = json_encode(["count" => 813,"uniques" => 61,"views" => [["timestamp" => "2017-03-12T00:00:00Z","count" => 40,"uniques" => 3]]]);
+
+        $api = $this->getApiMock();
+
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/repos/knplabs/php-github-api/traffic/views?per=day')
+            ->will($this->returnValue($expectedValue));
+
+        $result = $api->views('knplabs', 'php-github-api');
+
+        $this->assertEquals($expectedValue, $result);
+    }
+
+    public function shouldgetClones()
+    {
+        $expectedValue = json_encode(["count" => 813,"uniques" => 61,"clones" => [["timestamp" => "2017-03-12T00:00:00Z","count" => 14,"uniques" => 8]]]);
+
+        $api = $this->getApiMock();
+
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/repos/knplabs/php-github-api/traffic/clones?per=day')
+            ->will($this->returnValue($expectedValue));
+
+        $result = $api->clones('knplabs', 'php-github-api');
+
         $this->assertEquals($expectedValue, $result);
     }
 
     protected function getApiClass()
     {
-        // Tell the "getAPIMock" what class to mock.
-        return \Github\Api\Gist\Comments::class;
+        return \Github\Api\Repository\Traffic::class;
     }
 }
