@@ -14,6 +14,27 @@ use Github\Api\Gist\Comments;
  */
 class Gists extends AbstractApi
 {
+    use AcceptHeaderTrait;
+
+    /**
+     * Configure the body type.
+     *
+     * @link https://developer.github.com/v3/gists/#custom-media-types
+     * @param string|null $bodyType
+     *
+     * @return self
+     */
+    public function configure($bodyType = null)
+    {
+        if (!in_array($bodyType, array('base64'))) {
+            $bodyType = 'raw';
+        }
+
+        $this->acceptHeaderValue = sprintf('application/vnd.github.%s.%s', $this->client->getApiVersion(), $bodyType);
+
+        return $this;
+    }
+
     public function all($type = null)
     {
         if (!in_array($type, array('public', 'starred'))) {

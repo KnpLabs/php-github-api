@@ -3,6 +3,7 @@
 namespace Github\Api\Repository;
 
 use Github\Api\AbstractApi;
+use Github\Api\AcceptHeaderTrait;
 use Github\Exception\InvalidArgumentException;
 use Github\Exception\ErrorException;
 use Github\Exception\MissingArgumentException;
@@ -14,6 +15,27 @@ use Github\Exception\TwoFactorAuthenticationRequiredException;
  */
 class Contents extends AbstractApi
 {
+    use AcceptHeaderTrait;
+
+    /**
+     * Configure the body type.
+     *
+     * @link https://developer.github.com/v3/repo/contents/#custom-media-types
+     * @param string|null $bodyType
+     *
+     * @return self
+     */
+    public function configure($bodyType = null)
+    {
+        if (!in_array($bodyType, array('html', 'object'))) {
+            $bodyType = 'raw';
+        }
+
+        $this->acceptHeaderValue = sprintf('application/vnd.github.%s.%s', $this->client->getApiVersion(), $bodyType);
+
+        return $this;
+    }
+
     /**
      * Get content of README file in a repository.
      *
