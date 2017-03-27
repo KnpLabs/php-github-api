@@ -19,12 +19,16 @@ class Blobs extends AbstractApi
      * Configure the Accept header depending on the blob type.
      *
      * @param string|null $bodyType
+     *
+     * @return self
      */
     public function configure($bodyType = null)
     {
         if ('raw' === $bodyType) {
             $this->acceptHeaderValue = sprintf('application/vnd.github.%s.raw', $this->client->getApiVersion());
         }
+
+        return $this;
     }
 
     /**

@@ -20,6 +20,8 @@ class Comments extends AbstractApi
      *
      * @link https://developer.github.com/v3/issues/comments/#custom-media-types
      * @param string|null $bodyType
+     *
+     * @return self
      */
     public function configure($bodyType = null)
     {
@@ -28,6 +30,8 @@ class Comments extends AbstractApi
         }
 
         $this->acceptHeaderValue = sprintf('application/vnd.github.%s.%s+json', $this->client->getApiVersion(), $bodyType);
+
+        return $this;
     }
 
     /**

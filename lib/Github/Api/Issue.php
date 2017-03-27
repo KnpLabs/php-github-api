@@ -2,6 +2,7 @@
 
 namespace Github\Api;
 
+use Github\Api\Issue\Assignees;
 use Github\Api\Issue\Comments;
 use Github\Api\Issue\Events;
 use Github\Api\Issue\Labels;
@@ -150,6 +151,38 @@ class Issue extends AbstractApi
     }
 
     /**
+     * Lock an issue. Users with push access can lock an issue's conversation.
+     *
+     * @link https://developer.github.com/v3/issues/#lock-an-issue
+     *
+     * @param string $username
+     * @param string $repository
+     * @param string $id
+     *
+     * @return string
+     */
+    public function lock($username, $repository, $id)
+    {
+        return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($id).'/lock');
+    }
+
+    /**
+     * Unlock an issue. Users with push access can unlock an issue's conversation.
+     *
+     * @link https://developer.github.com/v3/issues/#lock-an-issue
+     *
+     * @param string $username
+     * @param string $repository
+     * @param string $id
+     *
+     * @return string
+     */
+    public function unlock($username, $repository, $id)
+    {
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($id).'/lock');
+    }
+
+    /**
      * List an issue comments.
      *
      * @link http://developer.github.com/v3/issues/comments/
@@ -195,5 +228,17 @@ class Issue extends AbstractApi
     public function milestones()
     {
         return new Milestones($this->client);
+    }
+
+    /**
+     * List all assignees.
+     *
+     * @link https://developer.github.com/v3/issues/assignees/
+     *
+     * @return Assignees
+     */
+    public function assignees()
+    {
+        return new Assignees($this->client);
     }
 }
