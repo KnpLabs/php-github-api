@@ -22,6 +22,8 @@ class Contents extends AbstractApi
      *
      * @link https://developer.github.com/v3/repo/contents/#custom-media-types
      * @param string|null $bodyType
+     *
+     * @return self
      */
     public function configure($bodyType = null)
     {
@@ -30,6 +32,8 @@ class Contents extends AbstractApi
         }
 
         $this->acceptHeaderValue = sprintf('application/vnd.github.%s.%s', $this->client->getApiVersion(), $bodyType);
+
+        return $this;
     }
 
     /**

@@ -23,6 +23,8 @@ class PullRequest extends AbstractApi
      * @link https://developer.github.com/v3/pulls/#custom-media-types
      * @param string|null $bodyType
      * @param string|null $apiVersion
+     *
+     * @return self
      */
     public function configure($bodyType = null, $apiVersion = null)
     {
@@ -39,6 +41,8 @@ class PullRequest extends AbstractApi
         }
 
         $this->acceptHeaderValue = sprintf('application/vnd.github.%s.%s', $this->client->getApiVersion(), $bodyType);
+
+        return $this;
     }
 
     /**
