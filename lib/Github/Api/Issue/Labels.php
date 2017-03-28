@@ -34,6 +34,22 @@ class Labels extends AbstractApi
     }
 
     /**
+     * Get a single label.
+     *
+     * @link https://developer.github.com/v3/issues/labels/#get-a-single-label
+     *
+     * @param string $username
+     * @param string $repository
+     * @param string $label
+     *
+     * @return array
+     */
+    public function show($username, $repository, $label)
+    {
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels/'.rawurlencode($label));
+    }
+
+    /**
      * Create a label for a repository.
      *
      * @link https://developer.github.com/v3/issues/labels/#create-a-label

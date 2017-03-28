@@ -3,6 +3,7 @@
 namespace Github\Api\PullRequest;
 
 use Github\Api\AbstractApi;
+use Github\Api\AcceptHeaderTrait;
 use Github\Exception\InvalidArgumentException;
 use Github\Exception\MissingArgumentException;
 
@@ -14,6 +15,15 @@ use Github\Exception\MissingArgumentException;
  */
 class Review extends AbstractApi
 {
+    use AcceptHeaderTrait;
+
+    public function configure()
+    {
+        $this->acceptHeaderValue = 'application/vnd.github.black-cat-preview+json';
+
+        return $this;
+    }
+
     /**
      * Get a listing of a pull request's reviews by the username, repository and pull request number.
      *

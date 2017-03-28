@@ -15,26 +15,23 @@ class Comments extends AbstractApi
 {
     use AcceptHeaderTrait;
 
+    /**
+     * Configure the body type.
+     *
+     * @link https://developer.github.com/v3/repos/comments/#custom-media-types
+     * @param string|null $bodyType
+     *
+     * @return self
+     */
     public function configure($bodyType = null)
     {
-        switch ($bodyType) {
-            case 'raw':
-                $header = sprintf('Accept: application/vnd.github.%s.raw+json', $this->client->getApiVersion());
-                break;
-
-            case 'text':
-                $header = sprintf('Accept: application/vnd.github.%s.text+json', $this->client->getApiVersion());
-                break;
-
-            case 'html':
-                $header = sprintf('Accept: application/vnd.github.%s.html+json', $this->client->getApiVersion());
-                break;
-
-            default:
-                $header = sprintf('Accept: application/vnd.github.%s.full+json', $this->client->getApiVersion());
+        if (!in_array($bodyType, array('raw', 'text', 'html'))) {
+            $bodyType = 'full';
         }
 
-        $this->acceptHeaderValue = $header;
+        $this->acceptHeaderValue = sprintf('application/vnd.github.%s.%s+json', $this->client->getApiVersion(), $bodyType);
+
+        return $this;
     }
 
     public function all($username, $repository, $sha = null)

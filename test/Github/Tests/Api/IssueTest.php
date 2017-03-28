@@ -243,6 +243,36 @@ class IssueTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function shouldLockIssue()
+    {
+        $parameters = array();
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('put')
+            ->with('/repos/knplabs/php-github-api/issues/1/lock', $parameters);
+
+        $api->lock('knplabs', 'php-github-api', '1');
+    }
+
+    /**
+     * @test
+     */
+    public function shouldUnlockIssue()
+    {
+        $parameters = array();
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('delete')
+            ->with('/repos/knplabs/php-github-api/issues/1/lock', $parameters);
+
+        $api->unlock('knplabs', 'php-github-api', '1');
+    }
+
+    /**
      * @return string
      */
     protected function getApiClass()

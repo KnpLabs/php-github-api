@@ -2,6 +2,7 @@
 
 namespace Github\Api;
 
+use Github\Api\Issue\Assignees;
 use Github\Api\Issue\Comments;
 use Github\Api\Issue\Events;
 use Github\Api\Issue\Labels;
@@ -18,6 +19,27 @@ use Github\Exception\MissingArgumentException;
  */
 class Issue extends AbstractApi
 {
+    use AcceptHeaderTrait;
+
+    /**
+     * Configure the body type.
+     *
+     * @link https://developer.github.com/v3/issues/#custom-media-types
+     * @param string|null $bodyType
+     *
+     * @return self
+     */
+    public function configure($bodyType = null)
+    {
+        if (!in_array($bodyType, array('text', 'html', 'full'))) {
+            $bodyType = 'raw';
+        }
+
+        $this->acceptHeaderValue = sprintf('application/vnd.github.%s.%s+json', $this->client->getApiVersion(), $bodyType);
+
+        return $this;
+    }
+
     /**
      * List issues by username, repo and state.
      *
@@ -133,6 +155,38 @@ class Issue extends AbstractApi
     }
 
     /**
+     * Lock an issue. Users with push access can lock an issue's conversation.
+     *
+     * @link https://developer.github.com/v3/issues/#lock-an-issue
+     *
+     * @param string $username
+     * @param string $repository
+     * @param string $id
+     *
+     * @return string
+     */
+    public function lock($username, $repository, $id)
+    {
+        return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($id).'/lock');
+    }
+
+    /**
+     * Unlock an issue. Users with push access can unlock an issue's conversation.
+     *
+     * @link https://developer.github.com/v3/issues/#lock-an-issue
+     *
+     * @param string $username
+     * @param string $repository
+     * @param string $id
+     *
+     * @return string
+     */
+    public function unlock($username, $repository, $id)
+    {
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($id).'/lock');
+    }
+
+    /**
      * List an issue comments.
      *
      * @link http://developer.github.com/v3/issues/comments/
@@ -178,5 +232,17 @@ class Issue extends AbstractApi
     public function milestones()
     {
         return new Milestones($this->client);
+    }
+
+    /**
+     * List all assignees.
+     *
+     * @link https://developer.github.com/v3/issues/assignees/
+     *
+     * @return Assignees
+     */
+    public function assignees()
+    {
+        return new Assignees($this->client);
     }
 }

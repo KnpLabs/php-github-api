@@ -4,6 +4,7 @@ namespace Github\Api;
 
 use Github\Api\PullRequest\Comments;
 use Github\Api\PullRequest\Review;
+use Github\Api\PullRequest\ReviewRequest;
 use Github\Exception\MissingArgumentException;
 
 /**
@@ -14,6 +15,36 @@ use Github\Exception\MissingArgumentException;
  */
 class PullRequest extends AbstractApi
 {
+    use AcceptHeaderTrait;
+
+    /**
+     * Configure the body type.
+     *
+     * @link https://developer.github.com/v3/pulls/#custom-media-types
+     * @param string|null $bodyType
+     * @param string|null $apiVersion
+     *
+     * @return self
+     */
+    public function configure($bodyType = null, $apiVersion = null)
+    {
+        if (!in_array($apiVersion, array('polaris-preview'))) {
+            $apiVersion = $this->client->getApiVersion();
+        }
+
+        if (!in_array($bodyType, array('text', 'html', 'full', 'diff', 'patch'))) {
+            $bodyType = 'raw';
+        }
+
+        if (!in_array($bodyType, array('diff', 'patch'))) {
+            $bodyType .= '+json';
+        }
+
+        $this->acceptHeaderValue = sprintf('application/vnd.github.%s.%s', $this->client->getApiVersion(), $bodyType);
+
+        return $this;
+    }
+
     /**
      * Get a listing of a project's pull requests by the username, repository and (optionally) state.
      *
@@ -69,6 +100,11 @@ class PullRequest extends AbstractApi
     public function reviews()
     {
         return new Review($this->client);
+    }
+
+    public function reviewRequests()
+    {
+        return new ReviewRequest($this->client);
     }
 
     /**

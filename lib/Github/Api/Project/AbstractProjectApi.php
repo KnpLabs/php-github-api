@@ -13,10 +13,14 @@ abstract class AbstractProjectApi extends AbstractApi
      * Configure the accept header for Early Access to the projects api
      *
      * @see https://developer.github.com/v3/repos/projects/#projects
+     *
+     * @return self
      */
     public function configure()
     {
         $this->acceptHeaderValue = 'application/vnd.github.inertia-preview+json';
+
+        return $this;
     }
 
     public function show($id, array $params = array())

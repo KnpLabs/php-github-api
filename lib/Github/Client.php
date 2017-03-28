@@ -23,10 +23,12 @@ use Psr\Cache\CacheItemPoolInterface;
  * @method Api\CurrentUser me()
  * @method Api\Enterprise ent()
  * @method Api\Enterprise enterprise()
+ * @method Api\Miscellaneous\Emojis emojis()
  * @method Api\GitData git()
  * @method Api\GitData gitData()
  * @method Api\Gists gist()
  * @method Api\Gists gists()
+ * @method Api\Miscellaneous\Gitignore gitignore()
  * @method Api\Integrations integration()
  * @method Api\Integrations integrations()
  * @method Api\Issue issue()
@@ -177,6 +179,10 @@ class Client
                 $api = new Api\Enterprise($this);
                 break;
 
+            case 'emojis':
+                $api = new Api\Miscellaneous\Emojis($this);
+                break;
+
             case 'git':
             case 'git_data':
             case 'gitData':
@@ -186,6 +192,10 @@ class Client
             case 'gist':
             case 'gists':
                 $api = new Api\Gists($this);
+                break;
+
+            case 'gitignore':
+                $api = new Api\Miscellaneous\Gitignore($this);
                 break;
 
             case 'integration':
