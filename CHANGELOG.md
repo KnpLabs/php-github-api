@@ -18,7 +18,7 @@ The change log describes what is "Added", "Removed", "Changed" or "Fixed" betwee
 ### Fixed
 
 - Cache issue where some requests are not cached
-- Issue with `User::all()` creates an query with double question marks.
+- Issue with `User::all()` creates a query with double question marks.
 
 ## 2.1.0
 
