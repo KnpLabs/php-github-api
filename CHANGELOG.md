@@ -11,7 +11,7 @@ The change log describes what is "Added", "Removed", "Changed" or "Fixed" betwee
 - API support for issue Assignees. 
 - API support for Miscellaneous Gitignore and Emojis. 
 - Added endpoints for issue lock, unlock and issue label show. 
-- Added more parameters to ´User::starred`.
+- Added more parameters to `User::starred`.
 - Fluid interface by allowing `configure()` to return `$this`.
 - `configure()` support for issues API.
 
