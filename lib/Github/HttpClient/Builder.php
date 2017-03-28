@@ -176,12 +176,12 @@ class Builder
     /**
      * Add a cache plugin to cache responses locally.
      *
-     * @param CacheItemPoolInterface $cache
+     * @param CacheItemPoolInterface $cachePool
      * @param array                  $config
      */
     public function addCache(CacheItemPoolInterface $cachePool, array $config = [])
     {
-        $this->cachePlugin = new Plugin\CachePlugin($cachePool, $this->streamFactory, $config);
+        $this->cachePlugin = Plugin\CachePlugin::clientCache($cachePool, $this->streamFactory, $config);
         $this->httpClientModified = true;
     }
 

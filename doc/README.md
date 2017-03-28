@@ -48,4 +48,5 @@ Additional features:
 * [Request any Route](request_any_route.md)
 * [Customize `php-github-api`](customize.md)
 * [Running and writing tests](testing.md)
+* [Response caching](caching.md)
 * [Request / Response info](request_response_info.md)
