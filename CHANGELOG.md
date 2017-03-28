@@ -2,6 +2,24 @@
 
 The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release. 
 
+## 2.2.0
+
+### Added
+
+- API support for Reviews. 
+- API support for Traffic. 
+- API support for issue Assignees. 
+- API support for Miscellaneous Gitignore and Emojis. 
+- Added endpoints for issue lock, unlock and issue label show. 
+- Added more parameters to `User::starred`.
+- Fluid interface by allowing `configure()` to return `$this`.
+- `configure()` support for issues API.
+
+### Fixed
+
+- Cache issue where some requests are not cached
+- Issue with `User::all()` creates a query with double question marks.
+
 ## 2.1.0
 
 ### Added
