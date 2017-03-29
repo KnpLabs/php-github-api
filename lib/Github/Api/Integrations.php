@@ -23,7 +23,6 @@ class Integrations extends AbstractApi
         if ($userId) {
             $parameters['user_id'] = $userId;
         }
-
         return $this->post('/installations/'.rawurlencode($installationId).'/access_tokens', $parameters);
     }
 
@@ -48,9 +47,13 @@ class Integrations extends AbstractApi
      *
      * @return array
      */
-    public function listRepositories($userId)
+    public function listRepositories($userId = null)
     {
-        return $this->get('/installation/repositories', ['user_id' => $userId]);
+        $parameters = array();
+        if ($userId) {
+            $parameters['user_id'] = $userId;
+        }
+        return $this->get('/installation/repositories', $parameters);
     }
 
     /**
