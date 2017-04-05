@@ -183,7 +183,7 @@ class Builder
     public function addCache(CacheItemPoolInterface $cachePool, array $config = [])
     {
         if (!isset($config['cache_key_generator'])) {
-            $config['cache_key_generator'] = new HeaderCacheKeyGenerator(['Authorization', 'Cookie', 'Accept']);
+            $config['cache_key_generator'] = new HeaderCacheKeyGenerator(['Authorization', 'Cookie', 'Accept', 'Content-type']);
         }
         $this->cachePlugin = Plugin\CachePlugin::clientCache($cachePool, $this->streamFactory, $config);
         $this->httpClientModified = true;
