@@ -35,6 +35,8 @@
     "autoload": {
         "psr-4": { "Github\\": "lib/Github/" }
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "extra": {
         "branch-alias": {
             "dev-master": "2.3.x-dev"
