@@ -154,6 +154,10 @@ class PullRequest extends AbstractApi
 
     public function merge($username, $repository, $id, $message, $sha, $mergeMethod = 'merge', $title = null)
     {
+        if (is_bool($mergeMethod)) {
+            $mergeMethod = $mergeMethod ? 'squash' : 'merge';
+        }
+
         if (!in_array($mergeMethod, array('squash', 'rebase'))) {
             $mergeMethod = 'merge';
         }
