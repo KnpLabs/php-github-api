@@ -22,16 +22,11 @@ class PullRequest extends AbstractApi
      *
      * @link https://developer.github.com/v3/pulls/#custom-media-types
      * @param string|null $bodyType
-     * @param string|null $apiVersion
      *
      * @return self
      */
-    public function configure($bodyType = null, $apiVersion = null)
+    public function configure($bodyType = null)
     {
-        if (!in_array($apiVersion, array('polaris-preview'))) {
-            $apiVersion = $this->client->getApiVersion();
-        }
-
         if (!in_array($bodyType, array('text', 'html', 'full', 'diff', 'patch'))) {
             $bodyType = 'raw';
         }
@@ -159,8 +154,8 @@ class PullRequest extends AbstractApi
 
     public function merge($username, $repository, $id, $message, $sha, $mergeMethod = 'merge', $title = null)
     {
-        if (is_bool($mergeMethod)) {
-            $mergeMethod = $mergeMethod ? 'squash' : 'merge';
+        if (!in_array($mergeMethod, array('squash', 'rebase'))) {
+            $mergeMethod = 'merge';
         }
 
         $params = array(
