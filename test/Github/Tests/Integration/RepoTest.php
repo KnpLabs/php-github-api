@@ -1,9 +1,9 @@
 <?php
 
-namespace Github\Tests\Functional;
+namespace Github\Tests\Integration;
 
 /**
- * @group functional
+ * @group integration
  */
 class RepoTest extends TestCase
 {

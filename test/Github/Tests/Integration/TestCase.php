@@ -1,13 +1,13 @@
 <?php
 
-namespace Github\Tests\Functional;
+namespace Github\Tests\Integration;
 
 use Github\Client;
 use Github\Exception\ApiLimitExceedException;
 use Github\Exception\RuntimeException;
 
 /**
- * @group functional
+ * @group integration
  */
 class TestCase extends \PHPUnit_Framework_TestCase
 {
