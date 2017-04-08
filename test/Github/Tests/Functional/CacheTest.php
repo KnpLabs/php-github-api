@@ -5,7 +5,6 @@ namespace Github\Tests\Functional;
 use Cache\Adapter\PHPArray\ArrayCachePool;
 use Github\Client;
 use GuzzleHttp\Psr7\Response;
-use function GuzzleHttp\Psr7\stream_for;
 
 /**
  * @group functional
@@ -60,7 +59,7 @@ class CacheTest extends \PHPUnit_Framework_TestCase
             'Content-Type' => 'application/json',
         ];
 
-        $body = stream_for(json_encode([
+        $body = \GuzzleHttp\Psr7\stream_for(json_encode([
           'login' => $username,
         ]));
 
