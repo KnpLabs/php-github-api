@@ -1,11 +1,11 @@
 <?php
 
-namespace Github\Tests\Functional;
+namespace Github\Tests\Integration;
 
 use Github\Api\Markdown;
 
 /**
- * @group functional
+ * @group integration
  */
 class MarkdownTest extends TestCase
 {

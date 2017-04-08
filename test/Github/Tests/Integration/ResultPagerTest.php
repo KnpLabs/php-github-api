@@ -1,11 +1,11 @@
 <?php
 
-namespace Github\Tests\Functional;
+namespace Github\Tests\Integration;
 
 use Github\ResultPager;
 
 /**
- * @group functional
+ * @group integration
  */
 class ResultPagerTest extends TestCase
 {
