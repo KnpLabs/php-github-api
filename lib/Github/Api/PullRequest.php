@@ -57,6 +57,12 @@ class PullRequest extends AbstractApi
     {
         return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/files');
     }
+    
+    public function status($username, $repository, $id) {
+        $link = $this->show($username, $repository, $id)['_links']['statuses']['href'];
+
+        return $this->get($link);
+    }
 
     public function comments()
     {
