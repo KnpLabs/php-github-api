@@ -107,17 +107,17 @@ class PullRequestTest extends TestCase
     public function shouldShowStatusesFromPullRequest()
     {
         $expectedArray = array(array('id' => 'id', 'sha' => '123123'));
-        $expectedArray['_links']['statuses']['href'] = 'repos/ezsystems/ezpublish/pulls/15/statuses';
+        $expectedArray['_links']['statuses']['href'] = '/repos/ezsystems/ezpublish/pulls/15/statuses';
 
         $api = $this->getApiMock();
         $api->expects($this->at(0))
             ->method('get')
-            ->with('repos/ezsystems/ezpublish/pulls/15')
+            ->with('/repos/ezsystems/ezpublish/pulls/15')
             ->will($this->returnValue($expectedArray));
 
         $api->expects($this->at(1))
             ->method('get')
-            ->with('repos/ezsystems/ezpublish/pulls/15/statuses')
+            ->with('/repos/ezsystems/ezpublish/pulls/15/statuses')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->status('ezsystems', 'ezpublish', '15'));
