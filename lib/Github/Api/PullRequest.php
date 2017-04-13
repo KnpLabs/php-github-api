@@ -8,18 +8,20 @@ use Github\Exception\MissingArgumentException;
 /**
  * API for accessing Pull Requests from your Git/Github repositories.
  *
- * @link   http://developer.github.com/v3/pulls/
+ * @see   http://developer.github.com/v3/pulls/
+ *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class PullRequest extends AbstractApi
 {
     /**
      * Get a listing of a project's pull requests by the username, repository and (optionally) state.
-     * @link http://developer.github.com/v3/pulls/
      *
-     * @param string  $username   the username
-     * @param string  $repository the repository
-     * @param array   $params     a list of extra parameters.
+     * @see http://developer.github.com/v3/pulls/
+     *
+     * @param string $username   the username
+     * @param string $repository the repository
+     * @param array  $params     a list of extra parameters
      *
      * @return array array of pull requests for the project
      */
@@ -27,7 +29,7 @@ class PullRequest extends AbstractApi
     {
         $parameters = array_merge(array(
             'page' => 1,
-            'per_page' => 30
+            'per_page' => 30,
         ), $params);
 
         return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls', $parameters);
@@ -35,7 +37,8 @@ class PullRequest extends AbstractApi
 
     /**
      * Show all details of a pull request, including the discussions.
-     * @link http://developer.github.com/v3/pulls/
+     *
+     * @see http://developer.github.com/v3/pulls/
      *
      * @param string $username   the username
      * @param string $repository the repository
@@ -58,6 +61,17 @@ class PullRequest extends AbstractApi
         return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/files');
     }
 
+    /**
+     * All statuses which are the statuses of its head branch.
+     *
+     * @see http://developer.github.com/v3/pulls/
+     *
+     * @param string $username   the username
+     * @param string $repository the repository
+     * @param string $id         the ID of the pull request for which statuses are retrieved
+     *
+     * @return array array of pull requests for the project
+     */
     public function status($username, $repository, $id)
     {
         $link = $this->show($username, $repository, $id)['_links']['statuses']['href'];
@@ -71,8 +85,9 @@ class PullRequest extends AbstractApi
     }
 
     /**
-     * Create a pull request
-     * @link   http://developer.github.com/v3/pulls/
+     * Create a pull request.
+     *
+     * @see   http://developer.github.com/v3/pulls/
      *
      * @param string $username   the username
      * @param string $repository the repository
@@ -122,7 +137,7 @@ class PullRequest extends AbstractApi
     public function merge($username, $repository, $id, $message = null)
     {
         return $this->put('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/merge', array(
-            'commit_message' => $message
+            'commit_message' => $message,
         ));
     }
 }
