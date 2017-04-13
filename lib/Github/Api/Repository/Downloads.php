@@ -11,7 +11,8 @@ use Github\Api\AbstractApi;
 class Downloads extends AbstractApi
 {
     /**
-     * List downloads in selected repository
+     * List downloads in selected repository.
+     *
      * @link http://developer.github.com/v3/repos/downloads/#list-downloads-for-a-repository
      *
      * @param string $username   the user who owns the repo
@@ -21,36 +22,38 @@ class Downloads extends AbstractApi
      */
     public function all($username, $repository)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/downloads');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/downloads');
     }
 
     /**
-     * Get a download in selected repository
+     * Get a download in selected repository.
+     *
      * @link http://developer.github.com/v3/repos/downloads/#get-a-single-download
      *
-     * @param string  $username   the user who owns the repo
-     * @param string  $repository the name of the repo
-     * @param integer $id         the id of the download file
+     * @param string $username   the user who owns the repo
+     * @param string $repository the name of the repo
+     * @param int    $id         the id of the download file
      *
      * @return array
      */
     public function show($username, $repository, $id)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/downloads/'.rawurlencode($id));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/downloads/'.rawurlencode($id));
     }
 
     /**
-     * Delete a download in selected repository
+     * Delete a download in selected repository.
+     *
      * @link http://developer.github.com/v3/repos/downloads/#delete-a-download
      *
-     * @param string  $username   the user who owns the repo
-     * @param string  $repository the name of the repo
-     * @param integer $id         the id of the download file
+     * @param string $username   the user who owns the repo
+     * @param string $repository the name of the repo
+     * @param int    $id         the id of the download file
      *
      * @return array
      */
     public function remove($username, $repository, $id)
     {
-        return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/downloads/'.rawurlencode($id));
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/downloads/'.rawurlencode($id));
     }
 }

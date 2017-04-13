@@ -11,11 +11,32 @@ use Github\Exception\MissingArgumentException;
  */
 class Trees extends AbstractApi
 {
+    /**
+     * Get the tree for a repository.
+     *
+     * @param string $username
+     * @param string $repository
+     * @param string $sha
+     * @param bool   $recursive
+     *
+     * @return array
+     */
     public function show($username, $repository, $sha, $recursive = false)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/trees/'.rawurlencode($sha), array('recursive' => $recursive ? 1 : null));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/trees/'.rawurlencode($sha), $recursive ? array('recursive' => 1) : array());
     }
 
+    /**
+     * Create tree for a repository.
+     *
+     * @param string $username
+     * @param string $repository
+     * @param array  $params
+     *
+     * @return array
+     *
+     * @throws \Github\Exception\MissingArgumentException
+     */
     public function create($username, $repository, array $params)
     {
         if (!isset($params['tree']) || !is_array($params['tree'])) {
@@ -37,6 +58,6 @@ class Trees extends AbstractApi
             }
         }
 
-        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/trees', $params);
+        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/trees', $params);
     }
 }

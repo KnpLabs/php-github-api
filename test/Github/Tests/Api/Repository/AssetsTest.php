@@ -17,7 +17,7 @@ class AssetsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/releases/'.$id.'/assets')
+            ->with('/repos/KnpLabs/php-github-api/releases/'.$id.'/assets')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', $id));
@@ -34,7 +34,7 @@ class AssetsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/releases/assets/'.$assetId)
+            ->with('/repos/KnpLabs/php-github-api/releases/assets/'.$assetId)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', $assetId));
@@ -46,6 +46,12 @@ class AssetsTest extends TestCase
      */
     public function shouldCreateReleaseAsset()
     {
+        if (!defined('OPENSSL_TLSEXT_SERVER_NAME') || !OPENSSL_TLSEXT_SERVER_NAME) {
+            return $this->markTestSkipped(
+                'Asset upload support requires Server Name Indication. This is not supported be your PHP version.'
+            );
+        }
+
         $name = 'asset.gzip';
         $body = 'assetCreatedData';
         $contentType = 'application/gzip';
@@ -54,7 +60,7 @@ class AssetsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
           ->method('postRaw')
-          ->with('repos/KnpLabs/php-github-api/releases/'. $releaseId .'/assets?name='.$name)
+          ->with('https://uploads.github.com/repos/KnpLabs/php-github-api/releases/'. $releaseId .'/assets?name='.$name)
           ->will($this->returnValue($body));
 
         $this->assertEquals($body, $api->create('KnpLabs', 'php-github-api', $releaseId, $name, $contentType, $body));
@@ -72,7 +78,7 @@ class AssetsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
-            ->with('repos/KnpLabs/php-github-api/releases/assets/'.$assetId)
+            ->with('/repos/KnpLabs/php-github-api/releases/assets/'.$assetId)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->edit('KnpLabs', 'php-github-api', $assetId, $data));
@@ -80,7 +86,7 @@ class AssetsTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotEditReleaseAssetWithoutName()
     {
@@ -105,14 +111,17 @@ class AssetsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('repos/KnpLabs/php-github-api/releases/assets/'.$assetId)
+            ->with('/repos/KnpLabs/php-github-api/releases/assets/'.$assetId)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->remove('KnpLabs', 'php-github-api', $assetId));
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Repository\Assets';
+        return \Github\Api\Repository\Assets::class;
     }
 }

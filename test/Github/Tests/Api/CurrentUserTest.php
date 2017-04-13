@@ -14,7 +14,7 @@ class CurrentUserTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('user')
+            ->with('/user')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->show());
@@ -30,7 +30,7 @@ class CurrentUserTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
-            ->with('user', array('value' => 'toChange'))
+            ->with('/user', array('value' => 'toChange'))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->update(array('value' => 'toChange')));
@@ -46,7 +46,7 @@ class CurrentUserTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('user/followers', array('page' => 1))
+            ->with('/user/followers', array('page' => 1))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->followers(1));
@@ -62,7 +62,7 @@ class CurrentUserTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('issues', array('page' => 1, 'some' => 'param'))
+            ->with('/issues', array('page' => 1, 'some' => 'param'))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->issues(array('some' => 'param')));
@@ -78,7 +78,7 @@ class CurrentUserTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('user/watched', array('page' => 1))
+            ->with('/user/watched', array('page' => 1))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->watched(1));
@@ -91,7 +91,7 @@ class CurrentUserTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\CurrentUser\DeployKeys', $api->keys());
+        $this->assertInstanceOf(\Github\Api\CurrentUser\PublicKeys::class, $api->keys());
     }
 
     /**
@@ -101,7 +101,7 @@ class CurrentUserTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\CurrentUser\Emails', $api->emails());
+        $this->assertInstanceOf(\Github\Api\CurrentUser\Emails::class, $api->emails());
     }
 
     /**
@@ -111,7 +111,7 @@ class CurrentUserTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\CurrentUser\Followers', $api->follow());
+        $this->assertInstanceOf(\Github\Api\CurrentUser\Followers::class, $api->follow());
     }
 
     /**
@@ -121,7 +121,7 @@ class CurrentUserTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\CurrentUser\Notifications', $api->notifications());
+        $this->assertInstanceOf(\Github\Api\CurrentUser\Notifications::class, $api->notifications());
     }
 
     /**
@@ -131,11 +131,24 @@ class CurrentUserTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\CurrentUser\Watchers', $api->watchers());
+        $this->assertInstanceOf(\Github\Api\CurrentUser\Watchers::class, $api->watchers());
     }
 
+    /**
+     * @test
+     */
+    public function shouldGetStarredApiObject()
+    {
+        $api = $this->getApiMock();
+
+        $this->assertInstanceOf(\Github\Api\CurrentUser\Starring::class, $api->starring());
+    }
+
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\CurrentUser';
+        return \Github\Api\CurrentUser::class;
     }
 }

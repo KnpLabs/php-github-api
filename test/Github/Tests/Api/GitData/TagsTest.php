@@ -2,8 +2,6 @@
 
 namespace Github\Tests\Api;
 
-use Github\Tests\Api\TestCase;
-
 class TagsTest extends TestCase
 {
     /**
@@ -16,7 +14,7 @@ class TagsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/git/tags/123')
+            ->with('/repos/KnpLabs/php-github-api/git/tags/123')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 123));
@@ -32,7 +30,7 @@ class TagsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/git/refs/tags')
+            ->with('/repos/KnpLabs/php-github-api/git/refs/tags')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api'));
@@ -59,7 +57,7 @@ class TagsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('repos/KnpLabs/php-github-api/git/tags', $data)
+            ->with('/repos/KnpLabs/php-github-api/git/tags', $data)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', $data));
@@ -67,7 +65,7 @@ class TagsTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateTagWithoutMessageParam()
     {
@@ -91,7 +89,7 @@ class TagsTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateTagWithoutTaggerParam()
     {
@@ -111,7 +109,7 @@ class TagsTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateTagWithoutTaggerNameParam()
     {
@@ -135,7 +133,7 @@ class TagsTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateTagWithoutTaggerEmailParam()
     {
@@ -159,7 +157,7 @@ class TagsTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateTagWithoutTaggerDateParam()
     {
@@ -183,7 +181,7 @@ class TagsTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateTagWithoutTagParam()
     {
@@ -207,7 +205,7 @@ class TagsTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateTagWithoutObjectParam()
     {
@@ -231,7 +229,7 @@ class TagsTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateTagWithoutTypeParam()
     {
@@ -253,8 +251,11 @@ class TagsTest extends TestCase
         $api->create('KnpLabs', 'php-github-api', $data);
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\GitData\Tags';
+        return \Github\Api\GitData\Tags::class;
     }
 }

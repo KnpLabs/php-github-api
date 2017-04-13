@@ -2,8 +2,15 @@
 
 namespace Github\Tests;
 
+use Github\Api;
 use Github\Client;
-use Github\Exception\InvalidArgumentException;
+use Github\Exception\BadMethodCallException;
+use Github\HttpClient\Builder;
+use Github\HttpClient\Plugin\Authentication;
+use GuzzleHttp\Psr7\Response;
+use Http\Client\Common\Plugin;
+use Http\Client\HttpClient;
+use Psr\Http\Message\RequestInterface;
 
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
@@ -14,7 +21,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $client = new Client();
 
-        $this->assertInstanceOf('Github\HttpClient\HttpClient', $client->getHttpClient());
+        $this->assertInstanceOf(\Http\Client\HttpClient::class, $client->getHttpClient());
     }
 
     /**
@@ -22,9 +29,12 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldPassHttpClientInterfaceToConstructor()
     {
-        $client = new Client($this->getHttpClientMock());
+        $httpClientMock = $this->getMockBuilder(\Http\Client\HttpClient::class)
+            ->getMock();
 
-        $this->assertInstanceOf('Github\HttpClient\HttpClientInterface', $client->getHttpClient());
+        $client = Client::createWithHttpClient($httpClientMock);
+
+        $this->assertInstanceOf(\Http\Client\HttpClient::class, $client->getHttpClient());
     }
 
     /**
@@ -33,12 +43,25 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldAuthenticateUsingAllGivenParameters($login, $password, $method)
     {
-        $httpClient = $this->getHttpClientMock();
-        $httpClient->expects($this->once())
-            ->method('authenticate')
-            ->with($login, $password, $method);
+        $builder = $this->getMockBuilder(\Github\HttpClient\Builder::class)
+            ->setMethods(array('addPlugin', 'removePlugin'))
+            ->disableOriginalConstructor()
+            ->getMock();
+        $builder->expects($this->once())
+            ->method('addPlugin')
+            ->with($this->equalTo(new Authentication($login, $password, $method)));
+        $builder->expects($this->once())
+            ->method('removePlugin')
+            ->with(Authentication::class);
 
-        $client = new Client($httpClient);
+        $client = $this->getMockBuilder(\Github\Client::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getHttpClientBuilder'])
+            ->getMock();
+        $client->expects($this->any())
+            ->method('getHttpClientBuilder')
+            ->willReturn($builder);
+
         $client->authenticate($login, $password, $method);
     }
 
@@ -58,12 +81,25 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldAuthenticateUsingGivenParameters($token, $method)
     {
-        $httpClient = $this->getHttpClientMock();
-        $httpClient->expects($this->once())
-            ->method('authenticate')
-            ->with($token, null, $method);
+        $builder = $this->getMockBuilder(\Github\HttpClient\Builder::class)
+            ->setMethods(array('addPlugin', 'removePlugin'))
+            ->getMock();
+        $builder->expects($this->once())
+            ->method('addPlugin')
+            ->with($this->equalTo(new Authentication($token, null, $method)));
 
-        $client = new Client($httpClient);
+        $builder->expects($this->once())
+            ->method('removePlugin')
+            ->with(Authentication::class);
+
+        $client = $this->getMockBuilder(\Github\Client::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getHttpClientBuilder'])
+            ->getMock();
+        $client->expects($this->any())
+            ->method('getHttpClientBuilder')
+            ->willReturn($builder);
+
         $client->authenticate($token, $method);
     }
 
@@ -77,40 +113,13 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException InvalidArgumentException
+     * @expectedException \Github\Exception\InvalidArgumentException
      */
     public function shouldThrowExceptionWhenAuthenticatingWithoutMethodSet()
     {
-        $httpClient = $this->getHttpClientMock(array('addListener'));
+        $client = new Client();
 
-        $client = new Client($httpClient);
         $client->authenticate('login', null, null);
-    }
-
-    /**
-     * @test
-     */
-    public function shouldClearHeadersLazy()
-    {
-        $httpClient = $this->getHttpClientMock(array('clearHeaders'));
-        $httpClient->expects($this->once())->method('clearHeaders');
-
-        $client = new Client($httpClient);
-        $client->clearHeaders();
-    }
-
-    /**
-     * @test
-     */
-    public function shouldSetHeadersLaizly()
-    {
-        $headers = array('header1', 'header2');
-
-        $httpClient = $this->getHttpClientMock();
-        $httpClient->expects($this->once())->method('setHeaders')->with($headers);
-
-        $client = new Client($httpClient);
-        $client->setHeaders($headers);
     }
 
     /**
@@ -126,7 +135,18 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException InvalidArgumentException
+     * @dataProvider getApiClassesProvider
+     */
+    public function shouldGetMagicApiInstance($apiName, $class)
+    {
+        $client = new Client();
+
+        $this->assertInstanceOf($class, $client->$apiName());
+    }
+
+    /**
+     * @test
+     * @expectedException \Github\Exception\InvalidArgumentException
      */
     public function shouldNotGetApiInstance()
     {
@@ -134,52 +154,79 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $client->api('do_not_exist');
     }
 
+    /**
+     * @test
+     * @expectedException BadMethodCallException
+     */
+    public function shouldNotGetMagicApiInstance()
+    {
+        $client = new Client();
+        $client->doNotExist();
+    }
+
     public function getApiClassesProvider()
     {
         return array(
-            array('user', 'Github\Api\User'),
-            array('users', 'Github\Api\User'),
+            array('user', Api\User::class),
+            array('users', Api\User::class),
 
-            array('me', 'Github\Api\CurrentUser'),
-            array('current_user', 'Github\Api\CurrentUser'),
+            array('me', Api\CurrentUser::class),
+            array('current_user', Api\CurrentUser::class),
+            array('currentUser', Api\CurrentUser::class),
 
-            array('git', 'Github\Api\GitData'),
-            array('git_data', 'Github\Api\GitData'),
+            array('git', Api\GitData::class),
+            array('git_data', Api\GitData::class),
+            array('gitData', Api\GitData::class),
 
-            array('gist', 'Github\Api\Gists'),
-            array('gists', 'Github\Api\Gists'),
+            array('gist', Api\Gists::class),
+            array('gists', Api\Gists::class),
 
-            array('issue', 'Github\Api\Issue'),
-            array('issues', 'Github\Api\Issue'),
+            array('issue', Api\Issue::class),
+            array('issues', Api\Issue::class),
 
-            array('markdown', 'Github\Api\Markdown'),
+            array('markdown', Api\Markdown::class),
 
-            array('organization', 'Github\Api\Organization'),
-            array('organizations', 'Github\Api\Organization'),
+            array('organization', Api\Organization::class),
+            array('organizations', Api\Organization::class),
 
-            array('repo', 'Github\Api\Repo'),
-            array('repos', 'Github\Api\Repo'),
-            array('repository', 'Github\Api\Repo'),
-            array('repositories', 'Github\Api\Repo'),
+            array('repo', Api\Repo::class),
+            array('repos', Api\Repo::class),
+            array('repository', Api\Repo::class),
+            array('repositories', Api\Repo::class),
 
-            array('pr', 'Github\Api\PullRequest'),
-            array('pull_request', 'Github\Api\PullRequest'),
-            array('pull_requests', 'Github\Api\PullRequest'),
+            array('search', Api\Search::class),
 
-            array('authorization', 'Github\Api\Authorizations'),
-            array('authorizations', 'Github\Api\Authorizations'),
+            array('pr', Api\PullRequest::class),
+            array('pullRequest', Api\PullRequest::class),
+            array('pull_request', Api\PullRequest::class),
+            array('pullRequests', Api\PullRequest::class),
+            array('pull_requests', Api\PullRequest::class),
 
-            array('meta', 'Github\Api\Meta')
+            array('authorization', Api\Authorizations::class),
+            array('authorizations', Api\Authorizations::class),
+
+            array('meta', Api\Meta::class)
         );
     }
 
-    public function getHttpClientMock(array $methods = array())
+    /**
+     * Make sure that the URL is correct when using enterprise.
+     */
+    public function testEnterpriseUrl()
     {
-        $methods = array_merge(
-            array('get', 'post', 'patch', 'put', 'delete', 'request', 'setOption', 'setHeaders', 'authenticate'),
-            $methods
-        );
+        $httpClientMock = $this->getMockBuilder(HttpClient::class)
+            ->setMethods(['sendRequest'])
+            ->getMock();
 
-        return $this->getMock('Github\HttpClient\HttpClientInterface', $methods);
+        $httpClientMock->expects($this->once())
+            ->method('sendRequest')
+            ->with($this->callback(function (RequestInterface $request) {
+                return (string) $request->getUri() === 'https://foobar.com/api/v3/enterprise/stats/all';
+            }))
+            ->willReturn(new Response(200, [], '[]'));
+
+        $httpClientBuilder = new Builder($httpClientMock);
+        $client = new Client($httpClientBuilder, null, 'https://foobar.com');
+        $client->enterprise()->stats()->show('all');
     }
 }

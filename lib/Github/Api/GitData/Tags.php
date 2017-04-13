@@ -11,16 +11,44 @@ use Github\Exception\MissingArgumentException;
  */
 class Tags extends AbstractApi
 {
+    /**
+     * Get all tags for a repository.
+     *
+     * @param string $username
+     * @param string $repository
+     *
+     * @return array
+     */
     public function all($username, $repository)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs/tags');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs/tags');
     }
 
+    /**
+     * Get a tag for a repository.
+     *
+     * @param string $username
+     * @param string $repository
+     * @param string $sha
+     *
+     * @return array
+     */
     public function show($username, $repository, $sha)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/tags/'.rawurlencode($sha));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/tags/'.rawurlencode($sha));
     }
 
+    /**
+     * Create a tag for a repository.
+     *
+     * @param string $username
+     * @param string $repository
+     * @param array  $params
+     *
+     * @return array
+     *
+     * @throws \Github\Exception\MissingArgumentException
+     */
     public function create($username, $repository, array $params)
     {
         if (!isset($params['tag'], $params['message'], $params['object'], $params['type'])) {
@@ -35,6 +63,6 @@ class Tags extends AbstractApi
             throw new MissingArgumentException(array('tagger.name', 'tagger.email', 'tagger.date'));
         }
 
-        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/tags', $params);
+        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/tags', $params);
     }
 }

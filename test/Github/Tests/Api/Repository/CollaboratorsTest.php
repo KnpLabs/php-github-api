@@ -16,7 +16,7 @@ class CollaboratorsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/collaborators')
+            ->with('/repos/KnpLabs/php-github-api/collaborators')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api'));
@@ -32,7 +32,7 @@ class CollaboratorsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/collaborators/l3l0')
+            ->with('/repos/KnpLabs/php-github-api/collaborators/l3l0')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->check('KnpLabs', 'php-github-api', 'l3l0'));
@@ -48,7 +48,7 @@ class CollaboratorsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with('repos/KnpLabs/php-github-api/collaborators/l3l0')
+            ->with('/repos/KnpLabs/php-github-api/collaborators/l3l0')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->add('KnpLabs', 'php-github-api', 'l3l0'));
@@ -64,14 +64,17 @@ class CollaboratorsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('repos/KnpLabs/php-github-api/collaborators/l3l0')
+            ->with('/repos/KnpLabs/php-github-api/collaborators/l3l0')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->remove('KnpLabs', 'php-github-api', 'l3l0'));
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Repository\Collaborators';
+        return \Github\Api\Repository\Collaborators::class;
     }
 }

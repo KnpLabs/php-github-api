@@ -1,7 +1,11 @@
 ## Gists API
-[Back to the navigation](index.md)
+[Back to the navigation](README.md)
 
-Creating, editing, deleting and listing gists. Wraps [GitHub Gists API](http://developer.github.com/v3/gists/).
+Creating, editing, deleting and listing gists.
+Wraps [GitHub Gists API](http://developer.github.com/v3/gists/).
+
+Additional APIs:
+* [Comments](gists/comments.md)
 
 #### List all public gists.
 
@@ -33,6 +37,12 @@ $gists = $github->api('gists')->all();
 $gist = $github->api('gists')->show(1);
 ```
 
+#### Get commits for a single gist
+
+```php
+$commits = $github->api('gists')->commits(1);
+```
+
 #### Create a gist
 
 ```php
@@ -60,7 +70,7 @@ $data = array(
     'description' => 'This is new description'
 );
 
-$gist = $github->api('gists')->update($data);
+$gist = $github->api('gists')->update(1234, $data);
 ```
 
 You can update ``content`` of a previous file's version.

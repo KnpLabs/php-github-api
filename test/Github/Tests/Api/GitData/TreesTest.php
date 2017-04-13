@@ -2,8 +2,6 @@
 
 namespace Github\Tests\Api;
 
-use Github\Tests\Api\TestCase;
-
 class TreesTest extends TestCase
 {
     /**
@@ -16,7 +14,7 @@ class TreesTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/git/trees/123', array('recursive' => null))
+            ->with('/repos/KnpLabs/php-github-api/git/trees/123', array())
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 123));
@@ -48,7 +46,7 @@ class TreesTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('repos/KnpLabs/php-github-api/git/trees', $data)
+            ->with('/repos/KnpLabs/php-github-api/git/trees', $data)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', $data));
@@ -80,7 +78,7 @@ class TreesTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('repos/KnpLabs/php-github-api/git/trees', $data)
+            ->with('/repos/KnpLabs/php-github-api/git/trees', $data)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', $data));
@@ -88,7 +86,7 @@ class TreesTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateTreeWithoutShaAndContentParam()
     {
@@ -109,7 +107,7 @@ class TreesTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateTreeWithoutPathParam()
     {
@@ -130,7 +128,7 @@ class TreesTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateTreeWithoutModeParam()
     {
@@ -151,7 +149,7 @@ class TreesTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateTreeWithoutTypeParam()
     {
@@ -172,7 +170,7 @@ class TreesTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateTreeWithoutTreeParam()
     {
@@ -187,7 +185,7 @@ class TreesTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateTreeWhenTreeParamIsNotArray()
     {
@@ -202,8 +200,11 @@ class TreesTest extends TestCase
         $api->create('KnpLabs', 'php-github-api', $data);
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\GitData\Trees';
+        return \Github\Api\GitData\Trees::class;
     }
 }

@@ -13,7 +13,7 @@ class Teams extends AbstractApi
 {
     public function all($organization)
     {
-        return $this->get('orgs/'.rawurlencode($organization).'/teams');
+        return $this->get('/orgs/'.rawurlencode($organization).'/teams');
     }
 
     public function create($organization, array $params)
@@ -28,12 +28,12 @@ class Teams extends AbstractApi
             $params['permission'] = 'pull';
         }
 
-        return $this->post('orgs/'.rawurlencode($organization).'/teams', $params);
+        return $this->post('/orgs/'.rawurlencode($organization).'/teams', $params);
     }
 
     public function show($team)
     {
-        return $this->get('teams/'.rawurlencode($team));
+        return $this->get('/teams/'.rawurlencode($team));
     }
 
     public function update($team, array $params)
@@ -45,51 +45,55 @@ class Teams extends AbstractApi
             $params['permission'] = 'pull';
         }
 
-        return $this->patch('teams/'.rawurlencode($team), $params);
+        return $this->patch('/teams/'.rawurlencode($team), $params);
     }
 
     public function remove($team)
     {
-        return $this->delete('teams/'.rawurlencode($team));
+        return $this->delete('/teams/'.rawurlencode($team));
     }
 
     public function members($team)
     {
-        return $this->get('teams/'.rawurlencode($team).'/members');
+        return $this->get('/teams/'.rawurlencode($team).'/members');
     }
 
     public function check($team, $username)
     {
-        return $this->get('teams/'.rawurlencode($team).'/members/'.rawurlencode($username));
+        return $this->get('/teams/'.rawurlencode($team).'/memberships/'.rawurlencode($username));
     }
 
     public function addMember($team, $username)
     {
-        return $this->put('teams/'.rawurlencode($team).'/members/'.rawurlencode($username));
+        return $this->put('/teams/'.rawurlencode($team).'/memberships/'.rawurlencode($username));
     }
 
     public function removeMember($team, $username)
     {
-        return $this->delete('teams/'.rawurlencode($team).'/members/'.rawurlencode($username));
+        return $this->delete('/teams/'.rawurlencode($team).'/memberships/'.rawurlencode($username));
     }
 
     public function repositories($team)
     {
-        return $this->get('teams/'.rawurlencode($team).'/repos');
+        return $this->get('/teams/'.rawurlencode($team).'/repos');
     }
 
-    public function repository($team, $username, $repository)
+    public function repository($team, $organization, $repository)
     {
-        return $this->get('teams/'.rawurlencode($team).'/repos/'.rawurlencode($username).'/'.rawurlencode($repository));
+        return $this->get('/teams/'.rawurlencode($team).'/repos/'.rawurlencode($organization).'/'.rawurlencode($repository));
     }
 
-    public function addRepository($team, $username, $repository)
+    public function addRepository($team, $organization, $repository, $params = array())
     {
-        return $this->put('teams/'.rawurlencode($team).'/repos/'.rawurlencode($username).'/'.rawurlencode($repository));
+        if (isset($params['permission']) && !in_array($params['permission'], array('pull', 'push', 'admin'))) {
+            $params['permission'] = 'pull';
+        }
+
+        return $this->put('/teams/'.rawurlencode($team).'/repos/'.rawurlencode($organization).'/'.rawurlencode($repository), $params);
     }
 
-    public function removeRepository($team, $username, $repository)
+    public function removeRepository($team, $organization, $repository)
     {
-        return $this->delete('teams/'.rawurlencode($team).'/repos/'.rawurlencode($username).'/'.rawurlencode($repository));
+        return $this->delete('/teams/'.rawurlencode($team).'/repos/'.rawurlencode($organization).'/'.rawurlencode($repository));
     }
 }

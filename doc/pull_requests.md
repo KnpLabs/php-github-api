@@ -1,5 +1,5 @@
 ## Pull Requests API
-[Back to the navigation](index.md)
+[Back to the navigation](README.md)
 
 Additional APIs:
 * [Review Comments](pull_request/comments.md)
@@ -15,10 +15,10 @@ Wraps [GitHub Pull Request API](http://developer.github.com/v3/pulls/).
 ```php
 <?php
 
-$openPullRequests = $client->api('pull_request')->all('ezsystems', 'ezpublish', 'open');
+$openPullRequests = $client->api('pull_request')->all('ezsystems', 'ezpublish', array('state' => 'open'));
 ```
 
-The last parameter of the listPullRequests method default to 'open'. The call above is equivalent to:
+The state parameter of the listPullRequests method default to 'open'. The call above is equivalent to:
 
 ```php
 <?php
@@ -33,7 +33,7 @@ $openPullRequests = $client->api('pull_request')->all('ezsystems', 'ezpublish');
 ```php
 <?php
 
-$closedPullRequests = $client->api('pull_request')->all('ezsystems', 'ezpublish', 'closed');
+$closedPullRequests = $client->api('pull_request')->all('ezsystems', 'ezpublish', array('state' => 'closed'));
 ```
 
 ``$closedPullRequests`` contains an array of closed pull-requests for this repository.
@@ -67,7 +67,7 @@ $pullRequest = $client->api('pull_request')->create('ezsystems', 'ezpublish', ar
     'head'  => 'testbranch',
     'title' => 'My nifty pull request',
     'body'  => 'This pull request contains a bunch of enhancements and bug-fixes, happily shared with you'
-);
+));
 ```
 
 This returns the details of the pull request.
@@ -83,7 +83,7 @@ $pullRequest = $client->api('pull_request')->create('ezsystems', 'ezpublish', ar
     'base'  => 'master',
     'head'  => 'testbranch',
     'issue' => 15
-);
+));
 ```
 
 This returns the details of the pull request.

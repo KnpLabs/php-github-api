@@ -2,8 +2,6 @@
 
 namespace Github\Tests\Api;
 
-use Github\Tests\Api\TestCase;
-
 class CommitsTest extends TestCase
 {
     /**
@@ -16,7 +14,7 @@ class CommitsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/git/commits/123')
+            ->with('/repos/KnpLabs/php-github-api/git/commits/123')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 123));
@@ -33,7 +31,7 @@ class CommitsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('repos/KnpLabs/php-github-api/git/commits', $data)
+            ->with('/repos/KnpLabs/php-github-api/git/commits', $data)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', $data));
@@ -41,7 +39,7 @@ class CommitsTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateCommitWithoutMessageParam()
     {
@@ -56,7 +54,7 @@ class CommitsTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateCommitWithoutTreeParam()
     {
@@ -71,7 +69,7 @@ class CommitsTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateCommitWithoutParentsParam()
     {
@@ -84,8 +82,11 @@ class CommitsTest extends TestCase
         $api->create('KnpLabs', 'php-github-api', $data);
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\GitData\Commits';
+        return \Github\Api\GitData\Commits::class;
     }
 }

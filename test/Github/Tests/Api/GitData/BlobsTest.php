@@ -2,8 +2,6 @@
 
 namespace Github\Tests\Api;
 
-use Github\Tests\Api\TestCase;
-
 class BlobsTest extends TestCase
 {
     /**
@@ -16,7 +14,7 @@ class BlobsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/l3l0/l3l0repo/git/blobs/123456sha')
+            ->with('/repos/l3l0/l3l0repo/git/blobs/123456sha')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->show('l3l0', 'l3l0repo', '123456sha'));
@@ -42,7 +40,7 @@ class BlobsTest extends TestCase
             ->with('raw');
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/l3l0/l3l0repo/git/blobs/123456sha')
+            ->with('/repos/l3l0/l3l0repo/git/blobs/123456sha')
             ->will($this->returnValue($expectedValue));
 
         $api->configure('raw');
@@ -61,7 +59,7 @@ class BlobsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('repos/l3l0/l3l0repo/git/blobs', $data)
+            ->with('/repos/l3l0/l3l0repo/git/blobs', $data)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->create('l3l0', 'l3l0repo', $data));
@@ -69,7 +67,7 @@ class BlobsTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateBlobWithoutEncoding()
     {
@@ -84,7 +82,7 @@ class BlobsTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateBlobWithoutContent()
     {
@@ -97,8 +95,11 @@ class BlobsTest extends TestCase
         $api->create('l3l0', 'l3l0repo', $data);
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\GitData\Blobs';
+        return \Github\Api\GitData\Blobs::class;
     }
 }

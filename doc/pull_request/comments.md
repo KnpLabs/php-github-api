@@ -1,5 +1,5 @@
 ## Pull Requests / Review Comments API
-[Back to the "Pull Requests API"](../pull_requests.md) | [Back to the navigation](../index.md)
+[Back to the "Pull Requests API"](../pull_requests.md) | [Back to the navigation](../README.md)
 
 Review Comments are comments on a portion of the unified diff. These are separate from Commit Comments (which
 are applied directly to a commit, outside of the Pull Request view), and Issue Comments (which do not reference
@@ -37,7 +37,7 @@ $comment = $client->api('pull_request')->comments()->create('KnpLabs', 'php-gith
     'path'      => 'README.markdown',
     'position'  => 37,
     'line'      => 31
-);
+));
 ```
 
 This returns the details of the comment.
@@ -50,7 +50,7 @@ This returns the details of the comment.
 $comment = $client->api('pull_request')->comments()->create('KnpLabs', 'php-github-api', 8, array(
     'body'        => 'Yeah! Really nice change',
     'in_reply_to' => 2
-);
+));
 ```
 
 This returns the details of the comment.
@@ -62,7 +62,7 @@ This returns the details of the comment.
 ```php
 $comment = $client->api('pull_request')->comments()->update('KnpLabs', 'php-github-api', 2, array(
     'body' => 'Hell Yeah! Awesome change!'
-);
+));
 ```
 
 This returns the details of the updated comment.

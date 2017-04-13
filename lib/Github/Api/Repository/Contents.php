@@ -3,9 +3,11 @@
 namespace Github\Api\Repository;
 
 use Github\Api\AbstractApi;
+use Github\Api\AcceptHeaderTrait;
 use Github\Exception\InvalidArgumentException;
 use Github\Exception\ErrorException;
 use Github\Exception\MissingArgumentException;
+use Github\Exception\TwoFactorAuthenticationRequiredException;
 
 /**
  * @link   http://developer.github.com/v3/repos/contents/
@@ -13,8 +15,30 @@ use Github\Exception\MissingArgumentException;
  */
 class Contents extends AbstractApi
 {
+    use AcceptHeaderTrait;
+
     /**
-     * Get content of README file in a repository
+     * Configure the body type.
+     *
+     * @link https://developer.github.com/v3/repo/contents/#custom-media-types
+     * @param string|null $bodyType
+     *
+     * @return self
+     */
+    public function configure($bodyType = null)
+    {
+        if (!in_array($bodyType, array('html', 'object'))) {
+            $bodyType = 'raw';
+        }
+
+        $this->acceptHeaderValue = sprintf('application/vnd.github.%s.%s', $this->client->getApiVersion(), $bodyType);
+
+        return $this;
+    }
+
+    /**
+     * Get content of README file in a repository.
+     *
      * @link http://developer.github.com/v3/repos/contents/
      *
      * @param string      $username   the user who owns the repository
@@ -25,13 +49,14 @@ class Contents extends AbstractApi
      */
     public function readme($username, $repository, $reference = null)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/readme', array(
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/readme', array(
             'ref' => $reference
         ));
     }
 
     /**
-     * Get contents of any file or directory in a repository
+     * Get contents of any file or directory in a repository.
+     *
      * @link http://developer.github.com/v3/repos/contents/
      *
      * @param string      $username   the user who owns the repository
@@ -43,7 +68,7 @@ class Contents extends AbstractApi
      */
     public function show($username, $repository, $path = null, $reference = null)
     {
-        $url = 'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents';
+        $url = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents';
         if (null !== $path) {
             $url .= '/'.rawurlencode($path);
         }
@@ -54,7 +79,8 @@ class Contents extends AbstractApi
     }
 
     /**
-     * Creates a new file in a repository
+     * Creates a new file in a repository.
+     *
      * @link http://developer.github.com/v3/repos/contents/#create-a-file
      *
      * @param string      $username   the user who owns the repository
@@ -71,7 +97,7 @@ class Contents extends AbstractApi
      */
     public function create($username, $repository, $path, $content, $message, $branch = null, array $committer = null)
     {
-        $url = 'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
+        $url = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
 
         $parameters = array(
           'content' => base64_encode($content),
@@ -93,7 +119,43 @@ class Contents extends AbstractApi
     }
 
     /**
-     * Updates the contents of a file in a repository
+     * Checks that a given path exists in a repository.
+     *
+     * @param string      $username   the user who owns the repository
+     * @param string      $repository the name of the repository
+     * @param string      $path       path of file to check
+     * @param null|string $reference  reference to a branch or commit
+     *
+     * @return bool
+     */
+    public function exists($username, $repository, $path, $reference = null)
+    {
+        $url = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents';
+
+        if (null !== $path) {
+            $url .= '/'.rawurlencode($path);
+        }
+
+        try {
+            $response = $this->head($url, array(
+                'ref' => $reference
+            ));
+
+            if ($response->getStatusCode() != 200) {
+                return false;
+            }
+        } catch (TwoFactorAuthenticationRequiredException $ex) {
+            throw $ex;
+        } catch (\Exception $ex) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Updates the contents of a file in a repository.
+     *
      * @link http://developer.github.com/v3/repos/contents/#update-a-file
      *
      * @param string      $username   the user who owns the repository
@@ -111,7 +173,7 @@ class Contents extends AbstractApi
      */
     public function update($username, $repository, $path, $content, $message, $sha, $branch = null, array $committer = null)
     {
-        $url = 'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
+        $url = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
 
         $parameters = array(
           'content' => base64_encode($content),
@@ -133,9 +195,9 @@ class Contents extends AbstractApi
         return $this->put($url, $parameters);
     }
 
-
     /**
-     * Deletes a file from a repository
+     * Deletes a file from a repository.
+     *
      * @link http://developer.github.com/v3/repos/contents/#delete-a-file
      *
      * @param string      $username   the user who owns the repository
@@ -152,7 +214,7 @@ class Contents extends AbstractApi
      */
     public function rm($username, $repository, $path, $message, $sha, $branch = null, array $committer = null)
     {
-        $url = 'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
+        $url = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
 
         $parameters = array(
           'message' => $message,
@@ -174,7 +236,8 @@ class Contents extends AbstractApi
     }
 
     /**
-     * Get content of archives in a repository
+     * Get content of archives in a repository.
+     *
      * @link http://developer.github.com/v3/repos/contents/
      *
      * @param string      $username   the user who owns the repository
@@ -190,23 +253,22 @@ class Contents extends AbstractApi
             $format = 'tarball';
         }
 
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/'.rawurlencode($format), array(
-            'ref' => $reference
-        ));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/'.rawurlencode($format).
+            ((null !== $reference) ? ('/'.rawurlencode($reference)) : ''));
     }
 
     /**
-     * Get the contents of a file in a repository
+     * Get the contents of a file in a repository.
      *
      * @param string      $username   the user who owns the repository
      * @param string      $repository the name of the repository
      * @param string      $path       path to file
      * @param null|string $reference  reference to a branch or commit
      *
-     * @return null|string content of file, or null in case of base64_decode failure
-     *
      * @throws InvalidArgumentException If $path is not a file or if its encoding is different from base64
      * @throws ErrorException           If $path doesn't include a 'content' index
+     *
+     * @return null|string content of file, or null in case of base64_decode failure
      */
     public function download($username, $repository, $path, $reference = null)
     {

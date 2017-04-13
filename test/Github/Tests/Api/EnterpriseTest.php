@@ -1,10 +1,4 @@
 <?php
-/**
- * This file is part of the PHP GitHub API package.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
 
 namespace Github\Tests\Api;
 
@@ -17,7 +11,7 @@ class EnterpriseTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Enterprise\Stats', $api->stats());
+        $this->assertInstanceOf(\Github\Api\Enterprise\Stats::class, $api->stats());
     }
 
     /**
@@ -27,12 +21,34 @@ class EnterpriseTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Enterprise\License', $api->license());
+        $this->assertInstanceOf(\Github\Api\Enterprise\License::class, $api->license());
     }
 
+    /**
+     * @test
+     */
+    public function shouldGetEnterpriseManagementConsoleApiObject()
+    {
+        $api = $this->getApiMock();
+
+        $this->assertInstanceOf(\Github\Api\Enterprise\ManagementConsole::class, $api->console());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetEnterpriseUserAdminApiObject()
+    {
+        $api = $this->getApiMock();
+
+        $this->assertInstanceOf(\Github\Api\Enterprise\UserAdmin::class, $api->userAdmin());
+    }
+
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Enterprise';
+        return \Github\Api\Enterprise::class;
     }
 }
- 

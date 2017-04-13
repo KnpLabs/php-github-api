@@ -3,7 +3,7 @@
 namespace Github\Api;
 
 /**
- * Markdown Rendering API
+ * Markdown Rendering API.
  *
  * @link   http://developer.github.com/v3/markdown/
  * @author Joseph Bielawski <stloyd@gmail.com>
@@ -31,7 +31,7 @@ class Markdown extends AbstractApi
             $params['context'] = $context;
         }
 
-        return $this->post('markdown', $params);
+        return $this->post('/markdown', $params);
     }
 
     /**
@@ -41,7 +41,7 @@ class Markdown extends AbstractApi
      */
     public function renderRaw($file)
     {
-        return $this->post('markdown/raw', array(
+        return $this->post('/markdown/raw', array(
             'file' => $file
         ));
     }

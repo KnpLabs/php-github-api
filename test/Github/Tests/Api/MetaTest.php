@@ -27,8 +27,11 @@ class MetaTest extends TestCase
         $this->assertEquals($expectedArray, $api->service());
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Meta';
+        return \Github\Api\Meta::class;
     }
 }

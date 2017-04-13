@@ -16,7 +16,7 @@ class MembersTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('orgs/KnpLabs/members')
+            ->with('/orgs/KnpLabs/members')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs'));
@@ -32,7 +32,7 @@ class MembersTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('orgs/KnpLabs/public_members')
+            ->with('/orgs/KnpLabs/public_members')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs', true));
@@ -48,10 +48,26 @@ class MembersTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('orgs/KnpLabs/public_members/l3l0')
+            ->with('/orgs/KnpLabs/public_members/l3l0')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->check('KnpLabs', 'l3l0'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldAddOrganizationMember()
+    {
+        $expectedValue = 'response';
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('put')
+            ->with('/orgs/KnpLabs/memberships/l3l0')
+            ->will($this->returnValue($expectedValue));
+
+        $this->assertEquals($expectedValue, $api->add('KnpLabs', 'l3l0'));
     }
 
     /**
@@ -64,7 +80,7 @@ class MembersTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('orgs/KnpLabs/members/l3l0')
+            ->with('/orgs/KnpLabs/members/l3l0')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->remove('KnpLabs', 'l3l0'));
@@ -80,7 +96,7 @@ class MembersTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with('orgs/KnpLabs/public_members/l3l0')
+            ->with('/orgs/KnpLabs/public_members/l3l0')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->publicize('KnpLabs', 'l3l0'));
@@ -96,7 +112,7 @@ class MembersTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('orgs/KnpLabs/public_members/l3l0')
+            ->with('/orgs/KnpLabs/public_members/l3l0')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->conceal('KnpLabs', 'l3l0'));
@@ -112,14 +128,17 @@ class MembersTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('orgs/KnpLabs/members/l3l0')
+            ->with('/orgs/KnpLabs/members/l3l0')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'l3l0'));
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Organization\Members';
+        return \Github\Api\Organization\Members::class;
     }
 }

@@ -11,52 +11,60 @@ use Github\Api\AbstractApi;
 class Followers extends AbstractApi
 {
     /**
-     * List followed users by the authenticated user
+     * List followed users by the authenticated user.
+     *
      * @link http://developer.github.com/v3/repos/followers/
      *
-     * @param  integer $page
+     * @param int $page
+     *
      * @return array
      */
     public function all($page = 1)
     {
-        return $this->get('user/following', array(
+        return $this->get('/user/following', array(
             'page' => $page
         ));
     }
 
     /**
-     * Check that the authenticated user follows a user
+     * Check that the authenticated user follows a user.
+     *
      * @link http://developer.github.com/v3/repos/followers/
      *
-     * @param  string $username the username to follow
+     * @param string $username the username to follow
+     *
      * @return array
      */
     public function check($username)
     {
-        return $this->get('user/following/'.rawurlencode($username));
+        return $this->get('/user/following/'.rawurlencode($username));
     }
 
     /**
-     * Make the authenticated user follow a user
+     * Make the authenticated user follow a user.
+     *
      * @link http://developer.github.com/v3/repos/followers/
      *
-     * @param  string $username the username to follow
+     * @param string $username the username to follow
+     *
      * @return array
      */
     public function follow($username)
     {
-        return $this->put('user/following/'.rawurlencode($username));
+        return $this->put('/user/following/'.rawurlencode($username));
     }
 
     /**
-     * Make the authenticated user un-follow a user
+     * Make the authenticated user un-follow a user.
+     *
      * @link http://developer.github.com/v3/repos/followers/
      *
-     * @param  string $username the username to un-follow
+     * @param string $username the username to un-follow
+     *
      * @return array
      */
     public function unfollow($username)
     {
-        return $this->delete('user/following/'.rawurlencode($username));
+        return $this->delete('/user/following/'.rawurlencode($username));
     }
 }

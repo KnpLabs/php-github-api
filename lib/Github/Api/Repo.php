@@ -8,11 +8,15 @@ use Github\Api\Repository\Commits;
 use Github\Api\Repository\Contents;
 use Github\Api\Repository\DeployKeys;
 use Github\Api\Repository\Downloads;
+use Github\Api\Repository\Projects;
+use Github\Api\Repository\Protection;
 use Github\Api\Repository\Releases;
 use Github\Api\Repository\Forks;
 use Github\Api\Repository\Hooks;
 use Github\Api\Repository\Labels;
+use Github\Api\Repository\Stargazers;
 use Github\Api\Repository\Statuses;
+use Github\Api\Repository\Traffic;
 
 /**
  * Searching repositories, getting repository information
@@ -25,7 +29,8 @@ use Github\Api\Repository\Statuses;
 class Repo extends AbstractApi
 {
     /**
-     * Search repositories by keyword:
+     * Search repositories by keyword.
+     *
      * @link http://developer.github.com/v3/search/#search-repositories
      *
      * @param string $keyword the search query
@@ -35,39 +40,90 @@ class Repo extends AbstractApi
      */
     public function find($keyword, array $params = array())
     {
-        return $this->get('legacy/repos/search/'.rawurlencode($keyword), array_merge(array('start_page' => 1), $params));
+        return $this->get('/legacy/repos/search/'.rawurlencode($keyword), array_merge(array('start_page' => 1), $params));
     }
-    
+
     /**
-     * Get the last year of commit activity for a repository grouped by week
+     * List all public repositories.
+     *
+     * @link https://developer.github.com/v3/repos/#list-all-public-repositories
+     *
+     * @param int|null $id The integer ID of the last Repository that you’ve seen.
+     *
+     * @return array list of users found
+     */
+    public function all($id = null)
+    {
+        if (!is_int($id)) {
+            return $this->get('/repositories');
+        }
+
+        return $this->get('/repositories?since=' . rawurldecode($id));
+    }
+
+    /**
+     * Get the last year of commit activity for a repository grouped by week.
+     *
      * @link http://developer.github.com/v3/repos/statistics/#commit-activity
-     * 
+     *
      * @param string $username   the user who owns the repository
      * @param string $repository the name of the repository
-     * 
+     *
      * @return array commit activity grouped by week
      */
     public function activity($username, $repository)
     {
-	    return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/stats/commit_activity');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/stats/commit_activity');
     }
 
-	/**
-	 * Get contributor commit statistics for a repository
-	 * @link http://developer.github.com/v3/repos/statistics/#contributors
-	 *
-	 * @param string $username   the user who owns the repository
-	 * @param string $repository the name of the repository
-	 *
-	 * @return array list of contributors and their commit statistics
-	 */
-	public function statistics($username, $repository)
-	{
-		return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/stats/contributors');
-	}
+    /**
+     * Get contributor commit statistics for a repository.
+     *
+     * @link http://developer.github.com/v3/repos/statistics/#contributors
+     *
+     * @param string $username   the user who owns the repository
+     * @param string $repository the name of the repository
+     *
+     * @return array list of contributors and their commit statistics
+     */
+    public function statistics($username, $repository)
+    {
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/stats/contributors');
+    }
 
     /**
-     * List all repositories for an organization
+     * Get a weekly aggregate of the number of additions and deletions pushed to a repository.
+     *
+     * @link http://developer.github.com/v3/repos/statistics/#code-frequency
+     *
+     * @param string $username   the user who owns the repository
+     * @param string $repository the name of the repository
+     *
+     * @return array list of weeks and their commit statistics
+     */
+    public function frequency($username, $repository)
+    {
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/stats/code_frequency');
+    }
+
+    /**
+     * Get the weekly commit count for the repository owner and everyone else.
+     *
+     * @link http://developer.github.com/v3/repos/statistics/#participation
+     *
+     * @param string $username   the user who owns the repository
+     * @param string $repository the name of the repository
+     *
+     * @return array list of weekly commit count grouped by 'all' and 'owner'
+     */
+    public function participation($username, $repository)
+    {
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/stats/participation');
+    }
+
+    /**
+     * List all repositories for an organization.
+     *
      * @link http://developer.github.com/v3/repos/#list-organization-repositories
      *
      * @param string $organization the name of the organization
@@ -77,37 +133,39 @@ class Repo extends AbstractApi
      */
     public function org($organization, array $params = array())
     {
-        return $this->get('orgs/'.$organization.'/repos', array_merge(array('start_page' => 1), $params));
+        return $this->get('/orgs/'.$organization.'/repos', array_merge(array('start_page' => 1), $params));
     }
 
     /**
-     * Get extended information about a repository by its username and repository name
+     * Get extended information about a repository by its username and repository name.
+     *
      * @link http://developer.github.com/v3/repos/
      *
      * @param string $username   the user who owns the repository
      * @param string $repository the name of the repository
      *
-     * @return array informations about the repository
+     * @return array information about the repository
      */
     public function show($username, $repository)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository));
     }
 
     /**
-     * Create repository
+     * Create repository.
+     *
      * @link http://developer.github.com/v3/repos/
      *
      * @param string      $name         name of the repository
      * @param string      $description  repository description
      * @param string      $homepage     homepage url
-     * @param boolean     $public       `true` for public, `false` for private
+     * @param bool        $public       `true` for public, `false` for private
      * @param null|string $organization username of organization if applicable
-     * @param boolean     $hasIssues    `true` to enable issues for this repository, `false` to disable them
-     * @param boolean     $hasWiki      `true` to enable the wiki for this repository, `false` to disable it
-     * @param boolean     $hadDownloads `true` to enable downloads for this repository, `false` to disable them
-     * @param integer     $teamId       The id of the team that will be granted access to this repository. This is only valid when creating a repo in an organization.
-     * @param boolean     $autoInit     `true` to create an initial commit with empty README, `false` for no initial commit
+     * @param bool        $hasIssues    `true` to enable issues for this repository, `false` to disable them
+     * @param bool        $hasWiki      `true` to enable the wiki for this repository, `false` to disable it
+     * @param bool        $hasDownloads `true` to enable downloads for this repository, `false` to disable them
+     * @param int         $teamId       The id of the team that will be granted access to this repository. This is only valid when creating a repo in an organization.
+     * @param bool        $autoInit     `true` to create an initial commit with empty README, `false` for no initial commit
      *
      * @return array returns repository data
      */
@@ -123,7 +181,7 @@ class Repo extends AbstractApi
         $teamId = null,
         $autoInit = false
     ) {
-        $path = null !== $organization ? 'orgs/'.$organization.'/repos' : 'user/repos';
+        $path = null !== $organization ? '/orgs/'.$organization.'/repos' : '/user/repos';
 
         $parameters = array(
             'name'          => $name,
@@ -144,22 +202,24 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Set information of a repository
+     * Set information of a repository.
+     *
      * @link http://developer.github.com/v3/repos/
      *
      * @param string $username   the user who owns the repository
      * @param string $repository the name of the repository
      * @param array  $values     the key => value pairs to post
      *
-     * @return array informations about the repository
+     * @return array information about the repository
      */
     public function update($username, $repository, array $values)
     {
-        return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository), $values);
+        return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository), $values);
     }
 
     /**
-     * Delete a repository
+     * Delete a repository.
+     *
      * @link http://developer.github.com/v3/repos/
      *
      * @param string $username   the user who owns the repository
@@ -169,25 +229,30 @@ class Repo extends AbstractApi
      */
     public function remove($username, $repository)
     {
-        return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository));
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository));
     }
-    
+
     /**
-     * Get the readme content for a repository by its username and repository name
+     * Get the readme content for a repository by its username and repository name.
+     *
      * @link http://developer.github.com/v3/repos/contents/#get-the-readme
      *
      * @param string $username   the user who owns the repository
      * @param string $repository the name of the repository
+     * @param string $format     one of formats: "raw" or "html"
      *
      * @return array the readme content
      */
-    public function readme($username, $repository)
+    public function readme($username, $repository, $format = 'raw')
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/readme');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/readme', [], [
+            'Accept' => "application/vnd.github.$format",
+        ]);
     }
 
     /**
-     * Manage the collaborators of a repository
+     * Manage the collaborators of a repository.
+     *
      * @link http://developer.github.com/v3/repos/collaborators/
      *
      * @return Collaborators
@@ -198,7 +263,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Manage the comments of a repository
+     * Manage the comments of a repository.
+     *
      * @link http://developer.github.com/v3/repos/comments/
      *
      * @return Comments
@@ -209,7 +275,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Manage the commits of a repository
+     * Manage the commits of a repository.
+     *
      * @link http://developer.github.com/v3/repos/commits/
      *
      * @return Commits
@@ -220,7 +287,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Manage the content of a repository
+     * Manage the content of a repository.
+     *
      * @link http://developer.github.com/v3/repos/contents/
      *
      * @return Contents
@@ -231,7 +299,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Manage the content of a repository
+     * Manage the content of a repository.
+     *
      * @link http://developer.github.com/v3/repos/downloads/
      *
      * @return Downloads
@@ -242,8 +311,9 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Manage the releases of a repository (Currently Undocumented)
-     * @link http://developer.github.com/v3/repos/ 
+     * Manage the releases of a repository (Currently Undocumented).
+     *
+     * @link http://developer.github.com/v3/repos/
      *
      * @return Releases
      */
@@ -253,7 +323,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Manage the deploy keys of a repository
+     * Manage the deploy keys of a repository.
+     *
      * @link http://developer.github.com/v3/repos/keys/
      *
      * @return DeployKeys
@@ -264,7 +335,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Manage the forks of a repository
+     * Manage the forks of a repository.
+     *
      * @link http://developer.github.com/v3/repos/forks/
      *
      * @return Forks
@@ -275,7 +347,20 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Manage the hooks of a repository
+     * Manage the stargazers of a repository.
+     *
+     * @link https://developer.github.com/v3/activity/starring/#list-stargazers
+     *
+     * @return Stargazers
+     */
+    public function stargazers()
+    {
+        return new Stargazers($this->client);
+    }
+
+    /**
+     * Manage the hooks of a repository.
+     *
      * @link http://developer.github.com/v3/issues/jooks/
      *
      * @return Hooks
@@ -286,7 +371,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Manage the labels of a repository
+     * Manage the labels of a repository.
+     *
      * @link http://developer.github.com/v3/issues/labels/
      *
      * @return Labels
@@ -297,7 +383,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Manage the statuses of a repository
+     * Manage the statuses of a repository.
+     *
      * @link http://developer.github.com/v3/repos/statuses/
      *
      * @return Statuses
@@ -308,7 +395,8 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Get the branch(es) of a repository
+     * Get the branch(es) of a repository.
+     *
      * @link http://developer.github.com/v3/repos/
      *
      * @param string $username   the username
@@ -319,7 +407,7 @@ class Repo extends AbstractApi
      */
     public function branches($username, $repository, $branch = null)
     {
-        $url = 'repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches';
+        $url = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches';
         if (null !== $branch) {
             $url .= '/'.rawurlencode($branch);
         }
@@ -328,24 +416,39 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Get the contributors of a repository
+     * Manage the protection of a repository branch.
+     *
+     * @link https://developer.github.com/v3/repos/branches/#get-branch-protection
+     *
+     * @return Protection
+     */
+    public function protection()
+    {
+        return new Protection($this->client);
+    }
+
+    /**
+     * Get the contributors of a repository.
+     *
      * @link http://developer.github.com/v3/repos/
      *
-     * @param string  $username           the user who owns the repository
-     * @param string  $repository         the name of the repository
-     * @param boolean $includingAnonymous by default, the list only shows GitHub users.
-     *                                    You can include non-users too by setting this to true
+     * @param string $username           the user who owns the repository
+     * @param string $repository         the name of the repository
+     * @param bool   $includingAnonymous by default, the list only shows GitHub users.
+     *                                   You can include non-users too by setting this to true
+     *
      * @return array list of the repo contributors
      */
     public function contributors($username, $repository, $includingAnonymous = false)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contributors', array(
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contributors', array(
             'anon' => $includingAnonymous ?: null
         ));
     }
 
     /**
-     * Get the language breakdown of a repository
+     * Get the language breakdown of a repository.
+     *
      * @link http://developer.github.com/v3/repos/
      *
      * @param string $username   the user who owns the repository
@@ -355,25 +458,28 @@ class Repo extends AbstractApi
      */
     public function languages($username, $repository)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/languages');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/languages');
     }
 
     /**
-     * Get the tags of a repository
+     * Get the tags of a repository.
+     *
      * @link http://developer.github.com/v3/repos/
      *
      * @param string $username   the user who owns the repository
      * @param string $repository the name of the repository
+     * @param array  $params     the additional parameters like milestone, assignees, labels, sort, direction
      *
      * @return array list of the repository tags
      */
-    public function tags($username, $repository)
+    public function tags($username, $repository, array $params = [])
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/tags');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/tags', $params);
     }
 
     /**
-     * Get the teams of a repository
+     * Get the teams of a repository.
+     *
      * @link http://developer.github.com/v3/repos/
      *
      * @param string $username   the user who owns the repo
@@ -383,40 +489,42 @@ class Repo extends AbstractApi
      */
     public function teams($username, $repository)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/teams');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/teams');
     }
 
     /**
      * @deprecated see subscribers method
-     * @param string  $username
-     * @param string  $repository
-     * @param integer $page
+     *
+     * @param string $username
+     * @param string $repository
+     * @param int    $page
      *
      * @return array
      */
     public function watchers($username, $repository, $page = 1)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/watchers', array(
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/watchers', array(
             'page' => $page
         ));
     }
 
     /**
-     * @param string  $username
-     * @param string  $repository
-     * @param integer $page
+     * @param string $username
+     * @param string $repository
+     * @param int    $page
      *
      * @return array
      */
     public function subscribers($username, $repository, $page = 1)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/subscribers', array(
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/subscribers', array(
             'page' => $page
         ));
     }
 
     /**
-     * Perform a merge
+     * Perform a merge.
+     *
      * @link http://developer.github.com/v3/repos/merging/
      *
      * @param string $username
@@ -429,10 +537,35 @@ class Repo extends AbstractApi
      */
     public function merge($username, $repository, $base, $head, $message = null)
     {
-        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/merges', array(
-            'base'           => $base,
-            'head'           => $head,
-            'commit_message' => $message
-        ));
+        $parameters = array(
+            'base' => $base,
+            'head' => $head,
+        );
+
+        if (is_string($message)) {
+            $parameters['commit_message'] = $message;
+        }
+
+        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/merges', $parameters);
+    }
+
+    /**
+     * @param string $username
+     * @param string $repository
+     * @return array
+     */
+    public function milestones($username, $repository)
+    {
+        return $this->get('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/milestones');
+    }
+
+    public function projects()
+    {
+        return new Projects($this->client);
+    }
+    
+    public function traffic()
+    {
+        return new Traffic($this->client);
     }
 }

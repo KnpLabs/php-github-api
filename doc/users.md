@@ -1,5 +1,5 @@
 ## Users API
-[Back to the navigation](index.md)
+[Back to the navigation](README.md)
 
 Searching users, getting user information and managing authenticated user account information.
 Wrap [GitHub User API](http://developer.github.com/v3/users/).
@@ -36,7 +36,7 @@ $user = $client->api('user')->show('KnpLabs');
 
 Returns an array of information about the user.
 
-### Update user informations
+### Update user information
 
 > Requires [authentication](security.md).
 
@@ -95,7 +95,7 @@ $client->api('current_user')->follow()->follow('symfony');
 
 Returns an array of followed users.
 
-### Unfollow a
+### Unfollow a user
 
 > Requires [authentication](security.md).
 
@@ -108,12 +108,24 @@ $client->api('current_user')->follow()->unfollow('symfony');
 Returns an array of followed users.
 
 ### Get repos that a specific user is watching
+> See [more](activity.md).
 
 ```php
 $users = $client->api('user')->watched('ornicar');
 ```
 
+For authenticated user use.
+
+> Requires [authentication](security.md).
+
+```php
+$users = $client->api('current_user')->watchers()->all();
+```
+
+Returns an array of watched repos.
+
 ### Get repos that a specific user has starred
+> See [more](activity.md).
 
 ```php
 $users = $client->api('user')->starred('ornicar');
@@ -124,10 +136,10 @@ For authenticated user use.
 > Requires [authentication](security.md).
 
 ```php
-$users = $client->api('current_user')->watched();
+$users = $client->api('current_user')->starring()->all();
 ```
 
-Returns an array of watched repos.
+Returns an array of starred repos.
 
 ### Get the authenticated user emails
 

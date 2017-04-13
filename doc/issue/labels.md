@@ -1,5 +1,5 @@
 ## Issues / Labels API
-[Back to the "Issues API"](../issues.md) | [Back to the navigation](../index.md)
+[Back to the "Issues API"](../issues.md) | [Back to the navigation](../README.md)
 
 Wraps [GitHub Issue Labels API](http://developer.github.com/v3/issues/labels/).
 
@@ -11,6 +11,39 @@ $labels = $client->api('issue')->labels()->all('KnpLabs', 'php-github-api');
 
 List all project labels by username and repo.
 Returns an array of project labels.
+
+### Get a single label
+
+```php
+$label = $client->api('issue')->labels()->all('KnpLabs', 'php-github-api', 'label1');
+```
+
+### Create a label
+
+```php
+$labels = $client->api('issue')->labels()->create('KnpLabs', 'php-github-api', array(
+    'name' => 'Bug',
+    'color' => 'FFFFFF',
+));
+```
+
+Create a new label in the repository.
+
+### Update a label
+
+```php
+$labels = $client->api('issue')->labels()->update('KnpLabs', 'php-github-api', 'Enhancement', 'Feature', 'FFFFFF');
+```
+
+Update the label name and color.
+
+### Delete a label
+
+```php
+$labels = $client->api('issue')->labels()->deleteLabel('KnpLabs', 'php-github-api', 'Bug');
+```
+
+Delete a new label from the repository.
 
 ### Add a label on an issue
 
@@ -34,7 +67,7 @@ $client->api('issue')->labels()->replace('KnpLabs', 'php-github-api', 4, array('
 
 Replace a label for an issue: by username, repo, issue number and array of labels.
 
-### Remove all labels fom an issue
+### Remove all labels from an issue
 
 > Requires [authentication](../security.md).
 

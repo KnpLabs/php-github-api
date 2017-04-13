@@ -1,7 +1,7 @@
 ## Authorizations API
-[Back to the navigation](index.md)
+[Back to the navigation](README.md)
 
-Creating, deleting and listing authorizations. Wraps [GitHub Authorizations API](http://developer.github.com/v3/oauth/).
+Creating, deleting and listing authorizations. Wraps [GitHub Authorizations API](http://developer.github.com/v3/oauth_authorizations/).
 
 #### List all authorizations.
 
@@ -49,4 +49,22 @@ $authorization = $github->api('authorizations')->remove(1234);
 
 ```php
 $authorization = $github->api('authorizations')->check(1234, 'token');
+```
+
+#### Reset an authorization
+
+```php
+$authorization = $github->api('authorizations')->reset(1234, 'token');
+```
+
+#### Revoke an authorization
+
+```php
+$github->api('authorizations')->revoke(1234, 'token');
+```
+
+#### Revoke all authorizations
+
+```php
+$github->api('authorizations')->revokeAll(1234);
 ```

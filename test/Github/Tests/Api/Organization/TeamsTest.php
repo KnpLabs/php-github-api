@@ -16,7 +16,7 @@ class TeamsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('orgs/KnpLabs/teams')
+            ->with('/orgs/KnpLabs/teams')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs'));
@@ -32,7 +32,7 @@ class TeamsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('teams/KnpWorld/members/l3l0')
+            ->with('/teams/KnpWorld/memberships/l3l0')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->check('KnpWorld', 'l3l0'));
@@ -48,7 +48,7 @@ class TeamsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('teams/KnpWorld')
+            ->with('/teams/KnpWorld')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->remove('KnpWorld'));
@@ -64,7 +64,7 @@ class TeamsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('teams/KnpWorld')
+            ->with('/teams/KnpWorld')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->show('KnpWorld'));
@@ -80,7 +80,7 @@ class TeamsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('teams/KnpWorld/members')
+            ->with('/teams/KnpWorld/members')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->members('KnpWorld'));
@@ -96,7 +96,7 @@ class TeamsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with('teams/KnpWorld/members/l3l0')
+            ->with('/teams/KnpWorld/memberships/l3l0')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->addMember('KnpWorld', 'l3l0'));
@@ -112,7 +112,7 @@ class TeamsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('teams/KnpWorld/members/l3l0')
+            ->with('/teams/KnpWorld/memberships/l3l0')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->removeMember('KnpWorld', 'l3l0'));
@@ -128,7 +128,7 @@ class TeamsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('teams/KnpWorld/repos')
+            ->with('/teams/KnpWorld/repos')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->repositories('KnpWorld'));
@@ -144,7 +144,7 @@ class TeamsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('teams/KnpWorld/repos/l3l0/l3l0Repo')
+            ->with('/teams/KnpWorld/repos/l3l0/l3l0Repo')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->repository('KnpWorld', 'l3l0', 'l3l0Repo'));
@@ -160,7 +160,7 @@ class TeamsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with('teams/KnpWorld/repos/l3l0/l3l0Repo')
+            ->with('/teams/KnpWorld/repos/l3l0/l3l0Repo')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->addRepository('KnpWorld', 'l3l0', 'l3l0Repo'));
@@ -176,7 +176,7 @@ class TeamsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('teams/KnpWorld/repos/l3l0/l3l0Repo')
+            ->with('/teams/KnpWorld/repos/l3l0/l3l0Repo')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->removeRepository('KnpWorld', 'l3l0', 'l3l0Repo'));
@@ -184,7 +184,7 @@ class TeamsTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateTeamWithoutName()
     {
@@ -208,7 +208,7 @@ class TeamsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('orgs/KnpLabs/teams', $data)
+            ->with('/orgs/KnpLabs/teams', $data)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->create('KnpLabs', $data));
@@ -225,7 +225,7 @@ class TeamsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('orgs/KnpLabs/teams', array('name' => 'KnpWorld', 'repo_names' => array('somerepo')))
+            ->with('/orgs/KnpLabs/teams', array('name' => 'KnpWorld', 'repo_names' => array('somerepo')))
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->create('KnpLabs', $data));
@@ -242,7 +242,7 @@ class TeamsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('orgs/KnpLabs/teams', array('name' => 'KnpWorld', 'permission' => 'pull'))
+            ->with('/orgs/KnpLabs/teams', array('name' => 'KnpWorld', 'permission' => 'pull'))
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->create('KnpLabs', $data));
@@ -250,7 +250,7 @@ class TeamsTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotUpdateTeamWithoutName()
     {
@@ -274,7 +274,7 @@ class TeamsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
-            ->with('teams/KnpWorld', $data)
+            ->with('/teams/KnpWorld', $data)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->update('KnpWorld', $data));
@@ -291,14 +291,17 @@ class TeamsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
-            ->with('teams/KnpWorld', array('name' => 'KnpWorld', 'permission' => 'pull'))
+            ->with('/teams/KnpWorld', array('name' => 'KnpWorld', 'permission' => 'pull'))
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->update('KnpWorld', $data));
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Organization\Teams';
+        return \Github\Api\Organization\Teams::class;
     }
 }

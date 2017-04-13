@@ -16,7 +16,7 @@ class ForksTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/forks', array('page' => 1))
+            ->with('/repos/KnpLabs/php-github-api/forks', array('page' => 1))
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api'));
@@ -33,7 +33,7 @@ class ForksTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('repos/KnpLabs/php-github-api/forks', $data)
+            ->with('/repos/KnpLabs/php-github-api/forks', $data)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', $data));
@@ -49,14 +49,17 @@ class ForksTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/forks', array('page' => 1, 'sort' => 'newest'))
+            ->with('/repos/KnpLabs/php-github-api/forks', array('page' => 1, 'sort' => 'newest'))
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', array('sort' => 'oldes')));
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Repository\Forks';
+        return \Github\Api\Repository\Forks::class;
     }
 }

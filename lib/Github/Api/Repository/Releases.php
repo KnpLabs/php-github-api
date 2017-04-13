@@ -13,38 +13,66 @@ use Github\Exception\MissingArgumentException;
 class Releases extends AbstractApi
 {
     /**
-     * List releases in selected repository
+     * Get the latest release.
      *
-     * @param  string  $username         the user who owns the repo
-     * @param  string  $repository       the name of the repo
+     * @param $username
+     * @param $repository
      *
      * @return array
      */
-    public function all($username, $repository)
+    public function latest($username, $repository)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/latest');
     }
 
     /**
-     * Get a release in selected repository
+     * List releases for a tag.
      *
-     * @param  string  $username         the user who owns the repo
-     * @param  string  $repository       the name of the repo
-     * @param  integer $id               the id of the release
+     * @param $username
+     * @param $repository
+     * @param $tag
+     *
+     * @return array
+     */
+    public function tag($username, $repository, $tag)
+    {
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/tags/'.rawurlencode($tag));
+    }
+
+    /**
+     * List releases in selected repository.
+     *
+     * @param string $username   the user who owns the repo
+     * @param string $repository the name of the repo
+     * @param array  $params     the additional parameters like milestone, assignees, labels, sort, direction
+     *
+     * @return array
+     */
+    public function all($username, $repository, array $params = [])
+    {
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases', $params);
+    }
+
+    /**
+     * Get a release in selected repository.
+     *
+     * @param string $username   the user who owns the repo
+     * @param string $repository the name of the repo
+     * @param int    $id         the id of the release
      *
      * @return array
      */
     public function show($username, $repository, $id)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode($id));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode($id));
     }
 
     /**
-     * Create new release in selected repository
+     * Create new release in selected repository.
      *
-     * @param  string  $username
-     * @param  string  $repository
-     * @param  array   $params
+     * @param string $username
+     * @param string $repository
+     * @param array  $params
      *
      * @throws MissingArgumentException
      *
@@ -56,36 +84,36 @@ class Releases extends AbstractApi
             throw new MissingArgumentException('tag_name');
         }
 
-        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases', $params);
+        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases', $params);
     }
 
     /**
-     * Edit release in selected repository
+     * Edit release in selected repository.
      *
-     * @param  string  $username
-     * @param  string  $repository
-     * @param  integer $id
-     * @param  array   $params
+     * @param string $username
+     * @param string $repository
+     * @param int    $id
+     * @param array  $params
      *
      * @return array
      */
     public function edit($username, $repository, $id, array $params)
     {
-        return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode($id), $params);
+        return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode($id), $params);
     }
 
     /**
-     * Delete a release in selected repository (Not thoroughly tested!)
+     * Delete a release in selected repository (Not thoroughly tested!).
      *
-     * @param  string  $username         the user who owns the repo
-     * @param  string  $repository       the name of the repo
-     * @param  integer $id               the id of the release 
+     * @param string $username   the user who owns the repo
+     * @param string $repository the name of the repo
+     * @param int    $id         the id of the release
      *
      * @return array
      */
     public function remove($username, $repository, $id)
     {
-        return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode($id));
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode($id));
     }
 
     /**

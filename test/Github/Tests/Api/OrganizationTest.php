@@ -7,6 +7,22 @@ class OrganizationTest extends TestCase
     /**
      * @test
      */
+    public function shouldGetAllOrganizations()
+    {
+        $expectedValue = array(array('login' => 'KnpLabs'));
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/organizations?since=1')
+            ->will($this->returnValue($expectedValue));
+
+        $this->assertEquals($expectedValue, $api->all(1));
+    }
+
+    /**
+     * @test
+     */
     public function shouldShowOrganization()
     {
         $expectedArray = array('id' => 1, 'name' => 'KnpLabs');
@@ -14,7 +30,7 @@ class OrganizationTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('orgs/KnpLabs')
+            ->with('/orgs/KnpLabs')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->show('KnpLabs'));
@@ -30,7 +46,7 @@ class OrganizationTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
-            ->with('orgs/KnpLabs', array('value' => 'toUpdate'))
+            ->with('/orgs/KnpLabs', array('value' => 'toUpdate'))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->update('KnpLabs', array('value' => 'toUpdate')));
@@ -46,7 +62,7 @@ class OrganizationTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('orgs/KnpLabs/repos', array('type' => 'all'))
+            ->with('/orgs/KnpLabs/repos', array('type' => 'all', 'page' => 1))
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->repositories('KnpLabs'));
@@ -59,7 +75,7 @@ class OrganizationTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Organization\Members', $api->members());
+        $this->assertInstanceOf(\Github\Api\Organization\Members::class, $api->members());
     }
 
     /**
@@ -69,11 +85,14 @@ class OrganizationTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Organization\Teams', $api->teams());
+        $this->assertInstanceOf(\Github\Api\Organization\Teams::class, $api->teams());
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Organization';
+        return \Github\Api\Organization::class;
     }
 }

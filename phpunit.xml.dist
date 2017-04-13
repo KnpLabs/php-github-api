@@ -19,7 +19,7 @@
 
     <groups>
         <exclude>
-            <group>functional</group>
+            <group>integration</group>
         </exclude>
     </groups>
 

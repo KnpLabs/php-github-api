@@ -2,10 +2,24 @@
 
 namespace Github\Tests\Api;
 
-use Github\Tests\Api\TestCase;
-
 class ReferencesTest extends TestCase
 {
+    /**
+     * @test
+     */
+    public function shouldNotEscapeSlashesInReferences()
+    {
+        $expectedValue = array('reference' => 'some data');
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/repos/l3l0/l3l0repo/git/refs/master/some%2A%26%40%23branch/dasd1212')
+            ->will($this->returnValue($expectedValue));
+
+        $this->assertEquals($expectedValue, $api->show('l3l0', 'l3l0repo', 'master/some*&@#branch/dasd1212'));
+    }
+
     /**
      * @test
      */
@@ -16,7 +30,7 @@ class ReferencesTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/l3l0/l3l0repo/git/refs/123456sha')
+            ->with('/repos/l3l0/l3l0repo/git/refs/123456sha')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->show('l3l0', 'l3l0repo', '123456sha'));
@@ -32,7 +46,7 @@ class ReferencesTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('repos/l3l0/l3l0repo/git/refs/123456sha')
+            ->with('/repos/l3l0/l3l0repo/git/refs/123456sha')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->remove('l3l0', 'l3l0repo', '123456sha'));
@@ -48,7 +62,7 @@ class ReferencesTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/l3l0/l3l0repo/git/refs')
+            ->with('/repos/l3l0/l3l0repo/git/refs')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('l3l0', 'l3l0repo'));
@@ -64,7 +78,7 @@ class ReferencesTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/l3l0/l3l0repo/git/refs/heads')
+            ->with('/repos/l3l0/l3l0repo/git/refs/heads')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->branches('l3l0', 'l3l0repo'));
@@ -80,7 +94,7 @@ class ReferencesTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/l3l0/l3l0repo/git/refs/tags')
+            ->with('/repos/l3l0/l3l0repo/git/refs/tags')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->tags('l3l0', 'l3l0repo'));
@@ -97,7 +111,7 @@ class ReferencesTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('repos/l3l0/l3l0repo/git/refs', $data)
+            ->with('/repos/l3l0/l3l0repo/git/refs', $data)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->create('l3l0', 'l3l0repo', $data));
@@ -105,7 +119,7 @@ class ReferencesTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateReferenceWithoutShaParam()
     {
@@ -120,7 +134,7 @@ class ReferencesTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateReferenceWithoutRefsParam()
     {
@@ -144,7 +158,7 @@ class ReferencesTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
-            ->with('repos/l3l0/l3l0repo/git/refs/someRefs', $data)
+            ->with('/repos/l3l0/l3l0repo/git/refs/someRefs', $data)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->update('l3l0', 'l3l0repo', 'someRefs', $data));
@@ -152,7 +166,7 @@ class ReferencesTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNoUpdateReferenceWithoutSha()
     {
@@ -165,8 +179,11 @@ class ReferencesTest extends TestCase
         $api->update('l3l0', 'l3l0repo', 'someRefs', $data);
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\GitData\References';
+        return \Github\Api\GitData\References::class;
     }
 }

@@ -17,7 +17,7 @@ class CommitsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/commits', $data)
+            ->with('/repos/KnpLabs/php-github-api/commits', $data)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', $data));
@@ -33,7 +33,7 @@ class CommitsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/compare/v3...HEAD')
+            ->with('/repos/KnpLabs/php-github-api/compare/v3...HEAD')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->compare('KnpLabs', 'php-github-api', 'v3', 'HEAD'));
@@ -49,14 +49,17 @@ class CommitsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/KnpLabs/php-github-api/commits/123')
+            ->with('/repos/KnpLabs/php-github-api/commits/123')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 123));
     }
 
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Repository\Commits';
+        return \Github\Api\Repository\Commits::class;
     }
 }

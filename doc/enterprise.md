@@ -1,8 +1,9 @@
 ## Enterprise API
-[Back to the navigation](index.md)
+[Back to the navigation](README.md)
 
 Provides information about a GitHub Enterprise installation. Wraps [GitHub Enterprise API](http://developer.github.com/v3/enterprise/).
 
+### Configuration
 In order to configure the client to point to a GitHub Enterprise installation, do the following:
 
 ```php
@@ -20,5 +21,23 @@ $client->setEnterpriseUrl('https://ghe.host');
 $repositories = $client->api('user')->repositories('ornicar');
 ```
 
-To use the Stats and License APIs, you will need to authenticate using a GitHub Enterprise site admin account.
+### Authentication
+The Admin Stats, License, and User Administration API endpoints are only accessible to GitHub Enterprise site administrators. The Management Console API endpoints are only accessible via the Management Console password.
 
+### User Administration
+
+#### Suspend a user (Enterprise only)
+
+> Requires [authentication](security.md).
+
+```php
+$client->api('enterprise')->userAdmin()->suspend('ornicar');
+```
+
+#### Unsuspend a user (Enterprise only)
+
+> Requires [authentication](security.md).
+
+```php
+$client->api('enterprise')->userAdmin()->unsuspend('ornicar');
+```

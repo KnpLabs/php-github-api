@@ -19,7 +19,7 @@ class IssueTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/ornicar/php-github-api/issues', $sentData);
+            ->with('/repos/ornicar/php-github-api/issues', $sentData);
 
         $api->all('ornicar', 'php-github-api', $data);
     }
@@ -46,7 +46,7 @@ class IssueTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/ornicar/php-github-api/issues', $sentData)
+            ->with('/repos/ornicar/php-github-api/issues', $sentData)
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->all('ornicar', 'php-github-api', $data));
@@ -62,7 +62,7 @@ class IssueTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('repos/ornicar/php-github-api/issues/14')
+            ->with('/repos/ornicar/php-github-api/issues/14')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->show('ornicar', 'php-github-api', 14));
@@ -81,14 +81,14 @@ class IssueTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('repos/ornicar/php-github-api/issues', $data);
+            ->with('/repos/ornicar/php-github-api/issues', $data);
 
         $api->create('ornicar', 'php-github-api', $data);
     }
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateIssueWithoutTitle()
     {
@@ -105,7 +105,7 @@ class IssueTest extends TestCase
 
     /**
      * @test
-     * @expectedException Github\Exception\MissingArgumentException
+     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateIssueWithoutBody()
     {
@@ -132,7 +132,7 @@ class IssueTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
-            ->with('repos/ornicar/php-github-api/issues/14', $data);
+            ->with('/repos/ornicar/php-github-api/issues/14', $data);
 
         $api->update('ornicar', 'php-github-api', 14, $data);
     }
@@ -149,7 +149,7 @@ class IssueTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
-            ->with('repos/ornicar/php-github-api/issues/14', $data);
+            ->with('/repos/ornicar/php-github-api/issues/14', $data);
 
         $api->update('ornicar', 'php-github-api', 14, $data);
     }
@@ -164,7 +164,7 @@ class IssueTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('legacy/issues/search/KnpLabs/php-github-api/open/Invalid%20Commits')
+            ->with('/legacy/issues/search/KnpLabs/php-github-api/open/Invalid%20Commits')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->find('KnpLabs', 'php-github-api', 'open', 'Invalid Commits'));
@@ -180,7 +180,7 @@ class IssueTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('legacy/issues/search/KnpLabs/php-github-api/closed/Invalid%20Commits')
+            ->with('/legacy/issues/search/KnpLabs/php-github-api/closed/Invalid%20Commits')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->find('KnpLabs', 'php-github-api', 'closed', 'Invalid Commits'));
@@ -196,7 +196,7 @@ class IssueTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('legacy/issues/search/KnpLabs/php-github-api/open/Invalid%20Commits')
+            ->with('/legacy/issues/search/KnpLabs/php-github-api/open/Invalid%20Commits')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->find('KnpLabs', 'php-github-api', 'abc', 'Invalid Commits'));
@@ -209,7 +209,7 @@ class IssueTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Issue\Comments', $api->comments());
+        $this->assertInstanceOf(\Github\Api\Issue\Comments::class, $api->comments());
     }
 
     /**
@@ -219,7 +219,7 @@ class IssueTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Issue\Events', $api->events());
+        $this->assertInstanceOf(\Github\Api\Issue\Events::class, $api->events());
     }
 
     /**
@@ -229,7 +229,7 @@ class IssueTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Issue\Labels', $api->labels());
+        $this->assertInstanceOf(\Github\Api\Issue\Labels::class, $api->labels());
     }
 
     /**
@@ -239,11 +239,44 @@ class IssueTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $this->assertInstanceOf('Github\Api\Issue\Milestones', $api->milestones());
+        $this->assertInstanceOf(\Github\Api\Issue\Milestones::class, $api->milestones());
     }
 
+    /**
+     * @test
+     */
+    public function shouldLockIssue()
+    {
+        $parameters = array();
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('put')
+            ->with('/repos/knplabs/php-github-api/issues/1/lock', $parameters);
+
+        $api->lock('knplabs', 'php-github-api', '1');
+    }
+
+    /**
+     * @test
+     */
+    public function shouldUnlockIssue()
+    {
+        $parameters = array();
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('delete')
+            ->with('/repos/knplabs/php-github-api/issues/1/lock', $parameters);
+
+        $api->unlock('knplabs', 'php-github-api', '1');
+    }
+
+    /**
+     * @return string
+     */
     protected function getApiClass()
     {
-        return 'Github\Api\Issue';
+        return \Github\Api\Issue::class;
     }
 }

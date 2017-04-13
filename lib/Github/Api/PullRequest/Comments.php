@@ -3,6 +3,7 @@
 namespace Github\Api\PullRequest;
 
 use Github\Api\AbstractApi;
+use Github\Api\AcceptHeaderTrait;
 use Github\Exception\MissingArgumentException;
 
 /**
@@ -11,14 +12,44 @@ use Github\Exception\MissingArgumentException;
  */
 class Comments extends AbstractApi
 {
-    public function all($username, $repository, $pullRequest)
+    use AcceptHeaderTrait;
+
+    /**
+     * Configure the body type.
+     *
+     * @link https://developer.github.com/v3/pulls/comments/#custom-media-types
+     * @param string|null $bodyType
+     * @param string|null @apiVersion
+     *
+     * @return self
+     */
+    public function configure($bodyType = null, $apiVersion = null)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($pullRequest).'/comments');
+        if (!in_array($apiVersion, array('squirrel-girl-preview'))) {
+            $apiVersion = $this->client->getApiVersion();
+        }
+
+        if (!in_array($bodyType, array('text', 'html', 'full'))) {
+            $bodyType = 'raw';
+        }
+
+        $this->acceptHeaderValue = sprintf('application/vnd.github.%s.%s+json', $apiVersion, $bodyType);
+
+        return $this;
+    }
+
+    public function all($username, $repository, $pullRequest = null)
+    {
+        if (null !== $pullRequest) {
+            return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($pullRequest).'/comments');
+        }
+
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/comments');
     }
 
     public function show($username, $repository, $comment)
     {
-        return $this->get('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/comments/'.rawurlencode($comment));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/comments/'.rawurlencode($comment));
     }
 
     public function create($username, $repository, $pullRequest, array $params)
@@ -32,7 +63,7 @@ class Comments extends AbstractApi
             throw new MissingArgumentException(array('commit_id', 'path', 'position'));
         }
 
-        return $this->post('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($pullRequest).'/comments', $params);
+        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($pullRequest).'/comments', $params);
     }
 
     public function update($username, $repository, $comment, array $params)
@@ -41,11 +72,11 @@ class Comments extends AbstractApi
             throw new MissingArgumentException('body');
         }
 
-        return $this->patch('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/comments/'.rawurlencode($comment), $params);
+        return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/comments/'.rawurlencode($comment), $params);
     }
 
     public function remove($username, $repository, $comment)
     {
-        return $this->delete('repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/comments/'.rawurlencode($comment));
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/comments/'.rawurlencode($comment));
     }
 }
