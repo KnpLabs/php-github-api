@@ -158,10 +158,6 @@ class PullRequest extends AbstractApi
             $mergeMethod = $mergeMethod ? 'squash' : 'merge';
         }
 
-        if (!in_array($mergeMethod, array('squash', 'rebase'))) {
-            $mergeMethod = 'merge';
-        }
-
         $params = array(
             'commit_message' => $message,
             'sha' => $sha,
