@@ -5,6 +5,7 @@ namespace Github\Api;
 use Github\Api\PullRequest\Comments;
 use Github\Api\PullRequest\Review;
 use Github\Api\PullRequest\ReviewRequest;
+use Github\Exception\InvalidArgumentException;
 use Github\Exception\MissingArgumentException;
 
 /**
