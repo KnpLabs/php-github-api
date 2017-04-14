@@ -13,6 +13,7 @@ use Http\Message\MessageFactory;
 use Http\Message\RequestFactory;
 use Http\Message\StreamFactory;
 use Psr\Cache\CacheItemPoolInterface;
+use Http\Client\Common\Plugin\Cache\Generator\HeaderCacheKeyGenerator;
 
 /**
  * A builder that builds the API client.
@@ -181,6 +182,9 @@ class Builder
      */
     public function addCache(CacheItemPoolInterface $cachePool, array $config = [])
     {
+        if (!isset($config['cache_key_generator'])) {
+            $config['cache_key_generator'] = new HeaderCacheKeyGenerator(['Authorization', 'Cookie', 'Accept', 'Content-type']);
+        }
         $this->cachePlugin = Plugin\CachePlugin::clientCache($cachePool, $this->streamFactory, $config);
         $this->httpClientModified = true;
     }
