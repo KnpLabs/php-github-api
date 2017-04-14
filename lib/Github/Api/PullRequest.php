@@ -10,7 +10,8 @@ use Github\Exception\MissingArgumentException;
 /**
  * API for accessing Pull Requests from your Git/Github repositories.
  *
- * @link   http://developer.github.com/v3/pulls/
+ * @see   http://developer.github.com/v3/pulls/
+ *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class PullRequest extends AbstractApi
@@ -60,7 +61,7 @@ class PullRequest extends AbstractApi
     {
         $parameters = array_merge(array(
             'page' => 1,
-            'per_page' => 30
+            'per_page' => 30,
         ), $params);
 
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls', $parameters);
@@ -90,6 +91,24 @@ class PullRequest extends AbstractApi
     public function files($username, $repository, $id)
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/files');
+    }
+
+    /**
+     * All statuses which are the statuses of its head branch.
+     *
+     * @see http://developer.github.com/v3/pulls/
+     *
+     * @param string $username   the username
+     * @param string $repository the repository
+     * @param string $id         the ID of the pull request for which statuses are retrieved
+     *
+     * @return array array of statuses for the project
+     */
+    public function status($username, $repository, $id)
+    {
+        $link = $this->show($username, $repository, $id)['_links']['statuses']['href'];
+
+        return $this->get($link);
     }
 
     public function comments()
