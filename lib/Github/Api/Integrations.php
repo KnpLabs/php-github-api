@@ -53,6 +53,7 @@ class Integrations extends AbstractApi
         if ($userId) {
             $parameters['user_id'] = $userId;
         }
+
         return $this->get('/installation/repositories', $parameters);
     }
 
