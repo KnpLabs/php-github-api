@@ -400,4 +400,22 @@ class Client
     {
         return $this->httpClientBuilder;
     }
+    
+    
+    /**
+     * @param string $content
+     */
+    public static function hash($content){
+		$cnt = str_replace("\r\n", "\n", $content);
+		return sha1('blob ' . strlen($cnt) . "\0" . $cnt);
+	}
+	
+    
+    /**
+     * @param string $file
+     */
+	public static function hashFile($file){
+		$cnt = str_replace("\r\n", "\n", file_get_contents($file));
+		return sha1('blob ' . strlen($cnt) . "\0" . $cnt);
+	}
 }
