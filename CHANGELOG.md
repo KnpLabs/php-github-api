@@ -2,6 +2,23 @@
 
 The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release. 
 
+## 2.3.0
+
+### Fixed
+
+- Issue where we serve the wrong cached response. We vary on authorization header now.
+
+### Added
+
+- `PullRequest::status`
+- Throw InvalidArgumentException on `PullRequest::merge` when wrong merge method is used.
+- Added `Protection::configure`
+
+### Changed
+
+- First argument to `Integrations::listRepositories()` is now optional. 
+- Moved tests from "functional" to "integration"
+
 ## 2.2.0
 
 ### Added
