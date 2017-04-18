@@ -5,6 +5,7 @@ namespace Github\Api;
 use Github\Api\PullRequest\Comments;
 use Github\Api\PullRequest\Review;
 use Github\Api\PullRequest\ReviewRequest;
+use Github\Exception\InvalidArgumentException;
 use Github\Exception\MissingArgumentException;
 
 /**
@@ -29,7 +30,7 @@ class PullRequest extends AbstractApi
      */
     public function configure($bodyType = null, $apiVersion = null)
     {
-        if (!in_array($apiVersion, array('polaris-preview'))) {
+        if (!in_array($apiVersion, array())) {
             $apiVersion = $this->client->getApiVersion();
         }
 
@@ -41,7 +42,7 @@ class PullRequest extends AbstractApi
             $bodyType .= '+json';
         }
 
-        $this->acceptHeaderValue = sprintf('application/vnd.github.%s.%s', $this->client->getApiVersion(), $bodyType);
+        $this->acceptHeaderValue = sprintf('application/vnd.github.%s.%s', $apiVersion, $bodyType);
 
         return $this;
     }
@@ -180,6 +181,10 @@ class PullRequest extends AbstractApi
     {
         if (is_bool($mergeMethod)) {
             $mergeMethod = $mergeMethod ? 'squash' : 'merge';
+        }
+
+        if (!in_array($mergeMethod, array('merge', 'squash', 'rebase'), true)) {
+            throw new InvalidArgumentException(sprintf('"$mergeMethod" must be one of ["merge", "squash", "rebase"] ("%s" given).', $mergeMethod));
         }
 
         $params = array(
