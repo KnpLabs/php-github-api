@@ -3,6 +3,7 @@
 namespace Github\Api\Repository;
 
 use Github\Api\AbstractApi;
+use Github\Api\AcceptHeaderTrait;
 
 /**
  * @link   https://developer.github.com/v3/repos/branches/
@@ -10,6 +11,15 @@ use Github\Api\AbstractApi;
  */
 class Protection extends AbstractApi
 {
+    use AcceptHeaderTrait;
+
+    public function configure()
+    {
+        $this->acceptHeaderValue = 'application/vnd.github.loki-preview+json';
+
+        return $this;
+    }
+
     /**
      * Retrieves configured protection for the provided branch
      *
