@@ -20,6 +20,16 @@ $protection = $client->api('repo')->protection()->show('twbs', 'bootstrap', 'mas
 
 > Requires [authentication](../security.md).
 
+For the full list of parameters see https://developer.github.com/v3/repos/branches/#parameters-1
+
 ```php
+$params = [
+    'required_status_checks' => null,
+    'required_pull_request_reviews' => [
+        'include_admins' => true,
+    ],
+    'enforce_admins' => true,
+    'restrictions' => null,
+];
 $protection = $client->api('repo')->protection()->show('twbs', 'bootstrap', 'master', $params);
 ```
