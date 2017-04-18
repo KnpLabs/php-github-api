@@ -11,7 +11,7 @@ The change log describes what is "Added", "Removed", "Changed" or "Fixed" betwee
 ### Added
 
 - `PullRequest::status`
-- Throw InvalidArgumentException on `PullRequest::merge` when wrong merge method is ued.
+- Throw InvalidArgumentException on `PullRequest::merge` when wrong merge method is used.
 - Added `Protection::configure`
 
 ### Changed
