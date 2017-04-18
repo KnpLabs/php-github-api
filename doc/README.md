@@ -32,6 +32,7 @@ APIs:
 * [Repositories](repos.md)
   * [Contents](repo/contents.md)
   * [Deployments](repo/deployments.md)
+  * [Protection](repo/protection.md)
   * [Releases](repo/releases.md)
     * [Assets](repo/assets.md)
   * [Stargazers](repo/stargazers.md)
