@@ -193,7 +193,7 @@ class User extends AbstractApi
      */
     public function myRepositories(array $params = [])
     {
-        return $this->get('/user/repos', $params);
+        return $this->get('/user/repos?', $params);
     }
 
     /**
