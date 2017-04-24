@@ -3,7 +3,7 @@
 
 Wraps [GitHub Issue Milestones API](http://developer.github.com/v3/issues/milestones/).
 
-### List project milestones
+### List milestones for a repository
 
 ```php
 $milestones = $client->api('issue')->milestones()->all('KnpLabs', 'php-github-api');
