@@ -36,5 +36,5 @@ $client->api('issue')->milestones()->remove('KnpLabs', 'php-github-api', 123);
 ### List milestone labels
 
 ```php
-$labels = $client->api('issue')->milestones()->labels('KnpLabs', 'php-github-api', 123);
+$labels = $client->api('issue')->milestones()->all('KnpLabs', 'php-github-api', 123);
 ```
