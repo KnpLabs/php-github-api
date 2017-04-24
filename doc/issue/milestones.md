@@ -27,7 +27,7 @@ $milestone = $client->api('issue')->milestones()->create('KnpLabs', 'php-github-
 $milestone = $client->api('issue')->milestones()->update('KnpLabs', 'php-github-api', 123, array('title' => '3.0'));
 ```
 
-### Remove a milestonre
+### Remove a milestone
 
 ```php
 $client->api('issue')->milestones()->remove('KnpLabs', 'php-github-api', 123);
