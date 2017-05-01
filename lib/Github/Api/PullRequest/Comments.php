@@ -38,13 +38,18 @@ class Comments extends AbstractApi
         return $this;
     }
 
-    public function all($username, $repository, $pullRequest = null)
+    public function all($username, $repository, $pullRequest = null, array $params = [])
     {
         if (null !== $pullRequest) {
             return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($pullRequest).'/comments');
         }
 
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/comments');
+        $parameters = array_merge([
+            'page' => 1,
+            'per_page' => 30
+        ], $params);
+
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/comments', $parameters);
     }
 
     public function show($username, $repository, $comment)
