@@ -87,6 +87,22 @@ class CurrentUserTest extends TestCase
     /**
      * @test
      */
+    public function shouldGetInstallationsForUser()
+    {
+        $result = ['installation1', 'installation2'];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/user/installations')
+            ->willReturn($result);
+
+        $this->assertEquals($result, $api->installations());
+    }
+
+    /**
+     * @test
+     */
     public function shouldGetDeployKeysApiObject()
     {
         $api = $this->getApiMock();
