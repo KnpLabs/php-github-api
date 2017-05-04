@@ -176,5 +176,4 @@ class CurrentUser extends AbstractApi
     {
         return $this->get('/user/installations');
     }
-    
 }
