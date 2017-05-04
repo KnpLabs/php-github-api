@@ -18,7 +18,13 @@ $token = $client->api('integrations')->createInstallationToken(123, 456);
 
 Find all installations for the authenticated integration.
 ```php
-Installations = $client->api('integrations')->findInstallations();
+$installations = $client->api('integrations')->findInstallations();
+```
+
+### Find installations for a user
+
+```php
+$installations = $client->api('current_user')->installations();
 ```
 
 ### List repositories
@@ -26,6 +32,12 @@ Installations = $client->api('integrations')->findInstallations();
 List repositories that are accessible to the authenticated installation.
 ```php
 $repositories = $client->api('integrations')->listRepositories(456);
+```
+
+### List repositories for a given installation and user
+
+```
+$repositories = $client->api('current_user')->repositoriesByInstallation(456);
 ```
 
 ### Add repository to installation
