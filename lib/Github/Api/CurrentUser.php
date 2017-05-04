@@ -168,12 +168,15 @@ class CurrentUser extends AbstractApi
     {
         return $this->get('/user/subscriptions');
     }
-    
+
     /**
      * @link https://developer.github.com/v3/integrations/#list-installations-for-user
+     *
+     * @param array $params
      */
-    public function installations()
+    public function installations(array $params = array())
     {
-        return $this->get('/user/installations');
+        return $this->get('/user/installations', array_merge(array('page' => 1), $params));
     }
+
 }
