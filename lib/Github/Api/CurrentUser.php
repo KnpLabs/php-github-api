@@ -178,5 +178,4 @@ class CurrentUser extends AbstractApi
     {
         return $this->get('/user/installations', array_merge(array('page' => 1), $params));
     }
-
 }
