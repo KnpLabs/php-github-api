@@ -48,6 +48,12 @@ $repos = $client->api('repo')->find('chess', array('language' => 'php', 'start_p
 $repo = $client->api('repo')->show('KnpLabs', 'php-github-api')
 ```
 
+or
+
+```php
+$repo = $client->api('repo')->showById(123456)
+```
+
 Returns an array of information about the specified repository.
 
 ### Get the repositories of a specific user
