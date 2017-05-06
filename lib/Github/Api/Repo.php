@@ -150,6 +150,20 @@ class Repo extends AbstractApi
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository));
     }
+    
+    /**
+     * Get extended information about a repository by its id.
+     *
+     * @link http://developer.github.com/v3/repos/
+     *
+     * @param int $id   the id of the repository
+     *
+     * @return array information about the repository
+     */
+    public function showById($id)
+    {
+        return $this->get('/repositories/'.rawurlencode($id));
+    }
 
     /**
      * Create repository.
