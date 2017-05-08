@@ -178,4 +178,15 @@ class CurrentUser extends AbstractApi
     {
         return $this->get('/user/installations', array_merge(array('page' => 1), $params));
     }
+
+    /**
+     * @link https://developer.github.com/v3/integrations/installations/#list-repositories-accessible-to-the-user-for-an-installation
+     *
+     * @param string $installationId  the ID of the Installation
+     * @param array $params
+     */
+    public function repositoriesByInstallation($installationId, array $params = array())
+    {
+        return $this->get(sprintf('/user/installations/%s/repositories', $installationId), array_merge(array('page' => 1), $params));
+    }
 }

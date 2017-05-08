@@ -87,7 +87,7 @@ class CurrentUserTest extends TestCase
     /**
      * @test
      */
-    public function shouldGetInstallationsForUser()
+    public function shouldGetInstallations()
     {
         $result = ['installation1', 'installation2'];
 
@@ -98,6 +98,22 @@ class CurrentUserTest extends TestCase
             ->willReturn($result);
 
         $this->assertEquals($result, $api->installations());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetRepositoriesByInstallation()
+    {
+        $expectedArray = array(array('id' => 1, 'name' => 'l3l0repo'));
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/user/installations/42/repositories', array('page' => 1))
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->repositoriesByInstallation(42));
     }
 
     /**
