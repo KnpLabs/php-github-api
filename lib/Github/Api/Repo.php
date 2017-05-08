@@ -150,6 +150,23 @@ class Repo extends AbstractApi
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository));
     }
+    
+    /**
+     * Get extended information about a repository by its id.
+     * Note: at time of writing this is an undocumented feature but GitHub support have advised that it can be relied on.
+     *
+     * @link http://developer.github.com/v3/repos/
+     * @link https://github.com/piotrmurach/github/issues/283
+     * @link https://github.com/piotrmurach/github/issues/282
+     *
+     * @param int $id   the id of the repository
+     *
+     * @return array information about the repository
+     */
+    public function showById($id)
+    {
+        return $this->get('/repositories/'.rawurlencode($id));
+    }
 
     /**
      * Create repository.

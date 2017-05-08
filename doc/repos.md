@@ -44,8 +44,16 @@ $repos = $client->api('repo')->find('chess', array('language' => 'php', 'start_p
 
 ### Get extended information about a repository
 
+Using the username of the repository owner and the repository name:
+
 ```php
 $repo = $client->api('repo')->show('KnpLabs', 'php-github-api')
+```
+
+Or by using the repository id (note that this is at time of writing an undocumented feature, see [here](https://github.com/piotrmurach/github/issues/283) and [here](https://github.com/piotrmurach/github/issues/282)):
+
+```php
+$repo = $client->api('repo')->showById(123456)
 ```
 
 Returns an array of information about the specified repository.

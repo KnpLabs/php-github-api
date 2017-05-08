@@ -19,6 +19,22 @@ class RepoTest extends TestCase
 
         $this->assertEquals($expectedArray, $api->show('KnpLabs', 'php-github-api'));
     }
+    
+    /**
+     * @test
+     */
+    public function shouldShowRepositoryById()
+    {
+        $expectedArray = array('id' => 123456, 'name' => 'repoName');
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/repositories/123456')
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->showById(123456));
+    }
 
     /**
      * @test
