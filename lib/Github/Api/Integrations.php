@@ -22,6 +22,7 @@ class Integrations extends AbstractApi
     public function configure()
     {
         $this->acceptHeaderValue = 'application/vnd.github.machine-man-preview+json';
+
         return $this;
     }
 
