@@ -2,12 +2,31 @@
 
 namespace Github\Api;
 
+use Github\Api\AcceptHeaderTrait;
+
 /**
  * @link   https://developer.github.com/v3/integrations/
  * @author Nils Adermann <naderman@naderman.de>
  */
 class Integrations extends AbstractApi
 {
+    use AcceptHeaderTrait;
+
+    /**
+     * Configure the Accept header depending on the blob type.
+     *
+     * @param string|null $bodyType
+     *
+     * @return self
+     */
+    public function configure($bodyType = null)
+    {
+        if ('raw' === $bodyType) {
+            $this->acceptHeaderValue = sprintf('application/vnd.github.%s.raw', $this->client->getApiVersion());
+        }
+        return $this;
+    }
+
     /**
      * Create an access token for an installation
      *
