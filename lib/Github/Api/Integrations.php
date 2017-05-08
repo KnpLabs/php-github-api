@@ -13,18 +13,15 @@ class Integrations extends AbstractApi
     use AcceptHeaderTrait;
 
     /**
-     * Configure the Accept header depending on the blob type.
+     * Configure the accept header for Early Access to the projects api
      *
-     * @param string|null $bodyType
+     * @see https://developer.github.com/v3/repos/projects/#projects
      *
      * @return self
      */
-    public function configure($bodyType = null)
+    public function configure()
     {
-        if ('raw' === $bodyType) {
-            $this->acceptHeaderValue = sprintf('application/vnd.github.%s.raw', $this->client->getApiVersion());
-        }
-
+        $this->acceptHeaderValue = 'application/vnd.github.machine-man-preview+json';
         return $this;
     }
 
