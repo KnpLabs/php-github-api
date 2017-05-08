@@ -13,9 +13,9 @@ class Integrations extends AbstractApi
     use AcceptHeaderTrait;
 
     /**
-     * Configure the accept header for Early Access to the projects api
+     * Configure the accept header for Early Access to the integrations api
      *
-     * @see https://developer.github.com/v3/repos/projects/#projects
+     * @see https://developer.github.com/v3/integrations/
      *
      * @return self
      */
