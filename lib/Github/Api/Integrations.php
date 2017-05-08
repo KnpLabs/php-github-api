@@ -24,6 +24,7 @@ class Integrations extends AbstractApi
         if ('raw' === $bodyType) {
             $this->acceptHeaderValue = sprintf('application/vnd.github.%s.raw', $this->client->getApiVersion());
         }
+
         return $this;
     }
 
