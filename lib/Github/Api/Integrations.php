@@ -2,12 +2,30 @@
 
 namespace Github\Api;
 
+use Github\Api\AcceptHeaderTrait;
+
 /**
  * @link   https://developer.github.com/v3/integrations/
  * @author Nils Adermann <naderman@naderman.de>
  */
 class Integrations extends AbstractApi
 {
+    use AcceptHeaderTrait;
+
+    /**
+     * Configure the accept header for Early Access to the integrations api
+     *
+     * @see https://developer.github.com/v3/integrations/
+     *
+     * @return self
+     */
+    public function configure()
+    {
+        $this->acceptHeaderValue = 'application/vnd.github.machine-man-preview+json';
+
+        return $this;
+    }
+
     /**
      * Create an access token for an installation
      *
