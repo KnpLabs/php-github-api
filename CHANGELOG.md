@@ -2,6 +2,16 @@
 
 The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release. 
 
+## 2.4.0
+
+### Added
+
+- `Integrations::configure` to allow accessing early access program endpoints. 
+- Add support for pagination and parameters in the pull request comments
+- Add the ability to fetch user installations (`CurrentUser::installations`)
+- Allow getting repo info by id (`Repo::showById`)
+- Allow fetching repositories for a specific installation and user (`CurrentUser::repositoriesByInstallation`)
+
 ## 2.3.0
 
 ### Fixed
