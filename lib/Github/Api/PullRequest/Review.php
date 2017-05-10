@@ -19,8 +19,6 @@ class Review extends AbstractApi
 
     public function configure()
     {
-        $this->acceptHeaderValue = 'application/vnd.github.black-cat-preview+json';
-
         return $this;
     }
 

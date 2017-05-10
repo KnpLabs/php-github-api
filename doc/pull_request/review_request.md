@@ -1,13 +1,6 @@
 ## Pull Requests / Review Requests API
 [Back to the "Pull Requests API"](../pull_requests.md) | [Back to the navigation](../README.md)
 
-The Pull Request Review API is currently available for developers to preview.
-To access the API during the preview period, you must provide a custom media type in the Accept header:
-
-```php
-$client->api('pull_request')->reviewRequests()->configure();
-```
-
 ### List all review requests
 
 ```php
