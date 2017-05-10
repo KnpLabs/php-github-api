@@ -20,6 +20,13 @@ abstract class AbstractApi implements ApiInterface
     protected $client;
 
     /**
+     * The requested page (GitHub pagination).
+     *
+     * @var null|int
+     */
+    protected $page;
+
+    /**
      * Number of items per page (GitHub pagination).
      *
      * @var null|int
@@ -36,6 +43,24 @@ abstract class AbstractApi implements ApiInterface
 
     public function configure()
     {
+    }
+
+    /**
+     * @return null|int
+     */
+    public function getPage()
+    {
+        return $this->page;
+    }
+
+    /**
+     * @param null|int $page
+     */
+    public function setPage($page)
+    {
+        $this->page = (null === $page ? $page : (int) $page);
+
+        return $this;
     }
 
     /**
@@ -67,6 +92,9 @@ abstract class AbstractApi implements ApiInterface
      */
     protected function get($path, array $parameters = array(), array $requestHeaders = array())
     {
+        if (null !== $this->page && !isset($parameters['page'])) {
+            $parameters['page'] = $this->page;
+        }
         if (null !== $this->perPage && !isset($parameters['per_page'])) {
             $parameters['per_page'] = $this->perPage;
         }
