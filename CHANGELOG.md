@@ -14,7 +14,7 @@ The change log describes what is "Added", "Removed", "Changed" or "Fixed" betwee
 
 ### Changed
 
-- `PullRequest\Review` and `PullRequest\ReviewRequest` is not part of the official API. No need to call `configure`. 
+- `PullRequest\Review` and `PullRequest\ReviewRequest` is now part of the official API. No need to call `configure`. 
 
 ## 2.3.0
 
