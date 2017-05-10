@@ -12,6 +12,10 @@ The change log describes what is "Added", "Removed", "Changed" or "Fixed" betwee
 - Allow getting repo info by id (`Repo::showById`)
 - Allow fetching repositories for a specific installation and user (`CurrentUser::repositoriesByInstallation`)
 
+### Changed
+
+- `PullRequest\Review` and `PullRequest\ReviewRequest` is not part of the official API. No need to call `configure`. 
+
 ## 2.3.0
 
 ### Fixed
