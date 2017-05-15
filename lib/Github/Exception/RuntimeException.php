@@ -9,4 +9,8 @@ namespace Github\Exception;
  */
 class RuntimeException extends \RuntimeException implements ExceptionInterface
 {
+    public function getCode()
+    {
+        return isset($this->code) ? $this->code : null;
+    }
 }
