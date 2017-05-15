@@ -37,7 +37,7 @@ The change log describes what is "Added", "Removed", "Changed" or "Fixed" betwee
 
 ### Added
 
-- API support for Reviews. 
+- API support for Pull Request Review Requests.
 - API support for Traffic. 
 - API support for issue Assignees. 
 - API support for Miscellaneous Gitignore and Emojis. 
