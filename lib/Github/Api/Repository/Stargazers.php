@@ -36,4 +36,9 @@ class Stargazers extends AbstractApi
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/stargazers');
     }
+    
+    public function star($username, $repository)
+    {
+        return $this->put('/user/starred/'.rawurlencode($username).'/'.rawurlencode($repository));
+    }
 }
