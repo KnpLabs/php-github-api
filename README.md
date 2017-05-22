@@ -13,7 +13,7 @@ For old version please check:
 
 A simple Object Oriented wrapper for GitHub API, written with PHP5.
 
-Uses [GitHub API v3](http://developer.github.com/v3/). The object API is very similar to the RESTful API.
+Uses [GitHub API v3](http://developer.github.com/v3/) & supports [GitHub API v4](http://developer.github.com/v4). The object API (v3) is very similar to the RESTful API.
 
 ## Features
 
@@ -114,5 +114,6 @@ See the [`doc` directory](doc/) for more detailed documentation.
 - Thanks to [Rolf van de Krol](http://github.com/rolfvandekrol) for his countless contributions.
 - Thanks to [Nicolas Pastorino](http://github.com/jeanvoye) for his contribution on the Pull Request API.
 - Thanks to [Edoardo Rivello](http://github.com/erivello) for his contribution on the Gists API.
+- Thanks to [Miguel Piedrafita](https://github.com/m1guelpf) for his contribution to the v4 & Apps API.
 
 Thanks to GitHub for the high quality API and documentation.
