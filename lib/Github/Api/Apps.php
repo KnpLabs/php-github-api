@@ -74,7 +74,7 @@ class Apps extends AbstractApi
      */
     public function addRepository($installationId, $repositoryId)
     {
-        return $this->put('/app/'.rawurlencode($installationId).'/repositories/'.rawurlencode($repositoryId));
+        return $this->put('/installation/'.rawurlencode($installationId).'/repositories/'.rawurlencode($repositoryId));
     }
 
     /**
