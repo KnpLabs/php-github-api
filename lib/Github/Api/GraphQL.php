@@ -2,6 +2,7 @@
 
 namespace Github\Api;
 
+use AcceptHeaderTrait;
 /**
  * GraphQL API.
  *
@@ -12,6 +13,7 @@ namespace Github\Api;
  */
 class GraphQL extends AbstractApi
 {
+    use AcceptHeaderTrait;
     /**
      * @param string $query
      *
@@ -19,6 +21,7 @@ class GraphQL extends AbstractApi
      */
     public function execute($query)
     {
+        $this->acceptHeader = 'application/vnd.github.v4+json'; 
         $params = array(
             'query' => $query
         );
