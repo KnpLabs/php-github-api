@@ -1,7 +1,10 @@
 Navigation
 ==========
 
-APIs:
+v4 API:
+* [GraphQL](graphql.md)
+
+v3 APIs:
 * [Authorizations](authorizations.md)
 * [Commits](commits.md)
 * Current User
@@ -10,6 +13,7 @@ APIs:
 * [Enterprise](enterprise.md)
 * [Gists](gists.md)
   * [Comments](gists/comments.md)
+* [GraphQL](graphql.md)
 * [Integrations](integrations.md)
 * [Issues](issues.md)
   * [Assignees](issue/assignees.md)
