@@ -2,16 +2,25 @@
 
 namespace Github\Api;
 
-use Github\Api\AcceptHeaderTrait;
-
 /**
  * @link   https://developer.github.com/v3/apps/
  * @author Nils Adermann <naderman@naderman.de>
  */
 class Apps extends AbstractApi
 {
-    use AcceptHeaderTrait;
-
+    /**
+     * @deprecated
+     * Configure the accept header for Early Access to the integrations api (DEPRECATED)
+     *
+     * @see https://developer.github.com/v3/apps/
+     *
+     * @return self
+     */
+    public function configure()
+    {
+        return $this;
+    }
+    
     /**
      * Create an access token for an installation
      *
