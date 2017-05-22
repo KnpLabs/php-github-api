@@ -30,7 +30,7 @@ Returns a list of repositories.
 
 #### Advanced search
 
-You can filter the results by language. It takes the same values as the language drop down on [http://github.com/search](http://github).
+You can filter the results by language. It takes the same values as the language drop down on [http://github.com/search](http://github.com/search).
 
 ```php
 $repos = $client->api('repo')->find('chess', array('language' => 'php'));
