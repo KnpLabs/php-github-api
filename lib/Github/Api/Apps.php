@@ -74,7 +74,7 @@ class Apps extends AbstractApi
      */
     public function addRepository($installationId, $repositoryId)
     {
-        return $this->put('/installation/'.rawurlencode($installationId).'/repositories/'.rawurlencode($repositoryId));
+        return $this->put('/installations/'.rawurlencode($installationId).'/repositories/'.rawurlencode($repositoryId));
     }
 
     /**
@@ -89,6 +89,6 @@ class Apps extends AbstractApi
      */
     public function removeRepository($installationId, $repositoryId)
     {
-        return $this->delete('/app/'.rawurlencode($installationId).'/repositories/'.rawurlencode($repositoryId));
+        return $this->delete('/installations/'.rawurlencode($installationId).'/repositories/'.rawurlencode($repositoryId));
     }
 }
