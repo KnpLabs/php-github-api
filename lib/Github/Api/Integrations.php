@@ -9,5 +9,4 @@ namespace Github\Api;
  */
 class Integrations extends Apps
 {
-
 }
