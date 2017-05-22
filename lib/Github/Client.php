@@ -29,8 +29,9 @@ use Psr\Cache\CacheItemPoolInterface;
  * @method Api\Gists gist()
  * @method Api\Gists gists()
  * @method Api\Miscellaneous\Gitignore gitignore()
- * @method Api\Integrations integration()
- * @method Api\Integrations integrations()
+ * @method Api\Apps integration() (deprecated)
+ * @method Api\Apps integrations() (deprecated)
+ * @method Api\Apps apps()
  * @method Api\Issue issue()
  * @method Api\Issue issues()
  * @method Api\Markdown markdown()
@@ -200,7 +201,8 @@ class Client
 
             case 'integration':
             case 'integrations':
-                $api = new Api\Integrations($this);
+            case 'apps':
+                $api = new Api\Apps($this);
                 break;
 
             case 'issue':
