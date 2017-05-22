@@ -59,7 +59,7 @@ class Apps extends AbstractApi
             $parameters['user_id'] = $userId;
         }
 
-        return $this->get('/app/repositories', $parameters);
+        return $this->get('/installation/repositories', $parameters);
     }
 
     /**
