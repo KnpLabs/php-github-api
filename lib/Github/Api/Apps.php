@@ -5,26 +5,12 @@ namespace Github\Api;
 use Github\Api\AcceptHeaderTrait;
 
 /**
- * @link   https://developer.github.com/v3/integrations/
+ * @link   https://developer.github.com/v3/apps/
  * @author Nils Adermann <naderman@naderman.de>
  */
-class Integrations extends AbstractApi
+class Apps extends AbstractApi
 {
     use AcceptHeaderTrait;
-
-    /**
-     * Configure the accept header for Early Access to the integrations api
-     *
-     * @see https://developer.github.com/v3/integrations/
-     *
-     * @return self
-     */
-    public function configure()
-    {
-        $this->acceptHeaderValue = 'application/vnd.github.machine-man-preview+json';
-
-        return $this;
-    }
 
     /**
      * Create an access token for an installation
@@ -48,19 +34,19 @@ class Integrations extends AbstractApi
     /**
      * Find all installations for the authenticated integration.
      *
-     * @link https://developer.github.com/v3/integrations/#find-installations
+     * @link https://developer.github.com/v3/apps/#find-installations
      *
      * @return array
      */
     public function findInstallations()
     {
-        return $this->get('/integration/installations');
+        return $this->get('/app/installations');
     }
 
     /**
      * List repositories that are accessible to the authenticated installation.
      *
-     * @link https://developer.github.com/v3/integrations/installations/#list-repositories
+     * @link https://developer.github.com/v3/apps/installations/#list-repositories
      *
      * @param int $userId
      *
@@ -73,13 +59,13 @@ class Integrations extends AbstractApi
             $parameters['user_id'] = $userId;
         }
 
-        return $this->get('/installation/repositories', $parameters);
+        return $this->get('/app/repositories', $parameters);
     }
 
     /**
      * Add a single repository to an installation.
      *
-     * @link https://developer.github.com/v3/integrations/installations/#add-repository-to-installation
+     * @link https://developer.github.com/v3/apps/installations/#add-repository-to-installation
      *
      * @param int $installationId
      * @param int $repositoryId
@@ -88,13 +74,13 @@ class Integrations extends AbstractApi
      */
     public function addRepository($installationId, $repositoryId)
     {
-        return $this->put('/installations/'.rawurlencode($installationId).'/repositories/'.rawurlencode($repositoryId));
+        return $this->put('/app/'.rawurlencode($installationId).'/repositories/'.rawurlencode($repositoryId));
     }
 
     /**
      * Remove a single repository from an installation.
      *
-     * @link https://developer.github.com/v3/integrations/installations/#remove-repository-from-installation
+     * @link https://developer.github.com/v3/apps/installations/#remove-repository-from-installation
      *
      * @param int $installationId
      * @param int $repositoryId
@@ -103,6 +89,6 @@ class Integrations extends AbstractApi
      */
     public function removeRepository($installationId, $repositoryId)
     {
-        return $this->delete('/installations/'.rawurlencode($installationId).'/repositories/'.rawurlencode($repositoryId));
+        return $this->delete('/app/'.rawurlencode($installationId).'/repositories/'.rawurlencode($repositoryId));
     }
 }
