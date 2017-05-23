@@ -2,6 +2,7 @@ Navigation
 ==========
 
 APIs:
+* [Applications](apps.md)
 * [Authorizations](authorizations.md)
 * [Commits](commits.md)
 * Current User
@@ -10,7 +11,6 @@ APIs:
 * [Enterprise](enterprise.md)
 * [Gists](gists.md)
   * [Comments](gists/comments.md)
-* [Integrations](integrations.md)
 * [Issues](issues.md)
   * [Assignees](issue/assignees.md)
   * [Comments](issue/comments.md)

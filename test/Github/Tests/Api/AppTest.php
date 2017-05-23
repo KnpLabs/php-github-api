@@ -2,19 +2,19 @@
 
 namespace Github\Tests\Api;
 
-class IntegrationTest extends TestCase
+class AppTest extends TestCase
 {
     /**
      * @test
      */
-    public function shouldFindRepositoriesForIntegration()
+    public function shouldFindRepositoriesForApplication()
     {
         $result = ['installation1', 'installation2'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/integration/installations')
+            ->with('/app/installations')
             ->willReturn($result);
 
         $this->assertEquals($result, $api->findInstallations());
@@ -68,6 +68,6 @@ class IntegrationTest extends TestCase
      */
     protected function getApiClass()
     {
-        return \Github\Api\Integrations::class;
+        return \Github\Api\Apps::class;
     }
 }
