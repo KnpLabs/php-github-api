@@ -202,7 +202,7 @@ class Client
             case 'integration':
             case 'integrations':
                 $api = new Api\Integrations($this);
-                break
+                break;
             case 'apps':
                 $api = new Api\Apps($this);
                 break;
