@@ -28,7 +28,7 @@ class Apps extends AbstractApi
     }
 
     /**
-     * Find all installations for the authenticated integration.
+     * Find all installations for the authenticated application.
      *
      * @link https://developer.github.com/v3/apps/#find-installations
      *
