@@ -2,8 +2,6 @@
 
 namespace Github\Api;
 
-use AcceptHeaderTrait;
-
 /**
  * GraphQL API.
  *
