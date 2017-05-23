@@ -12,7 +12,7 @@ namespace Github\Api;
 class Integrations extends Apps
 {
     /**
-     * @deprecated
+     * @deprecated 
      * Configure the accept header for Early Access to the integrations api (DEPRECATED)
      *
      * @see https://developer.github.com/v3/apps/
