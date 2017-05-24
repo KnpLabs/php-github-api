@@ -13,6 +13,7 @@ namespace Github\Api;
 class GraphQL extends AbstractApi
 {
     use AcceptHeaderTrait;
+    
     /**
      * @param string $query
      *
