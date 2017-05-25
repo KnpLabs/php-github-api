@@ -2,6 +2,17 @@
 
 The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release. 
 
+## 2.5.0 (unreleased)
+
+### Added
+
+- Stable support for graphql api (V4) (#593)
+- Stable support for apps (previously integrations) (#592)
+
+### Fixed
+
+- Incorrect link in repository search docs (#594)
+
 ## 2.4.0
 
 ### Added
