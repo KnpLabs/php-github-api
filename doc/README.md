@@ -1,7 +1,10 @@
 Navigation
 ==========
 
-APIs:
+v4 API:
+* [GraphQL](graphql.md)
+
+v3 APIs:
 * [Applications](apps.md)
 * [Authorizations](authorizations.md)
 * [Commits](commits.md)
@@ -11,6 +14,7 @@ APIs:
 * [Enterprise](enterprise.md)
 * [Gists](gists.md)
   * [Comments](gists/comments.md)
+* [GraphQL](graphql.md)
 * [Issues](issues.md)
   * [Assignees](issue/assignees.md)
   * [Comments](issue/comments.md)
