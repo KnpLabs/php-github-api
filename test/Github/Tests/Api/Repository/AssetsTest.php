@@ -48,7 +48,7 @@ class AssetsTest extends TestCase
     {
         if (!defined('OPENSSL_TLSEXT_SERVER_NAME') || !OPENSSL_TLSEXT_SERVER_NAME) {
             return $this->markTestSkipped(
-                'Asset upload support requires Server Name Indication. This is not supported be your PHP version.'
+                'Asset upload support requires Server Name Indication. This is not supported by your PHP version.'
             );
         }
 
