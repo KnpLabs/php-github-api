@@ -60,7 +60,7 @@ class Builder
     private $plugins = [];
 
     /**
-     * This plugin is speacal treated because it has to be the very last plugin.
+     * This plugin is special treated because it has to be the very last plugin.
      *
      * @var Plugin\CachePlugin
      */
