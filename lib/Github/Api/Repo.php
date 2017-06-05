@@ -62,6 +62,25 @@ class Repo extends AbstractApi
     }
 
     /**
+       * List all repositories owned by the user.
+       *
+       * @link https://developer.github.com/v3/repos/#list-your-repositories
+       *
+       * @param string|all $visibility The repo visibility
+       * @param string|full_name $sort How to sort the data.
+       * @param int|null $id The integer ID of the last Repository that you’ve seen.
+       *
+       * @return array list of users found
+       */
+      public function owned($visibility = 'all', $sort = 'full_name', $id = null)
+      {
+          if (!is_int($id)) {
+              return $this->get('/user/repos?affiliation=owner');
+          }
+
+          return $this->get('/user/repos?affiliation=owner&since=' . rawurldecode($id));
+      }
+    /**
      * Get the last year of commit activity for a repository grouped by week.
      *
      * @link http://developer.github.com/v3/repos/statistics/#commit-activity
