@@ -36,6 +36,7 @@ abstract class AbstractApi implements ApiInterface
 
     public function configure()
     {
+        //
     }
 
     /**
