@@ -41,7 +41,7 @@ Then run the following command to require the library:
 $ php composer.phar require knplabs/github-api php-http/guzzle6-adapter
 ```
 
-Why `php-http/guzzle6-adapter`? We are decoupled form any HTTP messaging client with help by [HTTPlug](http://httplug.io/). Read about clients in our [docs](doc/customize.md).
+Why `php-http/guzzle6-adapter`? We are decoupled from any HTTP messaging client with help by [HTTPlug](http://httplug.io/). Read about clients in our [docs](doc/customize.md).
 
 ## Using Laravel?
 
