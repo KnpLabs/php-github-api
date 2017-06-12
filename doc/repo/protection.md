@@ -33,3 +33,11 @@ $params = [
 ];
 $protection = $client->api('repo')->protection()->show('twbs', 'bootstrap', 'master', $params);
 ```
+
+### Remove branch protection
+
+> Requires [authentication](../security.md).
+
+```php
+$protection = $client->api('repo')->protection()->remove('twbs', 'bootstrap', 'master');
+```

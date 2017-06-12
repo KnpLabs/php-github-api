@@ -52,4 +52,18 @@ class Protection extends AbstractApi
     {
         return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches/'.rawurlencode($branch).'/protection', $params);
     }
+
+    /**
+     * Remove the repo's branch protection
+     *
+     * @link https://developer.github.com/v3/repos/branches/#remove-branch-protection
+     *
+     * @param  string $username   The user who owns the repository
+     * @param  string $repository The name of the repo
+     * @param  string $branch     The name of the branch
+     */
+    public function remove($username, $repository, $branch)
+    {
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches/'.rawurlencode($branch).'/protection');
+    }
 }
