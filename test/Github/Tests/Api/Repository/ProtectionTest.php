@@ -40,6 +40,22 @@ class ProtectionTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function shouldRemoveProtection()
+    {
+        $expectedValue = array('someOutput');
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('delete')
+            ->with('/repos/KnpLabs/php-github-api/branches/master/protection')
+            ->will($this->returnValue($expectedValue));
+
+        $this->assertEquals($expectedValue, $api->remove('KnpLabs', 'php-github-api', 'master'));
+    }
+
+    /**
      * @return string
      */
     protected function getApiClass()
