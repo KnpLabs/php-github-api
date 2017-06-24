@@ -159,11 +159,22 @@ class Review extends AbstractApi
      * @param string $repository  the repository
      * @param int    $pullRequest the pull request number
      * @param int    $id          the review id
+     * @param string  $message    a mandatory dismissal message
      *
      * @return array|string
      */
-    public function dismiss($username, $repository, $pullRequest, $id)
+    public function dismiss($username, $repository, $pullRequest, $id, $message)
     {
-        return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.$pullRequest.'/reviews/'.$id.'/dismissals');
+        if (empty($message)) {
+            throw new InvalidArgumentException(sprintf('"message" must be a valid string ("%s" given).', gettype($message)));
+        }
+
+        if (!is_string($message)) {
+            throw new InvalidArgumentException('"message" is mandatory and cannot be empty');
+        }
+
+        return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.$pullRequest.'/reviews/'.$id.'/dismissals', [
+          'message' => $message
+        ]);
     }
 }
