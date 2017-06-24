@@ -165,11 +165,11 @@ class Review extends AbstractApi
      */
     public function dismiss($username, $repository, $pullRequest, $id, $message)
     {
-        if (empty($message)) {
+        if (!is_string($message)) {
             throw new InvalidArgumentException(sprintf('"message" must be a valid string ("%s" given).', gettype($message)));
         }
 
-        if (!is_string($message)) {
+        if (empty($message)) {
             throw new InvalidArgumentException('"message" is mandatory and cannot be empty');
         }
 
