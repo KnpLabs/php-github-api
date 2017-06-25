@@ -10,6 +10,7 @@ The change log describes what is "Added", "Removed", "Changed" or "Fixed" betwee
 
 - Stable support for graphql api (V4) (#593)
 - Stable support for apps (previously integrations) (#592)
+- `Repo::events()`
 
 ### Fixed
 
