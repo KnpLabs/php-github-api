@@ -30,7 +30,8 @@ $client->api('pull_request')->reviews()->comments('twbs', 'bootstrap', 12, $revi
 ```
 
 ### Dismiss a review
-##### This does not remove the review but dismisses the (dis)approval status of this one
+**This does not remove the review but dismisses the (dis)approval status of this one**
+
 Note: To dismiss a pull request review on a protected branch, you must be a
 repository administrator or be included in the list of people or teams who can dismiss pull request reviews.
 
