@@ -2,7 +2,9 @@
 
 The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release. 
 
-## 2.5.0 (unreleased)
+## 2.6.0 (unreleased)
+
+## 2.5.0
 
 ### Added
 
@@ -12,6 +14,7 @@ The change log describes what is "Added", "Removed", "Changed" or "Fixed" betwee
 ### Fixed
 
 - Incorrect link in repository search docs (#594)
+- Added the required parameter `$message` on `Review::dismiss`.
 
 ## 2.4.0
 
