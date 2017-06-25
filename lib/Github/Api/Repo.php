@@ -150,7 +150,7 @@ class Repo extends AbstractApi
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository));
     }
-    
+
     /**
      * Get extended information about a repository by its id.
      * Note: at time of writing this is an undocumented feature but GitHub support have advised that it can be relied on.
@@ -580,9 +580,23 @@ class Repo extends AbstractApi
     {
         return new Projects($this->client);
     }
-    
+
     public function traffic()
     {
         return new Traffic($this->client);
+    }
+
+    /**
+     * @param string $username
+     * @param string $repository
+     * @param int    $page
+     *
+     * @return array|string
+     *
+     * @see https://developer.github.com/v3/activity/events/#list-repository-events
+     */
+    public function events($username, $repository, $page = 1)
+    {
+        return $this->get('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/events', ['page' => $page]);
     }
 }

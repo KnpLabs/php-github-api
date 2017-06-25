@@ -19,7 +19,7 @@ class RepoTest extends TestCase
 
         $this->assertEquals($expectedArray, $api->show('KnpLabs', 'php-github-api'));
     }
-    
+
     /**
      * @test
      */
@@ -515,6 +515,24 @@ class RepoTest extends TestCase
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->activity('KnpLabs', 'php-github-api'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetRepositoryEvents()
+    {
+        $expectedArray = array('id' => 6122723754, 'type' => 'ForkEvent');
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/repos/KnpLabs/php-github-api/events', array(
+                'page' => 3,
+            ))
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->events('KnpLabs', 'php-github-api', 3));
     }
 
     /**
