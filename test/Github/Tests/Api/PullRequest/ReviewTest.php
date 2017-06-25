@@ -391,7 +391,7 @@ class ReviewTest extends TestCase
             ->with('/repos/octocat/Hello-World/pulls/12/reviews/80/dismissals')
             ->willReturn($expectedValue);
 
-        $this->assertSame($expectedValue, $api->dismiss('octocat', 'Hello-World', 12, 80));
+        $this->assertSame($expectedValue, $api->dismiss('octocat', 'Hello-World', 12, 80, 'Dismiss reason'));
     }
 
     protected function getApiClass()
