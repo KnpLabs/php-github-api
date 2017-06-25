@@ -7,7 +7,7 @@
 $reviewRequests = $client->api('pull_request')->reviews()->all('twbs', 'bootstrap', 12);
 ```
 
-### Create a review request
+### Create a review
 
 ```php
 $client->api('pull_request')->reviews()->create('twbs', 'bootstrap', 12, array(                  
@@ -17,19 +17,19 @@ $client->api('pull_request')->reviews()->create('twbs', 'bootstrap', 12, array(
 ));
 ```
 
-### Get a review request
+### Get a review
 
 ```php
 $client->api('pull_request')->reviews()->show('twbs', 'bootstrap', 12, $reviewId);
 ```
 
-### Get comment from a review request
+### Get comment from a review
 
 ```php
 $client->api('pull_request')->reviews()->comments('twbs', 'bootstrap', 12, $reviewId);
 ```
 
-### Dismiss a review request
+### Dismiss a review
 ##### This does not remove the review but dismisses the (dis)approval status of this one
 Note: To dismiss a pull request review on a protected branch, you must be a
 repository administrator or be included in the list of people or teams who can dismiss pull request reviews.
@@ -38,7 +38,7 @@ repository administrator or be included in the list of people or teams who can d
 $client->api('pull_request')->reviews()->remove('twbs', 'bootstrap', 12, $reviewId, 'Dismiss reason (mandatory)');
 ```
 
-### Remove a review request
+### Remove a review
 
 ```php
 $client->api('pull_request')->reviews()->remove('twbs', 'bootstrap', 12, $reviewId);
