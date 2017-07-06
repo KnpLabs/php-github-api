@@ -21,6 +21,35 @@ class GraphQLTest extends TestCase
         $this->assertEquals('foo', $result);
     }
 
+    /**
+     * @test
+     */
+    public function shouldSupportGraphQLVariables()
+    {
+        $api = $this->getApiMock();
+
+        $api->method('post')
+            ->with('/graphql', $this->arrayHasKey('variables'));
+
+        $api->execute('bar', ['variable' => 'foo']);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldJSONEncodeGraphQLVariables()
+    {
+        $api = $this->getApiMock();
+
+        $api->method('post')
+            ->with('/graphql', $this->equalTo([
+                'query'=>'bar',
+                'variables' => '{"variable":"foo"}'
+            ]));
+
+        $api->execute('bar', ['variable' => 'foo']);
+    }
+
     protected function getApiClass()
     {
         return \Github\Api\GraphQL::class;
