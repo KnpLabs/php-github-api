@@ -4,6 +4,10 @@ The change log describes what is "Added", "Removed", "Changed" or "Fixed" betwee
 
 ## 2.6.0 (unreleased)
 
+### Added
+
+- Support for graphql api [variables](https://developer.github.com/v4/guides/forming-calls/#working-with-variables) (#612)
+
 ## 2.5.0
 
 ### Added
