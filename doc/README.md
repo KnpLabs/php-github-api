@@ -14,6 +14,12 @@ v3 APIs:
 * [Enterprise](enterprise.md)
 * [Gists](gists.md)
   * [Comments](gists/comments.md)
+* GitData
+  * [Blobs](gitdata/blobs.md)
+  * [Commits](gitdata/commits.md)
+  * [References](gitdata/references.md)
+  * [Tags](gitdata/tags.md)
+  * [Trees](gitdata/trees.md)
 * [GraphQL](graphql.md)
 * [Issues](issues.md)
   * [Assignees](issue/assignees.md)
