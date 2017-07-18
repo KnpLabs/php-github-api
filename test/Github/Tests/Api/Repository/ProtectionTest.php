@@ -58,7 +58,8 @@ class ProtectionTest extends TestCase
     /**
      * @test
      */
-    public function shouldShowStatusChecks() {
+    public function shouldShowStatusChecks()
+    {
         $expectedValue = array('someOutput');
 
         $api = $this->getApiMock();
@@ -73,7 +74,8 @@ class ProtectionTest extends TestCase
     /**
      * @test
      */
-    public function shouldUpdateStatusChecks() {
+    public function shouldUpdateStatusChecks()
+    {
         $expectedValue = array('someOutput');
         $data = array('someInput');
 
@@ -89,7 +91,8 @@ class ProtectionTest extends TestCase
     /**
      * @test
      */
-    public function shouldRemoveStatusChecks() {
+    public function shouldRemoveStatusChecks()
+    {
         $expectedValue = array('someOutput');
 
         $api = $this->getApiMock();
@@ -104,7 +107,8 @@ class ProtectionTest extends TestCase
     /**
      * @test
      */
-    public function shouldShowStatusChecksContexts() {
+    public function shouldShowStatusChecksContexts()
+    {
         $expectedValue = array('someOutput');
 
         $api = $this->getApiMock();
@@ -119,7 +123,8 @@ class ProtectionTest extends TestCase
     /**
      * @test
      */
-    public function shouldReplaceStatusChecksContexts() {
+    public function shouldReplaceStatusChecksContexts()
+    {
         $expectedValue = array('someOutput');
         $data = array('someInput');
 
@@ -135,7 +140,8 @@ class ProtectionTest extends TestCase
     /**
      * @test
      */
-    public function shouldAddStatusChecksContexts() {
+    public function shouldAddStatusChecksContexts()
+    {
         $expectedValue = array('someOutput');
         $data = array('someInput');
 
@@ -151,7 +157,8 @@ class ProtectionTest extends TestCase
     /**
      * @test
      */
-    public function shouldRemoveStatusChecksContexts() {
+    public function shouldRemoveStatusChecksContexts()
+    {
         $expectedValue = array('someOutput');
         $data = array('someInput');
 
@@ -167,7 +174,8 @@ class ProtectionTest extends TestCase
     /**
      * @test
      */
-    public function shouldShowPullRequestReviewEnforcement() {
+    public function shouldShowPullRequestReviewEnforcement()
+    {
         $expectedValue = array('someOutput');
 
         $api = $this->getApiMock();
@@ -182,7 +190,8 @@ class ProtectionTest extends TestCase
     /**
      * @test
      */
-    public function shouldUpdatePullRequestReviewEnforcement() {
+    public function shouldUpdatePullRequestReviewEnforcement()
+    {
         $expectedValue = array('someOutput');
         $data = array('someInput');
 
@@ -198,7 +207,8 @@ class ProtectionTest extends TestCase
     /**
      * @test
      */
-    public function shouldRemovePullRequestReviewEnforcement() {
+    public function shouldRemovePullRequestReviewEnforcement()
+    {
         $expectedValue = array('someOutput');
 
         $api = $this->getApiMock();
@@ -213,7 +223,8 @@ class ProtectionTest extends TestCase
     /**
      * @test
      */
-    public function shouldShowAdminEnforcement() {
+    public function shouldShowAdminEnforcement()
+    {
         $expectedValue = array('someOutput');
 
         $api = $this->getApiMock();
@@ -228,7 +239,8 @@ class ProtectionTest extends TestCase
     /**
      * @test
      */
-    public function shouldAddAdminEnforcement() {
+    public function shouldAddAdminEnforcement()
+    {
         $expectedValue = array('someOutput');
 
         $api = $this->getApiMock();
@@ -243,7 +255,8 @@ class ProtectionTest extends TestCase
     /**
      * @test
      */
-    public function shouldRemoveAdminEnforcement() {
+    public function shouldRemoveAdminEnforcement()
+    {
         $expectedValue = array('someOutput');
 
         $api = $this->getApiMock();
@@ -258,7 +271,8 @@ class ProtectionTest extends TestCase
     /**
      * @test
      */
-    public function shouldShowRestrictions() {
+    public function shouldShowRestrictions()
+    {
         $expectedValue = array('someOutput');
 
         $api = $this->getApiMock();
@@ -273,7 +287,8 @@ class ProtectionTest extends TestCase
     /**
      * @test
      */
-    public function shouldRemoveRestrictions() {
+    public function shouldRemoveRestrictions()
+    {
         $expectedValue = array('someOutput');
 
         $api = $this->getApiMock();
@@ -288,7 +303,8 @@ class ProtectionTest extends TestCase
     /**
      * @test
      */
-    public function shouldShowTeamRestrictions() {
+    public function shouldShowTeamRestrictions()
+    {
         $expectedValue = array('someOutput');
 
         $api = $this->getApiMock();
@@ -303,7 +319,8 @@ class ProtectionTest extends TestCase
     /**
      * @test
      */
-    public function shouldReplaceTeamRestrictions() {
+    public function shouldReplaceTeamRestrictions()
+    {
         $expectedValue = array('someOutput');
         $data = array('someInput');
 
@@ -319,7 +336,8 @@ class ProtectionTest extends TestCase
     /**
      * @test
      */
-    public function shouldAddTeamRestrictions() {
+    public function shouldAddTeamRestrictions()
+    {
         $expectedValue = array('someOutput');
         $data = array('someInput');
 
@@ -335,7 +353,8 @@ class ProtectionTest extends TestCase
     /**
      * @test
      */
-    public function shouldRemoveTeamRestrictions() {
+    public function shouldRemoveTeamRestrictions()
+    {
         $expectedValue = array('someOutput');
         $data = array('someInput');
 
@@ -351,7 +370,8 @@ class ProtectionTest extends TestCase
     /**
      * @test
      */
-    public function shouldShowUserRestrictions() {
+    public function shouldShowUserRestrictions()
+    {
         $expectedValue = array('someOutput');
 
         $api = $this->getApiMock();
@@ -366,7 +386,8 @@ class ProtectionTest extends TestCase
     /**
      * @test
      */
-    public function shouldReplaceUserRestrictions() {
+    public function shouldReplaceUserRestrictions()
+    {
         $expectedValue = array('someOutput');
         $data = array('someInput');
 
@@ -382,7 +403,8 @@ class ProtectionTest extends TestCase
     /**
      * @test
      */
-    public function shouldAddUserRestrictions() {
+    public function shouldAddUserRestrictions()
+    {
         $expectedValue = array('someOutput');
         $data = array('someInput');
 
@@ -398,13 +420,14 @@ class ProtectionTest extends TestCase
     /**
      * @test
      */
-    public function shouldRemoveUserRestrictions() {
+    public function shouldRemoveUserRestrictions()
+    {
         $expectedValue = array('someOutput');
         $data = array('someInput');
 
         $api = $this->getApiMock();
         $api->expects($this->once())
-            ->method('delete')
+            ->method('post')
             ->with('/repos/KnpLabs/php-github-api/branches/master/protection/restrictions/users')
             ->will($this->returnValue($expectedValue));
 
