@@ -427,7 +427,7 @@ class ProtectionTest extends TestCase
 
         $api = $this->getApiMock();
         $api->expects($this->once())
-            ->method('post')
+            ->method('delete')
             ->with('/repos/KnpLabs/php-github-api/branches/master/protection/restrictions/users')
             ->will($this->returnValue($expectedValue));
 
