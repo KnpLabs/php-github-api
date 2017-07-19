@@ -1,12 +1,13 @@
 # Change Log
 
-The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release. 
+The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release.
 
 ## 2.6.0 (unreleased)
 
 ### Added
 
 - Support for graphql api [variables](https://developer.github.com/v4/guides/forming-calls/#working-with-variables) (#612)
+- Added missing branch protection methods (#616)
 
 ## 2.5.0
 
@@ -25,7 +26,7 @@ The change log describes what is "Added", "Removed", "Changed" or "Fixed" betwee
 
 ### Added
 
-- `Integrations::configure` to allow accessing early access program endpoints. 
+- `Integrations::configure` to allow accessing early access program endpoints.
 - Add support for pagination and parameters in the pull request comments
 - Add the ability to fetch user installations (`CurrentUser::installations`)
 - Allow getting repo info by id (`Repo::showById`)
@@ -33,7 +34,7 @@ The change log describes what is "Added", "Removed", "Changed" or "Fixed" betwee
 
 ### Changed
 
-- `PullRequest\Review` and `PullRequest\ReviewRequest` is now part of the official API. No need to call `configure`. 
+- `PullRequest\Review` and `PullRequest\ReviewRequest` is now part of the official API. No need to call `configure`.
 
 ## 2.3.0
 
@@ -49,7 +50,7 @@ The change log describes what is "Added", "Removed", "Changed" or "Fixed" betwee
 
 ### Changed
 
-- First argument to `Integrations::listRepositories()` is now optional. 
+- First argument to `Integrations::listRepositories()` is now optional.
 - Moved tests from "functional" to "integration"
 
 ## 2.2.0
@@ -57,10 +58,10 @@ The change log describes what is "Added", "Removed", "Changed" or "Fixed" betwee
 ### Added
 
 - API support for Pull Request Review Requests.
-- API support for Traffic. 
-- API support for issue Assignees. 
-- API support for Miscellaneous Gitignore and Emojis. 
-- Added endpoints for issue lock, unlock and issue label show. 
+- API support for Traffic.
+- API support for issue Assignees.
+- API support for Miscellaneous Gitignore and Emojis.
+- Added endpoints for issue lock, unlock and issue label show.
 - Added more parameters to `User::starred`.
 - Fluid interface by allowing `configure()` to return `$this`.
 - `configure()` support for issues API.
@@ -74,21 +75,21 @@ The change log describes what is "Added", "Removed", "Changed" or "Fixed" betwee
 
 ### Added
 
-- Add support for retrieving a single notification info using his ID 
+- Add support for retrieving a single notification info using his ID
 - Add a function to get user organizations
 - Added GraphQL support
 - Add page variable to organization repo list (Organization::repositories())
-- Add support for pull request review. 
+- Add support for pull request review.
 - Add support for adding branch protection.
 
 ### Fixed
 
-- Bug with double slashes when using enterprise URL. 
+- Bug with double slashes when using enterprise URL.
 - Bug when headers not being passed to request (#529)
 
 ## 2.0.0
 
-### Added 
+### Added
 
 - Support for JWT authentication
 - API for Organization\Members
@@ -101,26 +102,26 @@ The change log describes what is "Added", "Removed", "Changed" or "Fixed" betwee
 
 ### Changed
 
-- `ApiLimitExceedException::__construct` has a new second parameter for the remaining API calls. 
-- First parameter of `Github\Client` has changed type from `\Http\Client\HttpClient` to 
-`Github\HttpClient\Builder`. A factory class was also added. To upgrade you need to change: 
- 
+- `ApiLimitExceedException::__construct` has a new second parameter for the remaining API calls.
+- First parameter of `Github\Client` has changed type from `\Http\Client\HttpClient` to
+`Github\HttpClient\Builder`. A factory class was also added. To upgrade you need to change:
+
 ```php
 // Old way does not work:
-$github = new Github\Client($httpClient); 
+$github = new Github\Client($httpClient);
 
 // New way will work:
-$github = new Github\Client(new Github\HttpClient\Builder($httpClient)); 
-$github = Github\Client::createWithHttpClient($httpClient);  
+$github = new Github\Client(new Github\HttpClient\Builder($httpClient));
+$github = Github\Client::createWithHttpClient($httpClient);
 ```
-- Renamed the currentuser `DeployKeys` api class to `PublicKeys` to reflect to github api name. 
+- Renamed the currentuser `DeployKeys` api class to `PublicKeys` to reflect to github api name.
 
 ## 2.0.0-rc4
 
-### Added 
+### Added
 
 - HTTPlug to decouple from Guzzle
-- `Github\Client::getLastResponse` was added 
+- `Github\Client::getLastResponse` was added
 - Support for PSR-6 cache
 - `Github\Client::addPlugin` and `Github\Client::removePlugin`
 - `Github\Client::getApiVersion`
@@ -143,6 +144,6 @@ $github = Github\Client::createWithHttpClient($httpClient);
 - `Github/HttpClient/CachedHttpClient` was removed
 -  All classes in `Github/HttpClient/Cache/*` were removed
 
-## 1.7.1 
+## 1.7.1
 
 No change log before this version
