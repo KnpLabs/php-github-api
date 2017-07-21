@@ -5,6 +5,7 @@ v4 API:
 * [GraphQL](graphql.md)
 
 v3 APIs:
+* [Activity](activity.md)
 * [Applications](apps.md)
 * [Authorizations](authorizations.md)
 * [Commits](commits.md)
@@ -20,6 +21,7 @@ v3 APIs:
   * [Comments](issue/comments.md)
   * [Labels](issue/labels.md)
   * [Milestones](issue/milestones.md)
+* [Meta](meta.md)
 * Miscellaneous
   * [Emojis](miscellaneous/emojis.md)
   * [Gitignore](miscellaneous/gitignore.md)
@@ -42,16 +44,15 @@ v3 APIs:
   * [Stargazers](repo/stargazers.md)
   * [Statuses](repo/statuses.md)
   * [Tags](repo/tags.md)
+* [Search](search.md)
 * [Users](users.md)
-* [Meta](meta.md)
-* [Activity](activity.md)
 
 Additional features:
 
-* [Pagination support](result_pager.md)
 * [Authentication & Security](security.md)
-* [Request any Route](request_any_route.md)
 * [Customize `php-github-api`](customize.md)
 * [Running and writing tests](testing.md)
 * [Response caching](caching.md)
 * [Request / Response info](request_response_info.md)
+* [Pagination support](result_pager.md)
+* [Request any Route](request_any_route.md)
