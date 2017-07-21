@@ -2,6 +2,7 @@ Navigation
 ==========
 
 APIs:
+* [Activity](activity.md)
 * [Authorizations](authorizations.md)
 * [Commits](commits.md)
 * [Enterprise](enterprise.md)
@@ -10,6 +11,7 @@ APIs:
 * [Issues](issues.md)
   * [Comments](issue/comments.md)
   * [Labels](issue/labels.md)
+* [Meta](meta.md)
 * [Organization](organization.md)
   * [Members](organization/members.md)
   * [Teams](organization/teams.md)
@@ -24,13 +26,12 @@ APIs:
   * [Stargazers](repo/stargazers.md)
   * [Statuses](repo/statuses.md)
   * [Tags](repo/tags.md)
+* [Search](search.md)
 * [Users](users.md)
-* [Meta](meta.md)
-* [Activity](activity.md)
 
 Additional features:
 
-* [Pagination support](result_pager.md)
 * [Authentication & Security](security.md)
-* [Request any Route](request_any_route.md)
 * [Customize `php-github-api` and testing](customize.md)
+* [Pagination support](result_pager.md)
+* [Request any Route](request_any_route.md)
