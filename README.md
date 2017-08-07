@@ -27,7 +27,7 @@ Uses [GitHub API v3](http://developer.github.com/v3/) & supports [GitHub API v4]
 * [Guzzle](https://github.com/guzzle/guzzle) library,
 * (optional) PHPUnit to run tests.
 
-## Autoload
+## Install
 
 The new version of `php-github-api` using [Composer](http://getcomposer.org).
 The first step to use `php-github-api` is to download composer:
