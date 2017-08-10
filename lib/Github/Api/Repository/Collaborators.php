@@ -10,9 +10,9 @@ use Github\Api\AbstractApi;
  */
 class Collaborators extends AbstractApi
 {
-    public function all($username, $repository)
+    public function all($username, $repository, array $params = [])
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/collaborators');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/collaborators', $params);
     }
 
     public function check($username, $repository, $collaborator)
@@ -20,9 +20,9 @@ class Collaborators extends AbstractApi
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/collaborators/'.rawurlencode($collaborator));
     }
 
-    public function add($username, $repository, $collaborator)
+    public function add($username, $repository, $collaborator, array $params = [])
     {
-        return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/collaborators/'.rawurlencode($collaborator));
+        return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/collaborators/'.rawurlencode($collaborator), $params);
     }
 
     public function remove($username, $repository, $collaborator)
