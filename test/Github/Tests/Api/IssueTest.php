@@ -105,17 +105,17 @@ class IssueTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
-    public function shouldNotCreateIssueWithoutBody()
+    public function shouldCreateIssueWithoutBody()
     {
         $data = array(
             'title' => 'some title'
         );
 
         $api = $this->getApiMock();
-        $api->expects($this->never())
-            ->method('post');
+        $api->expects($this->once())
+            ->method('post')
+            ->with('/repos/ornicar/php-github-api/issues', $data);
 
         $api->create('ornicar', 'php-github-api', $data);
     }
