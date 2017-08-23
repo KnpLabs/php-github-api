@@ -8,6 +8,7 @@ The change log describes what is "Added", "Removed", "Changed" or "Fixed" betwee
 
 - Support for graphql api [variables](https://developer.github.com/v4/guides/forming-calls/#working-with-variables) (#612)
 - Added missing branch protection methods (#616)
+- Remove `body` as a required parameter when creating an issue (#624)
 
 ## 2.5.0
 

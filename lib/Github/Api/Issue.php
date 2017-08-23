@@ -129,8 +129,8 @@ class Issue extends AbstractApi
      */
     public function create($username, $repository, array $params)
     {
-        if (!isset($params['title'], $params['body'])) {
-            throw new MissingArgumentException(array('title', 'body'));
+        if (!isset($params['title'])) {
+            throw new MissingArgumentException(array('title'));
         }
 
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues', $params);
