@@ -258,7 +258,7 @@ class Repo extends AbstractApi
      * @param string $repository the name of the repository
      * @param string $format     one of formats: "raw" or "html"
      *
-     * @return array the readme content
+     * @return string the readme content
      */
     public function readme($username, $repository, $format = 'raw')
     {
