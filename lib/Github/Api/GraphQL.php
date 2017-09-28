@@ -32,4 +32,15 @@ class GraphQL extends AbstractApi
 
         return $this->post('/graphql', $params);
     }
+    
+    /**
+     * @param string $file
+     * @param array $variables
+     *
+     * @return array
+     */
+    public function fromFile($file, array $variables = array())
+    {
+        return $this->execute(file_get_contents($file), $variables);
+    }
 }
