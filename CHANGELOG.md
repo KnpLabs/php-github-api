@@ -2,13 +2,19 @@
 
 The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release.
 
-## 2.6.0 (unreleased)
+## 2.6.0
 
 ### Added
 
 - Support for graphql api [variables](https://developer.github.com/v4/guides/forming-calls/#working-with-variables) (#612)
 - Added missing branch protection methods (#616)
+- Helper function `fromFile ` to get GraphQL queries from a file (#628)
+- Extra parameter `params` to collaborators api calls (#623)
+- Documentation for GitData API (#613)
+
+### Fixed
 - Remove `body` as a required parameter when creating an issue (#624)
+- Minor fixes in example code (#617)
 
 ## 2.5.0
 
