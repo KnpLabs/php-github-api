@@ -23,7 +23,7 @@ Uses [GitHub API v3](http://developer.github.com/v3/) & supports [GitHub API v4]
 
 ## Requirements
 
-* PHP >= 5.5
+* PHP >= 5.6
 * [Guzzle](https://github.com/guzzle/guzzle) library,
 * (optional) PHPUnit to run tests.
 

@@ -12,7 +12,7 @@ use Http\Client\Common\Plugin;
 use Http\Client\HttpClient;
 use Psr\Http\Message\RequestInterface;
 
-class ClientTest extends \PHPUnit_Framework_TestCase
+class ClientTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test

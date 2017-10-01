@@ -11,7 +11,7 @@ use GuzzleHttp\Psr7\Response;
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class CacheTest extends \PHPUnit_Framework_TestCase
+class CacheTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test

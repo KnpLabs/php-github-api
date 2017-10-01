@@ -2,6 +2,16 @@
 
 The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release.
 
+## 2.7.0 (Unreleased)
+
+### Removed
+
+- Dropped support for php 5.5
+
+###
+
+- Phpunit 6 compatibility
+
 ## 2.6.0
 
 ### Added
