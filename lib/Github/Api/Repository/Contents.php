@@ -64,7 +64,7 @@ class Contents extends AbstractApi
      * @param null|string $path       path to file or directory
      * @param null|string $reference  reference to a branch or commit
      *
-     * @return array information for file | information for each item in directory
+     * @return array|string information for file | information for each item in directory
      */
     public function show($username, $repository, $path = null, $reference = null)
     {

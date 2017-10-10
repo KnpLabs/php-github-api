@@ -77,7 +77,7 @@ class PullRequest extends AbstractApi
      * @param string $repository the repository
      * @param string $id         the ID of the pull request for which details are retrieved
      *
-     * @return array array of pull requests for the project
+     * @return array|string pull request details
      */
     public function show($username, $repository, $id)
     {
