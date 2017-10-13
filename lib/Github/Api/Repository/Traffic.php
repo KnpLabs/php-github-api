@@ -39,7 +39,7 @@ class Traffic extends AbstractApi
      *
      * @param string $owner
      * @param string $repository
-     * @param string|day $per
+     * @param string $per
      *
      * @return array
      */
@@ -52,7 +52,7 @@ class Traffic extends AbstractApi
      *
      * @param string $owner
      * @param string $repository
-     * @param string|day $per
+     * @param string $per
      *
      * @return array
      */
