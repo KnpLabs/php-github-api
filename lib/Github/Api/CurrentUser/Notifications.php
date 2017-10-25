@@ -75,8 +75,8 @@ class Notifications extends AbstractApi
      *
      * @link http://developer.github.com/v3/activity/notifications/#mark-a-thread-as-read
      *
-     * @param string $id     the notification number
-     * @param array  $params
+     * @param int   $id     the notification number
+     * @param array $params
      *
      * @return array
      */
@@ -90,7 +90,7 @@ class Notifications extends AbstractApi
      *
      * @link http://developer.github.com/v3/activity/notifications/#view-a-single-thread
      *
-     * @param string $id the notification number
+     * @param int $id the notification number
      *
      * @return array
      */
@@ -104,7 +104,7 @@ class Notifications extends AbstractApi
      *
      * @link http://developer.github.com/v3/activity/notifications/#get-a-thread-subscription
      *
-     * @param string $id the notification number
+     * @param int $id the notification number
      *
      * @return array
      */
@@ -118,8 +118,8 @@ class Notifications extends AbstractApi
      *
      * @link http://developer.github.com/v3/activity/notifications/#set-a-thread-subscription
      *
-     * @param string $id     the notification number
-     * @param array  $params
+     * @param int   $id     the notification number
+     * @param array $params
      *
      * @return array
      */
@@ -133,7 +133,7 @@ class Notifications extends AbstractApi
      *
      * @link http://developer.github.com/v3/activity/notifications/#delete-a-thread-subscription
      *
-     * @param string $id the notification number
+     * @param int $id the notification number
      *
      * @return array
      */

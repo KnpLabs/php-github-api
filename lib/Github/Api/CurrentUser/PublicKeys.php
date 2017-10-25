@@ -28,7 +28,7 @@ class PublicKeys extends AbstractApi
      *
      * @link https://developer.github.com/v3/users/keys/
      *
-     * @param string $id
+     * @param int $id
      *
      * @return array
      */
@@ -62,7 +62,7 @@ class PublicKeys extends AbstractApi
      *
      * @link https://developer.github.com/v3/users/keys/
      *
-     * @param string $id
+     * @param int $id
      *
      * @return array
      */

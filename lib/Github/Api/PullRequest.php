@@ -75,7 +75,7 @@ class PullRequest extends AbstractApi
      *
      * @param string $username   the username
      * @param string $repository the repository
-     * @param string $id         the ID of the pull request for which details are retrieved
+     * @param int    $id         the ID of the pull request for which details are retrieved
      *
      * @return array|string pull request details
      */
@@ -101,7 +101,7 @@ class PullRequest extends AbstractApi
      *
      * @param string $username   the username
      * @param string $repository the repository
-     * @param string $id         the ID of the pull request for which statuses are retrieved
+     * @param int    $id         the ID of the pull request for which statuses are retrieved
      *
      * @return array array of statuses for the project
      */
