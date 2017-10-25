@@ -203,6 +203,7 @@ class Client
             case 'integrations':
                 $api = new Api\Integrations($this);
                 break;
+
             case 'apps':
                 $api = new Api\Apps($this);
                 break;
@@ -225,6 +226,7 @@ class Client
             case 'organizations':
                 $api = new Api\Organization($this);
                 break;
+
             case 'org_project':
             case 'orgProject':
             case 'org_projects':
@@ -284,6 +286,7 @@ class Client
             case 'meta':
                 $api = new Api\Meta($this);
                 break;
+
             case 'graphql':
                 $api = new Api\GraphQL($this);
                 break;
