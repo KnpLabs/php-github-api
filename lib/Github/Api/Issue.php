@@ -104,7 +104,7 @@ class Issue extends AbstractApi
      *
      * @param string $username   the username
      * @param string $repository the repository
-     * @param string $id         the issue number
+     * @param int    $id         the issue number
      *
      * @return array information about the issue
      */
@@ -143,7 +143,7 @@ class Issue extends AbstractApi
      *
      * @param string $username   the username
      * @param string $repository the repository
-     * @param string $id         the issue number
+     * @param int    $id         the issue number
      * @param array  $params     key=>value user attributes to update.
      *                           key can be title or body
      *
@@ -161,7 +161,7 @@ class Issue extends AbstractApi
      *
      * @param string $username
      * @param string $repository
-     * @param string $id
+     * @param int    $id
      *
      * @return string
      */
@@ -177,7 +177,7 @@ class Issue extends AbstractApi
      *
      * @param string $username
      * @param string $repository
-     * @param string $id
+     * @param int    $id
      *
      * @return string
      */

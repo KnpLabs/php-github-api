@@ -68,8 +68,8 @@ class Deployment extends AbstractApi
      *
      * @param string $username the username
      * @param string $repository the repository
-     * @param string $id the deployment number
-     * @param array $params The information about the deployment update.
+     * @param int    $id the deployment number
+     * @param array  $params The information about the deployment update.
      *                       Must include a "state" field of pending, success, error, or failure.
      *                       May also be given a target_url and description, ßee link for more details.
      * @return array information about the deployment
