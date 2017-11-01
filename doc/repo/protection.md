@@ -31,7 +31,7 @@ $params = [
     'enforce_admins' => true,
     'restrictions' => null,
 ];
-$protection = $client->api('repo')->protection()->show('twbs', 'bootstrap', 'master', $params);
+$protection = $client->api('repo')->protection()->update('twbs', 'bootstrap', 'master', $params);
 ```
 
 ### Remove branch protection
