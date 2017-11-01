@@ -37,6 +37,9 @@
     "autoload": {
         "psr-4": { "Github\\": "lib/Github/" }
     },
+    "autoload-dev": {
+        "psr-4": { "Github\\Tests\\": "test/Github/Tests/"}
+    },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "extra": {
