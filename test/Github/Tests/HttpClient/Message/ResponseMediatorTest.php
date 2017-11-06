@@ -8,7 +8,7 @@ use GuzzleHttp\Psr7\Response;
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class ResponseMediatorTest extends \PHPUnit_Framework_TestCase
+class ResponseMediatorTest extends \PHPUnit\Framework\TestCase
 {
     public function testGetContent()
     {

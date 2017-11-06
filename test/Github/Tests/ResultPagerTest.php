@@ -18,7 +18,7 @@ use Http\Client\HttpClient;
  * @author Mitchel Verschoof <mitchel@future500.nl>
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class ResultPagerTest extends \PHPUnit_Framework_TestCase
+class ResultPagerTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test
