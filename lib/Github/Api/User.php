@@ -11,6 +11,19 @@ namespace Github\Api;
  */
 class User extends AbstractApi
 {
+
+	/**
+	 * Get current user.
+	 *
+	 * @link https://developer.github.com/v3/users/#get-a-single-user
+	 *
+	 * @return array list of user properties
+	 */
+	public function self()
+	{
+		return $this->get('/user');
+	}
+
     /**
      * Search users by username.
      *
