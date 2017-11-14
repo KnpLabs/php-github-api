@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\HttpClient;
 
@@ -9,9 +9,6 @@ use Http\Client\Common\Plugin;
  */
 class BuilderTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @test
-     */
     public function shouldClearHeaders()
     {
         $builder = $this->getMockBuilder(\Github\HttpClient\Builder::class)
@@ -28,9 +25,6 @@ class BuilderTest extends \PHPUnit\Framework\TestCase
         $builder->clearHeaders();
     }
 
-    /**
-     * @test
-     */
     public function shouldAddHeaders()
     {
         $headers = array('header1', 'header2');
@@ -50,9 +44,6 @@ class BuilderTest extends \PHPUnit\Framework\TestCase
         $client->addHeaders($headers);
     }
 
-    /**
-     * @test
-     */
     public function appendingHeaderShouldAddAndRemovePlugin()
     {
         $expectedHeaders = [

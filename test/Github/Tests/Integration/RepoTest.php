@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Integration;
 
@@ -7,9 +7,6 @@ namespace Github\Tests\Integration;
  */
 class RepoTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldShowPRDiffIfHeaderIsPresent()
     {
         $this->client->addHeaders(
@@ -24,9 +21,6 @@ class RepoTest extends TestCase
         $this->assertTrue('string' === gettype($diff));
     }
 
-    /**
-     * @test
-     */
     public function shouldRetrieveRawBlob()
     {
         $api = $this->client->api('git_data')->blobs();
@@ -42,9 +36,6 @@ class RepoTest extends TestCase
         $this->assertStringStartsWith('<?php', $contents);
     }
 
-    /**
-     * @test
-     */
     public function shouldNotDecodeRawBlob()
     {
         $api = $this->client->api('git_data')->blobs();
@@ -60,9 +51,6 @@ class RepoTest extends TestCase
         $this->assertStringStartsWith('{', $contents);
     }
 
-    /**
-     * @test
-     */
     public function shouldRetrieveContributorsList()
     {
         $username = 'KnpLabs';
@@ -79,9 +67,6 @@ class RepoTest extends TestCase
         $this->assertArrayHasKey('id', $contributor);
     }
 
-    /**
-     * @test
-     */
     public function shouldShowRepo()
     {
         $username = 'KnpLabs';

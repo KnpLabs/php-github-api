@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Issue;
 
@@ -7,9 +7,6 @@ use Github\Tests\Api\TestCase;
 
 class AssigneesTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldListAvailableAssignees()
     {
         $api = $this->getApiMock();
@@ -20,9 +17,6 @@ class AssigneesTest extends TestCase
         $api->listAvailable('knplabs', 'php-github-api');
     }
 
-    /**
-     * @test
-     */
     public function shouldCheckAssignee()
     {
         $api = $this->getApiMock();
@@ -33,10 +27,6 @@ class AssigneesTest extends TestCase
         $api->check('knplabs', 'php-github-api', 'test-user');
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotAddAssigneeMissingParameter()
     {
         $data = array();
@@ -48,9 +38,6 @@ class AssigneesTest extends TestCase
         $api->add('knplabs', 'php-github-api', 4, $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldAddAssignee()
     {
         $data = array(
@@ -65,10 +52,6 @@ class AssigneesTest extends TestCase
         $api->add('knplabs', 'php-github-api', 4, $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotRemoveAssigneeMissingParameter()
     {
         $data = array();
@@ -80,9 +63,6 @@ class AssigneesTest extends TestCase
         $api->remove('knplabs', 'php-github-api', 4, $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldRemoveAssignee()
     {
         $data = array(
@@ -100,7 +80,7 @@ class AssigneesTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return Assignees::class;
     }

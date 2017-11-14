@@ -1,12 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
 class PullRequestTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetAllPullRequests()
     {
         $expectedArray = array('pr1', 'pr2');
@@ -20,9 +17,6 @@ class PullRequestTest extends TestCase
         $this->assertEquals($expectedArray, $api->all('ezsystems', 'ezpublish'));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetOpenPullRequests()
     {
         $expectedArray = array('pr1', 'pr2');
@@ -36,9 +30,6 @@ class PullRequestTest extends TestCase
         $this->assertEquals($expectedArray, $api->all('ezsystems', 'ezpublish', array('state' => 'open')));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetClosedPullRequests()
     {
         $expectedArray = array('pr1', 'pr2');
@@ -52,9 +43,6 @@ class PullRequestTest extends TestCase
         $this->assertEquals($expectedArray, $api->all('ezsystems', 'ezpublish', array('state' => 'closed')));
     }
 
-    /**
-     * @test
-     */
     public function shouldShowPullRequest()
     {
         $expectedArray = array('id' => 'id', 'sha' => '123123');
@@ -69,9 +57,6 @@ class PullRequestTest extends TestCase
         $this->assertEquals($expectedArray, $api->show('ezsystems', 'ezpublish', '15'));
     }
 
-    /**
-     * @test
-     */
     public function shouldShowCommitsFromPullRequest()
     {
         $expectedArray = array(array('id' => 'id', 'sha' => '123123'));
@@ -85,9 +70,6 @@ class PullRequestTest extends TestCase
         $this->assertEquals($expectedArray, $api->commits('ezsystems', 'ezpublish', '15'));
     }
 
-    /**
-     * @test
-     */
     public function shouldShowFilesFromPullRequest()
     {
         $expectedArray = array(array('id' => 'id', 'sha' => '123123'));
@@ -101,9 +83,6 @@ class PullRequestTest extends TestCase
         $this->assertEquals($expectedArray, $api->files('ezsystems', 'ezpublish', '15'));
     }
 
-    /**
-     * @test
-     */
     public function shouldShowStatusesFromPullRequest()
     {
         $expectedArray = array(array('id' => 'id', 'sha' => '123123'));
@@ -123,9 +102,6 @@ class PullRequestTest extends TestCase
         $this->assertEquals($expectedArray, $api->status('ezsystems', 'ezpublish', '15'));
     }
 
-    /**
-     * @test
-     */
     public function shouldUpdatePullRequests()
     {
         $expectedArray = array('id' => 15, 'sha' => '123123');
@@ -139,9 +115,6 @@ class PullRequestTest extends TestCase
         $this->assertEquals($expectedArray, $api->update('ezsystems', 'ezpublish', 15, array('state' => 'aa', 'some' => 'param')));
     }
 
-    /**
-     * @test
-     */
     public function shouldCheckIfPullRequestIsMerged()
     {
         $expectedArray = array('some' => 'response');
@@ -155,9 +128,6 @@ class PullRequestTest extends TestCase
         $this->assertEquals($expectedArray, $api->merged('ezsystems', 'ezpublish', 15));
     }
 
-    /**
-     * @test
-     */
     public function shouldMergePullRequest()
     {
         $expectedArray = array('some' => 'response');
@@ -171,9 +141,6 @@ class PullRequestTest extends TestCase
         $this->assertEquals($expectedArray, $api->merge('ezsystems', 'ezpublish', 15, 'Merged something', str_repeat('A', 40)));
     }
 
-    /**
-     * @test
-     */
     public function shouldMergePullRequestWithSquashAsBool()
     {
         $expectedArray = array('some' => 'response');
@@ -187,9 +154,6 @@ class PullRequestTest extends TestCase
         $this->assertEquals($expectedArray, $api->merge('ezsystems', 'ezpublish', 15, 'Merged something', str_repeat('A', 40), true));
     }
 
-    /**
-     * @test
-     */
     public function shouldMergePullRequestWithMergeMethod()
     {
         $expectedArray = array('some' => 'response');
@@ -203,9 +167,6 @@ class PullRequestTest extends TestCase
         $this->assertEquals($expectedArray, $api->merge('ezsystems', 'ezpublish', 15, 'Merged something', str_repeat('A', 40), 'rebase'));
     }
 
-    /**
-     * @test
-     */
     public function shouldCreatePullRequestUsingTitle()
     {
         $data = array(
@@ -223,9 +184,6 @@ class PullRequestTest extends TestCase
         $api->create('ezsystems', 'ezpublish', $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldCreatePullRequestUsingIssueId()
     {
         $data = array(
@@ -242,10 +200,6 @@ class PullRequestTest extends TestCase
         $api->create('ezsystems', 'ezpublish', $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreatePullRequestWithoutBase()
     {
         $data = array(
@@ -261,10 +215,6 @@ class PullRequestTest extends TestCase
         $api->create('ezsystems', 'ezpublish', $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreatePullRequestWithoutHead()
     {
         $data = array(
@@ -280,10 +230,6 @@ class PullRequestTest extends TestCase
         $api->create('ezsystems', 'ezpublish', $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreatePullRequestUsingTitleButWithoutBody()
     {
         $data = array(
@@ -299,10 +245,6 @@ class PullRequestTest extends TestCase
         $api->create('ezsystems', 'ezpublish', $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreatePullRequestWithoutIssueIdOrTitle()
     {
         $data = array(
@@ -317,9 +259,6 @@ class PullRequestTest extends TestCase
         $api->create('ezsystems', 'ezpublish', $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldGetCommentsApiObject()
     {
         $api = $this->getApiMock();
@@ -327,9 +266,6 @@ class PullRequestTest extends TestCase
         $this->assertInstanceOf(\Github\Api\PullRequest\Comments::class, $api->comments());
     }
 
-    /**
-     * @test
-     */
     public function shouldGetReviewApiObject()
     {
         $api = $this->getApiMock();
@@ -340,7 +276,7 @@ class PullRequestTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\PullRequest::class;
     }

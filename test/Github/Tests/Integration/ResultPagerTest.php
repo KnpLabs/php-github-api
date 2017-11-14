@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Integration;
 
@@ -9,9 +9,6 @@ use Github\ResultPager;
  */
 class ResultPagerTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldPaginateGetRequests()
     {
         $repositoriesApi = $this->client->api('user');
@@ -27,19 +24,6 @@ class ResultPagerTest extends TestCase
         $this->assertCount(20, $repositories);
     }
 
-    /**
-     * @test
-     *
-     * response in a search api has different format:
-     *
-     * {
-     *  "total_count": 1,
-     *  "incomplete_results": false,
-     *  "items": []
-     * }
-     *
-     * and we need to extract result from `items`
-     */
     public function shouldGetAllResultsFromSearchApi()
     {
         $searchApi = $this->client->search();

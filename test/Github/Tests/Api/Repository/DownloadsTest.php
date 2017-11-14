@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Repository;
 
@@ -6,9 +6,6 @@ use Github\Tests\Api\TestCase;
 
 class DownloadsTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetAllRepositoryDownloads()
     {
         $expectedValue = array(array('download'));
@@ -22,9 +19,6 @@ class DownloadsTest extends TestCase
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api'));
     }
 
-    /**
-     * @test
-     */
     public function shouldShowRepositoryDownload()
     {
         $expectedValue = array('download');
@@ -38,9 +32,6 @@ class DownloadsTest extends TestCase
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 'l3l0'));
     }
 
-    /**
-     * @test
-     */
     public function shouldRemoveRepositoryDownload()
     {
         $expectedValue = 'response';
@@ -57,7 +48,7 @@ class DownloadsTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Repository\Downloads::class;
     }

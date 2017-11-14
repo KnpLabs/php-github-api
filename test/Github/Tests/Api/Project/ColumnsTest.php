@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Project;
 
@@ -6,9 +6,6 @@ use Github\Tests\Api\TestCase;
 
 class ColumnsTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetAllProjectColumns()
     {
         $expectedValue = array(array('column1data'), array('column2data'));
@@ -22,9 +19,6 @@ class ColumnsTest extends TestCase
         $this->assertEquals($expectedValue, $api->all(123));
     }
 
-    /**
-     * @test
-     */
     public function shouldShowColumn()
     {
         $expectedValue = array('column1');
@@ -38,10 +32,6 @@ class ColumnsTest extends TestCase
         $this->assertEquals($expectedValue, $api->show(123));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateWithoutName()
     {
         $data = array();
@@ -53,9 +43,6 @@ class ColumnsTest extends TestCase
         $api->create('123', $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateColumn()
     {
         $expectedValue = array('column1data');
@@ -70,10 +57,6 @@ class ColumnsTest extends TestCase
         $this->assertEquals($expectedValue, $api->create(123, $data));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotUpdateWithoutName()
     {
         $data = array();
@@ -85,9 +68,6 @@ class ColumnsTest extends TestCase
         $api->update('123', $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldUpdateColumn()
     {
         $expectedValue = array('column1data');
@@ -102,9 +82,6 @@ class ColumnsTest extends TestCase
         $this->assertEquals($expectedValue, $api->update(123, $data));
     }
 
-    /**
-     * @test
-     */
     public function shouldRemoveCard()
     {
         $expectedValue = array('someOutput');
@@ -118,10 +95,6 @@ class ColumnsTest extends TestCase
         $this->assertEquals($expectedValue, $api->deleteColumn(123));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotMoveWithoutPosition()
     {
         $data = array();
@@ -133,9 +106,6 @@ class ColumnsTest extends TestCase
         $api->move('123', $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldMoveCard()
     {
         $expectedValue = array('card1');
@@ -150,9 +120,6 @@ class ColumnsTest extends TestCase
         $this->assertEquals($expectedValue, $api->move(123, $data));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetCardsApiObject()
     {
         $api = $this->getApiMock();
@@ -163,7 +130,7 @@ class ColumnsTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Project\Columns::class;
     }

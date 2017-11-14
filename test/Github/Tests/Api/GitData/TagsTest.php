@@ -1,12 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
 class TagsTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldShowTagUsingSha()
     {
         $expectedValue = array('sha' => '123', 'comitter');
@@ -20,9 +17,6 @@ class TagsTest extends TestCase
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 123));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetAllTags()
     {
         $expectedValue = array(array('sha' => '123', 'tagger'));
@@ -36,9 +30,6 @@ class TagsTest extends TestCase
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api'));
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateTag()
     {
         $expectedValue = array('sha' => '123', 'comitter');
@@ -63,10 +54,6 @@ class TagsTest extends TestCase
         $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', $data));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateTagWithoutMessageParam()
     {
         $data = array(
@@ -87,10 +74,6 @@ class TagsTest extends TestCase
         $api->create('KnpLabs', 'php-github-api', $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateTagWithoutTaggerParam()
     {
         $data = array(
@@ -107,10 +90,6 @@ class TagsTest extends TestCase
         $api->create('KnpLabs', 'php-github-api', $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateTagWithoutTaggerNameParam()
     {
         $data = array(
@@ -131,10 +110,6 @@ class TagsTest extends TestCase
         $api->create('KnpLabs', 'php-github-api', $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateTagWithoutTaggerEmailParam()
     {
         $data = array(
@@ -155,10 +130,6 @@ class TagsTest extends TestCase
         $api->create('KnpLabs', 'php-github-api', $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateTagWithoutTaggerDateParam()
     {
         $data = array(
@@ -179,10 +150,6 @@ class TagsTest extends TestCase
         $api->create('KnpLabs', 'php-github-api', $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateTagWithoutTagParam()
     {
         $data = array(
@@ -203,10 +170,6 @@ class TagsTest extends TestCase
         $api->create('KnpLabs', 'php-github-api', $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateTagWithoutObjectParam()
     {
         $data = array(
@@ -227,10 +190,6 @@ class TagsTest extends TestCase
         $api->create('KnpLabs', 'php-github-api', $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateTagWithoutTypeParam()
     {
         $data = array(
@@ -254,7 +213,7 @@ class TagsTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\GitData\Tags::class;
     }

@@ -1,12 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
 class AuthorizationsTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetAllAuthorizations()
     {
         $expectedArray = array(array('id' => '123'));
@@ -20,9 +17,6 @@ class AuthorizationsTest extends TestCase
         $this->assertEquals($expectedArray, $api->all());
     }
 
-    /**
-     * @test
-     */
     public function shouldShowAuthorization()
     {
         $id = 123;
@@ -37,9 +31,6 @@ class AuthorizationsTest extends TestCase
         $this->assertEquals($expectedArray, $api->show($id));
     }
 
-    /**
-     * @test
-     */
     public function shouldAuthorization()
     {
         $input = array(
@@ -54,9 +45,6 @@ class AuthorizationsTest extends TestCase
         $api->create($input);
     }
 
-    /**
-     * @test
-     */
     public function shouldUpdateAuthorization()
     {
         $id = 123;
@@ -72,9 +60,6 @@ class AuthorizationsTest extends TestCase
         $api->update($id, $input);
     }
 
-    /**
-     * @test
-     */
     public function shouldDeleteAuthorization()
     {
         $id = 123;
@@ -86,9 +71,6 @@ class AuthorizationsTest extends TestCase
         $api->remove($id);
     }
 
-    /**
-     * @test
-     */
     public function shouldCheckAuthorization()
     {
         $id = 123;
@@ -104,9 +86,6 @@ class AuthorizationsTest extends TestCase
         $this->assertEquals($expectedArray, $api->check($id, $token));
     }
 
-    /**
-     * @test
-     */
     public function shouldResetAuthorization()
     {
         $id = 123;
@@ -120,9 +99,6 @@ class AuthorizationsTest extends TestCase
         $api->reset($id, $token);
     }
 
-    /**
-     * @test
-     */
     public function shouldRevokeAuthorization()
     {
         $id = 123;
@@ -136,9 +112,6 @@ class AuthorizationsTest extends TestCase
         $api->revoke($id, $token);
     }
 
-    /**
-     * @test
-     */
     public function shouldRevokeAllAuthorizations()
     {
         $id = 123;
@@ -154,7 +127,7 @@ class AuthorizationsTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Authorizations::class;
     }

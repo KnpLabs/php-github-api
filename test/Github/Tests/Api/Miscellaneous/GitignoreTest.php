@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Miscellaneous;
 
@@ -8,9 +8,6 @@ use Github\Tests\Api\TestCase;
 
 class GitignoreTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetAllTemplates()
     {
         $expectedArray = array(
@@ -32,9 +29,6 @@ class GitignoreTest extends TestCase
         $this->assertEquals($expectedArray, $api->all());
     }
 
-    /**
-     * @test
-     */
     public function shouldGetTemplate()
     {
         $expectedArray = array(
@@ -54,7 +48,7 @@ class GitignoreTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return Gitignore::class;
     }

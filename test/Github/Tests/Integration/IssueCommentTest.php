@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Integration;
 
@@ -7,9 +7,6 @@ namespace Github\Tests\Integration;
  */
 class IssueCommentTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldRetrieveCommentsForIssue()
     {
         $username = 'KnpLabs';
@@ -29,10 +26,6 @@ class IssueCommentTest extends TestCase
         return $comment['id'];
     }
 
-    /**
-     * @test
-     * @depends shouldRetrieveCommentsForIssue
-     */
     public function shouldRetrieveSingleComment($commentId)
     {
         $username = 'KnpLabs';
@@ -48,9 +41,6 @@ class IssueCommentTest extends TestCase
         $this->assertArrayHasKey('updated_at', $comment);
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateCommentForIssue()
     {
         $username = 'KnpLabs';
@@ -69,10 +59,6 @@ class IssueCommentTest extends TestCase
 
         return $comment['id'];
     }
-    /**
-     * @test
-     * @depends shouldCreateCommentForIssue
-     */
     public function shouldUpdateCommentByCommentId($commentId)
     {
         $username = 'KnpLabs';
@@ -91,10 +77,6 @@ class IssueCommentTest extends TestCase
         return $comment['id'];
     }
 
-    /**
-     * @test
-     * @depends shouldUpdateCommentByCommentId
-     */
     public function shouldRemoveCommentByCommentId($commentId)
     {
         $username = 'KnpLabs';

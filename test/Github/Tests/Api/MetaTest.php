@@ -1,12 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
 class MetaTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetInformationService()
     {
         $expectedArray = array(
@@ -30,7 +27,7 @@ class MetaTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Meta::class;
     }

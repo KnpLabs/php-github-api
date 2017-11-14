@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
@@ -6,9 +6,6 @@ use DateTime;
 
 class NotificationTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetNotifications()
     {
         $parameters = array(
@@ -24,9 +21,6 @@ class NotificationTest extends TestCase
         $api->all();
     }
 
-    /**
-     * @test
-     */
     public function shouldGetNotificationsSince()
     {
         $since = new DateTime('now');
@@ -45,9 +39,6 @@ class NotificationTest extends TestCase
         $api->all(false, false, $since);
     }
 
-    /**
-     * @test
-     */
     public function shouldGetNotificationsIncludingAndParticipating()
     {
         $parameters = array(
@@ -63,9 +54,6 @@ class NotificationTest extends TestCase
         $api->all(true, true);
     }
 
-    /**
-     * @test
-     */
     public function shouldMarkNotificationsAsRead()
     {
         $parameters = array();
@@ -78,9 +66,6 @@ class NotificationTest extends TestCase
         $api->markRead();
     }
 
-    /**
-     * @test
-     */
     public function shouldMarkNotificationsAsReadForGivenDate()
     {
         $since = new DateTime('now');
@@ -96,10 +81,10 @@ class NotificationTest extends TestCase
 
         $api->markRead($since);
     }
-    
+
     public function shouldGetNotification()
     {
-        $id = mt_rand(1, time());
+        $id = random_int(1, time());
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -111,7 +96,7 @@ class NotificationTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Notification::class;
     }

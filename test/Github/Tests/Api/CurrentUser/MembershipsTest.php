@@ -1,12 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
 class MembershipsTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetMemberships()
     {
         $expectedValue = array(
@@ -41,9 +38,6 @@ class MembershipsTest extends TestCase
         $this->assertEquals($expectedValue, $api->all());
     }
 
-    /**
-     * @test
-     */
     public function shouldGetMembershipsForOrganization()
     {
         $expectedValue = array(
@@ -66,9 +60,6 @@ class MembershipsTest extends TestCase
         $this->assertEquals($expectedValue, $api->organization('invitocat'));
     }
 
-    /**
-     * @test
-     */
     public function shouldEditMembershipsForOrganization()
     {
         $expectedValue = array(
@@ -87,7 +78,7 @@ class MembershipsTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\CurrentUser\Memberships::class;
     }

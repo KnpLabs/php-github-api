@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Issue;
 
@@ -6,9 +6,6 @@ use Github\Tests\Api\TestCase;
 
 class LabelsTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetProjectLabels()
     {
         $expectedValue = array(
@@ -25,9 +22,6 @@ class LabelsTest extends TestCase
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api'));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetAllIssueLabels()
     {
         $expectedValue = array(array('name' => 'label'));
@@ -41,9 +35,6 @@ class LabelsTest extends TestCase
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', '123'));
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateLabel()
     {
         $expectedValue = array(array('name' => 'label', 'color' => 'FFFFFF'));
@@ -58,9 +49,6 @@ class LabelsTest extends TestCase
         $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', $data));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetSingleLabel()
     {
         $expectedValue = array(array('name' => 'label1'));
@@ -74,9 +62,6 @@ class LabelsTest extends TestCase
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 'label1'));
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateLabelWithColor()
     {
         $expectedValue = array(array('name' => 'label', 'color' => '111111'));
@@ -91,9 +76,6 @@ class LabelsTest extends TestCase
         $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', $data));
     }
 
-    /**
-     * @test
-     */
     public function shouldDeleteLabel()
     {
         $expectedValue = array('someOutput');
@@ -107,9 +89,6 @@ class LabelsTest extends TestCase
         $this->assertEquals($expectedValue, $api->deleteLabel('KnpLabs', 'php-github-api', 'foo'));
     }
 
-    /**
-     * @test
-     */
     public function shouldUpdateLabel()
     {
         $expectedValue = array(array('name' => 'bar', 'color' => 'FFF'));
@@ -124,9 +103,6 @@ class LabelsTest extends TestCase
         $this->assertEquals($expectedValue, $api->update('KnpLabs', 'php-github-api', 'foo', 'bar', 'FFF'));
     }
 
-    /**
-     * @test
-     */
     public function shouldRemoveLabel()
     {
         $expectedValue = array('someOutput');
@@ -140,9 +116,6 @@ class LabelsTest extends TestCase
         $this->assertEquals($expectedValue, $api->remove('KnpLabs', 'php-github-api', 123, 'somename'));
     }
 
-    /**
-     * @test
-     */
     public function shouldAddOneLabel()
     {
         $expectedValue = array('label' => 'somename');
@@ -156,9 +129,6 @@ class LabelsTest extends TestCase
         $this->assertEquals($expectedValue, $api->add('KnpLabs', 'php-github-api', 123, 'labelname'));
     }
 
-    /**
-     * @test
-     */
     public function shouldAddManyLabels()
     {
         $expectedValue = array('label' => 'somename');
@@ -172,9 +142,6 @@ class LabelsTest extends TestCase
         $this->assertEquals($expectedValue, $api->add('KnpLabs', 'php-github-api', 123, array('labelname', 'labelname2')));
     }
 
-    /**
-     * @test
-     */
     public function shouldReplaceLabels()
     {
         $expectedValue = array(array('label' => 'somename'));
@@ -189,10 +156,6 @@ class LabelsTest extends TestCase
         $this->assertEquals($expectedValue, $api->replace('KnpLabs', 'php-github-api', 123, $data));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\InvalidArgumentException
-     */
     public function shouldNotAddWhenDoNotHaveLabelsToAdd()
     {
         $api = $this->getApiMock();
@@ -202,9 +165,6 @@ class LabelsTest extends TestCase
         $api->add('KnpLabs', 'php-github-api', 123, array());
     }
 
-    /**
-     * @test
-     */
     public function shouldClearLabels()
     {
         $expectedValue = array('someOutput');
@@ -221,7 +181,7 @@ class LabelsTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Issue\Labels::class;
     }

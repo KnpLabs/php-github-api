@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Integration;
 
@@ -7,9 +7,6 @@ namespace Github\Tests\Integration;
  */
 class RateLimitTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldRetrievedRateLimits()
     {
         $response = $this->client->api('rate_limit')->getRateLimits();

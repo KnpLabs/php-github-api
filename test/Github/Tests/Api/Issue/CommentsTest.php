@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Issue;
 
@@ -6,9 +6,6 @@ use Github\Tests\Api\TestCase;
 
 class CommentsTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetAllIssueComments()
     {
         $expectedValue = array(array('comment1data'), array('comment2data'));
@@ -22,9 +19,6 @@ class CommentsTest extends TestCase
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', 123));
     }
 
-    /**
-     * @test
-     */
     public function shouldShowIssueComment()
     {
         $expectedValue = array('comment1');
@@ -38,10 +32,6 @@ class CommentsTest extends TestCase
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 123));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateWithoutBody()
     {
         $data = array();
@@ -53,9 +43,6 @@ class CommentsTest extends TestCase
         $api->create('KnpLabs', 'php-github-api', '123', $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateIssueComment()
     {
         $expectedValue = array('comment1data');
@@ -70,10 +57,6 @@ class CommentsTest extends TestCase
         $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', '123', $data));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotUpdateWithoutBody()
     {
         $data = array('somedata');
@@ -85,9 +68,6 @@ class CommentsTest extends TestCase
         $api->update('KnpLabs', 'php-github-api', '123', $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldUpdateIssueComment()
     {
         $expectedValue = array('comment1data');
@@ -102,9 +82,6 @@ class CommentsTest extends TestCase
         $this->assertEquals($expectedValue, $api->update('KnpLabs', 'php-github-api', '233', $data));
     }
 
-    /**
-     * @test
-     */
     public function shouldRemoveComment()
     {
         $expectedValue = array('someOutput');
@@ -121,7 +98,7 @@ class CommentsTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Issue\Comments::class;
     }

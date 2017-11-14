@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Issue;
 
@@ -6,9 +6,6 @@ use Github\Tests\Api\TestCase;
 
 class MilestonesTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetMilestones()
     {
         $expectedValue = array(array('name' => 'l3l0repo'));
@@ -22,9 +19,6 @@ class MilestonesTest extends TestCase
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api'));
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateMilestone()
     {
         $expectedValue = array(array('title' => 'milestone'));
@@ -39,10 +33,6 @@ class MilestonesTest extends TestCase
         $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', $data));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateMilestoneWithoutTitle()
     {
         $expectedValue = array(array('title' => 'milestone'));
@@ -55,9 +45,6 @@ class MilestonesTest extends TestCase
         $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', $data));
     }
 
-    /**
-     * @test
-     */
     public function shouldSetStateToOpenWhileCreationWhenStateParamNotRecognized()
     {
         $expectedValue = array('title' => 'l3l0repo');
@@ -71,9 +58,6 @@ class MilestonesTest extends TestCase
         $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', array('state' => 'clos', 'title' => 'milestone')));
     }
 
-    /**
-     * @test
-     */
     public function shouldUpdateMilestone()
     {
         $expectedValue = array(array('title' => 'milestone'));
@@ -88,9 +72,6 @@ class MilestonesTest extends TestCase
         $this->assertEquals($expectedValue, $api->update('KnpLabs', 'php-github-api', 123, $data));
     }
 
-    /**
-     * @test
-     */
     public function shouldUpdateMilestoneWithClosedStatus()
     {
         $expectedValue = array(array('title' => 'milestone'));
@@ -105,9 +86,6 @@ class MilestonesTest extends TestCase
         $this->assertEquals($expectedValue, $api->update('KnpLabs', 'php-github-api', 123, $data));
     }
 
-    /**
-     * @test
-     */
     public function shouldSetStateToOpenWhileUpdateWhenStateParamNotRecognized()
     {
         $expectedValue = array('title' => 'l3l0repo');
@@ -122,9 +100,6 @@ class MilestonesTest extends TestCase
         $this->assertEquals($expectedValue, $api->update('KnpLabs', 'php-github-api', 123, $data));
     }
 
-    /**
-     * @test
-     */
     public function shouldSortByDueDateWhenSortParamNotRecognized()
     {
         $expectedValue = array(array('name' => 'l3l0repo'));
@@ -138,9 +113,6 @@ class MilestonesTest extends TestCase
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', array('sort' => 'completenes')));
     }
 
-    /**
-     * @test
-     */
     public function shouldSetStateToOpenWhenStateParamNotRecognized()
     {
         $expectedValue = array(array('name' => 'l3l0repo'));
@@ -154,9 +126,6 @@ class MilestonesTest extends TestCase
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', array('state' => 'clos')));
     }
 
-    /**
-     * @test
-     */
     public function shouldSetDirectionToDescWhenDirectionParamNotRecognized()
     {
         $expectedValue = array(array('name' => 'l3l0repo'));
@@ -170,9 +139,6 @@ class MilestonesTest extends TestCase
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', array('direction' => 'asc')));
     }
 
-    /**
-     * @test
-     */
     public function shouldRemoveMilestones()
     {
         $expectedValue = array('someOutput');
@@ -186,9 +152,6 @@ class MilestonesTest extends TestCase
         $this->assertEquals($expectedValue, $api->remove('KnpLabs', 'php-github-api', 123));
     }
 
-    /**
-     * @test
-     */
     public function shouldShowMilestone()
     {
         $expectedValue = array('someOutput');
@@ -202,9 +165,6 @@ class MilestonesTest extends TestCase
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 123));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetMilestoneLabels()
     {
         $expectedValue = array(array('label'), array('label2'));
@@ -221,7 +181,7 @@ class MilestonesTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Issue\Milestones::class;
     }

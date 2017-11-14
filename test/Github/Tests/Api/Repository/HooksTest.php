@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Repository;
 
@@ -6,9 +6,6 @@ use Github\Tests\Api\TestCase;
 
 class HooksTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetAllRepositoryHooks()
     {
         $expectedValue = array(array('name' => 'hook'));
@@ -22,9 +19,6 @@ class HooksTest extends TestCase
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api'));
     }
 
-    /**
-     * @test
-     */
     public function shouldShowHook()
     {
         $expectedValue = array('hook' => 'somename');
@@ -38,9 +32,6 @@ class HooksTest extends TestCase
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 123));
     }
 
-    /**
-     * @test
-     */
     public function shouldRemoveHook()
     {
         $expectedValue = array('someOutput');
@@ -54,10 +45,6 @@ class HooksTest extends TestCase
         $this->assertEquals($expectedValue, $api->remove('KnpLabs', 'php-github-api', 123));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateHookWithoutName()
     {
         $data = array('config' => 'conf');
@@ -69,10 +56,6 @@ class HooksTest extends TestCase
         $api->create('KnpLabs', 'php-github-api', $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateHookWithoutColor()
     {
         $data = array('name' => 'test');
@@ -84,9 +67,6 @@ class HooksTest extends TestCase
         $api->create('KnpLabs', 'php-github-api', $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateHook()
     {
         $expectedValue = array('hook' => 'somename');
@@ -101,10 +81,6 @@ class HooksTest extends TestCase
         $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', $data));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotUpdateHookWithoutConfig()
     {
         $data = array('name' => 'test');
@@ -116,9 +92,6 @@ class HooksTest extends TestCase
         $api->update('KnpLabs', 'php-github-api', 123, $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldUpdateHook()
     {
         $expectedValue = array('hook' => 'somename');
@@ -133,9 +106,6 @@ class HooksTest extends TestCase
         $this->assertEquals($expectedValue, $api->update('KnpLabs', 'php-github-api', 123, $data));
     }
 
-    /**
-     * @test
-     */
     public function shouldTestHook()
     {
         $expectedValue = array(array('name' => 'hook'));
@@ -152,7 +122,7 @@ class HooksTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Repository\Hooks::class;
     }

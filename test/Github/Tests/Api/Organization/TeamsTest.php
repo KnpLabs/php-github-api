@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Organization;
 
@@ -6,9 +6,6 @@ use Github\Tests\Api\TestCase;
 
 class TeamsTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetAllOrganizationTeams()
     {
         $expectedValue = array(array('name' => 'KnpWorld'), array('name' => 'KnpFrance'), array('name' => 'KnpMontreal'));
@@ -22,9 +19,6 @@ class TeamsTest extends TestCase
         $this->assertEquals($expectedValue, $api->all('KnpLabs'));
     }
 
-    /**
-     * @test
-     */
     public function shouldCheckIfMemberIsInOrganizationTeam()
     {
         $expectedValue = 'response';
@@ -38,9 +32,6 @@ class TeamsTest extends TestCase
         $this->assertEquals($expectedValue, $api->check('KnpWorld', 'l3l0'));
     }
 
-    /**
-     * @test
-     */
     public function shouldRemoveOrganizationTeam()
     {
         $expectedValue = 'response';
@@ -54,9 +45,6 @@ class TeamsTest extends TestCase
         $this->assertEquals($expectedValue, $api->remove('KnpWorld'));
     }
 
-    /**
-     * @test
-     */
     public function shouldShowOrganizationTeam()
     {
         $expectedValue = array('username' => 'l3l0');
@@ -70,9 +58,6 @@ class TeamsTest extends TestCase
         $this->assertEquals($expectedValue, $api->show('KnpWorld'));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetTeamMembers()
     {
         $expectedValue = array(array('username' => 'l3l0'));
@@ -86,9 +71,6 @@ class TeamsTest extends TestCase
         $this->assertEquals($expectedValue, $api->members('KnpWorld'));
     }
 
-    /**
-     * @test
-     */
     public function shouldAddTeamMembers()
     {
         $expectedValue = array('username' => 'l3l0');
@@ -102,9 +84,6 @@ class TeamsTest extends TestCase
         $this->assertEquals($expectedValue, $api->addMember('KnpWorld', 'l3l0'));
     }
 
-    /**
-     * @test
-     */
     public function shouldRemoveTeamMembers()
     {
         $expectedValue = array('username' => 'l3l0');
@@ -118,9 +97,6 @@ class TeamsTest extends TestCase
         $this->assertEquals($expectedValue, $api->removeMember('KnpWorld', 'l3l0'));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetTeamRepositories()
     {
         $expectedValue = array(array('name' => 'l3l0repo'));
@@ -134,9 +110,6 @@ class TeamsTest extends TestCase
         $this->assertEquals($expectedValue, $api->repositories('KnpWorld'));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetTeamRepository()
     {
         $expectedValue = array('name' => 'l3l0repo');
@@ -150,9 +123,6 @@ class TeamsTest extends TestCase
         $this->assertEquals($expectedValue, $api->repository('KnpWorld', 'l3l0', 'l3l0Repo'));
     }
 
-    /**
-     * @test
-     */
     public function shouldAddTeamRepository()
     {
         $expectedValue = array('name' => 'l3l0repo');
@@ -166,9 +136,6 @@ class TeamsTest extends TestCase
         $this->assertEquals($expectedValue, $api->addRepository('KnpWorld', 'l3l0', 'l3l0Repo'));
     }
 
-    /**
-     * @test
-     */
     public function shouldRemoveTeamRepository()
     {
         $expectedValue = array('name' => 'l3l0repo');
@@ -182,10 +149,6 @@ class TeamsTest extends TestCase
         $this->assertEquals($expectedValue, $api->removeRepository('KnpWorld', 'l3l0', 'l3l0Repo'));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateTeamWithoutName()
     {
         $data = array();
@@ -197,9 +160,6 @@ class TeamsTest extends TestCase
         $api->create('KnpLabs', $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateOrganizationTeam()
     {
         $expectedValue = array('name' => 'KnpWorld');
@@ -214,9 +174,6 @@ class TeamsTest extends TestCase
         $this->assertEquals($expectedValue, $api->create('KnpLabs', $data));
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateOrganizationTeamWithRepoName()
     {
         $expectedValue = array('name' => 'KnpWorld');
@@ -231,9 +188,6 @@ class TeamsTest extends TestCase
         $this->assertEquals($expectedValue, $api->create('KnpLabs', $data));
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateWithPullPermissionWhenPermissionParamNotRecognized()
     {
         $expectedValue = array('name' => 'KnpWorld');
@@ -248,10 +202,6 @@ class TeamsTest extends TestCase
         $this->assertEquals($expectedValue, $api->create('KnpLabs', $data));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotUpdateTeamWithoutName()
     {
         $data = array();
@@ -263,9 +213,6 @@ class TeamsTest extends TestCase
         $api->update('KnpWorld', $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldUpdateOrganizationTeam()
     {
         $expectedValue = array('name' => 'KnpWorld');
@@ -280,9 +227,6 @@ class TeamsTest extends TestCase
         $this->assertEquals($expectedValue, $api->update('KnpWorld', $data));
     }
 
-    /**
-     * @test
-     */
     public function shouldUpdateWithPullPermissionWhenPermissionParamNotRecognized()
     {
         $expectedValue = array('name' => 'KnpWorld');
@@ -300,7 +244,7 @@ class TeamsTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Organization\Teams::class;
     }

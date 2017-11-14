@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Organization;
 
@@ -6,9 +6,6 @@ use Github\Tests\Api\TestCase;
 
 class MembersTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetAllOrganizationMembers()
     {
         $expectedValue = array(array('username' => 'l3l0'));
@@ -22,9 +19,6 @@ class MembersTest extends TestCase
         $this->assertEquals($expectedValue, $api->all('KnpLabs'));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetPublicOrganizationMembers()
     {
         $expectedValue = array(array('username' => 'l3l0'));
@@ -38,9 +32,6 @@ class MembersTest extends TestCase
         $this->assertEquals($expectedValue, $api->all('KnpLabs', true));
     }
 
-    /**
-     * @test
-     */
     public function shouldCheckIfOrganizationMember()
     {
         $expectedValue = 'response';
@@ -54,9 +45,6 @@ class MembersTest extends TestCase
         $this->assertEquals($expectedValue, $api->check('KnpLabs', 'l3l0'));
     }
 
-    /**
-     * @test
-     */
     public function shouldAddOrganizationMember()
     {
         $expectedValue = 'response';
@@ -70,9 +58,6 @@ class MembersTest extends TestCase
         $this->assertEquals($expectedValue, $api->add('KnpLabs', 'l3l0'));
     }
 
-    /**
-     * @test
-     */
     public function shouldRemoveOrganizationMember()
     {
         $expectedValue = 'response';
@@ -86,9 +71,6 @@ class MembersTest extends TestCase
         $this->assertEquals($expectedValue, $api->remove('KnpLabs', 'l3l0'));
     }
 
-    /**
-     * @test
-     */
     public function shouldPublicizeOrganizationMembership()
     {
         $expectedValue = 'response';
@@ -102,9 +84,6 @@ class MembersTest extends TestCase
         $this->assertEquals($expectedValue, $api->publicize('KnpLabs', 'l3l0'));
     }
 
-    /**
-     * @test
-     */
     public function shouldConcealOrganizationMembership()
     {
         $expectedValue = 'response';
@@ -118,9 +97,6 @@ class MembersTest extends TestCase
         $this->assertEquals($expectedValue, $api->conceal('KnpLabs', 'l3l0'));
     }
 
-    /**
-     * @test
-     */
     public function shouldShowOrganizationMember()
     {
         $expectedValue = array('username' => 'l3l0');
@@ -137,7 +113,7 @@ class MembersTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Organization\Members::class;
     }

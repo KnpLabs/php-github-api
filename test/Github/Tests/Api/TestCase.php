@@ -1,8 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
-use Github\HttpClient\Builder;
 use ReflectionMethod;
 
 abstract class TestCase extends \PHPUnit\Framework\TestCase
@@ -10,12 +9,12 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
     /**
      * @return string
      */
-    abstract protected function getApiClass();
+    abstract protected function getApiClass(): string;
 
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
-    protected function getApiMock()
+    protected function getApiMock(): \PHPUnit_Framework_MockObject_MockObject
     {
         $httpClient = $this->getMockBuilder(\Http\Client\HttpClient::class)
             ->setMethods(array('sendRequest'))
@@ -37,7 +36,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
      * @param string $methodName
      * @return ReflectionMethod
      */
-    protected function getMethod($object, $methodName)
+    protected function getMethod($object, $methodName): ReflectionMethod
     {
         $method = new ReflectionMethod($object, $methodName);
         $method->setAccessible(true);

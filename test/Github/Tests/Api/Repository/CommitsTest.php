@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Repository;
 
@@ -6,9 +6,6 @@ use Github\Tests\Api\TestCase;
 
 class CommitsTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetAllRepositoryCommits()
     {
         $expectedValue = array('commit' => array(), 'comitter');
@@ -23,9 +20,6 @@ class CommitsTest extends TestCase
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', $data));
     }
 
-    /**
-     * @test
-     */
     public function shouldCompareTwoCommits()
     {
         $expectedValue = array('someCompareChanges');
@@ -39,9 +33,6 @@ class CommitsTest extends TestCase
         $this->assertEquals($expectedValue, $api->compare('KnpLabs', 'php-github-api', 'v3', 'HEAD'));
     }
 
-    /**
-     * @test
-     */
     public function shouldShowCommitUsingSha()
     {
         $expectedValue = array('sha' => '123', 'comitter');
@@ -58,7 +49,7 @@ class CommitsTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Repository\Commits::class;
     }

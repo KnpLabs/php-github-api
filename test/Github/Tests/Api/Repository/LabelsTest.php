@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Repository;
 
@@ -6,9 +6,6 @@ use Github\Tests\Api\TestCase;
 
 class LabelsTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetAllRepositoryLabelss()
     {
         $expectedValue = array(array('name' => 'label'));
@@ -22,9 +19,6 @@ class LabelsTest extends TestCase
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api'));
     }
 
-    /**
-     * @test
-     */
     public function shouldShowLabel()
     {
         $expectedValue = array('label' => 'somename');
@@ -38,9 +32,6 @@ class LabelsTest extends TestCase
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 'somename'));
     }
 
-    /**
-     * @test
-     */
     public function shouldRemoveLabel()
     {
         $expectedValue = array('someOutput');
@@ -54,10 +45,6 @@ class LabelsTest extends TestCase
         $this->assertEquals($expectedValue, $api->remove('KnpLabs', 'php-github-api', 'somename'));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateLabelWithoutName()
     {
         $data = array('color' => 'red');
@@ -69,10 +56,6 @@ class LabelsTest extends TestCase
         $api->create('KnpLabs', 'php-github-api', $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateLabelWithoutColor()
     {
         $data = array('name' => 'test');
@@ -84,9 +67,6 @@ class LabelsTest extends TestCase
         $api->create('KnpLabs', 'php-github-api', $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateLabel()
     {
         $expectedValue = array('label' => 'somename');
@@ -101,10 +81,6 @@ class LabelsTest extends TestCase
         $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', $data));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotUpdateLabelWithoutName()
     {
         $data = array('color' => 'red');
@@ -116,10 +92,6 @@ class LabelsTest extends TestCase
         $api->update('KnpLabs', 'php-github-api', 'labelName', $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotUpdateLabelWithoutColor()
     {
         $data = array('name' => 'test');
@@ -131,9 +103,6 @@ class LabelsTest extends TestCase
         $api->update('KnpLabs', 'php-github-api', 'labelName', $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldUpdateLabel()
     {
         $expectedValue = array('label' => 'somename');
@@ -151,7 +120,7 @@ class LabelsTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Repository\Labels::class;
     }

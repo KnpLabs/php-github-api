@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests;
 
@@ -20,11 +20,6 @@ use Http\Client\HttpClient;
  */
 class ResultPagerTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @test
-     *
-     * description fetchAll
-     */
     public function shouldGetAllResults()
     {
         $amountLoops = 3;
@@ -55,19 +50,6 @@ class ResultPagerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($amountLoops * count($content), count($result));
     }
 
-    /**
-     * @test
-     *
-     * response in a search api has different format:
-     *
-     * {
-     *  "total_count": 1,
-     *  "incomplete_results": false,
-     *  "items": []
-     * }
-     *
-     * and we need to extract result from `items`
-     */
     public function shouldGetAllSearchResults()
     {
         $amountLoops = 3;

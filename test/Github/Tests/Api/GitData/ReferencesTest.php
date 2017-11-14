@@ -1,12 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
 class ReferencesTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldNotEscapeSlashesInReferences()
     {
         $expectedValue = array('reference' => 'some data');
@@ -20,9 +17,6 @@ class ReferencesTest extends TestCase
         $this->assertEquals($expectedValue, $api->show('l3l0', 'l3l0repo', 'master/some*&@#branch/dasd1212'));
     }
 
-    /**
-     * @test
-     */
     public function shouldShowReference()
     {
         $expectedValue = array('reference' => 'some data');
@@ -36,9 +30,6 @@ class ReferencesTest extends TestCase
         $this->assertEquals($expectedValue, $api->show('l3l0', 'l3l0repo', '123456sha'));
     }
 
-    /**
-     * @test
-     */
     public function shouldRemoveReference()
     {
         $expectedValue = array('reference' => 'some data');
@@ -52,9 +43,6 @@ class ReferencesTest extends TestCase
         $this->assertEquals($expectedValue, $api->remove('l3l0', 'l3l0repo', '123456sha'));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetAllRepoReferences()
     {
         $expectedValue = array(array('reference' => 'some data'));
@@ -68,9 +56,6 @@ class ReferencesTest extends TestCase
         $this->assertEquals($expectedValue, $api->all('l3l0', 'l3l0repo'));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetAllRepoBranches()
     {
         $expectedValue = array(array('branch' => 'some data'));
@@ -84,9 +69,6 @@ class ReferencesTest extends TestCase
         $this->assertEquals($expectedValue, $api->branches('l3l0', 'l3l0repo'));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetAllRepoTags()
     {
         $expectedValue = array(array('tag' => 'some data'));
@@ -100,9 +82,6 @@ class ReferencesTest extends TestCase
         $this->assertEquals($expectedValue, $api->tags('l3l0', 'l3l0repo'));
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateReference()
     {
         $expectedValue = array('reference' => 'some data');
@@ -117,10 +96,6 @@ class ReferencesTest extends TestCase
         $this->assertEquals($expectedValue, $api->create('l3l0', 'l3l0repo', $data));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateReferenceWithoutShaParam()
     {
         $data = array('ref' => '123');
@@ -132,10 +107,6 @@ class ReferencesTest extends TestCase
         $api->create('l3l0', 'l3l0repo', $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateReferenceWithoutRefsParam()
     {
         $data = array('sha' => '1234');
@@ -147,9 +118,6 @@ class ReferencesTest extends TestCase
         $api->create('l3l0', 'l3l0repo', $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldUpdateReference()
     {
         $expectedValue = array('reference' => 'some data');
@@ -164,10 +132,6 @@ class ReferencesTest extends TestCase
         $this->assertEquals($expectedValue, $api->update('l3l0', 'l3l0repo', 'someRefs', $data));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNoUpdateReferenceWithoutSha()
     {
         $data = array();
@@ -182,7 +146,7 @@ class ReferencesTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\GitData\References::class;
     }

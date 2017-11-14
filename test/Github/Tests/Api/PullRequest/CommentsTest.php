@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\PullRequest;
 
@@ -8,9 +8,6 @@ use Github\Tests\Api\TestCase;
 
 class CommentsTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetAllReviewCommentsForAPullRequest()
     {
         $expectedValue = [
@@ -72,9 +69,6 @@ class CommentsTest extends TestCase
         $this->assertSame($expectedValue, $api->all('octocat', 'Hello-World', 12));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetAllReviewComments()
     {
         $expectedValue = [
@@ -136,9 +130,6 @@ class CommentsTest extends TestCase
         $this->assertSame($expectedValue, $api->all('octocat', 'Hello-World'));
     }
 
-    /**
-     * @test
-     */
     public function shouldShowReviewComment()
     {
         $expectedValue = [
@@ -198,9 +189,6 @@ class CommentsTest extends TestCase
         $this->assertSame($expectedValue, $api->show('octocat', 'Hello-World', 1));
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateReviewComment()
     {
         $expectedValue = [
@@ -265,10 +253,6 @@ class CommentsTest extends TestCase
         $this->assertSame($expectedValue, $api->create('octocat', 'Hello-World', 1, $data));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateReviewCommentWithoutCommitId()
     {
         $data = [
@@ -286,10 +270,6 @@ class CommentsTest extends TestCase
         $api->create('octocat', 'Hello-World', 1, $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateReviewCommentWithoutPath()
     {
         $data = [
@@ -307,10 +287,6 @@ class CommentsTest extends TestCase
         $api->create('octocat', 'Hello-World', 1, $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateReviewCommentWithoutPosition()
     {
         $data = [
@@ -328,10 +304,6 @@ class CommentsTest extends TestCase
         $api->create('octocat', 'Hello-World', 1, $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateReviewCommentWithoutBody()
     {
         $data = [
@@ -349,9 +321,6 @@ class CommentsTest extends TestCase
         $api->create('octocat', 'Hello-World', 1, $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldUpdateReviewComment()
     {
         $expectedValue = [
@@ -413,10 +382,6 @@ class CommentsTest extends TestCase
         $this->assertSame($expectedValue, $api->update('octocat', 'Hello-World', 1, $data));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotUpdateReviewCommentWithoutBody()
     {
         $expectedValue = [
@@ -474,9 +439,6 @@ class CommentsTest extends TestCase
         $this->assertSame($expectedValue, $api->update('octocat', 'Hello-World', 1, []));
     }
 
-    /**
-     * @test
-     */
     public function shouldDeleteReviewComment()
     {
         $api = $this->getApiMock();
@@ -488,7 +450,7 @@ class CommentsTest extends TestCase
         $api->remove('octocat', 'Hello-World', 1);
     }
 
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return Comments::class;
     }

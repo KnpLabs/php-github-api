@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Repository;
 
@@ -6,9 +6,6 @@ use Github\Tests\Api\TestCase;
 
 class StatusesTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldShowCommitStatuses()
     {
         $expectedValue = array(
@@ -25,9 +22,6 @@ class StatusesTest extends TestCase
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 'commitSHA123456'));
     }
 
-    /**
-     * @test
-     */
     public function shouldShowCombinedCommitStatuses()
     {
         $expectedValue = array(
@@ -55,10 +49,6 @@ class StatusesTest extends TestCase
         $this->assertEquals($expectedValue, $api->combined('KnpLabs', 'php-github-api', 'commitSHA123456'));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateWithoutStatus()
     {
         $data = array();
@@ -70,9 +60,6 @@ class StatusesTest extends TestCase
         $api->create('KnpLabs', 'php-github-api', 'commitSHA123456', $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateCommitStatus()
     {
         $expectedValue = array('state' => 'success');
@@ -90,7 +77,7 @@ class StatusesTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Repository\Statuses::class;
     }

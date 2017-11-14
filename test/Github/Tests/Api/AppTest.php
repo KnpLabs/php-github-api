@@ -1,12 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
 class AppTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldFindRepositoriesForApplication()
     {
         $result = ['installation1', 'installation2'];
@@ -20,9 +17,6 @@ class AppTest extends TestCase
         $this->assertEquals($result, $api->findInstallations());
     }
 
-    /**
-     * @test
-     */
     public function shouldGetRepositoriesFromInstallation()
     {
         $result = ['repo1', 'repo2'];
@@ -36,9 +30,6 @@ class AppTest extends TestCase
         $this->assertEquals($result, $api->listRepositories('1234'));
     }
 
-    /**
-     * @test
-     */
     public function shouldAddRepositoryToInstallation()
     {
         $api = $this->getApiMock();
@@ -49,9 +40,6 @@ class AppTest extends TestCase
         $api->addRepository('1234', '5678');
     }
 
-    /**
-     * @test
-     */
     public function shouldRemoveRepositoryToInstallation()
     {
         $api = $this->getApiMock();
@@ -66,7 +54,7 @@ class AppTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Apps::class;
     }

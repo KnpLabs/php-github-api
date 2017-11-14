@@ -1,12 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
 class SearchTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldSearchRepositoriesByQuery()
     {
         $expectedArray = array(array('total_count' => '0'));
@@ -24,9 +21,6 @@ class SearchTest extends TestCase
         $this->assertEquals($expectedArray, $api->repositories('query text'));
     }
 
-    /**
-     * @test
-     */
     public function shouldSearchRepositoriesRegardingSortAndOrder()
     {
         $expectedArray = array(array('total_count' => '0'));
@@ -47,9 +41,6 @@ class SearchTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
     public function shouldSearchIssuesByQuery()
     {
         $expectedArray = array(array('total_count' => '0'));
@@ -67,9 +58,6 @@ class SearchTest extends TestCase
         $this->assertEquals($expectedArray, $api->issues('query text'));
     }
 
-    /**
-     * @test
-     */
     public function shouldSearchIssuesRegardingSortAndOrder()
     {
         $expectedArray = array(array('total_count' => '0'));
@@ -90,9 +78,6 @@ class SearchTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
     public function shouldSearchCodeByQuery()
     {
         $expectedArray = array(array('total_count' => '0'));
@@ -110,9 +95,6 @@ class SearchTest extends TestCase
         $this->assertEquals($expectedArray, $api->code('query text'));
     }
 
-    /**
-     * @test
-     */
     public function shouldSearchCodeRegardingSortAndOrder()
     {
         $expectedArray = array(array('total_count' => '0'));
@@ -133,9 +115,6 @@ class SearchTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
     public function shouldSearchUsersByQuery()
     {
         $expectedArray = array(array('total_count' => '0'));
@@ -153,9 +132,6 @@ class SearchTest extends TestCase
         $this->assertEquals($expectedArray, $api->users('query text'));
     }
 
-    /**
-     * @test
-     */
     public function shouldSearchUsersRegardingSortAndOrder()
     {
         $expectedArray = array(array('total_count' => '0'));
@@ -179,7 +155,7 @@ class SearchTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Search::class;
     }

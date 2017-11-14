@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
@@ -7,9 +7,6 @@ use GuzzleHttp\Psr7\Response;
 
 class AbstractApiTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldPassGETRequestToClient()
     {
         $expectedArray = array('value');
@@ -35,9 +32,6 @@ class AbstractApiTest extends TestCase
         $this->assertEquals($expectedArray, $actual);
     }
 
-    /**
-     * @test
-     */
     public function shouldPassPOSTRequestToClient()
     {
         $expectedArray = array('value');
@@ -63,9 +57,6 @@ class AbstractApiTest extends TestCase
         $this->assertEquals($expectedArray, $actual);
     }
 
-    /**
-     * @test
-     */
     public function shouldPassPATCHRequestToClient()
     {
         $expectedArray = array('value');
@@ -91,9 +82,6 @@ class AbstractApiTest extends TestCase
         $this->assertEquals($expectedArray, $actual);
     }
 
-    /**
-     * @test
-     */
     public function shouldPassPUTRequestToClient()
     {
         $expectedArray = array('value');
@@ -119,9 +107,6 @@ class AbstractApiTest extends TestCase
         $this->assertEquals($expectedArray, $actual);
     }
 
-    /**
-     * @test
-     */
     public function shouldPassDELETERequestToClient()
     {
         $expectedArray = array('value');
@@ -148,9 +133,6 @@ class AbstractApiTest extends TestCase
         $this->assertEquals($expectedArray, $actual);
     }
 
-    /**
-     * @test
-     */
     public function shouldNotPassEmptyRefToClient()
     {
         $expectedArray = array('value');
@@ -179,7 +161,7 @@ class AbstractApiTest extends TestCase
      * @param $client
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
-    protected function getAbstractApiObject($client)
+    protected function getAbstractApiObject($client): \PHPUnit_Framework_MockObject_MockObject
     {
         return $this->getMockBuilder($this->getApiClass())
             ->setMethods(null)
@@ -190,7 +172,7 @@ class AbstractApiTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return AbstractApi::class;
     }
@@ -198,7 +180,7 @@ class AbstractApiTest extends TestCase
     /**
      * @return \Github\Client
      */
-    protected function getClientMock()
+    protected function getClientMock(): \Github\Client
     {
         return new \Github\Client($this->getHttpMethodsMock());
     }
@@ -209,7 +191,7 @@ class AbstractApiTest extends TestCase
      * @param array $methods
      * @return \Http\Client\Common\HttpMethodsClient
      */
-    protected function getHttpMethodsMock(array $methods = array())
+    protected function getHttpMethodsMock(array $methods = array()): \Http\Client\Common\HttpMethodsClient
     {
         $methods = array_merge(array('sendRequest'), $methods);
         $mock = $this->getMockBuilder(\Http\Client\Common\HttpMethodsClient::class)
@@ -225,7 +207,7 @@ class AbstractApiTest extends TestCase
     /**
      * @return \Http\Client\HttpClient
      */
-    protected function getHttpClientMock()
+    protected function getHttpClientMock(): \Http\Client\HttpClient
     {
         $mock = $this->getMockBuilder(\Http\Client\HttpClient::class)
             ->setMethods(array('sendRequest'))
@@ -242,7 +224,7 @@ class AbstractApiTest extends TestCase
      *
      * @return Response
      */
-    private function getPSR7Response($expectedArray)
+    private function getPSR7Response($expectedArray): Response
     {
         return new Response(
             200,

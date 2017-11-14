@@ -1,12 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
 class UserTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldShowUser()
     {
         $expectedArray = array('id' => 1, 'username' => 'l3l0');
@@ -20,9 +17,6 @@ class UserTest extends TestCase
         $this->assertEquals($expectedArray, $api->show('l3l0'));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetUserOrganizations()
     {
         $expectedArray = array(array(
@@ -63,9 +57,6 @@ class UserTest extends TestCase
         $this->assertEquals($expectedArray, $api->orgs());
     }
 
-    /**
-     * @test
-     */
     public function shouldGetAllUsers()
     {
         $expectedArray = array(
@@ -82,9 +73,6 @@ class UserTest extends TestCase
         $this->assertEquals($expectedArray, $api->all());
     }
 
-    /**
-     * @test
-     */
     public function shouldGetAllUsersSince()
     {
         $expectedArray = array(
@@ -101,9 +89,6 @@ class UserTest extends TestCase
         $this->assertEquals($expectedArray, $api->all(2));
     }
 
-    /**
-     * @test
-     */
     public function shouldSearchUsers()
     {
         $expectedArray = array(
@@ -120,9 +105,6 @@ class UserTest extends TestCase
         $this->assertEquals($expectedArray, $api->find('l3l0'));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetFollowingUsers()
     {
         $expectedArray = array(array('id' => 1, 'username' => 'l3l0test'));
@@ -136,9 +118,6 @@ class UserTest extends TestCase
         $this->assertEquals($expectedArray, $api->following('l3l0'));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetUserFollowers()
     {
         $expectedArray = array(array('id' => 1, 'username' => 'l3l0test'));
@@ -152,9 +131,6 @@ class UserTest extends TestCase
         $this->assertEquals($expectedArray, $api->followers('l3l0'));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetStarredToRepositories()
     {
         $expectedArray = array(array('id' => 1, 'name' => 'l3l0repo'));
@@ -168,9 +144,6 @@ class UserTest extends TestCase
         $this->assertEquals($expectedArray, $api->starred('l3l0', 2));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetSubscriptionsToRepositories()
     {
         $expectedArray = array(array('id' => 1, 'name' => 'l3l0repo'));
@@ -184,9 +157,6 @@ class UserTest extends TestCase
         $this->assertEquals($expectedArray, $api->subscriptions('l3l0'));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetUserRepositories()
     {
         $expectedArray = array(array('id' => 1, 'name' => 'l3l0repo'));
@@ -200,9 +170,6 @@ class UserTest extends TestCase
         $this->assertEquals($expectedArray, $api->repositories('l3l0'));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetMyRepositories()
     {
         $expectedArray = [['id' => 1, 'name' => 'l3l0repo']];
@@ -215,9 +182,6 @@ class UserTest extends TestCase
         $this->assertEquals($expectedArray, $api->myRepositories());
     }
 
-    /**
-     * @test
-     */
     public function shouldGetUserGists()
     {
         $expectedArray = array(array('id' => 1, 'name' => 'l3l0repo'));
@@ -234,7 +198,7 @@ class UserTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\User::class;
     }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Project;
 
@@ -6,9 +6,6 @@ use Github\Tests\Api\TestCase;
 
 class CardsTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetAllColumnCards()
     {
         $expectedValue = array(array('card1data'), array('card2data'));
@@ -22,9 +19,6 @@ class CardsTest extends TestCase
         $this->assertEquals($expectedValue, $api->all(123));
     }
 
-    /**
-     * @test
-     */
     public function shouldShowCard()
     {
         $expectedValue = array('card1');
@@ -38,9 +32,6 @@ class CardsTest extends TestCase
         $this->assertEquals($expectedValue, $api->show(123));
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateCard()
     {
         $expectedValue = array('card1data');
@@ -55,9 +46,6 @@ class CardsTest extends TestCase
         $this->assertEquals($expectedValue, $api->create('1234', $data));
     }
 
-    /**
-     * @test
-     */
     public function shouldUpdateCard()
     {
         $expectedValue = array('note1data');
@@ -72,9 +60,6 @@ class CardsTest extends TestCase
         $this->assertEquals($expectedValue, $api->update(123, $data));
     }
 
-    /**
-     * @test
-     */
     public function shouldRemoveCard()
     {
         $expectedValue = array('someOutput');
@@ -88,10 +73,6 @@ class CardsTest extends TestCase
         $this->assertEquals($expectedValue, $api->deleteCard(123));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotMoveWithoutPosition()
     {
         $data = array();
@@ -103,9 +84,6 @@ class CardsTest extends TestCase
         $api->move('123', $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldMoveCard()
     {
         $expectedValue = array('card1');
@@ -123,7 +101,7 @@ class CardsTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Project\Cards::class;
     }

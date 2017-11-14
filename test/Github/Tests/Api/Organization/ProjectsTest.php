@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Organization;
 
@@ -6,9 +6,6 @@ use Github\Tests\Api\TestCase;
 
 class ProjectsTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetAllRepositoryProjects()
     {
         $expectedValue = array(array('name' => 'Test project 1'));
@@ -22,10 +19,6 @@ class ProjectsTest extends TestCase
         $this->assertEquals($expectedValue, $api->all('KnpLabs'));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateWithoutName()
     {
         $data = array();
@@ -37,9 +30,6 @@ class ProjectsTest extends TestCase
         $api->create('KnpLabs', $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateColumn()
     {
         $expectedValue = array('project1data');
@@ -57,7 +47,7 @@ class ProjectsTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Organization\Projects::class;
     }

@@ -1,12 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
 class DeployKeysTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldShowKey()
     {
         $expectedValue = array('id' => '12', 'key' => 'ssh-rsa ...');
@@ -20,9 +17,6 @@ class DeployKeysTest extends TestCase
         $this->assertEquals($expectedValue, $api->show(12));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetKeys()
     {
         $expectedValue = array(array('id' => '12', 'key' => 'ssh-rsa ...'));
@@ -36,9 +30,6 @@ class DeployKeysTest extends TestCase
         $this->assertEquals($expectedValue, $api->all());
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateKey()
     {
         $expectedValue = array('id' => '123', 'key' => 'ssh-rsa ...');
@@ -53,10 +44,6 @@ class DeployKeysTest extends TestCase
         $this->assertEquals($expectedValue, $api->create($data));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateKeyWithoutTitleParam()
     {
         $data = array('key' => 'ssh-rsa ...');
@@ -68,10 +55,6 @@ class DeployKeysTest extends TestCase
         $api->create($data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateKeyWithoutKeyParam()
     {
         $data = array('title' => 'my key');
@@ -83,9 +66,6 @@ class DeployKeysTest extends TestCase
         $api->create($data);
     }
 
-    /**
-     * @test
-     */
     public function shouldRemoveKey()
     {
         $expectedValue = array('some value');
@@ -102,7 +82,7 @@ class DeployKeysTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\CurrentUser\PublicKeys::class;
     }

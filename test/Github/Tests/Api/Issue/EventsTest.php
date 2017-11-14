@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Issue;
 
@@ -6,9 +6,6 @@ use Github\Tests\Api\TestCase;
 
 class EventsTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetAllRepoIssuesEvents()
     {
         $expectedValue = array(array('event1data'), array('event2data'));
@@ -22,9 +19,6 @@ class EventsTest extends TestCase
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api'));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetIssueEvents()
     {
         $expectedValue = array(array('event1data'), array('event2data'));
@@ -38,9 +32,6 @@ class EventsTest extends TestCase
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', 123));
     }
 
-    /**
-     * @test
-     */
     public function shouldShowIssueEvent()
     {
         $expectedValue = array('event1');
@@ -57,7 +48,7 @@ class EventsTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Issue\Events::class;
     }

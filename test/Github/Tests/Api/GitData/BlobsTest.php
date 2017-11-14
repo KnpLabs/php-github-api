@@ -1,12 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
 class BlobsTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldShowBlob()
     {
         $expectedValue = array('blob' => 'some data');
@@ -20,9 +17,6 @@ class BlobsTest extends TestCase
         $this->assertEquals($expectedValue, $api->show('l3l0', 'l3l0repo', '123456sha'));
     }
 
-    /**
-     * @test
-     */
     public function shouldShowRawBlob()
     {
         $expectedValue = array('blob' => 'some data');
@@ -48,9 +42,6 @@ class BlobsTest extends TestCase
         $this->assertEquals($expectedValue, $api->show('l3l0', 'l3l0repo', '123456sha'));
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateBlob()
     {
         $expectedValue = array('blob' => 'some data');
@@ -65,10 +56,6 @@ class BlobsTest extends TestCase
         $this->assertEquals($expectedValue, $api->create('l3l0', 'l3l0repo', $data));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateBlobWithoutEncoding()
     {
         $data = array('content' => 'some cotent');
@@ -80,10 +67,6 @@ class BlobsTest extends TestCase
         $api->create('l3l0', 'l3l0repo', $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateBlobWithoutContent()
     {
         $data = array('encoding' => 'utf8');
@@ -98,7 +81,7 @@ class BlobsTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\GitData\Blobs::class;
     }

@@ -1,12 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
 class CommitsTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldShowCommitUsingSha()
     {
         $expectedValue = array('sha' => '123', 'comitter');
@@ -20,9 +17,6 @@ class CommitsTest extends TestCase
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 123));
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateCommit()
     {
         $expectedValue = array('sha' => '123', 'comitter');
@@ -37,10 +31,6 @@ class CommitsTest extends TestCase
         $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', $data));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateCommitWithoutMessageParam()
     {
         $data = array('tree' => 1234, 'parents' => array());
@@ -52,10 +42,6 @@ class CommitsTest extends TestCase
         $api->create('KnpLabs', 'php-github-api', $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateCommitWithoutTreeParam()
     {
         $data = array('message' => 'some message', 'parents' => array());
@@ -67,10 +53,6 @@ class CommitsTest extends TestCase
         $api->create('KnpLabs', 'php-github-api', $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateCommitWithoutParentsParam()
     {
         $data = array('message' => 'some message', 'tree' => '12334');
@@ -85,7 +67,7 @@ class CommitsTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\GitData\Commits::class;
     }

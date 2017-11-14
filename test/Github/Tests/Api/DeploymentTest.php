@@ -1,12 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
 class DeploymentTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldCreateDeployment()
     {
         $api = $this->getApiMock();
@@ -18,9 +15,6 @@ class DeploymentTest extends TestCase
         $api->create('KnpLabs', 'php-github-api', $deploymentData);
     }
 
-    /**
-     * @test
-     */
     public function shouldGetAllDeployments()
     {
         $api = $this->getApiMock();
@@ -31,9 +25,6 @@ class DeploymentTest extends TestCase
         $api->all('KnpLabs', 'php-github-api');
     }
 
-    /**
-     * @test
-     */
     public function shouldGetAllDeploymentsWithFilterParameters()
     {
         $api = $this->getApiMock();
@@ -46,9 +37,6 @@ class DeploymentTest extends TestCase
         $api->all('KnpLabs', 'php-github-api', $filterData);
     }
 
-    /**
-     * @test
-     */
     public function shouldShowProject()
     {
         $expectedValue = array('id' => 123, 'ref' => 'master');
@@ -62,9 +50,6 @@ class DeploymentTest extends TestCase
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 123));
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateStatusUpdate()
     {
         $api = $this->getApiMock();
@@ -77,10 +62,6 @@ class DeploymentTest extends TestCase
         $api->updateStatus('KnpLabs', 'php-github-api', 1, $statusData);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldRejectStatusUpdateWithoutStateField()
     {
         $api = $this->getApiMock();
@@ -89,9 +70,6 @@ class DeploymentTest extends TestCase
         $api->updateStatus('KnpLabs', 'php-github-api', 1, $statusData);
     }
 
-    /**
-     * @test
-     */
     public function shouldGetAllStatuses()
     {
         $api = $this->getApiMock();
@@ -105,7 +83,7 @@ class DeploymentTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Deployment::class;
     }

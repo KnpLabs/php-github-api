@@ -1,12 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
 class CurrentUserTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldShowCurrentUser()
     {
         $expectedArray = array('id' => 1, 'username' => 'l3l0');
@@ -20,9 +17,6 @@ class CurrentUserTest extends TestCase
         $this->assertEquals($expectedArray, $api->show());
     }
 
-    /**
-     * @test
-     */
     public function shouldUpdateCurrentUserData()
     {
         $expectedArray = array('id' => 1, 'username' => 'l3l0');
@@ -36,9 +30,6 @@ class CurrentUserTest extends TestCase
         $this->assertEquals($expectedArray, $api->update(array('value' => 'toChange')));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetUserFollowers()
     {
         $expectedArray = array(array('id' => 1, 'username' => 'l3l0test'));
@@ -52,9 +43,6 @@ class CurrentUserTest extends TestCase
         $this->assertEquals($expectedArray, $api->followers(1));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetIssuesAssignedToUser()
     {
         $expectedArray = array(array('id' => 1, 'title' => 'issues'));
@@ -68,9 +56,6 @@ class CurrentUserTest extends TestCase
         $this->assertEquals($expectedArray, $api->issues(array('some' => 'param')));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetWatchedRepositories()
     {
         $expectedArray = array(array('id' => 1, 'name' => 'l3l0repo'));
@@ -84,9 +69,6 @@ class CurrentUserTest extends TestCase
         $this->assertEquals($expectedArray, $api->watched(1));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetInstallations()
     {
         $result = ['installation1', 'installation2'];
@@ -100,9 +82,6 @@ class CurrentUserTest extends TestCase
         $this->assertEquals($result, $api->installations());
     }
 
-    /**
-     * @test
-     */
     public function shouldGetRepositoriesByInstallation()
     {
         $expectedArray = array(array('id' => 1, 'name' => 'l3l0repo'));
@@ -116,9 +95,6 @@ class CurrentUserTest extends TestCase
         $this->assertEquals($expectedArray, $api->repositoriesByInstallation(42));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetDeployKeysApiObject()
     {
         $api = $this->getApiMock();
@@ -126,9 +102,6 @@ class CurrentUserTest extends TestCase
         $this->assertInstanceOf(\Github\Api\CurrentUser\PublicKeys::class, $api->keys());
     }
 
-    /**
-     * @test
-     */
     public function shouldGetEmailsApiObject()
     {
         $api = $this->getApiMock();
@@ -136,9 +109,6 @@ class CurrentUserTest extends TestCase
         $this->assertInstanceOf(\Github\Api\CurrentUser\Emails::class, $api->emails());
     }
 
-    /**
-     * @test
-     */
     public function shouldGetFollowersApiObject()
     {
         $api = $this->getApiMock();
@@ -146,9 +116,6 @@ class CurrentUserTest extends TestCase
         $this->assertInstanceOf(\Github\Api\CurrentUser\Followers::class, $api->follow());
     }
 
-    /**
-     * @test
-     */
     public function shouldGetNotificationsApiObject()
     {
         $api = $this->getApiMock();
@@ -156,9 +123,6 @@ class CurrentUserTest extends TestCase
         $this->assertInstanceOf(\Github\Api\CurrentUser\Notifications::class, $api->notifications());
     }
 
-    /**
-     * @test
-     */
     public function shouldGetWatchersApiObject()
     {
         $api = $this->getApiMock();
@@ -166,9 +130,6 @@ class CurrentUserTest extends TestCase
         $this->assertInstanceOf(\Github\Api\CurrentUser\Watchers::class, $api->watchers());
     }
 
-    /**
-     * @test
-     */
     public function shouldGetStarredApiObject()
     {
         $api = $this->getApiMock();
@@ -179,7 +140,7 @@ class CurrentUserTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\CurrentUser::class;
     }

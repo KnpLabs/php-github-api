@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Repository;
 
@@ -6,9 +6,6 @@ use Github\Tests\Api\TestCase;
 
 class ForksTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetForks()
     {
         $expectedValue = array(array('name' => 'l3l0repo'));
@@ -22,9 +19,6 @@ class ForksTest extends TestCase
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api'));
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateFork()
     {
         $expectedValue = array(array('name' => 'l3l0repo'));
@@ -39,9 +33,6 @@ class ForksTest extends TestCase
         $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', $data));
     }
 
-    /**
-     * @test
-     */
     public function shouldSortByNewestWhenSortParamNotRecognized()
     {
         $expectedValue = array(array('name' => 'l3l0repo'));
@@ -58,7 +49,7 @@ class ForksTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Repository\Forks::class;
     }

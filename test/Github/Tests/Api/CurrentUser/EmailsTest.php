@@ -1,12 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
 class EmailsTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetEmails()
     {
         $expectedValue = array(array('email@example.com'));
@@ -20,9 +17,6 @@ class EmailsTest extends TestCase
         $this->assertEquals($expectedValue, $api->all());
     }
 
-    /**
-     * @test
-     */
     public function shouldRemoveEmail()
     {
         $expectedValue = array('some value');
@@ -36,9 +30,6 @@ class EmailsTest extends TestCase
         $this->assertEquals($expectedValue, $api->remove('email@example.com'));
     }
 
-    /**
-     * @test
-     */
     public function shouldRemoveEmails()
     {
         $expectedValue = array('some value');
@@ -52,10 +43,6 @@ class EmailsTest extends TestCase
         $this->assertEquals($expectedValue, $api->remove(array('email@example.com', 'email2@example.com')));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\InvalidArgumentException
-     */
     public function shouldNotRemoveEmailsWhenAreNotPass()
     {
         $api = $this->getApiMock();
@@ -65,9 +52,6 @@ class EmailsTest extends TestCase
         $api->remove(array());
     }
 
-    /**
-     * @test
-     */
     public function shouldAddEmail()
     {
         $expectedValue = array('some value');
@@ -81,9 +65,6 @@ class EmailsTest extends TestCase
         $this->assertEquals($expectedValue, $api->add('email@example.com'));
     }
 
-    /**
-     * @test
-     */
     public function shouldAddEmails()
     {
         $expectedValue = array('some value');
@@ -97,10 +78,6 @@ class EmailsTest extends TestCase
         $this->assertEquals($expectedValue, $api->add(array('email@example.com', 'email2@example.com')));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\InvalidArgumentException
-     */
     public function shouldNotAddEmailsWhenAreNotPass()
     {
         $api = $this->getApiMock();
@@ -113,7 +90,7 @@ class EmailsTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\CurrentUser\Emails::class;
     }

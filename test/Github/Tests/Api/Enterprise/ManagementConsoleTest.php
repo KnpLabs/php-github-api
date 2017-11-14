@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Enterprise;
 
@@ -6,9 +6,6 @@ use Github\Tests\Api\TestCase;
 
 class ManagementConsoleTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldShowConfigData()
     {
         $expectedJson = '{ "status": "running", "progress": [ { "status": "DONE", "key": "Appliance core components" },
@@ -26,9 +23,6 @@ class ManagementConsoleTest extends TestCase
         $this->assertEquals($expectedArray, $api->configcheck($this->getLicenseHash()));
     }
 
-    /**
-     * @test
-     */
     public function shouldShowSettingsData()
     {
         $expectedJson = '{ "enterprise": { "private_mode": false, "github_hostname": "ghe.local", "auth_mode":
@@ -64,9 +58,6 @@ class ManagementConsoleTest extends TestCase
         $this->assertEquals($expectedArray, $api->settings($this->getLicenseHash()));
     }
 
-    /**
-     * @test
-     */
     public function shouldShowMaintenanceStatus()
     {
         $expectedJson = '{ "status": "scheduled", "scheduled_time": "Tuesday, January 22 at 15 => 34 -0800",
@@ -83,9 +74,6 @@ class ManagementConsoleTest extends TestCase
         $this->assertEquals($expectedArray, $api->maintenance($this->getLicenseHash()));
     }
 
-    /**
-     * @test
-     */
     public function shouldShowAuthorizedKeys()
     {
         $expectedJson = '[ { "key": "ssh-rsa AAAAB3NzaC1yc2EAAAAB...", "pretty-print":
@@ -110,7 +98,7 @@ class ManagementConsoleTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Enterprise\ManagementConsole::class;
     }

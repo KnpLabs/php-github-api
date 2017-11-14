@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Miscellaneous;
 
@@ -7,9 +7,6 @@ use Github\Tests\Api\TestCase;
 
 class EmojisTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetAllEmojis()
     {
         $expectedArray = array(
@@ -29,7 +26,7 @@ class EmojisTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return Emojis::class;
     }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Repository;
 
@@ -6,9 +6,6 @@ use Github\Tests\Api\TestCase;
 
 class AssetsTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetAllReleaseAssets()
     {
         $expectedValue = array(array('asset1data'), array('asset2data'));
@@ -23,9 +20,6 @@ class AssetsTest extends TestCase
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', $id));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetSingleReleaseAsset()
     {
         $expectedValue = array('assetData');
@@ -40,10 +34,6 @@ class AssetsTest extends TestCase
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', $assetId));
     }
 
-    /**
-     * @test
-     * @requires PHP 5.3.4
-     */
     public function shouldCreateReleaseAsset()
     {
         if (!defined('OPENSSL_TLSEXT_SERVER_NAME') || !OPENSSL_TLSEXT_SERVER_NAME) {
@@ -66,9 +56,6 @@ class AssetsTest extends TestCase
         $this->assertEquals($body, $api->create('KnpLabs', 'php-github-api', $releaseId, $name, $contentType, $body));
     }
 
-    /**
-     * @test
-     */
     public function shouldEditReleaseAsset()
     {
         $expectedValue = array('assetUpdatedData');
@@ -84,10 +71,6 @@ class AssetsTest extends TestCase
         $this->assertEquals($expectedValue, $api->edit('KnpLabs', 'php-github-api', $assetId, $data));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotEditReleaseAssetWithoutName()
     {
         $assetId = 5;
@@ -100,9 +83,6 @@ class AssetsTest extends TestCase
         $api->edit('KnpLabs', 'php-github-api', $assetId, $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldRemoveReleaseAsset()
     {
         $expectedValue = array('assetUpdatedData');
@@ -120,7 +100,7 @@ class AssetsTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Repository\Assets::class;
     }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests;
 
@@ -14,9 +14,6 @@ use Psr\Http\Message\RequestInterface;
 
 class ClientTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @test
-     */
     public function shouldNotHaveToPassHttpClientToConstructor()
     {
         $client = new Client();
@@ -24,9 +21,6 @@ class ClientTest extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf(\Http\Client\HttpClient::class, $client->getHttpClient());
     }
 
-    /**
-     * @test
-     */
     public function shouldPassHttpClientInterfaceToConstructor()
     {
         $httpClientMock = $this->getMockBuilder(\Http\Client\HttpClient::class)
@@ -111,10 +105,6 @@ class ClientTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\InvalidArgumentException
-     */
     public function shouldThrowExceptionWhenAuthenticatingWithoutMethodSet()
     {
         $client = new Client();
@@ -144,20 +134,12 @@ class ClientTest extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf($class, $client->$apiName());
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\InvalidArgumentException
-     */
     public function shouldNotGetApiInstance()
     {
         $client = new Client();
         $client->api('do_not_exist');
     }
 
-    /**
-     * @test
-     * @expectedException BadMethodCallException
-     */
     public function shouldNotGetMagicApiInstance()
     {
         $client = new Client();

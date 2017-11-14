@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Integration;
 
@@ -7,9 +7,6 @@ namespace Github\Tests\Integration;
  */
 class CommitTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldRetrieveCommitsForRepositoryBranch()
     {
         $username = 'KnpLabs';
@@ -26,9 +23,6 @@ class CommitTest extends TestCase
         $this->assertArrayHasKey('sha', $commit);
     }
 
-    /**
-     * @test
-     */
     public function shouldRetrieveCommitBySha()
     {
         $username = 'KnpLabs';
@@ -44,9 +38,6 @@ class CommitTest extends TestCase
         $this->assertArrayHasKey('files', $commit);
     }
 
-    /**
-     * @test
-     */
     public function shouldRetrieveCommitsForFile()
     {
         $username = 'KnpLabs';

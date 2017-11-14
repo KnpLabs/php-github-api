@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Repository;
 
@@ -6,9 +6,6 @@ use Github\Tests\Api\TestCase;
 
 class CollaboratorsTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetAllRepositoryCollaborators()
     {
         $expectedValue = array(array('username' => 'l3l0'));
@@ -22,9 +19,6 @@ class CollaboratorsTest extends TestCase
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api'));
     }
 
-    /**
-     * @test
-     */
     public function shouldCheckIfRepositoryCollaborator()
     {
         $expectedValue = 'response';
@@ -38,9 +32,6 @@ class CollaboratorsTest extends TestCase
         $this->assertEquals($expectedValue, $api->check('KnpLabs', 'php-github-api', 'l3l0'));
     }
 
-    /**
-     * @test
-     */
     public function shouldAddRepositoryCollaborator()
     {
         $expectedValue = 'response';
@@ -54,9 +45,6 @@ class CollaboratorsTest extends TestCase
         $this->assertEquals($expectedValue, $api->add('KnpLabs', 'php-github-api', 'l3l0'));
     }
 
-    /**
-     * @test
-     */
     public function shouldRemoveRepositoryCollaborator()
     {
         $expectedValue = 'response';
@@ -73,7 +61,7 @@ class CollaboratorsTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Repository\Collaborators::class;
     }

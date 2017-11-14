@@ -1,12 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
 class GistsTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetStarredGists()
     {
         $expectedArray = array(array('id' => '123'));
@@ -20,9 +17,6 @@ class GistsTest extends TestCase
         $this->assertEquals($expectedArray, $api->all('starred'));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetAllGists()
     {
         $expectedArray = array(array('id' => '123'));
@@ -36,9 +30,6 @@ class GistsTest extends TestCase
         $this->assertEquals($expectedArray, $api->all());
     }
 
-    /**
-     * @test
-     */
     public function shouldShowGist()
     {
         $expectedArray = array('id' => '123');
@@ -52,9 +43,6 @@ class GistsTest extends TestCase
         $this->assertEquals($expectedArray, $api->show(123));
     }
 
-    /**
-     * @test
-     */
     public function shouldShowCommits()
     {
         $expectedArray = array('id' => '123');
@@ -68,9 +56,6 @@ class GistsTest extends TestCase
         $this->assertEquals($expectedArray, $api->commits(123));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetCommentsApiObject()
     {
         $api = $this->getApiMock();
@@ -78,9 +63,6 @@ class GistsTest extends TestCase
         $this->assertInstanceOf(\Github\Api\Gist\Comments::class, $api->comments());
     }
 
-    /**
-     * @test
-     */
     public function shouldForkGist()
     {
         $expectedArray = array('id' => '123');
@@ -94,9 +76,6 @@ class GistsTest extends TestCase
         $this->assertEquals($expectedArray, $api->fork(123));
     }
 
-    /**
-     * @test
-     */
     public function shouldListGistForks()
     {
         $expectedArray = array('id' => '123');
@@ -110,10 +89,6 @@ class GistsTest extends TestCase
         $api->forks(123);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateGistWithoutFile()
     {
         $input = array(
@@ -128,9 +103,6 @@ class GistsTest extends TestCase
         $api->create($input);
     }
 
-    /**
-     * @test
-     */
     public function shouldCheckGist()
     {
         $expectedArray = array('id' => '123');
@@ -144,9 +116,6 @@ class GistsTest extends TestCase
         $this->assertEquals($expectedArray, $api->check(123));
     }
 
-    /**
-     * @test
-     */
     public function shouldStarGist()
     {
         $expectedArray = array('id' => '123');
@@ -160,9 +129,6 @@ class GistsTest extends TestCase
         $this->assertEquals($expectedArray, $api->star(123));
     }
 
-    /**
-     * @test
-     */
     public function shouldUnstarGist()
     {
         $expectedArray = array('id' => '123');
@@ -176,9 +142,6 @@ class GistsTest extends TestCase
         $this->assertEquals($expectedArray, $api->unstar(123));
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateAnonymousGist()
     {
         $input = array(
@@ -199,9 +162,6 @@ class GistsTest extends TestCase
         $api->create($input);
     }
 
-    /**
-     * @test
-     */
     public function shouldUpdateGist()
     {
         $input = array(
@@ -225,9 +185,6 @@ class GistsTest extends TestCase
         $api->update(5, $input);
     }
 
-    /**
-     * @test
-     */
     public function shouldDeleteGist()
     {
         $api = $this->getApiMock();
@@ -241,7 +198,7 @@ class GistsTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Gists::class;
     }

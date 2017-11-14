@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Integration;
 
@@ -7,9 +7,6 @@ namespace Github\Tests\Integration;
  */
 class RepoCommentTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldRetrieveComments()
     {
         $username = 'fabpot';
@@ -26,9 +23,6 @@ class RepoCommentTest extends TestCase
         $this->assertArrayHasKey('url', $comment);
     }
 
-    /**
-     * @test
-     */
     public function shouldRetrieveCommentsForCommit()
     {
         $username = 'fabpot';
@@ -46,9 +40,6 @@ class RepoCommentTest extends TestCase
         $this->assertArrayHasKey('url', $comment);
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateCommentForCommit()
     {
         $username = 'KnpLabs';
@@ -68,10 +59,6 @@ class RepoCommentTest extends TestCase
         return $comment['id'];
     }
 
-    /**
-     * @test
-     * @depends shouldCreateCommentForCommit
-     */
     public function shouldShowCommentByCommentId($commentId)
     {
         $username = 'KnpLabs';
@@ -89,10 +76,6 @@ class RepoCommentTest extends TestCase
         return $comment['id'];
     }
 
-    /**
-     * @test
-     * @depends shouldShowCommentByCommentId
-     */
     public function shouldUpdateCommentByCommentId($commentId)
     {
         $username = 'KnpLabs';
@@ -111,10 +94,6 @@ class RepoCommentTest extends TestCase
         return $comment['id'];
     }
 
-    /**
-     * @test
-     * @depends shouldUpdateCommentByCommentId
-     */
     public function shouldRemoveCommentByCommentId($commentId)
     {
         $username = 'KnpLabs';

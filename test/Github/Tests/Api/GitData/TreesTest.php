@@ -1,12 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
 class TreesTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldShowTreeUsingSha()
     {
         $expectedValue = array('sha' => '123', 'comitter');
@@ -20,9 +17,6 @@ class TreesTest extends TestCase
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 123));
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateTreeUsingSha()
     {
         $expectedValue = array('sha' => '123', 'comitter');
@@ -52,9 +46,6 @@ class TreesTest extends TestCase
         $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', $data));
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateTreeUsingContent()
     {
         $expectedValue = array('sha' => '123', 'comitter');
@@ -84,10 +75,6 @@ class TreesTest extends TestCase
         $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', $data));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateTreeWithoutShaAndContentParam()
     {
         $data = array(
@@ -105,10 +92,6 @@ class TreesTest extends TestCase
         $api->create('KnpLabs', 'php-github-api', $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateTreeWithoutPathParam()
     {
         $data = array(
@@ -126,10 +109,6 @@ class TreesTest extends TestCase
         $api->create('KnpLabs', 'php-github-api', $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateTreeWithoutModeParam()
     {
         $data = array(
@@ -147,10 +126,6 @@ class TreesTest extends TestCase
         $api->create('KnpLabs', 'php-github-api', $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateTreeWithoutTypeParam()
     {
         $data = array(
@@ -168,10 +143,6 @@ class TreesTest extends TestCase
         $api->create('KnpLabs', 'php-github-api', $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateTreeWithoutTreeParam()
     {
         $data = array();
@@ -183,10 +154,6 @@ class TreesTest extends TestCase
         $api->create('KnpLabs', 'php-github-api', $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateTreeWhenTreeParamIsNotArray()
     {
         $data = array(
@@ -203,7 +170,7 @@ class TreesTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\GitData\Trees::class;
     }

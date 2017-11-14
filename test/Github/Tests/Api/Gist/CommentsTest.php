@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Gist;
 
@@ -6,9 +6,6 @@ use Github\Tests\Api\TestCase;
 
 class CommentsTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetAllGistComments()
     {
         $expectedValue = array(array('comment1data'), array('comment2data'));
@@ -22,9 +19,6 @@ class CommentsTest extends TestCase
         $this->assertEquals($expectedValue, $api->all('123'));
     }
 
-    /**
-     * @test
-     */
     public function shouldShowGistComment()
     {
         $expectedValue = array('comment1');
@@ -38,9 +32,6 @@ class CommentsTest extends TestCase
         $this->assertEquals($expectedValue, $api->show(123, 123));
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateGistComment()
     {
         $expectedValue = array('comment1data');
@@ -54,9 +45,6 @@ class CommentsTest extends TestCase
         $this->assertEquals($expectedValue, $api->create('123', 'Test body'));
     }
 
-    /**
-     * @test
-     */
     public function shouldUpdateGistComment()
     {
         $expectedValue = array('comment1data');
@@ -71,9 +59,6 @@ class CommentsTest extends TestCase
         $this->assertEquals($expectedValue, $api->update(123, 233, 'body test'));
     }
 
-    /**
-     * @test
-     */
     public function shouldRemoveComment()
     {
         $expectedValue = array('someOutput');
@@ -90,7 +75,7 @@ class CommentsTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Gist\Comments::class;
     }

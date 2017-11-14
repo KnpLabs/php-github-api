@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\PullRequest;
 
@@ -7,9 +7,6 @@ use Github\Tests\Api\TestCase;
 
 class ReviewRequestTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetAllReviewRequestsForAPullRequest()
     {
         $expectedValue = [
@@ -27,9 +24,6 @@ class ReviewRequestTest extends TestCase
         $this->assertSame($expectedValue, $api->all('octocat', 'Hello-World', 12));
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateReviewRequest()
     {
         $api = $this->getApiMock();
@@ -41,9 +35,6 @@ class ReviewRequestTest extends TestCase
         $api->create('octocat', 'Hello-World', 12, ['testuser']);
     }
 
-    /**
-     * @test
-     */
     public function shouldDeleteReviewRequest()
     {
         $api = $this->getApiMock();
@@ -58,7 +49,7 @@ class ReviewRequestTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return ReviewRequest::class;
     }

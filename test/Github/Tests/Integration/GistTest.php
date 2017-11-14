@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Integration;
 
@@ -7,9 +7,6 @@ namespace Github\Tests\Integration;
  */
 class GistTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldRetrievePublicGistsListWhenCalledAnonymously()
     {
         $gists = $this->client->api('gists')->all();
@@ -23,18 +20,11 @@ class GistTest extends TestCase
         $this->assertArrayHasKey('user', $gist);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\RuntimeException
-     */
     public function shouldNotGetStarredListWithoutAuthorization()
     {
         $this->client->api('gists')->all('starred');
     }
 
-    /**
-     * @test
-     */
     public function shouldRetrievePublicGistsList()
     {
         $gists = $this->client->api('gists')->all('public');
@@ -48,9 +38,6 @@ class GistTest extends TestCase
         $this->assertArrayHasKey('user', $gist);
     }
 
-    /**
-     * @test
-     */
     public function shouldRetrieveGistById()
     {
         $id = 1;
