@@ -3,7 +3,6 @@ use Github\Tests\Api\TestCase;
 
 class TrafficTest extends TestCase
 {
-
     public function shouldgetReferers()
     {
         $expectedValue = json_encode(["referrer" => "github.com","count" => 112,"uniques" => 15]);

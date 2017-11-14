@@ -4,7 +4,6 @@ namespace Github\Tests\Api;
 
 class GraphQLTest extends TestCase
 {
-
     public function shouldTestGraphQL()
     {
         $api = $this->getApiMock();

@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Github\Api;
+
 use Psr\Http\Message\ResponseInterface;
 
 /**
