@@ -16,11 +16,11 @@ class ResultPagerTest extends TestCase
 
         $pager = $this->createPager();
 
-        $repositories = $pager->fetch($repositoriesApi, 'repositories', array('KnpLabs'));
+        $repositories = $pager->fetch($repositoriesApi, 'repositories', ['KnpLabs']);
         $this->assertCount(10, $repositories);
 
         $repositoriesApi->setPerPage(20);
-        $repositories = $pager->fetch($repositoriesApi, 'repositories', array('KnpLabs'));
+        $repositories = $pager->fetch($repositoriesApi, 'repositories', ['KnpLabs']);
         $this->assertCount(20, $repositories);
     }
 
@@ -31,7 +31,7 @@ class ResultPagerTest extends TestCase
 
         $pager = $this->createPager();
 
-        $users = $pager->fetch($searchApi, 'users', array('location:Kyiv'));
+        $users = $pager->fetch($searchApi, 'users', ['location:Kyiv']);
         $this->assertCount(10, $users);
     }
 

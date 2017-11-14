@@ -23,7 +23,7 @@ class Search extends AbstractApi
      */
     public function repositories(string $q, string $sort = 'updated', string $order = 'desc'): array
     {
-        return $this->get('/search/repositories', array('q' => $q, 'sort' => $sort, 'order' => $order));
+        return $this->get('/search/repositories', ['q' => $q, 'sort' => $sort, 'order' => $order]);
     }
 
     /**
@@ -39,7 +39,7 @@ class Search extends AbstractApi
      */
     public function issues(string $q, string $sort = 'updated', string $order = 'desc'): array
     {
-        return $this->get('/search/issues', array('q' => $q, 'sort' => $sort, 'order' => $order));
+        return $this->get('/search/issues', ['q' => $q, 'sort' => $sort, 'order' => $order]);
     }
 
     /**
@@ -55,7 +55,7 @@ class Search extends AbstractApi
      */
     public function code(string $q, string $sort = 'updated', string $order = 'desc'): array
     {
-        return $this->get('/search/code', array('q' => $q, 'sort' => $sort, 'order' => $order));
+        return $this->get('/search/code', ['q' => $q, 'sort' => $sort, 'order' => $order]);
     }
 
     /**
@@ -71,6 +71,6 @@ class Search extends AbstractApi
      */
     public function users(string $q, string $sort = 'updated', string $order = 'desc'): array
     {
-        return $this->get('/search/users', array('q' => $q, 'sort' => $sort, 'order' => $order));
+        return $this->get('/search/users', ['q' => $q, 'sort' => $sort, 'order' => $order]);
     }
 }

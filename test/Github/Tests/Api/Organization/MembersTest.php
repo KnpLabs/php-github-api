@@ -8,7 +8,7 @@ class MembersTest extends TestCase
 {
     public function shouldGetAllOrganizationMembers()
     {
-        $expectedValue = array(array('username' => 'l3l0'));
+        $expectedValue = [['username' => 'l3l0']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -21,7 +21,7 @@ class MembersTest extends TestCase
 
     public function shouldGetPublicOrganizationMembers()
     {
-        $expectedValue = array(array('username' => 'l3l0'));
+        $expectedValue = [['username' => 'l3l0']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -99,7 +99,7 @@ class MembersTest extends TestCase
 
     public function shouldShowOrganizationMember()
     {
-        $expectedValue = array('username' => 'l3l0');
+        $expectedValue = ['username' => 'l3l0'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())

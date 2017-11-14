@@ -28,9 +28,9 @@ class Events extends AbstractApi
             $path = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/events';
         }
 
-        return $this->get($path, array(
+        return $this->get($path, [
             'page' => $page
-        ));
+        ]);
     }
 
     /**

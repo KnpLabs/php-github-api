@@ -72,6 +72,6 @@ class ManagementConsole extends AbstractApi
      */
     protected function getWithLicenseHash(string $uri, string $hash)
     {
-        return $this->get($uri, array('license_md5' => rawurlencode($hash)));
+        return $this->get($uri, ['license_md5' => rawurlencode($hash)]);
     }
 }

@@ -139,12 +139,12 @@ class User extends AbstractApi
      */
     public function starred(string $username, int $page = 1, int $perPage = 30, string $sort = 'created', string $direction = 'desc'): array
     {
-        return $this->get('/users/'.rawurlencode($username).'/starred', array(
+        return $this->get('/users/'.rawurlencode($username).'/starred', [
             'page' => $page,
             'per_page' => $perPage,
             'sort' => $sort,
             'direction' => $direction,
-        ));
+        ]);
     }
 
     /**

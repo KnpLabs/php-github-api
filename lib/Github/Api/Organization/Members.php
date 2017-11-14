@@ -12,7 +12,7 @@ class Members extends AbstractApi
 {
     public function all($organization, $type = null, $filter = 'all', $role = null)
     {
-        $parameters = array();
+        $parameters = [];
         $path = '/orgs/'.rawurlencode($organization).'/';
         if (null === $type) {
             $path .= 'members';

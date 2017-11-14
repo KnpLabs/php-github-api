@@ -26,10 +26,10 @@ class Notification extends AbstractApi
      */
     public function all(bool $includingRead = false, bool $participating = false, DateTime $since = null): array
     {
-        $parameters = array(
+        $parameters = [
             'all' => $includingRead,
             'participating' => $participating
-        );
+        ];
 
         if ($since !== null) {
             $parameters['since'] = $since->format(DateTime::ISO8601);
@@ -47,7 +47,7 @@ class Notification extends AbstractApi
      */
     public function markRead(DateTime $since = null)
     {
-        $parameters = array();
+        $parameters = [];
 
         if ($since !== null) {
             $parameters['last_read_at'] = $since->format(DateTime::ISO8601);

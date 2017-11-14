@@ -23,7 +23,7 @@ class Comments extends AbstractApi
      */
     public function configure(string $bodyType = null): self
     {
-        if (!in_array($bodyType, array('text', 'html', 'full'))) {
+        if (!in_array($bodyType, ['text', 'html', 'full'])) {
             $bodyType = 'raw';
         }
 
@@ -67,7 +67,7 @@ class Comments extends AbstractApi
      */
     public function create(string $gist, string $body): array
     {
-        return $this->post('/gists/'.rawurlencode($gist).'/comments', array('body' => $body));
+        return $this->post('/gists/'.rawurlencode($gist).'/comments', ['body' => $body]);
     }
 
     /**
@@ -81,7 +81,7 @@ class Comments extends AbstractApi
      */
     public function update(string $gist, int $comment_id, string $body): array
     {
-        return $this->patch('/gists/'.rawurlencode($gist).'/comments/'.rawurlencode($comment_id), array('body' => $body));
+        return $this->patch('/gists/'.rawurlencode($gist).'/comments/'.rawurlencode($comment_id), ['body' => $body]);
     }
 
     /**

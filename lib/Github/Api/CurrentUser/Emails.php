@@ -37,7 +37,7 @@ class Emails extends AbstractApi
     public function add($emails): array
     {
         if (is_string($emails)) {
-            $emails = array($emails);
+            $emails = [$emails];
         } elseif (0 === count($emails)) {
             throw new InvalidArgumentException();
         }
@@ -59,7 +59,7 @@ class Emails extends AbstractApi
     public function remove($emails): array
     {
         if (is_string($emails)) {
-            $emails = array($emails);
+            $emails = [$emails];
         } elseif (0 === count($emails)) {
             throw new InvalidArgumentException();
         }

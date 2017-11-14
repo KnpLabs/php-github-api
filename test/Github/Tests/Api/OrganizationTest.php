@@ -6,7 +6,7 @@ class OrganizationTest extends TestCase
 {
     public function shouldGetAllOrganizations()
     {
-        $expectedValue = array(array('login' => 'KnpLabs'));
+        $expectedValue = [['login' => 'KnpLabs']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -19,7 +19,7 @@ class OrganizationTest extends TestCase
 
     public function shouldShowOrganization()
     {
-        $expectedArray = array('id' => 1, 'name' => 'KnpLabs');
+        $expectedArray = ['id' => 1, 'name' => 'KnpLabs'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -32,25 +32,25 @@ class OrganizationTest extends TestCase
 
     public function shouldUpdateOrganization()
     {
-        $expectedArray = array('id' => 1, 'name' => 'KnpLabs');
+        $expectedArray = ['id' => 1, 'name' => 'KnpLabs'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
-            ->with('/orgs/KnpLabs', array('value' => 'toUpdate'))
+            ->with('/orgs/KnpLabs', ['value' => 'toUpdate'])
             ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($expectedArray, $api->update('KnpLabs', array('value' => 'toUpdate')));
+        $this->assertEquals($expectedArray, $api->update('KnpLabs', ['value' => 'toUpdate']));
     }
 
     public function shouldGetOrganizationRepositories()
     {
-        $expectedArray = array(array('id' => 1, 'username' => 'KnpLabs', 'name' => 'php-github-api'));
+        $expectedArray = [['id' => 1, 'username' => 'KnpLabs', 'name' => 'php-github-api']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/orgs/KnpLabs/repos', array('type' => 'all', 'page' => 1))
+            ->with('/orgs/KnpLabs/repos', ['type' => 'all', 'page' => 1])
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->repositories('KnpLabs'));

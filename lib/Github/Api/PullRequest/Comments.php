@@ -25,11 +25,11 @@ class Comments extends AbstractApi
      */
     public function configure(string $bodyType = null, string $apiVersion = null): self
     {
-        if (!in_array($apiVersion, array('squirrel-girl-preview'))) {
+        if (!in_array($apiVersion, ['squirrel-girl-preview'])) {
             $apiVersion = $this->client->getApiVersion();
         }
 
-        if (!in_array($bodyType, array('text', 'html', 'full'))) {
+        if (!in_array($bodyType, ['text', 'html', 'full'])) {
             $bodyType = 'raw';
         }
 
@@ -104,7 +104,7 @@ class Comments extends AbstractApi
 
         // If `in_reply_to` is set, other options are not necessary anymore
         if (!isset($params['in_reply_to']) && !isset($params['commit_id'], $params['path'], $params['position'])) {
-            throw new MissingArgumentException(array('commit_id', 'path', 'position'));
+            throw new MissingArgumentException(['commit_id', 'path', 'position']);
         }
 
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($pullRequest).'/comments', $params);

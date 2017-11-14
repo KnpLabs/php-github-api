@@ -8,12 +8,12 @@ use Github\Api\Repository\Commits;
 use Github\Api\Repository\Contents;
 use Github\Api\Repository\DeployKeys;
 use Github\Api\Repository\Downloads;
-use Github\Api\Repository\Projects;
-use Github\Api\Repository\Protection;
-use Github\Api\Repository\Releases;
 use Github\Api\Repository\Forks;
 use Github\Api\Repository\Hooks;
 use Github\Api\Repository\Labels;
+use Github\Api\Repository\Projects;
+use Github\Api\Repository\Protection;
+use Github\Api\Repository\Releases;
 use Github\Api\Repository\Stargazers;
 use Github\Api\Repository\Statuses;
 use Github\Api\Repository\Traffic;
@@ -38,9 +38,9 @@ class Repo extends AbstractApi
      *
      * @return array list of found repositories
      */
-    public function find(string $keyword, array $params = array()): array
+    public function find(string $keyword, array $params = []): array
     {
-        return $this->get('/legacy/repos/search/'.rawurlencode($keyword), array_merge(array('start_page' => 1), $params));
+        return $this->get('/legacy/repos/search/'.rawurlencode($keyword), array_merge(['start_page' => 1], $params));
     }
 
     /**
@@ -131,9 +131,9 @@ class Repo extends AbstractApi
      *
      * @return array list of organization repositories
      */
-    public function org(string $organization, array $params = array()): array
+    public function org(string $organization, array $params = []): array
     {
-        return $this->get('/orgs/'.$organization.'/repos', array_merge(array('start_page' => 1), $params));
+        return $this->get('/orgs/'.$organization.'/repos', array_merge(['start_page' => 1], $params));
     }
 
     /**
@@ -200,7 +200,7 @@ class Repo extends AbstractApi
     ): array {
         $path = null !== $organization ? '/orgs/'.$organization.'/repos' : '/user/repos';
 
-        $parameters = array(
+        $parameters = [
             'name'          => $name,
             'description'   => $description,
             'homepage'      => $homepage,
@@ -209,7 +209,7 @@ class Repo extends AbstractApi
             'has_wiki'      => $hasWiki,
             'has_downloads' => $hasDownloads,
             'auto_init'     => $autoInit
-        );
+        ];
 
         if ($organization && $teamId) {
             $parameters['team_id'] = $teamId;
@@ -458,9 +458,9 @@ class Repo extends AbstractApi
      */
     public function contributors(string $username, string $repository, bool $includingAnonymous = false): array
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contributors', array(
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contributors', [
             'anon' => $includingAnonymous ?: null
-        ));
+        ]);
     }
 
     /**
@@ -520,9 +520,9 @@ class Repo extends AbstractApi
      */
     public function watchers(string $username, string $repository, int $page = 1): array
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/watchers', array(
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/watchers', [
             'page' => $page
-        ));
+        ]);
     }
 
     /**
@@ -534,9 +534,9 @@ class Repo extends AbstractApi
      */
     public function subscribers(string $username, string $repository, int $page = 1): array
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/subscribers', array(
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/subscribers', [
             'page' => $page
-        ));
+        ]);
     }
 
     /**
@@ -554,10 +554,10 @@ class Repo extends AbstractApi
      */
     public function merge(string $username, string $repository, string $base, string $head, string $message = null)
     {
-        $parameters = array(
+        $parameters = [
             'base' => $base,
             'head' => $head,
-        );
+        ];
 
         if (is_string($message)) {
             $parameters['commit_message'] = $message;

@@ -33,7 +33,7 @@ class StatsTest extends TestCase
             ->with(sprintf('/enterprise/stats/%s', $type))
             ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($expectedArray, call_user_func(array($api, $type)));
+        $this->assertEquals($expectedArray, call_user_func([$api, $type]));
     }
 
     /**
@@ -41,19 +41,19 @@ class StatsTest extends TestCase
      */
     public function getTypes(): array
     {
-        return array(
-            array('issues'),
-            array('hooks'),
-            array('milestones'),
-            array('orgs'),
-            array('comments'),
-            array('pages'),
-            array('users'),
-            array('gists'),
-            array('pulls'),
-            array('repos'),
-            array('all')
-        );
+        return [
+            ['issues'],
+            ['hooks'],
+            ['milestones'],
+            ['orgs'],
+            ['comments'],
+            ['pages'],
+            ['users'],
+            ['gists'],
+            ['pulls'],
+            ['repos'],
+            ['all']
+        ];
     }
 
     /**

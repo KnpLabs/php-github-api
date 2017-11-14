@@ -29,7 +29,7 @@ class UserTest extends TestCase
 
     public function shouldNotUpdateUserWithoutAuthorization()
     {
-        $this->client->api('current_user')->update(array('email' => 'leszek.prabucki@gmail.com'));
+        $this->client->api('current_user')->update(['email' => 'leszek.prabucki@gmail.com']);
     }
 
     public function shouldGetUsersWhoUserIsFollowing()

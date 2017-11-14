@@ -45,7 +45,7 @@ class RepoCommentTest extends TestCase
         $username = 'KnpLabs';
         $repo     = 'php-github-api';
         $sha      = '22655813eb54e7d4e21545e396f919bcd245b50d';
-        $params   = array('body' => '%');
+        $params   = ['body' => '%'];
 
         $comment = $this->client->api('repo')->comments()->create($username, $repo, $sha, $params);
 
@@ -80,7 +80,7 @@ class RepoCommentTest extends TestCase
     {
         $username = 'KnpLabs';
         $repo     = 'php-github-api';
-        $params   = array('body' => 'test update');
+        $params   = ['body' => 'test update'];
 
         $comment = $this->client->api('repo')->comments()->update($username, $repo, $commentId, $params);
 

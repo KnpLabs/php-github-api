@@ -51,7 +51,7 @@ class Statuses extends AbstractApi
      *
      * @return array
      */
-    public function create(string $username, string $repository, string $sha, array $params = array()): array
+    public function create(string $username, string $repository, string $sha, array $params = []): array
     {
         if (!isset($params['state'])) {
             throw new MissingArgumentException('state');

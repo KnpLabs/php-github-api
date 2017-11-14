@@ -102,10 +102,10 @@ class Labels extends AbstractApi
      */
     public function update(string $username, string $repository, string $label, string $newName, string $color): array
     {
-        $params = array(
+        $params = [
             'name'  => $newName,
             'color' => $color,
-        );
+        ];
 
         return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels/'.rawurlencode($label), $params);
     }
@@ -126,7 +126,7 @@ class Labels extends AbstractApi
     public function add(string $username, string $repository, int $issue, string $labels): array
     {
         if (is_string($labels)) {
-            $labels = array($labels);
+            $labels = [$labels];
         } elseif (0 === count($labels)) {
             throw new InvalidArgumentException();
         }

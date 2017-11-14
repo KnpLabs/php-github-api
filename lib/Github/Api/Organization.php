@@ -57,10 +57,10 @@ class Organization extends AbstractApi
      */
     public function repositories(string $organization, string $type = 'all', int $page = 1): array
     {
-        return $this->get('/orgs/'.rawurlencode($organization).'/repos', array(
+        return $this->get('/orgs/'.rawurlencode($organization).'/repos', [
             'type' => $type,
             'page' => $page,
-        ));
+        ]);
     }
 
     /**
@@ -96,8 +96,8 @@ class Organization extends AbstractApi
      *
      * @return array
      */
-    public function issues($organization, array $params = array(), int $page = 1): array
+    public function issues($organization, array $params = [], int $page = 1): array
     {
-        return $this->get('/orgs/'.rawurlencode($organization).'/issues', array_merge(array('page' => $page), $params));
+        return $this->get('/orgs/'.rawurlencode($organization).'/issues', array_merge(['page' => $page], $params));
     }
 }

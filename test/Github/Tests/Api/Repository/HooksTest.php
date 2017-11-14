@@ -8,7 +8,7 @@ class HooksTest extends TestCase
 {
     public function shouldGetAllRepositoryHooks()
     {
-        $expectedValue = array(array('name' => 'hook'));
+        $expectedValue = [['name' => 'hook']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -21,7 +21,7 @@ class HooksTest extends TestCase
 
     public function shouldShowHook()
     {
-        $expectedValue = array('hook' => 'somename');
+        $expectedValue = ['hook' => 'somename'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -34,7 +34,7 @@ class HooksTest extends TestCase
 
     public function shouldRemoveHook()
     {
-        $expectedValue = array('someOutput');
+        $expectedValue = ['someOutput'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -47,7 +47,7 @@ class HooksTest extends TestCase
 
     public function shouldNotCreateHookWithoutName()
     {
-        $data = array('config' => 'conf');
+        $data = ['config' => 'conf'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -58,7 +58,7 @@ class HooksTest extends TestCase
 
     public function shouldNotCreateHookWithoutColor()
     {
-        $data = array('name' => 'test');
+        $data = ['name' => 'test'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -69,8 +69,8 @@ class HooksTest extends TestCase
 
     public function shouldCreateHook()
     {
-        $expectedValue = array('hook' => 'somename');
-        $data = array('name' => 'test', 'config' => 'someconfig');
+        $expectedValue = ['hook' => 'somename'];
+        $data = ['name' => 'test', 'config' => 'someconfig'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -83,7 +83,7 @@ class HooksTest extends TestCase
 
     public function shouldNotUpdateHookWithoutConfig()
     {
-        $data = array('name' => 'test');
+        $data = ['name' => 'test'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -94,8 +94,8 @@ class HooksTest extends TestCase
 
     public function shouldUpdateHook()
     {
-        $expectedValue = array('hook' => 'somename');
-        $data = array('name' => 'test', 'config' => 'config');
+        $expectedValue = ['hook' => 'somename'];
+        $data = ['name' => 'test', 'config' => 'config'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -108,7 +108,7 @@ class HooksTest extends TestCase
 
     public function shouldTestHook()
     {
-        $expectedValue = array(array('name' => 'hook'));
+        $expectedValue = [['name' => 'hook']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())

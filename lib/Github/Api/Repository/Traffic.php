@@ -3,7 +3,6 @@
 namespace Github\Api\Repository;
 
 use Github\Api\AbstractApi;
-use Github\Exception\MissingArgumentException;
 
 /**
  * @link   https://developer.github.com/v3/repos/traffic/

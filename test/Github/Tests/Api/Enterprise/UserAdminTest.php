@@ -8,7 +8,7 @@ class UserAdminTest extends TestCase
 {
     public function shouldSuspendUser()
     {
-        $expectedArray = array();
+        $expectedArray = [];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -20,7 +20,7 @@ class UserAdminTest extends TestCase
 
     public function shouldUnsuspendUser()
     {
-        $expectedArray = array();
+        $expectedArray = [];
 
         $api = $this->getApiMock();
         $api->expects($this->once())

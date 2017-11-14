@@ -19,14 +19,14 @@ class Markdown extends AbstractApi
      */
     public function render(string $text, string $mode = 'markdown', string $context = null): string
     {
-        if (!in_array($mode, array('gfm', 'markdown'))) {
+        if (!in_array($mode, ['gfm', 'markdown'])) {
             $mode = 'markdown';
         }
 
-        $params = array(
+        $params = [
             'text' => $text,
             'mode' => $mode
-        );
+        ];
         if (null !== $context && 'gfm' === $mode) {
             $params['context'] = $context;
         }
@@ -41,8 +41,8 @@ class Markdown extends AbstractApi
      */
     public function renderRaw(string $file): string
     {
-        return $this->post('/markdown/raw', array(
+        return $this->post('/markdown/raw', [
             'file' => $file
-        ));
+        ]);
     }
 }

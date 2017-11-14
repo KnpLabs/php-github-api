@@ -80,7 +80,7 @@ class References extends AbstractApi
     public function create(string $username, string $repository, array $params): array
     {
         if (!isset($params['ref'], $params['sha'])) {
-            throw new MissingArgumentException(array('ref', 'sha'));
+            throw new MissingArgumentException(['ref', 'sha']);
         }
 
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs', $params);

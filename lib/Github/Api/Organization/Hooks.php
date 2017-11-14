@@ -44,7 +44,7 @@ class Hooks extends AbstractApi
     public function create(string $organization, array $params): array
     {
         if (!isset($params['name'], $params['config'])) {
-            throw new MissingArgumentException(array('name', 'config'));
+            throw new MissingArgumentException(['name', 'config']);
         }
 
         return $this->post('/orgs/'.rawurlencode($organization).'/hooks', $params);
@@ -63,7 +63,7 @@ class Hooks extends AbstractApi
     public function update(string $organization, int $id, array $params): array
     {
         if (!isset($params['config'])) {
-            throw new MissingArgumentException(array('config'));
+            throw new MissingArgumentException(['config']);
         }
 
         return $this->patch('/orgs/'.rawurlencode($organization).'/hooks/'.rawurlencode($id), $params);

@@ -25,7 +25,7 @@ class Comments extends AbstractApi
      */
     public function configure(string $bodyType = null): self
     {
-        if (!in_array($bodyType, array('raw', 'text', 'html'))) {
+        if (!in_array($bodyType, ['raw', 'text', 'html'])) {
             $bodyType = 'full';
         }
 

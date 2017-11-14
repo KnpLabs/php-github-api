@@ -9,10 +9,10 @@ class EmojisTest extends TestCase
 {
     public function shouldGetAllEmojis()
     {
-        $expectedArray = array(
+        $expectedArray = [
             '+1' => 'https://github.global.ssl.fastly.net/images/icons/emoji/+1.png?v5',
             '-1' => 'https://github.global.ssl.fastly.net/images/icons/emoji/-1.png?v5',
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())

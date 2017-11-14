@@ -25,7 +25,7 @@ class Comments extends AbstractApi
      */
     public function configure(string $bodyType = null): self
     {
-        if (!in_array($bodyType, array('raw', 'text', 'html'))) {
+        if (!in_array($bodyType, ['raw', 'text', 'html'])) {
             $bodyType = 'full';
         }
 
@@ -47,9 +47,9 @@ class Comments extends AbstractApi
      */
     public function all(string $username, string $repository, int $issue, int $page = 1): array
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/comments', array(
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/comments', [
             'page' => $page
-        ));
+        ]);
     }
 
     /**

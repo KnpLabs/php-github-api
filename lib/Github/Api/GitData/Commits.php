@@ -39,7 +39,7 @@ class Commits extends AbstractApi
     public function create(string $username, string $repository, array $params): array
     {
         if (!isset($params['message'], $params['tree'], $params['parents'])) {
-            throw new MissingArgumentException(array('message', 'tree', 'parents'));
+            throw new MissingArgumentException(['message', 'tree', 'parents']);
         }
 
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/commits', $params);

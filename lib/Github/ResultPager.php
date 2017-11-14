@@ -56,7 +56,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetch(ApiInterface $api, string $method, array $parameters = array())
+    public function fetch(ApiInterface $api, string $method, array $parameters = [])
     {
         $result = $this->callApi($api, $method, $parameters);
         $this->postFetch();
@@ -67,7 +67,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetchAll(ApiInterface $api, string $method, array $parameters = array()): array
+    public function fetchAll(ApiInterface $api, string $method, array $parameters = []): array
     {
         $isSearch = $api instanceof Search;
 
@@ -185,6 +185,6 @@ class ResultPager implements ResultPagerInterface
      */
     protected function callApi(ApiInterface $api, $method, array $parameters)
     {
-        return call_user_func_array(array($api, $method), $parameters);
+        return call_user_func_array([$api, $method], $parameters);
     }
 }

@@ -20,12 +20,12 @@ class GraphQL extends AbstractApi
      *
      * @return array
      */
-    public function execute(string $query, array $variables = array()): array
+    public function execute(string $query, array $variables = []): array
     {
         $this->acceptHeaderValue = 'application/vnd.github.v4+json';
-        $params = array(
+        $params = [
             'query' => $query
-        );
+        ];
         if (!empty($variables)) {
             $params['variables'] = json_encode($variables);
         }
@@ -39,7 +39,7 @@ class GraphQL extends AbstractApi
      *
      * @return array
      */
-    public function fromFile(string $file, array $variables = array()): array
+    public function fromFile(string $file, array $variables = []): array
     {
         return $this->execute(file_get_contents($file), $variables);
     }

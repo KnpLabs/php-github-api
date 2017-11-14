@@ -6,12 +6,12 @@ class IssueTest extends TestCase
 {
     public function shouldGetIssues()
     {
-        $data = array(
+        $data = [
             'state' => 'open'
-        );
-        $sentData = $data + array(
+        ];
+        $sentData = $data + [
             'page' => 1
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -23,8 +23,8 @@ class IssueTest extends TestCase
 
     public function shouldGetIssuesUsingAdditionalParameters()
     {
-        $expectedArray = array(array('id' => '123'));
-        $data = array(
+        $expectedArray = [['id' => '123']];
+        $data = [
             'state' => 'open',
             'milestone' => '*',
             'assignee'  => 'l3l0',
@@ -32,10 +32,10 @@ class IssueTest extends TestCase
             'labels'    => 'bug,@high',
             'sort'      => 'created',
             'direction' => 'asc'
-        );
-        $sentData = $data + array(
+        ];
+        $sentData = $data + [
             'page' => 1
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -48,7 +48,7 @@ class IssueTest extends TestCase
 
     public function shouldShowIssue()
     {
-        $expectedArray = array('id' => '123');
+        $expectedArray = ['id' => '123'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -61,10 +61,10 @@ class IssueTest extends TestCase
 
     public function shouldCreateIssue()
     {
-        $data = array(
+        $data = [
             'title' => 'some title',
             'body'  => 'some body'
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -76,9 +76,9 @@ class IssueTest extends TestCase
 
     public function shouldNotCreateIssueWithoutTitle()
     {
-        $data = array(
+        $data = [
             'body'  => 'some body'
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -89,9 +89,9 @@ class IssueTest extends TestCase
 
     public function shouldCreateIssueWithoutBody()
     {
-        $data = array(
+        $data = [
             'title' => 'some title'
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -103,9 +103,9 @@ class IssueTest extends TestCase
 
     public function shouldCloseIssue()
     {
-        $data = array(
+        $data = [
             'state' => 'closed',
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -117,9 +117,9 @@ class IssueTest extends TestCase
 
     public function shouldReOpenIssue()
     {
-        $data = array(
+        $data = [
             'state' => 'open',
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -131,7 +131,7 @@ class IssueTest extends TestCase
 
     public function shouldSearchOpenIssues()
     {
-        $expectedArray = array(array('id' => '123'));
+        $expectedArray = [['id' => '123']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -144,7 +144,7 @@ class IssueTest extends TestCase
 
     public function shouldSearchClosedIssues()
     {
-        $expectedArray = array(array('id' => '123'));
+        $expectedArray = [['id' => '123']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -157,7 +157,7 @@ class IssueTest extends TestCase
 
     public function shouldSearchOpenIssuesWhenStateNotRecognized()
     {
-        $expectedArray = array(array('id' => '123'));
+        $expectedArray = [['id' => '123']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -198,7 +198,7 @@ class IssueTest extends TestCase
 
     public function shouldLockIssue()
     {
-        $parameters = array();
+        $parameters = [];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -210,7 +210,7 @@ class IssueTest extends TestCase
 
     public function shouldUnlockIssue()
     {
-        $parameters = array();
+        $parameters = [];
 
         $api = $this->getApiMock();
         $api->expects($this->once())

@@ -51,7 +51,7 @@ class PublicKeys extends AbstractApi
     public function create(array $params): array
     {
         if (!isset($params['title'], $params['key'])) {
-            throw new MissingArgumentException(array('title', 'key'));
+            throw new MissingArgumentException(['title', 'key']);
         }
 
         return $this->post('/user/keys', $params);

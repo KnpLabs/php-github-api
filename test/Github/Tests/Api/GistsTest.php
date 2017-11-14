@@ -6,7 +6,7 @@ class GistsTest extends TestCase
 {
     public function shouldGetStarredGists()
     {
-        $expectedArray = array(array('id' => '123'));
+        $expectedArray = [['id' => '123']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -19,7 +19,7 @@ class GistsTest extends TestCase
 
     public function shouldGetAllGists()
     {
-        $expectedArray = array(array('id' => '123'));
+        $expectedArray = [['id' => '123']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -32,7 +32,7 @@ class GistsTest extends TestCase
 
     public function shouldShowGist()
     {
-        $expectedArray = array('id' => '123');
+        $expectedArray = ['id' => '123'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -45,7 +45,7 @@ class GistsTest extends TestCase
 
     public function shouldShowCommits()
     {
-        $expectedArray = array('id' => '123');
+        $expectedArray = ['id' => '123'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -65,7 +65,7 @@ class GistsTest extends TestCase
 
     public function shouldForkGist()
     {
-        $expectedArray = array('id' => '123');
+        $expectedArray = ['id' => '123'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -78,7 +78,7 @@ class GistsTest extends TestCase
 
     public function shouldListGistForks()
     {
-        $expectedArray = array('id' => '123');
+        $expectedArray = ['id' => '123'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -91,10 +91,10 @@ class GistsTest extends TestCase
 
     public function shouldNotCreateGistWithoutFile()
     {
-        $input = array(
+        $input = [
             'description' => '',
             'public' => false,
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -105,7 +105,7 @@ class GistsTest extends TestCase
 
     public function shouldCheckGist()
     {
-        $expectedArray = array('id' => '123');
+        $expectedArray = ['id' => '123'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -118,7 +118,7 @@ class GistsTest extends TestCase
 
     public function shouldStarGist()
     {
-        $expectedArray = array('id' => '123');
+        $expectedArray = ['id' => '123'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -131,7 +131,7 @@ class GistsTest extends TestCase
 
     public function shouldUnstarGist()
     {
-        $expectedArray = array('id' => '123');
+        $expectedArray = ['id' => '123'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -144,15 +144,15 @@ class GistsTest extends TestCase
 
     public function shouldCreateAnonymousGist()
     {
-        $input = array(
+        $input = [
             'description' => '',
             'public' => false,
-            'files' => array(
-                'filename.txt' => array(
+            'files' => [
+                'filename.txt' => [
                     'content' => 'content'
-                )
-            )
-        );
+                ]
+            ]
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -164,18 +164,18 @@ class GistsTest extends TestCase
 
     public function shouldUpdateGist()
     {
-        $input = array(
+        $input = [
             'description' => 'jimbo',
-            'files' => array(
-                'filename.txt' => array(
+            'files' => [
+                'filename.txt' => [
                     'filename' => 'new_name.txt',
                     'content'  => 'content'
-                ),
-                'filename_new.txt' => array(
+                ],
+                'filename_new.txt' => [
                     'content'  => 'content new'
-                )
-            )
-        );
+                ]
+            ]
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())

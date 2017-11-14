@@ -3,8 +3,8 @@
 namespace Github;
 
 use Github\Api\ApiInterface;
-use Github\Exception\InvalidArgumentException;
 use Github\Exception\BadMethodCallException;
+use Github\Exception\InvalidArgumentException;
 use Github\HttpClient\Builder;
 use Github\HttpClient\Plugin\Authentication;
 use Github\HttpClient\Plugin\GithubExceptionThrower;
@@ -127,9 +127,9 @@ class Client
         $builder->addPlugin(new Plugin\HistoryPlugin($this->responseHistory));
         $builder->addPlugin(new Plugin\RedirectPlugin());
         $builder->addPlugin(new Plugin\AddHostPlugin(UriFactoryDiscovery::find()->createUri('https://api.github.com')));
-        $builder->addPlugin(new Plugin\HeaderDefaultsPlugin(array(
+        $builder->addPlugin(new Plugin\HeaderDefaultsPlugin([
             'User-Agent' => 'php-github-api (http://github.com/KnpLabs/php-github-api)',
-        )));
+        ]));
 
         $this->apiVersion = $apiVersion ?: 'v3';
         $builder->addHeaderValue('Accept', sprintf('application/vnd.github.%s+json', $this->apiVersion));
@@ -311,7 +311,7 @@ class Client
             throw new InvalidArgumentException('You need to specify authentication method!');
         }
 
-        if (null === $authMethod && in_array($password, array(self::AUTH_URL_TOKEN, self::AUTH_URL_CLIENT_ID, self::AUTH_HTTP_PASSWORD, self::AUTH_HTTP_TOKEN, self::AUTH_JWT))) {
+        if (null === $authMethod && in_array($password, [self::AUTH_URL_TOKEN, self::AUTH_URL_CLIENT_ID, self::AUTH_HTTP_PASSWORD, self::AUTH_HTTP_TOKEN, self::AUTH_JWT])) {
             $authMethod = $password;
             $password = null;
         }

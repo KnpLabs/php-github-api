@@ -19,7 +19,7 @@ class Apps extends AbstractApi
      */
     public function createInstallationToken(int $installationId, int $userId = null): array
     {
-        $parameters = array();
+        $parameters = [];
         if ($userId) {
             $parameters['user_id'] = $userId;
         }
@@ -50,7 +50,7 @@ class Apps extends AbstractApi
      */
     public function listRepositories(int $userId = null): array
     {
-        $parameters = array();
+        $parameters = [];
         if ($userId) {
             $parameters['user_id'] = $userId;
         }

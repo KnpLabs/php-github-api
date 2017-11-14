@@ -3,7 +3,6 @@
 namespace Github\Tests\Api\PullRequest;
 
 use Github\Api\PullRequest\Comments;
-use Github\Api\PullRequest\ReviewComment;
 use Github\Tests\Api\TestCase;
 
 class CommentsTest extends TestCase

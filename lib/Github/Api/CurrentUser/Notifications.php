@@ -19,7 +19,7 @@ class Notifications extends AbstractApi
      *
      * @return array
      */
-    public function all(array $params = array()): array
+    public function all(array $params = []): array
     {
         return $this->get('/notifications', $params);
     }
@@ -35,7 +35,7 @@ class Notifications extends AbstractApi
      *
      * @return array
      */
-    public function allInRepository(string $username, string $repository, array $params = array()): array
+    public function allInRepository(string $username, string $repository, array $params = []): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/notifications', $params);
     }
@@ -49,7 +49,7 @@ class Notifications extends AbstractApi
      *
      * @return array
      */
-    public function markAsReadAll(array $params = array()): array
+    public function markAsReadAll(array $params = []): array
     {
         return $this->put('/notifications', $params);
     }
@@ -65,7 +65,7 @@ class Notifications extends AbstractApi
      *
      * @return array
      */
-    public function markAsReadInRepository(string $username, string $repository, array $params = array()): array
+    public function markAsReadInRepository(string $username, string $repository, array $params = []): array
     {
         return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/notifications', $params);
     }

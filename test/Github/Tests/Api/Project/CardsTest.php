@@ -8,7 +8,7 @@ class CardsTest extends TestCase
 {
     public function shouldGetAllColumnCards()
     {
-        $expectedValue = array(array('card1data'), array('card2data'));
+        $expectedValue = [['card1data'], ['card2data']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -21,7 +21,7 @@ class CardsTest extends TestCase
 
     public function shouldShowCard()
     {
-        $expectedValue = array('card1');
+        $expectedValue = ['card1'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -34,8 +34,8 @@ class CardsTest extends TestCase
 
     public function shouldCreateCard()
     {
-        $expectedValue = array('card1data');
-        $data = array('content_id' => '123', 'content_type' => 'Issue');
+        $expectedValue = ['card1data'];
+        $data = ['content_id' => '123', 'content_type' => 'Issue'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -48,8 +48,8 @@ class CardsTest extends TestCase
 
     public function shouldUpdateCard()
     {
-        $expectedValue = array('note1data');
-        $data = array('note' => 'note test');
+        $expectedValue = ['note1data'];
+        $data = ['note' => 'note test'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -62,7 +62,7 @@ class CardsTest extends TestCase
 
     public function shouldRemoveCard()
     {
-        $expectedValue = array('someOutput');
+        $expectedValue = ['someOutput'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -75,7 +75,7 @@ class CardsTest extends TestCase
 
     public function shouldNotMoveWithoutPosition()
     {
-        $data = array();
+        $data = [];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -86,8 +86,8 @@ class CardsTest extends TestCase
 
     public function shouldMoveCard()
     {
-        $expectedValue = array('card1');
-        $data = array('position' => 'top');
+        $expectedValue = ['card1'];
+        $data = ['position' => 'top'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())

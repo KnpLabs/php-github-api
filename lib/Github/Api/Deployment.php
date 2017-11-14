@@ -20,7 +20,7 @@ class Deployment extends AbstractApi
      * @param  array $params      query parameters to filter deployments by (see link)
      * @return array              the deployments requested
      */
-    public function all(string $username, string $repository, array $params = array()): array
+    public function all(string $username, string $repository, array $params = []): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/deployments', $params);
     }
@@ -56,7 +56,7 @@ class Deployment extends AbstractApi
     public function create(string $username, string $repository, array $params): array
     {
         if (!isset($params['ref'])) {
-            throw new MissingArgumentException(array('ref'));
+            throw new MissingArgumentException(['ref']);
         }
 
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/deployments', $params);
@@ -79,7 +79,7 @@ class Deployment extends AbstractApi
     public function updateStatus(string $username, string $repository, int $id, array $params): array
     {
         if (!isset($params['state'])) {
-            throw new MissingArgumentException(array('state'));
+            throw new MissingArgumentException(['state']);
         }
 
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/deployments/'.rawurlencode($id).'/statuses', $params);

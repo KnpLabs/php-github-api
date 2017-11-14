@@ -21,24 +21,24 @@ class Milestones extends AbstractApi
      *
      * @return array
      */
-    public function all(string $username, string $repository, array $params = array()): array
+    public function all(string $username, string $repository, array $params = []): array
     {
-        if (isset($params['state']) && !in_array($params['state'], array('open', 'closed', 'all'))) {
+        if (isset($params['state']) && !in_array($params['state'], ['open', 'closed', 'all'])) {
             $params['state'] = 'open';
         }
-        if (isset($params['sort']) && !in_array($params['sort'], array('due_date', 'completeness'))) {
+        if (isset($params['sort']) && !in_array($params['sort'], ['due_date', 'completeness'])) {
             $params['sort'] = 'due_date';
         }
-        if (isset($params['direction']) && !in_array($params['direction'], array('asc', 'desc'))) {
+        if (isset($params['direction']) && !in_array($params['direction'], ['asc', 'desc'])) {
             $params['direction'] = 'asc';
         }
 
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones', array_merge(array(
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones', array_merge([
             'page'      => 1,
             'state'     => 'open',
             'sort'      => 'due_date',
             'direction' => 'asc'
-        ), $params));
+        ], $params));
     }
 
     /**
@@ -73,7 +73,7 @@ class Milestones extends AbstractApi
         if (!isset($params['title'])) {
             throw new MissingArgumentException('title');
         }
-        if (isset($params['state']) && !in_array($params['state'], array('open', 'closed'))) {
+        if (isset($params['state']) && !in_array($params['state'], ['open', 'closed'])) {
             $params['state'] = 'open';
         }
 
@@ -93,7 +93,7 @@ class Milestones extends AbstractApi
      */
     public function update(string $username, string $repository, int $id, array $params): array
     {
-        if (isset($params['state']) && !in_array($params['state'], array('open', 'closed'))) {
+        if (isset($params['state']) && !in_array($params['state'], ['open', 'closed'])) {
             $params['state'] = 'open';
         }
 

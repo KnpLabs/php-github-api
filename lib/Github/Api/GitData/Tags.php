@@ -52,7 +52,7 @@ class Tags extends AbstractApi
     public function create(string $username, string $repository, array $params): array
     {
         if (!isset($params['tag'], $params['message'], $params['object'], $params['type'])) {
-            throw new MissingArgumentException(array('tag', 'message', 'object', 'type'));
+            throw new MissingArgumentException(['tag', 'message', 'object', 'type']);
         }
 
         if (!isset($params['tagger'])) {
@@ -60,7 +60,7 @@ class Tags extends AbstractApi
         }
 
         if (!isset($params['tagger']['name'], $params['tagger']['email'], $params['tagger']['date'])) {
-            throw new MissingArgumentException(array('tagger.name', 'tagger.email', 'tagger.date'));
+            throw new MissingArgumentException(['tagger.name', 'tagger.email', 'tagger.date']);
         }
 
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/tags', $params);

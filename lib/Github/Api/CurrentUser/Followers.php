@@ -21,9 +21,9 @@ class Followers extends AbstractApi
      */
     public function all(int $page = 1): array
     {
-        return $this->get('/user/following', array(
+        return $this->get('/user/following', [
             'page' => $page
-        ));
+        ]);
     }
 
     /**

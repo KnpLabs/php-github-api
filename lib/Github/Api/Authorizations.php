@@ -42,7 +42,7 @@ class Authorizations extends AbstractApi
      */
     public function create(array $params, $OTPCode = null): array
     {
-        $headers = null === $OTPCode ? array() : array('X-GitHub-OTP' => $OTPCode);
+        $headers = null === $OTPCode ? [] : ['X-GitHub-OTP' => $OTPCode];
 
         return $this->post('/authorizations', $params, $headers);
     }

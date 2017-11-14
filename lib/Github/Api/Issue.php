@@ -31,7 +31,7 @@ class Issue extends AbstractApi
      */
     public function configure(string $bodyType = null): self
     {
-        if (!in_array($bodyType, array('text', 'html', 'full'))) {
+        if (!in_array($bodyType, ['text', 'html', 'full'])) {
             $bodyType = 'raw';
         }
 
@@ -51,9 +51,9 @@ class Issue extends AbstractApi
      *
      * @return array list of issues found
      */
-    public function all(string $username, string $repository, array $params = array()): array
+    public function all(string $username, string $repository, array $params = []): array
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues', array_merge(array('page' => 1), $params));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues', array_merge(['page' => 1], $params));
     }
 
     /**
@@ -70,7 +70,7 @@ class Issue extends AbstractApi
      */
     public function find(string $username, string $repository, string $state, string $keyword): array
     {
-        if (!in_array($state, array('open', 'closed'))) {
+        if (!in_array($state, ['open', 'closed'])) {
             $state = 'open';
         }
 
@@ -88,13 +88,13 @@ class Issue extends AbstractApi
      *
      * @return array list of issues found
      */
-    public function org(string $organization, string $state, array $params = array()): array
+    public function org(string $organization, string $state, array $params = []): array
     {
-        if (!in_array($state, array('open', 'closed'))) {
+        if (!in_array($state, ['open', 'closed'])) {
             $state = 'open';
         }
 
-        return $this->get('/orgs/'.rawurlencode($organization).'/issues', array_merge(array('page' => 1, 'state' => $state), $params));
+        return $this->get('/orgs/'.rawurlencode($organization).'/issues', array_merge(['page' => 1, 'state' => $state], $params));
     }
 
     /**
@@ -130,7 +130,7 @@ class Issue extends AbstractApi
     public function create(string $username, string $repository, array $params): array
     {
         if (!isset($params['title'])) {
-            throw new MissingArgumentException(array('title'));
+            throw new MissingArgumentException(['title']);
         }
 
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues', $params);

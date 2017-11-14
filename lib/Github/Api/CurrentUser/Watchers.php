@@ -22,9 +22,9 @@ class Watchers extends AbstractApi
      */
     public function all(int $page = 1): array
     {
-        return $this->get('/user/subscriptions', array(
+        return $this->get('/user/subscriptions', [
             'page' => $page
-        ));
+        ]);
     }
 
     /**

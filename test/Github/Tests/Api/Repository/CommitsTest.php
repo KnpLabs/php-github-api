@@ -8,8 +8,8 @@ class CommitsTest extends TestCase
 {
     public function shouldGetAllRepositoryCommits()
     {
-        $expectedValue = array('commit' => array(), 'comitter');
-        $data = array('sha' => 'v3');
+        $expectedValue = ['commit' => [], 'comitter'];
+        $data = ['sha' => 'v3'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -22,7 +22,7 @@ class CommitsTest extends TestCase
 
     public function shouldCompareTwoCommits()
     {
-        $expectedValue = array('someCompareChanges');
+        $expectedValue = ['someCompareChanges'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -35,7 +35,7 @@ class CommitsTest extends TestCase
 
     public function shouldShowCommitUsingSha()
     {
-        $expectedValue = array('sha' => '123', 'comitter');
+        $expectedValue = ['sha' => '123', 'comitter'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())

@@ -8,12 +8,12 @@ class ForksTest extends TestCase
 {
     public function shouldGetForks()
     {
-        $expectedValue = array(array('name' => 'l3l0repo'));
+        $expectedValue = [['name' => 'l3l0repo']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/forks', array('page' => 1))
+            ->with('/repos/KnpLabs/php-github-api/forks', ['page' => 1])
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api'));
@@ -21,8 +21,8 @@ class ForksTest extends TestCase
 
     public function shouldCreateFork()
     {
-        $expectedValue = array(array('name' => 'l3l0repo'));
-        $data = array('someparam');
+        $expectedValue = [['name' => 'l3l0repo']];
+        $data = ['someparam'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -35,15 +35,15 @@ class ForksTest extends TestCase
 
     public function shouldSortByNewestWhenSortParamNotRecognized()
     {
-        $expectedValue = array(array('name' => 'l3l0repo'));
+        $expectedValue = [['name' => 'l3l0repo']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/forks', array('page' => 1, 'sort' => 'newest'))
+            ->with('/repos/KnpLabs/php-github-api/forks', ['page' => 1, 'sort' => 'newest'])
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', array('sort' => 'oldes')));
+        $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', ['sort' => 'oldes']));
     }
 
     /**

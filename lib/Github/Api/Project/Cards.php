@@ -24,9 +24,9 @@ class Cards extends AbstractApi
         return $this;
     }
 
-    public function all($columnId, array $params = array())
+    public function all($columnId, array $params = [])
     {
-        return $this->get('/projects/columns/' . rawurlencode($columnId) . '/cards', array_merge(array('page' => 1), $params));
+        return $this->get('/projects/columns/' . rawurlencode($columnId) . '/cards', array_merge(['page' => 1], $params));
     }
 
     public function show($id)
@@ -52,7 +52,7 @@ class Cards extends AbstractApi
     public function move($id, array $params)
     {
         if (!isset($params['position'])) {
-            throw new MissingArgumentException(array('position'));
+            throw new MissingArgumentException(['position']);
         }
 
         return $this->post('/projects/columns/cards/' . rawurlencode($id) . '/moves', $params);

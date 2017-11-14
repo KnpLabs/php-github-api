@@ -35,7 +35,7 @@ class ResponseMediator
         }
 
         $header = self::getHeader($response, 'Link');
-        $pagination = array();
+        $pagination = [];
         foreach (explode(',', $header) as $link) {
             preg_match('/<(.*)>; rel="(.*)"/i', trim($link, ','), $match);
 

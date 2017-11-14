@@ -43,6 +43,6 @@ class Memberships extends AbstractApi
      */
     public function edit(string $organization): array
     {
-        return $this->patch('/user/memberships/orgs/'.rawurlencode($organization), array('state' => 'active'));
+        return $this->patch('/user/memberships/orgs/'.rawurlencode($organization), ['state' => 'active']);
     }
 }

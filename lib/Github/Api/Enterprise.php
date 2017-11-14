@@ -2,9 +2,9 @@
 
 namespace Github\Api;
 
+use Github\Api\Enterprise\License;
 use Github\Api\Enterprise\ManagementConsole;
 use Github\Api\Enterprise\Stats;
-use Github\Api\Enterprise\License;
 use Github\Api\Enterprise\UserAdmin;
 
 /**

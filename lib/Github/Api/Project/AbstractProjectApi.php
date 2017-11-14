@@ -23,9 +23,9 @@ abstract class AbstractProjectApi extends AbstractApi
         return $this;
     }
 
-    public function show($id, array $params = array())
+    public function show($id, array $params = [])
     {
-        return $this->get('/projects/' . rawurlencode($id), array_merge(array('page' => 1), $params));
+        return $this->get('/projects/' . rawurlencode($id), array_merge(['page' => 1], $params));
     }
 
     public function update($id, array $params)

@@ -8,7 +8,7 @@ class CommentsTest extends TestCase
 {
     public function shouldGetAllRepositoryComments()
     {
-        $expectedValue = array(array('comment1data'), array('comment2data'));
+        $expectedValue = [['comment1data'], ['comment2data']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -21,7 +21,7 @@ class CommentsTest extends TestCase
 
     public function shouldGetSpecificCommitRepositoryComments()
     {
-        $expectedValue = array(array('comment1data'), array('comment2data'));
+        $expectedValue = [['comment1data'], ['comment2data']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -34,7 +34,7 @@ class CommentsTest extends TestCase
 
     public function shouldShowComment()
     {
-        $expectedValue = array('comment1');
+        $expectedValue = ['comment1'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -47,7 +47,7 @@ class CommentsTest extends TestCase
 
     public function shouldNotCreateWithoutBody()
     {
-        $data = array('line' => 53, 'path' => 'test.php', 'position' => 2);
+        $data = ['line' => 53, 'path' => 'test.php', 'position' => 2];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -58,8 +58,8 @@ class CommentsTest extends TestCase
 
     public function shouldCreateRepositoryCommitComment()
     {
-        $expectedValue = array('comment1data');
-        $data = array('body' => 'test body', 'line' => 53, 'path' => 'test.php', 'position' => 2);
+        $expectedValue = ['comment1data'];
+        $data = ['body' => 'test body', 'line' => 53, 'path' => 'test.php', 'position' => 2];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -72,8 +72,8 @@ class CommentsTest extends TestCase
 
     public function shouldCreateRepositoryCommitCommentWithoutLine()
     {
-        $expectedValue = array('comment1data');
-        $data = array('body' => 'body', 'path' => 'test.php', 'position' => 2);
+        $expectedValue = ['comment1data'];
+        $data = ['body' => 'body', 'path' => 'test.php', 'position' => 2];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -90,13 +90,13 @@ class CommentsTest extends TestCase
         $api->expects($this->never())
             ->method('patch');
 
-        $api->update('KnpLabs', 'php-github-api', 'commitSHA123456', array());
+        $api->update('KnpLabs', 'php-github-api', 'commitSHA123456', []);
     }
 
     public function shouldUpdateComment()
     {
-        $expectedValue = array('comment1data');
-        $data = array('body' => 'body test');
+        $expectedValue = ['comment1data'];
+        $data = ['body' => 'body test'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -109,7 +109,7 @@ class CommentsTest extends TestCase
 
     public function shouldRemoveComment()
     {
-        $expectedValue = array('someOutput');
+        $expectedValue = ['someOutput'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())

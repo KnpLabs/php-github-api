@@ -16,7 +16,7 @@ class Assignees extends AbstractApi
      *
      * @return array
      */
-    public function listAvailable(string $username, string $repository, array $parameters = array()): array
+    public function listAvailable(string $username, string $repository, array $parameters = []): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/assignees', $parameters);
     }
