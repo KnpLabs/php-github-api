@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\PullRequest;
 
@@ -23,7 +23,7 @@ class Comments extends AbstractApi
      *
      * @return self
      */
-    public function configure($bodyType = null, $apiVersion = null)
+    public function configure(string $bodyType = null, string $apiVersion = null): self
     {
         if (!in_array($apiVersion, array('squirrel-girl-preview'))) {
             $apiVersion = $this->client->getApiVersion();
@@ -52,7 +52,7 @@ class Comments extends AbstractApi
      *
      * @return array
      */
-    public function all($username, $repository, $pullRequest = null, array $params = [])
+    public function all(string $username, string $repository, int $pullRequest = null, array $params = []): array
     {
         if (null !== $pullRequest) {
             return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($pullRequest).'/comments');
@@ -77,7 +77,7 @@ class Comments extends AbstractApi
      *
      * @return array
      */
-    public function show($username, $repository, $comment)
+    public function show(string $username, string $repository, int $comment): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/comments/'.rawurlencode($comment));
     }
@@ -96,7 +96,7 @@ class Comments extends AbstractApi
      *
      * @return array
      */
-    public function create($username, $repository, $pullRequest, array $params)
+    public function create(string $username, string $repository, int $pullRequest, array $params): array
     {
         if (!isset($params['body'])) {
             throw new MissingArgumentException('body');
@@ -124,7 +124,7 @@ class Comments extends AbstractApi
      *
      * @return array
      */
-    public function update($username, $repository, $comment, array $params)
+    public function update(string $username, string $repository, int $comment, array $params): array
     {
         if (!isset($params['body'])) {
             throw new MissingArgumentException('body');
@@ -144,7 +144,7 @@ class Comments extends AbstractApi
      *
      * @return string
      */
-    public function remove($username, $repository, $comment)
+    public function remove(string $username, string $repository, int $comment): string
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/comments/'.rawurlencode($comment));
     }

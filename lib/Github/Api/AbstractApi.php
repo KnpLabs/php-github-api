@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api;
 
@@ -26,9 +26,6 @@ abstract class AbstractApi implements ApiInterface
      */
     protected $perPage;
 
-    /**
-     * @param Client $client
-     */
     public function __construct(Client $client)
     {
         $this->client = $client;
@@ -46,10 +43,7 @@ abstract class AbstractApi implements ApiInterface
         return $this->perPage;
     }
 
-    /**
-     * @param null|int $perPage
-     */
-    public function setPerPage($perPage)
+    public function setPerPage(int $perPage = null)
     {
         $this->perPage = (null === $perPage ? $perPage : (int) $perPage);
 
@@ -65,7 +59,7 @@ abstract class AbstractApi implements ApiInterface
      *
      * @return array|string
      */
-    protected function get($path, array $parameters = array(), array $requestHeaders = array())
+    protected function get(string $path, array $parameters = array(), array $requestHeaders = array())
     {
         if (null !== $this->perPage && !isset($parameters['per_page'])) {
             $parameters['per_page'] = $this->perPage;
@@ -92,7 +86,7 @@ abstract class AbstractApi implements ApiInterface
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    protected function head($path, array $parameters = array(), array $requestHeaders = array())
+    protected function head(string $path, array $parameters = array(), array $requestHeaders = array()): \Psr\Http\Message\ResponseInterface
     {
         if (array_key_exists('ref', $parameters) && is_null($parameters['ref'])) {
             unset($parameters['ref']);
@@ -112,7 +106,7 @@ abstract class AbstractApi implements ApiInterface
      *
      * @return array|string
      */
-    protected function post($path, array $parameters = array(), array $requestHeaders = array())
+    protected function post(string $path, array $parameters = array(), array $requestHeaders = array())
     {
         return $this->postRaw(
             $path,
@@ -130,7 +124,7 @@ abstract class AbstractApi implements ApiInterface
      *
      * @return array|string
      */
-    protected function postRaw($path, $body, array $requestHeaders = array())
+    protected function postRaw(string $path, string $body, array $requestHeaders = array())
     {
         $response = $this->client->getHttpClient()->post(
             $path,
@@ -150,7 +144,7 @@ abstract class AbstractApi implements ApiInterface
      *
      * @return array|string
      */
-    protected function patch($path, array $parameters = array(), array $requestHeaders = array())
+    protected function patch(string $path, array $parameters = array(), array $requestHeaders = array())
     {
         $response = $this->client->getHttpClient()->patch(
             $path,
@@ -170,7 +164,7 @@ abstract class AbstractApi implements ApiInterface
      *
      * @return array|string
      */
-    protected function put($path, array $parameters = array(), array $requestHeaders = array())
+    protected function put(string $path, array $parameters = array(), array $requestHeaders = array())
     {
         $response = $this->client->getHttpClient()->put(
             $path,
@@ -190,7 +184,7 @@ abstract class AbstractApi implements ApiInterface
      *
      * @return array|string
      */
-    protected function delete($path, array $parameters = array(), array $requestHeaders = array())
+    protected function delete(string $path, array $parameters = array(), array $requestHeaders = array())
     {
         $response = $this->client->getHttpClient()->delete(
             $path,

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\Miscellaneous;
 
@@ -13,7 +13,7 @@ class Gitignore extends AbstractApi
      *
      * @return array
      */
-    public function all()
+    public function all(): array
     {
         return $this->get('/gitignore/templates');
     }
@@ -27,7 +27,7 @@ class Gitignore extends AbstractApi
      *
      * @return array
      */
-    public function show($template)
+    public function show(string $template): array
     {
         return $this->get('/gitignore/templates/' . rawurlencode($template));
     }

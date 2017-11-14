@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api;
 
@@ -20,7 +20,7 @@ class Deployment extends AbstractApi
      * @param  array $params      query parameters to filter deployments by (see link)
      * @return array              the deployments requested
      */
-    public function all($username, $repository, array $params = array())
+    public function all(string $username, string $repository, array $params = array()): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/deployments', $params);
     }
@@ -34,7 +34,7 @@ class Deployment extends AbstractApi
      *
      * @return array
      */
-    public function show($username, $repository, $id)
+    public function show(string $username, string $repository, int $id): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/deployments/'.rawurlencode($id));
     }
@@ -53,7 +53,7 @@ class Deployment extends AbstractApi
      *
      * @throws MissingArgumentException
      */
-    public function create($username, $repository, array $params)
+    public function create(string $username, string $repository, array $params): array
     {
         if (!isset($params['ref'])) {
             throw new MissingArgumentException(array('ref'));
@@ -76,7 +76,7 @@ class Deployment extends AbstractApi
      *
      * @throws MissingArgumentException
      */
-    public function updateStatus($username, $repository, $id, array $params)
+    public function updateStatus(string $username, string $repository, int $id, array $params): array
     {
         if (!isset($params['state'])) {
             throw new MissingArgumentException(array('state'));
@@ -93,7 +93,7 @@ class Deployment extends AbstractApi
      * @param  int $id the deployment identifier
      * @return array the deployment statuses
      */
-    public function getStatuses($username, $repository, $id)
+    public function getStatuses(string $username, string $repository, int $id): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/deployments/'.rawurlencode($id).'/statuses');
     }

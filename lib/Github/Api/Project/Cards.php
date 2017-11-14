@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\Project;
 
@@ -17,7 +17,7 @@ class Cards extends AbstractApi
      *
      * @return self
      */
-    public function configure()
+    public function configure(): self
     {
         $this->acceptHeaderValue = 'application/vnd.github.inertia-preview+json';
 

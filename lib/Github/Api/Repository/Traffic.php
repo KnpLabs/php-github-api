@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 namespace Github\Api\Repository;
 
 use Github\Api\AbstractApi;
@@ -18,7 +19,7 @@ class Traffic extends AbstractApi
      *
      * @return array
      */
-    public function referers($owner, $repository)
+    public function referers(string $owner, string $repository): array
     {
         return $this->get('/repos/'.rawurlencode($owner).'/'.rawurlencode($repository).'/traffic/popular/referrers');
     }
@@ -30,7 +31,7 @@ class Traffic extends AbstractApi
      *
      * @return array
      */
-    public function paths($owner, $repository)
+    public function paths(string $owner, string $repository): array
     {
         return $this->get('/repos/'.rawurlencode($owner).'/'.rawurlencode($repository).'/traffic/popular/paths');
     }
@@ -43,7 +44,7 @@ class Traffic extends AbstractApi
      *
      * @return array
      */
-    public function views($owner, $repository, $per = 'day')
+    public function views(string $owner, string $repository, string $per = 'day'): array
     {
         return $this->get('/repos/'.rawurlencode($owner).'/'.rawurlencode($repository).'/traffic/views?per='.rawurlencode($per));
     }
@@ -56,7 +57,7 @@ class Traffic extends AbstractApi
      *
      * @return array
      */
-    public function clones($owner, $repository, $per = 'day')
+    public function clones(string $owner, string $repository, string $per = 'day'): array
     {
         return $this->get('/repos/'.rawurlencode($owner).'/'.rawurlencode($repository).'/traffic/clones?per='.rawurlencode($per));
     }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\GitData;
 
@@ -19,7 +19,7 @@ class References extends AbstractApi
      *
      * @return array
      */
-    public function all($username, $repository)
+    public function all(string $username, string $repository): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs');
     }
@@ -32,7 +32,7 @@ class References extends AbstractApi
      *
      * @return array
      */
-    public function branches($username, $repository)
+    public function branches(string $username, string $repository): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs/heads');
     }
@@ -45,7 +45,7 @@ class References extends AbstractApi
      *
      * @return array
      */
-    public function tags($username, $repository)
+    public function tags(string $username, string $repository): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs/tags');
     }
@@ -59,7 +59,7 @@ class References extends AbstractApi
      *
      * @return array
      */
-    public function show($username, $repository, $reference)
+    public function show(string $username, string $repository, string $reference): array
     {
         $reference = $this->encodeReference($reference);
 
@@ -77,7 +77,7 @@ class References extends AbstractApi
      *
      * @throws \Github\Exception\MissingArgumentException
      */
-    public function create($username, $repository, array $params)
+    public function create(string $username, string $repository, array $params): array
     {
         if (!isset($params['ref'], $params['sha'])) {
             throw new MissingArgumentException(array('ref', 'sha'));
@@ -98,7 +98,7 @@ class References extends AbstractApi
      *
      * @throws \Github\Exception\MissingArgumentException
      */
-    public function update($username, $repository, $reference, array $params)
+    public function update(string $username, string $repository, string $reference, array $params): array
     {
         if (!isset($params['sha'])) {
             throw new MissingArgumentException('sha');
@@ -118,7 +118,7 @@ class References extends AbstractApi
      *
      * @return array
      */
-    public function remove($username, $repository, $reference)
+    public function remove(string $username, string $repository, string $reference): array
     {
         $reference = $this->encodeReference($reference);
 
@@ -132,7 +132,7 @@ class References extends AbstractApi
      *
      * @return string
      */
-    private function encodeReference($rawReference)
+    private function encodeReference(string $rawReference): string
     {
         return implode('/', array_map('rawurlencode', explode('/', $rawReference)));
     }

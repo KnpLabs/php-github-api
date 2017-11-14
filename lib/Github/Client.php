@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github;
 
@@ -115,11 +115,10 @@ class Client
     /**
      * Instantiate a new GitHub client.
      *
-     * @param Builder|null $httpClientBuilder
      * @param string|null  $apiVersion
      * @param string|null  $enterpriseUrl
      */
-    public function __construct(Builder $httpClientBuilder = null, $apiVersion = null, $enterpriseUrl = null)
+    public function __construct(Builder $httpClientBuilder = null, string $apiVersion = null, string $enterpriseUrl = null)
     {
         $this->responseHistory = new History();
         $this->httpClientBuilder = $builder = $httpClientBuilder ?: new Builder();
@@ -143,11 +142,10 @@ class Client
     /**
      * Create a Github\Client using a HttpClient.
      *
-     * @param HttpClient $httpClient
      *
      * @return Client
      */
-    public static function createWithHttpClient(HttpClient $httpClient)
+    public static function createWithHttpClient(HttpClient $httpClient): Client
     {
         $builder = new Builder($httpClient);
 
@@ -161,7 +159,7 @@ class Client
      *
      * @return ApiInterface
      */
-    public function api($name)
+    public function api(string $name): ApiInterface
     {
         switch ($name) {
             case 'me':
@@ -307,7 +305,7 @@ class Client
      *
      * @throws InvalidArgumentException If no authentication method was given
      */
-    public function authenticate($tokenOrLogin, $password = null, $authMethod = null)
+    public function authenticate(string $tokenOrLogin, string $password = null, string $authMethod = null)
     {
         if (null === $password && null === $authMethod) {
             throw new InvalidArgumentException('You need to specify authentication method!');
@@ -331,7 +329,7 @@ class Client
      *
      * @param string $enterpriseUrl URL of the API in the form of http(s)://hostname
      */
-    private function setEnterpriseUrl($enterpriseUrl)
+    private function setEnterpriseUrl(string $enterpriseUrl)
     {
         $builder = $this->getHttpClientBuilder();
         $builder->removePlugin(Plugin\AddHostPlugin::class);
@@ -344,7 +342,7 @@ class Client
     /**
      * @return string
      */
-    public function getApiVersion()
+    public function getApiVersion(): string
     {
         return $this->apiVersion;
     }
@@ -375,7 +373,7 @@ class Client
      *
      * @return ApiInterface
      */
-    public function __call($name, $args)
+    public function __call(string $name, $args): ApiInterface
     {
         try {
             return $this->api($name);
@@ -395,7 +393,7 @@ class Client
     /**
      * @return HttpMethodsClient
      */
-    public function getHttpClient()
+    public function getHttpClient(): HttpMethodsClient
     {
         return $this->getHttpClientBuilder()->getHttpClient();
     }
@@ -403,7 +401,7 @@ class Client
     /**
      * @return Builder
      */
-    protected function getHttpClientBuilder()
+    protected function getHttpClientBuilder(): Builder
     {
         return $this->httpClientBuilder;
     }

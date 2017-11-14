@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\GitData;
 
@@ -21,7 +21,7 @@ class Trees extends AbstractApi
      *
      * @return array
      */
-    public function show($username, $repository, $sha, $recursive = false)
+    public function show(string $username, string $repository, string $sha, bool $recursive = false): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/trees/'.rawurlencode($sha), $recursive ? array('recursive' => 1) : array());
     }
@@ -37,7 +37,7 @@ class Trees extends AbstractApi
      *
      * @throws \Github\Exception\MissingArgumentException
      */
-    public function create($username, $repository, array $params)
+    public function create(string $username, string $repository, array $params): array
     {
         if (!isset($params['tree']) || !is_array($params['tree'])) {
             throw new MissingArgumentException('tree');

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\Enterprise;
 
@@ -13,7 +13,7 @@ class License extends AbstractApi
      *
      * @return array array of license information
      */
-    public function show()
+    public function show(): array
     {
         return $this->get('/enterprise/settings/license');
     }

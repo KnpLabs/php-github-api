@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api;
 
@@ -20,7 +20,7 @@ class Organization extends AbstractApi
      *
      * @return array the organizations
      */
-    public function all($since = '')
+    public function all($since = ''): array
     {
         return $this->get('/organizations?since='.rawurlencode($since));
     }
@@ -34,7 +34,7 @@ class Organization extends AbstractApi
      *
      * @return array information about the organization
      */
-    public function show($organization)
+    public function show(string $organization): array
     {
         return $this->get('/orgs/'.rawurlencode($organization));
     }
@@ -55,7 +55,7 @@ class Organization extends AbstractApi
      *
      * @return array the repositories
      */
-    public function repositories($organization, $type = 'all', $page = 1)
+    public function repositories(string $organization, string $type = 'all', int $page = 1): array
     {
         return $this->get('/orgs/'.rawurlencode($organization).'/repos', array(
             'type' => $type,
@@ -66,7 +66,7 @@ class Organization extends AbstractApi
     /**
      * @return Members
      */
-    public function members()
+    public function members(): Members
     {
         return new Members($this->client);
     }
@@ -74,7 +74,7 @@ class Organization extends AbstractApi
     /**
      * @return Hooks
      */
-    public function hooks()
+    public function hooks(): Hooks
     {
         return new Hooks($this->client);
     }
@@ -82,7 +82,7 @@ class Organization extends AbstractApi
     /**
      * @return Teams
      */
-    public function teams()
+    public function teams(): Teams
     {
         return new Teams($this->client);
     }
@@ -96,7 +96,7 @@ class Organization extends AbstractApi
      *
      * @return array
      */
-    public function issues($organization, array $params = array(), $page = 1)
+    public function issues($organization, array $params = array(), int $page = 1): array
     {
         return $this->get('/orgs/'.rawurlencode($organization).'/issues', array_merge(array('page' => $page), $params));
     }

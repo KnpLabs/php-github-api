@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\CurrentUser;
 
@@ -21,7 +21,7 @@ class Starring extends AbstractApi
      *
      * @return array
      */
-    public function all($page = 1, $perPage = 30)
+    public function all(int $page = 1, int $perPage = 30): array
     {
         return $this->get('/user/starred', array(
             'page' => $page,
@@ -39,7 +39,7 @@ class Starring extends AbstractApi
      *
      * @return array
      */
-    public function check($username, $repository)
+    public function check(string $username, string $repository): array
     {
         return $this->get('/user/starred/'.rawurlencode($username).'/'.rawurlencode($repository));
     }
@@ -54,7 +54,7 @@ class Starring extends AbstractApi
      *
      * @return array
      */
-    public function star($username, $repository)
+    public function star(string $username, string $repository): array
     {
         return $this->put('/user/starred/'.rawurlencode($username).'/'.rawurlencode($repository));
     }
@@ -69,7 +69,7 @@ class Starring extends AbstractApi
      *
      * @return array
      */
-    public function unstar($username, $repository)
+    public function unstar(string $username, string $repository): array
     {
         return $this->delete('/user/starred/'.rawurlencode($username).'/'.rawurlencode($repository));
     }

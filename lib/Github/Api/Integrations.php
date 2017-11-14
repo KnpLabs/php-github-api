@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api;
 
@@ -19,7 +19,7 @@ class Integrations extends Apps
      *
      * @return self
      */
-    public function configure()
+    public function configure(): self
     {
         return $this;
     }

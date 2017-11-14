@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\GitData;
 
@@ -22,7 +22,7 @@ class Blobs extends AbstractApi
      *
      * @return self
      */
-    public function configure($bodyType = null)
+    public function configure(string $bodyType = null): self
     {
         if ('raw' === $bodyType) {
             $this->acceptHeaderValue = sprintf('application/vnd.github.%s.raw', $this->client->getApiVersion());
@@ -40,7 +40,7 @@ class Blobs extends AbstractApi
      *
      * @return array
      */
-    public function show($username, $repository, $sha)
+    public function show(string $username, string $repository, string $sha): array
     {
         $response = $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/blobs/'.rawurlencode($sha));
 
@@ -58,7 +58,7 @@ class Blobs extends AbstractApi
      *
      * @throws \Github\Exception\MissingArgumentException
      */
-    public function create($username, $repository, array $params)
+    public function create(string $username, string $repository, array $params): array
     {
         if (!isset($params['content'], $params['encoding'])) {
             throw new MissingArgumentException(array('content', 'encoding'));

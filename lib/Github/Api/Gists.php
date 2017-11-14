@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api;
 
@@ -24,7 +24,7 @@ class Gists extends AbstractApi
      *
      * @return self
      */
-    public function configure($bodyType = null)
+    public function configure(string $bodyType = null): self
     {
         if (!in_array($bodyType, array('base64'))) {
             $bodyType = 'raw';
@@ -107,7 +107,7 @@ class Gists extends AbstractApi
      *
      * @return Comments
      */
-    public function comments()
+    public function comments(): Comments
     {
         return new Comments($this->client);
     }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api;
 
@@ -30,7 +30,7 @@ class CurrentUser extends AbstractApi
     /**
      * @return Emails
      */
-    public function emails()
+    public function emails(): Emails
     {
         return new Emails($this->client);
     }
@@ -38,7 +38,7 @@ class CurrentUser extends AbstractApi
     /**
      * @return Followers
      */
-    public function follow()
+    public function follow(): Followers
     {
         return new Followers($this->client);
     }
@@ -58,7 +58,7 @@ class CurrentUser extends AbstractApi
      *
      * @return array
      */
-    public function issues(array $params = array(), $includeOrgIssues = true)
+    public function issues(array $params = array(), bool $includeOrgIssues = true): array
     {
         return $this->get($includeOrgIssues ? '/issues' : '/user/issues', array_merge(array('page' => 1), $params));
     }
@@ -66,7 +66,7 @@ class CurrentUser extends AbstractApi
     /**
      * @return PublicKeys
      */
-    public function keys()
+    public function keys(): PublicKeys
     {
         return new PublicKeys($this->client);
     }
@@ -74,7 +74,7 @@ class CurrentUser extends AbstractApi
     /**
      * @return Notifications
      */
-    public function notifications()
+    public function notifications(): Notifications
     {
         return new Notifications($this->client);
     }
@@ -82,7 +82,7 @@ class CurrentUser extends AbstractApi
     /**
      * @return Memberships
      */
-    public function memberships()
+    public function memberships(): Memberships
     {
         return new Memberships($this->client);
     }
@@ -92,7 +92,7 @@ class CurrentUser extends AbstractApi
      *
      * @return array
      */
-    public function organizations()
+    public function organizations(): array
     {
         return $this->get('/user/orgs');
     }
@@ -102,7 +102,7 @@ class CurrentUser extends AbstractApi
      *
      * @return array
      */
-    public function teams()
+    public function teams(): array
     {
         return $this->get('/user/teams');
     }
@@ -116,7 +116,7 @@ class CurrentUser extends AbstractApi
      *
      * @return array
      */
-    public function repositories($type = 'owner', $sort = 'full_name', $direction = 'asc')
+    public function repositories(string $type = 'owner', string $sort = 'full_name', string $direction = 'asc'): array
     {
         return $this->get('/user/repos', array(
             'type' => $type,
@@ -128,14 +128,11 @@ class CurrentUser extends AbstractApi
     /**
      * @return Watchers
      */
-    public function watchers()
+    public function watchers(): Watchers
     {
         return new Watchers($this->client);
     }
 
-    /**
-     * @deprecated Use watchers() instead
-     */
     public function watched($page = 1)
     {
         return $this->get('/user/watched', array(
@@ -146,14 +143,11 @@ class CurrentUser extends AbstractApi
     /**
      * @return Starring
      */
-    public function starring()
+    public function starring(): Starring
     {
         return new Starring($this->client);
     }
 
-    /**
-     * @deprecated Use starring() instead
-     */
     public function starred($page = 1)
     {
         return $this->get('/user/starred', array(
@@ -161,9 +155,6 @@ class CurrentUser extends AbstractApi
         ));
     }
 
-    /**
-     *  @link https://developer.github.com/v3/activity/watching/#list-repositories-being-watched
-     */
     public function subscriptions()
     {
         return $this->get('/user/subscriptions');
@@ -185,7 +176,7 @@ class CurrentUser extends AbstractApi
      * @param string $installationId  the ID of the Installation
      * @param array $params
      */
-    public function repositoriesByInstallation($installationId, array $params = array())
+    public function repositoriesByInstallation(string $installationId, array $params = array())
     {
         return $this->get(sprintf('/user/installations/%s/repositories', $installationId), array_merge(array('page' => 1), $params));
     }

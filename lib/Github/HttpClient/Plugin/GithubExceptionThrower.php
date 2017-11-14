@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\HttpClient\Plugin;
 
@@ -33,7 +33,7 @@ class GithubExceptionThrower implements Plugin
             if (null != $remaining && 1 > $remaining && 'rate_limit' !== substr($request->getRequestTarget(), 1, 10)) {
                 $limit = ResponseMediator::getHeader($response, 'X-RateLimit-Limit');
                 $reset = ResponseMediator::getHeader($response, 'X-RateLimit-Reset');
-                
+
                 throw new ApiLimitExceedException($limit, $reset);
             }
 
@@ -84,7 +84,7 @@ class GithubExceptionThrower implements Plugin
                 }
             }
 
-            throw new RuntimeException(isset($content['message']) ? $content['message'] : $content, $response->getStatusCode());
+            throw new RuntimeException($content['message'] ?? $content, $response->getStatusCode());
         });
     }
 }

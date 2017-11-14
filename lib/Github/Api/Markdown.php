@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api;
 
@@ -17,7 +17,7 @@ class Markdown extends AbstractApi
      *
      * @return string
      */
-    public function render($text, $mode = 'markdown', $context = null)
+    public function render(string $text, string $mode = 'markdown', string $context = null): string
     {
         if (!in_array($mode, array('gfm', 'markdown'))) {
             $mode = 'markdown';
@@ -39,7 +39,7 @@ class Markdown extends AbstractApi
      *
      * @return string
      */
-    public function renderRaw($file)
+    public function renderRaw(string $file): string
     {
         return $this->post('/markdown/raw', array(
             'file' => $file

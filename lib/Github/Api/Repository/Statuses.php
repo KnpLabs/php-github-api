@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\Repository;
 
@@ -20,7 +20,7 @@ class Statuses extends AbstractApi
      *
      * @return array
      */
-    public function show($username, $repository, $sha)
+    public function show(string $username, string $repository, string $sha): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/commits/'.rawurlencode($sha).'/statuses');
     }
@@ -34,7 +34,7 @@ class Statuses extends AbstractApi
      *
      * @return array
      */
-    public function combined($username, $repository, $sha)
+    public function combined(string $username, string $repository, string $sha): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/commits/'.rawurlencode($sha).'/status');
     }
@@ -51,7 +51,7 @@ class Statuses extends AbstractApi
      *
      * @return array
      */
-    public function create($username, $repository, $sha, array $params = array())
+    public function create(string $username, string $repository, string $sha, array $params = array()): array
     {
         if (!isset($params['state'])) {
             throw new MissingArgumentException('state');

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api;
 
@@ -21,11 +21,10 @@ class Notification extends AbstractApi
      *
      * @param bool          $includingRead
      * @param bool          $participating
-     * @param DateTime|null $since
      *
      * @return array array of notifications
      */
-    public function all($includingRead = false, $participating = false, DateTime $since = null)
+    public function all(bool $includingRead = false, bool $participating = false, DateTime $since = null): array
     {
         $parameters = array(
             'all' => $includingRead,
@@ -45,7 +44,6 @@ class Notification extends AbstractApi
      *
      * @link https://developer.github.com/v3/activity/notifications/#mark-as-read
      *
-     * @param DateTime|null $since
      */
     public function markRead(DateTime $since = null)
     {
@@ -64,7 +62,7 @@ class Notification extends AbstractApi
      *
      * @param int $id
      */
-    public function id($id)
+    public function id(int $id)
     {
         return $this->get('/notifications/threads/'.$id);
     }

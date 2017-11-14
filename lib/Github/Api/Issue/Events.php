@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\Issue;
 
@@ -20,7 +20,7 @@ class Events extends AbstractApi
      * @param int      $page
      * @return array
      */
-    public function all($username, $repository, $issue = null, $page = 1)
+    public function all(string $username, string $repository, int $issue = null, int $page = 1): array
     {
         if (null !== $issue) {
             $path = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/events';
@@ -42,7 +42,7 @@ class Events extends AbstractApi
      * @param $event
      * @return array
      */
-    public function show($username, $repository, $event)
+    public function show($username, $repository, $event): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/events/'.rawurlencode($event));
     }

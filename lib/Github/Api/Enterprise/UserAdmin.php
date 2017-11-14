@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\Enterprise;
 
@@ -15,7 +15,7 @@ class UserAdmin extends AbstractApi
      *
      * @return array
      */
-    public function suspend($username)
+    public function suspend(string $username): array
     {
         return $this->put('/users/'.rawurldecode($username).'/suspended', array('Content-Length' => 0));
     }
@@ -29,7 +29,7 @@ class UserAdmin extends AbstractApi
      *
      * @return array
      */
-    public function unsuspend($username)
+    public function unsuspend(string $username): array
     {
         return $this->delete('/users/'.rawurldecode($username).'/suspended');
     }

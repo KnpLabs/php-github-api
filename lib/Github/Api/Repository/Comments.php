@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\Repository;
 
@@ -23,7 +23,7 @@ class Comments extends AbstractApi
      *
      * @return self
      */
-    public function configure($bodyType = null)
+    public function configure(string $bodyType = null): self
     {
         if (!in_array($bodyType, array('raw', 'text', 'html'))) {
             $bodyType = 'full';

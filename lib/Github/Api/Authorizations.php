@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api;
 
@@ -15,7 +15,7 @@ class Authorizations extends AbstractApi
      *
      * @return array
      */
-    public function all()
+    public function all(): array
     {
         return $this->get('/authorizations');
     }
@@ -27,7 +27,7 @@ class Authorizations extends AbstractApi
      *
      * @return array
      */
-    public function show($clientId)
+    public function show($clientId): array
     {
         return $this->get('/authorizations/'.rawurlencode($clientId));
     }
@@ -40,7 +40,7 @@ class Authorizations extends AbstractApi
      *
      * @return array
      */
-    public function create(array $params, $OTPCode = null)
+    public function create(array $params, $OTPCode = null): array
     {
         $headers = null === $OTPCode ? array() : array('X-GitHub-OTP' => $OTPCode);
 
@@ -55,7 +55,7 @@ class Authorizations extends AbstractApi
      *
      * @return array
      */
-    public function update($clientId, array $params)
+    public function update($clientId, array $params): array
     {
         return $this->patch('/authorizations/'.rawurlencode($clientId), $params);
     }
@@ -67,7 +67,7 @@ class Authorizations extends AbstractApi
      *
      * @return array
      */
-    public function remove($clientId)
+    public function remove($clientId): array
     {
         return $this->delete('/authorizations/'.rawurlencode($clientId));
     }
@@ -80,7 +80,7 @@ class Authorizations extends AbstractApi
      *
      * @return array
      */
-    public function check($clientId, $token)
+    public function check($clientId, $token): array
     {
         return $this->get('/applications/'.rawurlencode($clientId).'/tokens/'.rawurlencode($token));
     }
@@ -93,7 +93,7 @@ class Authorizations extends AbstractApi
      *
      * @return array
      */
-    public function reset($clientId, $token)
+    public function reset($clientId, $token): array
     {
         return $this->post('/applications/'.rawurlencode($clientId).'/tokens/'.rawurlencode($token));
     }

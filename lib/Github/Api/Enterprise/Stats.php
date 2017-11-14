@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\Enterprise;
 
@@ -9,7 +9,7 @@ class Stats extends AbstractApi
     /**
      * Returns the number of open and closed issues.
      *
-     * @return array array with totals of open and closed issues
+     * @return array|string|null array with totals of open and closed issues
      */
     public function issues()
     {
@@ -21,7 +21,7 @@ class Stats extends AbstractApi
      *
      * @return array array with totals of active and inactive hooks
      */
-    public function hooks()
+    public function hooks(): array
     {
         return $this->show('hooks');
     }
@@ -31,7 +31,7 @@ class Stats extends AbstractApi
      *
      * @return array array with totals of open and closed milestones
      */
-    public function milestones()
+    public function milestones(): array
     {
         return $this->show('milestones');
     }
@@ -41,7 +41,7 @@ class Stats extends AbstractApi
      *
      * @return array array with totals of organizations, teams, team members, and disabled organizations
      */
-    public function orgs()
+    public function orgs(): array
     {
         return $this->show('orgs');
     }
@@ -51,7 +51,7 @@ class Stats extends AbstractApi
      *
      * @return array array with totals of comments on issues, pull requests, commits, and gists
      */
-    public function comments()
+    public function comments(): array
     {
         return $this->show('comments');
     }
@@ -61,7 +61,7 @@ class Stats extends AbstractApi
      *
      * @return array array with totals of GitHub Pages sites
      */
-    public function pages()
+    public function pages(): array
     {
         return $this->show('pages');
     }
@@ -71,7 +71,7 @@ class Stats extends AbstractApi
      *
      * @return array array with totals of suspended and admin users
      */
-    public function users()
+    public function users(): array
     {
         return $this->show('users');
     }
@@ -81,7 +81,7 @@ class Stats extends AbstractApi
      *
      * @return array array with totals of private and public gists
      */
-    public function gists()
+    public function gists(): array
     {
         return $this->show('gists');
     }
@@ -91,7 +91,7 @@ class Stats extends AbstractApi
      *
      * @return array array with totals of merged, mergeable, and unmergeable pull requests
      */
-    public function pulls()
+    public function pulls(): array
     {
         return $this->show('pulls');
     }
@@ -101,7 +101,7 @@ class Stats extends AbstractApi
      *
      * @return array array with totals of organization-owned repositories, root repositories, forks, pushed commits, and wikis
      */
-    public function repos()
+    public function repos(): array
     {
         return $this->show('repos');
     }
@@ -109,7 +109,7 @@ class Stats extends AbstractApi
     /**
      * Returns all of the statistics.
      *
-     * @return array array with all of the statistics
+     * @return array|string array with all of the statistics
      */
     public function all()
     {
@@ -119,9 +119,9 @@ class Stats extends AbstractApi
     /**
      * @param string $type The type of statistics to show
      *
-     * @return array
+     * @return array|string|null
      */
-    public function show($type)
+    public function show(string $type)
     {
         return $this->get('/enterprise/stats/' . rawurlencode($type));
     }

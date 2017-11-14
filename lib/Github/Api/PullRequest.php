@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api;
 
@@ -28,7 +28,7 @@ class PullRequest extends AbstractApi
      *
      * @return self
      */
-    public function configure($bodyType = null, $apiVersion = null)
+    public function configure(string $bodyType = null, string $apiVersion = null): self
     {
         if (!in_array($apiVersion, array())) {
             $apiVersion = $this->client->getApiVersion();
@@ -58,7 +58,7 @@ class PullRequest extends AbstractApi
      *
      * @return array array of pull requests for the project
      */
-    public function all($username, $repository, array $params = array())
+    public function all(string $username, string $repository, array $params = array()): array
     {
         $parameters = array_merge(array(
             'page' => 1,
@@ -79,7 +79,7 @@ class PullRequest extends AbstractApi
      *
      * @return array|string pull request details
      */
-    public function show($username, $repository, $id)
+    public function show(string $username, string $repository, int $id)
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id));
     }
@@ -105,7 +105,7 @@ class PullRequest extends AbstractApi
      *
      * @return array array of statuses for the project
      */
-    public function status($username, $repository, $id)
+    public function status(string $username, string $repository, int $id): array
     {
         $link = $this->show($username, $repository, $id)['_links']['statuses']['href'];
 
@@ -144,7 +144,7 @@ class PullRequest extends AbstractApi
      *
      * @return array
      */
-    public function create($username, $repository, array $params)
+    public function create(string $username, string $repository, array $params): array
     {
         // Two ways to create PR, using issue or title
         if (!isset($params['issue']) && !isset($params['title'])) {
