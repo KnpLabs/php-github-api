@@ -78,9 +78,6 @@ class BlobsTest extends TestCase
         $api->create('l3l0', 'l3l0repo', $data);
     }
 
-    /**
-     * @return string
-     */
     protected function getApiClass(): string
     {
         return \Github\Api\GitData\Blobs::class;

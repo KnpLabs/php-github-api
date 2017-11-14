@@ -273,9 +273,6 @@ class PullRequestTest extends TestCase
         $this->assertInstanceOf(\Github\Api\PullRequest\Review::class, $api->reviews());
     }
 
-    /**
-     * @return string
-     */
     protected function getApiClass(): string
     {
         return \Github\Api\PullRequest::class;

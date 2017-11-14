@@ -19,8 +19,6 @@ class Notification extends AbstractApi
      *
      * @link https://developer.github.com/v3/activity/notifications/
      *
-     * @param bool          $includingRead
-     * @param bool          $participating
      *
      * @return array array of notifications
      */
@@ -43,7 +41,6 @@ class Notification extends AbstractApi
      * Optionally give DateTime to mark as read before that date.
      *
      * @link https://developer.github.com/v3/activity/notifications/#mark-as-read
-     *
      */
     public function markRead(DateTime $since = null)
     {
@@ -59,8 +56,6 @@ class Notification extends AbstractApi
      * Gets a single notification using his ID
      *
      * @link https://developer.github.com/v3/activity/notifications/#view-a-single-thread
-     *
-     * @param int $id
      */
     public function id(int $id)
     {

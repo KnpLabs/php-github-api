@@ -124,9 +124,6 @@ class ReleasesTest extends TestCase
         $this->assertInstanceOf('Github\Api\Repository\Assets', $api->assets());
     }
 
-    /**
-     * @return string
-     */
     protected function getApiClass(): string
     {
         return \Github\Api\Repository\Releases::class;

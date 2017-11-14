@@ -228,10 +228,6 @@ class User extends AbstractApi
      * List events performed by a user.
      *
      * @link http://developer.github.com/v3/activity/events/#list-public-events-performed-by-a-user
-     *
-     * @param string $username
-     *
-     * @return array
      */
     public function publicEvents(string $username): array
     {

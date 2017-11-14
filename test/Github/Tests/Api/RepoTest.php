@@ -430,9 +430,6 @@ class RepoTest extends TestCase
         $this->assertEquals($expectedArray, $api->events('KnpLabs', 'php-github-api', 3));
     }
 
-    /**
-     * @return string
-     */
     protected function getApiClass(): string
     {
         return \Github\Api\Repo::class;

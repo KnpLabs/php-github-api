@@ -13,11 +13,6 @@ class References extends AbstractApi
 {
     /**
      * Get all references of a repository.
-     *
-     * @param string $username
-     * @param string $repository
-     *
-     * @return array
      */
     public function all(string $username, string $repository): array
     {
@@ -26,11 +21,6 @@ class References extends AbstractApi
 
     /**
      * Get all branches of a repository.
-     *
-     * @param string $username
-     * @param string $repository
-     *
-     * @return array
      */
     public function branches(string $username, string $repository): array
     {
@@ -39,11 +29,6 @@ class References extends AbstractApi
 
     /**
      * Get all tags of a repository.
-     *
-     * @param string $username
-     * @param string $repository
-     *
-     * @return array
      */
     public function tags(string $username, string $repository): array
     {
@@ -52,12 +37,6 @@ class References extends AbstractApi
 
     /**
      * Show the reference of a repository.
-     *
-     * @param string $username
-     * @param string $repository
-     * @param string $reference
-     *
-     * @return array
      */
     public function show(string $username, string $repository, string $reference): array
     {
@@ -69,11 +48,7 @@ class References extends AbstractApi
     /**
      * Create a reference for a repository.
      *
-     * @param string $username
-     * @param string $repository
-     * @param array  $params
      *
-     * @return array
      *
      * @throws \Github\Exception\MissingArgumentException
      */
@@ -89,12 +64,7 @@ class References extends AbstractApi
     /**
      * Update a reference for a repository.
      *
-     * @param string $username
-     * @param string $repository
-     * @param string $reference
-     * @param array  $params
      *
-     * @return array
      *
      * @throws \Github\Exception\MissingArgumentException
      */
@@ -111,12 +81,6 @@ class References extends AbstractApi
 
     /**
      * Delete a reference of a repository.
-     *
-     * @param string $username
-     * @param string $repository
-     * @param string $reference
-     *
-     * @return array
      */
     public function remove(string $username, string $repository, string $reference): array
     {
@@ -127,10 +91,6 @@ class References extends AbstractApi
 
     /**
      * Encode the raw reference.
-     *
-     * @param string $rawReference
-     *
-     * @return string
      */
     private function encodeReference(string $rawReference): string
     {

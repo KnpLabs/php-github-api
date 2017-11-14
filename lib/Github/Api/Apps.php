@@ -31,8 +31,6 @@ class Apps extends AbstractApi
      * Find all installations for the authenticated application.
      *
      * @link https://developer.github.com/v3/apps/#find-installations
-     *
-     * @return array
      */
     public function findInstallations(): array
     {
@@ -43,10 +41,6 @@ class Apps extends AbstractApi
      * List repositories that are accessible to the authenticated installation.
      *
      * @link https://developer.github.com/v3/apps/installations/#list-repositories
-     *
-     * @param int $userId
-     *
-     * @return array
      */
     public function listRepositories(int $userId = null): array
     {
@@ -62,11 +56,6 @@ class Apps extends AbstractApi
      * Add a single repository to an installation.
      *
      * @link https://developer.github.com/v3/apps/installations/#add-repository-to-installation
-     *
-     * @param int $installationId
-     * @param int $repositoryId
-     *
-     * @return array
      */
     public function addRepository(int $installationId, int $repositoryId): array
     {
@@ -77,11 +66,6 @@ class Apps extends AbstractApi
      * Remove a single repository from an installation.
      *
      * @link https://developer.github.com/v3/apps/installations/#remove-repository-from-installation
-     *
-     * @param int $installationId
-     * @param int $repositoryId
-     *
-     * @return array
      */
     public function removeRepository(int $installationId, int $repositoryId): array
     {

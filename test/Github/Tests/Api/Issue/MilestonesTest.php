@@ -178,9 +178,6 @@ class MilestonesTest extends TestCase
         $this->assertEquals($expectedValue, $api->labels('KnpLabs', 'php-github-api', 123));
     }
 
-    /**
-     * @return string
-     */
     protected function getApiClass(): string
     {
         return \Github\Api\Issue\Milestones::class;

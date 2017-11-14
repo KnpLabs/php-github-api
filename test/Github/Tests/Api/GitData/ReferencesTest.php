@@ -143,9 +143,6 @@ class ReferencesTest extends TestCase
         $api->update('l3l0', 'l3l0repo', 'someRefs', $data);
     }
 
-    /**
-     * @return string
-     */
     protected function getApiClass(): string
     {
         return \Github\Api\GitData\References::class;

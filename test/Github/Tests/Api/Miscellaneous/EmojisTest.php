@@ -23,9 +23,6 @@ class EmojisTest extends TestCase
         $this->assertEquals($expectedArray, $api->all());
     }
 
-    /**
-     * @return string
-     */
     protected function getApiClass(): string
     {
         return Emojis::class;

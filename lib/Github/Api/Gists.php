@@ -21,8 +21,6 @@ class Gists extends AbstractApi
      *
      * @link https://developer.github.com/v3/gists/#custom-media-types
      * @param string|null $bodyType
-     *
-     * @return self
      */
     public function configure(string $bodyType = null): self
     {
@@ -104,8 +102,6 @@ class Gists extends AbstractApi
      * Get a gist's comments.
      *
      * @link http://developer.github.com/v3/gists/comments/
-     *
-     * @return Comments
      */
     public function comments(): Comments
     {

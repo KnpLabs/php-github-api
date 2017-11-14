@@ -15,8 +15,6 @@ class Emails extends AbstractApi
      * List emails for the authenticated user.
      *
      * @link http://developer.github.com/v3/users/emails/
-     *
-     * @return array
      */
     public function all(): array
     {
@@ -31,8 +29,6 @@ class Emails extends AbstractApi
      * @param string|array $emails
      *
      * @throws \Github\Exception\InvalidArgumentException
-     *
-     * @return array
      */
     public function add($emails): array
     {
@@ -53,8 +49,6 @@ class Emails extends AbstractApi
      * @param string|array $emails
      *
      * @throws \Github\Exception\InvalidArgumentException
-     *
-     * @return array
      */
     public function remove($emails): array
     {

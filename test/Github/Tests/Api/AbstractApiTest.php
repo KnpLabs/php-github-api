@@ -158,7 +158,6 @@ class AbstractApiTest extends TestCase
     }
 
     /**
-     * @param $client
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
     protected function getAbstractApiObject($client): \PHPUnit_Framework_MockObject_MockObject
@@ -169,9 +168,6 @@ class AbstractApiTest extends TestCase
             ->getMock();
     }
 
-    /**
-     * @return string
-     */
     protected function getApiClass(): string
     {
         return AbstractApi::class;
@@ -188,7 +184,6 @@ class AbstractApiTest extends TestCase
     /**
      * Return a HttpMethods client mock
      *
-     * @param array $methods
      * @return \Http\Client\Common\HttpMethodsClient
      */
     protected function getHttpMethodsMock(array $methods = []): \Http\Client\Common\HttpMethodsClient
@@ -219,11 +214,6 @@ class AbstractApiTest extends TestCase
         return $mock;
     }
 
-    /**
-     * @param $expectedArray
-     *
-     * @return Response
-     */
     private function getPSR7Response($expectedArray): Response
     {
         return new Response(

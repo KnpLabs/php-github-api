@@ -195,9 +195,6 @@ class UserTest extends TestCase
         $this->assertEquals($expectedArray, $api->gists('l3l0'));
     }
 
-    /**
-     * @return string
-     */
     protected function getApiClass(): string
     {
         return \Github\Api\User::class;

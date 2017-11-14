@@ -141,9 +141,6 @@ class Client
 
     /**
      * Create a Github\Client using a HttpClient.
-     *
-     *
-     * @return Client
      */
     public static function createWithHttpClient(HttpClient $httpClient): Client
     {
@@ -153,11 +150,7 @@ class Client
     }
 
     /**
-     * @param string $name
-     *
      * @throws InvalidArgumentException
-     *
-     * @return ApiInterface
      */
     public function api(string $name): ApiInterface
     {
@@ -339,9 +332,6 @@ class Client
         $builder->addPlugin(new PathPrepend(sprintf('/api/%s', $this->getApiVersion())));
     }
 
-    /**
-     * @return string
-     */
     public function getApiVersion(): string
     {
         return $this->apiVersion;
@@ -351,7 +341,6 @@ class Client
      * Add a cache plugin to cache responses locally.
      *
      * @param CacheItemPoolInterface $cache
-     * @param array                  $config
      */
     public function addCache(CacheItemPoolInterface $cachePool, array $config = [])
     {
@@ -367,11 +356,7 @@ class Client
     }
 
     /**
-     * @param string $name
-     *
      * @throws BadMethodCallException
-     *
-     * @return ApiInterface
      */
     public function __call(string $name, $args): ApiInterface
     {
@@ -390,17 +375,11 @@ class Client
         return $this->responseHistory->getLastResponse();
     }
 
-    /**
-     * @return HttpMethodsClient
-     */
     public function getHttpClient(): HttpMethodsClient
     {
         return $this->getHttpClientBuilder()->getHttpClient();
     }
 
-    /**
-     * @return Builder
-     */
     protected function getHttpClientBuilder(): Builder
     {
         return $this->httpClientBuilder;

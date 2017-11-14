@@ -53,9 +53,6 @@ class WatchersTest extends TestCase
         $this->assertNull($api->unwatch('l3l0', 'test'));
     }
 
-    /**
-     * @return string
-     */
     protected function getApiClass(): string
     {
         return \Github\Api\CurrentUser\Watchers::class;

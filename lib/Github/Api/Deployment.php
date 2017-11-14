@@ -31,8 +31,6 @@ class Deployment extends AbstractApi
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
      * @param int    $id         the id of the deployment
-     *
-     * @return array
      */
     public function show(string $username, string $repository, int $id): array
     {

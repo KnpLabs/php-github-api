@@ -63,25 +63,16 @@ class Organization extends AbstractApi
         ]);
     }
 
-    /**
-     * @return Members
-     */
     public function members(): Members
     {
         return new Members($this->client);
     }
 
-    /**
-     * @return Hooks
-     */
     public function hooks(): Hooks
     {
         return new Hooks($this->client);
     }
 
-    /**
-     * @return Teams
-     */
     public function teams(): Teams
     {
         return new Teams($this->client);
@@ -89,12 +80,6 @@ class Organization extends AbstractApi
 
     /**
      * @link http://developer.github.com/v3/issues/#list-issues
-     *
-     * @param $organization
-     * @param array $params
-     * @param int $page
-     *
-     * @return array
      */
     public function issues($organization, array $params = [], int $page = 1): array
     {

@@ -195,9 +195,6 @@ class GistsTest extends TestCase
         $api->remove(5);
     }
 
-    /**
-     * @return string
-     */
     protected function getApiClass(): string
     {
         return \Github\Api\Gists::class;

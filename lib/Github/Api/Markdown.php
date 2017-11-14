@@ -10,13 +10,6 @@ namespace Github\Api;
  */
 class Markdown extends AbstractApi
 {
-    /**
-     * @param string $text
-     * @param string $mode
-     * @param string $context
-     *
-     * @return string
-     */
     public function render(string $text, string $mode = 'markdown', string $context = null): string
     {
         if (!in_array($mode, ['gfm', 'markdown'])) {
@@ -34,11 +27,6 @@ class Markdown extends AbstractApi
         return $this->post('/markdown', $params);
     }
 
-    /**
-     * @param string $file
-     *
-     * @return string
-     */
     public function renderRaw(string $file): string
     {
         return $this->post('/markdown/raw', [

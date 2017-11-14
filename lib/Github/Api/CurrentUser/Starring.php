@@ -15,11 +15,6 @@ class Starring extends AbstractApi
      * List repositories starred by the authenticated user.
      *
      * @link https://developer.github.com/v3/activity/starring/
-     *
-     * @param int $page
-     * @param int $perPage
-     *
-     * @return array
      */
     public function all(int $page = 1, int $perPage = 30): array
     {
@@ -36,8 +31,6 @@ class Starring extends AbstractApi
      *
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
-     *
-     * @return array
      */
     public function check(string $username, string $repository): array
     {
@@ -51,8 +44,6 @@ class Starring extends AbstractApi
      *
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
-     *
-     * @return array
      */
     public function star(string $username, string $repository): array
     {
@@ -66,8 +57,6 @@ class Starring extends AbstractApi
      *
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
-     *
-     * @return array
      */
     public function unstar(string $username, string $repository): array
     {

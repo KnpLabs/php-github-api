@@ -98,9 +98,6 @@ class CardsTest extends TestCase
         $this->assertEquals($expectedValue, $api->move(123, $data));
     }
 
-    /**
-     * @return string
-     */
     protected function getApiClass(): string
     {
         return \Github\Api\Project\Cards::class;

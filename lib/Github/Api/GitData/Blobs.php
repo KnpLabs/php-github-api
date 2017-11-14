@@ -19,8 +19,6 @@ class Blobs extends AbstractApi
      * Configure the Accept header depending on the blob type.
      *
      * @param string|null $bodyType
-     *
-     * @return self
      */
     public function configure(string $bodyType = null): self
     {
@@ -33,12 +31,6 @@ class Blobs extends AbstractApi
 
     /**
      * Show a blob of a sha for a repository.
-     *
-     * @param string $username
-     * @param string $repository
-     * @param string $sha
-     *
-     * @return array
      */
     public function show(string $username, string $repository, string $sha): array
     {
@@ -50,11 +42,7 @@ class Blobs extends AbstractApi
     /**
      * Create a blob of a sha for a repository.
      *
-     * @param string $username
-     * @param string $repository
-     * @param array  $params
      *
-     * @return array
      *
      * @throws \Github\Exception\MissingArgumentException
      */

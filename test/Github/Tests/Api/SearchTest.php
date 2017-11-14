@@ -152,9 +152,6 @@ class SearchTest extends TestCase
         );
     }
 
-    /**
-     * @return string
-     */
     protected function getApiClass(): string
     {
         return \Github\Api\Search::class;

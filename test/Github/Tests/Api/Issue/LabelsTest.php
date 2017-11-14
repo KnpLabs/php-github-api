@@ -178,9 +178,6 @@ class LabelsTest extends TestCase
         $this->assertEquals($expectedValue, $api->clear('KnpLabs', 'php-github-api', 123));
     }
 
-    /**
-     * @return string
-     */
     protected function getApiClass(): string
     {
         return \Github\Api\Issue\Labels::class;

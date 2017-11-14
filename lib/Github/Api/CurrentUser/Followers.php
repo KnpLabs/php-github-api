@@ -14,10 +14,6 @@ class Followers extends AbstractApi
      * List followed users by the authenticated user.
      *
      * @link http://developer.github.com/v3/repos/followers/
-     *
-     * @param int $page
-     *
-     * @return array
      */
     public function all(int $page = 1): array
     {
@@ -32,8 +28,6 @@ class Followers extends AbstractApi
      * @link http://developer.github.com/v3/repos/followers/
      *
      * @param string $username the username to follow
-     *
-     * @return array
      */
     public function check(string $username): array
     {
@@ -46,8 +40,6 @@ class Followers extends AbstractApi
      * @link http://developer.github.com/v3/repos/followers/
      *
      * @param string $username the username to follow
-     *
-     * @return array
      */
     public function follow(string $username): array
     {
@@ -60,8 +52,6 @@ class Followers extends AbstractApi
      * @link http://developer.github.com/v3/repos/followers/
      *
      * @param string $username the username to un-follow
-     *
-     * @return array
      */
     public function unfollow(string $username): array
     {

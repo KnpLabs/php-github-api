@@ -44,9 +44,6 @@ class GitignoreTest extends TestCase
         $this->assertEquals($expectedArray, $api->show('C'));
     }
 
-    /**
-     * @return string
-     */
     protected function getApiClass(): string
     {
         return Gitignore::class;

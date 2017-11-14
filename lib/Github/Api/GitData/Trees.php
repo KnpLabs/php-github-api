@@ -13,13 +13,6 @@ class Trees extends AbstractApi
 {
     /**
      * Get the tree for a repository.
-     *
-     * @param string $username
-     * @param string $repository
-     * @param string $sha
-     * @param bool   $recursive
-     *
-     * @return array
      */
     public function show(string $username, string $repository, string $sha, bool $recursive = false): array
     {
@@ -29,11 +22,7 @@ class Trees extends AbstractApi
     /**
      * Create tree for a repository.
      *
-     * @param string $username
-     * @param string $repository
-     * @param array  $params
      *
-     * @return array
      *
      * @throws \Github\Exception\MissingArgumentException
      */

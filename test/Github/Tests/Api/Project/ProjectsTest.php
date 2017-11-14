@@ -54,9 +54,6 @@ class ProjectsTest extends TestCase
         $this->assertInstanceOf('Github\Api\Project\Columns', $api->columns());
     }
 
-    /**
-     * @return string
-     */
     protected function getApiClass(): string
     {
         return AbstractProjectApi::class;

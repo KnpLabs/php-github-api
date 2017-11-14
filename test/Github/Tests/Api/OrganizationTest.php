@@ -70,9 +70,6 @@ class OrganizationTest extends TestCase
         $this->assertInstanceOf(\Github\Api\Organization\Teams::class, $api->teams());
     }
 
-    /**
-     * @return string
-     */
     protected function getApiClass(): string
     {
         return \Github\Api\Organization::class;

@@ -38,7 +38,6 @@ class ResultPager implements ResultPagerInterface
      * $client = new \Github\Client();
      * $api = $client->api('someApi');
      * $pager = new \Github\ResultPager($client);
-     *
      */
     public function __construct(Client $client)
     {
@@ -178,9 +177,6 @@ class ResultPager implements ResultPagerInterface
     }
 
     /**
-     * @param $method
-     * @param array $parameters
-     *
      * @return mixed
      */
     protected function callApi(ApiInterface $api, $method, array $parameters)

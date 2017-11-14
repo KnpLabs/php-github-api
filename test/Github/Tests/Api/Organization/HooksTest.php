@@ -119,9 +119,6 @@ class HooksTest extends TestCase
         $this->assertEquals($expectedValue, $api->ping('KnpLabs', 123));
     }
 
-    /**
-     * @return string
-     */
     protected function getApiClass(): string
     {
         return \Github\Api\Organization\Hooks::class;

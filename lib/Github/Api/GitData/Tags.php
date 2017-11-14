@@ -13,11 +13,6 @@ class Tags extends AbstractApi
 {
     /**
      * Get all tags for a repository.
-     *
-     * @param string $username
-     * @param string $repository
-     *
-     * @return array
      */
     public function all(string $username, string $repository): array
     {
@@ -26,12 +21,6 @@ class Tags extends AbstractApi
 
     /**
      * Get a tag for a repository.
-     *
-     * @param string $username
-     * @param string $repository
-     * @param string $sha
-     *
-     * @return array
      */
     public function show(string $username, string $repository, string $sha): array
     {
@@ -41,11 +30,7 @@ class Tags extends AbstractApi
     /**
      * Create a tag for a repository.
      *
-     * @param string $username
-     * @param string $repository
-     * @param array  $params
      *
-     * @return array
      *
      * @throws \Github\Exception\MissingArgumentException
      */

@@ -73,10 +73,6 @@ class Builder
      */
     private $headers = [];
 
-    /**
-     * @param HttpClient     $httpClient
-     * @param StreamFactory  $streamFactory
-     */
     public function __construct(
         HttpClient $httpClient = null,
         RequestFactory $requestFactory = null,
@@ -87,9 +83,6 @@ class Builder
         $this->streamFactory = $streamFactory ?: StreamFactoryDiscovery::find();
     }
 
-    /**
-     * @return HttpMethodsClient
-     */
     public function getHttpClient(): HttpMethodsClient
     {
         if ($this->httpClientModified) {
@@ -111,7 +104,6 @@ class Builder
 
     /**
      * Add a new plugin to the end of the plugin chain.
-     *
      */
     public function addPlugin(Plugin $plugin)
     {
@@ -121,8 +113,6 @@ class Builder
 
     /**
      * Remove a plugin by its fully qualified class name (FQCN).
-     *
-     * @param string $fqcn
      */
     public function removePlugin(string $fqcn)
     {
@@ -145,9 +135,6 @@ class Builder
         $this->addPlugin(new Plugin\HeaderAppendPlugin($this->headers));
     }
 
-    /**
-     * @param array $headers
-     */
     public function addHeaders(array $headers)
     {
         $this->headers = array_merge($this->headers, $headers);
@@ -156,10 +143,6 @@ class Builder
         $this->addPlugin(new Plugin\HeaderAppendPlugin($this->headers));
     }
 
-    /**
-     * @param string $header
-     * @param string $headerValue
-     */
     public function addHeaderValue(string $header, string $headerValue)
     {
         if (!isset($this->headers[$header])) {
@@ -174,8 +157,6 @@ class Builder
 
     /**
      * Add a cache plugin to cache responses locally.
-     *
-     * @param array                  $config
      */
     public function addCache(CacheItemPoolInterface $cachePool, array $config = [])
     {

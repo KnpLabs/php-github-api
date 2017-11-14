@@ -12,8 +12,6 @@ class Authorizations extends AbstractApi
 {
     /**
      * List all authorizations.
-     *
-     * @return array
      */
     public function all(): array
     {
@@ -22,10 +20,6 @@ class Authorizations extends AbstractApi
 
     /**
      * Show a single authorization.
-     *
-     * @param $clientId
-     *
-     * @return array
      */
     public function show($clientId): array
     {
@@ -35,10 +29,7 @@ class Authorizations extends AbstractApi
     /**
      * Create an authorization.
      *
-     * @param array $params
      * @param null $OTPCode
-     *
-     * @return array
      */
     public function create(array $params, $OTPCode = null): array
     {
@@ -49,11 +40,6 @@ class Authorizations extends AbstractApi
 
     /**
      * Update an authorization.
-     *
-     * @param $clientId
-     * @param array $params
-     *
-     * @return array
      */
     public function update($clientId, array $params): array
     {
@@ -62,10 +48,6 @@ class Authorizations extends AbstractApi
 
     /**
      * Remove an authorization.
-     *
-     * @param $clientId
-     *
-     * @return array
      */
     public function remove($clientId): array
     {
@@ -74,11 +56,6 @@ class Authorizations extends AbstractApi
 
     /**
      * Check an authorization.
-     *
-     * @param $clientId
-     * @param $token
-     *
-     * @return array
      */
     public function check($clientId, $token): array
     {
@@ -87,11 +64,6 @@ class Authorizations extends AbstractApi
 
     /**
      * Reset an authorization.
-     *
-     * @param $clientId
-     * @param $token
-     *
-     * @return array
      */
     public function reset($clientId, $token): array
     {
@@ -100,9 +72,6 @@ class Authorizations extends AbstractApi
 
     /**
      * Remove an authorization.
-     *
-     * @param $clientId
-     * @param $token
      */
     public function revoke($clientId, $token)
     {
@@ -111,8 +80,6 @@ class Authorizations extends AbstractApi
 
     /**
      * Revoke all authorizations.
-     *
-     * @param $clientId
      */
     public function revokeAll($clientId)
     {

@@ -34,7 +34,6 @@ class Repo extends AbstractApi
      * @link http://developer.github.com/v3/search/#search-repositories
      *
      * @param string $keyword the search query
-     * @param array  $params
      *
      * @return array list of found repositories
      */
@@ -127,7 +126,6 @@ class Repo extends AbstractApi
      * @link http://developer.github.com/v3/repos/#list-organization-repositories
      *
      * @param string $organization the name of the organization
-     * @param array  $params
      *
      * @return array list of organization repositories
      */
@@ -271,8 +269,6 @@ class Repo extends AbstractApi
      * Manage the collaborators of a repository.
      *
      * @link http://developer.github.com/v3/repos/collaborators/
-     *
-     * @return Collaborators
      */
     public function collaborators(): Collaborators
     {
@@ -283,8 +279,6 @@ class Repo extends AbstractApi
      * Manage the comments of a repository.
      *
      * @link http://developer.github.com/v3/repos/comments/
-     *
-     * @return Comments
      */
     public function comments(): Comments
     {
@@ -295,8 +289,6 @@ class Repo extends AbstractApi
      * Manage the commits of a repository.
      *
      * @link http://developer.github.com/v3/repos/commits/
-     *
-     * @return Commits
      */
     public function commits(): Commits
     {
@@ -307,8 +299,6 @@ class Repo extends AbstractApi
      * Manage the content of a repository.
      *
      * @link http://developer.github.com/v3/repos/contents/
-     *
-     * @return Contents
      */
     public function contents(): Contents
     {
@@ -319,8 +309,6 @@ class Repo extends AbstractApi
      * Manage the content of a repository.
      *
      * @link http://developer.github.com/v3/repos/downloads/
-     *
-     * @return Downloads
      */
     public function downloads(): Downloads
     {
@@ -331,8 +319,6 @@ class Repo extends AbstractApi
      * Manage the releases of a repository (Currently Undocumented).
      *
      * @link http://developer.github.com/v3/repos/
-     *
-     * @return Releases
      */
     public function releases(): Releases
     {
@@ -343,8 +329,6 @@ class Repo extends AbstractApi
      * Manage the deploy keys of a repository.
      *
      * @link http://developer.github.com/v3/repos/keys/
-     *
-     * @return DeployKeys
      */
     public function keys(): DeployKeys
     {
@@ -355,8 +339,6 @@ class Repo extends AbstractApi
      * Manage the forks of a repository.
      *
      * @link http://developer.github.com/v3/repos/forks/
-     *
-     * @return Forks
      */
     public function forks(): Forks
     {
@@ -367,8 +349,6 @@ class Repo extends AbstractApi
      * Manage the stargazers of a repository.
      *
      * @link https://developer.github.com/v3/activity/starring/#list-stargazers
-     *
-     * @return Stargazers
      */
     public function stargazers(): Stargazers
     {
@@ -379,8 +359,6 @@ class Repo extends AbstractApi
      * Manage the hooks of a repository.
      *
      * @link http://developer.github.com/v3/issues/jooks/
-     *
-     * @return Hooks
      */
     public function hooks(): Hooks
     {
@@ -391,8 +369,6 @@ class Repo extends AbstractApi
      * Manage the labels of a repository.
      *
      * @link http://developer.github.com/v3/issues/labels/
-     *
-     * @return Labels
      */
     public function labels(): Labels
     {
@@ -403,8 +379,6 @@ class Repo extends AbstractApi
      * Manage the statuses of a repository.
      *
      * @link http://developer.github.com/v3/repos/statuses/
-     *
-     * @return Statuses
      */
     public function statuses(): Statuses
     {
@@ -436,8 +410,6 @@ class Repo extends AbstractApi
      * Manage the protection of a repository branch.
      *
      * @link https://developer.github.com/v3/repos/branches/#get-branch-protection
-     *
-     * @return Protection
      */
     public function protection(): Protection
     {
@@ -511,12 +483,6 @@ class Repo extends AbstractApi
 
     /**
      * @deprecated see subscribers method
-     *
-     * @param string $username
-     * @param string $repository
-     * @param int    $page
-     *
-     * @return array
      */
     public function watchers(string $username, string $repository, int $page = 1): array
     {
@@ -525,13 +491,6 @@ class Repo extends AbstractApi
         ]);
     }
 
-    /**
-     * @param string $username
-     * @param string $repository
-     * @param int    $page
-     *
-     * @return array
-     */
     public function subscribers(string $username, string $repository, int $page = 1): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/subscribers', [
@@ -544,8 +503,6 @@ class Repo extends AbstractApi
      *
      * @link http://developer.github.com/v3/repos/merging/
      *
-     * @param string $username
-     * @param string $repository
      * @param string $base       The name of the base branch that the head will be merged into.
      * @param string $head       The head to merge. This can be a branch name or a commit SHA1.
      * @param string $message    Commit message to use for the merge commit. If omitted, a default message will be used.
@@ -566,11 +523,6 @@ class Repo extends AbstractApi
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/merges', $parameters);
     }
 
-    /**
-     * @param string $username
-     * @param string $repository
-     * @return array
-     */
     public function milestones(string $username, string $repository): array
     {
         return $this->get('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/milestones');
@@ -587,10 +539,6 @@ class Repo extends AbstractApi
     }
 
     /**
-     * @param string $username
-     * @param string $repository
-     * @param int    $page
-     *
      * @return array|string
      *
      * @see https://developer.github.com/v3/activity/events/#list-repository-events

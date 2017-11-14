@@ -93,9 +93,6 @@ class NotificationTest extends TestCase
         $api->id($id);
     }
 
-    /**
-     * @return string
-     */
     protected function getApiClass(): string
     {
         return \Github\Api\Notification::class;
