@@ -1,12 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
 class GitDataTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetBlobsApiObject()
     {
         $api = $this->getApiMock();
@@ -14,9 +11,6 @@ class GitDataTest extends TestCase
         $this->assertInstanceOf(\Github\Api\GitData\Blobs::class, $api->blobs());
     }
 
-    /**
-     * @test
-     */
     public function shouldGetCommitsApiObject()
     {
         $api = $this->getApiMock();
@@ -24,9 +18,6 @@ class GitDataTest extends TestCase
         $this->assertInstanceOf(\Github\Api\GitData\Commits::class, $api->commits());
     }
 
-    /**
-     * @test
-     */
     public function shouldGetReferencesApiObject()
     {
         $api = $this->getApiMock();
@@ -34,9 +25,6 @@ class GitDataTest extends TestCase
         $this->assertInstanceOf(\Github\Api\GitData\References::class, $api->references());
     }
 
-    /**
-     * @test
-     */
     public function shouldGetTagsApiObject()
     {
         $api = $this->getApiMock();
@@ -44,9 +32,6 @@ class GitDataTest extends TestCase
         $this->assertInstanceOf(\Github\Api\GitData\Tags::class, $api->tags());
     }
 
-    /**
-     * @test
-     */
     public function shouldGetTreesApiObject()
     {
         $api = $this->getApiMock();
@@ -57,7 +42,7 @@ class GitDataTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\GitData::class;
     }

@@ -64,7 +64,7 @@ class CommentsTest extends TestCase
         $this->assertEquals($expectedValue, $result);
     }
     
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         // Tell the "getAPIMock" what class to mock. 
         return \Github\Api\Gist\Comments::class;

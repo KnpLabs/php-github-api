@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Repository;
 
@@ -6,29 +6,23 @@ use Github\Tests\Api\TestCase;
 
 class ForksTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetForks()
     {
-        $expectedValue = array(array('name' => 'l3l0repo'));
+        $expectedValue = [['name' => 'l3l0repo']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/forks', array('page' => 1))
+            ->with('/repos/KnpLabs/php-github-api/forks', ['page' => 1])
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api'));
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateFork()
     {
-        $expectedValue = array(array('name' => 'l3l0repo'));
-        $data = array('someparam');
+        $expectedValue = [['name' => 'l3l0repo']];
+        $data = ['someparam'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -39,26 +33,20 @@ class ForksTest extends TestCase
         $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', $data));
     }
 
-    /**
-     * @test
-     */
     public function shouldSortByNewestWhenSortParamNotRecognized()
     {
-        $expectedValue = array(array('name' => 'l3l0repo'));
+        $expectedValue = [['name' => 'l3l0repo']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/forks', array('page' => 1, 'sort' => 'newest'))
+            ->with('/repos/KnpLabs/php-github-api/forks', ['page' => 1, 'sort' => 'newest'])
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', array('sort' => 'oldes')));
+        $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', ['sort' => 'oldes']));
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Repository\Forks::class;
     }

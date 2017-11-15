@@ -1,9 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api;
 
-use Github\Exception\MissingArgumentException;
 use Github\Api\Gist\Comments;
+use Github\Exception\MissingArgumentException;
 
 /**
  * Creating, editing, deleting and listing gists.
@@ -21,12 +21,10 @@ class Gists extends AbstractApi
      *
      * @link https://developer.github.com/v3/gists/#custom-media-types
      * @param string|null $bodyType
-     *
-     * @return self
      */
-    public function configure($bodyType = null)
+    public function configure(string $bodyType = null): self
     {
-        if (!in_array($bodyType, array('base64'))) {
+        if (!in_array($bodyType, ['base64'])) {
             $bodyType = 'raw';
         }
 
@@ -37,7 +35,7 @@ class Gists extends AbstractApi
 
     public function all($type = null)
     {
-        if (!in_array($type, array('public', 'starred'))) {
+        if (!in_array($type, ['public', 'starred'])) {
             return $this->get('/gists');
         }
 
@@ -104,10 +102,8 @@ class Gists extends AbstractApi
      * Get a gist's comments.
      *
      * @link http://developer.github.com/v3/gists/comments/
-     *
-     * @return Comments
      */
-    public function comments()
+    public function comments(): Comments
     {
         return new Comments($this->client);
     }

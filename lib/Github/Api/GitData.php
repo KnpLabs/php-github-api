@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api;
 
@@ -19,7 +19,7 @@ class GitData extends AbstractApi
     /**
      * @return Blobs
      */
-    public function blobs()
+    public function blobs(): Blobs
     {
         return new Blobs($this->client);
     }
@@ -27,7 +27,7 @@ class GitData extends AbstractApi
     /**
      * @return Commits
      */
-    public function commits()
+    public function commits(): Commits
     {
         return new Commits($this->client);
     }
@@ -35,7 +35,7 @@ class GitData extends AbstractApi
     /**
      * @return References
      */
-    public function references()
+    public function references(): References
     {
         return new References($this->client);
     }
@@ -43,7 +43,7 @@ class GitData extends AbstractApi
     /**
      * @return Tags
      */
-    public function tags()
+    public function tags(): Tags
     {
         return new Tags($this->client);
     }
@@ -51,7 +51,7 @@ class GitData extends AbstractApi
     /**
      * @return Trees
      */
-    public function trees()
+    public function trees(): Trees
     {
         return new Trees($this->client);
     }

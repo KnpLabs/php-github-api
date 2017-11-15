@@ -1,16 +1,14 @@
-<?php
+<?php declare(strict_types=1);
+
 namespace Github\Tests\Api\Enterprise;
 
 use Github\Tests\Api\TestCase;
 
 class UserAdminTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldSuspendUser()
     {
-        $expectedArray = array();
+        $expectedArray = [];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -20,12 +18,9 @@ class UserAdminTest extends TestCase
         $this->assertEquals($expectedArray, $api->suspend('l3l0'));
     }
 
-    /**
-     * @test
-     */
     public function shouldUnsuspendUser()
     {
-        $expectedArray = array();
+        $expectedArray = [];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -36,10 +31,7 @@ class UserAdminTest extends TestCase
         $this->assertEquals($expectedArray, $api->unsuspend('l3l0'));
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Enterprise\UserAdmin::class;
     }

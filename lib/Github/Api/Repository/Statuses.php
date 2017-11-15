@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\Repository;
 
@@ -13,28 +13,16 @@ class Statuses extends AbstractApi
 {
     /**
      * @link http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-sha
-     *
-     * @param string $username
-     * @param string $repository
-     * @param string $sha
-     *
-     * @return array
      */
-    public function show($username, $repository, $sha)
+    public function show(string $username, string $repository, string $sha): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/commits/'.rawurlencode($sha).'/statuses');
     }
 
     /**
      * @link https://developer.github.com/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref
-     *
-     * @param string $username
-     * @param string $repository
-     * @param string $sha
-     *
-     * @return array
      */
-    public function combined($username, $repository, $sha)
+    public function combined(string $username, string $repository, string $sha): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/commits/'.rawurlencode($sha).'/status');
     }
@@ -42,16 +30,10 @@ class Statuses extends AbstractApi
     /**
      * @link http://developer.github.com/v3/repos/statuses/#create-a-status
      *
-     * @param string $username
-     * @param string $repository
-     * @param string $sha
-     * @param array  $params
      *
      * @throws MissingArgumentException
-     *
-     * @return array
      */
-    public function create($username, $repository, $sha, array $params = array())
+    public function create(string $username, string $repository, string $sha, array $params = []): array
     {
         if (!isset($params['state'])) {
             throw new MissingArgumentException('state');

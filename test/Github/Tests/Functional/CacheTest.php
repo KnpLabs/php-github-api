@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Functional;
 
@@ -13,9 +13,6 @@ use GuzzleHttp\Psr7\Response;
  */
 class CacheTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @test
-     */
     public function shouldServeCachedResponse()
     {
         $mockClient = new \Http\Mock\Client();
@@ -32,9 +29,6 @@ class CacheTest extends \PHPUnit\Framework\TestCase
         $userB = $github->currentUser()->show();
         $this->assertEquals('nyholm', $userB['login'], 'Two request following each other should be cached.');
     }
-    /**
-     * @test
-     */
     public function shouldVaryOnAuthorization()
     {
         $mockClient = new \Http\Mock\Client();

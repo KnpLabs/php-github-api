@@ -1,10 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api;
 
+use Github\Api\Enterprise\License;
 use Github\Api\Enterprise\ManagementConsole;
 use Github\Api\Enterprise\Stats;
-use Github\Api\Enterprise\License;
 use Github\Api\Enterprise\UserAdmin;
 
 /**
@@ -16,34 +16,22 @@ use Github\Api\Enterprise\UserAdmin;
  */
 class Enterprise extends AbstractApi
 {
-    /**
-     * @return Stats
-     */
-    public function stats()
+    public function stats(): Stats
     {
         return new Stats($this->client);
     }
 
-    /**
-     * @return License
-     */
-    public function license()
+    public function license(): License
     {
         return new License($this->client);
     }
 
-    /**
-     * @return ManagementConsole
-     */
-    public function console()
+    public function console(): ManagementConsole
     {
         return new ManagementConsole($this->client);
     }
 
-    /**
-     * @return UserAdmin
-     */
-    public function userAdmin()
+    public function userAdmin(): UserAdmin
     {
         return new UserAdmin($this->client);
     }

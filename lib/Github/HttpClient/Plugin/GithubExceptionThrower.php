@@ -1,15 +1,15 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\HttpClient\Plugin;
 
-use Http\Client\Common\Plugin;
-use Psr\Http\Message\RequestInterface;
-use Github\Exception\TwoFactorAuthenticationRequiredException;
-use Github\HttpClient\Message\ResponseMediator;
 use Github\Exception\ApiLimitExceedException;
 use Github\Exception\ErrorException;
 use Github\Exception\RuntimeException;
+use Github\Exception\TwoFactorAuthenticationRequiredException;
 use Github\Exception\ValidationFailedException;
+use Github\HttpClient\Message\ResponseMediator;
+use Http\Client\Common\Plugin;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -33,7 +33,7 @@ class GithubExceptionThrower implements Plugin
             if (null != $remaining && 1 > $remaining && 'rate_limit' !== substr($request->getRequestTarget(), 1, 10)) {
                 $limit = ResponseMediator::getHeader($response, 'X-RateLimit-Limit');
                 $reset = ResponseMediator::getHeader($response, 'X-RateLimit-Reset');
-                
+
                 throw new ApiLimitExceedException($limit, $reset);
             }
 
@@ -50,7 +50,7 @@ class GithubExceptionThrower implements Plugin
                 if (400 == $response->getStatusCode()) {
                     throw new ErrorException($content['message'], 400);
                 } elseif (422 == $response->getStatusCode() && isset($content['errors'])) {
-                    $errors = array();
+                    $errors = [];
                     foreach ($content['errors'] as $error) {
                         switch ($error['code']) {
                             case 'missing':
@@ -84,7 +84,7 @@ class GithubExceptionThrower implements Plugin
                 }
             }
 
-            throw new RuntimeException(isset($content['message']) ? $content['message'] : $content, $response->getStatusCode());
+            throw new RuntimeException($content['message'] ?? $content, $response->getStatusCode());
         });
     }
 }

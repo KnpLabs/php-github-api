@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\Repository;
 
@@ -31,7 +31,7 @@ class Protection extends AbstractApi
      *
      * @return array              The branch protection information
      */
-    public function show($username, $repository, $branch)
+    public function show(string $username, string $repository, string $branch): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches/'.rawurlencode($branch).'/protection');
     }
@@ -48,7 +48,7 @@ class Protection extends AbstractApi
      *
      * @return array              The updated branch protection information
      */
-    public function update($username, $repository, $branch, array $params = array())
+    public function update(string $username, string $repository, string $branch, array $params = []): array
     {
         return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches/'.rawurlencode($branch).'/protection', $params);
     }
@@ -62,7 +62,7 @@ class Protection extends AbstractApi
      * @param  string $repository The name of the repo
      * @param  string $branch     The name of the branch
      */
-    public function remove($username, $repository, $branch)
+    public function remove(string $username, string $repository, string $branch)
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches/'.rawurlencode($branch).'/protection');
     }
@@ -78,7 +78,7 @@ class Protection extends AbstractApi
      *
      * @return array              The required status checks information
      */
-    public function showStatusChecks($username, $repository, $branch)
+    public function showStatusChecks(string $username, string $repository, string $branch): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches/'.rawurlencode($branch).'/protection/required_status_checks');
     }
@@ -95,7 +95,7 @@ class Protection extends AbstractApi
      *
      * @return array              The updated branch status checks information
      */
-    public function updateStatusChecks($username, $repository, $branch, array $params = array())
+    public function updateStatusChecks(string $username, string $repository, string $branch, array $params = []): array
     {
         return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches/'.rawurlencode($branch).'/protection/required_status_checks', $params);
     }
@@ -109,7 +109,7 @@ class Protection extends AbstractApi
      * @param  string $repository The name of the repo
      * @param  string $branch     The name of the branch
      */
-    public function removeStatusChecks($username, $repository, $branch)
+    public function removeStatusChecks(string $username, string $repository, string $branch)
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches/'.rawurlencode($branch).'/protection/required_status_checks');
     }
@@ -125,7 +125,7 @@ class Protection extends AbstractApi
      *
      * @return array              The required status checks contexts information
      */
-    public function showStatusChecksContexts($username, $repository, $branch)
+    public function showStatusChecksContexts(string $username, string $repository, string $branch): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches/'.rawurlencode($branch).'/protection/required_status_checks/contexts');
     }
@@ -142,7 +142,7 @@ class Protection extends AbstractApi
      *
      * @return array              The new branch status checks contexts information
      */
-    public function replaceStatusChecksContexts($username, $repository, $branch, array $params = array())
+    public function replaceStatusChecksContexts(string $username, string $repository, string $branch, array $params = []): array
     {
         return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches/'.rawurlencode($branch).'/protection/required_status_checks/contexts', $params);
     }
@@ -159,7 +159,7 @@ class Protection extends AbstractApi
      *
      * @return array              The updated branch status checks contexts information
      */
-    public function addStatusChecksContexts($username, $repository, $branch, array $params = array())
+    public function addStatusChecksContexts(string $username, string $repository, string $branch, array $params = []): array
     {
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches/'.rawurlencode($branch).'/protection/required_status_checks/contexts', $params);
     }
@@ -176,7 +176,7 @@ class Protection extends AbstractApi
      *
      * @return array              The updated branch status checks contexts information
      */
-    public function removeStatusChecksContexts($username, $repository, $branch, array $params = array())
+    public function removeStatusChecksContexts(string $username, string $repository, string $branch, array $params = []): array
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches/'.rawurlencode($branch).'/protection/required_status_checks/contexts', $params);
     }
@@ -192,7 +192,7 @@ class Protection extends AbstractApi
      *
      * @return array              The pull request review enforcement information
      */
-    public function showPullRequestReviewEnforcement($username, $repository, $branch)
+    public function showPullRequestReviewEnforcement(string $username, string $repository, string $branch): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches/'.rawurlencode($branch).'/protection/required_pull_request_reviews');
     }
@@ -209,7 +209,7 @@ class Protection extends AbstractApi
      *
      * @return array              The updated branch status checks information
      */
-    public function updatePullRequestReviewEnforcement($username, $repository, $branch, array $params = array())
+    public function updatePullRequestReviewEnforcement(string $username, string $repository, string $branch, array $params = []): array
     {
         return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches/'.rawurlencode($branch).'/protection/required_pull_request_reviews', $params);
     }
@@ -223,7 +223,7 @@ class Protection extends AbstractApi
      * @param  string $repository The name of the repo
      * @param  string $branch     The name of the branch
      */
-    public function removePullRequestReviewEnforcement($username, $repository, $branch)
+    public function removePullRequestReviewEnforcement(string $username, string $repository, string $branch)
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches/'.rawurlencode($branch).'/protection/required_pull_request_reviews');
     }
@@ -239,7 +239,7 @@ class Protection extends AbstractApi
      *
      * @return array              The admin enforcement information
      */
-    public function showAdminEnforcement($username, $repository, $branch)
+    public function showAdminEnforcement(string $username, string $repository, string $branch): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches/'.rawurlencode($branch).'/protection/enforce_admins');
     }
@@ -255,7 +255,7 @@ class Protection extends AbstractApi
      *
      * @return array              The updated admin enforcement information
      */
-    public function addAdminEnforcement($username, $repository, $branch)
+    public function addAdminEnforcement(string $username, string $repository, string $branch): array
     {
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches/'.rawurlencode($branch).'/protection/enforce_admins');
     }
@@ -269,7 +269,7 @@ class Protection extends AbstractApi
      * @param  string $repository The name of the repo
      * @param  string $branch     The name of the branch
      */
-    public function removeAdminEnforcement($username, $repository, $branch)
+    public function removeAdminEnforcement(string $username, string $repository, string $branch)
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches/'.rawurlencode($branch).'/protection/enforce_admins');
     }
@@ -285,7 +285,7 @@ class Protection extends AbstractApi
      *
      * @return array              The branch restrictions information
      */
-    public function showRestrictions($username, $repository, $branch)
+    public function showRestrictions(string $username, string $repository, string $branch): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches/'.rawurlencode($branch).'/protection/restrictions');
     }
@@ -299,7 +299,7 @@ class Protection extends AbstractApi
      * @param  string $repository The name of the repo
      * @param  string $branch     The name of the branch
      */
-    public function removeRestrictions($username, $repository, $branch)
+    public function removeRestrictions(string $username, string $repository, string $branch)
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches/'.rawurlencode($branch).'/protection/restrictions');
     }
@@ -315,7 +315,7 @@ class Protection extends AbstractApi
      *
      * @return array              The branch team restrictions information
      */
-    public function showTeamRestrictions($username, $repository, $branch)
+    public function showTeamRestrictions(string $username, string $repository, string $branch): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches/'.rawurlencode($branch).'/protection/restrictions/teams');
     }
@@ -332,7 +332,7 @@ class Protection extends AbstractApi
      *
      * @return array              The new branch team restrictions information
      */
-    public function replaceTeamRestrictions($username, $repository, $branch, array $params = array())
+    public function replaceTeamRestrictions(string $username, string $repository, string $branch, array $params = []): array
     {
         return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches/'.rawurlencode($branch).'/protection/restrictions/teams', $params);
     }
@@ -349,7 +349,7 @@ class Protection extends AbstractApi
      *
      * @return array              The branch team restrictions information
      */
-    public function addTeamRestrictions($username, $repository, $branch, array $params = array())
+    public function addTeamRestrictions(string $username, string $repository, string $branch, array $params = []): array
     {
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches/'.rawurlencode($branch).'/protection/restrictions/teams', $params);
     }
@@ -366,7 +366,7 @@ class Protection extends AbstractApi
      *
      * @return array              The updated branch team restrictions information
      */
-    public function removeTeamRestrictions($username, $repository, $branch, array $params = array())
+    public function removeTeamRestrictions(string $username, string $repository, string $branch, array $params = []): array
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches/'.rawurlencode($branch).'/protection/restrictions/teams', $params);
     }
@@ -382,7 +382,7 @@ class Protection extends AbstractApi
      *
      * @return array              The branch user restrictions information
      */
-    public function showUserRestrictions($username, $repository, $branch)
+    public function showUserRestrictions(string $username, string $repository, string $branch): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches/'.rawurlencode($branch).'/protection/restrictions/users');
     }
@@ -399,7 +399,7 @@ class Protection extends AbstractApi
      *
      * @return array              The new branch user restrictions information
      */
-    public function replaceUserRestrictions($username, $repository, $branch, array $params = array())
+    public function replaceUserRestrictions(string $username, string $repository, string $branch, array $params = []): array
     {
         return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches/'.rawurlencode($branch).'/protection/restrictions/users', $params);
     }
@@ -416,7 +416,7 @@ class Protection extends AbstractApi
      *
      * @return array              The branch user restrictions information
      */
-    public function addUserRestrictions($username, $repository, $branch, array $params = array())
+    public function addUserRestrictions(string $username, string $repository, string $branch, array $params = []): array
     {
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches/'.rawurlencode($branch).'/protection/restrictions/users', $params);
     }
@@ -433,7 +433,7 @@ class Protection extends AbstractApi
      *
      * @return array              The updated branch user restrictions information
      */
-    public function removeUserRestrictions($username, $repository, $branch, array $params = array())
+    public function removeUserRestrictions(string $username, string $repository, string $branch, array $params = []): array
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches/'.rawurlencode($branch).'/protection/restrictions/users', $params);
     }

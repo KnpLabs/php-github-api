@@ -1,13 +1,8 @@
-<?php
-
+<?php declare(strict_types=1);
 use Github\Tests\Api\TestCase;
 
 class TrafficTest extends TestCase
 {
-
-    /**
-     * @test
-     */
     public function shouldgetReferers()
     {
         $expectedValue = json_encode(["referrer" => "github.com","count" => 112,"uniques" => 15]);
@@ -72,7 +67,7 @@ class TrafficTest extends TestCase
         $this->assertEquals($expectedValue, $result);
     }
 
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Repository\Traffic::class;
     }

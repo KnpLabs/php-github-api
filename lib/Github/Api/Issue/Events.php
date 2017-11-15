@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\Issue;
 
@@ -14,13 +14,9 @@ class Events extends AbstractApi
      * Get all events for an issue.
      *
      * @link https://developer.github.com/v3/issues/events/#list-events-for-an-issue
-     * @param string   $username
-     * @param string   $repository
      * @param int|null $issue
-     * @param int      $page
-     * @return array
      */
-    public function all($username, $repository, $issue = null, $page = 1)
+    public function all(string $username, string $repository, int $issue = null, int $page = 1): array
     {
         if (null !== $issue) {
             $path = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/events';
@@ -28,21 +24,17 @@ class Events extends AbstractApi
             $path = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/events';
         }
 
-        return $this->get($path, array(
+        return $this->get($path, [
             'page' => $page
-        ));
+        ]);
     }
 
     /**
      * Display an event for an issue.
      *
      * @link https://developer.github.com/v3/issues/events/#get-a-single-event
-     * @param $username
-     * @param $repository
-     * @param $event
-     * @return array
      */
-    public function show($username, $repository, $event)
+    public function show($username, $repository, $event): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/events/'.rawurlencode($event));
     }

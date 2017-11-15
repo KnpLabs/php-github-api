@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\CurrentUser;
 
@@ -14,16 +14,12 @@ class Followers extends AbstractApi
      * List followed users by the authenticated user.
      *
      * @link http://developer.github.com/v3/repos/followers/
-     *
-     * @param int $page
-     *
-     * @return array
      */
-    public function all($page = 1)
+    public function all(int $page = 1): array
     {
-        return $this->get('/user/following', array(
+        return $this->get('/user/following', [
             'page' => $page
-        ));
+        ]);
     }
 
     /**
@@ -32,10 +28,8 @@ class Followers extends AbstractApi
      * @link http://developer.github.com/v3/repos/followers/
      *
      * @param string $username the username to follow
-     *
-     * @return array
      */
-    public function check($username)
+    public function check(string $username): array
     {
         return $this->get('/user/following/'.rawurlencode($username));
     }
@@ -46,10 +40,8 @@ class Followers extends AbstractApi
      * @link http://developer.github.com/v3/repos/followers/
      *
      * @param string $username the username to follow
-     *
-     * @return array
      */
-    public function follow($username)
+    public function follow(string $username): array
     {
         return $this->put('/user/following/'.rawurlencode($username));
     }
@@ -60,10 +52,8 @@ class Followers extends AbstractApi
      * @link http://developer.github.com/v3/repos/followers/
      *
      * @param string $username the username to un-follow
-     *
-     * @return array
      */
-    public function unfollow($username)
+    public function unfollow(string $username): array
     {
         return $this->delete('/user/following/'.rawurlencode($username));
     }

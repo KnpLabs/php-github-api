@@ -1,18 +1,15 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
 class StarringTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetStarred()
     {
-        $expectedValue = array(
-            array('name' => 'l3l0/test'),
-            array('name' => 'cordoval/test')
-        );
+        $expectedValue = [
+            ['name' => 'l3l0/test'],
+            ['name' => 'cordoval/test']
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -23,9 +20,6 @@ class StarringTest extends TestCase
         $this->assertEquals($expectedValue, $api->all());
     }
 
-    /**
-     * @test
-     */
     public function shouldCheckStar()
     {
         $api = $this->getApiMock();
@@ -37,9 +31,6 @@ class StarringTest extends TestCase
         $this->assertNull($api->check('l3l0', 'test'));
     }
 
-    /**
-     * @test
-     */
     public function shouldStarUser()
     {
         $api = $this->getApiMock();
@@ -51,9 +42,6 @@ class StarringTest extends TestCase
         $this->assertNull($api->star('l3l0', 'test'));
     }
 
-    /**
-     * @test
-     */
     public function shouldUnstarUser()
     {
         $api = $this->getApiMock();
@@ -65,10 +53,7 @@ class StarringTest extends TestCase
         $this->assertNull($api->unstar('l3l0', 'test'));
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\CurrentUser\Starring::class;
     }

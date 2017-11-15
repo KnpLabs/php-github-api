@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Repository;
 
@@ -6,12 +6,9 @@ use Github\Tests\Api\TestCase;
 
 class ProjectsTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetAllRepositoryProjects()
     {
-        $expectedValue = array(array('name' => 'Test project 1'));
+        $expectedValue = [['name' => 'Test project 1']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -22,13 +19,9 @@ class ProjectsTest extends TestCase
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api'));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateWithoutName()
     {
-        $data = array();
+        $data = [];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -37,13 +30,10 @@ class ProjectsTest extends TestCase
         $api->create('KnpLabs', 'php-github-api', $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateColumn()
     {
-        $expectedValue = array('project1data');
-        $data = array('name' => 'Project 1');
+        $expectedValue = ['project1data'];
+        $data = ['name' => 'Project 1'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -54,10 +44,7 @@ class ProjectsTest extends TestCase
         $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', $data));
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Repository\Projects::class;
     }

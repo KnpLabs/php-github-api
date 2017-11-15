@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Organization;
 
@@ -6,12 +6,9 @@ use Github\Tests\Api\TestCase;
 
 class HooksTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetAllOrganizationsHooks()
     {
-        $expectedValue = array(array('name' => 'hook'));
+        $expectedValue = [['name' => 'hook']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -22,12 +19,9 @@ class HooksTest extends TestCase
         $this->assertEquals($expectedValue, $api->all('KnpLabs'));
     }
 
-    /**
-     * @test
-     */
     public function shouldShowHook()
     {
-        $expectedValue = array('hook' => 'somename');
+        $expectedValue = ['hook' => 'somename'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -38,12 +32,9 @@ class HooksTest extends TestCase
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 123));
     }
 
-    /**
-     * @test
-     */
     public function shouldRemoveHook()
     {
-        $expectedValue = array('someOutput');
+        $expectedValue = ['someOutput'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -54,13 +45,9 @@ class HooksTest extends TestCase
         $this->assertEquals($expectedValue, $api->remove('KnpLabs', 123));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateHookWithoutName()
     {
-        $data = array('config' => 'conf');
+        $data = ['config' => 'conf'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -69,13 +56,9 @@ class HooksTest extends TestCase
         $api->create('KnpLabs', $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateHookWithoutConfig()
     {
-        $data = array('name' => 'test');
+        $data = ['name' => 'test'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -84,13 +67,10 @@ class HooksTest extends TestCase
         $api->create('KnpLabs', $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateHook()
     {
-        $expectedValue = array('hook' => 'somename');
-        $data = array('name' => 'test', 'config' => 'someconfig');
+        $expectedValue = ['hook' => 'somename'];
+        $data = ['name' => 'test', 'config' => 'someconfig'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -101,13 +81,9 @@ class HooksTest extends TestCase
         $this->assertEquals($expectedValue, $api->create('KnpLabs', $data));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotUpdateHookWithoutConfig()
     {
-        $data = array();
+        $data = [];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -116,13 +92,10 @@ class HooksTest extends TestCase
         $api->update('KnpLabs', 123, $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldUpdateHook()
     {
-        $expectedValue = array('hook' => 'somename');
-        $data = array('config' => 'config');
+        $expectedValue = ['hook' => 'somename'];
+        $data = ['config' => 'config'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -133,9 +106,6 @@ class HooksTest extends TestCase
         $this->assertEquals($expectedValue, $api->update('KnpLabs', 123, $data));
     }
 
-    /**
-     * @test
-     */
     public function shouldPingHook()
     {
         $expectedValue = null;
@@ -149,10 +119,7 @@ class HooksTest extends TestCase
         $this->assertEquals($expectedValue, $api->ping('KnpLabs', 123));
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Organization\Hooks::class;
     }

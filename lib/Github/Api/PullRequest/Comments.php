@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\PullRequest;
 
@@ -20,16 +20,14 @@ class Comments extends AbstractApi
      * @link https://developer.github.com/v3/pulls/comments/#custom-media-types
      * @param string|null $bodyType
      * @param string|null @apiVersion
-     *
-     * @return self
      */
-    public function configure($bodyType = null, $apiVersion = null)
+    public function configure(string $bodyType = null, string $apiVersion = null): self
     {
-        if (!in_array($apiVersion, array('squirrel-girl-preview'))) {
+        if (!in_array($apiVersion, ['squirrel-girl-preview'])) {
             $apiVersion = $this->client->getApiVersion();
         }
 
-        if (!in_array($bodyType, array('text', 'html', 'full'))) {
+        if (!in_array($bodyType, ['text', 'html', 'full'])) {
             $bodyType = 'raw';
         }
 
@@ -49,10 +47,8 @@ class Comments extends AbstractApi
      * @param string   $repository  the repository
      * @param int|null $pullRequest the pull request number
      * @param array    $params      a list of extra parameters.
-     *
-     * @return array
      */
-    public function all($username, $repository, $pullRequest = null, array $params = [])
+    public function all(string $username, string $repository, int $pullRequest = null, array $params = []): array
     {
         if (null !== $pullRequest) {
             return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($pullRequest).'/comments');
@@ -74,10 +70,8 @@ class Comments extends AbstractApi
      * @param string $username   the username
      * @param string $repository the repository
      * @param int    $comment    the comment id
-     *
-     * @return array
      */
-    public function show($username, $repository, $comment)
+    public function show(string $username, string $repository, int $comment): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/comments/'.rawurlencode($comment));
     }
@@ -93,10 +87,8 @@ class Comments extends AbstractApi
      * @param array  $params      a list of extra parameters.
      *
      * @throws MissingArgumentException
-     *
-     * @return array
      */
-    public function create($username, $repository, $pullRequest, array $params)
+    public function create(string $username, string $repository, int $pullRequest, array $params): array
     {
         if (!isset($params['body'])) {
             throw new MissingArgumentException('body');
@@ -104,7 +96,7 @@ class Comments extends AbstractApi
 
         // If `in_reply_to` is set, other options are not necessary anymore
         if (!isset($params['in_reply_to']) && !isset($params['commit_id'], $params['path'], $params['position'])) {
-            throw new MissingArgumentException(array('commit_id', 'path', 'position'));
+            throw new MissingArgumentException(['commit_id', 'path', 'position']);
         }
 
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($pullRequest).'/comments', $params);
@@ -121,10 +113,8 @@ class Comments extends AbstractApi
      * @param array  $params     a list of extra parameters.
      *
      * @throws MissingArgumentException
-     *
-     * @return array
      */
-    public function update($username, $repository, $comment, array $params)
+    public function update(string $username, string $repository, int $comment, array $params): array
     {
         if (!isset($params['body'])) {
             throw new MissingArgumentException('body');
@@ -141,10 +131,8 @@ class Comments extends AbstractApi
      * @param string $username   the username
      * @param string $repository the repository
      * @param int    $comment    the comment id
-     *
-     * @return string
      */
-    public function remove($username, $repository, $comment)
+    public function remove(string $username, string $repository, int $comment): string
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/comments/'.rawurlencode($comment));
     }

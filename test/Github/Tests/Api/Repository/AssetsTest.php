@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Repository;
 
@@ -6,12 +6,9 @@ use Github\Tests\Api\TestCase;
 
 class AssetsTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetAllReleaseAssets()
     {
-        $expectedValue = array(array('asset1data'), array('asset2data'));
+        $expectedValue = [['asset1data'], ['asset2data']];
         $id = 76;
 
         $api = $this->getApiMock();
@@ -23,12 +20,9 @@ class AssetsTest extends TestCase
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', $id));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetSingleReleaseAsset()
     {
-        $expectedValue = array('assetData');
+        $expectedValue = ['assetData'];
         $assetId = 2;
 
         $api = $this->getApiMock();
@@ -40,10 +34,6 @@ class AssetsTest extends TestCase
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', $assetId));
     }
 
-    /**
-     * @test
-     * @requires PHP 5.3.4
-     */
     public function shouldCreateReleaseAsset()
     {
         if (!defined('OPENSSL_TLSEXT_SERVER_NAME') || !OPENSSL_TLSEXT_SERVER_NAME) {
@@ -66,14 +56,11 @@ class AssetsTest extends TestCase
         $this->assertEquals($body, $api->create('KnpLabs', 'php-github-api', $releaseId, $name, $contentType, $body));
     }
 
-    /**
-     * @test
-     */
     public function shouldEditReleaseAsset()
     {
-        $expectedValue = array('assetUpdatedData');
+        $expectedValue = ['assetUpdatedData'];
         $assetId = 5;
-        $data = array('name' => 'asset111_name_qweqwe');
+        $data = ['name' => 'asset111_name_qweqwe'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -84,14 +71,10 @@ class AssetsTest extends TestCase
         $this->assertEquals($expectedValue, $api->edit('KnpLabs', 'php-github-api', $assetId, $data));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotEditReleaseAssetWithoutName()
     {
         $assetId = 5;
-        $data = array('not_a_name' => 'just a value');
+        $data = ['not_a_name' => 'just a value'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -100,12 +83,9 @@ class AssetsTest extends TestCase
         $api->edit('KnpLabs', 'php-github-api', $assetId, $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldRemoveReleaseAsset()
     {
-        $expectedValue = array('assetUpdatedData');
+        $expectedValue = ['assetUpdatedData'];
         $assetId = 5;
 
         $api = $this->getApiMock();
@@ -117,10 +97,7 @@ class AssetsTest extends TestCase
         $this->assertEquals($expectedValue, $api->remove('KnpLabs', 'php-github-api', $assetId));
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Repository\Assets::class;
     }

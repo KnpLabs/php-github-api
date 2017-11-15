@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Integration;
 
@@ -9,9 +9,6 @@ use Github\ResultPager;
  */
 class ResultPagerTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldPaginateGetRequests()
     {
         $repositoriesApi = $this->client->api('user');
@@ -19,27 +16,14 @@ class ResultPagerTest extends TestCase
 
         $pager = $this->createPager();
 
-        $repositories = $pager->fetch($repositoriesApi, 'repositories', array('KnpLabs'));
+        $repositories = $pager->fetch($repositoriesApi, 'repositories', ['KnpLabs']);
         $this->assertCount(10, $repositories);
 
         $repositoriesApi->setPerPage(20);
-        $repositories = $pager->fetch($repositoriesApi, 'repositories', array('KnpLabs'));
+        $repositories = $pager->fetch($repositoriesApi, 'repositories', ['KnpLabs']);
         $this->assertCount(20, $repositories);
     }
 
-    /**
-     * @test
-     *
-     * response in a search api has different format:
-     *
-     * {
-     *  "total_count": 1,
-     *  "incomplete_results": false,
-     *  "items": []
-     * }
-     *
-     * and we need to extract result from `items`
-     */
     public function shouldGetAllResultsFromSearchApi()
     {
         $searchApi = $this->client->search();
@@ -47,7 +31,7 @@ class ResultPagerTest extends TestCase
 
         $pager = $this->createPager();
 
-        $users = $pager->fetch($searchApi, 'users', array('location:Kyiv'));
+        $users = $pager->fetch($searchApi, 'users', ['location:Kyiv']);
         $this->assertCount(10, $users);
     }
 

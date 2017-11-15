@@ -1,36 +1,33 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
 class MembershipsTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetMemberships()
     {
-        $expectedValue = array(
-            array(
-                'organization' => array(
+        $expectedValue = [
+            [
+                'organization' => [
                     'login' => 'octocat',
                     'id'    => 1,
-                ),
-                'user'         => array(
+                ],
+                'user'         => [
                     'login' => 'defunkt',
                     'id'    => 3,
-                ),
-            ),
-            array(
-                'organization' => array(
+                ],
+            ],
+            [
+                'organization' => [
                     'login' => 'invitocat',
                     'id'    => 2,
-                ),
-                'user'         => array(
+                ],
+                'user'         => [
                     'login' => 'defunkt',
                     'id'    => 3,
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -41,21 +38,18 @@ class MembershipsTest extends TestCase
         $this->assertEquals($expectedValue, $api->all());
     }
 
-    /**
-     * @test
-     */
     public function shouldGetMembershipsForOrganization()
     {
-        $expectedValue = array(
-            'organization' => array(
+        $expectedValue = [
+            'organization' => [
                 'login' => 'invitocat',
                 'id'    => 2,
-            ),
-            'user'         => array(
+            ],
+            'user'         => [
                 'login' => 'defunkt',
                 'id'    => 3,
-            ),
-        );
+            ],
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -66,14 +60,11 @@ class MembershipsTest extends TestCase
         $this->assertEquals($expectedValue, $api->organization('invitocat'));
     }
 
-    /**
-     * @test
-     */
     public function shouldEditMembershipsForOrganization()
     {
-        $expectedValue = array(
+        $expectedValue = [
             'state' => 'active',
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -84,10 +75,7 @@ class MembershipsTest extends TestCase
         $this->assertEquals($expectedValue, $api->edit('invitocat'));
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\CurrentUser\Memberships::class;
     }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Integration;
 
@@ -7,9 +7,6 @@ namespace Github\Tests\Integration;
  */
 class IssueCommentTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldRetrieveCommentsForIssue()
     {
         $username = 'KnpLabs';
@@ -29,10 +26,6 @@ class IssueCommentTest extends TestCase
         return $comment['id'];
     }
 
-    /**
-     * @test
-     * @depends shouldRetrieveCommentsForIssue
-     */
     public function shouldRetrieveSingleComment($commentId)
     {
         $username = 'KnpLabs';
@@ -48,15 +41,12 @@ class IssueCommentTest extends TestCase
         $this->assertArrayHasKey('updated_at', $comment);
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateCommentForIssue()
     {
         $username = 'KnpLabs';
         $repo     = 'php-github-api';
         $issue    = 13;
-        $params   = array('body' => '%');
+        $params   = ['body' => '%'];
 
         $comment = $this->client->api('issue')->comments()->create($username, $repo, $issue, $params);
 
@@ -69,15 +59,11 @@ class IssueCommentTest extends TestCase
 
         return $comment['id'];
     }
-    /**
-     * @test
-     * @depends shouldCreateCommentForIssue
-     */
     public function shouldUpdateCommentByCommentId($commentId)
     {
         $username = 'KnpLabs';
         $repo     = 'php-github-api';
-        $params   = array('body' => 'test update');
+        $params   = ['body' => 'test update'];
 
         $comment = $this->client->api('issue')->comments()->update($username, $repo, $commentId, $params);
 
@@ -91,10 +77,6 @@ class IssueCommentTest extends TestCase
         return $comment['id'];
     }
 
-    /**
-     * @test
-     * @depends shouldUpdateCommentByCommentId
-     */
     public function shouldRemoveCommentByCommentId($commentId)
     {
         $username = 'KnpLabs';

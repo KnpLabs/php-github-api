@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api;
 
@@ -15,7 +15,7 @@ class Meta extends AbstractApi
      *
      * @return array Information about the service of GitHub.com
      */
-    public function service()
+    public function service(): array
     {
         return $this->get('/meta');
     }

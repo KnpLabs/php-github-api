@@ -1,20 +1,17 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
 class IssueTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetIssues()
     {
-        $data = array(
+        $data = [
             'state' => 'open'
-        );
-        $sentData = $data + array(
+        ];
+        $sentData = $data + [
             'page' => 1
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -24,13 +21,10 @@ class IssueTest extends TestCase
         $api->all('ornicar', 'php-github-api', $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldGetIssuesUsingAdditionalParameters()
     {
-        $expectedArray = array(array('id' => '123'));
-        $data = array(
+        $expectedArray = [['id' => '123']];
+        $data = [
             'state' => 'open',
             'milestone' => '*',
             'assignee'  => 'l3l0',
@@ -38,10 +32,10 @@ class IssueTest extends TestCase
             'labels'    => 'bug,@high',
             'sort'      => 'created',
             'direction' => 'asc'
-        );
-        $sentData = $data + array(
+        ];
+        $sentData = $data + [
             'page' => 1
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -52,12 +46,9 @@ class IssueTest extends TestCase
         $this->assertEquals($expectedArray, $api->all('ornicar', 'php-github-api', $data));
     }
 
-    /**
-     * @test
-     */
     public function shouldShowIssue()
     {
-        $expectedArray = array('id' => '123');
+        $expectedArray = ['id' => '123'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -68,15 +59,12 @@ class IssueTest extends TestCase
         $this->assertEquals($expectedArray, $api->show('ornicar', 'php-github-api', 14));
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateIssue()
     {
-        $data = array(
+        $data = [
             'title' => 'some title',
             'body'  => 'some body'
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -86,15 +74,11 @@ class IssueTest extends TestCase
         $api->create('ornicar', 'php-github-api', $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateIssueWithoutTitle()
     {
-        $data = array(
+        $data = [
             'body'  => 'some body'
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -103,14 +87,11 @@ class IssueTest extends TestCase
         $api->create('ornicar', 'php-github-api', $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateIssueWithoutBody()
     {
-        $data = array(
+        $data = [
             'title' => 'some title'
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -120,14 +101,11 @@ class IssueTest extends TestCase
         $api->create('ornicar', 'php-github-api', $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldCloseIssue()
     {
-        $data = array(
+        $data = [
             'state' => 'closed',
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -137,14 +115,11 @@ class IssueTest extends TestCase
         $api->update('ornicar', 'php-github-api', 14, $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldReOpenIssue()
     {
-        $data = array(
+        $data = [
             'state' => 'open',
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -154,12 +129,9 @@ class IssueTest extends TestCase
         $api->update('ornicar', 'php-github-api', 14, $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldSearchOpenIssues()
     {
-        $expectedArray = array(array('id' => '123'));
+        $expectedArray = [['id' => '123']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -170,12 +142,9 @@ class IssueTest extends TestCase
         $this->assertEquals($expectedArray, $api->find('KnpLabs', 'php-github-api', 'open', 'Invalid Commits'));
     }
 
-    /**
-     * @test
-     */
     public function shouldSearchClosedIssues()
     {
-        $expectedArray = array(array('id' => '123'));
+        $expectedArray = [['id' => '123']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -186,12 +155,9 @@ class IssueTest extends TestCase
         $this->assertEquals($expectedArray, $api->find('KnpLabs', 'php-github-api', 'closed', 'Invalid Commits'));
     }
 
-    /**
-     * @test
-     */
     public function shouldSearchOpenIssuesWhenStateNotRecognized()
     {
-        $expectedArray = array(array('id' => '123'));
+        $expectedArray = [['id' => '123']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -202,9 +168,6 @@ class IssueTest extends TestCase
         $this->assertEquals($expectedArray, $api->find('KnpLabs', 'php-github-api', 'abc', 'Invalid Commits'));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetCommentsApiObject()
     {
         $api = $this->getApiMock();
@@ -212,9 +175,6 @@ class IssueTest extends TestCase
         $this->assertInstanceOf(\Github\Api\Issue\Comments::class, $api->comments());
     }
 
-    /**
-     * @test
-     */
     public function shouldGetEventsApiObject()
     {
         $api = $this->getApiMock();
@@ -222,9 +182,6 @@ class IssueTest extends TestCase
         $this->assertInstanceOf(\Github\Api\Issue\Events::class, $api->events());
     }
 
-    /**
-     * @test
-     */
     public function shouldGetLabelsApiObject()
     {
         $api = $this->getApiMock();
@@ -232,9 +189,6 @@ class IssueTest extends TestCase
         $this->assertInstanceOf(\Github\Api\Issue\Labels::class, $api->labels());
     }
 
-    /**
-     * @test
-     */
     public function shouldGetMilestonesApiObject()
     {
         $api = $this->getApiMock();
@@ -242,12 +196,9 @@ class IssueTest extends TestCase
         $this->assertInstanceOf(\Github\Api\Issue\Milestones::class, $api->milestones());
     }
 
-    /**
-     * @test
-     */
     public function shouldLockIssue()
     {
-        $parameters = array();
+        $parameters = [];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -257,12 +208,9 @@ class IssueTest extends TestCase
         $api->lock('knplabs', 'php-github-api', '1');
     }
 
-    /**
-     * @test
-     */
     public function shouldUnlockIssue()
     {
-        $parameters = array();
+        $parameters = [];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -272,10 +220,7 @@ class IssueTest extends TestCase
         $api->unlock('knplabs', 'php-github-api', '1');
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Issue::class;
     }

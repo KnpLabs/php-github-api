@@ -1,15 +1,12 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
 class EmailsTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetEmails()
     {
-        $expectedValue = array(array('email@example.com'));
+        $expectedValue = [['email@example.com']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -20,100 +17,77 @@ class EmailsTest extends TestCase
         $this->assertEquals($expectedValue, $api->all());
     }
 
-    /**
-     * @test
-     */
     public function shouldRemoveEmail()
     {
-        $expectedValue = array('some value');
+        $expectedValue = ['some value'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('/user/emails', array('email@example.com'))
+            ->with('/user/emails', ['email@example.com'])
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->remove('email@example.com'));
     }
 
-    /**
-     * @test
-     */
     public function shouldRemoveEmails()
     {
-        $expectedValue = array('some value');
+        $expectedValue = ['some value'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('/user/emails', array('email@example.com', 'email2@example.com'))
+            ->with('/user/emails', ['email@example.com', 'email2@example.com'])
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->remove(array('email@example.com', 'email2@example.com')));
+        $this->assertEquals($expectedValue, $api->remove(['email@example.com', 'email2@example.com']));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\InvalidArgumentException
-     */
     public function shouldNotRemoveEmailsWhenAreNotPass()
     {
         $api = $this->getApiMock();
         $api->expects($this->any())
             ->method('delete');
 
-        $api->remove(array());
+        $api->remove([]);
     }
 
-    /**
-     * @test
-     */
     public function shouldAddEmail()
     {
-        $expectedValue = array('some value');
+        $expectedValue = ['some value'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('/user/emails', array('email@example.com'))
+            ->with('/user/emails', ['email@example.com'])
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->add('email@example.com'));
     }
 
-    /**
-     * @test
-     */
     public function shouldAddEmails()
     {
-        $expectedValue = array('some value');
+        $expectedValue = ['some value'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('/user/emails', array('email@example.com', 'email2@example.com'))
+            ->with('/user/emails', ['email@example.com', 'email2@example.com'])
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->add(array('email@example.com', 'email2@example.com')));
+        $this->assertEquals($expectedValue, $api->add(['email@example.com', 'email2@example.com']));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\InvalidArgumentException
-     */
     public function shouldNotAddEmailsWhenAreNotPass()
     {
         $api = $this->getApiMock();
         $api->expects($this->any())
             ->method('post');
 
-        $api->add(array());
+        $api->add([]);
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\CurrentUser\Emails::class;
     }

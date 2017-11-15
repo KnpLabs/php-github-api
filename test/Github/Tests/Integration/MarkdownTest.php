@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Integration;
 
@@ -9,9 +9,6 @@ use Github\Api\Markdown;
  */
 class MarkdownTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldRetrieveParsedMarkdownContent()
     {
         /** @var Markdown $api */

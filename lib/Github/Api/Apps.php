@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api;
 
@@ -17,9 +17,9 @@ class Apps extends AbstractApi
      *
      * @return array token and token metadata
      */
-    public function createInstallationToken($installationId, $userId = null)
+    public function createInstallationToken(int $installationId, int $userId = null): array
     {
-        $parameters = array();
+        $parameters = [];
         if ($userId) {
             $parameters['user_id'] = $userId;
         }
@@ -31,10 +31,8 @@ class Apps extends AbstractApi
      * Find all installations for the authenticated application.
      *
      * @link https://developer.github.com/v3/apps/#find-installations
-     *
-     * @return array
      */
-    public function findInstallations()
+    public function findInstallations(): array
     {
         return $this->get('/app/installations');
     }
@@ -43,14 +41,10 @@ class Apps extends AbstractApi
      * List repositories that are accessible to the authenticated installation.
      *
      * @link https://developer.github.com/v3/apps/installations/#list-repositories
-     *
-     * @param int $userId
-     *
-     * @return array
      */
-    public function listRepositories($userId = null)
+    public function listRepositories(int $userId = null): array
     {
-        $parameters = array();
+        $parameters = [];
         if ($userId) {
             $parameters['user_id'] = $userId;
         }
@@ -62,13 +56,8 @@ class Apps extends AbstractApi
      * Add a single repository to an installation.
      *
      * @link https://developer.github.com/v3/apps/installations/#add-repository-to-installation
-     *
-     * @param int $installationId
-     * @param int $repositoryId
-     *
-     * @return array
      */
-    public function addRepository($installationId, $repositoryId)
+    public function addRepository(int $installationId, int $repositoryId): array
     {
         return $this->put('/installations/'.rawurlencode($installationId).'/repositories/'.rawurlencode($repositoryId));
     }
@@ -77,13 +66,8 @@ class Apps extends AbstractApi
      * Remove a single repository from an installation.
      *
      * @link https://developer.github.com/v3/apps/installations/#remove-repository-from-installation
-     *
-     * @param int $installationId
-     * @param int $repositoryId
-     *
-     * @return array
      */
-    public function removeRepository($installationId, $repositoryId)
+    public function removeRepository(int $installationId, int $repositoryId): array
     {
         return $this->delete('/installations/'.rawurlencode($installationId).'/repositories/'.rawurlencode($repositoryId));
     }

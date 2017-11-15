@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
@@ -6,15 +6,12 @@ use DateTime;
 
 class NotificationTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetNotifications()
     {
-        $parameters = array(
+        $parameters = [
             'all' => false,
             'participating' => false,
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -24,18 +21,15 @@ class NotificationTest extends TestCase
         $api->all();
     }
 
-    /**
-     * @test
-     */
     public function shouldGetNotificationsSince()
     {
         $since = new DateTime('now');
 
-        $parameters = array(
+        $parameters = [
             'all' => false,
             'participating' => false,
             'since' => $since->format(DateTime::ISO8601),
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -45,15 +39,12 @@ class NotificationTest extends TestCase
         $api->all(false, false, $since);
     }
 
-    /**
-     * @test
-     */
     public function shouldGetNotificationsIncludingAndParticipating()
     {
-        $parameters = array(
+        $parameters = [
             'all' => true,
             'participating' => true,
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -63,12 +54,9 @@ class NotificationTest extends TestCase
         $api->all(true, true);
     }
 
-    /**
-     * @test
-     */
     public function shouldMarkNotificationsAsRead()
     {
-        $parameters = array();
+        $parameters = [];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -78,16 +66,13 @@ class NotificationTest extends TestCase
         $api->markRead();
     }
 
-    /**
-     * @test
-     */
     public function shouldMarkNotificationsAsReadForGivenDate()
     {
         $since = new DateTime('now');
 
-        $parameters = array(
+        $parameters = [
             'last_read_at' => $since->format(DateTime::ISO8601),
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -96,10 +81,10 @@ class NotificationTest extends TestCase
 
         $api->markRead($since);
     }
-    
+
     public function shouldGetNotification()
     {
-        $id = mt_rand(1, time());
+        $id = random_int(1, time());
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -108,10 +93,7 @@ class NotificationTest extends TestCase
         $api->id($id);
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Notification::class;
     }

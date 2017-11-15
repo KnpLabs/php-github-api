@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\Project;
 
@@ -24,9 +24,9 @@ class Columns extends AbstractApi
         return $this;
     }
 
-    public function all($projectId, array $params = array())
+    public function all($projectId, array $params = [])
     {
-        return $this->get('/projects/' . rawurlencode($projectId) . '/columns', array_merge(array('page' => 1), $params));
+        return $this->get('/projects/' . rawurlencode($projectId) . '/columns', array_merge(['page' => 1], $params));
     }
 
     public function show($id)
@@ -37,7 +37,7 @@ class Columns extends AbstractApi
     public function create($projectId, array $params)
     {
         if (!isset($params['name'])) {
-            throw new MissingArgumentException(array('name'));
+            throw new MissingArgumentException(['name']);
         }
 
         return $this->post('/projects/' . rawurlencode($projectId) . '/columns', $params);
@@ -46,7 +46,7 @@ class Columns extends AbstractApi
     public function update($id, array $params)
     {
         if (!isset($params['name'])) {
-            throw new MissingArgumentException(array('name'));
+            throw new MissingArgumentException(['name']);
         }
 
         return $this->patch('/projects/columns/' . rawurlencode($id), $params);
@@ -60,7 +60,7 @@ class Columns extends AbstractApi
     public function move($id, array $params)
     {
         if (!isset($params['position'])) {
-            throw new MissingArgumentException(array('position'));
+            throw new MissingArgumentException(['position']);
         }
 
         return $this->post('/projects/columns/' . rawurlencode($id) . '/moves', $params);

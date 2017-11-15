@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\CurrentUser;
 
@@ -10,10 +10,8 @@ class Memberships extends AbstractApi
      * List your organization memberships.
      *
      * @link https://developer.github.com/v3/orgs/members/#get-your-organization-membership
-     *
-     * @return array
      */
-    public function all()
+    public function all(): array
     {
         return $this->get('/user/memberships/orgs');
     }
@@ -22,12 +20,8 @@ class Memberships extends AbstractApi
      * Get your organization membership.
      *
      * @link https://developer.github.com/v3/orgs/members/#get-your-organization-membership
-     *
-     * @param string $organization
-     *
-     * @return array
      */
-    public function organization($organization)
+    public function organization(string $organization): array
     {
         return $this->get('/user/memberships/orgs/'.rawurlencode($organization));
     }
@@ -36,13 +30,9 @@ class Memberships extends AbstractApi
      * Edit your organization membership
      *
      * @link https://developer.github.com/v3/orgs/members/#edit-your-organization-membership
-     *
-     * @param string $organization
-     *
-     * @return array
      */
-    public function edit($organization)
+    public function edit(string $organization): array
     {
-        return $this->patch('/user/memberships/orgs/'.rawurlencode($organization), array('state' => 'active'));
+        return $this->patch('/user/memberships/orgs/'.rawurlencode($organization), ['state' => 'active']);
     }
 }

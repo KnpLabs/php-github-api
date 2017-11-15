@@ -1,19 +1,15 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Miscellaneous;
 
-use Github\Api\Miscellaneous\Emojis;
 use Github\Api\Miscellaneous\Gitignore;
 use Github\Tests\Api\TestCase;
 
 class GitignoreTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetAllTemplates()
     {
-        $expectedArray = array(
+        $expectedArray = [
             'Actionscript',
             'Android',
             'AppceleratorTitanium',
@@ -21,7 +17,7 @@ class GitignoreTest extends TestCase
             'Bancha',
             'C',
             'C++'
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -32,15 +28,12 @@ class GitignoreTest extends TestCase
         $this->assertEquals($expectedArray, $api->all());
     }
 
-    /**
-     * @test
-     */
     public function shouldGetTemplate()
     {
-        $expectedArray = array(
+        $expectedArray = [
             'name' => 'C',
             'source' => "# Object files\n*.o\n\n# Libraries\n*.lib\n*.a"
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -51,10 +44,7 @@ class GitignoreTest extends TestCase
         $this->assertEquals($expectedArray, $api->show('C'));
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return Gitignore::class;
     }

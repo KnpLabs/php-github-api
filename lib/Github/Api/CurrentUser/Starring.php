@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\CurrentUser;
 
@@ -15,18 +15,13 @@ class Starring extends AbstractApi
      * List repositories starred by the authenticated user.
      *
      * @link https://developer.github.com/v3/activity/starring/
-     *
-     * @param int $page
-     * @param int $perPage
-     *
-     * @return array
      */
-    public function all($page = 1, $perPage = 30)
+    public function all(int $page = 1, int $perPage = 30): array
     {
-        return $this->get('/user/starred', array(
+        return $this->get('/user/starred', [
             'page' => $page,
             'per_page' => $perPage,
-        ));
+        ]);
     }
 
     /**
@@ -36,10 +31,8 @@ class Starring extends AbstractApi
      *
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
-     *
-     * @return array
      */
-    public function check($username, $repository)
+    public function check(string $username, string $repository): array
     {
         return $this->get('/user/starred/'.rawurlencode($username).'/'.rawurlencode($repository));
     }
@@ -51,10 +44,8 @@ class Starring extends AbstractApi
      *
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
-     *
-     * @return array
      */
-    public function star($username, $repository)
+    public function star(string $username, string $repository): array
     {
         return $this->put('/user/starred/'.rawurlencode($username).'/'.rawurlencode($repository));
     }
@@ -66,10 +57,8 @@ class Starring extends AbstractApi
      *
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
-     *
-     * @return array
      */
-    public function unstar($username, $repository)
+    public function unstar(string $username, string $repository): array
     {
         return $this->delete('/user/starred/'.rawurlencode($username).'/'.rawurlencode($repository));
     }

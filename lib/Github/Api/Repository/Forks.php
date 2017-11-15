@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\Repository;
 
@@ -10,16 +10,16 @@ use Github\Api\AbstractApi;
  */
 class Forks extends AbstractApi
 {
-    public function all($username, $repository, array $params = array())
+    public function all($username, $repository, array $params = [])
     {
-        if (isset($params['sort']) && !in_array($params['sort'], array('newest', 'oldest', 'watchers'))) {
+        if (isset($params['sort']) && !in_array($params['sort'], ['newest', 'oldest', 'watchers'])) {
             $params['sort'] = 'newest';
         }
 
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/forks', array_merge(array('page' => 1), $params));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/forks', array_merge(['page' => 1], $params));
     }
 
-    public function create($username, $repository, array $params = array())
+    public function create($username, $repository, array $params = [])
     {
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/forks', $params);
     }

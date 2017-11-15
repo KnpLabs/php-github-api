@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Issue;
 
@@ -6,29 +6,23 @@ use Github\Tests\Api\TestCase;
 
 class MilestonesTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetMilestones()
     {
-        $expectedValue = array(array('name' => 'l3l0repo'));
+        $expectedValue = [['name' => 'l3l0repo']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/milestones', array('page' => 1, 'state' => 'open', 'sort' => 'due_date', 'direction' => 'asc'))
+            ->with('/repos/KnpLabs/php-github-api/milestones', ['page' => 1, 'state' => 'open', 'sort' => 'due_date', 'direction' => 'asc'])
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api'));
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateMilestone()
     {
-        $expectedValue = array(array('title' => 'milestone'));
-        $data = array('title' => 'milestone');
+        $expectedValue = [['title' => 'milestone']];
+        $data = ['title' => 'milestone'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -39,14 +33,10 @@ class MilestonesTest extends TestCase
         $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', $data));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateMilestoneWithoutTitle()
     {
-        $expectedValue = array(array('title' => 'milestone'));
-        $data = array();
+        $expectedValue = [['title' => 'milestone']];
+        $data = [];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -55,46 +45,37 @@ class MilestonesTest extends TestCase
         $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', $data));
     }
 
-    /**
-     * @test
-     */
     public function shouldSetStateToOpenWhileCreationWhenStateParamNotRecognized()
     {
-        $expectedValue = array('title' => 'l3l0repo');
+        $expectedValue = ['title' => 'l3l0repo'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('/repos/KnpLabs/php-github-api/milestones', array('state' => 'open', 'title' => 'milestone'))
+            ->with('/repos/KnpLabs/php-github-api/milestones', ['state' => 'open', 'title' => 'milestone'])
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', array('state' => 'clos', 'title' => 'milestone')));
+        $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', ['state' => 'clos', 'title' => 'milestone']));
     }
 
-    /**
-     * @test
-     */
     public function shouldUpdateMilestone()
     {
-        $expectedValue = array(array('title' => 'milestone'));
-        $data = array('title' => 'milestone');
+        $expectedValue = [['title' => 'milestone']];
+        $data = ['title' => 'milestone'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
-            ->with('/repos/KnpLabs/php-github-api/milestones/123', array('title' => 'milestone'))
+            ->with('/repos/KnpLabs/php-github-api/milestones/123', ['title' => 'milestone'])
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->update('KnpLabs', 'php-github-api', 123, $data));
     }
 
-    /**
-     * @test
-     */
     public function shouldUpdateMilestoneWithClosedStatus()
     {
-        $expectedValue = array(array('title' => 'milestone'));
-        $data = array('title' => 'milestone', 'status' => 'closed');
+        $expectedValue = [['title' => 'milestone']];
+        $data = ['title' => 'milestone', 'status' => 'closed'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -105,77 +86,62 @@ class MilestonesTest extends TestCase
         $this->assertEquals($expectedValue, $api->update('KnpLabs', 'php-github-api', 123, $data));
     }
 
-    /**
-     * @test
-     */
     public function shouldSetStateToOpenWhileUpdateWhenStateParamNotRecognized()
     {
-        $expectedValue = array('title' => 'l3l0repo');
-        $data = array('title' => 'milestone', 'state' => 'some');
+        $expectedValue = ['title' => 'l3l0repo'];
+        $data = ['title' => 'milestone', 'state' => 'some'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
-            ->with('/repos/KnpLabs/php-github-api/milestones/123', array('state' => 'open', 'title' => 'milestone'))
+            ->with('/repos/KnpLabs/php-github-api/milestones/123', ['state' => 'open', 'title' => 'milestone'])
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->update('KnpLabs', 'php-github-api', 123, $data));
     }
 
-    /**
-     * @test
-     */
     public function shouldSortByDueDateWhenSortParamNotRecognized()
     {
-        $expectedValue = array(array('name' => 'l3l0repo'));
+        $expectedValue = [['name' => 'l3l0repo']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/milestones', array('page' => 1, 'state' => 'open', 'sort' => 'due_date', 'direction' => 'asc'))
+            ->with('/repos/KnpLabs/php-github-api/milestones', ['page' => 1, 'state' => 'open', 'sort' => 'due_date', 'direction' => 'asc'])
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', array('sort' => 'completenes')));
+        $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', ['sort' => 'completenes']));
     }
 
-    /**
-     * @test
-     */
     public function shouldSetStateToOpenWhenStateParamNotRecognized()
     {
-        $expectedValue = array(array('name' => 'l3l0repo'));
+        $expectedValue = [['name' => 'l3l0repo']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/milestones', array('page' => 1, 'state' => 'open', 'sort' => 'due_date', 'direction' => 'asc'))
+            ->with('/repos/KnpLabs/php-github-api/milestones', ['page' => 1, 'state' => 'open', 'sort' => 'due_date', 'direction' => 'asc'])
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', array('state' => 'clos')));
+        $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', ['state' => 'clos']));
     }
 
-    /**
-     * @test
-     */
     public function shouldSetDirectionToDescWhenDirectionParamNotRecognized()
     {
-        $expectedValue = array(array('name' => 'l3l0repo'));
+        $expectedValue = [['name' => 'l3l0repo']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/milestones', array('page' => 1, 'state' => 'open', 'sort' => 'due_date', 'direction' => 'asc'))
+            ->with('/repos/KnpLabs/php-github-api/milestones', ['page' => 1, 'state' => 'open', 'sort' => 'due_date', 'direction' => 'asc'])
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', array('direction' => 'asc')));
+        $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', ['direction' => 'asc']));
     }
 
-    /**
-     * @test
-     */
     public function shouldRemoveMilestones()
     {
-        $expectedValue = array('someOutput');
+        $expectedValue = ['someOutput'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -186,12 +152,9 @@ class MilestonesTest extends TestCase
         $this->assertEquals($expectedValue, $api->remove('KnpLabs', 'php-github-api', 123));
     }
 
-    /**
-     * @test
-     */
     public function shouldShowMilestone()
     {
-        $expectedValue = array('someOutput');
+        $expectedValue = ['someOutput'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -202,12 +165,9 @@ class MilestonesTest extends TestCase
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 123));
     }
 
-    /**
-     * @test
-     */
     public function shouldGetMilestoneLabels()
     {
-        $expectedValue = array(array('label'), array('label2'));
+        $expectedValue = [['label'], ['label2']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -218,10 +178,7 @@ class MilestonesTest extends TestCase
         $this->assertEquals($expectedValue, $api->labels('KnpLabs', 'php-github-api', 123));
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Issue\Milestones::class;
     }

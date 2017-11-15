@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Miscellaneous;
 
@@ -6,9 +6,6 @@ use Github\Tests\Api\TestCase;
 
 class MarkdownTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldRenderMarkdown()
     {
         $input  = 'Hello world github/linguist#1 **cool**, and #1!';
@@ -16,14 +13,11 @@ class MarkdownTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('/markdown', array('text' => $input, 'mode' => 'markdown'));
+            ->with('/markdown', ['text' => $input, 'mode' => 'markdown']);
 
         $api->render($input);
     }
 
-    /**
-     * @test
-     */
     public function shouldRenderMarkdownUsingGfmMode()
     {
         $input  = 'Hello world github/linguist#1 **cool**, and #1!';
@@ -31,14 +25,11 @@ class MarkdownTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('/markdown', array('text' => $input, 'mode' => 'gfm'));
+            ->with('/markdown', ['text' => $input, 'mode' => 'gfm']);
 
         $api->render($input, 'gfm');
     }
 
-    /**
-     * @test
-     */
     public function shouldSetModeToMarkdownWhenIsNotRecognized()
     {
         $input  = 'Hello world github/linguist#1 **cool**, and #1!';
@@ -46,14 +37,11 @@ class MarkdownTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('/markdown', array('text' => $input, 'mode' => 'markdown'));
+            ->with('/markdown', ['text' => $input, 'mode' => 'markdown']);
 
         $api->render($input, 'abc');
     }
 
-    /**
-     * @test
-     */
     public function shouldSetContextOnlyForGfmMode()
     {
         $input  = 'Hello world github/linguist#1 **cool**, and #1!';
@@ -61,20 +49,17 @@ class MarkdownTest extends TestCase
         $apiWithMarkdown = $this->getApiMock();
         $apiWithMarkdown->expects($this->once())
             ->method('post')
-            ->with('/markdown', array('text' => $input, 'mode' => 'markdown'));
+            ->with('/markdown', ['text' => $input, 'mode' => 'markdown']);
 
         $apiWithGfm = $this->getApiMock();
         $apiWithGfm->expects($this->once())
             ->method('post')
-            ->with('/markdown', array('text' => $input, 'mode' => 'gfm', 'context' => 'someContext'));
+            ->with('/markdown', ['text' => $input, 'mode' => 'gfm', 'context' => 'someContext']);
 
         $apiWithMarkdown->render($input, 'markdown', 'someContext');
         $apiWithGfm->render($input, 'gfm', 'someContext');
     }
 
-    /**
-     * @test
-     */
     public function shouldRenderRawFile()
     {
         $file  = 'file';
@@ -82,15 +67,12 @@ class MarkdownTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('/markdown/raw', array('file' => $file));
+            ->with('/markdown/raw', ['file' => $file]);
 
         $api->renderRaw($file);
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Markdown::class;
     }

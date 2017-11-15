@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Integration;
 
@@ -7,9 +7,6 @@ namespace Github\Tests\Integration;
  */
 class UserTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldShowUserData()
     {
         $username = 'KnpLabs';
@@ -30,18 +27,11 @@ class UserTest extends TestCase
         $this->assertArrayHasKey('html_url', $user);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\RuntimeException
-     */
     public function shouldNotUpdateUserWithoutAuthorization()
     {
-        $this->client->api('current_user')->update(array('email' => 'leszek.prabucki@gmail.com'));
+        $this->client->api('current_user')->update(['email' => 'leszek.prabucki@gmail.com']);
     }
 
-    /**
-     * @test
-     */
     public function shouldGetUsersWhoUserIsFollowing()
     {
         $username = 'l3l0';
@@ -53,9 +43,6 @@ class UserTest extends TestCase
         $this->assertArrayHasKey('login', $user);
     }
 
-    /**
-     * @test
-     */
     public function shouldGetFollowersUsers()
     {
         $username = 'cursedcoder';
@@ -67,27 +54,16 @@ class UserTest extends TestCase
         $this->assertArrayHasKey('login', $user);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\RuntimeException
-     */
     public function shouldNotFollowUserWithoutAuthorization()
     {
         $this->client->api('current_user')->follow()->follow('KnpLabs');
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\RuntimeException
-     */
     public function shouldNotUnfollowUserWithoutAuthorization()
     {
         $this->client->api('current_user')->follow()->unfollow('KnpLabs');
     }
 
-    /**
-     * @test
-     */
     public function shouldGetReposBeingWatched()
     {
         $username = 'l3l0';
@@ -111,9 +87,6 @@ class UserTest extends TestCase
         $this->assertArrayHasKey('svn_url', $repo);
     }
 
-    /**
-     * @test
-     */
     public function shouldGetReposBeingStarred()
     {
         $username = 'l3l0';

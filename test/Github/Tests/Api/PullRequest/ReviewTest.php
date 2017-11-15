@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\PullRequest;
 
@@ -8,9 +8,6 @@ use Github\Tests\Api\TestCase;
 
 class ReviewTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldGetAllReviewsForAPullRequest()
     {
         $expectedValue = [
@@ -61,9 +58,6 @@ class ReviewTest extends TestCase
         $this->assertSame($expectedValue, $api->all('octocat', 'Hello-World', 12));
     }
 
-    /**
-     * @test
-     */
     public function shouldShowReview()
     {
         $expectedValue = [
@@ -112,9 +106,6 @@ class ReviewTest extends TestCase
         $this->assertSame($expectedValue, $api->show('octocat', 'Hello-World', 12, 80));
     }
 
-    /**
-     * @test
-     */
     public function shouldDeleteReview()
     {
         $api = $this->getApiMock();
@@ -126,9 +117,6 @@ class ReviewTest extends TestCase
         $api->remove('octocat', 'Hello-World', 12, 80);
     }
 
-    /**
-     * @test
-     */
     public function shouldShowReviewComments()
     {
         $expectedValue = [
@@ -190,9 +178,6 @@ class ReviewTest extends TestCase
         $this->assertSame($expectedValue, $api->comments('octocat', 'Hello-World', 1, 42));
     }
 
-    /**
-     * @test
-     */
     public function shouldCreateReviewComment()
     {
         $data = [
@@ -210,10 +195,6 @@ class ReviewTest extends TestCase
         $api->create('octocat', 'Hello-World', 12, $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotCreateReviewWithoutEvent()
     {
         $data = [
@@ -229,10 +210,6 @@ class ReviewTest extends TestCase
         $api->create('octocat', 'Hello-World', 12, $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\InvalidArgumentException
-     */
     public function shouldNotCreateReviewWithInvalidEvent()
     {
         $data = [
@@ -249,9 +226,6 @@ class ReviewTest extends TestCase
         $api->create('octocat', 'Hello-World', 12, $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldSubmitReviewComment()
     {
         $expectedValue = [
@@ -304,10 +278,6 @@ class ReviewTest extends TestCase
         $this->assertSame($expectedValue, $api->submit('octocat', 'Hello-World', 12, 80, $data));
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
     public function shouldNotSubmitReviewWithoutEvent()
     {
         $data = [
@@ -323,10 +293,6 @@ class ReviewTest extends TestCase
         $api->submit('octocat', 'Hello-World', 12, 80, $data);
     }
 
-    /**
-     * @test
-     * @expectedException \Github\Exception\InvalidArgumentException
-     */
     public function shouldNotSubmitReviewWithInvalidEvent()
     {
         $data = [
@@ -343,9 +309,6 @@ class ReviewTest extends TestCase
         $api->submit('octocat', 'Hello-World', 12, 80, $data);
     }
 
-    /**
-     * @test
-     */
     public function shouldDismissReview()
     {
         $expectedValue = [
@@ -394,7 +357,7 @@ class ReviewTest extends TestCase
         $this->assertSame($expectedValue, $api->dismiss('octocat', 'Hello-World', 12, 80, 'Dismiss reason'));
     }
 
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return Review::class;
     }

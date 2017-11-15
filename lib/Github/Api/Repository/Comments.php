@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\Repository;
 
@@ -20,12 +20,10 @@ class Comments extends AbstractApi
      *
      * @link https://developer.github.com/v3/repos/comments/#custom-media-types
      * @param string|null $bodyType
-     *
-     * @return self
      */
-    public function configure($bodyType = null)
+    public function configure(string $bodyType = null): self
     {
-        if (!in_array($bodyType, array('raw', 'text', 'html'))) {
+        if (!in_array($bodyType, ['raw', 'text', 'html'])) {
             $bodyType = 'full';
         }
 

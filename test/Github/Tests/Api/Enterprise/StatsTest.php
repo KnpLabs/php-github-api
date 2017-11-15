@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Enterprise;
 
@@ -6,9 +6,6 @@ use Github\Tests\Api\TestCase;
 
 class StatsTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function shouldShowStats()
     {
         $expectedArray = $this->getStatsData();
@@ -36,35 +33,30 @@ class StatsTest extends TestCase
             ->with(sprintf('/enterprise/stats/%s', $type))
             ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($expectedArray, call_user_func(array($api, $type)));
+        $this->assertEquals($expectedArray, call_user_func([$api, $type]));
     }
 
-    /**
-     * @return array
-     */
-    public function getTypes()
+    public function getTypes(): array
     {
-        return array(
-            array('issues'),
-            array('hooks'),
-            array('milestones'),
-            array('orgs'),
-            array('comments'),
-            array('pages'),
-            array('users'),
-            array('gists'),
-            array('pulls'),
-            array('repos'),
-            array('all')
-        );
+        return [
+            ['issues'],
+            ['hooks'],
+            ['milestones'],
+            ['orgs'],
+            ['comments'],
+            ['pages'],
+            ['users'],
+            ['gists'],
+            ['pulls'],
+            ['repos'],
+            ['all']
+        ];
     }
 
     /**
-     * @param string $key
-     *
      * @return mixed
      */
-    protected function getStatsData($key = '')
+    protected function getStatsData(string $key = '')
     {
         $json = '{"repos":{"total_repos": 212, "root_repos": 194, "fork_repos": 18, "org_repos": 51,
         "total_pushes": 3082, "total_wikis": 15 }, "hooks": { "total_hooks": 27, "active_hooks": 23,
@@ -83,10 +75,7 @@ class StatsTest extends TestCase
         }
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Enterprise\Stats::class;
     }

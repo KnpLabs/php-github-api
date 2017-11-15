@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\HttpClient;
 
@@ -9,13 +9,10 @@ use Http\Client\Common\Plugin;
  */
 class BuilderTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @test
-     */
     public function shouldClearHeaders()
     {
         $builder = $this->getMockBuilder(\Github\HttpClient\Builder::class)
-            ->setMethods(array('addPlugin', 'removePlugin'))
+            ->setMethods(['addPlugin', 'removePlugin'])
             ->getMock();
         $builder->expects($this->once())
             ->method('addPlugin')
@@ -28,15 +25,12 @@ class BuilderTest extends \PHPUnit\Framework\TestCase
         $builder->clearHeaders();
     }
 
-    /**
-     * @test
-     */
     public function shouldAddHeaders()
     {
-        $headers = array('header1', 'header2');
+        $headers = ['header1', 'header2'];
 
         $client = $this->getMockBuilder(\Github\HttpClient\Builder::class)
-            ->setMethods(array('addPlugin', 'removePlugin'))
+            ->setMethods(['addPlugin', 'removePlugin'])
             ->getMock();
         $client->expects($this->once())
             ->method('addPlugin')
@@ -50,9 +44,6 @@ class BuilderTest extends \PHPUnit\Framework\TestCase
         $client->addHeaders($headers);
     }
 
-    /**
-     * @test
-     */
     public function appendingHeaderShouldAddAndRemovePlugin()
     {
         $expectedHeaders = [
@@ -60,7 +51,7 @@ class BuilderTest extends \PHPUnit\Framework\TestCase
         ];
 
         $client = $this->getMockBuilder(\Github\HttpClient\Builder::class)
-            ->setMethods(array('removePlugin', 'addPlugin'))
+            ->setMethods(['removePlugin', 'addPlugin'])
             ->getMock();
 
         $client->expects($this->once())

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\CurrentUser;
 
@@ -15,10 +15,8 @@ class PublicKeys extends AbstractApi
      * List deploy keys for the authenticated user.
      *
      * @link https://developer.github.com/v3/users/keys/
-     *
-     * @return array
      */
-    public function all()
+    public function all(): array
     {
         return $this->get('/user/keys');
     }
@@ -27,12 +25,8 @@ class PublicKeys extends AbstractApi
      * Shows deploy key for the authenticated user.
      *
      * @link https://developer.github.com/v3/users/keys/
-     *
-     * @param int $id
-     *
-     * @return array
      */
-    public function show($id)
+    public function show(int $id): array
     {
         return $this->get('/user/keys/'.rawurlencode($id));
     }
@@ -42,16 +36,13 @@ class PublicKeys extends AbstractApi
      *
      * @link https://developer.github.com/v3/users/keys/
      *
-     * @param array $params
      *
      * @throws \Github\Exception\MissingArgumentException
-     *
-     * @return array
      */
-    public function create(array $params)
+    public function create(array $params): array
     {
         if (!isset($params['title'], $params['key'])) {
-            throw new MissingArgumentException(array('title', 'key'));
+            throw new MissingArgumentException(['title', 'key']);
         }
 
         return $this->post('/user/keys', $params);
@@ -61,12 +52,8 @@ class PublicKeys extends AbstractApi
      * Removes deploy key for the authenticated user.
      *
      * @link https://developer.github.com/v3/users/keys/
-     *
-     * @param int $id
-     *
-     * @return array
      */
-    public function remove($id)
+    public function remove(int $id): array
     {
         return $this->delete('/user/keys/'.rawurlencode($id));
     }
