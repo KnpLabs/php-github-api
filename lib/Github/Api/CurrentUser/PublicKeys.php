@@ -36,7 +36,6 @@ class PublicKeys extends AbstractApi
      *
      * @link https://developer.github.com/v3/users/keys/
      *
-     *
      * @throws \Github\Exception\MissingArgumentException
      */
     public function create(array $params): array

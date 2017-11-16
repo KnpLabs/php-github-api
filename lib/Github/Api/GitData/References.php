@@ -48,8 +48,6 @@ class References extends AbstractApi
     /**
      * Create a reference for a repository.
      *
-     *
-     *
      * @throws \Github\Exception\MissingArgumentException
      */
     public function create(string $username, string $repository, array $params): array
@@ -63,8 +61,6 @@ class References extends AbstractApi
 
     /**
      * Update a reference for a repository.
-     *
-     *
      *
      * @throws \Github\Exception\MissingArgumentException
      */

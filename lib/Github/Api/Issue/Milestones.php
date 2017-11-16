@@ -51,7 +51,6 @@ class Milestones extends AbstractApi
      *
      * @link https://developer.github.com/v3/issues/milestones/#create-a-milestone
      *
-     *
      * @throws \Github\Exception\MissingArgumentException
      */
     public function create(string $username, string $repository, array $params): array

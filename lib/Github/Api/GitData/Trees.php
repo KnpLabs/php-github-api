@@ -22,8 +22,6 @@ class Trees extends AbstractApi
     /**
      * Create tree for a repository.
      *
-     *
-     *
      * @throws \Github\Exception\MissingArgumentException
      */
     public function create(string $username, string $repository, array $params): array

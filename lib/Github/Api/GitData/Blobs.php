@@ -42,8 +42,6 @@ class Blobs extends AbstractApi
     /**
      * Create a blob of a sha for a repository.
      *
-     *
-     *
      * @throws \Github\Exception\MissingArgumentException
      */
     public function create(string $username, string $repository, array $params): array

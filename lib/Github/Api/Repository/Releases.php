@@ -55,7 +55,6 @@ class Releases extends AbstractApi
     /**
      * Create new release in selected repository.
      *
-     *
      * @throws MissingArgumentException
      */
     public function create(string $username, string $repository, array $params): array

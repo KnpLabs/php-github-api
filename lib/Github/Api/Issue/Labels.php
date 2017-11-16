@@ -44,7 +44,6 @@ class Labels extends AbstractApi
      *
      * @link https://developer.github.com/v3/issues/labels/#create-a-label
      *
-     *
      * @throws \Github\Exception\MissingArgumentException
      */
     public function create(string $username, string $repository, array $params): array

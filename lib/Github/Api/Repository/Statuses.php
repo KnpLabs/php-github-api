@@ -30,7 +30,6 @@ class Statuses extends AbstractApi
     /**
      * @link http://developer.github.com/v3/repos/statuses/#create-a-status
      *
-     *
      * @throws MissingArgumentException
      */
     public function create(string $username, string $repository, string $sha, array $params = []): array

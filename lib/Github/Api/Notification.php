@@ -19,7 +19,6 @@ class Notification extends AbstractApi
      *
      * @link https://developer.github.com/v3/activity/notifications/
      *
-     *
      * @return array|null array of notifications
      */
     public function all(bool $includingRead = false, bool $participating = false, DateTime $since = null)

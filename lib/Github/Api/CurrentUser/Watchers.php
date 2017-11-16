@@ -16,7 +16,6 @@ class Watchers extends AbstractApi
      *
      * @link https://developer.github.com/v3/activity/watching/
      *
-     *
      * @return array|null
      */
     public function all(int $page = 1)
