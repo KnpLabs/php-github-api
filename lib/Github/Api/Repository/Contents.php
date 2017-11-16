@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\Repository;
 
@@ -25,9 +25,9 @@ class Contents extends AbstractApi
      *
      * @return self
      */
-    public function configure($bodyType = null)
+    public function configure(string $bodyType = null): self
     {
-        if (!in_array($bodyType, array('html', 'object'))) {
+        if (!in_array($bodyType, ['html', 'object'])) {
             $bodyType = 'raw';
         }
 
@@ -47,11 +47,11 @@ class Contents extends AbstractApi
      *
      * @return array information for README file
      */
-    public function readme($username, $repository, $reference = null)
+    public function readme(string $username, string $repository, string $reference = null): array
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/readme', array(
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/readme', [
             'ref' => $reference
-        ));
+        ]);
     }
 
     /**
@@ -66,16 +66,16 @@ class Contents extends AbstractApi
      *
      * @return array|string information for file | information for each item in directory
      */
-    public function show($username, $repository, $path = null, $reference = null)
+    public function show(string $username, string $repository, string $path = null, string $reference = null)
     {
         $url = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents';
         if (null !== $path) {
             $url .= '/'.rawurlencode($path);
         }
 
-        return $this->get($url, array(
+        return $this->get($url, [
             'ref' => $reference
-        ));
+        ]);
     }
 
     /**
@@ -95,14 +95,14 @@ class Contents extends AbstractApi
      *
      * @return array information about the new file
      */
-    public function create($username, $repository, $path, $content, $message, $branch = null, array $committer = null)
+    public function create(string $username, string $repository, string $path, string $content, string $message, string $branch = null, array $committer = null): array
     {
         $url = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
 
-        $parameters = array(
+        $parameters = [
           'content' => base64_encode($content),
           'message' => $message,
-        );
+        ];
 
         if (null !== $branch) {
             $parameters['branch'] = $branch;
@@ -110,7 +110,7 @@ class Contents extends AbstractApi
 
         if (null !== $committer) {
             if (!isset($committer['name'], $committer['email'])) {
-                throw new MissingArgumentException(array('name', 'email'));
+                throw new MissingArgumentException(['name', 'email']);
             }
             $parameters['committer'] = $committer;
         }
@@ -128,7 +128,7 @@ class Contents extends AbstractApi
      *
      * @return bool
      */
-    public function exists($username, $repository, $path, $reference = null)
+    public function exists(string $username, string $repository, string $path, string $reference = null): bool
     {
         $url = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents';
 
@@ -137,16 +137,16 @@ class Contents extends AbstractApi
         }
 
         try {
-            $response = $this->head($url, array(
+            $response = $this->head($url, [
                 'ref' => $reference
-            ));
+            ]);
 
             if ($response->getStatusCode() != 200) {
                 return false;
             }
         } catch (TwoFactorAuthenticationRequiredException $ex) {
             throw $ex;
-        } catch (\Exception $ex) {
+        } catch (\Throwable $ex) {
             return false;
         }
 
@@ -171,15 +171,15 @@ class Contents extends AbstractApi
      *
      * @return array information about the updated file
      */
-    public function update($username, $repository, $path, $content, $message, $sha, $branch = null, array $committer = null)
+    public function update(string $username, string $repository, string $path, string $content, string $message, string $sha, string $branch = null, array $committer = null): array
     {
         $url = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
 
-        $parameters = array(
+        $parameters = [
           'content' => base64_encode($content),
           'message' => $message,
           'sha'     => $sha,
-        );
+        ];
 
         if (null !== $branch) {
             $parameters['branch'] = $branch;
@@ -187,7 +187,7 @@ class Contents extends AbstractApi
 
         if (null !== $committer) {
             if (!isset($committer['name'], $committer['email'])) {
-                throw new MissingArgumentException(array('name', 'email'));
+                throw new MissingArgumentException(['name', 'email']);
             }
             $parameters['committer'] = $committer;
         }
@@ -212,14 +212,14 @@ class Contents extends AbstractApi
      *
      * @return array information about the updated file
      */
-    public function rm($username, $repository, $path, $message, $sha, $branch = null, array $committer = null)
+    public function rm(string $username, string $repository, string $path, string $message, string $sha, string $branch = null, array $committer = null): array
     {
         $url = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
 
-        $parameters = array(
+        $parameters = [
           'message' => $message,
           'sha'     => $sha,
-        );
+        ];
 
         if (null !== $branch) {
             $parameters['branch'] = $branch;
@@ -227,7 +227,7 @@ class Contents extends AbstractApi
 
         if (null !== $committer) {
             if (!isset($committer['name'], $committer['email'])) {
-                throw new MissingArgumentException(array('name', 'email'));
+                throw new MissingArgumentException(['name', 'email']);
             }
             $parameters['committer'] = $committer;
         }
@@ -247,9 +247,9 @@ class Contents extends AbstractApi
      *
      * @return array information for archives
      */
-    public function archive($username, $repository, $format, $reference = null)
+    public function archive(string $username, string $repository, string $format, string $reference = null): array
     {
-        if (!in_array($format, array('tarball', 'zipball'))) {
+        if (!in_array($format, ['tarball', 'zipball'])) {
             $format = 'tarball';
         }
 
@@ -270,7 +270,7 @@ class Contents extends AbstractApi
      *
      * @return null|string content of file, or null in case of base64_decode failure
      */
-    public function download($username, $repository, $path, $reference = null)
+    public function download(string $username, string $repository, string $path, string $reference = null)
     {
         $file = $this->show($username, $repository, $path, $reference);
 

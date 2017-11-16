@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
@@ -9,7 +9,7 @@ class AuthorizationsTest extends TestCase
      */
     public function shouldGetAllAuthorizations()
     {
-        $expectedArray = array(array('id' => '123'));
+        $expectedArray = [['id' => '123']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -26,7 +26,7 @@ class AuthorizationsTest extends TestCase
     public function shouldShowAuthorization()
     {
         $id = 123;
-        $expectedArray = array('id' => $id);
+        $expectedArray = ['id' => $id];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -42,9 +42,9 @@ class AuthorizationsTest extends TestCase
      */
     public function shouldAuthorization()
     {
-        $input = array(
+        $input = [
             'note' => '',
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -60,9 +60,9 @@ class AuthorizationsTest extends TestCase
     public function shouldUpdateAuthorization()
     {
         $id = 123;
-        $input = array(
+        $input = [
             'note' => '',
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -93,7 +93,7 @@ class AuthorizationsTest extends TestCase
     {
         $id = 123;
         $token = 'abc';
-        $expectedArray = array('id' => $id);
+        $expectedArray = ['id' => $id];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -154,7 +154,7 @@ class AuthorizationsTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Authorizations::class;
     }

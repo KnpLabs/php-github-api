@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
@@ -9,10 +9,10 @@ class StarringTest extends TestCase
      */
     public function shouldGetStarred()
     {
-        $expectedValue = array(
-            array('name' => 'l3l0/test'),
-            array('name' => 'cordoval/test')
-        );
+        $expectedValue = [
+            ['name' => 'l3l0/test'],
+            ['name' => 'cordoval/test']
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -68,7 +68,7 @@ class StarringTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\CurrentUser\Starring::class;
     }

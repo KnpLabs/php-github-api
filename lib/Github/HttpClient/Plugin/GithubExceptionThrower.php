@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\HttpClient\Plugin;
 
@@ -50,7 +50,7 @@ class GithubExceptionThrower implements Plugin
                 if (400 == $response->getStatusCode()) {
                     throw new ErrorException($content['message'], 400);
                 } elseif (422 == $response->getStatusCode() && isset($content['errors'])) {
-                    $errors = array();
+                    $errors = [];
                     foreach ($content['errors'] as $error) {
                         switch ($error['code']) {
                             case 'missing':
@@ -84,7 +84,7 @@ class GithubExceptionThrower implements Plugin
                 }
             }
 
-            throw new RuntimeException(isset($content['message']) ? $content['message'] : $content, $response->getStatusCode());
+            throw new RuntimeException($content['message'] ?? $content, $response->getStatusCode());
         });
     }
 }

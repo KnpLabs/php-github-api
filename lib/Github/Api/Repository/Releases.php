@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\Repository;
 
@@ -20,7 +20,7 @@ class Releases extends AbstractApi
      *
      * @return array
      */
-    public function latest($username, $repository)
+    public function latest($username, $repository): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/latest');
     }
@@ -34,7 +34,7 @@ class Releases extends AbstractApi
      *
      * @return array
      */
-    public function tag($username, $repository, $tag)
+    public function tag($username, $repository, $tag): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/tags/'.rawurlencode($tag));
     }
@@ -48,7 +48,7 @@ class Releases extends AbstractApi
      *
      * @return array
      */
-    public function all($username, $repository, array $params = [])
+    public function all(string $username, string $repository, array $params = []): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases', $params);
     }
@@ -62,7 +62,7 @@ class Releases extends AbstractApi
      *
      * @return array
      */
-    public function show($username, $repository, $id)
+    public function show(string $username, string $repository, int $id): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode($id));
     }
@@ -78,7 +78,7 @@ class Releases extends AbstractApi
      *
      * @return array
      */
-    public function create($username, $repository, array $params)
+    public function create(string $username, string $repository, array $params): array
     {
         if (!isset($params['tag_name'])) {
             throw new MissingArgumentException('tag_name');
@@ -97,7 +97,7 @@ class Releases extends AbstractApi
      *
      * @return array
      */
-    public function edit($username, $repository, $id, array $params)
+    public function edit(string $username, string $repository, int $id, array $params): array
     {
         return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode($id), $params);
     }
@@ -111,7 +111,7 @@ class Releases extends AbstractApi
      *
      * @return array
      */
-    public function remove($username, $repository, $id)
+    public function remove(string $username, string $repository, int $id): array
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode($id));
     }
@@ -119,7 +119,7 @@ class Releases extends AbstractApi
     /**
      * @return Assets
      */
-    public function assets()
+    public function assets(): Assets
     {
         return new Assets($this->client);
     }

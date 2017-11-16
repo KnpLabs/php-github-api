@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Repository;
 
@@ -11,7 +11,7 @@ class DownloadsTest extends TestCase
      */
     public function shouldGetAllRepositoryDownloads()
     {
-        $expectedValue = array(array('download'));
+        $expectedValue = [['download']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -27,7 +27,7 @@ class DownloadsTest extends TestCase
      */
     public function shouldShowRepositoryDownload()
     {
-        $expectedValue = array('download');
+        $expectedValue = ['download'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -57,7 +57,7 @@ class DownloadsTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Repository\Downloads::class;
     }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api;
 
@@ -19,7 +19,7 @@ class Enterprise extends AbstractApi
     /**
      * @return Stats
      */
-    public function stats()
+    public function stats(): Stats
     {
         return new Stats($this->client);
     }
@@ -27,7 +27,7 @@ class Enterprise extends AbstractApi
     /**
      * @return License
      */
-    public function license()
+    public function license(): License
     {
         return new License($this->client);
     }
@@ -35,7 +35,7 @@ class Enterprise extends AbstractApi
     /**
      * @return ManagementConsole
      */
-    public function console()
+    public function console(): ManagementConsole
     {
         return new ManagementConsole($this->client);
     }
@@ -43,7 +43,7 @@ class Enterprise extends AbstractApi
     /**
      * @return UserAdmin
      */
-    public function userAdmin()
+    public function userAdmin(): UserAdmin
     {
         return new UserAdmin($this->client);
     }

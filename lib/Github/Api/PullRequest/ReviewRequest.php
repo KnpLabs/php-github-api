@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\PullRequest;
 
@@ -27,7 +27,7 @@ class ReviewRequest extends AbstractApi
      *
      * @return array
      */
-    public function all($username, $repository, $pullRequest, array $params = [])
+    public function all(string $username, string $repository, int $pullRequest, array $params = []): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.$pullRequest.'/requested_reviewers', $params);
     }
@@ -42,7 +42,7 @@ class ReviewRequest extends AbstractApi
      *
      * @return string
      */
-    public function create($username, $repository, $pullRequest, array $reviewers)
+    public function create(string $username, string $repository, int $pullRequest, array $reviewers): string
     {
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.$pullRequest.'/requested_reviewers', ['reviewers' => $reviewers]);
     }
@@ -57,7 +57,7 @@ class ReviewRequest extends AbstractApi
      *
      * @return string
      */
-    public function remove($username, $repository, $pullRequest, array $reviewers)
+    public function remove(string $username, string $repository, int $pullRequest, array $reviewers): string
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.$pullRequest.'/requested_reviewers', ['reviewers' => $reviewers]);
     }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\Repository;
 
@@ -22,7 +22,7 @@ class Assets extends AbstractApi
      *
      * @return array
      */
-    public function all($username, $repository, $id)
+    public function all(string $username, string $repository, int $id): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode($id).'/assets');
     }
@@ -37,7 +37,7 @@ class Assets extends AbstractApi
      *
      * @return array
      */
-    public function show($username, $repository, $id)
+    public function show(string $username, string $repository, int $id): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/assets/'.rawurlencode($id));
     }
@@ -64,7 +64,7 @@ class Assets extends AbstractApi
      *
      * @return array
      */
-    public function create($username, $repository, $id, $name, $contentType, $content)
+    public function create(string $username, string $repository, int $id, string $name, string $contentType, string $content): array
     {
         if (!defined('OPENSSL_TLSEXT_SERVER_NAME') || !OPENSSL_TLSEXT_SERVER_NAME) {
             throw new ErrorException('Asset upload support requires Server Name Indication. This is not supported by your PHP version. See http://php.net/manual/en/openssl.constsni.php.');
@@ -73,7 +73,7 @@ class Assets extends AbstractApi
         // Asset creation requires a separate endpoint, uploads.github.com.
         // Change the base url for the HTTP client temporarily while we execute
         // this request.
-        $response = $this->postRaw('https://uploads.github.com/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode($id).'/assets?name='.$name, $content, array('Content-Type' => $contentType));
+        $response = $this->postRaw('https://uploads.github.com/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode($id).'/assets?name='.$name, $content, ['Content-Type' => $contentType]);
 
         return $response;
     }
@@ -91,7 +91,7 @@ class Assets extends AbstractApi
      *
      * @return array
      */
-    public function edit($username, $repository, $id, array $params)
+    public function edit(string $username, string $repository, int $id, array $params): array
     {
         if (!isset($params['name'])) {
             throw new MissingArgumentException('name');
@@ -110,7 +110,7 @@ class Assets extends AbstractApi
      *
      * @return array
      */
-    public function remove($username, $repository, $id)
+    public function remove(string $username, string $repository, int $id): array
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/assets/'.rawurlencode($id));
     }

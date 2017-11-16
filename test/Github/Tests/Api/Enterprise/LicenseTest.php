@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Enterprise;
 
@@ -11,14 +11,14 @@ class LicenseTest extends TestCase
      */
     public function shouldShowLicenseInformation()
     {
-        $expectedArray = array(
+        $expectedArray = [
             'seats' => 1400,
             'seats_used' => 1316,
             'seats_available' => 84,
             'kind' => 'standard',
             'days_until_expiration' => 365,
             'expire_at' => '2016/02/06 12:41:52 -0600'
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -32,7 +32,7 @@ class LicenseTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Enterprise\License::class;
     }

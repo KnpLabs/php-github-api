@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github;
 
@@ -39,7 +39,6 @@ class ResultPager implements ResultPagerInterface
      * $api = $client->api('someApi');
      * $pager = new \Github\ResultPager($client);
      *
-     * @param \Github\Client $client
      */
     public function __construct(Client $client)
     {
@@ -57,7 +56,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetch(ApiInterface $api, $method, array $parameters = array())
+    public function fetch(ApiInterface $api, $method, array $parameters = [])
     {
         $result = $this->callApi($api, $method, $parameters);
         $this->postFetch();
@@ -68,7 +67,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetchAll(ApiInterface $api, $method, array $parameters = array())
+    public function fetchAll(ApiInterface $api, $method, array $parameters = [])
     {
         $isSearch = $api instanceof Search;
 
@@ -82,7 +81,7 @@ class ResultPager implements ResultPagerInterface
         $this->postFetch();
 
         if ($isSearch) {
-            $result = isset($result['items']) ? $result['items'] : $result;
+            $result = $result['items'] ?? $result;
         }
 
         while ($this->hasNext()) {
@@ -179,7 +178,6 @@ class ResultPager implements ResultPagerInterface
     }
 
     /**
-     * @param ApiInterface $api
      * @param $method
      * @param array $parameters
      *
@@ -187,6 +185,6 @@ class ResultPager implements ResultPagerInterface
      */
     protected function callApi(ApiInterface $api, $method, array $parameters)
     {
-        return call_user_func_array(array($api, $method), $parameters);
+        return call_user_func_array([$api, $method], $parameters);
     }
 }

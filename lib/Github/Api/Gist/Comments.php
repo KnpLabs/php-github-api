@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\Gist;
 
@@ -21,9 +21,9 @@ class Comments extends AbstractApi
      *
      * @return self
      */
-    public function configure($bodyType = null)
+    public function configure(string $bodyType = null): self
     {
-        if (!in_array($bodyType, array('text', 'html', 'full'))) {
+        if (!in_array($bodyType, ['text', 'html', 'full'])) {
             $bodyType = 'raw';
         }
 
@@ -39,7 +39,7 @@ class Comments extends AbstractApi
      *
      * @return array
      */
-    public function all($gist)
+    public function all(string $gist): array
     {
         return $this->get('/gists/'.rawurlencode($gist).'/comments');
     }
@@ -52,7 +52,7 @@ class Comments extends AbstractApi
      *
      * @return array
      */
-    public function show($gist, $comment)
+    public function show(string $gist, int $comment): array
     {
         return $this->get('/gists/'.rawurlencode($gist).'/comments/'.rawurlencode($comment));
     }
@@ -65,9 +65,9 @@ class Comments extends AbstractApi
      *
      * @return array
      */
-    public function create($gist, $body)
+    public function create(string $gist, string $body): array
     {
-        return $this->post('/gists/'.rawurlencode($gist).'/comments', array('body' => $body));
+        return $this->post('/gists/'.rawurlencode($gist).'/comments', ['body' => $body]);
     }
 
     /**
@@ -79,9 +79,9 @@ class Comments extends AbstractApi
      *
      * @return array
      */
-    public function update($gist, $comment_id, $body)
+    public function update(string $gist, int $comment_id, string $body): array
     {
-        return $this->patch('/gists/'.rawurlencode($gist).'/comments/'.rawurlencode($comment_id), array('body' => $body));
+        return $this->patch('/gists/'.rawurlencode($gist).'/comments/'.rawurlencode($comment_id), ['body' => $body]);
     }
 
     /**
@@ -92,7 +92,7 @@ class Comments extends AbstractApi
      *
      * @return array
      */
-    public function remove($gist, $comment)
+    public function remove(string $gist, int $comment): array
     {
         return $this->delete('/gists/'.rawurlencode($gist).'/comments/'.rawurlencode($comment));
     }

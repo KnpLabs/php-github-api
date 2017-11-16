@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Issue;
 
@@ -39,7 +39,7 @@ class AssigneesTest extends TestCase
      */
     public function shouldNotAddAssigneeMissingParameter()
     {
-        $data = array();
+        $data = [];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -53,9 +53,9 @@ class AssigneesTest extends TestCase
      */
     public function shouldAddAssignee()
     {
-        $data = array(
-            'assignees' => array('test-user')
-        );
+        $data = [
+            'assignees' => ['test-user']
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -71,7 +71,7 @@ class AssigneesTest extends TestCase
      */
     public function shouldNotRemoveAssigneeMissingParameter()
     {
-        $data = array();
+        $data = [];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -85,9 +85,9 @@ class AssigneesTest extends TestCase
      */
     public function shouldRemoveAssignee()
     {
-        $data = array(
-            'assignees' => array('test-user')
-        );
+        $data = [
+            'assignees' => ['test-user']
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -100,7 +100,7 @@ class AssigneesTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return Assignees::class;
     }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github;
 
@@ -26,7 +26,7 @@ interface ResultPagerInterface
      *
      * @return array returns the result of the Api::$method() call
      */
-    public function fetch(ApiInterface $api, $method, array $parameters = array());
+    public function fetch(ApiInterface $api, string $method, array $parameters = []): array;
 
     /**
      * Fetch all results (pages) from an api call.
@@ -39,7 +39,7 @@ interface ResultPagerInterface
      *
      * @return array returns a merge of the results of the Api::$method() call
      */
-    public function fetchAll(ApiInterface $api, $method, array $parameters = array());
+    public function fetchAll(ApiInterface $api, string $method, array $parameters = []): array;
 
     /**
      * Method that performs the actual work to refresh the pagination property.
@@ -51,40 +51,40 @@ interface ResultPagerInterface
      *
      * @return bool
      */
-    public function hasNext();
+    public function hasNext(): bool;
 
     /**
      * Check to determine the availability of a previous page.
      *
      * @return bool
      */
-    public function hasPrevious();
+    public function hasPrevious(): bool;
 
     /**
      * Fetch the next page.
      *
      * @return array
      */
-    public function fetchNext();
+    public function fetchNext(): array;
 
     /**
      * Fetch the previous page.
      *
      * @return array
      */
-    public function fetchPrevious();
+    public function fetchPrevious(): array;
 
     /**
      * Fetch the first page.
      *
      * @return array
      */
-    public function fetchFirst();
+    public function fetchFirst(): array;
 
     /**
      * Fetch the last page.
      *
      * @return array
      */
-    public function fetchLast();
+    public function fetchLast(): array;
 }

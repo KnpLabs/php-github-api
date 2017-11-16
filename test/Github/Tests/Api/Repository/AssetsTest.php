@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Repository;
 
@@ -11,7 +11,7 @@ class AssetsTest extends TestCase
      */
     public function shouldGetAllReleaseAssets()
     {
-        $expectedValue = array(array('asset1data'), array('asset2data'));
+        $expectedValue = [['asset1data'], ['asset2data']];
         $id = 76;
 
         $api = $this->getApiMock();
@@ -28,7 +28,7 @@ class AssetsTest extends TestCase
      */
     public function shouldGetSingleReleaseAsset()
     {
-        $expectedValue = array('assetData');
+        $expectedValue = ['assetData'];
         $assetId = 2;
 
         $api = $this->getApiMock();
@@ -71,9 +71,9 @@ class AssetsTest extends TestCase
      */
     public function shouldEditReleaseAsset()
     {
-        $expectedValue = array('assetUpdatedData');
+        $expectedValue = ['assetUpdatedData'];
         $assetId = 5;
-        $data = array('name' => 'asset111_name_qweqwe');
+        $data = ['name' => 'asset111_name_qweqwe'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -91,7 +91,7 @@ class AssetsTest extends TestCase
     public function shouldNotEditReleaseAssetWithoutName()
     {
         $assetId = 5;
-        $data = array('not_a_name' => 'just a value');
+        $data = ['not_a_name' => 'just a value'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -105,7 +105,7 @@ class AssetsTest extends TestCase
      */
     public function shouldRemoveReleaseAsset()
     {
-        $expectedValue = array('assetUpdatedData');
+        $expectedValue = ['assetUpdatedData'];
         $assetId = 5;
 
         $api = $this->getApiMock();
@@ -120,7 +120,7 @@ class AssetsTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Repository\Assets::class;
     }

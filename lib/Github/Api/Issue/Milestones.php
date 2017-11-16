@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\Issue;
 
@@ -21,24 +21,24 @@ class Milestones extends AbstractApi
      *
      * @return array
      */
-    public function all($username, $repository, array $params = array())
+    public function all(string $username, string $repository, array $params = []): array
     {
-        if (isset($params['state']) && !in_array($params['state'], array('open', 'closed', 'all'))) {
+        if (isset($params['state']) && !in_array($params['state'], ['open', 'closed', 'all'])) {
             $params['state'] = 'open';
         }
-        if (isset($params['sort']) && !in_array($params['sort'], array('due_date', 'completeness'))) {
+        if (isset($params['sort']) && !in_array($params['sort'], ['due_date', 'completeness'])) {
             $params['sort'] = 'due_date';
         }
-        if (isset($params['direction']) && !in_array($params['direction'], array('asc', 'desc'))) {
+        if (isset($params['direction']) && !in_array($params['direction'], ['asc', 'desc'])) {
             $params['direction'] = 'asc';
         }
 
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones', array_merge(array(
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones', array_merge([
             'page'      => 1,
             'state'     => 'open',
             'sort'      => 'due_date',
             'direction' => 'asc'
-        ), $params));
+        ], $params));
     }
 
     /**
@@ -51,7 +51,7 @@ class Milestones extends AbstractApi
      *
      * @return array
      */
-    public function show($username, $repository, $id)
+    public function show(string $username, string $repository, int $id): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones/'.rawurlencode($id));
     }
@@ -68,12 +68,12 @@ class Milestones extends AbstractApi
      *
      * @throws \Github\Exception\MissingArgumentException
      */
-    public function create($username, $repository, array $params)
+    public function create(string $username, string $repository, array $params): array
     {
         if (!isset($params['title'])) {
             throw new MissingArgumentException('title');
         }
-        if (isset($params['state']) && !in_array($params['state'], array('open', 'closed'))) {
+        if (isset($params['state']) && !in_array($params['state'], ['open', 'closed'])) {
             $params['state'] = 'open';
         }
 
@@ -91,9 +91,9 @@ class Milestones extends AbstractApi
      *
      * @return array
      */
-    public function update($username, $repository, $id, array $params)
+    public function update(string $username, string $repository, int $id, array $params): array
     {
-        if (isset($params['state']) && !in_array($params['state'], array('open', 'closed'))) {
+        if (isset($params['state']) && !in_array($params['state'], ['open', 'closed'])) {
             $params['state'] = 'open';
         }
 
@@ -110,7 +110,7 @@ class Milestones extends AbstractApi
      *
      * @return null
      */
-    public function remove($username, $repository, $id)
+    public function remove(string $username, string $repository, int $id)
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones/'.rawurlencode($id));
     }
@@ -125,7 +125,7 @@ class Milestones extends AbstractApi
      *
      * @return array
      */
-    public function labels($username, $repository, $id)
+    public function labels(string $username, string $repository, int $id): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/milestones/'.rawurlencode($id).'/labels');
     }

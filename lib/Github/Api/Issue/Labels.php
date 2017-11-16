@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\Issue;
 
@@ -22,7 +22,7 @@ class Labels extends AbstractApi
      *
      * @return array
      */
-    public function all($username, $repository, $issue = null)
+    public function all(string $username, string $repository, int $issue = null): array
     {
         if ($issue === null) {
             $path = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels';
@@ -44,7 +44,7 @@ class Labels extends AbstractApi
      *
      * @return array
      */
-    public function show($username, $repository, $label)
+    public function show(string $username, string $repository, string $label): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels/'.rawurlencode($label));
     }
@@ -61,7 +61,7 @@ class Labels extends AbstractApi
      *
      * @throws \Github\Exception\MissingArgumentException
      */
-    public function create($username, $repository, array $params)
+    public function create(string $username, string $repository, array $params): array
     {
         if (!isset($params['name'])) {
             throw new MissingArgumentException('name');
@@ -83,7 +83,7 @@ class Labels extends AbstractApi
      *
      * @return array
      */
-    public function deleteLabel($username, $repository, $label)
+    public function deleteLabel(string $username, string $repository, string $label): array
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels/'.rawurlencode($label));
     }
@@ -100,12 +100,12 @@ class Labels extends AbstractApi
      *
      * @return array
      */
-    public function update($username, $repository, $label, $newName, $color)
+    public function update(string $username, string $repository, string $label, string $newName, string $color): array
     {
-        $params = array(
+        $params = [
             'name'  => $newName,
             'color' => $color,
-        );
+        ];
 
         return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels/'.rawurlencode($label), $params);
     }
@@ -123,10 +123,10 @@ class Labels extends AbstractApi
      *
      * @thorws \Github\Exception\InvalidArgumentException
      */
-    public function add($username, $repository, $issue, $labels)
+    public function add(string $username, string $repository, int $issue, string $labels): array
     {
         if (is_string($labels)) {
-            $labels = array($labels);
+            $labels = [$labels];
         } elseif (0 === count($labels)) {
             throw new InvalidArgumentException();
         }
@@ -145,7 +145,7 @@ class Labels extends AbstractApi
      *
      * @return array
      */
-    public function replace($username, $repository, $issue, array $params)
+    public function replace(string $username, string $repository, int $issue, array $params): array
     {
         return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/labels', $params);
     }
@@ -161,7 +161,7 @@ class Labels extends AbstractApi
      *
      * @return null
      */
-    public function remove($username, $repository, $issue, $label)
+    public function remove(string $username, string $repository, string $issue, string $label)
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/labels/'.rawurlencode($label));
     }
@@ -176,7 +176,7 @@ class Labels extends AbstractApi
      *
      * @return null
      */
-    public function clear($username, $repository, $issue)
+    public function clear(string $username, string $repository, string $issue)
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/labels');
     }

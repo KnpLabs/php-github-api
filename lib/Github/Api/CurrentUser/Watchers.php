@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\CurrentUser;
 
@@ -20,11 +20,11 @@ class Watchers extends AbstractApi
      *
      * @return array
      */
-    public function all($page = 1)
+    public function all(int $page = 1): array
     {
-        return $this->get('/user/subscriptions', array(
+        return $this->get('/user/subscriptions', [
             'page' => $page
-        ));
+        ]);
     }
 
     /**
@@ -37,7 +37,7 @@ class Watchers extends AbstractApi
      *
      * @return array
      */
-    public function check($username, $repository)
+    public function check(string $username, string $repository): array
     {
         return $this->get('/user/subscriptions/'.rawurlencode($username).'/'.rawurlencode($repository));
     }
@@ -52,7 +52,7 @@ class Watchers extends AbstractApi
      *
      * @return array
      */
-    public function watch($username, $repository)
+    public function watch(string $username, string $repository): array
     {
         return $this->put('/user/subscriptions/'.rawurlencode($username).'/'.rawurlencode($repository));
     }
@@ -67,7 +67,7 @@ class Watchers extends AbstractApi
      *
      * @return array
      */
-    public function unwatch($username, $repository)
+    public function unwatch(string $username, string $repository): array
     {
         return $this->delete('/user/subscriptions/'.rawurlencode($username).'/'.rawurlencode($repository));
     }

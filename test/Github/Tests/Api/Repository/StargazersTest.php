@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Repository;
 
@@ -11,7 +11,7 @@ class StargazersTest extends TestCase
      */
     public function shouldGetAllRepositoryStargazers()
     {
-        $expectedValue = array(array('login' => 'nidup'));
+        $expectedValue = [['login' => 'nidup']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -27,7 +27,7 @@ class StargazersTest extends TestCase
      */
     public function shouldGetAllRepositoryStargazersWithAlternativeResponse()
     {
-        $expectedValue = array(array('starred_at' => '2013-10-01T13:22:01Z', 'user' => array('login' => 'nidup')));
+        $expectedValue = [['starred_at' => '2013-10-01T13:22:01Z', 'user' => ['login' => 'nidup']]];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -42,7 +42,7 @@ class StargazersTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Repository\Stargazers::class;
     }

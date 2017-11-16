@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\GitData;
 
@@ -19,7 +19,7 @@ class Tags extends AbstractApi
      *
      * @return array
      */
-    public function all($username, $repository)
+    public function all(string $username, string $repository): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs/tags');
     }
@@ -33,7 +33,7 @@ class Tags extends AbstractApi
      *
      * @return array
      */
-    public function show($username, $repository, $sha)
+    public function show(string $username, string $repository, string $sha): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/tags/'.rawurlencode($sha));
     }
@@ -49,10 +49,10 @@ class Tags extends AbstractApi
      *
      * @throws \Github\Exception\MissingArgumentException
      */
-    public function create($username, $repository, array $params)
+    public function create(string $username, string $repository, array $params): array
     {
         if (!isset($params['tag'], $params['message'], $params['object'], $params['type'])) {
-            throw new MissingArgumentException(array('tag', 'message', 'object', 'type'));
+            throw new MissingArgumentException(['tag', 'message', 'object', 'type']);
         }
 
         if (!isset($params['tagger'])) {
@@ -60,7 +60,7 @@ class Tags extends AbstractApi
         }
 
         if (!isset($params['tagger']['name'], $params['tagger']['email'], $params['tagger']['date'])) {
-            throw new MissingArgumentException(array('tagger.name', 'tagger.email', 'tagger.date'));
+            throw new MissingArgumentException(['tagger.name', 'tagger.email', 'tagger.date']);
         }
 
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/tags', $params);

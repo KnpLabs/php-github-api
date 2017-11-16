@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\GitData;
 
@@ -21,9 +21,9 @@ class Trees extends AbstractApi
      *
      * @return array
      */
-    public function show($username, $repository, $sha, $recursive = false)
+    public function show(string $username, string $repository, string $sha, bool $recursive = false): array
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/trees/'.rawurlencode($sha), $recursive ? array('recursive' => 1) : array());
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/trees/'.rawurlencode($sha), $recursive ? ['recursive' => 1] : []);
     }
 
     /**
@@ -37,19 +37,19 @@ class Trees extends AbstractApi
      *
      * @throws \Github\Exception\MissingArgumentException
      */
-    public function create($username, $repository, array $params)
+    public function create(string $username, string $repository, array $params): array
     {
         if (!isset($params['tree']) || !is_array($params['tree'])) {
             throw new MissingArgumentException('tree');
         }
 
         if (!isset($params['tree'][0])) {
-            $params['tree'] = array($params['tree']);
+            $params['tree'] = [$params['tree']];
         }
 
         foreach ($params['tree'] as $key => $tree) {
             if (!isset($tree['path'], $tree['mode'], $tree['type'])) {
-                throw new MissingArgumentException(array("tree.$key.path", "tree.$key.mode", "tree.$key.type"));
+                throw new MissingArgumentException(["tree.$key.path", "tree.$key.mode", "tree.$key.type"]);
             }
 
             // If `sha` is not set, `content` is required

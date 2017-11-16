@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
@@ -9,20 +9,20 @@ class RateLimitTest extends TestCase
      */
     public function shouldReturnRateLimitArray()
     {
-        $expectedArray = array(
-            'resources' => array(
-                'core' => array(
+        $expectedArray = [
+            'resources' => [
+                'core' => [
                     'limit' => 5000,
                     'remaining' => 4999,
                     'reset' => 1372700873
-                ),
-                'search' => array(
+                ],
+                'search' => [
                     'limit' => 30,
                     'remaining' => 18,
                     'reset' => 1372697452
-                )
-            )
-        );
+                ]
+            ]
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -36,7 +36,7 @@ class RateLimitTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\RateLimit::class;
     }

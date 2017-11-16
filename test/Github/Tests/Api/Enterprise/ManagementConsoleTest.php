@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Enterprise;
 
@@ -20,7 +20,7 @@ class ManagementConsoleTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/setup/api/configcheck', array('license_md5' => $this->getLicenseHash()))
+            ->with('/setup/api/configcheck', ['license_md5' => $this->getLicenseHash()])
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->configcheck($this->getLicenseHash()));
@@ -58,7 +58,7 @@ class ManagementConsoleTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/setup/api/settings', array('license_md5' => $this->getLicenseHash()))
+            ->with('/setup/api/settings', ['license_md5' => $this->getLicenseHash()])
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->settings($this->getLicenseHash()));
@@ -77,7 +77,7 @@ class ManagementConsoleTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/setup/api/maintenance', array('license_md5' => $this->getLicenseHash()))
+            ->with('/setup/api/maintenance', ['license_md5' => $this->getLicenseHash()])
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->maintenance($this->getLicenseHash()));
@@ -97,7 +97,7 @@ class ManagementConsoleTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/setup/api/settings/authorized-keys', array('license_md5' => $this->getLicenseHash()))
+            ->with('/setup/api/settings/authorized-keys', ['license_md5' => $this->getLicenseHash()])
             ->will($this->returnValue($expectedArray));
         $this->assertEquals($expectedArray, $api->keys($this->getLicenseHash()));
     }
@@ -110,7 +110,7 @@ class ManagementConsoleTest extends TestCase
     /**
      * @return string
      */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Enterprise\ManagementConsole::class;
     }

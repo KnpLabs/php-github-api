@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api;
 
@@ -30,9 +30,9 @@ class Issue extends AbstractApi
      *
      * @return self
      */
-    public function configure($bodyType = null)
+    public function configure(string $bodyType = null): self
     {
-        if (!in_array($bodyType, array('text', 'html', 'full'))) {
+        if (!in_array($bodyType, ['text', 'html', 'full'])) {
             $bodyType = 'raw';
         }
 
@@ -52,9 +52,9 @@ class Issue extends AbstractApi
      *
      * @return array list of issues found
      */
-    public function all($username, $repository, array $params = array())
+    public function all(string $username, string $repository, array $params = []): array
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues', array_merge(array('page' => 1), $params));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues', array_merge(['page' => 1], $params));
     }
 
     /**
@@ -71,9 +71,9 @@ class Issue extends AbstractApi
      *
      * @return array list of issues found
      */
-    public function find($username, $repository, $state, $keyword)
+    public function find(string $username, string $repository, string $state, string $keyword): array
     {
-        if (!in_array($state, array('open', 'closed'))) {
+        if (!in_array($state, ['open', 'closed'])) {
             $state = 'open';
         }
 
@@ -91,13 +91,13 @@ class Issue extends AbstractApi
      *
      * @return array list of issues found
      */
-    public function org($organization, $state, array $params = array())
+    public function org(string $organization, string $state, array $params = []): array
     {
-        if (!in_array($state, array('open', 'closed'))) {
+        if (!in_array($state, ['open', 'closed'])) {
             $state = 'open';
         }
 
-        return $this->get('/orgs/'.rawurlencode($organization).'/issues', array_merge(array('page' => 1, 'state' => $state), $params));
+        return $this->get('/orgs/'.rawurlencode($organization).'/issues', array_merge(['page' => 1, 'state' => $state], $params));
     }
 
     /**
@@ -111,7 +111,7 @@ class Issue extends AbstractApi
      *
      * @return array information about the issue
      */
-    public function show($username, $repository, $id)
+    public function show(string $username, string $repository, int $id): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($id));
     }
@@ -130,10 +130,10 @@ class Issue extends AbstractApi
      *
      * @return array information about the issue
      */
-    public function create($username, $repository, array $params)
+    public function create(string $username, string $repository, array $params): array
     {
         if (!isset($params['title'])) {
-            throw new MissingArgumentException(array('title'));
+            throw new MissingArgumentException(['title']);
         }
 
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues', $params);
@@ -152,7 +152,7 @@ class Issue extends AbstractApi
      *
      * @return array information about the issue
      */
-    public function update($username, $repository, $id, array $params)
+    public function update(string $username, string $repository, int $id, array $params): array
     {
         return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($id), $params);
     }
@@ -168,7 +168,7 @@ class Issue extends AbstractApi
      *
      * @return string
      */
-    public function lock($username, $repository, $id)
+    public function lock(string $username, string $repository, int $id): string
     {
         return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($id).'/lock');
     }
@@ -184,7 +184,7 @@ class Issue extends AbstractApi
      *
      * @return string
      */
-    public function unlock($username, $repository, $id)
+    public function unlock(string $username, string $repository, int $id): string
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($id).'/lock');
     }
@@ -196,7 +196,7 @@ class Issue extends AbstractApi
      *
      * @return Comments
      */
-    public function comments()
+    public function comments(): Comments
     {
         return new Comments($this->client);
     }
@@ -208,7 +208,7 @@ class Issue extends AbstractApi
      *
      * @return Events
      */
-    public function events()
+    public function events(): Events
     {
         return new Events($this->client);
     }
@@ -220,7 +220,7 @@ class Issue extends AbstractApi
      *
      * @return Labels
      */
-    public function labels()
+    public function labels(): Labels
     {
         return new Labels($this->client);
     }
@@ -232,7 +232,7 @@ class Issue extends AbstractApi
      *
      * @return Milestones
      */
-    public function milestones()
+    public function milestones(): Milestones
     {
         return new Milestones($this->client);
     }
@@ -244,7 +244,7 @@ class Issue extends AbstractApi
      *
      * @return Assignees
      */
-    public function assignees()
+    public function assignees(): Assignees
     {
         return new Assignees($this->client);
     }

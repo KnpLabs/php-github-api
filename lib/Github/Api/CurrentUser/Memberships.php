@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\CurrentUser;
 
@@ -13,7 +13,7 @@ class Memberships extends AbstractApi
      *
      * @return array
      */
-    public function all()
+    public function all(): array
     {
         return $this->get('/user/memberships/orgs');
     }
@@ -27,7 +27,7 @@ class Memberships extends AbstractApi
      *
      * @return array
      */
-    public function organization($organization)
+    public function organization(string $organization): array
     {
         return $this->get('/user/memberships/orgs/'.rawurlencode($organization));
     }
@@ -41,8 +41,8 @@ class Memberships extends AbstractApi
      *
      * @return array
      */
-    public function edit($organization)
+    public function edit(string $organization): array
     {
-        return $this->patch('/user/memberships/orgs/'.rawurlencode($organization), array('state' => 'active'));
+        return $this->patch('/user/memberships/orgs/'.rawurlencode($organization), ['state' => 'active']);
     }
 }
