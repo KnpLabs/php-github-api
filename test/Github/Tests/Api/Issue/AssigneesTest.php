@@ -4,6 +4,7 @@ namespace Github\Tests\Api\Issue;
 
 use Github\Api\Issue\Assignees;
 use Github\Tests\Api\TestCase;
+use PHPUnit_Framework_MockObject_MockObject;
 
 class AssigneesTest extends TestCase
 {
@@ -12,6 +13,7 @@ class AssigneesTest extends TestCase
      */
     public function shouldListAvailableAssignees()
     {
+        /** @var Assignees|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -25,6 +27,7 @@ class AssigneesTest extends TestCase
      */
     public function shouldCheckAssignee()
     {
+        /** @var Assignees|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -41,6 +44,7 @@ class AssigneesTest extends TestCase
     {
         $data = [];
 
+        /** @var Assignees|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -57,6 +61,7 @@ class AssigneesTest extends TestCase
             'assignees' => ['test-user']
         ];
 
+        /** @var Assignees|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
@@ -73,6 +78,7 @@ class AssigneesTest extends TestCase
     {
         $data = [];
 
+        /** @var Assignees|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('delete');
@@ -89,6 +95,7 @@ class AssigneesTest extends TestCase
             'assignees' => ['test-user']
         ];
 
+        /** @var Assignees|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')

@@ -109,9 +109,9 @@ class Stats extends AbstractApi
     /**
      * Returns all of the statistics.
      *
-     * @return array array with all of the statistics
+     * @return array|null array with all of the statistics
      */
-    public function all(): array
+    public function all()
     {
         return $this->show('all');
     }

@@ -24,7 +24,7 @@ class Gists extends AbstractApi
      */
     public function configure(string $bodyType = null): self
     {
-        if (!in_array($bodyType, ['base64'])) {
+        if ($bodyType !== 'base64') {
             $bodyType = 'raw';
         }
 
@@ -44,7 +44,7 @@ class Gists extends AbstractApi
 
     public function show($number)
     {
-        return $this->get('/gists/'.rawurlencode($number));
+        return $this->get('/gists/'.rawurlencode((string) $number));
     }
 
     public function create(array $params)

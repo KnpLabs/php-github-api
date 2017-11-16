@@ -2,7 +2,9 @@
 
 namespace Github\Tests\Api\Issue;
 
+use Github\Api\Issue\Comments;
 use Github\Tests\Api\TestCase;
+use PHPUnit_Framework_MockObject_MockObject;
 
 class CommentsTest extends TestCase
 {
@@ -13,6 +15,7 @@ class CommentsTest extends TestCase
     {
         $expectedValue = [['comment1data'], ['comment2data']];
 
+        /** @var Comments|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -29,6 +32,7 @@ class CommentsTest extends TestCase
     {
         $expectedValue = ['comment1'];
 
+        /** @var Comments|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -46,6 +50,7 @@ class CommentsTest extends TestCase
     {
         $data = [];
 
+        /** @var Comments|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -61,6 +66,7 @@ class CommentsTest extends TestCase
         $expectedValue = ['comment1data'];
         $data = ['body' => 'test body'];
 
+        /** @var Comments|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
@@ -78,6 +84,7 @@ class CommentsTest extends TestCase
     {
         $data = ['somedata'];
 
+        /** @var Comments|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('patch');
@@ -93,6 +100,7 @@ class CommentsTest extends TestCase
         $expectedValue = ['comment1data'];
         $data = ['body' => 'body test'];
 
+        /** @var Comments|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
@@ -109,6 +117,7 @@ class CommentsTest extends TestCase
     {
         $expectedValue = ['someOutput'];
 
+        /** @var Comments|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')

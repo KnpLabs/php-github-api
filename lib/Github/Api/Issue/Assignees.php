@@ -30,16 +30,17 @@ class Assignees extends AbstractApi
      *
      * @link https://developer.github.com/v3/issues/assignees/#add-assignees-to-an-issue
      *
+     * @param string|int $issue
      *
      * @throws MissingArgumentException
      */
-    public function add(string $username, string $repository, string $issue, array $parameters): string
+    public function add(string $username, string $repository, $issue, array $parameters): string
     {
         if (!isset($parameters['assignees'])) {
             throw new MissingArgumentException('assignees');
         }
 
-        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/assignees', $parameters);
+        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode((string)$issue).'/assignees', $parameters);
     }
 
     /**
@@ -47,15 +48,16 @@ class Assignees extends AbstractApi
      *
      * @link https://developer.github.com/v3/issues/assignees/#remove-assignees-from-an-issue
      *
+     * @param string|int $issue
      *
      * @throws MissingArgumentException
      */
-    public function remove(string $username, string $repository, string $issue, array $parameters): string
+    public function remove(string $username, string $repository, $issue, array $parameters): string
     {
         if (!isset($parameters['assignees'])) {
             throw new MissingArgumentException('assignees');
         }
 
-        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/assignees', $parameters);
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode((string) $issue).'/assignees', $parameters);
     }
 }

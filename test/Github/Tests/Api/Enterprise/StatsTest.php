@@ -2,7 +2,9 @@
 
 namespace Github\Tests\Api\Enterprise;
 
+use Github\Api\Enterprise\Stats;
 use Github\Tests\Api\TestCase;
+use PHPUnit_Framework_MockObject_MockObject;
 
 class StatsTest extends TestCase
 {
@@ -13,6 +15,7 @@ class StatsTest extends TestCase
     {
         $expectedArray = $this->getStatsData();
 
+        /** @var Stats|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -30,6 +33,7 @@ class StatsTest extends TestCase
     {
         $expectedArray = $this->getStatsData($type);
 
+        /** @var Stats|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -73,13 +77,15 @@ class StatsTest extends TestCase
         $stats = json_decode($json, true);
         if (is_null($key)) {
             return $stats;
-        } elseif (array_key_exists($key, $stats)) {
+        }
+
+        if (array_key_exists($key, $stats)) {
             return $stats[$key];
         }
     }
 
     protected function getApiClass(): string
     {
-        return \Github\Api\Enterprise\Stats::class;
+        return Stats::class;
     }
 }

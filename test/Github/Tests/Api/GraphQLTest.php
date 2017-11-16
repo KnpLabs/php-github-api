@@ -2,14 +2,17 @@
 
 namespace Github\Tests\Api;
 
+use Github\Api\GraphQL;
+use PHPUnit_Framework_MockObject_MockObject;
+
 class GraphQLTest extends TestCase
 {
-
     /**
      * @test
      */
     public function shouldTestGraphQL()
     {
+        /** @var GraphQL|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
 
         $api->expects($this->once())
@@ -26,6 +29,7 @@ class GraphQLTest extends TestCase
      */
     public function shouldSupportGraphQLVariables()
     {
+        /** @var GraphQL|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
 
         $api->method('post')
@@ -39,6 +43,7 @@ class GraphQLTest extends TestCase
      */
     public function shouldJSONEncodeGraphQLVariables()
     {
+        /** @var GraphQL|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
 
         $api->method('post')
@@ -52,6 +57,6 @@ class GraphQLTest extends TestCase
 
     protected function getApiClass(): string
     {
-        return \Github\Api\GraphQL::class;
+        return GraphQL::class;
     }
 }

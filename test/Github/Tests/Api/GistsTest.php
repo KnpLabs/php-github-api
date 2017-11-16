@@ -2,6 +2,9 @@
 
 namespace Github\Tests\Api;
 
+use Github\Api\Gists;
+use PHPUnit_Framework_MockObject_MockObject;
+
 class GistsTest extends TestCase
 {
     /**
@@ -11,6 +14,7 @@ class GistsTest extends TestCase
     {
         $expectedArray = [['id' => '123']];
 
+        /** @var Gists|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -27,6 +31,7 @@ class GistsTest extends TestCase
     {
         $expectedArray = [['id' => '123']];
 
+        /** @var Gists|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -43,6 +48,7 @@ class GistsTest extends TestCase
     {
         $expectedArray = ['id' => '123'];
 
+        /** @var Gists|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -59,6 +65,7 @@ class GistsTest extends TestCase
     {
         $expectedArray = ['id' => '123'];
 
+        /** @var Gists|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -73,6 +80,7 @@ class GistsTest extends TestCase
      */
     public function shouldGetCommentsApiObject()
     {
+        /** @var Gists|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
 
         $this->assertInstanceOf(\Github\Api\Gist\Comments::class, $api->comments());
@@ -85,6 +93,7 @@ class GistsTest extends TestCase
     {
         $expectedArray = ['id' => '123'];
 
+        /** @var Gists|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
@@ -101,6 +110,7 @@ class GistsTest extends TestCase
     {
         $expectedArray = ['id' => '123'];
 
+        /** @var Gists|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -121,6 +131,7 @@ class GistsTest extends TestCase
             'public' => false,
         ];
 
+        /** @var Gists|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -135,6 +146,7 @@ class GistsTest extends TestCase
     {
         $expectedArray = ['id' => '123'];
 
+        /** @var Gists|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -151,6 +163,7 @@ class GistsTest extends TestCase
     {
         $expectedArray = ['id' => '123'];
 
+        /** @var Gists|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
@@ -167,6 +180,7 @@ class GistsTest extends TestCase
     {
         $expectedArray = ['id' => '123'];
 
+        /** @var Gists|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
@@ -191,6 +205,7 @@ class GistsTest extends TestCase
             ]
         ];
 
+        /** @var Gists|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
@@ -217,6 +232,7 @@ class GistsTest extends TestCase
             ]
         ];
 
+        /** @var Gists|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
@@ -230,6 +246,7 @@ class GistsTest extends TestCase
      */
     public function shouldDeleteGist()
     {
+        /** @var Gists|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
@@ -240,6 +257,6 @@ class GistsTest extends TestCase
 
     protected function getApiClass(): string
     {
-        return \Github\Api\Gists::class;
+        return Gists::class;
     }
 }

@@ -59,15 +59,17 @@ class Comments extends AbstractApi
      *
      * @link https://developer.github.com/v3/issues/comments/#create-a-comment
      *
+     * @param string|int $issue
+     *
      * @throws \Github\Exception\MissingArgumentException
      */
-    public function create(string $username, string $repository, int $issue, array $params): array
+    public function create(string $username, string $repository, $issue, array $params): array
     {
         if (!isset($params['body'])) {
             throw new MissingArgumentException('body');
         }
 
-        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/comments', $params);
+        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode((string) $issue).'/comments', $params);
     }
 
     /**
@@ -75,24 +77,28 @@ class Comments extends AbstractApi
      *
      * @link https://developer.github.com/v3/issues/comments/#edit-a-comment
      *
+     * @param string|int $issue
+     *
      * @throws \Github\Exception\MissingArgumentException
      */
-    public function update(string $username, string $repository, int $comment, array $params): array
+    public function update(string $username, string $repository, $comment, array $params): array
     {
         if (!isset($params['body'])) {
             throw new MissingArgumentException('body');
         }
 
-        return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/comments/'.rawurlencode($comment), $params);
+        return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/comments/'.rawurlencode((string) $comment), $params);
     }
 
     /**
      * Delete a comment for an issue.
      *
+     * @param string|int $issue
+     *
      * @link https://developer.github.com/v3/issues/comments/#delete-a-comment
      */
-    public function remove(string $username, string $repository, int $comment): array
+    public function remove(string $username, string $repository, $comment): array
     {
-        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/comments/'.rawurlencode($comment));
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/comments/'.rawurlencode((string) $comment));
     }
 }

@@ -30,8 +30,10 @@ class Authorizations extends AbstractApi
      * Create an authorization.
      *
      * @param null $OTPCode
+     *
+     * @return array|null
      */
-    public function create(array $params, $OTPCode = null): array
+    public function create(array $params, $OTPCode = null)
     {
         $headers = null === $OTPCode ? [] : ['X-GitHub-OTP' => $OTPCode];
 
@@ -40,14 +42,18 @@ class Authorizations extends AbstractApi
 
     /**
      * Update an authorization.
+     *
+     * @return array|null
      */
-    public function update($clientId, array $params): array
+    public function update($clientId, array $params)
     {
         return $this->patch('/authorizations/'.rawurlencode((string) $clientId), $params);
     }
 
     /**
      * Remove an authorization.
+     *
+     * @return array|null
      */
     public function remove($clientId): array
     {
@@ -56,16 +62,20 @@ class Authorizations extends AbstractApi
 
     /**
      * Check an authorization.
+     *
+     * @return array|null
      */
-    public function check($clientId, $token): array
+    public function check($clientId, $token)
     {
         return $this->get('/applications/'.rawurlencode((string) $clientId).'/tokens/'.rawurlencode($token));
     }
 
     /**
      * Reset an authorization.
+     *
+     * @return array|null
      */
-    public function reset($clientId, $token): array
+    public function reset($clientId, $token)
     {
         return $this->post('/applications/'.rawurlencode((string) $clientId).'/tokens/'.rawurlencode($token));
     }

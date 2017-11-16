@@ -49,7 +49,7 @@ class Starring extends AbstractApi
      *
      * @return array|null
      */
-    public function star(string $username, string $repository): array
+    public function star(string $username, string $repository)
     {
         return $this->put('/user/starred/'.rawurlencode($username).'/'.rawurlencode($repository));
     }
@@ -64,7 +64,7 @@ class Starring extends AbstractApi
      *
      * @return array|null
      */
-    public function unstar(string $username, string $repository): array
+    public function unstar(string $username, string $repository)
     {
         return $this->delete('/user/starred/'.rawurlencode($username).'/'.rawurlencode($repository));
     }

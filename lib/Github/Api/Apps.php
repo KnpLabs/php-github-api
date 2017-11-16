@@ -56,8 +56,10 @@ class Apps extends AbstractApi
      * Add a single repository to an installation.
      *
      * @link https://developer.github.com/v3/apps/installations/#add-repository-to-installation
+     *
+     * @return array|null
      */
-    public function addRepository(int $installationId, int $repositoryId): array
+    public function addRepository(int $installationId, int $repositoryId)
     {
         return $this->put('/installations/'.rawurlencode((string) $installationId).'/repositories/'.rawurlencode((string) $repositoryId));
     }
@@ -66,8 +68,10 @@ class Apps extends AbstractApi
      * Remove a single repository from an installation.
      *
      * @link https://developer.github.com/v3/apps/installations/#remove-repository-from-installation
+     *
+     * @return array|null
      */
-    public function removeRepository(int $installationId, int $repositoryId): array
+    public function removeRepository(int $installationId, int $repositoryId)
     {
         return $this->delete('/installations/'.rawurlencode((string) $installationId).'/repositories/'.rawurlencode((string) $repositoryId));
     }

@@ -2,6 +2,9 @@
 
 namespace Github\Tests\Api;
 
+use Github\Api\GitData\Trees;
+use PHPUnit_Framework_MockObject_MockObject;
+
 class TreesTest extends TestCase
 {
     /**
@@ -11,13 +14,14 @@ class TreesTest extends TestCase
     {
         $expectedValue = ['sha' => '123', 'comitter'];
 
+        /** @var Trees|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
             ->with('/repos/KnpLabs/php-github-api/git/trees/123', [])
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 123));
+        $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', '123'));
     }
 
     /**
@@ -43,6 +47,7 @@ class TreesTest extends TestCase
             ]
         ];
 
+        /** @var Trees|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
@@ -75,6 +80,7 @@ class TreesTest extends TestCase
             ]
         ];
 
+        /** @var Trees|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
@@ -98,6 +104,7 @@ class TreesTest extends TestCase
             ]
         ];
 
+        /** @var Trees|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -119,6 +126,7 @@ class TreesTest extends TestCase
             ]
         ];
 
+        /** @var Trees|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -140,6 +148,7 @@ class TreesTest extends TestCase
             ]
         ];
 
+        /** @var Trees|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -161,6 +170,7 @@ class TreesTest extends TestCase
             ]
         ];
 
+        /** @var Trees|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -176,6 +186,7 @@ class TreesTest extends TestCase
     {
         $data = [];
 
+        /** @var Trees|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -193,6 +204,7 @@ class TreesTest extends TestCase
             'tree' => ''
         ];
 
+        /** @var Trees|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -202,6 +214,6 @@ class TreesTest extends TestCase
 
     protected function getApiClass(): string
     {
-        return \Github\Api\GitData\Trees::class;
+        return Trees::class;
     }
 }

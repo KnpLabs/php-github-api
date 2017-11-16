@@ -2,6 +2,9 @@
 
 namespace Github\Tests\Api;
 
+use Github\Api\GitData\Tags;
+use PHPUnit_Framework_MockObject_MockObject;
+
 class TagsTest extends TestCase
 {
     /**
@@ -11,6 +14,7 @@ class TagsTest extends TestCase
     {
         $expectedValue = ['sha' => '123', 'comitter'];
 
+        /** @var Tags|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -27,6 +31,7 @@ class TagsTest extends TestCase
     {
         $expectedValue = [['sha' => '123', 'tagger']];
 
+        /** @var Tags|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -54,6 +59,7 @@ class TagsTest extends TestCase
             ]
         ];
 
+        /** @var Tags|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
@@ -80,6 +86,7 @@ class TagsTest extends TestCase
             ]
         ];
 
+        /** @var Tags|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -100,6 +107,7 @@ class TagsTest extends TestCase
             'type' => 'unsigned',
         ];
 
+        /** @var Tags|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -124,6 +132,7 @@ class TagsTest extends TestCase
             ]
         ];
 
+        /** @var Tags|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -148,6 +157,7 @@ class TagsTest extends TestCase
             ]
         ];
 
+        /** @var Tags|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -172,6 +182,7 @@ class TagsTest extends TestCase
             ]
         ];
 
+        /** @var Tags|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -196,6 +207,7 @@ class TagsTest extends TestCase
             ]
         ];
 
+        /** @var Tags|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -220,6 +232,7 @@ class TagsTest extends TestCase
             ]
         ];
 
+        /** @var Tags|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -244,6 +257,7 @@ class TagsTest extends TestCase
             ]
         ];
 
+        /** @var Tags|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -253,6 +267,6 @@ class TagsTest extends TestCase
 
     protected function getApiClass(): string
     {
-        return \Github\Api\GitData\Tags::class;
+        return Tags::class;
     }
 }
