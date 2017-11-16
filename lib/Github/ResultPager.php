@@ -55,7 +55,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetch(ApiInterface $api, string $method, array $parameters = []): array
+    public function fetch(ApiInterface $api, string $method, array $parameters = [])
     {
         $result = $this->callApi($api, $method, $parameters);
         $this->postFetch();

@@ -24,9 +24,9 @@ interface ResultPagerInterface
      * @param string       $method     the method name to call on the Api instance
      * @param array        $parameters the method parameters in an array
      *
-     * @return array returns the result of the Api::$method() call
+     * @return array|string returns the result of the Api::$method() call
      */
-    public function fetch(ApiInterface $api, string $method, array $parameters = []): array;
+    public function fetch(ApiInterface $api, string $method, array $parameters = []);
 
     /**
      * Fetch all results (pages) from an api call.

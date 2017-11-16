@@ -82,12 +82,12 @@ class PullRequest extends AbstractApi
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode((string) $id));
     }
 
-    public function commits($username, $repository, $id)
+    public function commits(string $username, string $repository, int $id)
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode((string) $id).'/commits');
     }
 
-    public function files($username, $repository, $id)
+    public function files(string $username, string $repository, int $id)
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode((string) $id).'/files');
     }
@@ -138,9 +138,11 @@ class PullRequest extends AbstractApi
      *                           "my-user:some-branch". The String title of the Pull Request. The String body of
      *                           the Pull Request. The issue number. Used when title and body is not set.
      *
+     * @return array|string
+     *
      * @throws MissingArgumentException
      */
-    public function create(string $username, string $repository, array $params): array
+    public function create(string $username, string $repository, array $params)
     {
         // Two ways to create PR, using issue or title
         if (!isset($params['issue']) && !isset($params['title'])) {

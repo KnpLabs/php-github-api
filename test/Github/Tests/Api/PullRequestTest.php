@@ -2,6 +2,8 @@
 
 namespace Github\Tests\Api;
 
+use Github\Api\PullRequest;
+
 class PullRequestTest extends TestCase
 {
     /**
@@ -11,6 +13,7 @@ class PullRequestTest extends TestCase
     {
         $expectedArray = ['pr1', 'pr2'];
 
+        /** @var PullRequest|\PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -27,6 +30,7 @@ class PullRequestTest extends TestCase
     {
         $expectedArray = ['pr1', 'pr2'];
 
+        /** @var PullRequest|\PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -43,6 +47,7 @@ class PullRequestTest extends TestCase
     {
         $expectedArray = ['pr1', 'pr2'];
 
+        /** @var PullRequest|\PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -59,6 +64,7 @@ class PullRequestTest extends TestCase
     {
         $expectedArray = ['id' => 'id', 'sha' => '123123'];
 
+        /** @var PullRequest|\PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
 
         $api->expects($this->once())
@@ -66,7 +72,7 @@ class PullRequestTest extends TestCase
             ->with('/repos/ezsystems/ezpublish/pulls/15')
             ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($expectedArray, $api->show('ezsystems', 'ezpublish', '15'));
+        $this->assertEquals($expectedArray, $api->show('ezsystems', 'ezpublish', 15));
     }
 
     /**
@@ -76,13 +82,14 @@ class PullRequestTest extends TestCase
     {
         $expectedArray = [['id' => 'id', 'sha' => '123123']];
 
+        /** @var PullRequest|\PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
             ->with('/repos/ezsystems/ezpublish/pulls/15/commits')
             ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($expectedArray, $api->commits('ezsystems', 'ezpublish', '15'));
+        $this->assertEquals($expectedArray, $api->commits('ezsystems', 'ezpublish', 15));
     }
 
     /**
@@ -92,13 +99,14 @@ class PullRequestTest extends TestCase
     {
         $expectedArray = [['id' => 'id', 'sha' => '123123']];
 
+        /** @var PullRequest|\PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
             ->with('/repos/ezsystems/ezpublish/pulls/15/files')
             ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($expectedArray, $api->files('ezsystems', 'ezpublish', '15'));
+        $this->assertEquals($expectedArray, $api->files('ezsystems', 'ezpublish', 15));
     }
 
     /**
@@ -109,6 +117,7 @@ class PullRequestTest extends TestCase
         $expectedArray = [['id' => 'id', 'sha' => '123123']];
         $expectedArray['_links']['statuses']['href'] = '/repos/ezsystems/ezpublish/pulls/15/statuses';
 
+        /** @var PullRequest|\PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->at(0))
             ->method('get')
@@ -120,7 +129,7 @@ class PullRequestTest extends TestCase
             ->with('/repos/ezsystems/ezpublish/pulls/15/statuses')
             ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($expectedArray, $api->status('ezsystems', 'ezpublish', '15'));
+        $this->assertEquals($expectedArray, $api->status('ezsystems', 'ezpublish', 15));
     }
 
     /**
@@ -130,6 +139,7 @@ class PullRequestTest extends TestCase
     {
         $expectedArray = ['id' => 15, 'sha' => '123123'];
 
+        /** @var PullRequest|\PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
@@ -146,6 +156,7 @@ class PullRequestTest extends TestCase
     {
         $expectedArray = ['some' => 'response'];
 
+        /** @var PullRequest|\PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -162,6 +173,7 @@ class PullRequestTest extends TestCase
     {
         $expectedArray = ['some' => 'response'];
 
+        /** @var PullRequest|\PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
@@ -178,6 +190,7 @@ class PullRequestTest extends TestCase
     {
         $expectedArray = ['some' => 'response'];
 
+        /** @var PullRequest|\PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
@@ -194,6 +207,7 @@ class PullRequestTest extends TestCase
     {
         $expectedArray = ['some' => 'response'];
 
+        /** @var PullRequest|\PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
@@ -215,6 +229,7 @@ class PullRequestTest extends TestCase
             'body' => 'BODY: Testing pull-request creation from PHP Github API',
         ];
 
+        /** @var PullRequest|\PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
@@ -234,6 +249,7 @@ class PullRequestTest extends TestCase
             'issue' => 25,
         ];
 
+        /** @var PullRequest|\PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
@@ -254,6 +270,7 @@ class PullRequestTest extends TestCase
             'body' => 'BODY: Testing pull-request creation from PHP Github API',
         ];
 
+        /** @var PullRequest|\PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -273,6 +290,7 @@ class PullRequestTest extends TestCase
             'body' => 'BODY: Testing pull-request creation from PHP Github API',
         ];
 
+        /** @var PullRequest|\PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -292,6 +310,7 @@ class PullRequestTest extends TestCase
             'title' => 'TITLE: Testing pull-request creation from PHP Github API',
         ];
 
+        /** @var PullRequest|\PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -310,6 +329,7 @@ class PullRequestTest extends TestCase
             'head' => 'virtualtestbranch',
         ];
 
+        /** @var PullRequest|\PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -339,6 +359,6 @@ class PullRequestTest extends TestCase
 
     protected function getApiClass(): string
     {
-        return \Github\Api\PullRequest::class;
+        return PullRequest::class;
     }
 }
