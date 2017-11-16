@@ -9,6 +9,10 @@ namespace Github\Exception;
  */
 class MissingArgumentException extends ErrorException
 {
+    /**
+     * @param string|array $required
+     * @param int $code
+     */
     public function __construct($required, $code = 0, $previous = null)
     {
         if (is_string($required)) {
