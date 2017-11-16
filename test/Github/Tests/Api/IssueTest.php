@@ -282,9 +282,6 @@ class IssueTest extends TestCase
         $api->unlock('knplabs', 'php-github-api', '1');
     }
 
-    /**
-     * @return string
-     */
     protected function getApiClass(): string
     {
         return \Github\Api\Issue::class;

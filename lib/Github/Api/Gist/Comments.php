@@ -18,8 +18,6 @@ class Comments extends AbstractApi
      *
      * @link https://developer.github.com/v3/gists/comments/#custom-media-types
      * @param string|null $bodyType
-     *
-     * @return self
      */
     public function configure(string $bodyType = null): self
     {
@@ -34,10 +32,6 @@ class Comments extends AbstractApi
 
     /**
      * Get all comments for a gist.
-     *
-     * @param string $gist
-     *
-     * @return array
      */
     public function all(string $gist): array
     {
@@ -47,8 +41,6 @@ class Comments extends AbstractApi
     /**
      * Get a comment of a gist.
      *
-     * @param string $gist
-     * @param int    $comment
      *
      * @return array|null
      */
@@ -59,11 +51,6 @@ class Comments extends AbstractApi
 
     /**
      * Create a comment for gist.
-     *
-     * @param string $gist
-     * @param string $body
-     *
-     * @return array
      */
     public function create(string $gist, string $body): array
     {
@@ -73,9 +60,6 @@ class Comments extends AbstractApi
     /**
      * Create a comment for a gist.
      *
-     * @param string $gist
-     * @param int    $comment_id
-     * @param string $body
      *
      * @return array|null
      */
@@ -87,8 +71,6 @@ class Comments extends AbstractApi
     /**
      * Delete a comment for a gist.
      *
-     * @param string $gist
-     * @param int    $comment
      *
      * @return array|null
      */

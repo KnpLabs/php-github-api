@@ -14,11 +14,7 @@ class Events extends AbstractApi
      * Get all events for an issue.
      *
      * @link https://developer.github.com/v3/issues/events/#list-events-for-an-issue
-     * @param string   $username
-     * @param string   $repository
      * @param int|null $issue
-     * @param int      $page
-     * @return array
      */
     public function all(string $username, string $repository, int $issue = null, int $page = 1): array
     {
@@ -37,10 +33,6 @@ class Events extends AbstractApi
      * Display an event for an issue.
      *
      * @link https://developer.github.com/v3/issues/events/#get-a-single-event
-     * @param $username
-     * @param $repository
-     * @param $event
-     * @return array
      */
     public function show($username, $repository, $event): array
     {

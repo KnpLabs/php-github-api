@@ -434,9 +434,6 @@ class ProtectionTest extends TestCase
         $this->assertEquals($expectedValue, $api->removeUserRestrictions('KnpLabs', 'php-github-api', 'master', $data));
     }
 
-    /**
-     * @return string
-     */
     protected function getApiClass(): string
     {
         return \Github\Api\Repository\Protection::class;

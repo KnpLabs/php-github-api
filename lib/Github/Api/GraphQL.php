@@ -14,12 +14,6 @@ class GraphQL extends AbstractApi
 {
     use AcceptHeaderTrait;
     
-    /**
-     * @param string $query
-     * @param array $variables
-     *
-     * @return array
-     */
     public function execute(string $query, array $variables = []): array
     {
         $this->acceptHeaderValue = 'application/vnd.github.v4+json';
@@ -33,12 +27,6 @@ class GraphQL extends AbstractApi
         return $this->post('/graphql', $params);
     }
     
-    /**
-     * @param string $file
-     * @param array $variables
-     *
-     * @return array
-     */
     public function fromFile(string $file, array $variables = []): array
     {
         return $this->execute(file_get_contents($file), $variables);

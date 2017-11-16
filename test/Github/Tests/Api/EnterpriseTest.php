@@ -44,9 +44,6 @@ class EnterpriseTest extends TestCase
         $this->assertInstanceOf(\Github\Api\Enterprise\UserAdmin::class, $api->userAdmin());
     }
 
-    /**
-     * @return string
-     */
     protected function getApiClass(): string
     {
         return \Github\Api\Enterprise::class;

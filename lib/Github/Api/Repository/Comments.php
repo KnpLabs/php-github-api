@@ -20,8 +20,6 @@ class Comments extends AbstractApi
      *
      * @link https://developer.github.com/v3/repos/comments/#custom-media-types
      * @param string|null $bodyType
-     *
-     * @return self
      */
     public function configure(string $bodyType = null): self
     {

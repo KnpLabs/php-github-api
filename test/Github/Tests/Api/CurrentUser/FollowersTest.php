@@ -65,9 +65,6 @@ class FollowersTest extends TestCase
         $this->assertNull($api->unfollow('l3l0'));
     }
 
-    /**
-     * @return string
-     */
     protected function getApiClass(): string
     {
         return \Github\Api\CurrentUser\Followers::class;

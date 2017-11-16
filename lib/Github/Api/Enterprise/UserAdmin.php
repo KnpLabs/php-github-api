@@ -10,10 +10,6 @@ class UserAdmin extends AbstractApi
      * Suspend a user.
      *
      * @link https://developer.github.com/v3/users/administration/#suspend-a-user
-     *
-     * @param string $username
-     *
-     * @return array
      */
     public function suspend(string $username): array
     {
@@ -24,10 +20,6 @@ class UserAdmin extends AbstractApi
      * Unsuspend a user.
      *
      * @link https://developer.github.com/v3/users/administration/#unsuspend-a-user
-     *
-     * @param string $username
-     *
-     * @return array
      */
     public function unsuspend(string $username): array
     {

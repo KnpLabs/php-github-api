@@ -54,9 +54,6 @@ class ProjectsTest extends TestCase
         $this->assertEquals($expectedValue, $api->create('KnpLabs', $data));
     }
 
-    /**
-     * @return string
-     */
     protected function getApiClass(): string
     {
         return \Github\Api\Organization\Projects::class;

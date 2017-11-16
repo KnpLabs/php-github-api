@@ -20,8 +20,6 @@ class Comments extends AbstractApi
      *
      * @link https://developer.github.com/v3/issues/comments/#custom-media-types
      * @param string|null $bodyType
-     *
-     * @return self
      */
     public function configure(string $bodyType = null): self
     {
@@ -38,12 +36,6 @@ class Comments extends AbstractApi
      * Get all comments for an issue.
      *
      * @link https://developer.github.com/v3/issues/comments/#list-comments-on-an-issue
-     * @param string $username
-     * @param string $repository
-     * @param int    $issue
-     * @param int    $page
-     *
-     * @return array
      */
     public function all(string $username, string $repository, int $issue, int $page = 1): array
     {
@@ -56,11 +48,6 @@ class Comments extends AbstractApi
      * Get a comment for an issue.
      *
      * @link https://developer.github.com/v3/issues/comments/#get-a-single-comment
-     * @param string $username
-     * @param string $repository
-     * @param int    $comment
-     *
-     * @return array
      */
     public function show(string $username, string $repository, int $comment): array
     {
@@ -71,13 +58,8 @@ class Comments extends AbstractApi
      * Create a comment for an issue.
      *
      * @link https://developer.github.com/v3/issues/comments/#create-a-comment
-     * @param string $username
-     * @param string $repository
-     * @param int    $issue
-     * @param array  $params
      *
      * @throws \Github\Exception\MissingArgumentException
-     * @return array
      */
     public function create(string $username, string $repository, int $issue, array $params): array
     {
@@ -92,13 +74,8 @@ class Comments extends AbstractApi
      * Update a comment for an issue.
      *
      * @link https://developer.github.com/v3/issues/comments/#edit-a-comment
-     * @param string $username
-     * @param string $repository
-     * @param int    $comment
-     * @param array  $params
      *
      * @throws \Github\Exception\MissingArgumentException
-     * @return array
      */
     public function update(string $username, string $repository, int $comment, array $params): array
     {
@@ -113,11 +90,6 @@ class Comments extends AbstractApi
      * Delete a comment for an issue.
      *
      * @link https://developer.github.com/v3/issues/comments/#delete-a-comment
-     * @param string $username
-     * @param string $repository
-     * @param int    $comment
-     *
-     * @return array
      */
     public function remove(string $username, string $repository, int $comment): array
     {

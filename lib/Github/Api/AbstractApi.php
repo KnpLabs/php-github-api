@@ -33,9 +33,6 @@ abstract class AbstractApi implements ApiInterface
      */
     protected $perPage;
 
-    /**
-     * @param Client $client
-     */
     public function __construct(Client $client)
     {
         $this->client = $client;

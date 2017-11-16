@@ -126,9 +126,6 @@ class EmailsTest extends TestCase
         $this->assertEquals($expectedValue, $api->toggleVisibility());
     }
 
-    /**
-     * @return string
-     */
     protected function getApiClass(): string
     {
         return \Github\Api\CurrentUser\Emails::class;

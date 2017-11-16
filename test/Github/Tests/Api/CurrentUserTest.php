@@ -176,9 +176,6 @@ class CurrentUserTest extends TestCase
         $this->assertInstanceOf(\Github\Api\CurrentUser\Starring::class, $api->starring());
     }
 
-    /**
-     * @return string
-     */
     protected function getApiClass(): string
     {
         return \Github\Api\CurrentUser::class;

@@ -13,12 +13,6 @@ class Commits extends AbstractApi
 {
     /**
      * Show a commit for a repository.
-     *
-     * @param string $username
-     * @param string $repository
-     * @param string $sha
-     *
-     * @return array
      */
     public function show(string $username, string $repository, string $sha): array
     {
@@ -28,11 +22,7 @@ class Commits extends AbstractApi
     /**
      * Create a commit for a repository.
      *
-     * @param string $username
-     * @param string $repository
-     * @param array  $params
      *
-     * @return array
      *
      * @throws \Github\Exception\MissingArgumentException
      */

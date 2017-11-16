@@ -12,8 +12,6 @@ class RateLimit extends AbstractApi
 {
     /**
      * Get rate limits
-     *
-     * @return array
      */
     public function getRateLimits(): array
     {

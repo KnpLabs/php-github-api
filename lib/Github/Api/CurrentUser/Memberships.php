@@ -10,8 +10,6 @@ class Memberships extends AbstractApi
      * List your organization memberships.
      *
      * @link https://developer.github.com/v3/orgs/members/#get-your-organization-membership
-     *
-     * @return array
      */
     public function all(): array
     {
@@ -22,10 +20,6 @@ class Memberships extends AbstractApi
      * Get your organization membership.
      *
      * @link https://developer.github.com/v3/orgs/members/#get-your-organization-membership
-     *
-     * @param string $organization
-     *
-     * @return array
      */
     public function organization(string $organization): array
     {
@@ -36,10 +30,6 @@ class Memberships extends AbstractApi
      * Edit your organization membership
      *
      * @link https://developer.github.com/v3/orgs/members/#edit-your-organization-membership
-     *
-     * @param string $organization
-     *
-     * @return array
      */
     public function edit(string $organization): array
     {

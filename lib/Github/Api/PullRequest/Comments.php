@@ -20,8 +20,6 @@ class Comments extends AbstractApi
      * @link https://developer.github.com/v3/pulls/comments/#custom-media-types
      * @param string|null $bodyType
      * @param string|null @apiVersion
-     *
-     * @return self
      */
     public function configure(string $bodyType = null, string $apiVersion = null): self
     {
@@ -49,8 +47,6 @@ class Comments extends AbstractApi
      * @param string   $repository  the repository
      * @param int|null $pullRequest the pull request number
      * @param array    $params      a list of extra parameters.
-     *
-     * @return array
      */
     public function all(string $username, string $repository, int $pullRequest = null, array $params = []): array
     {
@@ -74,8 +70,6 @@ class Comments extends AbstractApi
      * @param string $username   the username
      * @param string $repository the repository
      * @param int    $comment    the comment id
-     *
-     * @return array
      */
     public function show(string $username, string $repository, int $comment): array
     {
@@ -93,8 +87,6 @@ class Comments extends AbstractApi
      * @param array  $params      a list of extra parameters.
      *
      * @throws MissingArgumentException
-     *
-     * @return array
      */
     public function create(string $username, string $repository, int $pullRequest, array $params): array
     {
@@ -121,8 +113,6 @@ class Comments extends AbstractApi
      * @param array  $params     a list of extra parameters.
      *
      * @throws MissingArgumentException
-     *
-     * @return array
      */
     public function update(string $username, string $repository, int $comment, array $params): array
     {
@@ -141,8 +131,6 @@ class Comments extends AbstractApi
      * @param string $username   the username
      * @param string $repository the repository
      * @param int    $comment    the comment id
-     *
-     * @return string
      */
     public function remove(string $username, string $repository, int $comment): string
     {

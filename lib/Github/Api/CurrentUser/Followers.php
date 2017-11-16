@@ -14,10 +14,6 @@ class Followers extends AbstractApi
      * List followed users by the authenticated user.
      *
      * @link http://developer.github.com/v3/repos/followers/
-     *
-     * @param int $page
-     *
-     * @return array
      */
     public function all(int $page = 1): array
     {

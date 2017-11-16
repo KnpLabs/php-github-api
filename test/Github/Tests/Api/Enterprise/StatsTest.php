@@ -39,9 +39,6 @@ class StatsTest extends TestCase
         $this->assertEquals($expectedArray, call_user_func([$api, $type]));
     }
 
-    /**
-     * @return array
-     */
     public function getTypes(): array
     {
         return [
@@ -60,8 +57,6 @@ class StatsTest extends TestCase
     }
 
     /**
-     * @param string $key
-     *
      * @return mixed
      */
     protected function getStatsData(string $key = '')
@@ -83,9 +78,6 @@ class StatsTest extends TestCase
         }
     }
 
-    /**
-     * @return string
-     */
     protected function getApiClass(): string
     {
         return \Github\Api\Enterprise\Stats::class;

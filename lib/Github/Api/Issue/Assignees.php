@@ -9,12 +9,6 @@ class Assignees extends AbstractApi
 {
     /**
      * List all the available assignees to which issues may be assigned.
-     *
-     * @param string $username
-     * @param string $repository
-     * @param array  $parameters
-     *
-     * @return array
      */
     public function listAvailable(string $username, string $repository, array $parameters = []): array
     {
@@ -25,12 +19,6 @@ class Assignees extends AbstractApi
      * Check to see if a particular user is an assignee for a repository.
      *
      * @link https://developer.github.com/v3/issues/assignees/#check-assignee
-     *
-     * @param string $username
-     * @param string $repository
-     * @param string $assignee
-     *
-     * @return array
      */
     public function check(string $username, string $repository, string $assignee): array
     {
@@ -42,12 +30,7 @@ class Assignees extends AbstractApi
      *
      * @link https://developer.github.com/v3/issues/assignees/#add-assignees-to-an-issue
      *
-     * @param string $username
-     * @param string $repository
-     * @param string $issue
-     * @param array  $parameters
      *
-     * @return string
      * @throws MissingArgumentException
      */
     public function add(string $username, string $repository, string $issue, array $parameters): string
@@ -64,12 +47,7 @@ class Assignees extends AbstractApi
      *
      * @link https://developer.github.com/v3/issues/assignees/#remove-assignees-from-an-issue
      *
-     * @param string $username
-     * @param string $repository
-     * @param string $issue
-     * @param array  $parameters
      *
-     * @return string
      * @throws MissingArgumentException
      */
     public function remove(string $username, string $repository, string $issue, array $parameters): string

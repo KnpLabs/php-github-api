@@ -18,10 +18,6 @@ class Stargazers extends AbstractApi
      * Configure the body type
      *
      * @see https://developer.github.com/v3/activity/starring/#alternative-response-with-star-creation-timestamps
-     *
-     * @param string $bodyType
-     *
-     * @return self
      */
     public function configure(string $bodyType = null): self
     {

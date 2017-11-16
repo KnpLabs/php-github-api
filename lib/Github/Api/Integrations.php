@@ -16,8 +16,6 @@ class Integrations extends Apps
      * Configure the accept header for Early Access to the integrations api (DEPRECATED)
      *
      * @see https://developer.github.com/v3/apps/
-     *
-     * @return self
      */
     public function configure(): self
     {

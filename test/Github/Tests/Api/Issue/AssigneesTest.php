@@ -97,9 +97,6 @@ class AssigneesTest extends TestCase
         $api->remove('knplabs', 'php-github-api', 4, $data);
     }
 
-    /**
-     * @return string
-     */
     protected function getApiClass(): string
     {
         return Assignees::class;

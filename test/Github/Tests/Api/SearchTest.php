@@ -176,6 +176,7 @@ class SearchTest extends TestCase
         );
     }
 
+<<<<<<< HEAD
     /**
      * @test
      */
@@ -199,6 +200,8 @@ class SearchTest extends TestCase
     /**
      * @return string
      */
+=======
+>>>>>>> remove useless docs
     protected function getApiClass(): string
     {
         return \Github\Api\Search::class;

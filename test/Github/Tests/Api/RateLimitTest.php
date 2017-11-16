@@ -33,9 +33,6 @@ class RateLimitTest extends TestCase
         $this->assertEquals($expectedArray, $api->getRateLimits());
     }
 
-    /**
-     * @return string
-     */
     protected function getApiClass(): string
     {
         return \Github\Api\RateLimit::class;

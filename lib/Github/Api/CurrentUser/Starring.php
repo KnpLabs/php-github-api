@@ -15,11 +15,6 @@ class Starring extends AbstractApi
      * List repositories starred by the authenticated user.
      *
      * @link https://developer.github.com/v3/activity/starring/
-     *
-     * @param int $page
-     * @param int $perPage
-     *
-     * @return array
      */
     public function all(int $page = 1, int $perPage = 30): array
     {

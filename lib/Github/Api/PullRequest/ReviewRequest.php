@@ -19,13 +19,6 @@ class ReviewRequest extends AbstractApi
 
     /**
      * @link https://developer.github.com/v3/pulls/review_requests/#list-review-requests
-     *
-     * @param string $username
-     * @param string $repository
-     * @param int    $pullRequest
-     * @param array  $params
-     *
-     * @return array
      */
     public function all(string $username, string $repository, int $pullRequest, array $params = []): array
     {
@@ -34,13 +27,6 @@ class ReviewRequest extends AbstractApi
 
     /**
      * @link https://developer.github.com/v3/pulls/review_requests/#create-a-review-request
-     *
-     * @param string $username
-     * @param string $repository
-     * @param int    $pullRequest
-     * @param array  $reviewers
-     *
-     * @return string
      */
     public function create(string $username, string $repository, int $pullRequest, array $reviewers): string
     {
@@ -49,13 +35,6 @@ class ReviewRequest extends AbstractApi
 
     /**
      * @link https://developer.github.com/v3/pulls/review_requests/#delete-a-review-request
-     *
-     * @param string $username
-     * @param string $repository
-     * @param int    $pullRequest
-     * @param array  $reviewers
-     *
-     * @return string
      */
     public function remove(string $username, string $repository, int $pullRequest, array $reviewers): string
     {
