@@ -6,9 +6,6 @@ use ReflectionMethod;
 
 abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @return string
-     */
     abstract protected function getApiClass(): string;
 
     /**
@@ -34,7 +31,6 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
     /**
      * @param object $object
      * @param string $methodName
-     * @return ReflectionMethod
      */
     protected function getMethod($object, $methodName): ReflectionMethod
     {

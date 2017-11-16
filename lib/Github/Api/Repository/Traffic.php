@@ -12,11 +12,6 @@ class Traffic extends AbstractApi
 {
     /**
      * @link https://developer.github.com/v3/repos/traffic/#list-referrers
-     *
-     * @param string $owner
-     * @param string $repository
-     *
-     * @return array
      */
     public function referers(string $owner, string $repository): array
     {
@@ -24,11 +19,6 @@ class Traffic extends AbstractApi
     }
     /**
      * @link https://developer.github.com/v3/repos/traffic/#list-paths
-     *
-     * @param string $owner
-     * @param string $repository
-     *
-     * @return array
      */
     public function paths(string $owner, string $repository): array
     {
@@ -36,12 +26,6 @@ class Traffic extends AbstractApi
     }
     /**
      * @link https://developer.github.com/v3/repos/traffic/#views
-     *
-     * @param string $owner
-     * @param string $repository
-     * @param string $per
-     *
-     * @return array
      */
     public function views(string $owner, string $repository, string $per = 'day'): array
     {
@@ -49,12 +33,6 @@ class Traffic extends AbstractApi
     }
     /**
      * @link https://developer.github.com/v3/repos/traffic/#clones
-     *
-     * @param string $owner
-     * @param string $repository
-     * @param string $per
-     *
-     * @return array
      */
     public function clones(string $owner, string $repository, string $per = 'day'): array
     {

@@ -16,33 +16,21 @@ use Github\Api\Enterprise\UserAdmin;
  */
 class Enterprise extends AbstractApi
 {
-    /**
-     * @return Stats
-     */
     public function stats(): Stats
     {
         return new Stats($this->client);
     }
 
-    /**
-     * @return License
-     */
     public function license(): License
     {
         return new License($this->client);
     }
 
-    /**
-     * @return ManagementConsole
-     */
     public function console(): ManagementConsole
     {
         return new ManagementConsole($this->client);
     }
 
-    /**
-     * @return UserAdmin
-     */
     public function userAdmin(): UserAdmin
     {
         return new UserAdmin($this->client);

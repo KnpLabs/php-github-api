@@ -22,8 +22,6 @@ class Contents extends AbstractApi
      *
      * @link https://developer.github.com/v3/repo/contents/#custom-media-types
      * @param string|null $bodyType
-     *
-     * @return self
      */
     public function configure(string $bodyType = null): self
     {
@@ -125,8 +123,6 @@ class Contents extends AbstractApi
      * @param string      $repository the name of the repository
      * @param string      $path       path of file to check
      * @param null|string $reference  reference to a branch or commit
-     *
-     * @return bool
      */
     public function exists(string $username, string $repository, string $path, string $reference = null): bool
     {
