@@ -89,10 +89,11 @@ class Labels extends AbstractApi
      *
      * @link https://developer.github.com/v3/issues/labels/#remove-a-label-from-an-issue
      *
+     * @param array|string $labels
      *
      * @thorws \Github\Exception\InvalidArgumentException
      */
-    public function add(string $username, string $repository, int $issue, string $labels): array
+    public function add(string $username, string $repository, int $issue, $labels): array
     {
         if (is_string($labels)) {
             $labels = [$labels];

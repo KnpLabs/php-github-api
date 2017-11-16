@@ -2,7 +2,9 @@
 
 namespace Github\Tests\Api\Issue;
 
+use Github\Api\Issue\Labels;
 use Github\Tests\Api\TestCase;
+use PHPUnit_Framework_MockObject_MockObject;
 
 class LabelsTest extends TestCase
 {
@@ -16,6 +18,7 @@ class LabelsTest extends TestCase
             ['name' => 'other'],
         ];
 
+        /** @var Labels|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -32,6 +35,7 @@ class LabelsTest extends TestCase
     {
         $expectedValue = [['name' => 'label']];
 
+        /** @var Labels|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -49,6 +53,7 @@ class LabelsTest extends TestCase
         $expectedValue = [['name' => 'label', 'color' => 'FFFFFF']];
         $data = ['name' => 'label'];
 
+        /** @var Labels|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
@@ -65,6 +70,7 @@ class LabelsTest extends TestCase
     {
         $expectedValue = [['name' => 'label1']];
 
+        /** @var Labels|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -82,6 +88,7 @@ class LabelsTest extends TestCase
         $expectedValue = [['name' => 'label', 'color' => '111111']];
         $data = ['name' => 'label', 'color' => '111111'];
 
+        /** @var Labels|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
@@ -98,6 +105,7 @@ class LabelsTest extends TestCase
     {
         $expectedValue = ['someOutput'];
 
+        /** @var Labels|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
@@ -115,6 +123,7 @@ class LabelsTest extends TestCase
         $expectedValue = [['name' => 'bar', 'color' => 'FFF']];
         $data = ['name' => 'bar', 'color' => 'FFF'];
 
+        /** @var Labels|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
@@ -131,6 +140,7 @@ class LabelsTest extends TestCase
     {
         $expectedValue = ['someOutput'];
 
+        /** @var Labels|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
@@ -147,6 +157,7 @@ class LabelsTest extends TestCase
     {
         $expectedValue = ['label' => 'somename'];
 
+        /** @var Labels|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
@@ -163,6 +174,7 @@ class LabelsTest extends TestCase
     {
         $expectedValue = ['label' => 'somename'];
 
+        /** @var Labels|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
@@ -180,6 +192,7 @@ class LabelsTest extends TestCase
         $expectedValue = [['label' => 'somename']];
         $data = ['labels' => ['labelname']];
 
+        /** @var Labels|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
@@ -195,6 +208,7 @@ class LabelsTest extends TestCase
      */
     public function shouldNotAddWhenDoNotHaveLabelsToAdd()
     {
+        /** @var Labels|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->any())
             ->method('post');
@@ -209,6 +223,7 @@ class LabelsTest extends TestCase
     {
         $expectedValue = ['someOutput'];
 
+        /** @var Labels|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')

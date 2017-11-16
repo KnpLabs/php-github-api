@@ -4,6 +4,7 @@ namespace Github\Tests\Api\PullRequest;
 
 use Github\Api\PullRequest\Comments;
 use Github\Tests\Api\TestCase;
+use PHPUnit_Framework_MockObject_MockObject;
 
 class CommentsTest extends TestCase
 {
@@ -61,6 +62,7 @@ class CommentsTest extends TestCase
             ],
         ];
 
+        /** @var Comments|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api
             ->expects($this->once())
@@ -125,6 +127,7 @@ class CommentsTest extends TestCase
             ],
         ];
 
+        /** @var Comments|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api
             ->expects($this->once())
@@ -187,6 +190,7 @@ class CommentsTest extends TestCase
             ],
         ];
 
+        /** @var Comments|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api
             ->expects($this->once())
@@ -255,6 +259,7 @@ class CommentsTest extends TestCase
             'body' => 'Nice change',
         ];
 
+        /** @var Comments|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
@@ -276,6 +281,7 @@ class CommentsTest extends TestCase
             'body' => 'Nice change',
         ];
 
+        /** @var Comments|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api
             ->expects($this->never())
@@ -297,6 +303,7 @@ class CommentsTest extends TestCase
             'body' => 'Nice change',
         ];
 
+        /** @var Comments|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api
             ->expects($this->never())
@@ -318,6 +325,7 @@ class CommentsTest extends TestCase
             'body' => 'Nice change',
         ];
 
+        /** @var Comments|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api
             ->expects($this->never())
@@ -339,6 +347,7 @@ class CommentsTest extends TestCase
             'position' => 4,
         ];
 
+        /** @var Comments|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api
             ->expects($this->never())
@@ -403,6 +412,7 @@ class CommentsTest extends TestCase
             'body' => 'Nice change',
         ];
 
+        /** @var Comments|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
@@ -465,6 +475,7 @@ class CommentsTest extends TestCase
             ],
         ];
 
+        /** @var Comments|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('patch')
@@ -478,6 +489,7 @@ class CommentsTest extends TestCase
      */
     public function shouldDeleteReviewComment()
     {
+        /** @var Comments|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')

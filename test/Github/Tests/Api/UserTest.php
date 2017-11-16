@@ -2,6 +2,9 @@
 
 namespace Github\Tests\Api;
 
+use Github\Api\User;
+use PHPUnit_Framework_MockObject_MockObject;
+
 class UserTest extends TestCase
 {
     /**
@@ -11,6 +14,7 @@ class UserTest extends TestCase
     {
         $expectedArray = ['id' => 1, 'username' => 'l3l0'];
 
+        /** @var User|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -34,6 +38,7 @@ class UserTest extends TestCase
             'public_members_url' => 'https://api.github.com/orgs/KnpLabs/public_members{/member}'
         ]];
 
+        /** @var User|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -54,6 +59,7 @@ class UserTest extends TestCase
             'public_members_url' => 'https://api.github.com/orgs/KnpLabs/public_members{/member}'
         ]];
 
+        /** @var User|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -73,6 +79,7 @@ class UserTest extends TestCase
             ['id' => 2, 'username' => 'l3l0test']
         ];
 
+        /** @var User|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -92,6 +99,7 @@ class UserTest extends TestCase
             ['id' => 4, 'username' => 'test4']
         ];
 
+        /** @var User|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -111,6 +119,7 @@ class UserTest extends TestCase
             ['id' => 2, 'username' => 'l3l0test']
         ];
 
+        /** @var User|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -127,6 +136,7 @@ class UserTest extends TestCase
     {
         $expectedArray = [['id' => 1, 'username' => 'l3l0test']];
 
+        /** @var User|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -143,6 +153,7 @@ class UserTest extends TestCase
     {
         $expectedArray = [['id' => 1, 'username' => 'l3l0test']];
 
+        /** @var User|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -159,6 +170,7 @@ class UserTest extends TestCase
     {
         $expectedArray = [['id' => 1, 'name' => 'l3l0repo']];
 
+        /** @var User|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -175,6 +187,7 @@ class UserTest extends TestCase
     {
         $expectedArray = [['id' => 1, 'name' => 'l3l0repo']];
 
+        /** @var User|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -191,6 +204,7 @@ class UserTest extends TestCase
     {
         $expectedArray = [['id' => 1, 'name' => 'l3l0repo']];
 
+        /** @var User|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -207,6 +221,7 @@ class UserTest extends TestCase
     {
         $expectedArray = [['id' => 1, 'name' => 'l3l0repo']];
 
+        /** @var User|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')->with('/user/repos', [])
@@ -222,6 +237,7 @@ class UserTest extends TestCase
     {
         $expectedArray = [['id' => 1, 'name' => 'l3l0repo']];
 
+        /** @var User|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -233,6 +249,6 @@ class UserTest extends TestCase
 
     protected function getApiClass(): string
     {
-        return \Github\Api\User::class;
+        return User::class;
     }
 }

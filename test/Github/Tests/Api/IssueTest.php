@@ -2,6 +2,9 @@
 
 namespace Github\Tests\Api;
 
+use Github\Api\Issue;
+use PHPUnit_Framework_MockObject_MockObject;
+
 class IssueTest extends TestCase
 {
     /**
@@ -16,6 +19,7 @@ class IssueTest extends TestCase
             'page' => 1
         ];
 
+        /** @var Issue|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -43,6 +47,7 @@ class IssueTest extends TestCase
             'page' => 1
         ];
 
+        /** @var Issue|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -59,6 +64,7 @@ class IssueTest extends TestCase
     {
         $expectedArray = ['id' => '123'];
 
+        /** @var Issue|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -78,6 +84,7 @@ class IssueTest extends TestCase
             'body'  => 'some body'
         ];
 
+        /** @var Issue|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
@@ -96,6 +103,7 @@ class IssueTest extends TestCase
             'body'  => 'some body'
         ];
 
+        /** @var Issue|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -112,6 +120,7 @@ class IssueTest extends TestCase
             'title' => 'some title'
         ];
 
+        /** @var Issue|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
@@ -129,6 +138,7 @@ class IssueTest extends TestCase
             'state' => 'closed',
         ];
 
+        /** @var Issue|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
@@ -146,6 +156,7 @@ class IssueTest extends TestCase
             'state' => 'open',
         ];
 
+        /** @var Issue|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
@@ -161,6 +172,7 @@ class IssueTest extends TestCase
     {
         $expectedArray = [['id' => '123']];
 
+        /** @var Issue|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -177,6 +189,7 @@ class IssueTest extends TestCase
     {
         $expectedArray = [['id' => '123']];
 
+        /** @var Issue|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -193,6 +206,7 @@ class IssueTest extends TestCase
     {
         $expectedArray = [['id' => '123']];
 
+        /** @var Issue|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -207,6 +221,7 @@ class IssueTest extends TestCase
      */
     public function shouldGetCommentsApiObject()
     {
+        /** @var Issue|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
 
         $this->assertInstanceOf(\Github\Api\Issue\Comments::class, $api->comments());
@@ -217,6 +232,7 @@ class IssueTest extends TestCase
      */
     public function shouldGetEventsApiObject()
     {
+        /** @var Issue|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
 
         $this->assertInstanceOf(\Github\Api\Issue\Events::class, $api->events());
@@ -227,6 +243,7 @@ class IssueTest extends TestCase
      */
     public function shouldGetLabelsApiObject()
     {
+        /** @var Issue|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
 
         $this->assertInstanceOf(\Github\Api\Issue\Labels::class, $api->labels());
@@ -237,6 +254,7 @@ class IssueTest extends TestCase
      */
     public function shouldGetMilestonesApiObject()
     {
+        /** @var Issue|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
 
         $this->assertInstanceOf(\Github\Api\Issue\Milestones::class, $api->milestones());
@@ -259,6 +277,7 @@ class IssueTest extends TestCase
     {
         $parameters = [];
 
+        /** @var Issue|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
@@ -274,6 +293,7 @@ class IssueTest extends TestCase
     {
         $parameters = [];
 
+        /** @var Issue|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')

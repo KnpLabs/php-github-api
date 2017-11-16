@@ -159,8 +159,10 @@ class Issue extends AbstractApi
      * Lock an issue. Users with push access can lock an issue's conversation.
      *
      * @link https://developer.github.com/v3/issues/#lock-an-issue
+     *
+     * @param string|int $id
      */
-    public function lock(string $username, string $repository, int $id): string
+    public function lock(string $username, string $repository, $id): string
     {
         return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode((string) $id).'/lock');
     }
@@ -169,8 +171,12 @@ class Issue extends AbstractApi
      * Unlock an issue. Users with push access can unlock an issue's conversation.
      *
      * @link https://developer.github.com/v3/issues/#lock-an-issue
+     *
+     * @param string|int $id
+     *
+     * @return string|null
      */
-    public function unlock(string $username, string $repository, int $id): string
+    public function unlock(string $username, string $repository, $id)
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode((string) $id).'/lock');
     }
