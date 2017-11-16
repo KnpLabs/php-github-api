@@ -12,8 +12,9 @@ class Traffic extends AbstractApi
 {
     /**
      * @link https://developer.github.com/v3/repos/traffic/#list-referrers
+     * @return string|array
      */
-    public function referers(string $owner, string $repository): array
+    public function referers(string $owner, string $repository)
     {
         return $this->get('/repos/'.rawurlencode($owner).'/'.rawurlencode($repository).'/traffic/popular/referrers');
     }

@@ -2,7 +2,9 @@
 
 namespace Github\Tests\Api\Repository;
 
+use Github\Api\Repository\Downloads;
 use Github\Tests\Api\TestCase;
+use PHPUnit_Framework_MockObject_MockObject;
 
 class DownloadsTest extends TestCase
 {
@@ -13,6 +15,7 @@ class DownloadsTest extends TestCase
     {
         $expectedValue = [['download']];
 
+        /** @var Downloads|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -29,6 +32,7 @@ class DownloadsTest extends TestCase
     {
         $expectedValue = ['download'];
 
+        /** @var Downloads|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -45,6 +49,7 @@ class DownloadsTest extends TestCase
     {
         $expectedValue = 'response';
 
+        /** @var Downloads|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
@@ -56,6 +61,6 @@ class DownloadsTest extends TestCase
 
     protected function getApiClass(): string
     {
-        return \Github\Api\Repository\Downloads::class;
+        return Downloads::class;
     }
 }

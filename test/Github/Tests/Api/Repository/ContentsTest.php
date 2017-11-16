@@ -2,9 +2,11 @@
 
 namespace Github\Tests\Api\Repository;
 
+use Github\Api\Repository\Contents;
 use Github\Exception\TwoFactorAuthenticationRequiredException;
 use Github\Tests\Api\TestCase;
 use GuzzleHttp\Psr7\Response;
+use PHPUnit_Framework_MockObject_MockObject;
 
 class ContentsTest extends TestCase
 {
@@ -177,6 +179,8 @@ class ContentsTest extends TestCase
     public function shouldThrowExceptionWhenUpdateFileWithInvalidCommitter()
     {
         $committer = ['invalid_key' => 'some data'];
+
+        /** @var Contents|PHPUnit_Framework_MockObject_MockObject $api */
         $api       = $this->getApiMock();
         $api->update('KnpLabs', 'php-github-api', 'test/Github/Tests/Api/Repository/ContentsTest.php', 'some content', 'a commit message', null, null, $committer);
     }
@@ -198,6 +202,7 @@ class ContentsTest extends TestCase
             'sha'       => $sha,
         ];
 
+        /** @var Contents|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
@@ -215,7 +220,9 @@ class ContentsTest extends TestCase
     public function shouldThrowExceptionWhenDeleteFileWithInvalidCommitter()
     {
         $committer = ['invalid_key' => 'some data'];
-        $api       = $this->getApiMock();
+
+        /** @var Contents|PHPUnit_Framework_MockObject_MockObject $api */
+        $api = $this->getApiMock();
         $api->rm('KnpLabs', 'php-github-api', 'test/Github/Tests/Api/Repository/ContentsTest.php', 'a commit message', null, null, $committer);
     }
 
@@ -226,6 +233,7 @@ class ContentsTest extends TestCase
     {
         $expectedValue = 'tar';
 
+        /** @var Contents|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -242,6 +250,7 @@ class ContentsTest extends TestCase
     {
         $expectedValue = 'tar';
 
+        /** @var Contents|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -258,6 +267,7 @@ class ContentsTest extends TestCase
     {
         $expectedValue = 'zip';
 
+        /** @var Contents|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -274,6 +284,7 @@ class ContentsTest extends TestCase
     {
         $expectedValue = 'zip';
 
+        /** @var Contents|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -294,6 +305,7 @@ class ContentsTest extends TestCase
         // The download() method return
         $expectedValue = base64_decode($getValue['content']);
 
+        /** @var Contents|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -314,6 +326,7 @@ class ContentsTest extends TestCase
         // The download() method return
         $expectedValue = base64_decode($getValue['content']);
 
+        /** @var Contents|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -325,6 +338,6 @@ class ContentsTest extends TestCase
 
     protected function getApiClass(): string
     {
-        return \Github\Api\Repository\Contents::class;
+        return Contents::class;
     }
 }

@@ -2,6 +2,9 @@
 
 namespace Github\Tests\Api;
 
+use Github\Api\Repo;
+use PHPUnit_Framework_MockObject_MockObject;
+
 class RepoTest extends TestCase
 {
     /**
@@ -11,6 +14,7 @@ class RepoTest extends TestCase
     {
         $expectedArray = ['id' => 1, 'name' => 'repoName'];
 
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -27,6 +31,7 @@ class RepoTest extends TestCase
     {
         $expectedArray = ['id' => 123456, 'name' => 'repoName'];
 
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -46,6 +51,7 @@ class RepoTest extends TestCase
             ['id' => 2, 'name' => 'php-cs']
         ];
 
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -65,6 +71,7 @@ class RepoTest extends TestCase
             ['id' => 4, 'name' => 'fork of php-cs']
         ];
 
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -86,6 +93,7 @@ class RepoTest extends TestCase
             ['id' => 4, 'name' => 'fork of php-cs'],
         ];
 
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -107,6 +115,7 @@ class RepoTest extends TestCase
             ['id' => 4, 'name' => 'fork of php-cs'],
         ];
 
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -123,6 +132,7 @@ class RepoTest extends TestCase
     {
         $expectedArray = ['id' => 1, 'name' => 'l3l0Repo'];
 
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
@@ -148,6 +158,7 @@ class RepoTest extends TestCase
     {
         $expectedArray = ['id' => 1, 'name' => 'KnpLabsRepo'];
 
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
@@ -173,6 +184,7 @@ class RepoTest extends TestCase
     {
         $expectedArray = [['id' => 1, 'username' => 'l3l0']];
 
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -189,6 +201,7 @@ class RepoTest extends TestCase
     {
         $expectedArray = [['sha' => 1234]];
 
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -205,6 +218,7 @@ class RepoTest extends TestCase
     {
         $expectedArray = [['sha' => 1234, 'name' => 'master']];
 
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -221,6 +235,7 @@ class RepoTest extends TestCase
     {
         $expectedArray = ['sha' => 1234, 'name' => 'master'];
 
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -237,6 +252,7 @@ class RepoTest extends TestCase
     {
         $expectedArray = ['lang1', 'lang2'];
 
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -253,6 +269,7 @@ class RepoTest extends TestCase
     {
         $expectedArray = ['milestone1', 'milestone2'];
 
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -269,6 +286,7 @@ class RepoTest extends TestCase
     {
         $expectedArray = ['contrib1', 'contrib2'];
 
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -285,6 +303,7 @@ class RepoTest extends TestCase
     {
         $expectedArray = ['contrib1', 'contrib2'];
 
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -301,6 +320,7 @@ class RepoTest extends TestCase
     {
         $expectedArray = [['id' => 1234], ['id' => 2345]];
 
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -317,6 +337,7 @@ class RepoTest extends TestCase
     {
         $expectedArray = ['id' => 1, 'name' => 'l3l0Repo'];
 
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
@@ -342,6 +363,7 @@ class RepoTest extends TestCase
     {
         $expectedArray = ['id' => 1, 'name' => 'l3l0Repo'];
 
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
@@ -356,6 +378,7 @@ class RepoTest extends TestCase
      */
     public function shouldDelete()
     {
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
@@ -372,6 +395,7 @@ class RepoTest extends TestCase
     {
         $expectedArray = ['message' => 'Not Found'];
 
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
@@ -386,6 +410,7 @@ class RepoTest extends TestCase
      */
     public function shouldGetCollaboratorsApiObject()
     {
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
 
         $this->assertInstanceOf(\Github\Api\Repository\Collaborators::class, $api->collaborators());
@@ -396,6 +421,7 @@ class RepoTest extends TestCase
      */
     public function shouldGetCommentsApiObject()
     {
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
 
         $this->assertInstanceOf(\Github\Api\Repository\Comments::class, $api->comments());
@@ -406,6 +432,7 @@ class RepoTest extends TestCase
      */
     public function shouldGetCommitsApiObject()
     {
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
 
         $this->assertInstanceOf(\Github\Api\Repository\Commits::class, $api->commits());
@@ -416,6 +443,7 @@ class RepoTest extends TestCase
      */
     public function shouldGetContentsApiObject()
     {
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
 
         $this->assertInstanceOf(\Github\Api\Repository\Contents::class, $api->contents());
@@ -426,6 +454,7 @@ class RepoTest extends TestCase
      */
     public function shouldGetDeployKeysApiObject()
     {
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
 
         $this->assertInstanceOf(\Github\Api\Repository\DeployKeys::class, $api->keys());
@@ -436,6 +465,7 @@ class RepoTest extends TestCase
      */
     public function shouldGetDownloadsApiObject()
     {
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
 
         $this->assertInstanceOf(\Github\Api\Repository\Downloads::class, $api->downloads());
@@ -446,6 +476,7 @@ class RepoTest extends TestCase
      */
     public function shouldGetForksApiObject()
     {
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
 
         $this->assertInstanceOf(\Github\Api\Repository\Forks::class, $api->forks());
@@ -456,6 +487,7 @@ class RepoTest extends TestCase
      */
     public function shouldGetHooksApiObject()
     {
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
 
         $this->assertInstanceOf(\Github\Api\Repository\Hooks::class, $api->hooks());
@@ -466,6 +498,7 @@ class RepoTest extends TestCase
      */
     public function shouldGetLabelsApiObject()
     {
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
 
         $this->assertInstanceOf(\Github\Api\Repository\Labels::class, $api->labels());
@@ -476,6 +509,7 @@ class RepoTest extends TestCase
      */
     public function shouldGetStatusesApiObject()
     {
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
 
         $this->assertInstanceOf(\Github\Api\Repository\Statuses::class, $api->statuses());
@@ -486,6 +520,7 @@ class RepoTest extends TestCase
      */
     public function shouldGetStargazersApiObject()
     {
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
 
         $this->assertInstanceOf(\Github\Api\Repository\Stargazers::class, $api->stargazers());
@@ -496,6 +531,7 @@ class RepoTest extends TestCase
      */
     public function shouldGetReleasesApiObject()
     {
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
 
         $this->assertInstanceOf(\Github\Api\Repository\Releases::class, $api->releases());
@@ -508,6 +544,7 @@ class RepoTest extends TestCase
     {
         $expectedArray = [['days' => [0, 3, 26, 20, 39, 1, 0], 'total' => 89, 'week' => 1336280400]];
 
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -524,6 +561,7 @@ class RepoTest extends TestCase
     {
         $expectedArray = ['id' => 6122723754, 'type' => 'ForkEvent'];
 
+        /** @var Repo|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -593,6 +631,6 @@ class RepoTest extends TestCase
 >>>>>>> remove useless docs
     protected function getApiClass(): string
     {
-        return \Github\Api\Repo::class;
+        return Repo::class;
     }
 }

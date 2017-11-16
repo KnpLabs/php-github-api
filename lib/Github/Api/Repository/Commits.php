@@ -25,7 +25,7 @@ class Commits extends AbstractApi
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/compare/'.rawurlencode($base).'...'.rawurlencode($head), [], $headers);
     }
 
-    public function show($username, $repository, $sha)
+    public function show(string $username, string $repository, string $sha)
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/commits/'.rawurlencode($sha));
     }

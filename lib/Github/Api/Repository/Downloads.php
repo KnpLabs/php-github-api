@@ -31,10 +31,12 @@ class Downloads extends AbstractApi
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
      * @param int    $id         the id of the download file
+     *
+     * @return string|array
      */
-    public function show(string $username, string $repository, int $id): array
+    public function show(string $username, string $repository, string $id)
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/downloads/'.rawurlencode((string) $id));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/downloads/'.rawurlencode($id));
     }
 
     /**
@@ -45,9 +47,11 @@ class Downloads extends AbstractApi
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
      * @param int    $id         the id of the download file
+     *
+     * @return string|array
      */
-    public function remove(string $username, string $repository, int $id): array
+    public function remove(string $username, string $repository, string $id)
     {
-        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/downloads/'.rawurlencode((string) $id));
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/downloads/'.rawurlencode($id));
     }
 }

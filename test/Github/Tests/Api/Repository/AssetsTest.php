@@ -2,7 +2,9 @@
 
 namespace Github\Tests\Api\Repository;
 
+use Github\Api\Repository\Assets;
 use Github\Tests\Api\TestCase;
+use PHPUnit_Framework_MockObject_MockObject;
 
 class AssetsTest extends TestCase
 {
@@ -14,6 +16,7 @@ class AssetsTest extends TestCase
         $expectedValue = [['asset1data'], ['asset2data']];
         $id = 76;
 
+        /** @var Assets|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -31,6 +34,7 @@ class AssetsTest extends TestCase
         $expectedValue = ['assetData'];
         $assetId = 2;
 
+        /** @var Assets|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -42,7 +46,6 @@ class AssetsTest extends TestCase
 
     /**
      * @test
-     * @requires PHP 5.3.4
      */
     public function shouldCreateReleaseAsset()
     {
@@ -57,6 +60,7 @@ class AssetsTest extends TestCase
         $contentType = 'application/gzip';
         $releaseId = '12345';
 
+        /** @var Assets|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
           ->method('postRaw')
@@ -75,6 +79,7 @@ class AssetsTest extends TestCase
         $assetId = 5;
         $data = ['name' => 'asset111_name_qweqwe'];
 
+        /** @var Assets|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
@@ -93,6 +98,7 @@ class AssetsTest extends TestCase
         $assetId = 5;
         $data = ['not_a_name' => 'just a value'];
 
+        /** @var Assets|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('patch');
@@ -108,6 +114,7 @@ class AssetsTest extends TestCase
         $expectedValue = ['assetUpdatedData'];
         $assetId = 5;
 
+        /** @var Assets|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
@@ -119,6 +126,6 @@ class AssetsTest extends TestCase
 
     protected function getApiClass(): string
     {
-        return \Github\Api\Repository\Assets::class;
+        return Assets::class;
     }
 }

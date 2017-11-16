@@ -48,17 +48,19 @@ class Assets extends AbstractApi
      * @see http://developer.github.com/v3/repos/releases/#upload-a-release-asset
      * @see http://php.net/manual/en/openssl.constsni.php
      *
-     * @param string $username    the user who owns the repo
-     * @param string $repository  the name of the repo
-     * @param int    $id          the id of the release
-     * @param string $name        the filename for the asset
-     * @param string $contentType the content type for the asset
-     * @param string $content     the content of the asset
+     * @param string     $username    the user who owns the repo
+     * @param string     $repository  the name of the repo
+     * @param int|string $id          the id of the release
+     * @param string     $name        the filename for the asset
+     * @param string     $contentType the content type for the asset
+     * @param string     $content     the content of the asset
+     *
+     * @return array|string
      *
      * @throws MissingArgumentException
      * @throws ErrorException
      */
-    public function create(string $username, string $repository, int $id, string $name, string $contentType, string $content): array
+    public function create(string $username, string $repository, $id, string $name, string $contentType, string $content)
     {
         if (!defined('OPENSSL_TLSEXT_SERVER_NAME') || !OPENSSL_TLSEXT_SERVER_NAME) {
             throw new ErrorException('Asset upload support requires Server Name Indication. This is not supported by your PHP version. See http://php.net/manual/en/openssl.constsni.php.');

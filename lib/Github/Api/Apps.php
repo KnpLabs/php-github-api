@@ -24,7 +24,7 @@ class Apps extends AbstractApi
             $parameters['user_id'] = $userId;
         }
 
-        return $this->post('/installations/'.rawurlencode($installationId).'/access_tokens', $parameters);
+        return $this->post('/installations/'.rawurlencode((string) $installationId).'/access_tokens', $parameters);
     }
 
     /**
@@ -59,7 +59,7 @@ class Apps extends AbstractApi
      */
     public function addRepository(int $installationId, int $repositoryId): array
     {
-        return $this->put('/installations/'.rawurlencode($installationId).'/repositories/'.rawurlencode($repositoryId));
+        return $this->put('/installations/'.rawurlencode((string) $installationId).'/repositories/'.rawurlencode((string) $repositoryId));
     }
 
     /**
@@ -69,6 +69,6 @@ class Apps extends AbstractApi
      */
     public function removeRepository(int $installationId, int $repositoryId): array
     {
-        return $this->delete('/installations/'.rawurlencode($installationId).'/repositories/'.rawurlencode($repositoryId));
+        return $this->delete('/installations/'.rawurlencode((string) $installationId).'/repositories/'.rawurlencode((string) $repositoryId));
     }
 }

@@ -43,9 +43,9 @@ class Contents extends AbstractApi
      * @param string      $repository the name of the repository
      * @param null|string $reference  reference to a branch or commit
      *
-     * @return array information for README file
+     * @return array|string information for README file
      */
-    public function readme(string $username, string $repository, string $reference = null): array
+    public function readme(string $username, string $repository, string $reference = null)
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/readme', [
             'ref' => $reference
@@ -200,7 +200,7 @@ class Contents extends AbstractApi
      * @param string      $repository the name of the repository
      * @param string      $path       path to file
      * @param string      $message    the commit message
-     * @param string      $sha        blob SHA of the file being deleted
+     * @param null|string $sha        blob SHA of the file being deleted
      * @param null|string $branch     name of a branch
      * @param null|array  $committer  information about the committer
      *
@@ -208,7 +208,7 @@ class Contents extends AbstractApi
      *
      * @return array information about the updated file
      */
-    public function rm(string $username, string $repository, string $path, string $message, string $sha, string $branch = null, array $committer = null): array
+    public function rm(string $username, string $repository, string $path, string $message, $sha, string $branch = null, array $committer = null): array
     {
         $url = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
 
@@ -241,9 +241,9 @@ class Contents extends AbstractApi
      * @param string      $format     format of archive: tarball or zipball
      * @param null|string $reference  reference to a branch or commit
      *
-     * @return array information for archives
+     * @return array|string information for archives
      */
-    public function archive(string $username, string $repository, string $format, string $reference = null): array
+    public function archive(string $username, string $repository, string $format, string $reference = null)
     {
         if (!in_array($format, ['tarball', 'zipball'])) {
             $format = 'tarball';
