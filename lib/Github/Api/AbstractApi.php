@@ -88,7 +88,7 @@ abstract class AbstractApi implements ApiInterface
      * @param array  $parameters     GET parameters.
      * @param array  $requestHeaders Request Headers.
      *
-     * @return array|string
+     * @return array|string|null
      */
     protected function get(string $path, array $parameters = [], array $requestHeaders = [])
     {

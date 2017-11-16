@@ -18,9 +18,9 @@ class Deployment extends AbstractApi
      * @param  string $username   the username of the user who owns the repository
      * @param  string $repository the name of the repository
      * @param  array $params      query parameters to filter deployments by (see link)
-     * @return array              the deployments requested
+     * @return array|null         the deployments requested
      */
-    public function all(string $username, string $repository, array $params = []): array
+    public function all(string $username, string $repository, array $params = [])
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/deployments', $params);
     }
@@ -31,8 +31,10 @@ class Deployment extends AbstractApi
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
      * @param int    $id         the id of the deployment
+     *
+     * @return array|null
      */
-    public function show(string $username, string $repository, int $id): array
+    public function show(string $username, string $repository, int $id)
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/deployments/'.rawurlencode((string) $id));
     }
@@ -47,11 +49,11 @@ class Deployment extends AbstractApi
      * @param  string $username   the username
      * @param  string $repository the repository
      * @param  array  $params     the new deployment data
-     * @return array  information about the deployment
+     * @return array|null  information about the deployment
      *
      * @throws MissingArgumentException
      */
-    public function create(string $username, string $repository, array $params): array
+    public function create(string $username, string $repository, array $params)
     {
         if (!isset($params['ref'])) {
             throw new MissingArgumentException(['ref']);
@@ -70,11 +72,11 @@ class Deployment extends AbstractApi
      * @param array  $params The information about the deployment update.
      *                       Must include a "state" field of pending, success, error, or failure.
      *                       May also be given a target_url and description, ßee link for more details.
-     * @return array information about the deployment
+     * @return array|null information about the deployment
      *
      * @throws MissingArgumentException
      */
-    public function updateStatus(string $username, string $repository, int $id, array $params): array
+    public function updateStatus(string $username, string $repository, int $id, array $params)
     {
         if (!isset($params['state'])) {
             throw new MissingArgumentException(['state']);
@@ -89,9 +91,9 @@ class Deployment extends AbstractApi
      * @param  string $username the username
      * @param  string $repository the repository
      * @param  int $id the deployment identifier
-     * @return array the deployment statuses
+     * @return array|null the deployment statuses
      */
-    public function getStatuses(string $username, string $repository, int $id): array
+    public function getStatuses(string $username, string $repository, int $id)
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/deployments/'.rawurlencode((string) $id).'/statuses');
     }

@@ -29,7 +29,7 @@ class Authorizations extends AbstractApi
      */
     public function show($clientId): array
     {
-        return $this->get('/authorizations/'.rawurlencode($clientId));
+        return $this->get('/authorizations/'.rawurlencode((string) $clientId));
     }
 
     /**
@@ -57,7 +57,7 @@ class Authorizations extends AbstractApi
      */
     public function update($clientId, array $params): array
     {
-        return $this->patch('/authorizations/'.rawurlencode($clientId), $params);
+        return $this->patch('/authorizations/'.rawurlencode((string) $clientId), $params);
     }
 
     /**
@@ -69,7 +69,7 @@ class Authorizations extends AbstractApi
      */
     public function remove($clientId): array
     {
-        return $this->delete('/authorizations/'.rawurlencode($clientId));
+        return $this->delete('/authorizations/'.rawurlencode((string) $clientId));
     }
 
     /**
@@ -82,7 +82,7 @@ class Authorizations extends AbstractApi
      */
     public function check($clientId, $token): array
     {
-        return $this->get('/applications/'.rawurlencode($clientId).'/tokens/'.rawurlencode($token));
+        return $this->get('/applications/'.rawurlencode((string) $clientId).'/tokens/'.rawurlencode($token));
     }
 
     /**
@@ -95,7 +95,7 @@ class Authorizations extends AbstractApi
      */
     public function reset($clientId, $token): array
     {
-        return $this->post('/applications/'.rawurlencode($clientId).'/tokens/'.rawurlencode($token));
+        return $this->post('/applications/'.rawurlencode((string) $clientId).'/tokens/'.rawurlencode($token));
     }
 
     /**
@@ -106,7 +106,7 @@ class Authorizations extends AbstractApi
      */
     public function revoke($clientId, $token)
     {
-        $this->delete('/applications/'.rawurlencode($clientId).'/tokens/'.rawurlencode($token));
+        $this->delete('/applications/'.rawurlencode((string) $clientId).'/tokens/'.rawurlencode($token));
     }
 
     /**
@@ -116,6 +116,6 @@ class Authorizations extends AbstractApi
      */
     public function revokeAll($clientId)
     {
-        $this->delete('/applications/'.rawurlencode($clientId).'/tokens');
+        $this->delete('/applications/'.rawurlencode((string) $clientId).'/tokens');
     }
 }

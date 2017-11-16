@@ -50,9 +50,9 @@ class Comments extends AbstractApi
      * @param string $gist
      * @param int    $comment
      *
-     * @return array
+     * @return array|null
      */
-    public function show(string $gist, int $comment): array
+    public function show(string $gist, int $comment)
     {
         return $this->get('/gists/'.rawurlencode($gist).'/comments/'.rawurlencode($comment));
     }
@@ -77,9 +77,9 @@ class Comments extends AbstractApi
      * @param int    $comment_id
      * @param string $body
      *
-     * @return array
+     * @return array|null
      */
-    public function update(string $gist, int $comment_id, string $body): array
+    public function update(string $gist, int $comment_id, string $body)
     {
         return $this->patch('/gists/'.rawurlencode($gist).'/comments/'.rawurlencode($comment_id), ['body' => $body]);
     }
@@ -90,9 +90,9 @@ class Comments extends AbstractApi
      * @param string $gist
      * @param int    $comment
      *
-     * @return array
+     * @return array|null
      */
-    public function remove(string $gist, int $comment): array
+    public function remove(string $gist, int $comment)
     {
         return $this->delete('/gists/'.rawurlencode($gist).'/comments/'.rawurlencode($comment));
     }

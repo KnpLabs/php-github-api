@@ -119,9 +119,9 @@ class Stats extends AbstractApi
     /**
      * @param string $type The type of statistics to show
      *
-     * @return array
+     * @return array|null
      */
-    public function show(string $type): array
+    public function show(string $type)
     {
         return $this->get('/enterprise/stats/' . rawurlencode($type));
     }

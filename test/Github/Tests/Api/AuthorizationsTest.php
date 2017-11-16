@@ -2,6 +2,9 @@
 
 namespace Github\Tests\Api;
 
+use Github\Api\Authorizations;
+use PHPUnit_Framework_MockObject_MockObject;
+
 class AuthorizationsTest extends TestCase
 {
     /**
@@ -11,6 +14,7 @@ class AuthorizationsTest extends TestCase
     {
         $expectedArray = [['id' => '123']];
 
+        /** @var Authorizations|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -28,6 +32,7 @@ class AuthorizationsTest extends TestCase
         $id = 123;
         $expectedArray = ['id' => $id];
 
+        /** @var Authorizations|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -46,6 +51,7 @@ class AuthorizationsTest extends TestCase
             'note' => '',
         ];
 
+        /** @var Authorizations|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
@@ -64,6 +70,7 @@ class AuthorizationsTest extends TestCase
             'note' => '',
         ];
 
+        /** @var Authorizations|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
@@ -78,6 +85,7 @@ class AuthorizationsTest extends TestCase
     public function shouldDeleteAuthorization()
     {
         $id = 123;
+        /** @var Authorizations|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
@@ -95,6 +103,7 @@ class AuthorizationsTest extends TestCase
         $token = 'abc';
         $expectedArray = ['id' => $id];
 
+        /** @var Authorizations|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -112,6 +121,7 @@ class AuthorizationsTest extends TestCase
         $id = 123;
         $token = 'abcde';
 
+        /** @var Authorizations|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
@@ -128,6 +138,7 @@ class AuthorizationsTest extends TestCase
         $id = 123;
         $token = 'abcde';
 
+        /** @var Authorizations|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
@@ -143,6 +154,7 @@ class AuthorizationsTest extends TestCase
     {
         $id = 123;
 
+        /** @var Authorizations|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
@@ -151,11 +163,8 @@ class AuthorizationsTest extends TestCase
         $api->revokeAll($id);
     }
 
-    /**
-     * @return string
-     */
     protected function getApiClass(): string
     {
-        return \Github\Api\Authorizations::class;
+        return Authorizations::class;
     }
 }

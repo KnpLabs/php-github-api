@@ -37,9 +37,9 @@ class Starring extends AbstractApi
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
      *
-     * @return array
+     * @return array|null
      */
-    public function check(string $username, string $repository): array
+    public function check(string $username, string $repository)
     {
         return $this->get('/user/starred/'.rawurlencode($username).'/'.rawurlencode($repository));
     }
@@ -52,7 +52,7 @@ class Starring extends AbstractApi
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
      *
-     * @return array
+     * @return array|null
      */
     public function star(string $username, string $repository): array
     {
@@ -67,7 +67,7 @@ class Starring extends AbstractApi
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
      *
-     * @return array
+     * @return array|null
      */
     public function unstar(string $username, string $repository): array
     {

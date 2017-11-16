@@ -2,6 +2,9 @@
 
 namespace Github\Tests\Api;
 
+use Github\Api\Apps;
+use PHPUnit_Framework_MockObject_MockObject;
+
 class AppTest extends TestCase
 {
     /**
@@ -11,6 +14,7 @@ class AppTest extends TestCase
     {
         $result = ['installation1', 'installation2'];
 
+        /** @var Apps|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -27,13 +31,14 @@ class AppTest extends TestCase
     {
         $result = ['repo1', 'repo2'];
 
+        /** @var Apps|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
             ->with('/installation/repositories', ['user_id' => '1234'])
             ->willReturn($result);
 
-        $this->assertEquals($result, $api->listRepositories('1234'));
+        $this->assertEquals($result, $api->listRepositories(1234));
     }
 
     /**
@@ -41,12 +46,13 @@ class AppTest extends TestCase
      */
     public function shouldAddRepositoryToInstallation()
     {
+        /** @var Apps|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
             ->with('/installations/1234/repositories/5678');
 
-        $api->addRepository('1234', '5678');
+        $api->addRepository(1234, 5678);
     }
 
     /**
@@ -54,18 +60,16 @@ class AppTest extends TestCase
      */
     public function shouldRemoveRepositoryToInstallation()
     {
+        /** @var Apps|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
             ->with('/installations/1234/repositories/5678');
 
-        $api->removeRepository('1234', '5678');
+        $api->removeRepository(1234, 5678);
     }
 
 
-    /**
-     * @return string
-     */
     protected function getApiClass(): string
     {
         return \Github\Api\Apps::class;
