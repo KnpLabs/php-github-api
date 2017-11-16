@@ -54,7 +54,7 @@ class Members extends AbstractApi
         return $this->delete('/orgs/'.rawurlencode($organization).'/public_members/'.rawurlencode($username));
     }
 
-    /*
+    /**
      * Add user to organization
      */
     public function add($organization, $username)
