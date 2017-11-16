@@ -17,8 +17,6 @@ class Downloads extends AbstractApi
      *
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
-     *
-     * @return array
      */
     public function all(string $username, string $repository): array
     {
@@ -33,8 +31,6 @@ class Downloads extends AbstractApi
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
      * @param int    $id         the id of the download file
-     *
-     * @return array
      */
     public function show(string $username, string $repository, int $id): array
     {
@@ -49,8 +45,6 @@ class Downloads extends AbstractApi
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
      * @param int    $id         the id of the download file
-     *
-     * @return array
      */
     public function remove(string $username, string $repository, int $id): array
     {

@@ -14,10 +14,6 @@ class Notifications extends AbstractApi
      * List all notifications for the authenticated user.
      *
      * @link http://developer.github.com/v3/activity/notifications/#list-your-notifications
-     *
-     * @param array $params
-     *
-     * @return array
      */
     public function all(array $params = []): array
     {
@@ -31,9 +27,6 @@ class Notifications extends AbstractApi
      *
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
-     * @param array  $params
-     *
-     * @return array
      */
     public function allInRepository(string $username, string $repository, array $params = []): array
     {
@@ -44,10 +37,6 @@ class Notifications extends AbstractApi
      * Mark all notifications as read.
      *
      * @link http://developer.github.com/v3/activity/notifications/#mark-as-read
-     *
-     * @param array $params
-     *
-     * @return array
      */
     public function markAsReadAll(array $params = []): array
     {
@@ -61,9 +50,6 @@ class Notifications extends AbstractApi
      *
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
-     * @param array  $params
-     *
-     * @return array
      */
     public function markAsReadInRepository(string $username, string $repository, array $params = []): array
     {
@@ -76,9 +62,6 @@ class Notifications extends AbstractApi
      * @link http://developer.github.com/v3/activity/notifications/#mark-a-thread-as-read
      *
      * @param int   $id     the notification number
-     * @param array $params
-     *
-     * @return array
      */
     public function markAsRead(int $id, array $params): array
     {
@@ -91,8 +74,6 @@ class Notifications extends AbstractApi
      * @link http://developer.github.com/v3/activity/notifications/#view-a-single-thread
      *
      * @param int $id the notification number
-     *
-     * @return array
      */
     public function show(int $id): array
     {
@@ -105,8 +86,6 @@ class Notifications extends AbstractApi
      * @link http://developer.github.com/v3/activity/notifications/#get-a-thread-subscription
      *
      * @param int $id the notification number
-     *
-     * @return array
      */
     public function showSubscription(int $id): array
     {
@@ -119,9 +98,6 @@ class Notifications extends AbstractApi
      * @link http://developer.github.com/v3/activity/notifications/#set-a-thread-subscription
      *
      * @param int   $id     the notification number
-     * @param array $params
-     *
-     * @return array
      */
     public function createSubscription(int $id, array $params): array
     {
@@ -134,8 +110,6 @@ class Notifications extends AbstractApi
      * @link http://developer.github.com/v3/activity/notifications/#delete-a-thread-subscription
      *
      * @param int $id the notification number
-     *
-     * @return array
      */
     public function removeSubscription(int $id): array
     {

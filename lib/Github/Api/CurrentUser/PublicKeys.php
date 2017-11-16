@@ -15,8 +15,6 @@ class PublicKeys extends AbstractApi
      * List deploy keys for the authenticated user.
      *
      * @link https://developer.github.com/v3/users/keys/
-     *
-     * @return array
      */
     public function all(): array
     {
@@ -27,10 +25,6 @@ class PublicKeys extends AbstractApi
      * Shows deploy key for the authenticated user.
      *
      * @link https://developer.github.com/v3/users/keys/
-     *
-     * @param int $id
-     *
-     * @return array
      */
     public function show(int $id): array
     {
@@ -42,11 +36,8 @@ class PublicKeys extends AbstractApi
      *
      * @link https://developer.github.com/v3/users/keys/
      *
-     * @param array $params
      *
      * @throws \Github\Exception\MissingArgumentException
-     *
-     * @return array
      */
     public function create(array $params): array
     {
@@ -61,10 +52,6 @@ class PublicKeys extends AbstractApi
      * Removes deploy key for the authenticated user.
      *
      * @link https://developer.github.com/v3/users/keys/
-     *
-     * @param int $id
-     *
-     * @return array
      */
     public function remove(int $id): array
     {

@@ -25,8 +25,6 @@ class PullRequest extends AbstractApi
      * @link https://developer.github.com/v3/pulls/#custom-media-types
      * @param string|null $bodyType
      * @param string|null $apiVersion
-     *
-     * @return self
      */
     public function configure(string $bodyType = null, string $apiVersion = null): self
     {
@@ -141,8 +139,6 @@ class PullRequest extends AbstractApi
      *                           the Pull Request. The issue number. Used when title and body is not set.
      *
      * @throws MissingArgumentException
-     *
-     * @return array
      */
     public function create(string $username, string $repository, array $params): array
     {

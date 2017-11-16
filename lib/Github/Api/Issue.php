@@ -27,8 +27,6 @@ class Issue extends AbstractApi
      *
      * @link https://developer.github.com/v3/issues/#custom-media-types
      * @param string|null $bodyType
-     *
-     * @return self
      */
     public function configure(string $bodyType = null): self
     {
@@ -161,12 +159,6 @@ class Issue extends AbstractApi
      * Lock an issue. Users with push access can lock an issue's conversation.
      *
      * @link https://developer.github.com/v3/issues/#lock-an-issue
-     *
-     * @param string $username
-     * @param string $repository
-     * @param int    $id
-     *
-     * @return string
      */
     public function lock(string $username, string $repository, int $id): string
     {
@@ -177,12 +169,6 @@ class Issue extends AbstractApi
      * Unlock an issue. Users with push access can unlock an issue's conversation.
      *
      * @link https://developer.github.com/v3/issues/#lock-an-issue
-     *
-     * @param string $username
-     * @param string $repository
-     * @param int    $id
-     *
-     * @return string
      */
     public function unlock(string $username, string $repository, int $id): string
     {
@@ -193,8 +179,6 @@ class Issue extends AbstractApi
      * List an issue comments.
      *
      * @link http://developer.github.com/v3/issues/comments/
-     *
-     * @return Comments
      */
     public function comments(): Comments
     {
@@ -205,8 +189,6 @@ class Issue extends AbstractApi
      * List all project events.
      *
      * @link http://developer.github.com/v3/issues/events/
-     *
-     * @return Events
      */
     public function events(): Events
     {
@@ -217,8 +199,6 @@ class Issue extends AbstractApi
      * List all project labels.
      *
      * @link http://developer.github.com/v3/issues/labels/
-     *
-     * @return Labels
      */
     public function labels(): Labels
     {
@@ -229,8 +209,6 @@ class Issue extends AbstractApi
      * List all project milestones.
      *
      * @link http://developer.github.com/v3/issues/milestones/
-     *
-     * @return Milestones
      */
     public function milestones(): Milestones
     {
@@ -241,8 +219,6 @@ class Issue extends AbstractApi
      * List all assignees.
      *
      * @link https://developer.github.com/v3/issues/assignees/
-     *
-     * @return Assignees
      */
     public function assignees(): Assignees
     {

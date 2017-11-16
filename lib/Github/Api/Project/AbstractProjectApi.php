@@ -13,8 +13,6 @@ abstract class AbstractProjectApi extends AbstractApi
      * Configure the accept header for Early Access to the projects api
      *
      * @see https://developer.github.com/v3/repos/projects/#projects
-     *
-     * @return self
      */
     public function configure(): self
     {
