@@ -31,7 +31,7 @@ class Columns extends AbstractApi
 
     public function show($id)
     {
-        return $this->get('/projects/columns/'.rawurlencode($id));
+        return $this->get('/projects/columns/'.rawurlencode((string) $id));
     }
 
     public function create($projectId, array $params)
@@ -49,12 +49,12 @@ class Columns extends AbstractApi
             throw new MissingArgumentException(['name']);
         }
 
-        return $this->patch('/projects/columns/' . rawurlencode($id), $params);
+        return $this->patch('/projects/columns/' . rawurlencode((string) $id), $params);
     }
 
     public function deleteColumn($id)
     {
-        return $this->delete('/projects/columns/'.rawurlencode($id));
+        return $this->delete('/projects/columns/'.rawurlencode((string) $id));
     }
 
     public function move($id, array $params)
@@ -63,7 +63,7 @@ class Columns extends AbstractApi
             throw new MissingArgumentException(['position']);
         }
 
-        return $this->post('/projects/columns/' . rawurlencode($id) . '/moves', $params);
+        return $this->post('/projects/columns/' . rawurlencode((string) $id) . '/moves', $params);
     }
 
     public function cards()

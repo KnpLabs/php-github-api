@@ -26,27 +26,27 @@ class Cards extends AbstractApi
 
     public function all($columnId, array $params = [])
     {
-        return $this->get('/projects/columns/' . rawurlencode($columnId) . '/cards', array_merge(['page' => 1], $params));
+        return $this->get('/projects/columns/' . rawurlencode((string) $columnId) . '/cards', array_merge(['page' => 1], $params));
     }
 
     public function show($id)
     {
-        return $this->get('/projects/columns/cards/'.rawurlencode($id));
+        return $this->get('/projects/columns/cards/'.rawurlencode((string) $id));
     }
 
     public function create($columnId, array $params)
     {
-        return $this->post('/projects/columns/' . rawurlencode($columnId) . '/cards', $params);
+        return $this->post('/projects/columns/' . rawurlencode((string) $columnId) . '/cards', $params);
     }
 
     public function update($id, array $params)
     {
-        return $this->patch('/projects/columns/cards/' . rawurlencode($id), $params);
+        return $this->patch('/projects/columns/cards/' . rawurlencode((string) $id), $params);
     }
 
     public function deleteCard($id)
     {
-        return $this->delete('/projects/columns/cards/'.rawurlencode($id));
+        return $this->delete('/projects/columns/cards/'.rawurlencode((string) $id));
     }
 
     public function move($id, array $params)
@@ -55,6 +55,6 @@ class Cards extends AbstractApi
             throw new MissingArgumentException(['position']);
         }
 
-        return $this->post('/projects/columns/cards/' . rawurlencode($id) . '/moves', $params);
+        return $this->post('/projects/columns/cards/' . rawurlencode((string) $id) . '/moves', $params);
     }
 }

@@ -25,17 +25,17 @@ abstract class AbstractProjectApi extends AbstractApi
 
     public function show($id, array $params = [])
     {
-        return $this->get('/projects/' . rawurlencode($id), array_merge(['page' => 1], $params));
+        return $this->get('/projects/' . rawurlencode((string) $id), array_merge(['page' => 1], $params));
     }
 
     public function update($id, array $params)
     {
-        return $this->patch('/projects/'.rawurlencode($id), $params);
+        return $this->patch('/projects/'.rawurlencode((string) $id), $params);
     }
 
     public function deleteProject($id)
     {
-        return $this->delete('/projects/'.rawurlencode($id));
+        return $this->delete('/projects/'.rawurlencode((string) $id));
     }
 
     public function columns()

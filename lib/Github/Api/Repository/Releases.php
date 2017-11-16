@@ -64,7 +64,7 @@ class Releases extends AbstractApi
      */
     public function show(string $username, string $repository, int $id): array
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode($id));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode((string) $id));
     }
 
     /**
@@ -99,7 +99,7 @@ class Releases extends AbstractApi
      */
     public function edit(string $username, string $repository, int $id, array $params): array
     {
-        return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode($id), $params);
+        return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode((string) $id), $params);
     }
 
     /**
@@ -113,7 +113,7 @@ class Releases extends AbstractApi
      */
     public function remove(string $username, string $repository, int $id): array
     {
-        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode($id));
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode((string) $id));
     }
 
     /**

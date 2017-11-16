@@ -34,7 +34,7 @@ class PublicKeys extends AbstractApi
      */
     public function show(int $id): array
     {
-        return $this->get('/user/keys/'.rawurlencode($id));
+        return $this->get('/user/keys/'.rawurlencode((string) $id));
     }
 
     /**
@@ -68,6 +68,6 @@ class PublicKeys extends AbstractApi
      */
     public function remove(int $id): array
     {
-        return $this->delete('/user/keys/'.rawurlencode($id));
+        return $this->delete('/user/keys/'.rawurlencode((string) $id));
     }
 }

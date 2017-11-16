@@ -60,42 +60,42 @@ class Gists extends AbstractApi
 
     public function update($id, array $params)
     {
-        return $this->patch('/gists/'.rawurlencode($id), $params);
+        return $this->patch('/gists/'.rawurlencode((string) $id), $params);
     }
 
     public function commits($id)
     {
-        return $this->get('/gists/'.rawurlencode($id).'/commits');
+        return $this->get('/gists/'.rawurlencode((string) $id).'/commits');
     }
 
     public function fork($id)
     {
-        return $this->post('/gists/'.rawurlencode($id).'/fork');
+        return $this->post('/gists/'.rawurlencode((string) $id).'/fork');
     }
 
     public function forks($id)
     {
-        return $this->get('/gists/'.rawurlencode($id).'/forks');
+        return $this->get('/gists/'.rawurlencode((string) $id).'/forks');
     }
 
     public function remove($id)
     {
-        return $this->delete('/gists/'.rawurlencode($id));
+        return $this->delete('/gists/'.rawurlencode((string) $id));
     }
 
     public function check($id)
     {
-        return $this->get('/gists/'.rawurlencode($id).'/star');
+        return $this->get('/gists/'.rawurlencode((string) $id).'/star');
     }
 
     public function star($id)
     {
-        return $this->put('/gists/'.rawurlencode($id).'/star');
+        return $this->put('/gists/'.rawurlencode((string) $id).'/star');
     }
 
     public function unstar($id)
     {
-        return $this->delete('/gists/'.rawurlencode($id).'/star');
+        return $this->delete('/gists/'.rawurlencode((string) $id).'/star');
     }
 
     /**

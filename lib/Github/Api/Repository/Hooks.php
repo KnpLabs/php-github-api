@@ -18,7 +18,7 @@ class Hooks extends AbstractApi
 
     public function show($username, $repository, $id)
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/hooks/'.rawurlencode($id));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/hooks/'.rawurlencode((string) $id));
     }
 
     public function create($username, $repository, array $params)
@@ -36,21 +36,21 @@ class Hooks extends AbstractApi
             throw new MissingArgumentException(['config']);
         }
 
-        return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/hooks/'.rawurlencode($id), $params);
+        return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/hooks/'.rawurlencode((string) $id), $params);
     }
 
     public function ping($username, $repository, $id)
     {
-        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/hooks/'.rawurlencode($id).'/pings');
+        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/hooks/'.rawurlencode((string) $id).'/pings');
     }
 
     public function test($username, $repository, $id)
     {
-        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/hooks/'.rawurlencode($id).'/test');
+        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/hooks/'.rawurlencode((string) $id).'/test');
     }
 
     public function remove($username, $repository, $id)
     {
-        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/hooks/'.rawurlencode($id));
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/hooks/'.rawurlencode((string) $id));
     }
 }
