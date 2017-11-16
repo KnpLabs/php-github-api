@@ -72,7 +72,7 @@ class TrafficTest extends TestCase
         $this->assertEquals($expectedValue, $result);
     }
 
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Repository\Traffic::class;
     }

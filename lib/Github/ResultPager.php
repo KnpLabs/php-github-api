@@ -56,7 +56,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetch(ApiInterface $api, $method, array $parameters = [])
+    public function fetch(ApiInterface $api, string $method, array $parameters = []): array
     {
         $result = $this->callApi($api, $method, $parameters);
         $this->postFetch();
@@ -67,7 +67,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetchAll(ApiInterface $api, $method, array $parameters = [])
+    public function fetchAll(ApiInterface $api, string $method, array $parameters = []): array
     {
         $isSearch = $api instanceof Search;
 
@@ -111,7 +111,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function hasNext()
+    public function hasNext(): bool
     {
         return $this->has('next');
     }
@@ -119,7 +119,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetchNext()
+    public function fetchNext(): array
     {
         return $this->get('next');
     }
@@ -127,7 +127,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPrevious()
+    public function hasPrevious(): bool
     {
         return $this->has('prev');
     }
@@ -135,7 +135,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetchPrevious()
+    public function fetchPrevious(): array
     {
         return $this->get('prev');
     }
@@ -143,7 +143,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetchFirst()
+    public function fetchFirst(): array
     {
         return $this->get('first');
     }
@@ -151,7 +151,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetchLast()
+    public function fetchLast(): array
     {
         return $this->get('last');
     }

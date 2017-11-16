@@ -96,7 +96,7 @@ class NotificationTest extends TestCase
 
         $api->markRead($since);
     }
-    
+
     public function shouldGetNotification()
     {
         $id = random_int(1, time());

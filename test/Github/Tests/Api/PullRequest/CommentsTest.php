@@ -487,7 +487,7 @@ class CommentsTest extends TestCase
         $api->remove('octocat', 'Hello-World', 1);
     }
 
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return Comments::class;
     }

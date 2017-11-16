@@ -394,7 +394,7 @@ class ReviewTest extends TestCase
         $this->assertSame($expectedValue, $api->dismiss('octocat', 'Hello-World', 12, 80, 'Dismiss reason'));
     }
 
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return Review::class;
     }

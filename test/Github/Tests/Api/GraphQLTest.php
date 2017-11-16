@@ -50,7 +50,7 @@ class GraphQLTest extends TestCase
         $api->execute('bar', ['variable' => 'foo']);
     }
 
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\GraphQL::class;
     }
