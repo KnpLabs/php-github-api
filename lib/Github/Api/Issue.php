@@ -48,9 +48,9 @@ class Issue extends AbstractApi
      * @param string $repository the repository
      * @param array  $params     the additional parameters like milestone, assignees, labels, sort, direction
      *
-     * @return array list of issues found
+     * @return array|null list of issues found
      */
-    public function all(string $username, string $repository, array $params = []): array
+    public function all(string $username, string $repository, array $params = [])
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues', array_merge(['page' => 1], $params));
     }
@@ -126,9 +126,9 @@ class Issue extends AbstractApi
      *
      * @throws MissingArgumentException
      *
-     * @return array information about the issue
+     * @return array|null information about the issue
      */
-    public function create(string $username, string $repository, array $params): array
+    public function create(string $username, string $repository, array $params)
     {
         if (!isset($params['title'])) {
             throw new MissingArgumentException(['title']);
@@ -148,9 +148,9 @@ class Issue extends AbstractApi
      * @param array  $params     key=>value user attributes to update.
      *                           key can be title or body
      *
-     * @return array information about the issue
+     * @return array|null information about the issue
      */
-    public function update(string $username, string $repository, int $id, array $params): array
+    public function update(string $username, string $repository, int $id, array $params)
     {
         return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode((string) $id), $params);
     }
@@ -161,8 +161,10 @@ class Issue extends AbstractApi
      * @link https://developer.github.com/v3/issues/#lock-an-issue
      *
      * @param string|int $id
+     *
+     * @return string|null
      */
-    public function lock(string $username, string $repository, $id): string
+    public function lock(string $username, string $repository, $id)
     {
         return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode((string) $id).'/lock');
     }

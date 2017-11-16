@@ -39,7 +39,7 @@ class Comments extends AbstractApi
      */
     public function all(string $username, string $repository, int $issue, int $page = 1): array
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/comments', [
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode((string) $issue).'/comments', [
             'page' => $page
         ]);
     }
@@ -51,7 +51,7 @@ class Comments extends AbstractApi
      */
     public function show(string $username, string $repository, int $comment): array
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/comments/'.rawurlencode($comment));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/comments/'.rawurlencode((string) $comment));
     }
 
     /**

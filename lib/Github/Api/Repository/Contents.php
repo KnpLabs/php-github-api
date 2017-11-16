@@ -159,7 +159,7 @@ class Contents extends AbstractApi
      * @param string      $path       path to file
      * @param string      $content    contents of the new file
      * @param string      $message    the commit message
-     * @param string      $sha        blob SHA of the file being replaced
+     * @param string|null      $sha        blob SHA of the file being replaced
      * @param null|string $branch     name of a branch
      * @param null|array  $committer  information about the committer
      *
@@ -167,7 +167,7 @@ class Contents extends AbstractApi
      *
      * @return array information about the updated file
      */
-    public function update(string $username, string $repository, string $path, string $content, string $message, string $sha, string $branch = null, array $committer = null): array
+    public function update(string $username, string $repository, string $path, string $content, string $message, $sha, string $branch = null, array $committer = null): array
     {
         $url = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
 

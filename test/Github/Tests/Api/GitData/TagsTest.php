@@ -21,7 +21,7 @@ class TagsTest extends TestCase
             ->with('/repos/KnpLabs/php-github-api/git/tags/123')
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 123));
+        $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', '123'));
     }
 
     /**

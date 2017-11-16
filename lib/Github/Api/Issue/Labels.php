@@ -16,14 +16,14 @@ class Labels extends AbstractApi
      * Get all labels for a repository or the labels for a specific issue.
      *
      * @link https://developer.github.com/v3/issues/labels/#list-labels-on-an-issue
-     * @param int|null $issue
+     * @param string|int|null $issue
      */
-    public function all(string $username, string $repository, int $issue = null): array
+    public function all(string $username, string $repository, $issue = null): array
     {
         if ($issue === null) {
             $path = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels';
         } else {
-            $path = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/labels';
+            $path = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode((string) $issue).'/labels';
         }
 
         return $this->get($path);
@@ -101,7 +101,7 @@ class Labels extends AbstractApi
             throw new InvalidArgumentException();
         }
 
-        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/labels', $labels);
+        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode((string) $issue).'/labels', $labels);
     }
 
     /**
@@ -111,26 +111,30 @@ class Labels extends AbstractApi
      */
     public function replace(string $username, string $repository, int $issue, array $params): array
     {
-        return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/labels', $params);
+        return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode((string) $issue).'/labels', $params);
     }
 
     /**
      * Remove a label for an issue
      *
+     * @param string|int $issue
+     *
      * @link https://developer.github.com/v3/issues/labels/#remove-a-label-from-an-issue
      */
-    public function remove(string $username, string $repository, string $issue, string $label)
+    public function remove(string $username, string $repository, $issue, string $label)
     {
-        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/labels/'.rawurlencode($label));
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode((string) $issue).'/labels/'.rawurlencode($label));
     }
 
     /**
      * Remove all labels from an issue.
      *
+     * @param string|int $issue
+     *
      * @link https://developer.github.com/v3/issues/labels/#replace-all-labels-for-an-issue
      */
-    public function clear(string $username, string $repository, string $issue)
+    public function clear(string $username, string $repository, $issue)
     {
-        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/labels');
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode((string) $issue).'/labels');
     }
 }

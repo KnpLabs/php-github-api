@@ -51,7 +51,7 @@ class Comments extends AbstractApi
     public function all(string $username, string $repository, int $pullRequest = null, array $params = []): array
     {
         if (null !== $pullRequest) {
-            return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($pullRequest).'/comments');
+            return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode((string) $pullRequest).'/comments');
         }
 
         $parameters = array_merge([
@@ -73,7 +73,7 @@ class Comments extends AbstractApi
      */
     public function show(string $username, string $repository, int $comment): array
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/comments/'.rawurlencode($comment));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/comments/'.rawurlencode((string) $comment));
     }
 
     /**
@@ -99,7 +99,7 @@ class Comments extends AbstractApi
             throw new MissingArgumentException(['commit_id', 'path', 'position']);
         }
 
-        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($pullRequest).'/comments', $params);
+        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode((string) $pullRequest).'/comments', $params);
     }
 
     /**
@@ -120,7 +120,7 @@ class Comments extends AbstractApi
             throw new MissingArgumentException('body');
         }
 
-        return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/comments/'.rawurlencode($comment), $params);
+        return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/comments/'.rawurlencode((string) $comment), $params);
     }
 
     /**
@@ -131,9 +131,11 @@ class Comments extends AbstractApi
      * @param string $username   the username
      * @param string $repository the repository
      * @param int    $comment    the comment id
+     *
+     * @return string|null
      */
-    public function remove(string $username, string $repository, int $comment): string
+    public function remove(string $username, string $repository, int $comment)
     {
-        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/comments/'.rawurlencode($comment));
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/comments/'.rawurlencode((string) $comment));
     }
 }

@@ -45,7 +45,7 @@ class Comments extends AbstractApi
      */
     public function show(string $gist, string $comment)
     {
-        return $this->get('/gists/'.rawurlencode($gist).'/comments/'.rawurlencode($comment));
+        return $this->get('/gists/'.rawurlencode($gist).'/comments/'.rawurlencode((string) $comment));
     }
 
     /**
@@ -63,7 +63,7 @@ class Comments extends AbstractApi
      */
     public function update(string $gist, string $comment, string $body)
     {
-        return $this->patch('/gists/'.rawurlencode($gist).'/comments/'.rawurlencode($comment), ['body' => $body]);
+        return $this->patch('/gists/'.rawurlencode($gist).'/comments/'.rawurlencode((string) $comment), ['body' => $body]);
     }
 
     /**
@@ -73,6 +73,6 @@ class Comments extends AbstractApi
      */
     public function remove(string $gist, string $comment)
     {
-        return $this->delete('/gists/'.rawurlencode($gist).'/comments/'.rawurlencode($comment));
+        return $this->delete('/gists/'.rawurlencode($gist).'/comments/'.rawurlencode((string) $comment));
     }
 }

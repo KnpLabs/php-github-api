@@ -55,7 +55,7 @@ class Authorizations extends AbstractApi
      *
      * @return array|null
      */
-    public function remove($clientId): array
+    public function remove($clientId)
     {
         return $this->delete('/authorizations/'.rawurlencode((string) $clientId));
     }

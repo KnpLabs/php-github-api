@@ -27,16 +27,20 @@ class ReviewRequest extends AbstractApi
 
     /**
      * @link https://developer.github.com/v3/pulls/review_requests/#create-a-review-request
+     *
+     * @return string|null
      */
-    public function create(string $username, string $repository, int $pullRequest, array $reviewers): string
+    public function create(string $username, string $repository, int $pullRequest, array $reviewers)
     {
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.$pullRequest.'/requested_reviewers', ['reviewers' => $reviewers]);
     }
 
     /**
      * @link https://developer.github.com/v3/pulls/review_requests/#delete-a-review-request
+     *
+     * @return string|null
      */
-    public function remove(string $username, string $repository, int $pullRequest, array $reviewers): string
+    public function remove(string $username, string $repository, int $pullRequest, array $reviewers)
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.$pullRequest.'/requested_reviewers', ['reviewers' => $reviewers]);
     }

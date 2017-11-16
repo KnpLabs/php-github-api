@@ -26,7 +26,7 @@ class Columns extends AbstractApi
 
     public function all($projectId, array $params = [])
     {
-        return $this->get('/projects/' . rawurlencode($projectId) . '/columns', array_merge(['page' => 1], $params));
+        return $this->get('/projects/' . rawurlencode((string) $projectId) . '/columns', array_merge(['page' => 1], $params));
     }
 
     public function show($id)
@@ -40,7 +40,7 @@ class Columns extends AbstractApi
             throw new MissingArgumentException(['name']);
         }
 
-        return $this->post('/projects/' . rawurlencode($projectId) . '/columns', $params);
+        return $this->post('/projects/' . rawurlencode((string) $projectId) . '/columns', $params);
     }
 
     public function update($id, array $params)

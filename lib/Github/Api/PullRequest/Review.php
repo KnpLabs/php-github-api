@@ -92,7 +92,7 @@ class Review extends AbstractApi
      */
     public function comments(string $username, string $repository, int $pullRequest, int $id)
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($pullRequest).'/reviews/'.rawurlencode((string) $id).'/comments');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode((string) $pullRequest).'/reviews/'.rawurlencode((string) $id).'/comments');
     }
 
     /**
@@ -107,9 +107,9 @@ class Review extends AbstractApi
      *
      * @throws MissingArgumentException
      *
-     * @return array the pull request review
+     * @return array|null the pull request review
      */
-    public function create(string $username, string $repository, int $pullRequest, array $params = []): array
+    public function create(string $username, string $repository, int $pullRequest, array $params = [])
     {
         if (!isset($params['event'])) {
             throw new MissingArgumentException('event');
