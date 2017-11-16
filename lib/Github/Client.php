@@ -3,8 +3,8 @@
 namespace Github;
 
 use Github\Api\ApiInterface;
-use Github\Exception\InvalidArgumentException;
 use Github\Exception\BadMethodCallException;
+use Github\Exception\InvalidArgumentException;
 use Github\HttpClient\Builder;
 use Github\HttpClient\Plugin\Authentication;
 use Github\HttpClient\Plugin\GithubExceptionThrower;

@@ -4,8 +4,8 @@ namespace Github\Api\Repository;
 
 use Github\Api\AbstractApi;
 use Github\Api\AcceptHeaderTrait;
-use Github\Exception\InvalidArgumentException;
 use Github\Exception\ErrorException;
+use Github\Exception\InvalidArgumentException;
 use Github\Exception\MissingArgumentException;
 use Github\Exception\TwoFactorAuthenticationRequiredException;
 

@@ -2,11 +2,8 @@
 
 namespace Github\Tests;
 
-use Github\Api\Organization;
 use Github\Api\Organization\Members;
 use Github\Api\Search;
-use Github\Client;
-use Github\HttpClient\Builder;
 use Github\ResultPager;
 use Github\Tests\Mock\PaginatedResponse;
 use Http\Client\HttpClient;

@@ -8,7 +8,6 @@ use Github\Exception\BadMethodCallException;
 use Github\HttpClient\Builder;
 use Github\HttpClient\Plugin\Authentication;
 use GuzzleHttp\Psr7\Response;
-use Http\Client\Common\Plugin;
 use Http\Client\HttpClient;
 use Psr\Http\Message\RequestInterface;
 

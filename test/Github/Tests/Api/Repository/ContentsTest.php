@@ -2,8 +2,8 @@
 
 namespace Github\Tests\Api\Repository;
 
-use Github\Tests\Api\TestCase;
 use Github\Exception\TwoFactorAuthenticationRequiredException;
+use Github\Tests\Api\TestCase;
 use GuzzleHttp\Psr7\Response;
 
 class ContentsTest extends TestCase

@@ -2,13 +2,13 @@
 
 namespace Github\Api;
 
-use Github\Api\CurrentUser\PublicKeys;
 use Github\Api\CurrentUser\Emails;
 use Github\Api\CurrentUser\Followers;
 use Github\Api\CurrentUser\Memberships;
 use Github\Api\CurrentUser\Notifications;
-use Github\Api\CurrentUser\Watchers;
+use Github\Api\CurrentUser\PublicKeys;
 use Github\Api\CurrentUser\Starring;
+use Github\Api\CurrentUser\Watchers;
 
 /**
  * @link   http://developer.github.com/v3/users/

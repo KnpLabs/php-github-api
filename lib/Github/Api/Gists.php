@@ -2,8 +2,8 @@
 
 namespace Github\Api;
 
-use Github\Exception\MissingArgumentException;
 use Github\Api\Gist\Comments;
+use Github\Exception\MissingArgumentException;
 
 /**
  * Creating, editing, deleting and listing gists.

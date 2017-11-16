@@ -2,14 +2,14 @@
 
 namespace Github\HttpClient\Plugin;
 
-use Http\Client\Common\Plugin;
-use Psr\Http\Message\RequestInterface;
-use Github\Exception\TwoFactorAuthenticationRequiredException;
-use Github\HttpClient\Message\ResponseMediator;
 use Github\Exception\ApiLimitExceedException;
 use Github\Exception\ErrorException;
 use Github\Exception\RuntimeException;
+use Github\Exception\TwoFactorAuthenticationRequiredException;
 use Github\Exception\ValidationFailedException;
+use Github\HttpClient\Message\ResponseMediator;
+use Http\Client\Common\Plugin;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /**

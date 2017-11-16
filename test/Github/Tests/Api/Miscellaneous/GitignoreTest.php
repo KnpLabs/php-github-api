@@ -2,7 +2,6 @@
 
 namespace Github\Tests\Api\Miscellaneous;
 
-use Github\Api\Miscellaneous\Emojis;
 use Github\Api\Miscellaneous\Gitignore;
 use Github\Tests\Api\TestCase;
 
