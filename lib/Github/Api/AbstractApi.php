@@ -31,7 +31,7 @@ abstract class AbstractApi implements ApiInterface
      *
      * @var null|int
      */
-    protected $perPage;
+    private $perPage;
 
     /**
      * @param Client $client
