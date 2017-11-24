@@ -24,14 +24,14 @@ abstract class AbstractApi implements ApiInterface
      *
      * @var null|int
      */
-    protected $page;
+    private $page;
 
     /**
      * Number of items per page (GitHub pagination).
      *
      * @var null|int
      */
-    private $perPage;
+    protected $perPage;
 
     /**
      * @param Client $client
