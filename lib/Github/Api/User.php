@@ -109,7 +109,7 @@ class User extends AbstractApi
      *
      * @return array list of following users
      */
-    public function followers($username, array $parameters = array(), array $requestHeaders = array())
+    public function followers($username, array $parameters = [], array $requestHeaders = [])
     {
         return $this->get('/users/'.rawurlencode($username).'/followers', $parameters, $requestHeaders);
     }
