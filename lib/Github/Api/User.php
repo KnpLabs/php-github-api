@@ -88,12 +88,14 @@ class User extends AbstractApi
      * @link http://developer.github.com/v3/users/followers/
      *
      * @param string $username the username
+     * @param array $parameters parameters for the query string
+     * @param array $requestHeaders additional headers to set in the request
      *
      * @return array list of followed users
      */
-    public function following($username)
+    public function following($username, array $parameters = [], array $requestHeaders = [])
     {
-        return $this->get('/users/'.rawurlencode($username).'/following');
+        return $this->get('/users/'.rawurlencode($username).'/following', $parameters, $requestHeaders);
     }
 
     /**
@@ -102,12 +104,14 @@ class User extends AbstractApi
      * @link http://developer.github.com/v3/users/followers/
      *
      * @param string $username the username
+     * @param array $parameters parameters for the query string
+     * @param array $requestHeaders additional headers to set in the request
      *
      * @return array list of following users
      */
-    public function followers($username)
+    public function followers($username, array $parameters = [], array $requestHeaders = [])
     {
-        return $this->get('/users/'.rawurlencode($username).'/followers');
+        return $this->get('/users/'.rawurlencode($username).'/followers', $parameters, $requestHeaders);
     }
 
     /**
