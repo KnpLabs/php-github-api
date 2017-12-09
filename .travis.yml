@@ -1,4 +1,5 @@
 language: php
+sudo: false
 
 cache:
     directories:
@@ -9,13 +10,12 @@ php:
   - 5.6
   - 7.0
   - 7.1
+  - 7.2
 
 matrix:
   include:
     - php: hhvm
       dist: trusty
-
-sudo: false
 
 install:
   - travis_retry composer install --no-interaction
