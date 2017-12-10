@@ -27,6 +27,7 @@ v3 APIs:
   * [Comments](issue/comments.md)
   * [Labels](issue/labels.md)
   * [Milestones](issue/milestones.md)
+  * [Timeline](issue/timeline.md)
 * [Meta](meta.md)
 * Miscellaneous
   * [Emojis](miscellaneous/emojis.md)

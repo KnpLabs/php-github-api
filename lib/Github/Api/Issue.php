@@ -7,6 +7,7 @@ use Github\Api\Issue\Comments;
 use Github\Api\Issue\Events;
 use Github\Api\Issue\Labels;
 use Github\Api\Issue\Milestones;
+use Github\Api\Issue\Timeline;
 use Github\Exception\MissingArgumentException;
 
 /**
@@ -244,5 +245,17 @@ class Issue extends AbstractApi
     public function assignees()
     {
         return new Assignees($this->client);
+    }
+
+    /**
+     * List all events.
+     *
+     * @link https://developer.github.com/v3/issues/timeline/
+     *
+     * @return Timeline
+     */
+    public function timeline()
+    {
+        return new Timeline($this->client);
     }
 }

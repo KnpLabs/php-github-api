@@ -245,6 +245,16 @@ class IssueTest extends TestCase
     /**
      * @test
      */
+    public function shouldGetTimelineApiObject()
+    {
+        $api = $this->getApiMock();
+
+        $this->assertInstanceOf(\Github\Api\Issue\Timeline::class, $api->timeline());
+    }
+
+    /**
+     * @test
+     */
     public function shouldLockIssue()
     {
         $parameters = array();
