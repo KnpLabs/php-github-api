@@ -552,6 +552,40 @@ class RepoTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function shouldGetRepositoryTopics()
+    {
+        $expectedArray = ['names' => ['octocat', 'atom', 'electron', 'API']];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/repos/KnpLabs/php-github-api/topics')
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->topics('KnpLabs', 'php-github-api'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReplaceRepositoryTopics()
+    {
+        $expectedArray = array('id' => 6122723754, 'type' => 'ForkEvent');
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('put')
+            ->with('/repos/KnpLabs/php-github-api/topics', array(
+                'names' => ['octocat', 'atom', 'electron', 'API'],
+            ))
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->replaceTopics('KnpLabs', 'php-github-api', ['octocat', 'atom', 'electron', 'API']));
+    }
+
+    /**
      * @return string
      */
     protected function getApiClass()

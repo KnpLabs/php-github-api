@@ -309,3 +309,15 @@ Returns a list of milestones.
 ```php
 $codeOfConduct = $client->api('repo')->codeOfConduct('ornicar', 'php-github-api');
 ```
+
+### List all topics for a repository
+
+```php
+$topics = $client->api('repo')->topics('ornicar', 'php-github-api');
+```
+
+### Replace all topics for a repository
+
+```php
+$currentTopics = $client->api('repo')->replaceTopics('ornicar', 'php-github-api', ['new', 'topics']);
+```
