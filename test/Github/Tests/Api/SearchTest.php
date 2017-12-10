@@ -177,6 +177,26 @@ class SearchTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function shouldSearchCommitsRegardingSortAndOrder()
+    {
+        $expectedArray = ['total_count' => '0'];
+
+        $api = $this->getApiMock();
+
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/search/commits', ['q' => 'query text', 'sort' => 'author-date', 'order' => 'asc'])
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals(
+            $expectedArray,
+            $api->commits('query text', 'author-date', 'asc')
+        );
+    }
+
+    /**
      * @return string
      */
     protected function getApiClass()
