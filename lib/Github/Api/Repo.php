@@ -28,6 +28,8 @@ use Github\Api\Repository\Traffic;
  */
 class Repo extends AbstractApi
 {
+    use AcceptHeaderTrait;
+
     /**
      * Search repositories by keyword.
      *
@@ -598,5 +600,23 @@ class Repo extends AbstractApi
     public function events($username, $repository, $page = 1)
     {
         return $this->get('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/events', ['page' => $page]);
+    }
+
+    /**
+     * Get the contents of a repository's code of conduct
+     *
+     * @link https://developer.github.com/v3/codes_of_conduct/#get-the-contents-of-a-repositorys-code-of-conduct
+     *
+     * @param string $username
+     * @param string $repository
+     *
+     * @return array
+     */
+    public function codeOfConduct($username, $repository)
+    {
+        //This api is in preview mode, so set the correct accept-header
+        $this->acceptHeaderValue = 'application/vnd.github.scarlet-witch-preview+json';
+
+        return $this->get('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/community/code_of_conduct');
     }
 }

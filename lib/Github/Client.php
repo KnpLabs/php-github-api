@@ -23,6 +23,7 @@ use Psr\Cache\CacheItemPoolInterface;
  * @method Api\CurrentUser me()
  * @method Api\Enterprise ent()
  * @method Api\Enterprise enterprise()
+ * @method Api\Miscellaneous\CodeOfConduct codeOfConduct()
  * @method Api\Miscellaneous\Emojis emojis()
  * @method Api\GitData git()
  * @method Api\GitData gitData()
@@ -168,6 +169,9 @@ class Client
             case 'current_user':
             case 'currentUser':
                 $api = new Api\CurrentUser($this);
+                break;
+            case 'codeOfConduct':
+                $api = new Api\Miscellaneous\CodeOfConduct($this);
                 break;
 
             case 'deployment':

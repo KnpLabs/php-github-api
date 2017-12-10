@@ -536,6 +536,22 @@ class RepoTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function shouldGetRepositoryCodeOfConduct()
+    {
+        $expectedArray = array('name' => 'Contributor Covenant', 'url' => 'http://...');
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/repos/KnpLabs/php-github-api/community/code_of_conduct')
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->codeOfConduct('KnpLabs', 'php-github-api'));
+    }
+
+    /**
      * @return string
      */
     protected function getApiClass()
