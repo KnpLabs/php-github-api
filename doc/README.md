@@ -10,6 +10,7 @@ v3 APIs:
 * [Authorizations](authorizations.md)
 * [Commits](commits.md)
 * Current User
+  * [Emails](currentuser/emails.md)
   * [Public keys](currentuser/publickeys.md)
   * [Memberships](currentuser/memberships.md)
 * [Enterprise](enterprise.md)
