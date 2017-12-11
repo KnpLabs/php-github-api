@@ -28,7 +28,9 @@ class PathPrepend implements Plugin
     public function handleRequest(RequestInterface $request, callable $next, callable $first)
     {
         $currentPath = $request->getUri()->getPath();
-        $uri = $request->getUri()->withPath($this->path.$currentPath);
+        if (strpos($currentPath, $this->path) !== 0) {
+            $uri = $request->getUri()->withPath($this->path.$currentPath);
+        }
 
         $request = $request->withUri($uri);
 
