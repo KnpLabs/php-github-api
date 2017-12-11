@@ -30,9 +30,8 @@ class PathPrepend implements Plugin
         $currentPath = $request->getUri()->getPath();
         if (strpos($currentPath, $this->path) !== 0) {
             $uri = $request->getUri()->withPath($this->path.$currentPath);
+            $request = $request->withUri($uri);
         }
-
-        $request = $request->withUri($uri);
 
         return $next($request);
     }
