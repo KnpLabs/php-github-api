@@ -20,8 +20,8 @@ class PathPrependTest extends \PHPUnit_Framework_TestCase
 
         $newRequest = null;
         $plugin->handleRequest($request, function ($request) use (&$newRequest) {
-                $newRequest = $request;
-            }, function () {
+            $newRequest = $request;
+        }, function () {
             throw new \RuntimeException("Did not expect plugin to call first");
         });
 
