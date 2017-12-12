@@ -21,7 +21,7 @@ class RepoTest extends TestCase
 
         $diff = $this->client->api('pull_request')->show('KnpLabs', 'php-github-api', '92');
 
-        $this->assertTrue('string' === gettype($diff));
+        $this->assertInternalType('string', $diff);
     }
 
     /**

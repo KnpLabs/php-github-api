@@ -52,7 +52,7 @@ class ResultPagerTest extends \PHPUnit\Framework\TestCase
         $paginator = new ResultPager($client);
         $result = $paginator->fetchAll($memberApi, $method, $parameters);
 
-        $this->assertEquals($amountLoops * count($content), count($result));
+        $this->assertCount($amountLoops * count($content), $result);
     }
 
     /**
@@ -94,7 +94,7 @@ class ResultPagerTest extends \PHPUnit\Framework\TestCase
         $paginator = new ResultPager($client);
         $result = $paginator->fetchAll($searchApi, $method, array('knplabs'));
 
-        $this->assertEquals($amountLoops * count($content['items']), count($result));
+        $this->assertCount($amountLoops * count($content['items']), $result);
     }
 
     public function testFetch()
