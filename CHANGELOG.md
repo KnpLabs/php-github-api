@@ -33,7 +33,7 @@ The following endpoints were deprecated by Github and are also deprecated in the
 
 - `Github\Api\Repo::find()`
 - `Github\Api\User::find()`
-- `Github\Api\Issue::all()`
+- `Github\Api\Issue::find()`
 
 ## 2.6.0
 
