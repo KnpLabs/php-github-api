@@ -31,6 +31,7 @@ v3 APIs:
   * [Timeline](issue/timeline.md)
 * [Meta](meta.md)
 * Miscellaneous
+  * [Code of conduct](miscellaneous/codeofconduct.md)
   * [Emojis](miscellaneous/emojis.md)
   * [Gitignore](miscellaneous/gitignore.md)
   * [Markdown](miscellaneous/markdown.md)

@@ -303,3 +303,9 @@ $milestones = $client->api('repo')->milestones('ornicar', 'php-github-api');
 ```
 
 Returns a list of milestones.
+
+### Get the contents of a repository's code of conduct
+
+```php
+$codeOfConduct = $client->api('repo')->codeOfConduct('ornicar', 'php-github-api');
+```
