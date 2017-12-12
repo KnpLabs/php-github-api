@@ -24,6 +24,18 @@ class Emails extends AbstractApi
     }
 
     /**
+     * List public email addresses for a user.
+     *
+     * @link https://developer.github.com/v3/users/emails/#list-public-email-addresses-for-a-user
+     *
+     * @return array
+     */
+    public function allPublic()
+    {
+        return $this->get('/user/public_emails');
+    }
+
+    /**
      * Adds one or more email for the authenticated user.
      *
      * @link http://developer.github.com/v3/users/emails/
@@ -65,5 +77,17 @@ class Emails extends AbstractApi
         }
 
         return $this->delete('/user/emails', $emails);
+    }
+
+    /**
+     * Toggle primary email visibility
+     *
+     * @link https://developer.github.com/v3/users/emails/#toggle-primary-email-visibility
+     *
+     * @return array
+     */
+    public function toggleVisibility()
+    {
+        return $this->patch('/user/email/visibility');
     }
 }

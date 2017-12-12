@@ -111,6 +111,22 @@ class EmailsTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function shouldToggleVisibility()
+    {
+        $expectedValue = array('primary email info');
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('patch')
+            ->with('/user/email/visibility')
+            ->will($this->returnValue($expectedValue));
+
+        $this->assertEquals($expectedValue, $api->toggleVisibility());
+    }
+
+    /**
      * @return string
      */
     protected function getApiClass()
