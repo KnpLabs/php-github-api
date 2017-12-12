@@ -53,7 +53,7 @@ class ContentsTest extends TestCase
             ->with('/repos/KnpLabs/php-github-api/contents/composer.json', array('ref' => null))
             ->will($this->returnValue($response));
 
-        $this->assertEquals(true, $api->exists('KnpLabs', 'php-github-api', 'composer.json'));
+        $this->assertTrue($api->exists('KnpLabs', 'php-github-api', 'composer.json'));
     }
 
     public function getFailureStubsForExistsTest()
