@@ -12,6 +12,8 @@ The change log describes what is "Added", "Removed", "Changed" or "Fixed" betwee
 - API endpoint `Github\Api\CurrentUser\Emails::allPublic()`
 - API endpoint `Github\Api\Search::commits()`
 - API endpoint `Github\Api\Miscellaneous\CodeOfConduct`
+- API endpoint `Github\Api\Repo::topics()`
+- API endpoint `Github\Api\Repo::replaceTopics()`
 
 ### Fixed
 
