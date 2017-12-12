@@ -7,12 +7,15 @@ The change log describes what is "Added", "Removed", "Changed" or "Fixed" betwee
 ### Added
 
 - Phpunit 6 compatibility
-- `AbstractApi::setPage()` to allow you to set the page on all endpoints. 
-- Support for query parameters and request headers on `User::following` and `User::followers` 
+- `Github\Api\AbstractApi::setPage()` to allow you to set the page on all endpoints. 
+- Support for query parameters and request headers on `Github\Api\User::following` and `Github\Api\User::followers` 
+- API endpoint `Github\Api\CurrentUser\Emails::allPublic()`
+- API endpoint `Github\Api\Search::commits()`
+- API endpoint `Github\Api\Miscellaneous\CodeOfConduct`
 
 ### Fixed
 
-- Fixed bug in `PathPrepend` where "api/vX" could be duplicated.
+- Fixed bug in `PathPrepend` plugin where "api/vX" could be duplicated.
 
 ### Changed
 
@@ -21,6 +24,14 @@ The change log describes what is "Added", "Removed", "Changed" or "Fixed" betwee
 ### Removed
 
 - Dropped support for php 5.5
+
+### Deprecated
+
+The following classes and endpoints were deprecated by Github and are also deprecated in the client: 
+
+- `Github\Api\Repo`
+- `Github\Api\User`
+- `Github\Api\Issue::all()`
 
 ## 2.6.0
 
