@@ -27,10 +27,10 @@ The change log describes what is "Added", "Removed", "Changed" or "Fixed" betwee
 
 ### Deprecated
 
-The following classes and endpoints were deprecated by Github and are also deprecated in the client: 
+The following endpoints were deprecated by Github and are also deprecated in the client: 
 
-- `Github\Api\Repo`
-- `Github\Api\User`
+- `Github\Api\Repo::find()`
+- `Github\Api\User::find()`
 - `Github\Api\Issue::all()`
 
 ## 2.6.0
