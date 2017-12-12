@@ -621,4 +621,41 @@ class Repo extends AbstractApi
 
         return $this->get('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/community/code_of_conduct');
     }
+
+    /**
+     * List all topics for a repository
+     *
+     * @link https://developer.github.com/v3/repos/#list-all-topics-for-a-repository
+     *
+     * @param string $username
+     * @param string $repository
+     *
+     * @return array
+     */
+    public function topics($username, $repository)
+    {
+        //This api is in preview mode, so set the correct accept-header
+        $this->acceptHeaderValue = 'application/vnd.github.mercy-preview+json';
+
+        return $this->get('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/topics');
+    }
+
+    /**
+     * Replace all topics for a repository
+     *
+     * @link https://developer.github.com/v3/repos/#replace-all-topics-for-a-repository
+     *
+     * @param string $username
+     * @param string $repository
+     * @param array  $topics
+     *
+     * @return array
+     */
+    public function replaceTopics($username, $repository, array $topics)
+    {
+        //This api is in preview mode, so set the correct accept-header
+        $this->acceptHeaderValue = 'application/vnd.github.mercy-preview+json';
+
+        return $this->put('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/topics', ['names' => $topics]);
+    }
 }
