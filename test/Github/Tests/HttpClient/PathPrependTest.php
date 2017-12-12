@@ -4,11 +4,12 @@ namespace Github\Tests\HttpClient\Plugin;
 
 use Github\HttpClient\Plugin\PathPrepend;
 use GuzzleHttp\Psr7\Request;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @author Nils Adermann <naderman@naderman.de>
  */
-class PathPrependTest extends \PHPUnit_Framework_TestCase
+class PathPrependTest extends TestCase
 {
     /**
      * @dataProvider uris
