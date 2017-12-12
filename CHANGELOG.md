@@ -2,15 +2,38 @@
 
 The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release.
 
-## 2.7.0 (Unreleased)
+## 2.7.0
+
+### Added
+
+- Phpunit 6 compatibility
+- `Github\Api\AbstractApi::setPage()` to allow you to set the page on all endpoints. 
+- Support for query parameters and request headers on `Github\Api\User::following` and `Github\Api\User::followers` 
+- API endpoint `Github\Api\CurrentUser\Emails::allPublic()`
+- API endpoint `Github\Api\Search::commits()`
+- API endpoint `Github\Api\Miscellaneous\CodeOfConduct`
+- API endpoint `Github\Api\Repo::topics()`
+- API endpoint `Github\Api\Repo::replaceTopics()`
+
+### Fixed
+
+- Fixed bug in `PathPrepend` plugin where "api/vX" could be duplicated.
+
+### Changed
+
+- Improved documentation and doc blocks
 
 ### Removed
 
 - Dropped support for php 5.5
 
-###
+### Deprecated
 
-- Phpunit 6 compatibility
+The following endpoints were deprecated by Github and are also deprecated in the client: 
+
+- `Github\Api\Repo::find()`
+- `Github\Api\User::find()`
+- `Github\Api\Issue::find()`
 
 ## 2.6.0
 
