@@ -31,6 +31,8 @@ class Repo extends AbstractApi
     /**
      * Search repositories by keyword.
      *
+     * @deprecated This method is deprecated use the Search api instead. See https://developer.github.com/v3/search/legacy/#legacy-search-api-is-deprecated
+     *
      * @link http://developer.github.com/v3/search/#search-repositories
      *
      * @param string $keyword the search query

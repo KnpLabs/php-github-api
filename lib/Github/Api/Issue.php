@@ -60,6 +60,8 @@ class Issue extends AbstractApi
     /**
      * Search issues by username, repo, state and keyword.
      *
+     * @deprecated This method is deprecated use the Search api instead. See https://developer.github.com/v3/search/legacy/#legacy-search-api-is-deprecated
+     *
      * @link http://developer.github.com/v3/search/#search-issues
      *
      * @param string $username   the username
