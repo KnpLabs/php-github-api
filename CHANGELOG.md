@@ -2,15 +2,25 @@
 
 The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release.
 
-## 2.7.0 (Unreleased)
+## 2.7.0
+
+### Added
+
+- Phpunit 6 compatibility
+- `AbstractApi::setPage()` to allow you to set the page on all endpoints. 
+- Support for query parameters and request headers on `User::following` and `User::followers` 
+
+### Fixed
+
+- Fixed bug in `PathPrepend` where "api/vX" could be duplicated.
+
+### Changed
+
+- Improved documentation and doc blocks
 
 ### Removed
 
 - Dropped support for php 5.5
-
-###
-
-- Phpunit 6 compatibility
 
 ## 2.6.0
 
