@@ -573,7 +573,6 @@ class RepoTest extends TestCase
         $this->assertEquals($expectedArray, $api->events('KnpLabs', 'php-github-api', 3));
     }
 
-<<<<<<< HEAD
     /**
      * @test
      */
@@ -624,11 +623,6 @@ class RepoTest extends TestCase
         $this->assertEquals($expectedArray, $api->replaceTopics('KnpLabs', 'php-github-api', ['octocat', 'atom', 'electron', 'API']));
     }
 
-    /**
-     * @return string
-     */
-=======
->>>>>>> remove useless docs
     protected function getApiClass(): string
     {
         return Repo::class;

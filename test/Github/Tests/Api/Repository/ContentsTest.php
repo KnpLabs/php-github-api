@@ -76,11 +76,6 @@ class ContentsTest extends TestCase
      */
     public function shouldReturnFalseWhenFileIsNotFound($failureStub)
     {
-<<<<<<< HEAD
-=======
-        $expectedValue = ['some-header' => 'value'];
-
->>>>>>> use PHP 70 strict types and typehints
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('head')

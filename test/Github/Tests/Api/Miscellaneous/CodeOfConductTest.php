@@ -44,10 +44,7 @@ class CodeOfConductTest extends TestCase
         $this->assertEquals($expectedArray, $api->show('contributor_covenant'));
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return CodeOfConduct::class;
     }
