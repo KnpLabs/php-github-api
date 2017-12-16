@@ -9,7 +9,7 @@ class UserTest extends TestCase
      */
     public function shouldShowUser()
     {
-        $expectedArray = array('id' => 1, 'username' => 'l3l0');
+        $expectedArray = ['id' => 1, 'username' => 'l3l0'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -25,14 +25,14 @@ class UserTest extends TestCase
      */
     public function shouldGetUserOrganizations()
     {
-        $expectedArray = array(array(
+        $expectedArray = [[
             'id' => 202732,
             'url' => 'https://api.github.com/orgs/KnpLabs',
             'repos_url' => 'https://api.github.com/orgs/KnpLabs/repos',
             'events_url' => 'https://api.github.com/orgs/KnpLabs/events',
             'members_url' => 'https://api.github.com/orgs/KnpLabs/members{/member}',
-            'public_members_url' => 'https://api.github.com/orgs/KnpLabs/public_members{/member}'
-        ));
+            'public_members_url' => 'https://api.github.com/orgs/KnpLabs/public_members{/member}',
+        ]];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -45,14 +45,14 @@ class UserTest extends TestCase
 
     public function shouldGetUserOrgs()
     {
-        $expectedArray = array(array(
+        $expectedArray = [[
             'id' => 202732,
             'url' => 'https://api.github.com/orgs/KnpLabs',
             'repos_url' => 'https://api.github.com/orgs/KnpLabs/repos',
             'events_url' => 'https://api.github.com/orgs/KnpLabs/events',
             'members_url' => 'https://api.github.com/orgs/KnpLabs/members{/member}',
-            'public_members_url' => 'https://api.github.com/orgs/KnpLabs/public_members{/member}'
-        ));
+            'public_members_url' => 'https://api.github.com/orgs/KnpLabs/public_members{/member}',
+        ]];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -68,10 +68,10 @@ class UserTest extends TestCase
      */
     public function shouldGetAllUsers()
     {
-        $expectedArray = array(
-            array('id' => 1, 'username' => 'l3l0'),
-            array('id' => 2, 'username' => 'l3l0test')
-        );
+        $expectedArray = [
+            ['id' => 1, 'username' => 'l3l0'],
+            ['id' => 2, 'username' => 'l3l0test'],
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -87,10 +87,10 @@ class UserTest extends TestCase
      */
     public function shouldGetAllUsersSince()
     {
-        $expectedArray = array(
-            array('id' => 3, 'username' => 'test3'),
-            array('id' => 4, 'username' => 'test4')
-        );
+        $expectedArray = [
+            ['id' => 3, 'username' => 'test3'],
+            ['id' => 4, 'username' => 'test4'],
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -106,10 +106,10 @@ class UserTest extends TestCase
      */
     public function shouldSearchUsers()
     {
-        $expectedArray = array(
-            array('id' => 1, 'username' => 'l3l0'),
-            array('id' => 2, 'username' => 'l3l0test')
-        );
+        $expectedArray = [
+            ['id' => 1, 'username' => 'l3l0'],
+            ['id' => 2, 'username' => 'l3l0test'],
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -125,7 +125,7 @@ class UserTest extends TestCase
      */
     public function shouldGetFollowingUsers()
     {
-        $expectedArray = array(array('id' => 1, 'username' => 'l3l0test'));
+        $expectedArray = [['id' => 1, 'username' => 'l3l0test']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -141,7 +141,7 @@ class UserTest extends TestCase
      */
     public function shouldGetUserFollowers()
     {
-        $expectedArray = array(array('id' => 1, 'username' => 'l3l0test'));
+        $expectedArray = [['id' => 1, 'username' => 'l3l0test']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -157,7 +157,7 @@ class UserTest extends TestCase
      */
     public function shouldGetStarredToRepositories()
     {
-        $expectedArray = array(array('id' => 1, 'name' => 'l3l0repo'));
+        $expectedArray = [['id' => 1, 'name' => 'l3l0repo']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -173,7 +173,7 @@ class UserTest extends TestCase
      */
     public function shouldGetSubscriptionsToRepositories()
     {
-        $expectedArray = array(array('id' => 1, 'name' => 'l3l0repo'));
+        $expectedArray = [['id' => 1, 'name' => 'l3l0repo']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -189,12 +189,12 @@ class UserTest extends TestCase
      */
     public function shouldGetUserRepositories()
     {
-        $expectedArray = array(array('id' => 1, 'name' => 'l3l0repo'));
+        $expectedArray = [['id' => 1, 'name' => 'l3l0repo']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/users/l3l0/repos', array('type' => 'owner', 'sort' => 'full_name', 'direction' => 'asc'))
+            ->with('/users/l3l0/repos', ['type' => 'owner', 'sort' => 'full_name', 'direction' => 'asc'])
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->repositories('l3l0'));
@@ -220,7 +220,7 @@ class UserTest extends TestCase
      */
     public function shouldGetUserGists()
     {
-        $expectedArray = array(array('id' => 1, 'name' => 'l3l0repo'));
+        $expectedArray = [['id' => 1, 'name' => 'l3l0repo']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())

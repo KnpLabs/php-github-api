@@ -29,7 +29,7 @@ class CodeOfConduct extends AbstractApi
     }
 
     /**
-     * Get an individual code of conduct
+     * Get an individual code of conduct.
      *
      * @link https://developer.github.com/v3/codes_of_conduct/#get-an-individual-code-of-conduct
      *
@@ -39,6 +39,6 @@ class CodeOfConduct extends AbstractApi
      */
     public function show($key)
     {
-        return $this->get('/codes_of_conduct/' . rawurlencode($key));
+        return $this->get('/codes_of_conduct/'.rawurlencode($key));
     }
 }

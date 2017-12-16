@@ -7,6 +7,7 @@ use Github\Exception\MissingArgumentException;
 
 /**
  * @link   http://developer.github.com/v3/repos/releases/
+ *
  * @author Matthew Simo <matthew.a.simo@gmail.com>
  * @author Evgeniy Guseletov <d46k16@gmail.com>
  */

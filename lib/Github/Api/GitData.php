@@ -12,6 +12,7 @@ use Github\Api\GitData\Trees;
  * Getting full versions of specific files and trees in your Git repositories.
  *
  * @link   http://developer.github.com/v3/git/
+ *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class GitData extends AbstractApi

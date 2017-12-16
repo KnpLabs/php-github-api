@@ -4,13 +4,14 @@ namespace Github\Api\Repository;
 
 use Github\Api\AbstractApi;
 use Github\Api\AcceptHeaderTrait;
-use Github\Exception\InvalidArgumentException;
 use Github\Exception\ErrorException;
+use Github\Exception\InvalidArgumentException;
 use Github\Exception\MissingArgumentException;
 use Github\Exception\TwoFactorAuthenticationRequiredException;
 
 /**
  * @link   http://developer.github.com/v3/repos/contents/
+ *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class Contents extends AbstractApi
@@ -21,13 +22,14 @@ class Contents extends AbstractApi
      * Configure the body type.
      *
      * @link https://developer.github.com/v3/repo/contents/#custom-media-types
+     *
      * @param string|null $bodyType
      *
      * @return self
      */
     public function configure($bodyType = null)
     {
-        if (!in_array($bodyType, array('html', 'object'))) {
+        if (!in_array($bodyType, ['html', 'object'])) {
             $bodyType = 'raw';
         }
 
@@ -49,9 +51,9 @@ class Contents extends AbstractApi
      */
     public function readme($username, $repository, $reference = null)
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/readme', array(
-            'ref' => $reference
-        ));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/readme', [
+            'ref' => $reference,
+        ]);
     }
 
     /**
@@ -73,9 +75,9 @@ class Contents extends AbstractApi
             $url .= '/'.rawurlencode($path);
         }
 
-        return $this->get($url, array(
-            'ref' => $reference
-        ));
+        return $this->get($url, [
+            'ref' => $reference,
+        ]);
     }
 
     /**
@@ -99,10 +101,10 @@ class Contents extends AbstractApi
     {
         $url = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
 
-        $parameters = array(
+        $parameters = [
           'content' => base64_encode($content),
           'message' => $message,
-        );
+        ];
 
         if (null !== $branch) {
             $parameters['branch'] = $branch;
@@ -110,7 +112,7 @@ class Contents extends AbstractApi
 
         if (null !== $committer) {
             if (!isset($committer['name'], $committer['email'])) {
-                throw new MissingArgumentException(array('name', 'email'));
+                throw new MissingArgumentException(['name', 'email']);
             }
             $parameters['committer'] = $committer;
         }
@@ -137,9 +139,9 @@ class Contents extends AbstractApi
         }
 
         try {
-            $response = $this->head($url, array(
-                'ref' => $reference
-            ));
+            $response = $this->head($url, [
+                'ref' => $reference,
+            ]);
 
             if ($response->getStatusCode() != 200) {
                 return false;
@@ -175,11 +177,11 @@ class Contents extends AbstractApi
     {
         $url = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
 
-        $parameters = array(
+        $parameters = [
           'content' => base64_encode($content),
           'message' => $message,
           'sha'     => $sha,
-        );
+        ];
 
         if (null !== $branch) {
             $parameters['branch'] = $branch;
@@ -187,7 +189,7 @@ class Contents extends AbstractApi
 
         if (null !== $committer) {
             if (!isset($committer['name'], $committer['email'])) {
-                throw new MissingArgumentException(array('name', 'email'));
+                throw new MissingArgumentException(['name', 'email']);
             }
             $parameters['committer'] = $committer;
         }
@@ -216,10 +218,10 @@ class Contents extends AbstractApi
     {
         $url = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
 
-        $parameters = array(
+        $parameters = [
           'message' => $message,
           'sha'     => $sha,
-        );
+        ];
 
         if (null !== $branch) {
             $parameters['branch'] = $branch;
@@ -227,7 +229,7 @@ class Contents extends AbstractApi
 
         if (null !== $committer) {
             if (!isset($committer['name'], $committer['email'])) {
-                throw new MissingArgumentException(array('name', 'email'));
+                throw new MissingArgumentException(['name', 'email']);
             }
             $parameters['committer'] = $committer;
         }
@@ -249,7 +251,7 @@ class Contents extends AbstractApi
      */
     public function archive($username, $repository, $format, $reference = null)
     {
-        if (!in_array($format, array('tarball', 'zipball'))) {
+        if (!in_array($format, ['tarball', 'zipball'])) {
             $format = 'tarball';
         }
 

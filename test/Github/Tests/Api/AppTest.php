@@ -62,7 +62,6 @@ class AppTest extends TestCase
         $api->removeRepository('1234', '5678');
     }
 
-
     /**
      * @return string
      */

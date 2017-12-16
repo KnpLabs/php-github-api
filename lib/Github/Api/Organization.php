@@ -10,6 +10,7 @@ use Github\Api\Organization\Teams;
  * Getting organization information and managing authenticated organization account information.
  *
  * @link   http://developer.github.com/v3/orgs/
+ *
  * @author Antoine Berranger <antoine at ihqs dot net>
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
@@ -57,10 +58,10 @@ class Organization extends AbstractApi
      */
     public function repositories($organization, $type = 'all', $page = 1)
     {
-        return $this->get('/orgs/'.rawurlencode($organization).'/repos', array(
+        return $this->get('/orgs/'.rawurlencode($organization).'/repos', [
             'type' => $type,
             'page' => $page,
-        ));
+        ]);
     }
 
     /**
@@ -92,12 +93,12 @@ class Organization extends AbstractApi
      *
      * @param $organization
      * @param array $params
-     * @param int $page
+     * @param int   $page
      *
      * @return array
      */
-    public function issues($organization, array $params = array(), $page = 1)
+    public function issues($organization, array $params = [], $page = 1)
     {
-        return $this->get('/orgs/'.rawurlencode($organization).'/issues', array_merge(array('page' => $page), $params));
+        return $this->get('/orgs/'.rawurlencode($organization).'/issues', array_merge(['page' => $page], $params));
     }
 }

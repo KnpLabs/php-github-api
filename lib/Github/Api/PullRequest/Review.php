@@ -11,6 +11,7 @@ use Github\Exception\MissingArgumentException;
  * API for accessing Pull Request Reviews from your Git/Github repositories.
  *
  * @link https://developer.github.com/v3/pulls/reviews/
+ *
  * @author Christian Flothmann <christian.flothmann@sensiolabs.de>
  */
 class Review extends AbstractApi
@@ -38,7 +39,7 @@ class Review extends AbstractApi
     {
         $parameters = array_merge([
             'page' => 1,
-            'per_page' => 30
+            'per_page' => 30,
         ], $params);
 
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.$pullRequest.'/reviews', $parameters);
@@ -115,7 +116,7 @@ class Review extends AbstractApi
             throw new MissingArgumentException('event');
         }
 
-        if (!in_array($params['event'], ["APPROVE", "REQUEST_CHANGES", "COMMENT"], true)) {
+        if (!in_array($params['event'], ['APPROVE', 'REQUEST_CHANGES', 'COMMENT'], true)) {
             throw new InvalidArgumentException(sprintf('"event" must be one of ["APPROVE", "REQUEST_CHANGES", "COMMENT"] ("%s" given).', $params['event']));
         }
 
@@ -143,7 +144,7 @@ class Review extends AbstractApi
             throw new MissingArgumentException('event');
         }
 
-        if (!in_array($params['event'], ["APPROVE", "REQUEST_CHANGES", "COMMENT"], true)) {
+        if (!in_array($params['event'], ['APPROVE', 'REQUEST_CHANGES', 'COMMENT'], true)) {
             throw new InvalidArgumentException(sprintf('"event" must be one of ["APPROVE", "REQUEST_CHANGES", "COMMENT"] ("%s" given).', $params['event']));
         }
 
@@ -159,7 +160,7 @@ class Review extends AbstractApi
      * @param string $repository  the repository
      * @param int    $pullRequest the pull request number
      * @param int    $id          the review id
-     * @param string  $message    a mandatory dismissal message
+     * @param string $message     a mandatory dismissal message
      *
      * @return array|string
      */
@@ -174,7 +175,7 @@ class Review extends AbstractApi
         }
 
         return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.$pullRequest.'/reviews/'.$id.'/dismissals', [
-          'message' => $message
+          'message' => $message,
         ]);
     }
 }

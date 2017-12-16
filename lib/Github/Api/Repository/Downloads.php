@@ -6,6 +6,7 @@ use Github\Api\AbstractApi;
 
 /**
  * @link   http://developer.github.com/v3/repos/downloads/
+ *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class Downloads extends AbstractApi

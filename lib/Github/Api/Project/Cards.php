@@ -11,7 +11,7 @@ class Cards extends AbstractApi
     use AcceptHeaderTrait;
 
     /**
-     * Configure the accept header for Early Access to the projects api
+     * Configure the accept header for Early Access to the projects api.
      *
      * @see https://developer.github.com/v3/repos/projects/#projects
      *
@@ -24,9 +24,9 @@ class Cards extends AbstractApi
         return $this;
     }
 
-    public function all($columnId, array $params = array())
+    public function all($columnId, array $params = [])
     {
-        return $this->get('/projects/columns/' . rawurlencode($columnId) . '/cards', array_merge(array('page' => 1), $params));
+        return $this->get('/projects/columns/'.rawurlencode($columnId).'/cards', array_merge(['page' => 1], $params));
     }
 
     public function show($id)
@@ -36,12 +36,12 @@ class Cards extends AbstractApi
 
     public function create($columnId, array $params)
     {
-        return $this->post('/projects/columns/' . rawurlencode($columnId) . '/cards', $params);
+        return $this->post('/projects/columns/'.rawurlencode($columnId).'/cards', $params);
     }
 
     public function update($id, array $params)
     {
-        return $this->patch('/projects/columns/cards/' . rawurlencode($id), $params);
+        return $this->patch('/projects/columns/cards/'.rawurlencode($id), $params);
     }
 
     public function deleteCard($id)
@@ -52,9 +52,9 @@ class Cards extends AbstractApi
     public function move($id, array $params)
     {
         if (!isset($params['position'])) {
-            throw new MissingArgumentException(array('position'));
+            throw new MissingArgumentException(['position']);
         }
 
-        return $this->post('/projects/columns/cards/' . rawurlencode($id) . '/moves', $params);
+        return $this->post('/projects/columns/cards/'.rawurlencode($id).'/moves', $params);
     }
 }

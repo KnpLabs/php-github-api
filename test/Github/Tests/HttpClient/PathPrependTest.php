@@ -23,7 +23,7 @@ class PathPrependTest extends TestCase
         $plugin->handleRequest($request, function ($request) use (&$newRequest) {
             $newRequest = $request;
         }, function () {
-            throw new \RuntimeException("Did not expect plugin to call first");
+            throw new \RuntimeException('Did not expect plugin to call first');
         });
 
         $this->assertEquals($expectedPath, $newRequest->getUri()->getPath());

@@ -10,6 +10,7 @@ use DateTime;
  * Important! You have to be authenticated to perform these methods
  *
  * @link   https://developer.github.com/v3/activity/notifications/
+ *
  * @author Dennis de Greef <github@link0.net>
  */
 class Notification extends AbstractApi
@@ -27,10 +28,10 @@ class Notification extends AbstractApi
      */
     public function all($includingRead = false, $participating = false, DateTime $since = null)
     {
-        $parameters = array(
+        $parameters = [
             'all' => $includingRead,
-            'participating' => $participating
-        );
+            'participating' => $participating,
+        ];
 
         if ($since !== null) {
             $parameters['since'] = $since->format(DateTime::ISO8601);
@@ -49,7 +50,7 @@ class Notification extends AbstractApi
      */
     public function markRead(DateTime $since = null)
     {
-        $parameters = array();
+        $parameters = [];
 
         if ($since !== null) {
             $parameters['last_read_at'] = $since->format(DateTime::ISO8601);
@@ -57,8 +58,9 @@ class Notification extends AbstractApi
 
         $this->put('/notifications', $parameters);
     }
+
     /**
-     * Gets a single notification using his ID
+     * Gets a single notification using his ID.
      *
      * @link https://developer.github.com/v3/activity/notifications/#view-a-single-thread
      *

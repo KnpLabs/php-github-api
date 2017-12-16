@@ -2,16 +2,17 @@
 
 namespace Github\Api;
 
-use Github\Api\CurrentUser\PublicKeys;
 use Github\Api\CurrentUser\Emails;
 use Github\Api\CurrentUser\Followers;
 use Github\Api\CurrentUser\Memberships;
 use Github\Api\CurrentUser\Notifications;
-use Github\Api\CurrentUser\Watchers;
+use Github\Api\CurrentUser\PublicKeys;
 use Github\Api\CurrentUser\Starring;
+use Github\Api\CurrentUser\Watchers;
 
 /**
  * @link   http://developer.github.com/v3/users/
+ *
  * @author Joseph Bielawski <stloyd@gmail.com>
  * @author Felipe Valtl de Mello <eu@felipe.im>
  */
@@ -45,9 +46,9 @@ class CurrentUser extends AbstractApi
 
     public function followers($page = 1)
     {
-        return $this->get('/user/followers', array(
-            'page' => $page
-        ));
+        return $this->get('/user/followers', [
+            'page' => $page,
+        ]);
     }
 
     /**
@@ -58,9 +59,9 @@ class CurrentUser extends AbstractApi
      *
      * @return array
      */
-    public function issues(array $params = array(), $includeOrgIssues = true)
+    public function issues(array $params = [], $includeOrgIssues = true)
     {
-        return $this->get($includeOrgIssues ? '/issues' : '/user/issues', array_merge(array('page' => 1), $params));
+        return $this->get($includeOrgIssues ? '/issues' : '/user/issues', array_merge(['page' => 1], $params));
     }
 
     /**
@@ -118,11 +119,11 @@ class CurrentUser extends AbstractApi
      */
     public function repositories($type = 'owner', $sort = 'full_name', $direction = 'asc')
     {
-        return $this->get('/user/repos', array(
+        return $this->get('/user/repos', [
             'type' => $type,
             'sort' => $sort,
-            'direction' => $direction
-        ));
+            'direction' => $direction,
+        ]);
     }
 
     /**
@@ -138,9 +139,9 @@ class CurrentUser extends AbstractApi
      */
     public function watched($page = 1)
     {
-        return $this->get('/user/watched', array(
-            'page' => $page
-        ));
+        return $this->get('/user/watched', [
+            'page' => $page,
+        ]);
     }
 
     /**
@@ -156,9 +157,9 @@ class CurrentUser extends AbstractApi
      */
     public function starred($page = 1)
     {
-        return $this->get('/user/starred', array(
-            'page' => $page
-        ));
+        return $this->get('/user/starred', [
+            'page' => $page,
+        ]);
     }
 
     /**
@@ -174,19 +175,19 @@ class CurrentUser extends AbstractApi
      *
      * @param array $params
      */
-    public function installations(array $params = array())
+    public function installations(array $params = [])
     {
-        return $this->get('/user/installations', array_merge(array('page' => 1), $params));
+        return $this->get('/user/installations', array_merge(['page' => 1], $params));
     }
 
     /**
      * @link https://developer.github.com/v3/integrations/installations/#list-repositories-accessible-to-the-user-for-an-installation
      *
-     * @param string $installationId  the ID of the Installation
-     * @param array $params
+     * @param string $installationId the ID of the Installation
+     * @param array  $params
      */
-    public function repositoriesByInstallation($installationId, array $params = array())
+    public function repositoriesByInstallation($installationId, array $params = [])
     {
-        return $this->get(sprintf('/user/installations/%s/repositories', $installationId), array_merge(array('page' => 1), $params));
+        return $this->get(sprintf('/user/installations/%s/repositories', $installationId), array_merge(['page' => 1], $params));
     }
 }

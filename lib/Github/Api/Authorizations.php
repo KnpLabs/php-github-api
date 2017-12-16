@@ -6,6 +6,7 @@ namespace Github\Api;
  * Creating, deleting and listing authorizations.
  *
  * @link   http://developer.github.com/v3/oauth_authorizations/
+ *
  * @author Evgeniy Guseletov <d46k16@gmail.com>
  */
 class Authorizations extends AbstractApi
@@ -36,13 +37,13 @@ class Authorizations extends AbstractApi
      * Create an authorization.
      *
      * @param array $params
-     * @param null $OTPCode
+     * @param null  $OTPCode
      *
      * @return array
      */
     public function create(array $params, $OTPCode = null)
     {
-        $headers = null === $OTPCode ? array() : array('X-GitHub-OTP' => $OTPCode);
+        $headers = null === $OTPCode ? [] : ['X-GitHub-OTP' => $OTPCode];
 
         return $this->post('/authorizations', $params, $headers);
     }

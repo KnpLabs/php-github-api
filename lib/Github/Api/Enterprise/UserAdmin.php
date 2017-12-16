@@ -17,7 +17,7 @@ class UserAdmin extends AbstractApi
      */
     public function suspend($username)
     {
-        return $this->put('/users/'.rawurldecode($username).'/suspended', array('Content-Length' => 0));
+        return $this->put('/users/'.rawurldecode($username).'/suspended', ['Content-Length' => 0]);
     }
 
     /**

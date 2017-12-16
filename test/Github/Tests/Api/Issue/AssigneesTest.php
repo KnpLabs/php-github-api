@@ -39,7 +39,7 @@ class AssigneesTest extends TestCase
      */
     public function shouldNotAddAssigneeMissingParameter()
     {
-        $data = array();
+        $data = [];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -53,9 +53,9 @@ class AssigneesTest extends TestCase
      */
     public function shouldAddAssignee()
     {
-        $data = array(
-            'assignees' => array('test-user')
-        );
+        $data = [
+            'assignees' => ['test-user'],
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -71,7 +71,7 @@ class AssigneesTest extends TestCase
      */
     public function shouldNotRemoveAssigneeMissingParameter()
     {
-        $data = array();
+        $data = [];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -85,9 +85,9 @@ class AssigneesTest extends TestCase
      */
     public function shouldRemoveAssignee()
     {
-        $data = array(
-            'assignees' => array('test-user')
-        );
+        $data = [
+            'assignees' => ['test-user'],
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())

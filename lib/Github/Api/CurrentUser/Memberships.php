@@ -33,7 +33,7 @@ class Memberships extends AbstractApi
     }
 
     /**
-     * Edit your organization membership
+     * Edit your organization membership.
      *
      * @link https://developer.github.com/v3/orgs/members/#edit-your-organization-membership
      *
@@ -43,6 +43,6 @@ class Memberships extends AbstractApi
      */
     public function edit($organization)
     {
-        return $this->patch('/user/memberships/orgs/'.rawurlencode($organization), array('state' => 'active'));
+        return $this->patch('/user/memberships/orgs/'.rawurlencode($organization), ['state' => 'active']);
     }
 }

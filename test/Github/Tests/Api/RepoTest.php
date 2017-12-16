@@ -9,7 +9,7 @@ class RepoTest extends TestCase
      */
     public function shouldShowRepository()
     {
-        $expectedArray = array('id' => 1, 'name' => 'repoName');
+        $expectedArray = ['id' => 1, 'name' => 'repoName'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -25,7 +25,7 @@ class RepoTest extends TestCase
      */
     public function shouldShowRepositoryById()
     {
-        $expectedArray = array('id' => 123456, 'name' => 'repoName');
+        $expectedArray = ['id' => 123456, 'name' => 'repoName'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -41,18 +41,18 @@ class RepoTest extends TestCase
      */
     public function shouldSearchRepositories()
     {
-        $expectedArray = array(
-            array('id' => 1, 'name' => 'php'),
-            array('id' => 2, 'name' => 'php-cs')
-        );
+        $expectedArray = [
+            ['id' => 1, 'name' => 'php'],
+            ['id' => 2, 'name' => 'php-cs'],
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/legacy/repos/search/php', array('myparam' => 2, 'start_page' => 1))
+            ->with('/legacy/repos/search/php', ['myparam' => 2, 'start_page' => 1])
             ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($expectedArray, $api->find('php', array('myparam' => 2)));
+        $this->assertEquals($expectedArray, $api->find('php', ['myparam' => 2]));
     }
 
     /**
@@ -60,18 +60,18 @@ class RepoTest extends TestCase
      */
     public function shouldPaginateFoundRepositories()
     {
-        $expectedArray = array(
-            array('id' => 3, 'name' => 'fork of php'),
-            array('id' => 4, 'name' => 'fork of php-cs')
-        );
+        $expectedArray = [
+            ['id' => 3, 'name' => 'fork of php'],
+            ['id' => 4, 'name' => 'fork of php-cs'],
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/legacy/repos/search/php', array('start_page' => 2))
+            ->with('/legacy/repos/search/php', ['start_page' => 2])
             ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($expectedArray, $api->find('php', array('start_page' => 2)));
+        $this->assertEquals($expectedArray, $api->find('php', ['start_page' => 2]));
     }
 
     /**
@@ -79,12 +79,12 @@ class RepoTest extends TestCase
      */
     public function shouldGetAllRepositories()
     {
-        $expectedArray = array(
-            array('id' => 1, 'name' => 'dummy project'),
-            array('id' => 2, 'name' => 'awesome another project'),
-            array('id' => 3, 'name' => 'fork of php'),
-            array('id' => 4, 'name' => 'fork of php-cs'),
-        );
+        $expectedArray = [
+            ['id' => 1, 'name' => 'dummy project'],
+            ['id' => 2, 'name' => 'awesome another project'],
+            ['id' => 3, 'name' => 'fork of php'],
+            ['id' => 4, 'name' => 'fork of php-cs'],
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -100,12 +100,12 @@ class RepoTest extends TestCase
      */
     public function shouldGetAllRepositoriesStartingIndex()
     {
-        $expectedArray = array(
-            array('id' => 1, 'name' => 'dummy project'),
-            array('id' => 2, 'name' => 'awesome another project'),
-            array('id' => 3, 'name' => 'fork of php'),
-            array('id' => 4, 'name' => 'fork of php-cs'),
-        );
+        $expectedArray = [
+            ['id' => 1, 'name' => 'dummy project'],
+            ['id' => 2, 'name' => 'awesome another project'],
+            ['id' => 3, 'name' => 'fork of php'],
+            ['id' => 4, 'name' => 'fork of php-cs'],
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -121,12 +121,12 @@ class RepoTest extends TestCase
      */
     public function shouldCreateRepositoryUsingNameOnly()
     {
-        $expectedArray = array('id' => 1, 'name' => 'l3l0Repo');
+        $expectedArray = ['id' => 1, 'name' => 'l3l0Repo'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('/user/repos', array(
+            ->with('/user/repos', [
                 'name'          => 'l3l0Repo',
                 'description'   => '',
                 'homepage'      => '',
@@ -134,8 +134,8 @@ class RepoTest extends TestCase
                 'has_issues'    => false,
                 'has_wiki'      => false,
                 'has_downloads' => false,
-                'auto_init'     => false
-            ))
+                'auto_init'     => false,
+            ])
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->create('l3l0Repo'));
@@ -146,12 +146,12 @@ class RepoTest extends TestCase
      */
     public function shouldCreateRepositoryForOrganization()
     {
-        $expectedArray = array('id' => 1, 'name' => 'KnpLabsRepo');
+        $expectedArray = ['id' => 1, 'name' => 'KnpLabsRepo'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('/orgs/KnpLabs/repos', array(
+            ->with('/orgs/KnpLabs/repos', [
                 'name'          => 'KnpLabsRepo',
                 'description'   => '',
                 'homepage'      => '',
@@ -159,8 +159,8 @@ class RepoTest extends TestCase
                 'has_issues'    => false,
                 'has_wiki'      => false,
                 'has_downloads' => false,
-                'auto_init'     => false
-            ))
+                'auto_init'     => false,
+            ])
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->create('KnpLabsRepo', '', '', true, 'KnpLabs'));
@@ -171,12 +171,12 @@ class RepoTest extends TestCase
      */
     public function shouldGetRepositorySubscribers()
     {
-        $expectedArray = array(array('id' => 1, 'username' => 'l3l0'));
+        $expectedArray = [['id' => 1, 'username' => 'l3l0']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/subscribers', array('page' => 2))
+            ->with('/repos/KnpLabs/php-github-api/subscribers', ['page' => 2])
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->subscribers('KnpLabs', 'php-github-api', 2));
@@ -187,7 +187,7 @@ class RepoTest extends TestCase
      */
     public function shouldGetRepositoryTags()
     {
-        $expectedArray = array(array('sha' => 1234));
+        $expectedArray = [['sha' => 1234]];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -203,7 +203,7 @@ class RepoTest extends TestCase
      */
     public function shouldGetRepositoryBranches()
     {
-        $expectedArray = array(array('sha' => 1234, 'name' => 'master'));
+        $expectedArray = [['sha' => 1234, 'name' => 'master']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -219,7 +219,7 @@ class RepoTest extends TestCase
      */
     public function shouldGetRepositoryBranch()
     {
-        $expectedArray = array('sha' => 1234, 'name' => 'master');
+        $expectedArray = ['sha' => 1234, 'name' => 'master'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -235,7 +235,7 @@ class RepoTest extends TestCase
      */
     public function shouldGetRepositoryLanguages()
     {
-        $expectedArray = array('lang1', 'lang2');
+        $expectedArray = ['lang1', 'lang2'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -251,7 +251,7 @@ class RepoTest extends TestCase
      */
     public function shouldGetRepositoryMilestones()
     {
-        $expectedArray = array('milestone1', 'milestone2');
+        $expectedArray = ['milestone1', 'milestone2'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -267,12 +267,12 @@ class RepoTest extends TestCase
      */
     public function shouldGetContributorsExcludingAnonymousOnes()
     {
-        $expectedArray = array('contrib1', 'contrib2');
+        $expectedArray = ['contrib1', 'contrib2'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/contributors', array('anon' => null))
+            ->with('/repos/KnpLabs/php-github-api/contributors', ['anon' => null])
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->contributors('KnpLabs', 'php-github-api', false));
@@ -283,12 +283,12 @@ class RepoTest extends TestCase
      */
     public function shouldGetContributorsIncludingAnonymousOnes()
     {
-        $expectedArray = array('contrib1', 'contrib2');
+        $expectedArray = ['contrib1', 'contrib2'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/contributors', array('anon' => true))
+            ->with('/repos/KnpLabs/php-github-api/contributors', ['anon' => true])
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->contributors('KnpLabs', 'php-github-api', true));
@@ -299,7 +299,7 @@ class RepoTest extends TestCase
      */
     public function shouldGetRepositoryTeams()
     {
-        $expectedArray = array(array('id' => 1234), array('id' => 2345));
+        $expectedArray = [['id' => 1234], ['id' => 2345]];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -315,12 +315,12 @@ class RepoTest extends TestCase
      */
     public function shouldCreateUsingAllParams()
     {
-        $expectedArray = array('id' => 1, 'name' => 'l3l0Repo');
+        $expectedArray = ['id' => 1, 'name' => 'l3l0Repo'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('/user/repos', array(
+            ->with('/user/repos', [
                 'name'          => 'l3l0Repo',
                 'description'   => 'test',
                 'homepage'      => 'http://l3l0.eu',
@@ -328,8 +328,8 @@ class RepoTest extends TestCase
                 'has_issues'    => false,
                 'has_wiki'      => false,
                 'has_downloads' => false,
-                'auto_init'     => false
-            ))
+                'auto_init'     => false,
+            ])
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->create('l3l0Repo', 'test', 'http://l3l0.eu', false));
@@ -340,15 +340,15 @@ class RepoTest extends TestCase
      */
     public function shouldUpdate()
     {
-        $expectedArray = array('id' => 1, 'name' => 'l3l0Repo');
+        $expectedArray = ['id' => 1, 'name' => 'l3l0Repo'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
-            ->with('/repos/l3l0Repo/test', array('description' => 'test', 'homepage' => 'http://l3l0.eu'))
+            ->with('/repos/l3l0Repo/test', ['description' => 'test', 'homepage' => 'http://l3l0.eu'])
             ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($expectedArray, $api->update('l3l0Repo', 'test', array('description' => 'test', 'homepage' => 'http://l3l0.eu')));
+        $this->assertEquals($expectedArray, $api->update('l3l0Repo', 'test', ['description' => 'test', 'homepage' => 'http://l3l0.eu']));
     }
 
     /**
@@ -370,7 +370,7 @@ class RepoTest extends TestCase
      */
     public function shouldNotDelete()
     {
-        $expectedArray = array('message' => 'Not Found');
+        $expectedArray = ['message' => 'Not Found'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -506,7 +506,7 @@ class RepoTest extends TestCase
      */
     public function shouldGetCommitActivity()
     {
-        $expectedArray = array(array('days' => array(0, 3, 26, 20, 39, 1, 0), 'total' => 89, 'week' => 1336280400));
+        $expectedArray = [['days' => [0, 3, 26, 20, 39, 1, 0], 'total' => 89, 'week' => 1336280400]];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -522,14 +522,14 @@ class RepoTest extends TestCase
      */
     public function shouldGetRepositoryEvents()
     {
-        $expectedArray = array('id' => 6122723754, 'type' => 'ForkEvent');
+        $expectedArray = ['id' => 6122723754, 'type' => 'ForkEvent'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/events', array(
+            ->with('/repos/KnpLabs/php-github-api/events', [
                 'page' => 3,
-            ))
+            ])
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->events('KnpLabs', 'php-github-api', 3));
@@ -540,7 +540,7 @@ class RepoTest extends TestCase
      */
     public function shouldGetRepositoryCodeOfConduct()
     {
-        $expectedArray = array('name' => 'Contributor Covenant', 'url' => 'http://...');
+        $expectedArray = ['name' => 'Contributor Covenant', 'url' => 'http://...'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -572,14 +572,14 @@ class RepoTest extends TestCase
      */
     public function shouldReplaceRepositoryTopics()
     {
-        $expectedArray = array('id' => 6122723754, 'type' => 'ForkEvent');
+        $expectedArray = ['id' => 6122723754, 'type' => 'ForkEvent'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with('/repos/KnpLabs/php-github-api/topics', array(
+            ->with('/repos/KnpLabs/php-github-api/topics', [
                 'names' => ['octocat', 'atom', 'electron', 'API'],
-            ))
+            ])
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->replaceTopics('KnpLabs', 'php-github-api', ['octocat', 'atom', 'electron', 'API']));

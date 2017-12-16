@@ -7,6 +7,7 @@ use Github\Exception\MissingArgumentException;
 
 /**
  * @link   http://developer.github.com/v3/users/keys/
+ *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class PublicKeys extends AbstractApi
@@ -51,7 +52,7 @@ class PublicKeys extends AbstractApi
     public function create(array $params)
     {
         if (!isset($params['title'], $params['key'])) {
-            throw new MissingArgumentException(array('title', 'key'));
+            throw new MissingArgumentException(['title', 'key']);
         }
 
         return $this->post('/user/keys', $params);
