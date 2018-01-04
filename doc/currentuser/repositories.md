@@ -6,7 +6,7 @@
 ### List repositories that are accessible to the authenticated user.
 
 ```php
-$emails = $client->currentUser()->repositories();
+$repositories = $client->currentUser()->repositories();
 ```
 
 This includes repositories owned by the authenticated user, repositories where the authenticated user is a collaborator, and repositories that the authenticated user has access to through an organization membership.
