@@ -13,11 +13,11 @@ This includes repositories owned by the authenticated user, repositories where t
 
 There are three values that can be passed into the `repositories` method: `type`, `sort` and `direction`
 
-| Parameters    | Default   |
-| ------------- |-----------| 
-| type          | owner     |
-| sort          | full_name | 
-| direction     | asc       |
+| Parameters    | Default     | Possible Values                              |
+| ------------- |-------------| -------------------------------------------- |
+| type          | `owner`     | `all`, `owner`, `public`, `private`, `member`
+| sort          | `full_name` | `created`, `updated`, `pushed`, `full_name`
+| direction     | `asc`       | `asc`, `desc`
 
 > See https://developer.github.com/v3/repos/#list-your-repositories for possible values and additional information 
 
