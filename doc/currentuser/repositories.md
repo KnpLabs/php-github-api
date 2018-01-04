@@ -11,6 +11,16 @@ $repositories = $client->currentUser()->repositories();
 
 This includes repositories owned by the authenticated user, repositories where the authenticated user is a collaborator, and repositories that the authenticated user has access to through an organization membership.
 
+There are three values that can be passed into the `repositories` method: `type`, `sort` and `direction`
+
+| Parameters    | Default   |
+| ------------- |-----------| 
+| type          | owner     |
+| sort          | full_name | 
+| direction     | asc       |
+
+> See https://developer.github.com/v3/repos/#list-your-repositories for possible values and additional information 
+
 #### Code Example:
 
 ```php
