@@ -177,16 +177,17 @@ class Repo extends AbstractApi
      *
      * @link http://developer.github.com/v3/repos/
      *
-     * @param string      $name         name of the repository
-     * @param string      $description  repository description
-     * @param string      $homepage     homepage url
-     * @param bool        $public       `true` for public, `false` for private
-     * @param null|string $organization username of organization if applicable
-     * @param bool        $hasIssues    `true` to enable issues for this repository, `false` to disable them
-     * @param bool        $hasWiki      `true` to enable the wiki for this repository, `false` to disable it
-     * @param bool        $hasDownloads `true` to enable downloads for this repository, `false` to disable them
-     * @param int         $teamId       The id of the team that will be granted access to this repository. This is only valid when creating a repo in an organization.
-     * @param bool        $autoInit     `true` to create an initial commit with empty README, `false` for no initial commit
+     * @param string      $name             name of the repository
+     * @param string      $description      repository description
+     * @param string      $homepage         homepage url
+     * @param bool        $public           `true` for public, `false` for private
+     * @param null|string $organization     username of organization if applicable
+     * @param bool        $hasIssues        `true` to enable issues for this repository, `false` to disable them
+     * @param bool        $hasWiki          `true` to enable the wiki for this repository, `false` to disable it
+     * @param bool        $hasDownloads     `true` to enable downloads for this repository, `false` to disable them
+     * @param int         $teamId           The id of the team that will be granted access to this repository. This is only valid when creating a repo in an organization.
+     * @param bool        $autoInit         `true` to create an initial commit with empty README, `false` for no initial commit
+     * @param string      $licenseTemplate  Desired LICENSE template to apply. Use the name of the template without the extension. For example, "mit" or "mozilla".
      *
      * @return array returns repository data
      */
@@ -200,19 +201,21 @@ class Repo extends AbstractApi
         $hasWiki = false,
         $hasDownloads = false,
         $teamId = null,
-        $autoInit = false
+        $autoInit = false,
+        $licenseTemplate = 'mit'
     ) {
         $path = null !== $organization ? '/orgs/'.$organization.'/repos' : '/user/repos';
 
         $parameters = array(
-            'name'          => $name,
-            'description'   => $description,
-            'homepage'      => $homepage,
-            'private'       => !$public,
-            'has_issues'    => $hasIssues,
-            'has_wiki'      => $hasWiki,
-            'has_downloads' => $hasDownloads,
-            'auto_init'     => $autoInit
+            'name'              => $name,
+            'description'       => $description,
+            'homepage'          => $homepage,
+            'private'           => !$public,
+            'has_issues'        => $hasIssues,
+            'has_wiki'          => $hasWiki,
+            'has_downloads'     => $hasDownloads,
+            'auto_init'         => $autoInit,
+            'license_template'  => $licenseTemplate
         );
 
         if ($organization && $teamId) {
