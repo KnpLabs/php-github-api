@@ -38,10 +38,10 @@ Returns an array of information about the issue.
 > Requires [authentication](security.md).
 
 ```php
-$client->api('issue')->create('KnpLabs', 'php-github-api', array('title' => 'The issue title', 'body' => 'The issue body'));
+$client->api('issue')->create('KnpLabs', 'php-github-api-example', array('title' => 'The issue title', 'body' => 'The issue body'));
 ```
 
-Creates a new issue in the repo "php-github-api" of the user "KnpLabs". The issue is assigned to the authenticated user.
+Creates a new issue in the repo "php-github-api-example" (the repository in this example does not exist) of the user "KnpLabs". The issue is assigned to the authenticated user.
 Returns an array of information about the issue.
 
 ### Close an issue
