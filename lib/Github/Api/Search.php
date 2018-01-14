@@ -37,6 +37,8 @@ class Search extends AbstractApi
      * @param string $q     the filter
      * @param string $sort  the sort field
      * @param string $order asc/desc
+     * @param int $page paginator page
+     * @param int $per_page Number of items per page, defaults to 100 Github API limit
      *
      * @return array list of issues found
      */
@@ -56,9 +58,9 @@ class Search extends AbstractApi
      *
      * @return array list of code found
      */
-    public function code($q, $sort = 'updated', $order = 'desc')
+    public function code($q, $sort = 'updated', $order = 'desc', $page = 1, $per_page = 100)
     {
-        return $this->get('/search/code', ['q' => $q, 'sort' => $sort, 'order' => $order]);
+        return $this->get('/search/code', array('q' => $q, 'sort' => $sort, 'order' => $order, 'page' => $page, 'per_page' => $per_page));
     }
 
     /**

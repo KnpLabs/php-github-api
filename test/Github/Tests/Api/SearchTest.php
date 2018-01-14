@@ -103,7 +103,7 @@ class SearchTest extends TestCase
             ->method('get')
             ->with(
                 '/search/code',
-                ['q' => 'query text', 'sort' => 'updated', 'order' => 'desc']
+                array('q' => 'query text', 'sort' => 'updated', 'order' => 'desc', 'page' => 1, 'per_page' => 100)
             )
             ->will($this->returnValue($expectedArray));
 
