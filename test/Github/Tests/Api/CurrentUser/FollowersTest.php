@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
@@ -9,10 +9,10 @@ class FollowersTest extends TestCase
      */
     public function shouldGetFollowers()
     {
-        $expectedValue = array(
-            array('login' => 'l3l0'),
-            array('login' => 'cordoval')
-        );
+        $expectedValue = [
+            ['login' => 'l3l0'],
+            ['login' => 'cordoval']
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -65,10 +65,7 @@ class FollowersTest extends TestCase
         $this->assertNull($api->unfollow('l3l0'));
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\CurrentUser\Followers::class;
     }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\HttpClient\Message;
 
@@ -8,8 +8,6 @@ use Psr\Http\Message\ResponseInterface;
 class ResponseMediator
 {
     /**
-     * @param ResponseInterface $response
-     *
      * @return array|string
      */
     public static function getContent(ResponseInterface $response)
@@ -26,8 +24,6 @@ class ResponseMediator
     }
 
     /**
-     * @param ResponseInterface $response
-     *
      * @return array|null
      */
     public static function getPagination(ResponseInterface $response)
@@ -37,7 +33,7 @@ class ResponseMediator
         }
 
         $header = self::getHeader($response, 'Link');
-        $pagination = array();
+        $pagination = [];
         foreach (explode(',', $header) as $link) {
             preg_match('/<(.*)>; rel="(.*)"/i', trim($link, ','), $match);
 
@@ -50,8 +46,6 @@ class ResponseMediator
     }
 
     /**
-     * @param ResponseInterface $response
-     *
      * @return null|string
      */
     public static function getApiLimit(ResponseInterface $response)
@@ -67,12 +61,10 @@ class ResponseMediator
     
     /**
      * Get the value for a single header
-     * @param ResponseInterface $response
-     * @param string $name
      *
      * @return string|null
      */
-    public static function getHeader(ResponseInterface $response, $name)
+    public static function getHeader(ResponseInterface $response, string $name)
     {
         $headers = $response->getHeader($name);
 

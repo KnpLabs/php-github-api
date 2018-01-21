@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\Project;
 
@@ -24,46 +24,46 @@ class Columns extends AbstractApi
         return $this;
     }
 
-    public function all($projectId, array $params = array())
+    public function all($projectId, array $params = [])
     {
-        return $this->get('/projects/' . rawurlencode($projectId) . '/columns', array_merge(array('page' => 1), $params));
+        return $this->get('/projects/' . rawurlencode((string) $projectId) . '/columns', array_merge(['page' => 1], $params));
     }
 
     public function show($id)
     {
-        return $this->get('/projects/columns/'.rawurlencode($id));
+        return $this->get('/projects/columns/'.rawurlencode((string) $id));
     }
 
     public function create($projectId, array $params)
     {
         if (!isset($params['name'])) {
-            throw new MissingArgumentException(array('name'));
+            throw new MissingArgumentException(['name']);
         }
 
-        return $this->post('/projects/' . rawurlencode($projectId) . '/columns', $params);
+        return $this->post('/projects/' . rawurlencode((string) $projectId) . '/columns', $params);
     }
 
     public function update($id, array $params)
     {
         if (!isset($params['name'])) {
-            throw new MissingArgumentException(array('name'));
+            throw new MissingArgumentException(['name']);
         }
 
-        return $this->patch('/projects/columns/' . rawurlencode($id), $params);
+        return $this->patch('/projects/columns/' . rawurlencode((string) $id), $params);
     }
 
     public function deleteColumn($id)
     {
-        return $this->delete('/projects/columns/'.rawurlencode($id));
+        return $this->delete('/projects/columns/'.rawurlencode((string) $id));
     }
 
     public function move($id, array $params)
     {
         if (!isset($params['position'])) {
-            throw new MissingArgumentException(array('position'));
+            throw new MissingArgumentException(['position']);
         }
 
-        return $this->post('/projects/columns/' . rawurlencode($id) . '/moves', $params);
+        return $this->post('/projects/columns/' . rawurlencode((string) $id) . '/moves', $params);
     }
 
     public function cards()

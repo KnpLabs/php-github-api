@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Repository;
 
@@ -11,7 +11,7 @@ class CollaboratorsTest extends TestCase
      */
     public function shouldGetAllRepositoryCollaborators()
     {
-        $expectedValue = array(array('username' => 'l3l0'));
+        $expectedValue = [['username' => 'l3l0']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -70,10 +70,7 @@ class CollaboratorsTest extends TestCase
         $this->assertEquals($expectedValue, $api->remove('KnpLabs', 'php-github-api', 'l3l0'));
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Repository\Collaborators::class;
     }

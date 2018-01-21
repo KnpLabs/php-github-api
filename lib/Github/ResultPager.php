@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github;
 
@@ -38,8 +38,6 @@ class ResultPager implements ResultPagerInterface
      * $client = new \Github\Client();
      * $api = $client->api('someApi');
      * $pager = new \Github\ResultPager($client);
-     *
-     * @param \Github\Client $client
      */
     public function __construct(Client $client)
     {
@@ -57,7 +55,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetch(ApiInterface $api, $method, array $parameters = array())
+    public function fetch(ApiInterface $api, string $method, array $parameters = [])
     {
         $result = $this->callApi($api, $method, $parameters);
         $this->postFetch();
@@ -68,7 +66,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetchAll(ApiInterface $api, $method, array $parameters = array())
+    public function fetchAll(ApiInterface $api, string $method, array $parameters = []): array
     {
         $isSearch = $api instanceof Search;
 
@@ -82,7 +80,7 @@ class ResultPager implements ResultPagerInterface
         $this->postFetch();
 
         if ($isSearch) {
-            $result = isset($result['items']) ? $result['items'] : $result;
+            $result = $result['items'] ?? $result;
         }
 
         while ($this->hasNext()) {
@@ -112,7 +110,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function hasNext()
+    public function hasNext(): bool
     {
         return $this->has('next');
     }
@@ -120,7 +118,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetchNext()
+    public function fetchNext(): array
     {
         return $this->get('next');
     }
@@ -128,7 +126,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPrevious()
+    public function hasPrevious(): bool
     {
         return $this->has('prev');
     }
@@ -136,7 +134,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetchPrevious()
+    public function fetchPrevious(): array
     {
         return $this->get('prev');
     }
@@ -144,7 +142,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetchFirst()
+    public function fetchFirst(): array
     {
         return $this->get('first');
     }
@@ -152,7 +150,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetchLast()
+    public function fetchLast(): array
     {
         return $this->get('last');
     }
@@ -179,14 +177,10 @@ class ResultPager implements ResultPagerInterface
     }
 
     /**
-     * @param ApiInterface $api
-     * @param $method
-     * @param array $parameters
-     *
      * @return mixed
      */
     protected function callApi(ApiInterface $api, $method, array $parameters)
     {
-        return call_user_func_array(array($api, $method), $parameters);
+        return call_user_func_array([$api, $method], $parameters);
     }
 }

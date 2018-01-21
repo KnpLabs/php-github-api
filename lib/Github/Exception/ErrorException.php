@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Exception;
 
@@ -7,6 +7,6 @@ namespace Github\Exception;
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
-class ErrorException extends \ErrorException implements ExceptionInterface
+class ErrorException extends \Exception implements ExceptionInterface
 {
 }

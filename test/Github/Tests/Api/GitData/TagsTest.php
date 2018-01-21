@@ -1,6 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
+
+use Github\Api\GitData\Tags;
+use PHPUnit_Framework_MockObject_MockObject;
 
 class TagsTest extends TestCase
 {
@@ -9,15 +12,16 @@ class TagsTest extends TestCase
      */
     public function shouldShowTagUsingSha()
     {
-        $expectedValue = array('sha' => '123', 'comitter');
+        $expectedValue = ['sha' => '123', 'comitter'];
 
+        /** @var Tags|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
             ->with('/repos/KnpLabs/php-github-api/git/tags/123')
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 123));
+        $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', '123'));
     }
 
     /**
@@ -25,8 +29,9 @@ class TagsTest extends TestCase
      */
     public function shouldGetAllTags()
     {
-        $expectedValue = array(array('sha' => '123', 'tagger'));
+        $expectedValue = [['sha' => '123', 'tagger']];
 
+        /** @var Tags|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -41,19 +46,20 @@ class TagsTest extends TestCase
      */
     public function shouldCreateTag()
     {
-        $expectedValue = array('sha' => '123', 'comitter');
-        $data = array(
+        $expectedValue = ['sha' => '123', 'comitter'];
+        $data = [
             'message' => 'some message',
             'tag' => 'v2.2',
             'object' => 'test',
             'type' => 'unsigned',
-            'tagger' => array(
+            'tagger' => [
                 'name' => 'l3l0',
                 'email' => 'leszek.prabucki@gmail.com',
                 'date' => date('Y-m-d H:i:s')
-            )
-        );
+            ]
+        ];
 
+        /** @var Tags|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
@@ -69,17 +75,18 @@ class TagsTest extends TestCase
      */
     public function shouldNotCreateTagWithoutMessageParam()
     {
-        $data = array(
+        $data = [
             'tag' => 'v2.2',
             'object' => 'test',
             'type' => 'unsigned',
-            'tagger' => array(
+            'tagger' => [
                 'name' => 'l3l0',
                 'email' => 'leszek.prabucki@gmail.com',
                 'date' => date('Y-m-d H:i:s')
-            )
-        );
+            ]
+        ];
 
+        /** @var Tags|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -93,13 +100,14 @@ class TagsTest extends TestCase
      */
     public function shouldNotCreateTagWithoutTaggerParam()
     {
-        $data = array(
+        $data = [
             'message' => 'some message',
             'tag' => 'v2.2',
             'object' => 'test',
             'type' => 'unsigned',
-        );
+        ];
 
+        /** @var Tags|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -113,17 +121,18 @@ class TagsTest extends TestCase
      */
     public function shouldNotCreateTagWithoutTaggerNameParam()
     {
-        $data = array(
+        $data = [
             'message' => 'some message',
             'tag' => 'v2.2',
             'object' => 'test',
             'type' => 'unsigned',
-            'tagger' => array(
+            'tagger' => [
                 'email' => 'leszek.prabucki@gmail.com',
                 'date' => date('Y-m-d H:i:s')
-            )
-        );
+            ]
+        ];
 
+        /** @var Tags|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -137,17 +146,18 @@ class TagsTest extends TestCase
      */
     public function shouldNotCreateTagWithoutTaggerEmailParam()
     {
-        $data = array(
+        $data = [
             'message' => 'some message',
             'tag' => 'v2.2',
             'object' => 'test',
             'type' => 'unsigned',
-            'tagger' => array(
+            'tagger' => [
                 'name' => 'l3l0',
                 'date' => date('Y-m-d H:i:s')
-            )
-        );
+            ]
+        ];
 
+        /** @var Tags|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -161,17 +171,18 @@ class TagsTest extends TestCase
      */
     public function shouldNotCreateTagWithoutTaggerDateParam()
     {
-        $data = array(
+        $data = [
             'message' => 'some message',
             'tag' => 'v2.2',
             'object' => 'test',
             'type' => 'unsigned',
-            'tagger' => array(
+            'tagger' => [
                 'name' => 'l3l0',
                 'email' => 'leszek.prabucki@gmail.com',
-            )
-        );
+            ]
+        ];
 
+        /** @var Tags|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -185,17 +196,18 @@ class TagsTest extends TestCase
      */
     public function shouldNotCreateTagWithoutTagParam()
     {
-        $data = array(
+        $data = [
             'message' => 'some message',
             'object' => 'test',
             'type' => 'unsigned',
-            'tagger' => array(
+            'tagger' => [
                 'name' => 'l3l0',
                 'email' => 'leszek.prabucki@gmail.com',
                 'date' => date('Y-m-d H:i:s')
-            )
-        );
+            ]
+        ];
 
+        /** @var Tags|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -209,17 +221,18 @@ class TagsTest extends TestCase
      */
     public function shouldNotCreateTagWithoutObjectParam()
     {
-        $data = array(
+        $data = [
             'message' => 'some message',
             'tag' => 'v2.2',
             'type' => 'unsigned',
-            'tagger' => array(
+            'tagger' => [
                 'name' => 'l3l0',
                 'email' => 'leszek.prabucki@gmail.com',
                 'date' => date('Y-m-d H:i:s')
-            )
-        );
+            ]
+        ];
 
+        /** @var Tags|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -233,17 +246,18 @@ class TagsTest extends TestCase
      */
     public function shouldNotCreateTagWithoutTypeParam()
     {
-        $data = array(
+        $data = [
             'message' => 'some message',
             'tag' => 'v2.2',
             'object' => 'test',
-            'tagger' => array(
+            'tagger' => [
                 'name' => 'l3l0',
                 'email' => 'leszek.prabucki@gmail.com',
                 'date' => date('Y-m-d H:i:s')
-            )
-        );
+            ]
+        ];
 
+        /** @var Tags|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -251,11 +265,8 @@ class TagsTest extends TestCase
         $api->create('KnpLabs', 'php-github-api', $data);
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
-        return \Github\Api\GitData\Tags::class;
+        return Tags::class;
     }
 }

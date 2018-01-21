@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api;
 
@@ -16,42 +16,27 @@ use Github\Api\GitData\Trees;
  */
 class GitData extends AbstractApi
 {
-    /**
-     * @return Blobs
-     */
-    public function blobs()
+    public function blobs(): Blobs
     {
         return new Blobs($this->client);
     }
 
-    /**
-     * @return Commits
-     */
-    public function commits()
+    public function commits(): Commits
     {
         return new Commits($this->client);
     }
 
-    /**
-     * @return References
-     */
-    public function references()
+    public function references(): References
     {
         return new References($this->client);
     }
 
-    /**
-     * @return Tags
-     */
-    public function tags()
+    public function tags(): Tags
     {
         return new Tags($this->client);
     }
 
-    /**
-     * @return Trees
-     */
-    public function trees()
+    public function trees(): Trees
     {
         return new Trees($this->client);
     }

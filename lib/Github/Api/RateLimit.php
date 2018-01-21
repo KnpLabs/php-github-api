@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api;
 
@@ -12,10 +12,8 @@ class RateLimit extends AbstractApi
 {
     /**
      * Get rate limits
-     *
-     * @return array
      */
-    public function getRateLimits()
+    public function getRateLimits(): array
     {
         return $this->get('/rate_limit');
     }
@@ -25,7 +23,7 @@ class RateLimit extends AbstractApi
      *
      * @return integer
      */
-    public function getCoreLimit()
+    public function getCoreLimit(): int
     {
         $response = $this->getRateLimits();
 
@@ -37,7 +35,7 @@ class RateLimit extends AbstractApi
      *
      * @return integer
      */
-    public function getSearchLimit()
+    public function getSearchLimit(): int
     {
         $response = $this->getRateLimits();
 

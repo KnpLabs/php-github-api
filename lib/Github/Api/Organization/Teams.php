@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\Organization;
 
@@ -22,9 +22,9 @@ class Teams extends AbstractApi
             throw new MissingArgumentException('name');
         }
         if (isset($params['repo_names']) && !is_array($params['repo_names'])) {
-            $params['repo_names'] = array($params['repo_names']);
+            $params['repo_names'] = [$params['repo_names']];
         }
-        if (isset($params['permission']) && !in_array($params['permission'], array('pull', 'push', 'admin'))) {
+        if (isset($params['permission']) && !in_array($params['permission'], ['pull', 'push', 'admin'])) {
             $params['permission'] = 'pull';
         }
 
@@ -41,7 +41,7 @@ class Teams extends AbstractApi
         if (!isset($params['name'])) {
             throw new MissingArgumentException('name');
         }
-        if (isset($params['permission']) && !in_array($params['permission'], array('pull', 'push', 'admin'))) {
+        if (isset($params['permission']) && !in_array($params['permission'], ['pull', 'push', 'admin'])) {
             $params['permission'] = 'pull';
         }
 
@@ -83,9 +83,9 @@ class Teams extends AbstractApi
         return $this->get('/teams/'.rawurlencode($team).'/repos/'.rawurlencode($organization).'/'.rawurlencode($repository));
     }
 
-    public function addRepository($team, $organization, $repository, $params = array())
+    public function addRepository($team, $organization, $repository, $params = [])
     {
-        if (isset($params['permission']) && !in_array($params['permission'], array('pull', 'push', 'admin'))) {
+        if (isset($params['permission']) && !in_array($params['permission'], ['pull', 'push', 'admin'])) {
             $params['permission'] = 'pull';
         }
 

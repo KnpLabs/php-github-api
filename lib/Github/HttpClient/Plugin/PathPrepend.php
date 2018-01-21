@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\HttpClient\Plugin;
 
@@ -14,10 +14,7 @@ class PathPrepend implements Plugin
 {
     private $path;
 
-    /**
-     * @param string $path
-     */
-    public function __construct($path)
+    public function __construct(string $path)
     {
         $this->path = $path;
     }

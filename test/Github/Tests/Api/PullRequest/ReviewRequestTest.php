@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\PullRequest;
 
@@ -55,10 +55,7 @@ class ReviewRequestTest extends TestCase
         $api->remove('octocat', 'Hello-World', 12, ['testuser']);
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return ReviewRequest::class;
     }

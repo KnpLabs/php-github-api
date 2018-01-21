@@ -1,6 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
+
+use Github\Api\CurrentUser;
+use PHPUnit_Framework_MockObject_MockObject;
 
 class CurrentUserTest extends TestCase
 {
@@ -9,8 +12,9 @@ class CurrentUserTest extends TestCase
      */
     public function shouldShowCurrentUser()
     {
-        $expectedArray = array('id' => 1, 'username' => 'l3l0');
+        $expectedArray = ['id' => 1, 'username' => 'l3l0'];
 
+        /** @var CurrentUser|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -25,15 +29,16 @@ class CurrentUserTest extends TestCase
      */
     public function shouldUpdateCurrentUserData()
     {
-        $expectedArray = array('id' => 1, 'username' => 'l3l0');
+        $expectedArray = ['id' => 1, 'username' => 'l3l0'];
 
+        /** @var CurrentUser|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
-            ->with('/user', array('value' => 'toChange'))
+            ->with('/user', ['value' => 'toChange'])
             ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($expectedArray, $api->update(array('value' => 'toChange')));
+        $this->assertEquals($expectedArray, $api->update(['value' => 'toChange']));
     }
 
     /**
@@ -41,12 +46,13 @@ class CurrentUserTest extends TestCase
      */
     public function shouldGetUserFollowers()
     {
-        $expectedArray = array(array('id' => 1, 'username' => 'l3l0test'));
+        $expectedArray = [['id' => 1, 'username' => 'l3l0test']];
 
+        /** @var CurrentUser|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/user/followers', array('page' => 1))
+            ->with('/user/followers', ['page' => 1])
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->followers(1));
@@ -57,15 +63,16 @@ class CurrentUserTest extends TestCase
      */
     public function shouldGetIssuesAssignedToUser()
     {
-        $expectedArray = array(array('id' => 1, 'title' => 'issues'));
+        $expectedArray = [['id' => 1, 'title' => 'issues']];
 
+        /** @var CurrentUser|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/issues', array('page' => 1, 'some' => 'param'))
+            ->with('/issues', ['page' => 1, 'some' => 'param'])
             ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($expectedArray, $api->issues(array('some' => 'param')));
+        $this->assertEquals($expectedArray, $api->issues(['some' => 'param']));
     }
 
     /**
@@ -73,12 +80,13 @@ class CurrentUserTest extends TestCase
      */
     public function shouldGetWatchedRepositories()
     {
-        $expectedArray = array(array('id' => 1, 'name' => 'l3l0repo'));
+        $expectedArray = [['id' => 1, 'name' => 'l3l0repo']];
 
+        /** @var CurrentUser|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/user/watched', array('page' => 1))
+            ->with('/user/watched', ['page' => 1])
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->watched(1));
@@ -91,6 +99,7 @@ class CurrentUserTest extends TestCase
     {
         $result = ['installation1', 'installation2'];
 
+        /** @var CurrentUser|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -105,15 +114,16 @@ class CurrentUserTest extends TestCase
      */
     public function shouldGetRepositoriesByInstallation()
     {
-        $expectedArray = array(array('id' => 1, 'name' => 'l3l0repo'));
+        $expectedArray = [['id' => 1, 'name' => 'l3l0repo']];
 
+        /** @var CurrentUser|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/user/installations/42/repositories', array('page' => 1))
+            ->with('/user/installations/42/repositories', ['page' => 1])
             ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($expectedArray, $api->repositoriesByInstallation(42));
+        $this->assertEquals($expectedArray, $api->repositoriesByInstallation('42'));
     }
 
     /**
@@ -121,6 +131,7 @@ class CurrentUserTest extends TestCase
      */
     public function shouldGetDeployKeysApiObject()
     {
+        /** @var CurrentUser|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
 
         $this->assertInstanceOf(\Github\Api\CurrentUser\PublicKeys::class, $api->keys());
@@ -131,6 +142,7 @@ class CurrentUserTest extends TestCase
      */
     public function shouldGetEmailsApiObject()
     {
+        /** @var CurrentUser|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
 
         $this->assertInstanceOf(\Github\Api\CurrentUser\Emails::class, $api->emails());
@@ -141,6 +153,7 @@ class CurrentUserTest extends TestCase
      */
     public function shouldGetFollowersApiObject()
     {
+        /** @var CurrentUser|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
 
         $this->assertInstanceOf(\Github\Api\CurrentUser\Followers::class, $api->follow());
@@ -151,6 +164,7 @@ class CurrentUserTest extends TestCase
      */
     public function shouldGetNotificationsApiObject()
     {
+        /** @var CurrentUser|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
 
         $this->assertInstanceOf(\Github\Api\CurrentUser\Notifications::class, $api->notifications());
@@ -161,6 +175,7 @@ class CurrentUserTest extends TestCase
      */
     public function shouldGetWatchersApiObject()
     {
+        /** @var CurrentUser|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
 
         $this->assertInstanceOf(\Github\Api\CurrentUser\Watchers::class, $api->watchers());
@@ -171,16 +186,14 @@ class CurrentUserTest extends TestCase
      */
     public function shouldGetStarredApiObject()
     {
+        /** @var CurrentUser|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
 
         $this->assertInstanceOf(\Github\Api\CurrentUser\Starring::class, $api->starring());
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
-        return \Github\Api\CurrentUser::class;
+        return CurrentUser::class;
     }
 }

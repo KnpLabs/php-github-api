@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
@@ -54,10 +54,7 @@ class GitDataTest extends TestCase
         $this->assertInstanceOf(\Github\Api\GitData\Trees::class, $api->trees());
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\GitData::class;
     }

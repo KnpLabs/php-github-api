@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\Repository;
 
@@ -18,13 +18,13 @@ class Hooks extends AbstractApi
 
     public function show($username, $repository, $id)
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/hooks/'.rawurlencode($id));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/hooks/'.rawurlencode((string) $id));
     }
 
     public function create($username, $repository, array $params)
     {
         if (!isset($params['name'], $params['config'])) {
-            throw new MissingArgumentException(array('name', 'config'));
+            throw new MissingArgumentException(['name', 'config']);
         }
 
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/hooks', $params);
@@ -33,24 +33,24 @@ class Hooks extends AbstractApi
     public function update($username, $repository, $id, array $params)
     {
         if (!isset($params['config'])) {
-            throw new MissingArgumentException(array('config'));
+            throw new MissingArgumentException(['config']);
         }
 
-        return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/hooks/'.rawurlencode($id), $params);
+        return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/hooks/'.rawurlencode((string) $id), $params);
     }
 
     public function ping($username, $repository, $id)
     {
-        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/hooks/'.rawurlencode($id).'/pings');
+        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/hooks/'.rawurlencode((string) $id).'/pings');
     }
 
     public function test($username, $repository, $id)
     {
-        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/hooks/'.rawurlencode($id).'/test');
+        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/hooks/'.rawurlencode((string) $id).'/test');
     }
 
     public function remove($username, $repository, $id)
     {
-        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/hooks/'.rawurlencode($id));
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/hooks/'.rawurlencode((string) $id));
     }
 }

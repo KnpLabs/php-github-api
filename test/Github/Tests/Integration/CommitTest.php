@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Integration;
 
@@ -16,7 +16,7 @@ class CommitTest extends TestCase
         $repo     = 'php-github-api';
         $branch   = 'master';
 
-        $commits = $this->client->api('repo')->commits()->all($username, $repo, array('sha' => $branch));
+        $commits = $this->client->api('repo')->commits()->all($username, $repo, ['sha' => $branch]);
         $commit  = array_pop($commits);
 
         $this->assertArrayHasKey('url', $commit);
@@ -53,7 +53,7 @@ class CommitTest extends TestCase
         $repo     = 'php-github-api';
         $branch   = 'master';
 
-        $commits = $this->client->api('repo')->commits()->all($username, $repo, array('sha' => $branch, 'path' => 'composer.json'));
+        $commits = $this->client->api('repo')->commits()->all($username, $repo, ['sha' => $branch, 'path' => 'composer.json']);
         $commit = array_pop($commits);
 
         $this->assertArrayHasKey('url', $commit);

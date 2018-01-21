@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\Issue;
 
@@ -10,13 +10,9 @@ class Assignees extends AbstractApi
     /**
      * List all the available assignees to which issues may be assigned.
      *
-     * @param string $username
-     * @param string $repository
-     * @param array  $parameters
-     *
-     * @return array
+     * @return array|null
      */
-    public function listAvailable($username, $repository, array $parameters = array())
+    public function listAvailable(string $username, string $repository, array $parameters = [])
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/assignees', $parameters);
     }
@@ -26,13 +22,9 @@ class Assignees extends AbstractApi
      *
      * @link https://developer.github.com/v3/issues/assignees/#check-assignee
      *
-     * @param string $username
-     * @param string $repository
-     * @param string $assignee
-     *
-     * @return array
+     * @return array|null
      */
-    public function check($username, $repository, $assignee)
+    public function check(string $username, string $repository, string $assignee)
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/assignees/' . rawurlencode($assignee));
     }
@@ -42,21 +34,18 @@ class Assignees extends AbstractApi
      *
      * @link https://developer.github.com/v3/issues/assignees/#add-assignees-to-an-issue
      *
-     * @param string $username
-     * @param string $repository
-     * @param string $issue
-     * @param array  $parameters
+     * @param string|int $issue
+     * @return string|null
      *
-     * @return string
      * @throws MissingArgumentException
      */
-    public function add($username, $repository, $issue, array $parameters)
+    public function add(string $username, string $repository, $issue, array $parameters)
     {
         if (!isset($parameters['assignees'])) {
             throw new MissingArgumentException('assignees');
         }
 
-        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/assignees', $parameters);
+        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode((string)$issue).'/assignees', $parameters);
     }
 
     /**
@@ -64,20 +53,17 @@ class Assignees extends AbstractApi
      *
      * @link https://developer.github.com/v3/issues/assignees/#remove-assignees-from-an-issue
      *
-     * @param string $username
-     * @param string $repository
-     * @param string $issue
-     * @param array  $parameters
+     * @param string|int $issue
+     * @return string|null
      *
-     * @return string
      * @throws MissingArgumentException
      */
-    public function remove($username, $repository, $issue, array $parameters)
+    public function remove(string $username, string $repository, $issue, array $parameters)
     {
         if (!isset($parameters['assignees'])) {
             throw new MissingArgumentException('assignees');
         }
 
-        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/assignees', $parameters);
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode((string) $issue).'/assignees', $parameters);
     }
 }

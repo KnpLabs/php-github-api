@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\PullRequest;
 
@@ -34,7 +34,7 @@ class Review extends AbstractApi
      *
      * @return array array of pull request reviews for the pull request
      */
-    public function all($username, $repository, $pullRequest, array $params = [])
+    public function all(string $username, string $repository, int $pullRequest, array $params = []): array
     {
         $parameters = array_merge([
             'page' => 1,
@@ -56,7 +56,7 @@ class Review extends AbstractApi
      *
      * @return array the pull request review
      */
-    public function show($username, $repository, $pullRequest, $id)
+    public function show(string $username, string $repository, int $pullRequest, int $id): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.$pullRequest.'/reviews/'.$id);
     }
@@ -73,7 +73,7 @@ class Review extends AbstractApi
      *
      * @return array|string
      */
-    public function remove($username, $repository, $pullRequest, $id)
+    public function remove(string $username, string $repository, int $pullRequest, int $id)
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.$pullRequest.'/reviews/'.$id);
     }
@@ -90,9 +90,9 @@ class Review extends AbstractApi
      *
      * @return array|string
      */
-    public function comments($username, $repository, $pullRequest, $id)
+    public function comments(string $username, string $repository, int $pullRequest, int $id)
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($pullRequest).'/reviews/'.rawurlencode($id).'/comments');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode((string) $pullRequest).'/reviews/'.rawurlencode((string) $id).'/comments');
     }
 
     /**
@@ -107,9 +107,9 @@ class Review extends AbstractApi
      *
      * @throws MissingArgumentException
      *
-     * @return array the pull request review
+     * @return array|null the pull request review
      */
-    public function create($username, $repository, $pullRequest, array $params = [])
+    public function create(string $username, string $repository, int $pullRequest, array $params = [])
     {
         if (!isset($params['event'])) {
             throw new MissingArgumentException('event');
@@ -137,7 +137,7 @@ class Review extends AbstractApi
      *
      * @return array the pull request review
      */
-    public function submit($username, $repository, $pullRequest, $id, array $params = [])
+    public function submit(string $username, string $repository, int $pullRequest, int $id, array $params = []): array
     {
         if (!isset($params['event'])) {
             throw new MissingArgumentException('event');
@@ -163,7 +163,7 @@ class Review extends AbstractApi
      *
      * @return array|string
      */
-    public function dismiss($username, $repository, $pullRequest, $id, $message)
+    public function dismiss(string $username, string $repository, int $pullRequest, int $id, string $message)
     {
         if (!is_string($message)) {
             throw new InvalidArgumentException(sprintf('"message" must be a valid string ("%s" given).', gettype($message)));

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\PullRequest;
 
@@ -19,15 +19,8 @@ class ReviewRequest extends AbstractApi
 
     /**
      * @link https://developer.github.com/v3/pulls/review_requests/#list-review-requests
-     *
-     * @param string $username
-     * @param string $repository
-     * @param int    $pullRequest
-     * @param array  $params
-     *
-     * @return array
      */
-    public function all($username, $repository, $pullRequest, array $params = [])
+    public function all(string $username, string $repository, int $pullRequest, array $params = []): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.$pullRequest.'/requested_reviewers', $params);
     }
@@ -35,14 +28,9 @@ class ReviewRequest extends AbstractApi
     /**
      * @link https://developer.github.com/v3/pulls/review_requests/#create-a-review-request
      *
-     * @param string $username
-     * @param string $repository
-     * @param int    $pullRequest
-     * @param array  $reviewers
-     *
-     * @return string
+     * @return string|null
      */
-    public function create($username, $repository, $pullRequest, array $reviewers)
+    public function create(string $username, string $repository, int $pullRequest, array $reviewers)
     {
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.$pullRequest.'/requested_reviewers', ['reviewers' => $reviewers]);
     }
@@ -50,14 +38,9 @@ class ReviewRequest extends AbstractApi
     /**
      * @link https://developer.github.com/v3/pulls/review_requests/#delete-a-review-request
      *
-     * @param string $username
-     * @param string $repository
-     * @param int    $pullRequest
-     * @param array  $reviewers
-     *
-     * @return string
+     * @return string|null
      */
-    public function remove($username, $repository, $pullRequest, array $reviewers)
+    public function remove(string $username, string $repository, int $pullRequest, array $reviewers)
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.$pullRequest.'/requested_reviewers', ['reviewers' => $reviewers]);
     }

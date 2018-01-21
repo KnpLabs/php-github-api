@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Repository;
 
@@ -11,10 +11,10 @@ class StatusesTest extends TestCase
      */
     public function shouldShowCommitStatuses()
     {
-        $expectedValue = array(
-            array('state' => 'success', 'context' => 'Travis'),
-            array('state' => 'pending', 'context' => 'Travis')
-        );
+        $expectedValue = [
+            ['state' => 'success', 'context' => 'Travis'],
+            ['state' => 'pending', 'context' => 'Travis']
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -30,21 +30,21 @@ class StatusesTest extends TestCase
      */
     public function shouldShowCombinedCommitStatuses()
     {
-        $expectedValue = array(
-            array(
+        $expectedValue = [
+            [
                 'state' => 'success',
-                'statuses' => array(
-                    array(
+                'statuses' => [
+                    [
                         'state' => 'success',
                         'context' => 'Travis'
-                    ),
-                    array(
+                    ],
+                    [
                         'state' => 'success',
                         'context' => 'Jenkins'
-                    )
-                )
-            )
-        );
+                    ]
+                ]
+            ]
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -61,7 +61,7 @@ class StatusesTest extends TestCase
      */
     public function shouldNotCreateWithoutStatus()
     {
-        $data = array();
+        $data = [];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -75,8 +75,8 @@ class StatusesTest extends TestCase
      */
     public function shouldCreateCommitStatus()
     {
-        $expectedValue = array('state' => 'success');
-        $data = array('state' => 'success');
+        $expectedValue = ['state' => 'success'];
+        $data = ['state' => 'success'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -87,10 +87,7 @@ class StatusesTest extends TestCase
         $this->assertEquals($expectedValue, $api->create('KnpLabs', 'php-github-api', 'commitSHA123456', $data));
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Repository\Statuses::class;
     }

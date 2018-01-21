@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api;
 
@@ -11,5 +11,5 @@ interface ApiInterface
 {
     public function getPerPage();
 
-    public function setPerPage($perPage);
+    public function setPerPage(int $perPage = null);
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Organization;
 
@@ -11,7 +11,7 @@ class MembersTest extends TestCase
      */
     public function shouldGetAllOrganizationMembers()
     {
-        $expectedValue = array(array('username' => 'l3l0'));
+        $expectedValue = [['username' => 'l3l0']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -27,7 +27,7 @@ class MembersTest extends TestCase
      */
     public function shouldGetPublicOrganizationMembers()
     {
-        $expectedValue = array(array('username' => 'l3l0'));
+        $expectedValue = [['username' => 'l3l0']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -123,7 +123,7 @@ class MembersTest extends TestCase
      */
     public function shouldShowOrganizationMember()
     {
-        $expectedValue = array('username' => 'l3l0');
+        $expectedValue = ['username' => 'l3l0'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -134,10 +134,7 @@ class MembersTest extends TestCase
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'l3l0'));
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Organization\Members::class;
     }

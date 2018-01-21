@@ -1,8 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Gist;
 
+use Github\Api\Gist\Comments;
 use Github\Tests\Api\TestCase;
+use PHPUnit_Framework_MockObject_MockObject;
 
 class CommentsTest extends TestCase
 {
@@ -11,8 +13,9 @@ class CommentsTest extends TestCase
      */
     public function shouldGetAllGistComments()
     {
-        $expectedValue = array(array('comment1data'), array('comment2data'));
+        $expectedValue = [['comment1data'], ['comment2data']];
 
+        /** @var Comments|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -27,15 +30,16 @@ class CommentsTest extends TestCase
      */
     public function shouldShowGistComment()
     {
-        $expectedValue = array('comment1');
+        $expectedValue = ['comment1'];
 
+        /** @var Comments|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
             ->with('/gists/123/comments/123')
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->show(123, 123));
+        $this->assertEquals($expectedValue, $api->show('123', '123'));
     }
 
     /**
@@ -43,12 +47,13 @@ class CommentsTest extends TestCase
      */
     public function shouldCreateGistComment()
     {
-        $expectedValue = array('comment1data');
+        $expectedValue = ['comment1data'];
 
+        /** @var Comments|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('/gists/123/comments', array('body' => 'Test body'))
+            ->with('/gists/123/comments', ['body' => 'Test body'])
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->create('123', 'Test body'));
@@ -59,16 +64,17 @@ class CommentsTest extends TestCase
      */
     public function shouldUpdateGistComment()
     {
-        $expectedValue = array('comment1data');
-        $data = array('body' => 'body test');
+        $expectedValue = ['comment1data'];
+        $data = ['body' => 'body test'];
 
+        /** @var Comments|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
             ->with('/gists/123/comments/233', $data)
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->update(123, 233, 'body test'));
+        $this->assertEquals($expectedValue, $api->update('123', '233', 'body test'));
     }
 
     /**
@@ -76,22 +82,20 @@ class CommentsTest extends TestCase
      */
     public function shouldRemoveComment()
     {
-        $expectedValue = array('someOutput');
+        $expectedValue = ['someOutput'];
 
+        /** @var Comments|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
             ->with('/gists/123/comments/233')
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->remove(123, 233));
+        $this->assertEquals($expectedValue, $api->remove('123', '233'));
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
-        return \Github\Api\Gist\Comments::class;
+        return Comments::class;
     }
 }

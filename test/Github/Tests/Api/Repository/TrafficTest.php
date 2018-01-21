@@ -1,5 +1,6 @@
-<?php
+<?php declare(strict_types=1);
 
+use Github\Api\Repository\Traffic;
 use Github\Tests\Api\TestCase;
 
 class TrafficTest extends TestCase
@@ -12,6 +13,7 @@ class TrafficTest extends TestCase
     {
         $expectedValue = json_encode(["referrer" => "github.com","count" => 112,"uniques" => 15]);
 
+        /** @var Traffic|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
 
         $api->expects($this->once())
@@ -28,6 +30,7 @@ class TrafficTest extends TestCase
     {
         $expectedValue = json_encode(["path" => "/knplabs/php-github-api","title" => "KnpLabs/php-github-api: A simple PHP GitHub API client, Object Oriented, tested and documented. For 5.5+.","count" => 203,"uniques" => 54]);
 
+        /** @var Traffic|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
 
         $api->expects($this->once())
@@ -46,6 +49,7 @@ class TrafficTest extends TestCase
 
         $api = $this->getApiMock();
 
+        /** @var Traffic|PHPUnit_Framework_MockObject_MockObject $api */
         $api->expects($this->once())
             ->method('get')
             ->with('/repos/knplabs/php-github-api/traffic/views?per=day')
@@ -60,6 +64,7 @@ class TrafficTest extends TestCase
     {
         $expectedValue = json_encode(["count" => 813,"uniques" => 61,"clones" => [["timestamp" => "2017-03-12T00:00:00Z","count" => 14,"uniques" => 8]]]);
 
+        /** @var Traffic|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
 
         $api->expects($this->once())
@@ -72,8 +77,8 @@ class TrafficTest extends TestCase
         $this->assertEquals($expectedValue, $result);
     }
 
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
-        return \Github\Api\Repository\Traffic::class;
+        return Traffic::class;
     }
 }

@@ -1,9 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\HttpClient;
 
 use Http\Client\Common\HttpMethodsClient;
 use Http\Client\Common\Plugin;
+use Http\Client\Common\Plugin\Cache\Generator\HeaderCacheKeyGenerator;
 use Http\Client\Common\PluginClient;
 use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
@@ -13,7 +14,6 @@ use Http\Message\MessageFactory;
 use Http\Message\RequestFactory;
 use Http\Message\StreamFactory;
 use Psr\Cache\CacheItemPoolInterface;
-use Http\Client\Common\Plugin\Cache\Generator\HeaderCacheKeyGenerator;
 
 /**
  * A builder that builds the API client.
@@ -73,11 +73,6 @@ class Builder
      */
     private $headers = [];
 
-    /**
-     * @param HttpClient     $httpClient
-     * @param RequestFactory $requestFactory
-     * @param StreamFactory  $streamFactory
-     */
     public function __construct(
         HttpClient $httpClient = null,
         RequestFactory $requestFactory = null,
@@ -88,10 +83,7 @@ class Builder
         $this->streamFactory = $streamFactory ?: StreamFactoryDiscovery::find();
     }
 
-    /**
-     * @return HttpMethodsClient
-     */
-    public function getHttpClient()
+    public function getHttpClient(): HttpMethodsClient
     {
         if ($this->httpClientModified) {
             $this->httpClientModified = false;
@@ -112,8 +104,6 @@ class Builder
 
     /**
      * Add a new plugin to the end of the plugin chain.
-     *
-     * @param Plugin $plugin
      */
     public function addPlugin(Plugin $plugin)
     {
@@ -123,10 +113,8 @@ class Builder
 
     /**
      * Remove a plugin by its fully qualified class name (FQCN).
-     *
-     * @param string $fqcn
      */
-    public function removePlugin($fqcn)
+    public function removePlugin(string $fqcn)
     {
         foreach ($this->plugins as $idx => $plugin) {
             if ($plugin instanceof $fqcn) {
@@ -147,9 +135,6 @@ class Builder
         $this->addPlugin(new Plugin\HeaderAppendPlugin($this->headers));
     }
 
-    /**
-     * @param array $headers
-     */
     public function addHeaders(array $headers)
     {
         $this->headers = array_merge($this->headers, $headers);
@@ -158,16 +143,12 @@ class Builder
         $this->addPlugin(new Plugin\HeaderAppendPlugin($this->headers));
     }
 
-    /**
-     * @param string $header
-     * @param string $headerValue
-     */
-    public function addHeaderValue($header, $headerValue)
+    public function addHeaderValue(string $header, string $headerValue)
     {
         if (!isset($this->headers[$header])) {
             $this->headers[$header] = $headerValue;
         } else {
-            $this->headers[$header] = array_merge((array)$this->headers[$header], array($headerValue));
+            $this->headers[$header] = array_merge((array)$this->headers[$header], [$headerValue]);
         }
 
         $this->removePlugin(Plugin\HeaderAppendPlugin::class);
@@ -176,9 +157,6 @@ class Builder
 
     /**
      * Add a cache plugin to cache responses locally.
-     *
-     * @param CacheItemPoolInterface $cachePool
-     * @param array                  $config
      */
     public function addCache(CacheItemPoolInterface $cachePool, array $config = [])
     {

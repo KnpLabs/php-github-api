@@ -1,6 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api;
+
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * A trait to make sure we add accept headers on all requests.
@@ -11,37 +13,37 @@ trait AcceptHeaderTrait
 {
     protected $acceptHeaderValue = null;
 
-    protected function get($path, array $parameters = array(), array $requestHeaders = array())
+    protected function get(string $path, array $parameters = [], array $requestHeaders = [])
     {
         return parent::get($path, $parameters, $this->mergeHeaders($requestHeaders));
     }
 
-    protected function head($path, array $parameters = array(), array $requestHeaders = array())
+    protected function head(string $path, array $parameters = [], array $requestHeaders = []): ResponseInterface
     {
         return parent::head($path, $parameters, $this->mergeHeaders($requestHeaders));
     }
 
-    protected function post($path, array $parameters = array(), array $requestHeaders = array())
+    protected function post(string $path, array $parameters = [], array $requestHeaders = [])
     {
         return parent::post($path, $parameters, $this->mergeHeaders($requestHeaders));
     }
 
-    protected function postRaw($path, $body, array $requestHeaders = array())
+    protected function postRaw(string $path, string $body, array $requestHeaders = [])
     {
         return parent::postRaw($path, $body, $this->mergeHeaders($requestHeaders));
     }
 
-    protected function patch($path, array $parameters = array(), array $requestHeaders = array())
+    protected function patch(string $path, array $parameters = [], array $requestHeaders = [])
     {
         return parent::patch($path, $parameters, $this->mergeHeaders($requestHeaders));
     }
 
-    protected function put($path, array $parameters = array(), array $requestHeaders = array())
+    protected function put(string $path, array $parameters = [], array $requestHeaders = [])
     {
         return parent::put($path, $parameters, $this->mergeHeaders($requestHeaders));
     }
 
-    protected function delete($path, array $parameters = array(), array $requestHeaders = array())
+    protected function delete(string $path, array $parameters = [], array $requestHeaders = [])
     {
         return parent::delete($path, $parameters, $this->mergeHeaders($requestHeaders));
     }
@@ -50,11 +52,11 @@ trait AcceptHeaderTrait
      * Append a new accept header on all requests
      * @return array
      */
-    private function mergeHeaders(array $headers = array())
+    private function mergeHeaders(array $headers = []): array
     {
-        $default = array();
+        $default = [];
         if ($this->acceptHeaderValue) {
-            $default = array('Accept' => $this->acceptHeaderValue);
+            $default = ['Accept' => $this->acceptHeaderValue];
         }
 
         return array_merge($default, $headers);

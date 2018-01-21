@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\Enterprise;
 
@@ -15,7 +15,7 @@ class ManagementConsole extends AbstractApi
      *
      * @return array array of configuration status information
      */
-    public function configcheck($hash)
+    public function configcheck(string $hash): array
     {
         return $this->getWithLicenseHash('/setup/api/configcheck', $hash);
     }
@@ -29,7 +29,7 @@ class ManagementConsole extends AbstractApi
      *
      * @return array array of settings
      */
-    public function settings($hash)
+    public function settings(string $hash): array
     {
         return $this->getWithLicenseHash('/setup/api/settings', $hash);
     }
@@ -43,7 +43,7 @@ class ManagementConsole extends AbstractApi
      *
      * @return array array of maintenance status information
      */
-    public function maintenance($hash)
+    public function maintenance(string $hash): array
     {
         return $this->getWithLicenseHash('/setup/api/maintenance', $hash);
     }
@@ -57,7 +57,7 @@ class ManagementConsole extends AbstractApi
      *
      * @return array array of authorized keys
      */
-    public function keys($hash)
+    public function keys(string $hash): array
     {
         return $this->getWithLicenseHash('/setup/api/settings/authorized-keys', $hash);
     }
@@ -70,8 +70,8 @@ class ManagementConsole extends AbstractApi
      *
      * @return array|string
      */
-    protected function getWithLicenseHash($uri, $hash)
+    protected function getWithLicenseHash(string $uri, string $hash)
     {
-        return $this->get($uri, array('license_md5' => rawurlencode($hash)));
+        return $this->get($uri, ['license_md5' => rawurlencode($hash)]);
     }
 }

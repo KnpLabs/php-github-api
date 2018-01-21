@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\Repository;
 
@@ -20,12 +20,10 @@ class Comments extends AbstractApi
      *
      * @link https://developer.github.com/v3/repos/comments/#custom-media-types
      * @param string|null $bodyType
-     *
-     * @return self
      */
-    public function configure($bodyType = null)
+    public function configure(string $bodyType = null): self
     {
-        if (!in_array($bodyType, array('raw', 'text', 'html'))) {
+        if (!in_array($bodyType, ['raw', 'text', 'html'])) {
             $bodyType = 'full';
         }
 
@@ -37,15 +35,15 @@ class Comments extends AbstractApi
     public function all($username, $repository, $sha = null)
     {
         if (null === $sha) {
-            return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/comments');
+            return $this->get('/repos/'.rawurlencode((string) $username).'/'.rawurlencode((string) $repository).'/comments');
         }
 
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/commits/'.rawurlencode($sha).'/comments');
+        return $this->get('/repos/'.rawurlencode((string) $username).'/'.rawurlencode((string) $repository).'/commits/'.rawurlencode((string) $sha).'/comments');
     }
 
     public function show($username, $repository, $comment)
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/comments/'.rawurlencode($comment));
+        return $this->get('/repos/'.rawurlencode((string) $username).'/'.rawurlencode((string) $repository).'/comments/'.rawurlencode((string) $comment));
     }
 
     public function create($username, $repository, $sha, array $params)
@@ -54,7 +52,7 @@ class Comments extends AbstractApi
             throw new MissingArgumentException('body');
         }
 
-        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/commits/'.rawurlencode($sha).'/comments', $params);
+        return $this->post('/repos/'.rawurlencode((string) $username).'/'.rawurlencode((string) $repository).'/commits/'.rawurlencode((string) $sha).'/comments', $params);
     }
 
     public function update($username, $repository, $comment, array $params)
@@ -63,11 +61,11 @@ class Comments extends AbstractApi
             throw new MissingArgumentException('body');
         }
 
-        return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/comments/'.rawurlencode($comment), $params);
+        return $this->patch('/repos/'.rawurlencode((string) $username).'/'.rawurlencode((string) $repository).'/comments/'.rawurlencode((string) $comment), $params);
     }
 
     public function remove($username, $repository, $comment)
     {
-        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/comments/'.rawurlencode($comment));
+        return $this->delete('/repos/'.rawurlencode((string) $username).'/'.rawurlencode((string) $repository).'/comments/'.rawurlencode((string) $comment));
     }
 }

@@ -1,8 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Repository;
 
+use Github\Api\Repository\Commits;
 use Github\Tests\Api\TestCase;
+use PHPUnit_Framework_MockObject_MockObject;
 
 class CommitsTest extends TestCase
 {
@@ -11,9 +13,10 @@ class CommitsTest extends TestCase
      */
     public function shouldGetAllRepositoryCommits()
     {
-        $expectedValue = array('commit' => array(), 'comitter');
-        $data = array('sha' => 'v3');
+        $expectedValue = ['commit' => [], 'comitter'];
+        $data = ['sha' => 'v3'];
 
+        /** @var Commits|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -28,8 +31,9 @@ class CommitsTest extends TestCase
      */
     public function shouldCompareTwoCommits()
     {
-        $expectedValue = array('someCompareChanges');
+        $expectedValue = ['someCompareChanges'];
 
+        /** @var Commits|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -44,22 +48,20 @@ class CommitsTest extends TestCase
      */
     public function shouldShowCommitUsingSha()
     {
-        $expectedValue = array('sha' => '123', 'comitter');
+        $expectedValue = ['sha' => '123', 'comitter'];
 
+        /** @var Commits|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
             ->with('/repos/KnpLabs/php-github-api/commits/123')
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 123));
+        $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', '123'));
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
-        return \Github\Api\Repository\Commits::class;
+        return Commits::class;
     }
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\GitData;
 
@@ -13,53 +13,32 @@ class References extends AbstractApi
 {
     /**
      * Get all references of a repository.
-     *
-     * @param string $username
-     * @param string $repository
-     *
-     * @return array
      */
-    public function all($username, $repository)
+    public function all(string $username, string $repository): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs');
     }
 
     /**
      * Get all branches of a repository.
-     *
-     * @param string $username
-     * @param string $repository
-     *
-     * @return array
      */
-    public function branches($username, $repository)
+    public function branches(string $username, string $repository): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs/heads');
     }
 
     /**
      * Get all tags of a repository.
-     *
-     * @param string $username
-     * @param string $repository
-     *
-     * @return array
      */
-    public function tags($username, $repository)
+    public function tags(string $username, string $repository): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs/tags');
     }
 
     /**
      * Show the reference of a repository.
-     *
-     * @param string $username
-     * @param string $repository
-     * @param string $reference
-     *
-     * @return array
      */
-    public function show($username, $repository, $reference)
+    public function show(string $username, string $repository, string $reference): array
     {
         $reference = $this->encodeReference($reference);
 
@@ -69,18 +48,12 @@ class References extends AbstractApi
     /**
      * Create a reference for a repository.
      *
-     * @param string $username
-     * @param string $repository
-     * @param array  $params
-     *
-     * @return array
-     *
      * @throws \Github\Exception\MissingArgumentException
      */
-    public function create($username, $repository, array $params)
+    public function create(string $username, string $repository, array $params): array
     {
         if (!isset($params['ref'], $params['sha'])) {
-            throw new MissingArgumentException(array('ref', 'sha'));
+            throw new MissingArgumentException(['ref', 'sha']);
         }
 
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs', $params);
@@ -89,16 +62,9 @@ class References extends AbstractApi
     /**
      * Update a reference for a repository.
      *
-     * @param string $username
-     * @param string $repository
-     * @param string $reference
-     * @param array  $params
-     *
-     * @return array
-     *
      * @throws \Github\Exception\MissingArgumentException
      */
-    public function update($username, $repository, $reference, array $params)
+    public function update(string $username, string $repository, string $reference, array $params): array
     {
         if (!isset($params['sha'])) {
             throw new MissingArgumentException('sha');
@@ -111,14 +77,8 @@ class References extends AbstractApi
 
     /**
      * Delete a reference of a repository.
-     *
-     * @param string $username
-     * @param string $repository
-     * @param string $reference
-     *
-     * @return array
      */
-    public function remove($username, $repository, $reference)
+    public function remove(string $username, string $repository, string $reference): array
     {
         $reference = $this->encodeReference($reference);
 
@@ -127,12 +87,8 @@ class References extends AbstractApi
 
     /**
      * Encode the raw reference.
-     *
-     * @param string $rawReference
-     *
-     * @return string
      */
-    private function encodeReference($rawReference)
+    private function encodeReference(string $rawReference): string
     {
         return implode('/', array_map('rawurlencode', explode('/', $rawReference)));
     }

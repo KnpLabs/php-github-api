@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\CurrentUser;
 
@@ -16,15 +16,13 @@ class Watchers extends AbstractApi
      *
      * @link https://developer.github.com/v3/activity/watching/
      *
-     * @param int $page
-     *
-     * @return array
+     * @return array|null
      */
-    public function all($page = 1)
+    public function all(int $page = 1)
     {
-        return $this->get('/user/subscriptions', array(
+        return $this->get('/user/subscriptions', [
             'page' => $page
-        ));
+        ]);
     }
 
     /**
@@ -35,9 +33,9 @@ class Watchers extends AbstractApi
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
      *
-     * @return array
+     * @return array|null
      */
-    public function check($username, $repository)
+    public function check(string $username, string $repository)
     {
         return $this->get('/user/subscriptions/'.rawurlencode($username).'/'.rawurlencode($repository));
     }
@@ -50,9 +48,9 @@ class Watchers extends AbstractApi
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
      *
-     * @return array
+     * @return array|null
      */
-    public function watch($username, $repository)
+    public function watch(string $username, string $repository)
     {
         return $this->put('/user/subscriptions/'.rawurlencode($username).'/'.rawurlencode($repository));
     }
@@ -65,9 +63,9 @@ class Watchers extends AbstractApi
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
      *
-     * @return array
+     * @return array|null
      */
-    public function unwatch($username, $repository)
+    public function unwatch(string $username, string $repository)
     {
         return $this->delete('/user/subscriptions/'.rawurlencode($username).'/'.rawurlencode($repository));
     }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\Gist;
 
@@ -18,12 +18,10 @@ class Comments extends AbstractApi
      *
      * @link https://developer.github.com/v3/gists/comments/#custom-media-types
      * @param string|null $bodyType
-     *
-     * @return self
      */
-    public function configure($bodyType = null)
+    public function configure(string $bodyType = null): self
     {
-        if (!in_array($bodyType, array('text', 'html', 'full'))) {
+        if (!in_array($bodyType, ['text', 'html', 'full'])) {
             $bodyType = 'raw';
         }
 
@@ -34,12 +32,8 @@ class Comments extends AbstractApi
 
     /**
      * Get all comments for a gist.
-     *
-     * @param string $gist
-     *
-     * @return array
      */
-    public function all($gist)
+    public function all(string $gist): array
     {
         return $this->get('/gists/'.rawurlencode($gist).'/comments');
     }
@@ -47,53 +41,38 @@ class Comments extends AbstractApi
     /**
      * Get a comment of a gist.
      *
-     * @param string $gist
-     * @param int    $comment
-     *
-     * @return array
+     * @return array|null
      */
-    public function show($gist, $comment)
+    public function show(string $gist, string $comment)
     {
-        return $this->get('/gists/'.rawurlencode($gist).'/comments/'.rawurlencode($comment));
+        return $this->get('/gists/'.rawurlencode($gist).'/comments/'.rawurlencode((string) $comment));
     }
 
     /**
      * Create a comment for gist.
-     *
-     * @param string $gist
-     * @param string $body
-     *
-     * @return array
      */
-    public function create($gist, $body)
+    public function create(string $gist, string $body): array
     {
-        return $this->post('/gists/'.rawurlencode($gist).'/comments', array('body' => $body));
+        return $this->post('/gists/'.rawurlencode($gist).'/comments', ['body' => $body]);
     }
 
     /**
      * Create a comment for a gist.
      *
-     * @param string $gist
-     * @param int    $comment_id
-     * @param string $body
-     *
-     * @return array
+     * @return array|null
      */
-    public function update($gist, $comment_id, $body)
+    public function update(string $gist, string $comment, string $body)
     {
-        return $this->patch('/gists/'.rawurlencode($gist).'/comments/'.rawurlencode($comment_id), array('body' => $body));
+        return $this->patch('/gists/'.rawurlencode($gist).'/comments/'.rawurlencode((string) $comment), ['body' => $body]);
     }
 
     /**
      * Delete a comment for a gist.
      *
-     * @param string $gist
-     * @param int    $comment
-     *
-     * @return array
+     * @return array|null
      */
-    public function remove($gist, $comment)
+    public function remove(string $gist, string $comment)
     {
-        return $this->delete('/gists/'.rawurlencode($gist).'/comments/'.rawurlencode($comment));
+        return $this->delete('/gists/'.rawurlencode($gist).'/comments/'.rawurlencode((string) $comment));
     }
 }

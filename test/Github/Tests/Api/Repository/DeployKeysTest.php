@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Repository;
 
@@ -11,7 +11,7 @@ class DeployKeysTest extends TestCase
      */
     public function shouldGetAllRepositoryDeployKeys()
     {
-        $expectedValue = array(array('name' => 'key'));
+        $expectedValue = [['name' => 'key']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -27,7 +27,7 @@ class DeployKeysTest extends TestCase
      */
     public function shouldShowDeployKey()
     {
-        $expectedValue = array('key' => 'somename');
+        $expectedValue = ['key' => 'somename'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -43,7 +43,7 @@ class DeployKeysTest extends TestCase
      */
     public function shouldRemoveDeployKey()
     {
-        $expectedValue = array('someOutput');
+        $expectedValue = ['someOutput'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -60,7 +60,7 @@ class DeployKeysTest extends TestCase
      */
     public function shouldNotCreateDeployKeyWithoutName()
     {
-        $data = array('config' => 'conf');
+        $data = ['config' => 'conf'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -75,7 +75,7 @@ class DeployKeysTest extends TestCase
      */
     public function shouldNotCreateDeployKeyWithoutColor()
     {
-        $data = array('name' => 'test');
+        $data = ['name' => 'test'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -89,8 +89,8 @@ class DeployKeysTest extends TestCase
      */
     public function shouldCreateDeployKey()
     {
-        $expectedValue = array('key' => 'somename');
-        $data = array('title' => 'test', 'key' => 'ssh-rsa 1231234232');
+        $expectedValue = ['key' => 'somename'];
+        $data = ['title' => 'test', 'key' => 'ssh-rsa 1231234232'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -107,7 +107,7 @@ class DeployKeysTest extends TestCase
      */
     public function shouldNotUpdateDeployKeyWithoutTitle()
     {
-        $data = array('key' => 'ssh-rsa 12323213');
+        $data = ['key' => 'ssh-rsa 12323213'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -122,7 +122,7 @@ class DeployKeysTest extends TestCase
      */
     public function shouldNotUpdateDeployKeyWithoutKey()
     {
-        $data = array('title' => 'test');
+        $data = ['title' => 'test'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -136,8 +136,8 @@ class DeployKeysTest extends TestCase
      */
     public function shouldUpdateDeployKey()
     {
-        $expectedValue = array('key' => 'somename');
-        $data = array('title' => 'test', 'key' => 'ssh-rsa 12312312321...');
+        $expectedValue = ['key' => 'somename'];
+        $data = ['title' => 'test', 'key' => 'ssh-rsa 12312312321...'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -148,10 +148,7 @@ class DeployKeysTest extends TestCase
         $this->assertEquals($expectedValue, $api->update('KnpLabs', 'php-github-api', 123, $data));
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Repository\DeployKeys::class;
     }

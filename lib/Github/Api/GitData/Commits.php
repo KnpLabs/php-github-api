@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\GitData;
 
@@ -13,14 +13,8 @@ class Commits extends AbstractApi
 {
     /**
      * Show a commit for a repository.
-     *
-     * @param string $username
-     * @param string $repository
-     * @param string $sha
-     *
-     * @return array
      */
-    public function show($username, $repository, $sha)
+    public function show(string $username, string $repository, string $sha): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/commits/'.rawurlencode($sha));
     }
@@ -28,18 +22,12 @@ class Commits extends AbstractApi
     /**
      * Create a commit for a repository.
      *
-     * @param string $username
-     * @param string $repository
-     * @param array  $params
-     *
-     * @return array
-     *
      * @throws \Github\Exception\MissingArgumentException
      */
-    public function create($username, $repository, array $params)
+    public function create(string $username, string $repository, array $params): array
     {
         if (!isset($params['message'], $params['tree'], $params['parents'])) {
-            throw new MissingArgumentException(array('message', 'tree', 'parents'));
+            throw new MissingArgumentException(['message', 'tree', 'parents']);
         }
 
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/commits', $params);

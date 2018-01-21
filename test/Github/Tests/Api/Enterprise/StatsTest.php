@@ -1,8 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Enterprise;
 
+use Github\Api\Enterprise\Stats;
 use Github\Tests\Api\TestCase;
+use PHPUnit_Framework_MockObject_MockObject;
 
 class StatsTest extends TestCase
 {
@@ -13,6 +15,7 @@ class StatsTest extends TestCase
     {
         $expectedArray = $this->getStatsData();
 
+        /** @var Stats|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -30,41 +33,37 @@ class StatsTest extends TestCase
     {
         $expectedArray = $this->getStatsData($type);
 
+        /** @var Stats|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
             ->with(sprintf('/enterprise/stats/%s', $type))
             ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($expectedArray, call_user_func(array($api, $type)));
+        $this->assertEquals($expectedArray, call_user_func([$api, $type]));
     }
 
-    /**
-     * @return array
-     */
-    public function getTypes()
+    public function getTypes(): array
     {
-        return array(
-            array('issues'),
-            array('hooks'),
-            array('milestones'),
-            array('orgs'),
-            array('comments'),
-            array('pages'),
-            array('users'),
-            array('gists'),
-            array('pulls'),
-            array('repos'),
-            array('all')
-        );
+        return [
+            ['issues'],
+            ['hooks'],
+            ['milestones'],
+            ['orgs'],
+            ['comments'],
+            ['pages'],
+            ['users'],
+            ['gists'],
+            ['pulls'],
+            ['repos'],
+            ['all']
+        ];
     }
 
     /**
-     * @param string $key
-     *
      * @return mixed
      */
-    protected function getStatsData($key = '')
+    protected function getStatsData(string $key = '')
     {
         $json = '{"repos":{"total_repos": 212, "root_repos": 194, "fork_repos": 18, "org_repos": 51,
         "total_pushes": 3082, "total_wikis": 15 }, "hooks": { "total_hooks": 27, "active_hooks": 23,
@@ -78,16 +77,15 @@ class StatsTest extends TestCase
         $stats = json_decode($json, true);
         if (is_null($key)) {
             return $stats;
-        } elseif (array_key_exists($key, $stats)) {
+        }
+
+        if (array_key_exists($key, $stats)) {
             return $stats[$key];
         }
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
-        return \Github\Api\Enterprise\Stats::class;
+        return Stats::class;
     }
 }

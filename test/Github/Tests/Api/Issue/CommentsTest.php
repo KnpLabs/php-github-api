@@ -1,8 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Issue;
 
+use Github\Api\Issue\Comments;
 use Github\Tests\Api\TestCase;
+use PHPUnit_Framework_MockObject_MockObject;
 
 class CommentsTest extends TestCase
 {
@@ -11,12 +13,13 @@ class CommentsTest extends TestCase
      */
     public function shouldGetAllIssueComments()
     {
-        $expectedValue = array(array('comment1data'), array('comment2data'));
+        $expectedValue = [['comment1data'], ['comment2data']];
 
+        /** @var Comments|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/issues/123/comments', array('page' => 1))
+            ->with('/repos/KnpLabs/php-github-api/issues/123/comments', ['page' => 1])
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', 123));
@@ -27,8 +30,9 @@ class CommentsTest extends TestCase
      */
     public function shouldShowIssueComment()
     {
-        $expectedValue = array('comment1');
+        $expectedValue = ['comment1'];
 
+        /** @var Comments|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -44,8 +48,9 @@ class CommentsTest extends TestCase
      */
     public function shouldNotCreateWithoutBody()
     {
-        $data = array();
+        $data = [];
 
+        /** @var Comments|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -58,9 +63,10 @@ class CommentsTest extends TestCase
      */
     public function shouldCreateIssueComment()
     {
-        $expectedValue = array('comment1data');
-        $data = array('body' => 'test body');
+        $expectedValue = ['comment1data'];
+        $data = ['body' => 'test body'];
 
+        /** @var Comments|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
@@ -76,8 +82,9 @@ class CommentsTest extends TestCase
      */
     public function shouldNotUpdateWithoutBody()
     {
-        $data = array('somedata');
+        $data = ['somedata'];
 
+        /** @var Comments|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('patch');
@@ -90,9 +97,10 @@ class CommentsTest extends TestCase
      */
     public function shouldUpdateIssueComment()
     {
-        $expectedValue = array('comment1data');
-        $data = array('body' => 'body test');
+        $expectedValue = ['comment1data'];
+        $data = ['body' => 'body test'];
 
+        /** @var Comments|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
@@ -107,8 +115,9 @@ class CommentsTest extends TestCase
      */
     public function shouldRemoveComment()
     {
-        $expectedValue = array('someOutput');
+        $expectedValue = ['someOutput'];
 
+        /** @var Comments|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
@@ -118,10 +127,7 @@ class CommentsTest extends TestCase
         $this->assertEquals($expectedValue, $api->remove('KnpLabs', 'php-github-api', 123));
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Issue\Comments::class;
     }

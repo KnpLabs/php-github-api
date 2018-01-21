@@ -1,6 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
+
+use Github\Api\GitData\Commits;
+use PHPUnit_Framework_MockObject_MockObject;
 
 class CommitsTest extends TestCase
 {
@@ -9,15 +12,16 @@ class CommitsTest extends TestCase
      */
     public function shouldShowCommitUsingSha()
     {
-        $expectedValue = array('sha' => '123', 'comitter');
+        $expectedValue = ['sha' => '123', 'comitter'];
 
+        /** @var Commits|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
             ->with('/repos/KnpLabs/php-github-api/git/commits/123')
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 123));
+        $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', '123'));
     }
 
     /**
@@ -25,9 +29,10 @@ class CommitsTest extends TestCase
      */
     public function shouldCreateCommit()
     {
-        $expectedValue = array('sha' => '123', 'comitter');
-        $data = array('message' => 'some message', 'tree' => 1234, 'parents' => array());
+        $expectedValue = ['sha' => '123', 'comitter'];
+        $data = ['message' => 'some message', 'tree' => 1234, 'parents' => []];
 
+        /** @var Commits|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
@@ -43,8 +48,9 @@ class CommitsTest extends TestCase
      */
     public function shouldNotCreateCommitWithoutMessageParam()
     {
-        $data = array('tree' => 1234, 'parents' => array());
+        $data = ['tree' => 1234, 'parents' => []];
 
+        /** @var Commits|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -58,8 +64,9 @@ class CommitsTest extends TestCase
      */
     public function shouldNotCreateCommitWithoutTreeParam()
     {
-        $data = array('message' => 'some message', 'parents' => array());
+        $data = ['message' => 'some message', 'parents' => []];
 
+        /** @var Commits|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -73,8 +80,9 @@ class CommitsTest extends TestCase
      */
     public function shouldNotCreateCommitWithoutParentsParam()
     {
-        $data = array('message' => 'some message', 'tree' => '12334');
+        $data = ['message' => 'some message', 'tree' => '12334'];
 
+        /** @var Commits|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -82,11 +90,8 @@ class CommitsTest extends TestCase
         $api->create('KnpLabs', 'php-github-api', $data);
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
-        return \Github\Api\GitData\Commits::class;
+        return Commits::class;
     }
 }

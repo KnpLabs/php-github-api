@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
 
@@ -9,10 +9,10 @@ class WatchersTest extends TestCase
      */
     public function shouldGetWatchers()
     {
-        $expectedValue = array(
-            array('name' => 'l3l0/test'),
-            array('name' => 'cordoval/test')
-        );
+        $expectedValue = [
+            ['name' => 'l3l0/test'],
+            ['name' => 'cordoval/test']
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -65,10 +65,7 @@ class WatchersTest extends TestCase
         $this->assertNull($api->unwatch('l3l0', 'test'));
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\CurrentUser\Watchers::class;
     }

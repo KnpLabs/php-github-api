@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests;
 
@@ -8,7 +8,6 @@ use Github\Exception\BadMethodCallException;
 use Github\HttpClient\Builder;
 use Github\HttpClient\Plugin\Authentication;
 use GuzzleHttp\Psr7\Response;
-use Http\Client\Common\Plugin;
 use Http\Client\HttpClient;
 use Psr\Http\Message\RequestInterface;
 
@@ -44,7 +43,7 @@ class ClientTest extends \PHPUnit\Framework\TestCase
     public function shouldAuthenticateUsingAllGivenParameters($login, $password, $method)
     {
         $builder = $this->getMockBuilder(\Github\HttpClient\Builder::class)
-            ->setMethods(array('addPlugin', 'removePlugin'))
+            ->setMethods(['addPlugin', 'removePlugin'])
             ->disableOriginalConstructor()
             ->getMock();
         $builder->expects($this->once())
@@ -67,12 +66,12 @@ class ClientTest extends \PHPUnit\Framework\TestCase
 
     public function getAuthenticationFullData()
     {
-        return array(
-            array('login', 'password', Client::AUTH_HTTP_PASSWORD),
-            array('token', null, Client::AUTH_HTTP_TOKEN),
-            array('token', null, Client::AUTH_URL_TOKEN),
-            array('client_id', 'client_secret', Client::AUTH_URL_CLIENT_ID),
-        );
+        return [
+            ['login', 'password', Client::AUTH_HTTP_PASSWORD],
+            ['token', null, Client::AUTH_HTTP_TOKEN],
+            ['token', null, Client::AUTH_URL_TOKEN],
+            ['client_id', 'client_secret', Client::AUTH_URL_CLIENT_ID],
+        ];
     }
 
     /**
@@ -82,7 +81,7 @@ class ClientTest extends \PHPUnit\Framework\TestCase
     public function shouldAuthenticateUsingGivenParameters($token, $method)
     {
         $builder = $this->getMockBuilder(\Github\HttpClient\Builder::class)
-            ->setMethods(array('addPlugin', 'removePlugin'))
+            ->setMethods(['addPlugin', 'removePlugin'])
             ->getMock();
         $builder->expects($this->once())
             ->method('addPlugin')
@@ -105,10 +104,10 @@ class ClientTest extends \PHPUnit\Framework\TestCase
 
     public function getAuthenticationPartialData()
     {
-        return array(
-            array('token', Client::AUTH_HTTP_TOKEN),
-            array('token', Client::AUTH_URL_TOKEN),
-        );
+        return [
+            ['token', Client::AUTH_HTTP_TOKEN],
+            ['token', Client::AUTH_URL_TOKEN],
+        ];
     }
 
     /**
@@ -166,47 +165,47 @@ class ClientTest extends \PHPUnit\Framework\TestCase
 
     public function getApiClassesProvider()
     {
-        return array(
-            array('user', Api\User::class),
-            array('users', Api\User::class),
+        return [
+            ['user', Api\User::class],
+            ['users', Api\User::class],
 
-            array('me', Api\CurrentUser::class),
-            array('current_user', Api\CurrentUser::class),
-            array('currentUser', Api\CurrentUser::class),
+            ['me', Api\CurrentUser::class],
+            ['current_user', Api\CurrentUser::class],
+            ['currentUser', Api\CurrentUser::class],
 
-            array('git', Api\GitData::class),
-            array('git_data', Api\GitData::class),
-            array('gitData', Api\GitData::class),
+            ['git', Api\GitData::class],
+            ['git_data', Api\GitData::class],
+            ['gitData', Api\GitData::class],
 
-            array('gist', Api\Gists::class),
-            array('gists', Api\Gists::class),
+            ['gist', Api\Gists::class],
+            ['gists', Api\Gists::class],
 
-            array('issue', Api\Issue::class),
-            array('issues', Api\Issue::class),
+            ['issue', Api\Issue::class],
+            ['issues', Api\Issue::class],
 
-            array('markdown', Api\Markdown::class),
+            ['markdown', Api\Markdown::class],
 
-            array('organization', Api\Organization::class),
-            array('organizations', Api\Organization::class),
+            ['organization', Api\Organization::class],
+            ['organizations', Api\Organization::class],
 
-            array('repo', Api\Repo::class),
-            array('repos', Api\Repo::class),
-            array('repository', Api\Repo::class),
-            array('repositories', Api\Repo::class),
+            ['repo', Api\Repo::class],
+            ['repos', Api\Repo::class],
+            ['repository', Api\Repo::class],
+            ['repositories', Api\Repo::class],
 
-            array('search', Api\Search::class),
+            ['search', Api\Search::class],
 
-            array('pr', Api\PullRequest::class),
-            array('pullRequest', Api\PullRequest::class),
-            array('pull_request', Api\PullRequest::class),
-            array('pullRequests', Api\PullRequest::class),
-            array('pull_requests', Api\PullRequest::class),
+            ['pr', Api\PullRequest::class],
+            ['pullRequest', Api\PullRequest::class],
+            ['pull_request', Api\PullRequest::class],
+            ['pullRequests', Api\PullRequest::class],
+            ['pull_requests', Api\PullRequest::class],
 
-            array('authorization', Api\Authorizations::class),
-            array('authorizations', Api\Authorizations::class),
+            ['authorization', Api\Authorizations::class],
+            ['authorizations', Api\Authorizations::class],
 
-            array('meta', Api\Meta::class)
-        );
+            ['meta', Api\Meta::class]
+        ];
     }
 
     /**

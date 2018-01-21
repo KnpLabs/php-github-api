@@ -1,6 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api;
+
+use Github\Api\GitData\Trees;
+use PHPUnit_Framework_MockObject_MockObject;
 
 class TreesTest extends TestCase
 {
@@ -9,15 +12,16 @@ class TreesTest extends TestCase
      */
     public function shouldShowTreeUsingSha()
     {
-        $expectedValue = array('sha' => '123', 'comitter');
+        $expectedValue = ['sha' => '123', 'comitter'];
 
+        /** @var Trees|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/git/trees/123', array())
+            ->with('/repos/KnpLabs/php-github-api/git/trees/123', [])
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 123));
+        $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', '123'));
     }
 
     /**
@@ -25,24 +29,25 @@ class TreesTest extends TestCase
      */
     public function shouldCreateTreeUsingSha()
     {
-        $expectedValue = array('sha' => '123', 'comitter');
-        $data = array(
-            'tree' => array(
-                array(
+        $expectedValue = ['sha' => '123', 'comitter'];
+        $data = [
+            'tree' => [
+                [
                     'path' => 'path',
                     'mode' => 'mode',
                     'type' => 'type',
                     'sha'  => '1234'
-                ),
-                array(
+                ],
+                [
                     'path' => 'htap',
                     'mode' => 'edom',
                     'type' => 'epyt',
                     'sha'  => '4321'
-                ),
-            )
-        );
+                ],
+            ]
+        ];
 
+        /** @var Trees|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
@@ -57,24 +62,25 @@ class TreesTest extends TestCase
      */
     public function shouldCreateTreeUsingContent()
     {
-        $expectedValue = array('sha' => '123', 'comitter');
-        $data = array(
-            'tree' => array(
-                array(
+        $expectedValue = ['sha' => '123', 'comitter'];
+        $data = [
+            'tree' => [
+                [
                     'path' => 'path',
                     'mode' => 'mode',
                     'type' => 'type',
                     'content' => 'content'
-                ),
-                array(
+                ],
+                [
                     'path' => 'htap',
                     'mode' => 'edom',
                     'type' => 'epyt',
                     'content' => 'tnetnoc'
-                ),
-            )
-        );
+                ],
+            ]
+        ];
 
+        /** @var Trees|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
@@ -90,14 +96,15 @@ class TreesTest extends TestCase
      */
     public function shouldNotCreateTreeWithoutShaAndContentParam()
     {
-        $data = array(
-            'tree' => array(
+        $data = [
+            'tree' => [
                 'path' => 'path',
                 'mode' => 'mode',
                 'type' => 'type',
-            )
-        );
+            ]
+        ];
 
+        /** @var Trees|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -111,14 +118,15 @@ class TreesTest extends TestCase
      */
     public function shouldNotCreateTreeWithoutPathParam()
     {
-        $data = array(
-            'tree' => array(
+        $data = [
+            'tree' => [
                 'mode' => 'mode',
                 'type' => 'type',
                 'content'  => 'content'
-            )
-        );
+            ]
+        ];
 
+        /** @var Trees|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -132,14 +140,15 @@ class TreesTest extends TestCase
      */
     public function shouldNotCreateTreeWithoutModeParam()
     {
-        $data = array(
-            'tree' => array(
+        $data = [
+            'tree' => [
                 'path' => 'path',
                 'type' => 'type',
                 'content'  => 'content'
-            )
-        );
+            ]
+        ];
 
+        /** @var Trees|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -153,14 +162,15 @@ class TreesTest extends TestCase
      */
     public function shouldNotCreateTreeWithoutTypeParam()
     {
-        $data = array(
-            'tree' => array(
+        $data = [
+            'tree' => [
                 'path' => 'path',
                 'mode' => 'mode',
                 'content'  => 'content'
-            )
-        );
+            ]
+        ];
 
+        /** @var Trees|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -174,8 +184,9 @@ class TreesTest extends TestCase
      */
     public function shouldNotCreateTreeWithoutTreeParam()
     {
-        $data = array();
+        $data = [];
 
+        /** @var Trees|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -189,10 +200,11 @@ class TreesTest extends TestCase
      */
     public function shouldNotCreateTreeWhenTreeParamIsNotArray()
     {
-        $data = array(
+        $data = [
             'tree' => ''
-        );
+        ];
 
+        /** @var Trees|PHPUnit_Framework_MockObject_MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->never())
             ->method('post');
@@ -200,11 +212,8 @@ class TreesTest extends TestCase
         $api->create('KnpLabs', 'php-github-api', $data);
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
-        return \Github\Api\GitData\Trees::class;
+        return Trees::class;
     }
 }

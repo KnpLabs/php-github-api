@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Repository;
 
@@ -11,7 +11,7 @@ class LabelsTest extends TestCase
      */
     public function shouldGetAllRepositoryLabelss()
     {
-        $expectedValue = array(array('name' => 'label'));
+        $expectedValue = [['name' => 'label']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -27,7 +27,7 @@ class LabelsTest extends TestCase
      */
     public function shouldShowLabel()
     {
-        $expectedValue = array('label' => 'somename');
+        $expectedValue = ['label' => 'somename'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -43,7 +43,7 @@ class LabelsTest extends TestCase
      */
     public function shouldRemoveLabel()
     {
-        $expectedValue = array('someOutput');
+        $expectedValue = ['someOutput'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -60,7 +60,7 @@ class LabelsTest extends TestCase
      */
     public function shouldNotCreateLabelWithoutName()
     {
-        $data = array('color' => 'red');
+        $data = ['color' => 'red'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -75,7 +75,7 @@ class LabelsTest extends TestCase
      */
     public function shouldNotCreateLabelWithoutColor()
     {
-        $data = array('name' => 'test');
+        $data = ['name' => 'test'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -89,8 +89,8 @@ class LabelsTest extends TestCase
      */
     public function shouldCreateLabel()
     {
-        $expectedValue = array('label' => 'somename');
-        $data = array('name' => 'test', 'color' => 'red');
+        $expectedValue = ['label' => 'somename'];
+        $data = ['name' => 'test', 'color' => 'red'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -107,7 +107,7 @@ class LabelsTest extends TestCase
      */
     public function shouldNotUpdateLabelWithoutName()
     {
-        $data = array('color' => 'red');
+        $data = ['color' => 'red'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -122,7 +122,7 @@ class LabelsTest extends TestCase
      */
     public function shouldNotUpdateLabelWithoutColor()
     {
-        $data = array('name' => 'test');
+        $data = ['name' => 'test'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -136,8 +136,8 @@ class LabelsTest extends TestCase
      */
     public function shouldUpdateLabel()
     {
-        $expectedValue = array('label' => 'somename');
-        $data = array('name' => 'test', 'color' => 'red');
+        $expectedValue = ['label' => 'somename'];
+        $data = ['name' => 'test', 'color' => 'red'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -148,10 +148,7 @@ class LabelsTest extends TestCase
         $this->assertEquals($expectedValue, $api->update('KnpLabs', 'php-github-api', 'labelName', $data));
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return \Github\Api\Repository\Labels::class;
     }

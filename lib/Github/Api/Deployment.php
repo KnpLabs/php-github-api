@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api;
 
@@ -18,9 +18,9 @@ class Deployment extends AbstractApi
      * @param  string $username   the username of the user who owns the repository
      * @param  string $repository the name of the repository
      * @param  array $params      query parameters to filter deployments by (see link)
-     * @return array              the deployments requested
+     * @return array|null         the deployments requested
      */
-    public function all($username, $repository, array $params = array())
+    public function all(string $username, string $repository, array $params = [])
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/deployments', $params);
     }
@@ -32,11 +32,11 @@ class Deployment extends AbstractApi
      * @param string $repository the name of the repo
      * @param int    $id         the id of the deployment
      *
-     * @return array
+     * @return array|null
      */
-    public function show($username, $repository, $id)
+    public function show(string $username, string $repository, int $id)
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/deployments/'.rawurlencode($id));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/deployments/'.rawurlencode((string) $id));
     }
 
     /**
@@ -49,14 +49,14 @@ class Deployment extends AbstractApi
      * @param  string $username   the username
      * @param  string $repository the repository
      * @param  array  $params     the new deployment data
-     * @return array  information about the deployment
+     * @return array|null  information about the deployment
      *
      * @throws MissingArgumentException
      */
-    public function create($username, $repository, array $params)
+    public function create(string $username, string $repository, array $params)
     {
         if (!isset($params['ref'])) {
-            throw new MissingArgumentException(array('ref'));
+            throw new MissingArgumentException(['ref']);
         }
 
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/deployments', $params);
@@ -72,17 +72,17 @@ class Deployment extends AbstractApi
      * @param array  $params The information about the deployment update.
      *                       Must include a "state" field of pending, success, error, or failure.
      *                       May also be given a target_url and description, ßee link for more details.
-     * @return array information about the deployment
+     * @return array|null information about the deployment
      *
      * @throws MissingArgumentException
      */
-    public function updateStatus($username, $repository, $id, array $params)
+    public function updateStatus(string $username, string $repository, int $id, array $params)
     {
         if (!isset($params['state'])) {
-            throw new MissingArgumentException(array('state'));
+            throw new MissingArgumentException(['state']);
         }
 
-        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/deployments/'.rawurlencode($id).'/statuses', $params);
+        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/deployments/'.rawurlencode((string) $id).'/statuses', $params);
     }
 
     /**
@@ -91,10 +91,10 @@ class Deployment extends AbstractApi
      * @param  string $username the username
      * @param  string $repository the repository
      * @param  int $id the deployment identifier
-     * @return array the deployment statuses
+     * @return array|null the deployment statuses
      */
-    public function getStatuses($username, $repository, $id)
+    public function getStatuses(string $username, string $repository, int $id)
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/deployments/'.rawurlencode($id).'/statuses');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/deployments/'.rawurlencode((string) $id).'/statuses');
     }
 }

@@ -1,10 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github;
 
 use Github\Api\ApiInterface;
-use Github\Exception\InvalidArgumentException;
 use Github\Exception\BadMethodCallException;
+use Github\Exception\InvalidArgumentException;
 use Github\HttpClient\Builder;
 use Github\HttpClient\Plugin\Authentication;
 use Github\HttpClient\Plugin\GithubExceptionThrower;
@@ -116,11 +116,10 @@ class Client
     /**
      * Instantiate a new GitHub client.
      *
-     * @param Builder|null $httpClientBuilder
      * @param string|null  $apiVersion
      * @param string|null  $enterpriseUrl
      */
-    public function __construct(Builder $httpClientBuilder = null, $apiVersion = null, $enterpriseUrl = null)
+    public function __construct(Builder $httpClientBuilder = null, string $apiVersion = null, string $enterpriseUrl = null)
     {
         $this->responseHistory = new History();
         $this->httpClientBuilder = $builder = $httpClientBuilder ?: new Builder();
@@ -129,9 +128,9 @@ class Client
         $builder->addPlugin(new Plugin\HistoryPlugin($this->responseHistory));
         $builder->addPlugin(new Plugin\RedirectPlugin());
         $builder->addPlugin(new Plugin\AddHostPlugin(UriFactoryDiscovery::find()->createUri('https://api.github.com')));
-        $builder->addPlugin(new Plugin\HeaderDefaultsPlugin(array(
+        $builder->addPlugin(new Plugin\HeaderDefaultsPlugin([
             'User-Agent' => 'php-github-api (http://github.com/KnpLabs/php-github-api)',
-        )));
+        ]));
 
         $this->apiVersion = $apiVersion ?: 'v3';
         $builder->addHeaderValue('Accept', sprintf('application/vnd.github.%s+json', $this->apiVersion));
@@ -143,12 +142,8 @@ class Client
 
     /**
      * Create a Github\Client using a HttpClient.
-     *
-     * @param HttpClient $httpClient
-     *
-     * @return Client
      */
-    public static function createWithHttpClient(HttpClient $httpClient)
+    public static function createWithHttpClient(HttpClient $httpClient): Client
     {
         $builder = new Builder($httpClient);
 
@@ -156,13 +151,9 @@ class Client
     }
 
     /**
-     * @param string $name
-     *
      * @throws InvalidArgumentException
-     *
-     * @return ApiInterface
      */
-    public function api($name)
+    public function api(string $name): ApiInterface
     {
         switch ($name) {
             case 'me':
@@ -311,13 +302,13 @@ class Client
      *
      * @throws InvalidArgumentException If no authentication method was given
      */
-    public function authenticate($tokenOrLogin, $password = null, $authMethod = null)
+    public function authenticate(string $tokenOrLogin, string $password = null, string $authMethod = null)
     {
         if (null === $password && null === $authMethod) {
             throw new InvalidArgumentException('You need to specify authentication method!');
         }
 
-        if (null === $authMethod && in_array($password, array(self::AUTH_URL_TOKEN, self::AUTH_URL_CLIENT_ID, self::AUTH_HTTP_PASSWORD, self::AUTH_HTTP_TOKEN, self::AUTH_JWT))) {
+        if (null === $authMethod && in_array($password, [self::AUTH_URL_TOKEN, self::AUTH_URL_CLIENT_ID, self::AUTH_HTTP_PASSWORD, self::AUTH_HTTP_TOKEN, self::AUTH_JWT])) {
             $authMethod = $password;
             $password = null;
         }
@@ -335,7 +326,7 @@ class Client
      *
      * @param string $enterpriseUrl URL of the API in the form of http(s)://hostname
      */
-    private function setEnterpriseUrl($enterpriseUrl)
+    private function setEnterpriseUrl(string $enterpriseUrl)
     {
         $builder = $this->getHttpClientBuilder();
         $builder->removePlugin(Plugin\AddHostPlugin::class);
@@ -345,19 +336,13 @@ class Client
         $builder->addPlugin(new PathPrepend(sprintf('/api/%s', $this->getApiVersion())));
     }
 
-    /**
-     * @return string
-     */
-    public function getApiVersion()
+    public function getApiVersion(): string
     {
         return $this->apiVersion;
     }
 
     /**
      * Add a cache plugin to cache responses locally.
-     *
-     * @param CacheItemPoolInterface $cache
-     * @param array                  $config
      */
     public function addCache(CacheItemPoolInterface $cachePool, array $config = [])
     {
@@ -373,13 +358,9 @@ class Client
     }
 
     /**
-     * @param string $name
-     *
      * @throws BadMethodCallException
-     *
-     * @return ApiInterface
      */
-    public function __call($name, $args)
+    public function __call(string $name, $args): ApiInterface
     {
         try {
             return $this->api($name);
@@ -396,18 +377,12 @@ class Client
         return $this->responseHistory->getLastResponse();
     }
 
-    /**
-     * @return HttpMethodsClient
-     */
-    public function getHttpClient()
+    public function getHttpClient(): HttpMethodsClient
     {
         return $this->getHttpClientBuilder()->getHttpClient();
     }
 
-    /**
-     * @return Builder
-     */
-    protected function getHttpClientBuilder()
+    protected function getHttpClientBuilder(): Builder
     {
         return $this->httpClientBuilder;
     }

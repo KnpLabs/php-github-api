@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\GitData;
 
@@ -19,10 +19,8 @@ class Blobs extends AbstractApi
      * Configure the Accept header depending on the blob type.
      *
      * @param string|null $bodyType
-     *
-     * @return self
      */
-    public function configure($bodyType = null)
+    public function configure(string $bodyType = null): self
     {
         if ('raw' === $bodyType) {
             $this->acceptHeaderValue = sprintf('application/vnd.github.%s.raw', $this->client->getApiVersion());
@@ -33,14 +31,8 @@ class Blobs extends AbstractApi
 
     /**
      * Show a blob of a sha for a repository.
-     *
-     * @param string $username
-     * @param string $repository
-     * @param string $sha
-     *
-     * @return array
      */
-    public function show($username, $repository, $sha)
+    public function show(string $username, string $repository, string $sha): array
     {
         $response = $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/blobs/'.rawurlencode($sha));
 
@@ -50,18 +42,12 @@ class Blobs extends AbstractApi
     /**
      * Create a blob of a sha for a repository.
      *
-     * @param string $username
-     * @param string $repository
-     * @param array  $params
-     *
-     * @return array
-     *
      * @throws \Github\Exception\MissingArgumentException
      */
-    public function create($username, $repository, array $params)
+    public function create(string $username, string $repository, array $params): array
     {
         if (!isset($params['content'], $params['encoding'])) {
-            throw new MissingArgumentException(array('content', 'encoding'));
+            throw new MissingArgumentException(['content', 'encoding']);
         }
 
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/blobs', $params);

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api;
 
@@ -11,22 +11,18 @@ namespace Github\Api;
 class Markdown extends AbstractApi
 {
     /**
-     * @param string $text
-     * @param string $mode
-     * @param string $context
-     *
-     * @return string
+     * @return string|null
      */
-    public function render($text, $mode = 'markdown', $context = null)
+    public function render(string $text, string $mode = 'markdown', string $context = null)
     {
-        if (!in_array($mode, array('gfm', 'markdown'))) {
+        if (!in_array($mode, ['gfm', 'markdown'])) {
             $mode = 'markdown';
         }
 
-        $params = array(
+        $params = [
             'text' => $text,
             'mode' => $mode
-        );
+        ];
         if (null !== $context && 'gfm' === $mode) {
             $params['context'] = $context;
         }
@@ -35,14 +31,12 @@ class Markdown extends AbstractApi
     }
 
     /**
-     * @param string $file
-     *
-     * @return string
+     * @return string|null
      */
-    public function renderRaw($file)
+    public function renderRaw(string $file)
     {
-        return $this->post('/markdown/raw', array(
+        return $this->post('/markdown/raw', [
             'file' => $file
-        ));
+        ]);
     }
 }

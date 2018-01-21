@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Mock;
 
@@ -18,16 +18,16 @@ class PaginatedResponse extends Response
         $this->loopCount = $loopCount;
         $this->content   = $content;
 
-        parent::__construct(200, array('Content-Type'=>'application/json'), \GuzzleHttp\Psr7\stream_for(json_encode($content)));
+        parent::__construct(200, ['Content-Type'=>'application/json'], \GuzzleHttp\Psr7\stream_for(json_encode($content)));
     }
 
     public function getHeader($header)
     {
         if ($header === 'Link') {
             if ($this->loopCount > 1) {
-                $header = array(sprintf('<https://api.github.com/%d>; rel="next"', $this->loopCount));
+                $header = [sprintf('<https://api.github.com/%d>; rel="next"', $this->loopCount)];
             } else {
-                $header = array('<https://api.github.com/prev>; rel="prev"');
+                $header = ['<https://api.github.com/prev>; rel="prev"'];
             }
 
             $this->loopCount--;

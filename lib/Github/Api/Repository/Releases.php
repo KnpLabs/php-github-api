@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\Repository;
 
@@ -14,27 +14,16 @@ class Releases extends AbstractApi
 {
     /**
      * Get the latest release.
-     *
-     * @param $username
-     * @param $repository
-     *
-     * @return array
      */
-    public function latest($username, $repository)
+    public function latest($username, $repository): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/latest');
     }
 
     /**
      * List releases for a tag.
-     *
-     * @param $username
-     * @param $repository
-     * @param $tag
-     *
-     * @return array
      */
-    public function tag($username, $repository, $tag)
+    public function tag($username, $repository, $tag): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/tags/'.rawurlencode($tag));
     }
@@ -45,10 +34,8 @@ class Releases extends AbstractApi
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
      * @param array  $params     the additional parameters like milestone, assignees, labels, sort, direction
-     *
-     * @return array
      */
-    public function all($username, $repository, array $params = [])
+    public function all(string $username, string $repository, array $params = []): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases', $params);
     }
@@ -59,26 +46,18 @@ class Releases extends AbstractApi
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
      * @param int    $id         the id of the release
-     *
-     * @return array
      */
-    public function show($username, $repository, $id)
+    public function show(string $username, string $repository, int $id): array
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode($id));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode((string) $id));
     }
 
     /**
      * Create new release in selected repository.
      *
-     * @param string $username
-     * @param string $repository
-     * @param array  $params
-     *
      * @throws MissingArgumentException
-     *
-     * @return array
      */
-    public function create($username, $repository, array $params)
+    public function create(string $username, string $repository, array $params): array
     {
         if (!isset($params['tag_name'])) {
             throw new MissingArgumentException('tag_name');
@@ -89,17 +68,10 @@ class Releases extends AbstractApi
 
     /**
      * Edit release in selected repository.
-     *
-     * @param string $username
-     * @param string $repository
-     * @param int    $id
-     * @param array  $params
-     *
-     * @return array
      */
-    public function edit($username, $repository, $id, array $params)
+    public function edit(string $username, string $repository, int $id, array $params): array
     {
-        return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode($id), $params);
+        return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode((string) $id), $params);
     }
 
     /**
@@ -108,18 +80,13 @@ class Releases extends AbstractApi
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
      * @param int    $id         the id of the release
-     *
-     * @return array
      */
-    public function remove($username, $repository, $id)
+    public function remove(string $username, string $repository, int $id): array
     {
-        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode($id));
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode((string) $id));
     }
 
-    /**
-     * @return Assets
-     */
-    public function assets()
+    public function assets(): Assets
     {
         return new Assets($this->client);
     }

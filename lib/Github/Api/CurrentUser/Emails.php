@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\CurrentUser;
 
@@ -15,10 +15,8 @@ class Emails extends AbstractApi
      * List emails for the authenticated user.
      *
      * @link http://developer.github.com/v3/users/emails/
-     *
-     * @return array
      */
-    public function all()
+    public function all(): array
     {
         return $this->get('/user/emails');
     }
@@ -43,13 +41,11 @@ class Emails extends AbstractApi
      * @param string|array $emails
      *
      * @throws \Github\Exception\InvalidArgumentException
-     *
-     * @return array
      */
-    public function add($emails)
+    public function add($emails): array
     {
         if (is_string($emails)) {
-            $emails = array($emails);
+            $emails = [$emails];
         } elseif (0 === count($emails)) {
             throw new InvalidArgumentException();
         }
@@ -65,13 +61,11 @@ class Emails extends AbstractApi
      * @param string|array $emails
      *
      * @throws \Github\Exception\InvalidArgumentException
-     *
-     * @return array
      */
-    public function remove($emails)
+    public function remove($emails): array
     {
         if (is_string($emails)) {
-            $emails = array($emails);
+            $emails = [$emails];
         } elseif (0 === count($emails)) {
             throw new InvalidArgumentException();
         }

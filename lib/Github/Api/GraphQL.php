@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api;
 
@@ -13,33 +13,24 @@ namespace Github\Api;
 class GraphQL extends AbstractApi
 {
     use AcceptHeaderTrait;
-    
+
     /**
-     * @param string $query
-     * @param array $variables
-     *
-     * @return array
+     * @return array|string
      */
-    public function execute($query, array $variables = array())
+    public function execute(string $query, array $variables = [])
     {
         $this->acceptHeaderValue = 'application/vnd.github.v4+json';
-        $params = array(
+        $params = [
             'query' => $query
-        );
+        ];
         if (!empty($variables)) {
             $params['variables'] = json_encode($variables);
         }
 
         return $this->post('/graphql', $params);
     }
-    
-    /**
-     * @param string $file
-     * @param array $variables
-     *
-     * @return array
-     */
-    public function fromFile($file, array $variables = array())
+
+    public function fromFile(string $file, array $variables = []): array
     {
         return $this->execute(file_get_contents($file), $variables);
     }

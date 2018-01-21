@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api\Repository;
 
@@ -17,10 +17,8 @@ class Downloads extends AbstractApi
      *
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
-     *
-     * @return array
      */
-    public function all($username, $repository)
+    public function all(string $username, string $repository): array
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/downloads');
     }
@@ -34,9 +32,9 @@ class Downloads extends AbstractApi
      * @param string $repository the name of the repo
      * @param int    $id         the id of the download file
      *
-     * @return array
+     * @return string|array
      */
-    public function show($username, $repository, $id)
+    public function show(string $username, string $repository, string $id)
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/downloads/'.rawurlencode($id));
     }
@@ -50,9 +48,9 @@ class Downloads extends AbstractApi
      * @param string $repository the name of the repo
      * @param int    $id         the id of the download file
      *
-     * @return array
+     * @return string|array
      */
-    public function remove($username, $repository, $id)
+    public function remove(string $username, string $repository, string $id)
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/downloads/'.rawurlencode($id));
     }

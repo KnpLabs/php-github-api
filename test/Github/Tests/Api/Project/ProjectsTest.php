@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Tests\Api\Project;
 
@@ -12,7 +12,7 @@ class ProjectsTest extends TestCase
      */
     public function shouldShowProject()
     {
-        $expectedValue = array('name' => 'Test project 1');
+        $expectedValue = ['name' => 'Test project 1'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -28,8 +28,8 @@ class ProjectsTest extends TestCase
      */
     public function shouldUpdateProject()
     {
-        $expectedValue = array('project1data');
-        $data = array('name' => 'Project 1 update');
+        $expectedValue = ['project1data'];
+        $data = ['name' => 'Project 1 update'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -45,7 +45,7 @@ class ProjectsTest extends TestCase
      */
     public function shouldRemoveProject()
     {
-        $expectedValue = array('someOutput');
+        $expectedValue = ['someOutput'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -66,10 +66,7 @@ class ProjectsTest extends TestCase
         $this->assertInstanceOf('Github\Api\Project\Columns', $api->columns());
     }
 
-    /**
-     * @return string
-     */
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return AbstractProjectApi::class;
     }

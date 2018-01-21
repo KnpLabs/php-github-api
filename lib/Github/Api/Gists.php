@@ -1,9 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Github\Api;
 
-use Github\Exception\MissingArgumentException;
 use Github\Api\Gist\Comments;
+use Github\Exception\MissingArgumentException;
 
 /**
  * Creating, editing, deleting and listing gists.
@@ -21,12 +21,10 @@ class Gists extends AbstractApi
      *
      * @link https://developer.github.com/v3/gists/#custom-media-types
      * @param string|null $bodyType
-     *
-     * @return self
      */
-    public function configure($bodyType = null)
+    public function configure(string $bodyType = null): self
     {
-        if (!in_array($bodyType, array('base64'))) {
+        if ($bodyType !== 'base64') {
             $bodyType = 'raw';
         }
 
@@ -37,7 +35,7 @@ class Gists extends AbstractApi
 
     public function all($type = null)
     {
-        if (!in_array($type, array('public', 'starred'))) {
+        if (!in_array($type, ['public', 'starred'])) {
             return $this->get('/gists');
         }
 
@@ -46,7 +44,7 @@ class Gists extends AbstractApi
 
     public function show($number)
     {
-        return $this->get('/gists/'.rawurlencode($number));
+        return $this->get('/gists/'.rawurlencode((string) $number));
     }
 
     public function create(array $params)
@@ -62,52 +60,50 @@ class Gists extends AbstractApi
 
     public function update($id, array $params)
     {
-        return $this->patch('/gists/'.rawurlencode($id), $params);
+        return $this->patch('/gists/'.rawurlencode((string) $id), $params);
     }
 
     public function commits($id)
     {
-        return $this->get('/gists/'.rawurlencode($id).'/commits');
+        return $this->get('/gists/'.rawurlencode((string) $id).'/commits');
     }
 
     public function fork($id)
     {
-        return $this->post('/gists/'.rawurlencode($id).'/fork');
+        return $this->post('/gists/'.rawurlencode((string) $id).'/fork');
     }
 
     public function forks($id)
     {
-        return $this->get('/gists/'.rawurlencode($id).'/forks');
+        return $this->get('/gists/'.rawurlencode((string) $id).'/forks');
     }
 
     public function remove($id)
     {
-        return $this->delete('/gists/'.rawurlencode($id));
+        return $this->delete('/gists/'.rawurlencode((string) $id));
     }
 
     public function check($id)
     {
-        return $this->get('/gists/'.rawurlencode($id).'/star');
+        return $this->get('/gists/'.rawurlencode((string) $id).'/star');
     }
 
     public function star($id)
     {
-        return $this->put('/gists/'.rawurlencode($id).'/star');
+        return $this->put('/gists/'.rawurlencode((string) $id).'/star');
     }
 
     public function unstar($id)
     {
-        return $this->delete('/gists/'.rawurlencode($id).'/star');
+        return $this->delete('/gists/'.rawurlencode((string) $id).'/star');
     }
 
     /**
      * Get a gist's comments.
      *
      * @link http://developer.github.com/v3/gists/comments/
-     *
-     * @return Comments
      */
-    public function comments()
+    public function comments(): Comments
     {
         return new Comments($this->client);
     }
