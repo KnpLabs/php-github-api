@@ -245,7 +245,7 @@ class Contents extends AbstractApi
      * @param string      $format     format of archive: tarball or zipball
      * @param null|string $reference  reference to a branch or commit
      *
-     * @return array information for archives
+     * @return string repository archive binary data
      */
     public function archive($username, $repository, $format, $reference = null)
     {
