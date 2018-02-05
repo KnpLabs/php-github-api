@@ -62,4 +62,16 @@ class Collaborators extends AbstractApi
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/collaborators/'.rawurlencode($collaborator));
     }
+
+    /**
+     * @link https://developer.github.com/v3/repos/collaborators/#review-a-users-permission-level
+     * @param $username
+     * @param $repository
+     * @param $collaborator
+     * @return array|string
+     */
+    public function permission($username, $repository, $collaborator)
+    {
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/collaborators/'.rawurlencode($collaborator).'/permission');
+    }
 }
