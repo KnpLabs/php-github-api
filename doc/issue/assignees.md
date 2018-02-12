@@ -12,17 +12,17 @@ $assignees = $client->api('issue')->assignees()->listAvailable('KnpLabs', 'php-g
 ### Check if a user is an available assignee
 
 ```php
-$info = $client->api('issue')->assignees()->check('KnpLabs', 'php-github-api', 'test-user);
+$info = $client->api('issue')->assignees()->check('KnpLabs', 'php-github-api', 'test-user');
 ```
 
 ### Add assignee
 
 ```php
-$client->api('issue')->assignees()->add('KnpLabs', 'php-github-api', 4, ['assignees' => 'test-user]);
+$client->api('issue')->assignees()->add('KnpLabs', 'php-github-api', 4, ['assignees' => 'test-user']);
 ```
 
 ### Remove assignee
 
 ```php
-$client->api('issue')->assignees()->remove('KnpLabs', 'php-github-api', 4, ['assignees' => 'test-user]);
+$client->api('issue')->assignees()->remove('KnpLabs', 'php-github-api', 4, ['assignees' => 'test-user']);
 ```
