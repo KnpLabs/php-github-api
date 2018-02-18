@@ -4,7 +4,6 @@ namespace Github\Tests\Api;
 
 class GraphQLTest extends TestCase
 {
-
     /**
      * @test
      */
@@ -44,7 +43,7 @@ class GraphQLTest extends TestCase
         $api->method('post')
             ->with('/graphql', $this->equalTo([
                 'query'=>'bar',
-                'variables' => '{"variable":"foo"}'
+                'variables' => '{"variable":"foo"}',
             ]));
 
         $api->execute('bar', ['variable' => 'foo']);

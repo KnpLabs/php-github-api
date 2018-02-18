@@ -20,6 +20,7 @@ class Timeline extends AbstractApi
      * Get all events for a specific issue.
      *
      * @link https://developer.github.com/v3/issues/timeline/#list-events-for-an-issue
+     *
      * @param string $username
      * @param string $repository
      * @param int    $issue

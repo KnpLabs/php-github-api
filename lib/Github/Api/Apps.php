@@ -4,12 +4,13 @@ namespace Github\Api;
 
 /**
  * @link   https://developer.github.com/v3/apps/
+ *
  * @author Nils Adermann <naderman@naderman.de>
  */
 class Apps extends AbstractApi
 {
     /**
-     * Create an access token for an installation
+     * Create an access token for an installation.
      *
      * @param int $installationId An integration installation id
      * @param int $userId         An optional user id on behalf of whom the
@@ -19,7 +20,7 @@ class Apps extends AbstractApi
      */
     public function createInstallationToken($installationId, $userId = null)
     {
-        $parameters = array();
+        $parameters = [];
         if ($userId) {
             $parameters['user_id'] = $userId;
         }
@@ -50,7 +51,7 @@ class Apps extends AbstractApi
      */
     public function listRepositories($userId = null)
     {
-        $parameters = array();
+        $parameters = [];
         if ($userId) {
             $parameters['user_id'] = $userId;
         }

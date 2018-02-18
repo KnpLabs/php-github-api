@@ -4,6 +4,7 @@ namespace Github\HttpClient;
 
 use Http\Client\Common\HttpMethodsClient;
 use Http\Client\Common\Plugin;
+use Http\Client\Common\Plugin\Cache\Generator\HeaderCacheKeyGenerator;
 use Http\Client\Common\PluginClient;
 use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
@@ -13,7 +14,6 @@ use Http\Message\MessageFactory;
 use Http\Message\RequestFactory;
 use Http\Message\StreamFactory;
 use Psr\Cache\CacheItemPoolInterface;
-use Http\Client\Common\Plugin\Cache\Generator\HeaderCacheKeyGenerator;
 
 /**
  * A builder that builds the API client.
@@ -167,7 +167,7 @@ class Builder
         if (!isset($this->headers[$header])) {
             $this->headers[$header] = $headerValue;
         } else {
-            $this->headers[$header] = array_merge((array)$this->headers[$header], array($headerValue));
+            $this->headers[$header] = array_merge((array) $this->headers[$header], [$headerValue]);
         }
 
         $this->removePlugin(Plugin\HeaderAppendPlugin::class);

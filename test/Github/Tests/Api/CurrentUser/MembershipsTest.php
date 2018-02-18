@@ -9,28 +9,28 @@ class MembershipsTest extends TestCase
      */
     public function shouldGetMemberships()
     {
-        $expectedValue = array(
-            array(
-                'organization' => array(
+        $expectedValue = [
+            [
+                'organization' => [
                     'login' => 'octocat',
                     'id'    => 1,
-                ),
-                'user'         => array(
+                ],
+                'user'         => [
                     'login' => 'defunkt',
                     'id'    => 3,
-                ),
-            ),
-            array(
-                'organization' => array(
+                ],
+            ],
+            [
+                'organization' => [
                     'login' => 'invitocat',
                     'id'    => 2,
-                ),
-                'user'         => array(
+                ],
+                'user'         => [
                     'login' => 'defunkt',
                     'id'    => 3,
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -46,16 +46,16 @@ class MembershipsTest extends TestCase
      */
     public function shouldGetMembershipsForOrganization()
     {
-        $expectedValue = array(
-            'organization' => array(
+        $expectedValue = [
+            'organization' => [
                 'login' => 'invitocat',
                 'id'    => 2,
-            ),
-            'user'         => array(
+            ],
+            'user'         => [
                 'login' => 'defunkt',
                 'id'    => 3,
-            ),
-        );
+            ],
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -71,9 +71,9 @@ class MembershipsTest extends TestCase
      */
     public function shouldEditMembershipsForOrganization()
     {
-        $expectedValue = array(
+        $expectedValue = [
             'state' => 'active',
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())

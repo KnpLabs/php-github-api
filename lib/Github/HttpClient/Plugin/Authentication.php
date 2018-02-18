@@ -18,7 +18,7 @@ class Authentication implements Plugin
     private $password;
     private $method;
 
-    public function __construct($tokenOrLogin, $password = null, $method)
+    public function __construct($tokenOrLogin, $password, $method)
     {
         $this->tokenOrLogin = $tokenOrLogin;
         $this->password = $password;
@@ -46,10 +46,10 @@ class Authentication implements Plugin
                 $uri = $request->getUri();
                 $query = $uri->getQuery();
 
-                $parameters = array(
+                $parameters = [
                     'client_id' => $this->tokenOrLogin,
                     'client_secret' => $this->password,
-                );
+                ];
 
                 $query .= empty($query) ? '' : '&';
                 $query .= utf8_encode(http_build_query($parameters, '', '&'));
@@ -62,7 +62,7 @@ class Authentication implements Plugin
                 $uri = $request->getUri();
                 $query = $uri->getQuery();
 
-                $parameters = array('access_token' => $this->tokenOrLogin);
+                $parameters = ['access_token' => $this->tokenOrLogin];
 
                 $query .= empty($query) ? '' : '&';
                 $query .= utf8_encode(http_build_query($parameters, '', '&'));

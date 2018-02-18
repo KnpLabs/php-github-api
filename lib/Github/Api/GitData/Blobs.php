@@ -8,6 +8,7 @@ use Github\Exception\MissingArgumentException;
 
 /**
  * @link   http://developer.github.com/v3/git/blobs/
+ *
  * @author Joseph Bielawski <stloyd@gmail.com>
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
@@ -54,14 +55,14 @@ class Blobs extends AbstractApi
      * @param string $repository
      * @param array  $params
      *
-     * @return array
-     *
      * @throws \Github\Exception\MissingArgumentException
+     *
+     * @return array
      */
     public function create($username, $repository, array $params)
     {
         if (!isset($params['content'], $params['encoding'])) {
-            throw new MissingArgumentException(array('content', 'encoding'));
+            throw new MissingArgumentException(['content', 'encoding']);
         }
 
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/blobs', $params);

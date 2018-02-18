@@ -11,7 +11,7 @@ class ProjectsTest extends TestCase
      */
     public function shouldGetAllRepositoryProjects()
     {
-        $expectedValue = array(array('name' => 'Test project 1'));
+        $expectedValue = [['name' => 'Test project 1']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -28,7 +28,7 @@ class ProjectsTest extends TestCase
      */
     public function shouldNotCreateWithoutName()
     {
-        $data = array();
+        $data = [];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -42,8 +42,8 @@ class ProjectsTest extends TestCase
      */
     public function shouldCreateColumn()
     {
-        $expectedValue = array('project1data');
-        $data = array('name' => 'Project 1');
+        $expectedValue = ['project1data'];
+        $data = ['name' => 'Project 1'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())

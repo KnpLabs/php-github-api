@@ -2,8 +2,8 @@
 
 namespace Github\Tests\Api\Repository;
 
-use Github\Tests\Api\TestCase;
 use Github\Exception\TwoFactorAuthenticationRequiredException;
+use Github\Tests\Api\TestCase;
 use GuzzleHttp\Psr7\Response;
 
 class ContentsTest extends TestCase
@@ -18,7 +18,7 @@ class ContentsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/contents/test%2FGithub%2FTests%2FApi%2FRepository%2FContentsTest.php', array('ref' => null))
+            ->with('/repos/KnpLabs/php-github-api/contents/test%2FGithub%2FTests%2FApi%2FRepository%2FContentsTest.php', ['ref' => null])
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 'test/Github/Tests/Api/Repository/ContentsTest.php'));
@@ -34,7 +34,7 @@ class ContentsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/readme', array('ref' => null))
+            ->with('/repos/KnpLabs/php-github-api/readme', ['ref' => null])
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->readme('KnpLabs', 'php-github-api'));
@@ -50,7 +50,7 @@ class ContentsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('head')
-            ->with('/repos/KnpLabs/php-github-api/contents/composer.json', array('ref' => null))
+            ->with('/repos/KnpLabs/php-github-api/contents/composer.json', ['ref' => null])
             ->will($this->returnValue($response));
 
         $this->assertTrue($api->exists('KnpLabs', 'php-github-api', 'composer.json'));
@@ -60,10 +60,10 @@ class ContentsTest extends TestCase
     {
         $response = new Response(403);
 
-        return array(
-            array($this->throwException(new \ErrorException())),
-            array($this->returnValue($response))
-        );
+        return [
+            [$this->throwException(new \ErrorException())],
+            [$this->returnValue($response)],
+        ];
     }
 
     /**
@@ -77,7 +77,7 @@ class ContentsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('head')
-            ->with('/repos/KnpLabs/php-github-api/contents/composer.json', array('ref' => null))
+            ->with('/repos/KnpLabs/php-github-api/contents/composer.json', ['ref' => null])
             ->will($failureStub);
 
         $this->assertFalse($api->exists('KnpLabs', 'php-github-api', 'composer.json'));
@@ -92,7 +92,7 @@ class ContentsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('head')
-            ->with('/repos/KnpLabs/php-github-api/contents/composer.json', array('ref' => null))
+            ->with('/repos/KnpLabs/php-github-api/contents/composer.json', ['ref' => null])
             ->will($this->throwException(new TwoFactorAuthenticationRequiredException(0)));
 
         $api->exists('KnpLabs', 'php-github-api', 'composer.json');
@@ -103,17 +103,17 @@ class ContentsTest extends TestCase
      */
     public function shouldCreateNewFile()
     {
-        $expectedArray = array('content' => 'some data');
-        $content       = '<?php //..';
-        $message       = 'a commit message';
-        $branch        = 'master';
-        $committer     = array('name' => 'committer name', 'email' => 'email@example.com');
-        $parameters    = array(
+        $expectedArray = ['content' => 'some data'];
+        $content = '<?php //..';
+        $message = 'a commit message';
+        $branch = 'master';
+        $committer = ['name' => 'committer name', 'email' => 'email@example.com'];
+        $parameters = [
             'content'   => base64_encode($content),
             'message'   => $message,
             'committer' => $committer,
             'branch'    => $branch,
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -131,8 +131,8 @@ class ContentsTest extends TestCase
      */
     public function shouldThrowExceptionWhenCreateNewFileWithInvalidCommitter()
     {
-        $committer = array('invalid_key' => 'some data');
-        $api       = $this->getApiMock();
+        $committer = ['invalid_key' => 'some data'];
+        $api = $this->getApiMock();
         $api->create('KnpLabs', 'php-github-api', 'test/Github/Tests/Api/Repository/ContentsTest.php', 'some content', 'a commit message', null, $committer);
     }
 
@@ -141,19 +141,19 @@ class ContentsTest extends TestCase
      */
     public function shouldUpdateFile()
     {
-        $expectedArray = array('content' => 'some data');
-        $content       = '<?php //..';
-        $message       = 'a commit message';
-        $sha           = 'a sha';
-        $branch        = 'master';
-        $committer     = array('name' => 'committer name', 'email' => 'email@example.com');
-        $parameters    = array(
+        $expectedArray = ['content' => 'some data'];
+        $content = '<?php //..';
+        $message = 'a commit message';
+        $sha = 'a sha';
+        $branch = 'master';
+        $committer = ['name' => 'committer name', 'email' => 'email@example.com'];
+        $parameters = [
             'content'   => base64_encode($content),
             'message'   => $message,
             'committer' => $committer,
             'branch'    => $branch,
             'sha'       => $sha,
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -171,8 +171,8 @@ class ContentsTest extends TestCase
      */
     public function shouldThrowExceptionWhenUpdateFileWithInvalidCommitter()
     {
-        $committer = array('invalid_key' => 'some data');
-        $api       = $this->getApiMock();
+        $committer = ['invalid_key' => 'some data'];
+        $api = $this->getApiMock();
         $api->update('KnpLabs', 'php-github-api', 'test/Github/Tests/Api/Repository/ContentsTest.php', 'some content', 'a commit message', null, null, $committer);
     }
 
@@ -181,17 +181,17 @@ class ContentsTest extends TestCase
      */
     public function shouldDeleteFile()
     {
-        $expectedArray = array('content' => 'some data');
-        $message       = 'a commit message';
-        $sha           = 'a sha';
-        $branch        = 'master';
-        $committer     = array('name' => 'committer name', 'email' => 'email@example.com');
-        $parameters    = array(
+        $expectedArray = ['content' => 'some data'];
+        $message = 'a commit message';
+        $sha = 'a sha';
+        $branch = 'master';
+        $committer = ['name' => 'committer name', 'email' => 'email@example.com'];
+        $parameters = [
             'message'   => $message,
             'committer' => $committer,
             'branch'    => $branch,
             'sha'       => $sha,
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -209,8 +209,8 @@ class ContentsTest extends TestCase
      */
     public function shouldThrowExceptionWhenDeleteFileWithInvalidCommitter()
     {
-        $committer = array('invalid_key' => 'some data');
-        $api       = $this->getApiMock();
+        $committer = ['invalid_key' => 'some data'];
+        $api = $this->getApiMock();
         $api->rm('KnpLabs', 'php-github-api', 'test/Github/Tests/Api/Repository/ContentsTest.php', 'a commit message', null, null, $committer);
     }
 
@@ -292,7 +292,7 @@ class ContentsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/contents/test%2FGithub%2FTests%2FApi%2FRepository%2FContentsTest.php', array('ref' => null))
+            ->with('/repos/KnpLabs/php-github-api/contents/test%2FGithub%2FTests%2FApi%2FRepository%2FContentsTest.php', ['ref' => null])
             ->will($this->returnValue($getValue));
 
         $this->assertEquals($expectedValue, $api->download('KnpLabs', 'php-github-api', 'test/Github/Tests/Api/Repository/ContentsTest.php'));
@@ -312,7 +312,7 @@ class ContentsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/mads379/scala.tmbundle/contents/Syntaxes%2FSimple%20Build%20Tool.tmLanguage', array('ref' => null))
+            ->with('/repos/mads379/scala.tmbundle/contents/Syntaxes%2FSimple%20Build%20Tool.tmLanguage', ['ref' => null])
             ->will($this->returnValue($getValue));
 
         $this->assertEquals($expectedValue, $api->download('mads379', 'scala.tmbundle', 'Syntaxes/Simple Build Tool.tmLanguage'));

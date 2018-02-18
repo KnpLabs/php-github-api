@@ -7,6 +7,7 @@ use Github\Exception\MissingArgumentException;
 
 /**
  * @link   http://developer.github.com/v3/git/references/
+ *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class References extends AbstractApi
@@ -73,14 +74,14 @@ class References extends AbstractApi
      * @param string $repository
      * @param array  $params
      *
-     * @return array
-     *
      * @throws \Github\Exception\MissingArgumentException
+     *
+     * @return array
      */
     public function create($username, $repository, array $params)
     {
         if (!isset($params['ref'], $params['sha'])) {
-            throw new MissingArgumentException(array('ref', 'sha'));
+            throw new MissingArgumentException(['ref', 'sha']);
         }
 
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs', $params);
@@ -94,9 +95,9 @@ class References extends AbstractApi
      * @param string $reference
      * @param array  $params
      *
-     * @return array
-     *
      * @throws \Github\Exception\MissingArgumentException
+     *
+     * @return array
      */
     public function update($username, $repository, $reference, array $params)
     {

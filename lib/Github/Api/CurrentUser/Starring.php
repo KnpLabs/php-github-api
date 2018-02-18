@@ -23,10 +23,10 @@ class Starring extends AbstractApi
      */
     public function all($page = 1, $perPage = 30)
     {
-        return $this->get('/user/starred', array(
+        return $this->get('/user/starred', [
             'page' => $page,
             'per_page' => $perPage,
-        ));
+        ]);
     }
 
     /**

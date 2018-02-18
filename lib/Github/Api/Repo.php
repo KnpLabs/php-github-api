@@ -8,12 +8,12 @@ use Github\Api\Repository\Commits;
 use Github\Api\Repository\Contents;
 use Github\Api\Repository\DeployKeys;
 use Github\Api\Repository\Downloads;
-use Github\Api\Repository\Projects;
-use Github\Api\Repository\Protection;
-use Github\Api\Repository\Releases;
 use Github\Api\Repository\Forks;
 use Github\Api\Repository\Hooks;
 use Github\Api\Repository\Labels;
+use Github\Api\Repository\Projects;
+use Github\Api\Repository\Protection;
+use Github\Api\Repository\Releases;
 use Github\Api\Repository\Stargazers;
 use Github\Api\Repository\Statuses;
 use Github\Api\Repository\Traffic;
@@ -23,6 +23,7 @@ use Github\Api\Repository\Traffic;
  * and managing repository information for authenticated users.
  *
  * @link   http://developer.github.com/v3/repos/
+ *
  * @author Joseph Bielawski <stloyd@gmail.com>
  * @author Thibault Duplessis <thibault.duplessis at gmail dot com>
  */
@@ -34,7 +35,6 @@ class Repo extends AbstractApi
      * Search repositories by keyword.
      *
      * @deprecated This method is deprecated use the Search api instead. See https://developer.github.com/v3/search/legacy/#legacy-search-api-is-deprecated
-     *
      * @link http://developer.github.com/v3/search/#search-repositories
      *
      * @param string $keyword the search query
@@ -42,9 +42,9 @@ class Repo extends AbstractApi
      *
      * @return array list of found repositories
      */
-    public function find($keyword, array $params = array())
+    public function find($keyword, array $params = [])
     {
-        return $this->get('/legacy/repos/search/'.rawurlencode($keyword), array_merge(array('start_page' => 1), $params));
+        return $this->get('/legacy/repos/search/'.rawurlencode($keyword), array_merge(['start_page' => 1], $params));
     }
 
     /**
@@ -62,7 +62,7 @@ class Repo extends AbstractApi
             return $this->get('/repositories');
         }
 
-        return $this->get('/repositories?since=' . rawurldecode($id));
+        return $this->get('/repositories?since='.rawurldecode($id));
     }
 
     /**
@@ -135,9 +135,9 @@ class Repo extends AbstractApi
      *
      * @return array list of organization repositories
      */
-    public function org($organization, array $params = array())
+    public function org($organization, array $params = [])
     {
-        return $this->get('/orgs/'.$organization.'/repos', array_merge(array('start_page' => 1), $params));
+        return $this->get('/orgs/'.$organization.'/repos', array_merge(['start_page' => 1], $params));
     }
 
     /**
@@ -163,7 +163,7 @@ class Repo extends AbstractApi
      * @link https://github.com/piotrmurach/github/issues/283
      * @link https://github.com/piotrmurach/github/issues/282
      *
-     * @param int $id   the id of the repository
+     * @param int $id the id of the repository
      *
      * @return array information about the repository
      */
@@ -204,7 +204,7 @@ class Repo extends AbstractApi
     ) {
         $path = null !== $organization ? '/orgs/'.$organization.'/repos' : '/user/repos';
 
-        $parameters = array(
+        $parameters = [
             'name'          => $name,
             'description'   => $description,
             'homepage'      => $homepage,
@@ -212,8 +212,8 @@ class Repo extends AbstractApi
             'has_issues'    => $hasIssues,
             'has_wiki'      => $hasWiki,
             'has_downloads' => $hasDownloads,
-            'auto_init'     => $autoInit
-        );
+            'auto_init'     => $autoInit,
+        ];
 
         if ($organization && $teamId) {
             $parameters['team_id'] = $teamId;
@@ -462,9 +462,9 @@ class Repo extends AbstractApi
      */
     public function contributors($username, $repository, $includingAnonymous = false)
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contributors', array(
-            'anon' => $includingAnonymous ?: null
-        ));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contributors', [
+            'anon' => $includingAnonymous ?: null,
+        ]);
     }
 
     /**
@@ -524,9 +524,9 @@ class Repo extends AbstractApi
      */
     public function watchers($username, $repository, $page = 1)
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/watchers', array(
-            'page' => $page
-        ));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/watchers', [
+            'page' => $page,
+        ]);
     }
 
     /**
@@ -538,9 +538,9 @@ class Repo extends AbstractApi
      */
     public function subscribers($username, $repository, $page = 1)
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/subscribers', array(
-            'page' => $page
-        ));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/subscribers', [
+            'page' => $page,
+        ]);
     }
 
     /**
@@ -558,10 +558,10 @@ class Repo extends AbstractApi
      */
     public function merge($username, $repository, $base, $head, $message = null)
     {
-        $parameters = array(
+        $parameters = [
             'base' => $base,
             'head' => $head,
-        );
+        ];
 
         if (is_string($message)) {
             $parameters['commit_message'] = $message;
@@ -573,6 +573,7 @@ class Repo extends AbstractApi
     /**
      * @param string $username
      * @param string $repository
+     *
      * @return array
      */
     public function milestones($username, $repository)
@@ -605,7 +606,7 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Get the contents of a repository's code of conduct
+     * Get the contents of a repository's code of conduct.
      *
      * @link https://developer.github.com/v3/codes_of_conduct/#get-the-contents-of-a-repositorys-code-of-conduct
      *
@@ -623,7 +624,7 @@ class Repo extends AbstractApi
     }
 
     /**
-     * List all topics for a repository
+     * List all topics for a repository.
      *
      * @link https://developer.github.com/v3/repos/#list-all-topics-for-a-repository
      *
@@ -641,7 +642,7 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Replace all topics for a repository
+     * Replace all topics for a repository.
      *
      * @link https://developer.github.com/v3/repos/#replace-all-topics-for-a-repository
      *

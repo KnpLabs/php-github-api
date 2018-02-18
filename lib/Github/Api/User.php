@@ -6,6 +6,7 @@ namespace Github\Api;
  * Searching users, getting user information.
  *
  * @link   http://developer.github.com/v3/users/
+ *
  * @author Joseph Bielawski <stloyd@gmail.com>
  * @author Thibault Duplessis <thibault.duplessis at gmail dot com>
  */
@@ -15,7 +16,6 @@ class User extends AbstractApi
      * Search users by username.
      *
      * @deprecated This method is deprecated use the Search api instead. See https://developer.github.com/v3/search/legacy/#legacy-search-api-is-deprecated
-     *
      * @link http://developer.github.com/v3/search/#search-users
      *
      * @param string $keyword the keyword to search
@@ -74,7 +74,7 @@ class User extends AbstractApi
     }
 
     /**
-     * Get user organizations
+     * Get user organizations.
      *
      * @link https://developer.github.com/v3/orgs/#list-your-organizations
      *
@@ -84,14 +84,15 @@ class User extends AbstractApi
     {
         return $this->get('/user/orgs');
     }
+
     /**
      * Request the users that a specific user is following.
      *
      * @link http://developer.github.com/v3/users/followers/
      *
-     * @param string $username the username
-     * @param array $parameters parameters for the query string
-     * @param array $requestHeaders additional headers to set in the request
+     * @param string $username       the username
+     * @param array  $parameters     parameters for the query string
+     * @param array  $requestHeaders additional headers to set in the request
      *
      * @return array list of followed users
      */
@@ -105,9 +106,9 @@ class User extends AbstractApi
      *
      * @link http://developer.github.com/v3/users/followers/
      *
-     * @param string $username the username
-     * @param array $parameters parameters for the query string
-     * @param array $requestHeaders additional headers to set in the request
+     * @param string $username       the username
+     * @param array  $parameters     parameters for the query string
+     * @param array  $requestHeaders additional headers to set in the request
      *
      * @return array list of following users
      */
@@ -145,12 +146,12 @@ class User extends AbstractApi
      */
     public function starred($username, $page = 1, $perPage = 30, $sort = 'created', $direction = 'desc')
     {
-        return $this->get('/users/'.rawurlencode($username).'/starred', array(
+        return $this->get('/users/'.rawurlencode($username).'/starred', [
             'page' => $page,
             'per_page' => $perPage,
             'sort' => $sort,
             'direction' => $direction,
-        ));
+        ]);
     }
 
     /**
@@ -241,6 +242,6 @@ class User extends AbstractApi
      */
     public function publicEvents($username)
     {
-        return $this->get('/users/'.rawurlencode($username) . '/events/public');
+        return $this->get('/users/'.rawurlencode($username).'/events/public');
     }
 }

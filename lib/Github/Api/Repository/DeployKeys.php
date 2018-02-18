@@ -7,6 +7,7 @@ use Github\Exception\MissingArgumentException;
 
 /**
  * @link   http://developer.github.com/v3/repos/keys/
+ *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class DeployKeys extends AbstractApi
@@ -24,7 +25,7 @@ class DeployKeys extends AbstractApi
     public function create($username, $repository, array $params)
     {
         if (!isset($params['title'], $params['key'])) {
-            throw new MissingArgumentException(array('title', 'key'));
+            throw new MissingArgumentException(['title', 'key']);
         }
 
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/keys', $params);
@@ -33,7 +34,7 @@ class DeployKeys extends AbstractApi
     public function update($username, $repository, $id, array $params)
     {
         if (!isset($params['title'], $params['key'])) {
-            throw new MissingArgumentException(array('title', 'key'));
+            throw new MissingArgumentException(['title', 'key']);
         }
 
         return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/keys/'.rawurlencode($id), $params);

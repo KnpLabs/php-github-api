@@ -7,6 +7,7 @@ namespace Github\Api;
 /**
  * @deprecated Use the Apps class
  * @link   https://developer.github.com/v3/apps/
+ *
  * @author Nils Adermann <naderman@naderman.de>
  */
 class Integrations extends Apps
@@ -14,7 +15,6 @@ class Integrations extends Apps
     /**
      * @deprecated
      * Configure the accept header for Early Access to the integrations api (DEPRECATED)
-     *
      * @see https://developer.github.com/v3/apps/
      *
      * @return self

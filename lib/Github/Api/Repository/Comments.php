@@ -8,6 +8,7 @@ use Github\Exception\MissingArgumentException;
 
 /**
  * @link   http://developer.github.com/v3/repos/comments/
+ *
  * @author Joseph Bielawski <stloyd@gmail.com>
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
@@ -19,13 +20,14 @@ class Comments extends AbstractApi
      * Configure the body type.
      *
      * @link https://developer.github.com/v3/repos/comments/#custom-media-types
+     *
      * @param string|null $bodyType
      *
      * @return self
      */
     public function configure($bodyType = null)
     {
-        if (!in_array($bodyType, array('raw', 'text', 'html'))) {
+        if (!in_array($bodyType, ['raw', 'text', 'html'])) {
             $bodyType = 'full';
         }
 

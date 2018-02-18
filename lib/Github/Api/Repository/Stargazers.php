@@ -7,6 +7,7 @@ use Github\Api\AcceptHeaderTrait;
 
 /**
  * @link   https://developer.github.com/v3/activity/starring/#list-stargazers
+ *
  * @author Nicolas Dupont <nicolas@akeneo.com>
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
@@ -15,7 +16,7 @@ class Stargazers extends AbstractApi
     use AcceptHeaderTrait;
 
     /**
-     * Configure the body type
+     * Configure the body type.
      *
      * @see https://developer.github.com/v3/activity/starring/#alternative-response-with-star-creation-timestamps
      *

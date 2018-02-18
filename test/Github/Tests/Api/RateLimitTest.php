@@ -9,20 +9,20 @@ class RateLimitTest extends TestCase
      */
     public function shouldReturnRateLimitArray()
     {
-        $expectedArray = array(
-            'resources' => array(
-                'core' => array(
+        $expectedArray = [
+            'resources' => [
+                'core' => [
                     'limit' => 5000,
                     'remaining' => 4999,
-                    'reset' => 1372700873
-                ),
-                'search' => array(
+                    'reset' => 1372700873,
+                ],
+                'search' => [
                     'limit' => 30,
                     'remaining' => 18,
-                    'reset' => 1372697452
-                )
-            )
-        );
+                    'reset' => 1372697452,
+                ],
+            ],
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())

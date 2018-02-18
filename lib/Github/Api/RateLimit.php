@@ -3,15 +3,16 @@
 namespace Github\Api;
 
 /**
- * Get rate limits
+ * Get rate limits.
  *
  * @link   https://developer.github.com/v3/rate_limit/
+ *
  * @author Jeff Finley <quickliketurtle@gmail.com>
  */
 class RateLimit extends AbstractApi
 {
     /**
-     * Get rate limits
+     * Get rate limits.
      *
      * @return array
      */
@@ -21,9 +22,9 @@ class RateLimit extends AbstractApi
     }
 
     /**
-     * Get core rate limit
+     * Get core rate limit.
      *
-     * @return integer
+     * @return int
      */
     public function getCoreLimit()
     {
@@ -33,9 +34,9 @@ class RateLimit extends AbstractApi
     }
 
     /**
-     * Get search rate limit
+     * Get search rate limit.
      *
-     * @return integer
+     * @return int
      */
     public function getSearchLimit()
     {

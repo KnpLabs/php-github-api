@@ -32,6 +32,7 @@ class CacheTest extends \PHPUnit\Framework\TestCase
         $userB = $github->currentUser()->show();
         $this->assertEquals('nyholm', $userB['login'], 'Two request following each other should be cached.');
     }
+
     /**
      * @test
      */

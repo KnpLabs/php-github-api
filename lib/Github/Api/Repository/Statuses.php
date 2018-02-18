@@ -7,6 +7,7 @@ use Github\Exception\MissingArgumentException;
 
 /**
  * @link   http://developer.github.com/v3/repos/statuses/
+ *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class Statuses extends AbstractApi
@@ -51,7 +52,7 @@ class Statuses extends AbstractApi
      *
      * @return array
      */
-    public function create($username, $repository, $sha, array $params = array())
+    public function create($username, $repository, $sha, array $params = [])
     {
         if (!isset($params['state'])) {
             throw new MissingArgumentException('state');

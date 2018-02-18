@@ -11,20 +11,19 @@ class TimelineTest extends TestCase
      */
     public function shouldGetIssueEvents()
     {
-        $expectedValue = array(
+        $expectedValue = [
             'event1',
             'event2',
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/issues/123/timeline', array())
+            ->with('/repos/KnpLabs/php-github-api/issues/123/timeline', [])
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', 123));
     }
-
 
     /**
      * @return string

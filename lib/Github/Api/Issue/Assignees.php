@@ -16,7 +16,7 @@ class Assignees extends AbstractApi
      *
      * @return array
      */
-    public function listAvailable($username, $repository, array $parameters = array())
+    public function listAvailable($username, $repository, array $parameters = [])
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/assignees', $parameters);
     }
@@ -34,11 +34,11 @@ class Assignees extends AbstractApi
      */
     public function check($username, $repository, $assignee)
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/assignees/' . rawurlencode($assignee));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/assignees/'.rawurlencode($assignee));
     }
 
     /**
-     * Add assignees to an Issue
+     * Add assignees to an Issue.
      *
      * @link https://developer.github.com/v3/issues/assignees/#add-assignees-to-an-issue
      *
@@ -47,8 +47,9 @@ class Assignees extends AbstractApi
      * @param string $issue
      * @param array  $parameters
      *
-     * @return string
      * @throws MissingArgumentException
+     *
+     * @return string
      */
     public function add($username, $repository, $issue, array $parameters)
     {
@@ -60,7 +61,7 @@ class Assignees extends AbstractApi
     }
 
     /**
-     * Remove assignees from an Issue
+     * Remove assignees from an Issue.
      *
      * @link https://developer.github.com/v3/issues/assignees/#remove-assignees-from-an-issue
      *
@@ -69,8 +70,9 @@ class Assignees extends AbstractApi
      * @param string $issue
      * @param array  $parameters
      *
-     * @return string
      * @throws MissingArgumentException
+     *
+     * @return string
      */
     public function remove($username, $repository, $issue, array $parameters)
     {

@@ -8,6 +8,7 @@ use Github\Exception\MissingArgumentException;
 
 /**
  * @link   http://developer.github.com/v3/repos/releases/
+ *
  * @author Evgeniy Guseletov <d46k16@gmail.com>
  */
 class Assets extends AbstractApi
@@ -73,7 +74,7 @@ class Assets extends AbstractApi
         // Asset creation requires a separate endpoint, uploads.github.com.
         // Change the base url for the HTTP client temporarily while we execute
         // this request.
-        $response = $this->postRaw('https://uploads.github.com/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode($id).'/assets?name='.$name, $content, array('Content-Type' => $contentType));
+        $response = $this->postRaw('https://uploads.github.com/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode($id).'/assets?name='.$name, $content, ['Content-Type' => $contentType]);
 
         return $response;
     }

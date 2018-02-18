@@ -7,6 +7,7 @@ use Github\Api\AcceptHeaderTrait;
 
 /**
  * @link   https://developer.github.com/v3/gists/comments/
+ *
  * @author Kayla Daniels <kayladnls@gmail.com>
  */
 class Comments extends AbstractApi
@@ -17,13 +18,14 @@ class Comments extends AbstractApi
      * Configure the body type.
      *
      * @link https://developer.github.com/v3/gists/comments/#custom-media-types
+     *
      * @param string|null $bodyType
      *
      * @return self
      */
     public function configure($bodyType = null)
     {
-        if (!in_array($bodyType, array('text', 'html', 'full'))) {
+        if (!in_array($bodyType, ['text', 'html', 'full'])) {
             $bodyType = 'raw';
         }
 
@@ -67,7 +69,7 @@ class Comments extends AbstractApi
      */
     public function create($gist, $body)
     {
-        return $this->post('/gists/'.rawurlencode($gist).'/comments', array('body' => $body));
+        return $this->post('/gists/'.rawurlencode($gist).'/comments', ['body' => $body]);
     }
 
     /**
@@ -81,7 +83,7 @@ class Comments extends AbstractApi
      */
     public function update($gist, $comment_id, $body)
     {
-        return $this->patch('/gists/'.rawurlencode($gist).'/comments/'.rawurlencode($comment_id), array('body' => $body));
+        return $this->patch('/gists/'.rawurlencode($gist).'/comments/'.rawurlencode($comment_id), ['body' => $body]);
     }
 
     /**

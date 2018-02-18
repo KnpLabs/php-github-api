@@ -29,6 +29,6 @@ class Gitignore extends AbstractApi
      */
     public function show($template)
     {
-        return $this->get('/gitignore/templates/' . rawurlencode($template));
+        return $this->get('/gitignore/templates/'.rawurlencode($template));
     }
 }

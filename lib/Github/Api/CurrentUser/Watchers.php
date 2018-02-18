@@ -6,6 +6,7 @@ use Github\Api\AbstractApi;
 
 /**
  * @link   https://developer.github.com/v3/activity/watching/
+ *
  * @author Joseph Bielawski <stloyd@gmail.com>
  * @revised Felipe Valtl de Mello <eu@felipe.im>
  */
@@ -22,9 +23,9 @@ class Watchers extends AbstractApi
      */
     public function all($page = 1)
     {
-        return $this->get('/user/subscriptions', array(
-            'page' => $page
-        ));
+        return $this->get('/user/subscriptions', [
+            'page' => $page,
+        ]);
     }
 
     /**

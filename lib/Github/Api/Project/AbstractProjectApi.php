@@ -10,7 +10,7 @@ abstract class AbstractProjectApi extends AbstractApi
     use AcceptHeaderTrait;
 
     /**
-     * Configure the accept header for Early Access to the projects api
+     * Configure the accept header for Early Access to the projects api.
      *
      * @see https://developer.github.com/v3/repos/projects/#projects
      *
@@ -23,9 +23,9 @@ abstract class AbstractProjectApi extends AbstractApi
         return $this;
     }
 
-    public function show($id, array $params = array())
+    public function show($id, array $params = [])
     {
-        return $this->get('/projects/' . rawurlencode($id), array_merge(array('page' => 1), $params));
+        return $this->get('/projects/'.rawurlencode($id), array_merge(['page' => 1], $params));
     }
 
     public function update($id, array $params)

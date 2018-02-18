@@ -7,6 +7,7 @@ use Github\Exception\InvalidArgumentException;
 
 /**
  * @link   http://developer.github.com/v3/users/emails/
+ *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class Emails extends AbstractApi
@@ -49,7 +50,7 @@ class Emails extends AbstractApi
     public function add($emails)
     {
         if (is_string($emails)) {
-            $emails = array($emails);
+            $emails = [$emails];
         } elseif (0 === count($emails)) {
             throw new InvalidArgumentException();
         }
@@ -71,7 +72,7 @@ class Emails extends AbstractApi
     public function remove($emails)
     {
         if (is_string($emails)) {
-            $emails = array($emails);
+            $emails = [$emails];
         } elseif (0 === count($emails)) {
             throw new InvalidArgumentException();
         }
@@ -80,7 +81,7 @@ class Emails extends AbstractApi
     }
 
     /**
-     * Toggle primary email visibility
+     * Toggle primary email visibility.
      *
      * @link https://developer.github.com/v3/users/emails/#toggle-primary-email-visibility
      *

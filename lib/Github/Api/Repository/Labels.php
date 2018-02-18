@@ -7,6 +7,7 @@ use Github\Exception\MissingArgumentException;
 
 /**
  * @link   http://developer.github.com/v3/issues/labels/
+ *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class Labels extends AbstractApi
@@ -24,7 +25,7 @@ class Labels extends AbstractApi
     public function create($username, $repository, array $params)
     {
         if (!isset($params['name'], $params['color'])) {
-            throw new MissingArgumentException(array('name', 'color'));
+            throw new MissingArgumentException(['name', 'color']);
         }
 
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels', $params);
@@ -33,7 +34,7 @@ class Labels extends AbstractApi
     public function update($username, $repository, $label, array $params)
     {
         if (!isset($params['name'], $params['color'])) {
-            throw new MissingArgumentException(array('name', 'color'));
+            throw new MissingArgumentException(['name', 'color']);
         }
 
         return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels/'.rawurlencode($label), $params);

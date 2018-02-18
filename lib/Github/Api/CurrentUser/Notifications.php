@@ -6,6 +6,7 @@ use Github\Api\AbstractApi;
 
 /**
  * @link   http://developer.github.com/v3/activity/notifications/
+ *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class Notifications extends AbstractApi
@@ -19,7 +20,7 @@ class Notifications extends AbstractApi
      *
      * @return array
      */
-    public function all(array $params = array())
+    public function all(array $params = [])
     {
         return $this->get('/notifications', $params);
     }
@@ -35,7 +36,7 @@ class Notifications extends AbstractApi
      *
      * @return array
      */
-    public function allInRepository($username, $repository, array $params = array())
+    public function allInRepository($username, $repository, array $params = [])
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/notifications', $params);
     }
@@ -49,7 +50,7 @@ class Notifications extends AbstractApi
      *
      * @return array
      */
-    public function markAsReadAll(array $params = array())
+    public function markAsReadAll(array $params = [])
     {
         return $this->put('/notifications', $params);
     }
@@ -65,7 +66,7 @@ class Notifications extends AbstractApi
      *
      * @return array
      */
-    public function markAsReadInRepository($username, $repository, array $params = array())
+    public function markAsReadInRepository($username, $repository, array $params = [])
     {
         return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/notifications', $params);
     }

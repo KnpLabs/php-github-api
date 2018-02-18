@@ -1,4 +1,5 @@
-preset: psr2
+preset: recommended
 
-enabled:
-  - return
+disabled:
+  - align_double_arrow
+  - no_multiline_whitespace_before_semicolons

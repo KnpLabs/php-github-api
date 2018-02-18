@@ -13,11 +13,11 @@ class CommitTest extends TestCase
     public function shouldRetrieveCommitsForRepositoryBranch()
     {
         $username = 'KnpLabs';
-        $repo     = 'php-github-api';
-        $branch   = 'master';
+        $repo = 'php-github-api';
+        $branch = 'master';
 
-        $commits = $this->client->api('repo')->commits()->all($username, $repo, array('sha' => $branch));
-        $commit  = array_pop($commits);
+        $commits = $this->client->api('repo')->commits()->all($username, $repo, ['sha' => $branch]);
+        $commit = array_pop($commits);
 
         $this->assertArrayHasKey('url', $commit);
         $this->assertArrayHasKey('committer', $commit);
@@ -32,7 +32,7 @@ class CommitTest extends TestCase
     public function shouldRetrieveCommitBySha()
     {
         $username = 'KnpLabs';
-        $repo     = 'php-github-api';
+        $repo = 'php-github-api';
 
         $commit = $this->client->api('repo')->commits()->show($username, $repo, '6df3adf5bd16745299c6429e163265daed430fa1');
 
@@ -50,10 +50,10 @@ class CommitTest extends TestCase
     public function shouldRetrieveCommitsForFile()
     {
         $username = 'KnpLabs';
-        $repo     = 'php-github-api';
-        $branch   = 'master';
+        $repo = 'php-github-api';
+        $branch = 'master';
 
-        $commits = $this->client->api('repo')->commits()->all($username, $repo, array('sha' => $branch, 'path' => 'composer.json'));
+        $commits = $this->client->api('repo')->commits()->all($username, $repo, ['sha' => $branch, 'path' => 'composer.json']);
         $commit = array_pop($commits);
 
         $this->assertArrayHasKey('url', $commit);

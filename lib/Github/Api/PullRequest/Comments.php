@@ -8,6 +8,7 @@ use Github\Exception\MissingArgumentException;
 
 /**
  * @link   http://developer.github.com/v3/pulls/comments/
+ *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class Comments extends AbstractApi
@@ -18,6 +19,7 @@ class Comments extends AbstractApi
      * Configure the body type.
      *
      * @link https://developer.github.com/v3/pulls/comments/#custom-media-types
+     *
      * @param string|null $bodyType
      * @param string|null @apiVersion
      *
@@ -25,11 +27,11 @@ class Comments extends AbstractApi
      */
     public function configure($bodyType = null, $apiVersion = null)
     {
-        if (!in_array($apiVersion, array('squirrel-girl-preview'))) {
+        if (!in_array($apiVersion, ['squirrel-girl-preview'])) {
             $apiVersion = $this->client->getApiVersion();
         }
 
-        if (!in_array($bodyType, array('text', 'html', 'full'))) {
+        if (!in_array($bodyType, ['text', 'html', 'full'])) {
             $bodyType = 'raw';
         }
 
@@ -60,7 +62,7 @@ class Comments extends AbstractApi
 
         $parameters = array_merge([
             'page' => 1,
-            'per_page' => 30
+            'per_page' => 30,
         ], $params);
 
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/comments', $parameters);
@@ -104,7 +106,7 @@ class Comments extends AbstractApi
 
         // If `in_reply_to` is set, other options are not necessary anymore
         if (!isset($params['in_reply_to']) && !isset($params['commit_id'], $params['path'], $params['position'])) {
-            throw new MissingArgumentException(array('commit_id', 'path', 'position'));
+            throw new MissingArgumentException(['commit_id', 'path', 'position']);
         }
 
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($pullRequest).'/comments', $params);

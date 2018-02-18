@@ -13,10 +13,10 @@ class RepoTest extends TestCase
     public function shouldShowPRDiffIfHeaderIsPresent()
     {
         $this->client->addHeaders(
-            array('Accept' => sprintf(
+            ['Accept' => sprintf(
                 'application/vnd.github.%s.diff',
                 $this->client->getApiVersion()
-            ))
+            )]
         );
 
         $diff = $this->client->api('pull_request')->show('KnpLabs', 'php-github-api', '92');
@@ -66,7 +66,7 @@ class RepoTest extends TestCase
     public function shouldRetrieveContributorsList()
     {
         $username = 'KnpLabs';
-        $repo     = 'php-github-api';
+        $repo = 'php-github-api';
 
         $contributors = $this->client->api('repo')->contributors($username, $repo);
         $contributor = array_pop($contributors);
@@ -85,7 +85,7 @@ class RepoTest extends TestCase
     public function shouldShowRepo()
     {
         $username = 'KnpLabs';
-        $repo     = 'php-github-api';
+        $repo = 'php-github-api';
 
         $repo = $this->client->api('repo')->show($username, $repo);
 
