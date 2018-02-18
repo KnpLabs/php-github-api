@@ -54,6 +54,7 @@ The following sample code authenticates as an installation using [lcobucci/jwt](
 to generate a JSON Web Token (JWT).
 
 ```php
+use Http\Adapter\Guzzle6\Client as GuzzleClient;
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Signer\Key;
 use Lcobucci\JWT\Signer\Rsa\Sha256;
