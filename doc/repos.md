@@ -27,7 +27,6 @@ $repos = $client->api('repo')->find('symfony');
 ```
 
 Returns a list of repositories.
-
 #### Advanced search
 
 You can filter the results by language. It takes the same values as the language drop down on [http://github.com/search](http://github.com/search).
@@ -179,20 +178,29 @@ Returns a list of the collaborators for the 'reponame' repository.
 ### Add a collaborator to a repository
 
 ```php
-$client->api('repo')->collaborators()->add('username', 'reponame', 'KnpLabs');
+$client->api('repo')->collaborators()->add('username', 'reponame', 'collaborator');
 ```
 
-Adds the 'username' user as collaborator to the 'reponame' repository.
+Adds the 'collaborator' user as collaborator to the 'reponame' repository.
 
 ### Remove a collaborator from a repository
 
 > Requires [authentication](security.md).
 
 ```php
-$client->api('repo')->collaborators()->remove('username', 'reponame', 'KnpLabs');
+$client->api('repo')->collaborators()->remove('username', 'reponame', 'collaborator');
 ```
 
-Remove the 'username' collaborator from the 'reponame' repository.
+Remove the 'collaborator' collaborator from the 'reponame' repository.
+
+### Get the permissions of a collaborator for a repository
+
+```php
+$permissions = $client->api('repo')->collaborators()->permission('username', 'reponame', 'collaborator');
+```
+
+Returns the permissions of 'collaborator' collaborator for the 'reponame' repository.
+
 
 ### Watch and unwatch a repository
 
