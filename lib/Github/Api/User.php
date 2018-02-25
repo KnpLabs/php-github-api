@@ -173,19 +173,23 @@ class User extends AbstractApi
      *
      * @link https://developer.github.com/v3/repos/#list-user-repositories
      *
-     * @param string $username  the username
-     * @param string $type      role in the repository
-     * @param string $sort      sort by
-     * @param string $direction direction of sort, asc or desc
+     * @param string $username      the username
+     * @param string $type          role in the repository
+     * @param string $sort          sort by
+     * @param string $direction     direction of sort, asc or desc
+     * @param string $visibility    visibility of repository
+     * @param string $affiliation   relationship to repository
      *
      * @return array list of the user repositories
      */
-    public function repositories($username, $type = 'owner', $sort = 'full_name', $direction = 'asc')
+    public function repositories($username, $type = 'owner', $sort = 'full_name', $direction = 'asc', $visibility = 'all', $affiliation = 'owner,collaborator,organization_member')
     {
         return $this->get('/users/'.rawurlencode($username).'/repos', [
             'type' => $type,
             'sort' => $sort,
             'direction' => $direction,
+            'visibility' => $visibility,
+            'affiliation' => $affiliation,
         ]);
     }
 
