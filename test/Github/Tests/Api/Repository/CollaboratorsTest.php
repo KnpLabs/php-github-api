@@ -75,7 +75,7 @@ class CollaboratorsTest extends TestCase
      */
     public function shouldGetRepositoryCollaboratorPermission()
     {
-        $expectedValue = array(array('permission' => 'admin', 'user' => 'l3l0'));
+        $expectedValue = [['permission' => 'admin', 'user' => 'l3l0']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())

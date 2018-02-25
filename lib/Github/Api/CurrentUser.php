@@ -111,18 +111,22 @@ class CurrentUser extends AbstractApi
     /**
      * @link http://developer.github.com/v3/repos/#list-your-repositories
      *
-     * @param string $type      role in the repository
-     * @param string $sort      sort by
-     * @param string $direction direction of sort, asc or desc
+     * @param string $type        role in the repository
+     * @param string $sort        sort by
+     * @param string $direction   direction of sort, asc or desc
+     * @param string $visibility  visibility of repository
+     * @param string $affiliation relationship to repository
      *
      * @return array
      */
-    public function repositories($type = 'owner', $sort = 'full_name', $direction = 'asc')
+    public function repositories($type = 'owner', $sort = 'full_name', $direction = 'asc', $visibility = 'all', $affiliation = 'owner,collaborator,organization_member')
     {
         return $this->get('/user/repos', [
             'type' => $type,
             'sort' => $sort,
             'direction' => $direction,
+            'visibility' => $visibility,
+            'affiliation' => $affiliation,
         ]);
     }
 
