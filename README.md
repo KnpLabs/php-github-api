@@ -5,7 +5,7 @@
 [![Latest Stable Version](https://poser.pugx.org/knplabs/github-api/v/stable)](https://packagist.org/packages/knplabs/github-api)
 [![Total Downloads](https://poser.pugx.org/knplabs/github-api/downloads)](https://packagist.org/packages/knplabs/github-api)
 [![Latest Unstable Version](https://poser.pugx.org/knplabs/github-api/v/unstable)](https://packagist.org/packages/knplabs/github-api)
-[![License](https://poser.pugx.org/knplabs/github-api/license)](https://packagist.org/packages/knplabs/github-api)
+[![Monthly Downloads](https://poser.pugx.org/knplabs/github-api/d/monthly)](https://packagist.org/packages/knplabs/github-api)
 [![Daily Downloads](https://poser.pugx.org/knplabs/github-api/d/daily)](https://packagist.org/packages/knplabs/github-api)
 
 A simple Object Oriented wrapper for GitHub API, written with PHP5.
