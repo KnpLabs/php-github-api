@@ -23,7 +23,7 @@
         "php-http/httplug": "^1.1",
         "php-http/discovery": "^1.0",
         "php-http/client-implementation": "^1.0",
-        "php-http/client-common": "^1.3",
+        "php-http/client-common": "^1.6",
         "php-http/cache-plugin": "^1.4"
     },
     "require-dev": {

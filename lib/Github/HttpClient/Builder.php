@@ -6,6 +6,7 @@ use Http\Client\Common\HttpMethodsClient;
 use Http\Client\Common\Plugin;
 use Http\Client\Common\Plugin\Cache\Generator\HeaderCacheKeyGenerator;
 use Http\Client\Common\PluginClient;
+use Http\Client\Common\PluginClientFactory;
 use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\MessageFactoryDiscovery;
@@ -102,7 +103,7 @@ class Builder
             }
 
             $this->pluginClient = new HttpMethodsClient(
-                new PluginClient($this->httpClient, $plugins),
+                (new PluginClientFactory())->createClient($this->httpClient, $plugins),
                 $this->requestFactory
             );
         }
