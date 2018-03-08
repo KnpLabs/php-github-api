@@ -2,6 +2,12 @@
 
 The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release.
 
+## 2.8.0
+
+### Added
+
+- Allow our HTTP plugins to show up in the Symfony web profiler page. 
+
 ## 2.7.0
 
 ### Added
