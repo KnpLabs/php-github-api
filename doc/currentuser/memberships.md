@@ -8,7 +8,7 @@ Wraps [GitHub Issue Comments API](https://developer.github.com/v3/orgs/members/#
 > Requires [authentication](../security.md).
 
 ```php
-$memberships = $client->user()->memberships()->all();
+$memberships = $client->currentUser()->memberships()->all();
 ```
 
 Returns an array of your memberships in all organizations you are part of.
@@ -18,7 +18,7 @@ Returns an array of your memberships in all organizations you are part of.
 > Requires [authentication](../security.md).
 
 ```php
-$membership = $client->user()->memberships()->organization('KnpLabs');
+$membership = $client->currentUser()->memberships()->organization('KnpLabs');
 ```
 * `KnpLabs` : the organization
 
@@ -29,7 +29,7 @@ Returns an array of one membership in a specific organization.
 > Requires [authentication](../security.md).
 
 ```php
-$membership = $client->user()->memberships()->edit('KnpLabs');
+$membership = $client->currentUser()->memberships()->edit('KnpLabs');
 ```
 * `KnpLabs` : the organization
 
