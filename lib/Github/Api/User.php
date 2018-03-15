@@ -28,6 +28,18 @@ class User extends AbstractApi
     }
 
     /**
+     * Request the authenticated user.
+     *
+     * @link https://developer.github.com/v3/users/#get-the-authenticated-user
+     *
+     * @return array of authenticated user
+     */
+    public function authenticated()
+    {
+        return $this->get('/user');
+    }
+
+    /**
      * Request all users.
      *
      * @link https://developer.github.com/v3/users/#get-all-users
