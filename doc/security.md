@@ -71,6 +71,6 @@ $jwt = (new Builder)
 
 $github->authenticate($jwt, null, Github\Client::AUTH_JWT);
 
-$token = $github->api('integrations')->createInstallationToken($installationId);
+$token = $github->api('apps')->createInstallationToken($installationId);
 $github->authenticate($token['token'], null, Github\Client::AUTH_HTTP_TOKEN);
 ```
