@@ -329,3 +329,14 @@ $topics = $client->api('repo')->topics('ornicar', 'php-github-api');
 ```php
 $currentTopics = $client->api('repo')->replaceTopics('ornicar', 'php-github-api', ['new', 'topics']);
 ```
+
+### Transfer a repo to another user
+
+```php
+$currentTopics = $client->api('repo')->transfer('KnpLabs', 'php-github-api', 'github');
+```
+You can optionally assign some teams by passing an array with their ID's if you're transferring the repo to an organization:
+
+```php
+$currentTopics = $client->api('repo')->transfer('KnpLabs', 'php-github-api', 'github', [1234]);
+```
