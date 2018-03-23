@@ -2,6 +2,12 @@
 
 The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release.
 
+## 2.9.0
+
+### Added
+
+- API endpoint `Github\Api\Repo::transfer()`
+
 ## 2.8.0
 
 ### Added
