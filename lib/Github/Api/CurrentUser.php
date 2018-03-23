@@ -119,15 +119,25 @@ class CurrentUser extends AbstractApi
      *
      * @return array
      */
-    public function repositories($type = 'owner', $sort = 'full_name', $direction = 'asc', $visibility = 'all', $affiliation = 'owner,collaborator,organization_member')
+    public function repositories($type = 'owner', $sort = 'full_name', $direction = 'asc', $visibility = null, $affiliation = null)
     {
-        return $this->get('/user/repos', [
+        $params = [
             'type' => $type,
             'sort' => $sort,
             'direction' => $direction,
-            'visibility' => $visibility,
-            'affiliation' => $affiliation,
-        ]);
+        ];
+
+        if (null !== $visibility) {
+            unset($params['type']);
+            $params['visibility'] = $visibility;
+        }
+
+        if (null !== $affiliation) {
+            unset($params['type']);
+            $params['affiliation'] = $affiliation;
+        }
+
+        return $this->get('/user/repos', $params);
     }
 
     /**
