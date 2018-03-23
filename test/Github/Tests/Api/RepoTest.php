@@ -595,7 +595,7 @@ class RepoTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('/repos/KnpLabs/php-github-api/topics', [
+            ->with('/repos/KnpLabs/php-github-api/transfer', [
                 'new_user' => 'github',
                 'team_id' => [1234, 1235],
             ])
