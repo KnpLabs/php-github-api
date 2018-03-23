@@ -6,7 +6,22 @@ The change log describes what is "Added", "Removed", "Changed" or "Fixed" betwee
 
 ### Added
 
-- Allow our HTTP plugins to show up in the Symfony web profiler page. 
+- Allow our HTTP plugins to show up in the Symfony web profiler page. (#687)
+- Repository documentation to current user (#671)
+- Add collaborator permission call (#678)
+- Add missing parameters for User/CurrentUser Repositories (#684)
+- Pimp the readme with badge poser (#686)
+
+### Fixed
+
+- Typo in assignee documentation
+- Missing use statement in security example
+- Fixed phpdoc typo (#695)
+- Replace use of deprecated api to the correct one in the security docs (#697)
+
+### Changed
+
+- Updated requirements in readme (#689)
 
 ## 2.7.0
 
