@@ -596,7 +596,7 @@ class RepoTest extends TestCase
         $api->expects($this->once())
             ->method('post')
             ->with('/repos/KnpLabs/php-github-api/transfer', [
-                'new_user' => 'github',
+                'new_owner' => 'github',
                 'team_id' => [1234, 1235],
             ])
             ->will($this->returnValue($expectedArray));
