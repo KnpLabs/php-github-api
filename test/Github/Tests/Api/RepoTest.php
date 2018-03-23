@@ -586,6 +586,25 @@ class RepoTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function shouldTransferRepository()
+    {
+        $expectedArray = ['id' => 1, 'name' => 'php-github-api'];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('post')
+            ->with('/repos/KnpLabs/php-github-api/topics', [
+                'new_user' => 'github',
+                'team_id' => [1234, 1235]
+            ])
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->transfer('KnpLabs', 'php-github-api', 'github', [1234, 1235]));
+    }
+
+    /**
      * @return string
      */
     protected function getApiClass()
