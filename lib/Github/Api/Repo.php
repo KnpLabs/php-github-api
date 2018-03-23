@@ -659,7 +659,7 @@ class Repo extends AbstractApi
 
         return $this->put('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/topics', ['names' => $topics]);
     }
-    
+
     /**
      * Transfer a repository.
      *
