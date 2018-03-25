@@ -61,7 +61,7 @@ class Notification extends AbstractApi
     }
 
     /**
-     * Mark a single notification as read using his ID.
+     * Mark a single thread as read using its ID.
      *
      * @link https://developer.github.com/v3/activity/notifications/#mark-a-thread-as-read
      *
@@ -73,7 +73,7 @@ class Notification extends AbstractApi
     }
 
     /**
-     * Gets a single notification using his ID.
+     * Gets a single thread using its ID.
      *
      * @link https://developer.github.com/v3/activity/notifications/#view-a-single-thread
      *
