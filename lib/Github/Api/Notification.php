@@ -41,7 +41,8 @@ class Notification extends AbstractApi
     }
 
     /**
-     * Marks all notifications as read from the current date
+     * Marks all notifications as read from the current date.
+     *
      * Optionally give DateTime to mark as read before that date.
      *
      * @link https://developer.github.com/v3/activity/notifications/#mark-as-read
@@ -60,7 +61,19 @@ class Notification extends AbstractApi
     }
 
     /**
-     * Gets a single notification using his ID.
+     * Mark a single thread as read using its ID.
+     *
+     * @link https://developer.github.com/v3/activity/notifications/#mark-a-thread-as-read
+     *
+     * @param int $id
+     */
+    public function markThreadRead($id)
+    {
+        $this->patch('/notifications/threads/'.$id);
+    }
+
+    /**
+     * Gets a single thread using its ID.
      *
      * @link https://developer.github.com/v3/activity/notifications/#view-a-single-thread
      *
