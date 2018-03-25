@@ -97,6 +97,20 @@ class NotificationTest extends TestCase
         $api->markRead($since);
     }
 
+    /**
+     * @test
+     */
+    public function shouldMarkThreadAsRead()
+    {
+        $id = mt_rand(1, time());
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('patch')
+            ->with('/notifications/threads/'.$id);
+
+        $api->markThreadRead($id);
+    }
+
     public function shouldGetNotification()
     {
         $id = mt_rand(1, time());
