@@ -158,7 +158,7 @@ class ResultPager implements ResultPagerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $key
      */
     protected function has($key)
     {
@@ -166,7 +166,7 @@ class ResultPager implements ResultPagerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $key
      */
     protected function get($key)
     {
