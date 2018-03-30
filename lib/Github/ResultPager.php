@@ -182,8 +182,8 @@ class ResultPager implements ResultPagerInterface
 
     /**
      * @param ApiInterface $api
-     * @param $method
-     * @param array $parameters
+     * @param string       $method
+     * @param array        $parameters
      *
      * @return mixed
      */
