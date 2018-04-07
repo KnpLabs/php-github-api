@@ -20,7 +20,7 @@ class InvitationsTest extends TestCase
     {
         parent::setUp();
         $this->username = getenv("GITHUB_USER_1");
-        $this->repo     = getenv("GITHUB_REPO_1");
+        $this->repo = getenv("GITHUB_REPO_1");
 
         $this->invitedClient = new Client();
         $this->auth($this->invitedClient, 2);
@@ -31,7 +31,7 @@ class InvitationsTest extends TestCase
      */
     public function test()
     {
-        $invitations  = $this->listInvitations();
+        $invitations = $this->listInvitations();
         $originalSize = count($invitations);
 
         $this->client->repo()->collaborators()->add($this->username, $this->repo, getenv('GITHUB_USER_2'));
@@ -39,7 +39,7 @@ class InvitationsTest extends TestCase
         $this->assertEquals($originalSize + 1, count($invitations));
         $invitation = $invitations[$originalSize];
 
-        $collaborators      = $this->client->repo()->collaborators()->all($this->username, $this->repo);
+        $collaborators = $this->client->repo()->collaborators()->all($this->username, $this->repo);
         $collaboratorsCount = count($collaborators);
 
         $this->accept($invitation['id']);
@@ -64,7 +64,7 @@ class InvitationsTest extends TestCase
 
         $this->updateInvitation($invitation['id']);
         $invitations = $this->listInvitations();
-        $invitation  = $invitations[$originalSize];
+        $invitation = $invitations[$originalSize];
         $this->assertEquals("read", $invitation['permissions']);
 
         $this->removeInvitation($invitation['id']);
