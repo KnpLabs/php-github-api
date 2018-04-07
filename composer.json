@@ -32,7 +32,8 @@
         "php-http/mock-client": "^1.0",
         "guzzlehttp/psr7": "^1.2",
         "sllh/php-cs-fixer-styleci-bridge": "^1.3",
-        "cache/array-adapter": "^0.4"
+        "cache/array-adapter": "^0.4",
+        "vlucas/phpdotenv": "^2.4"
     },
     "autoload": {
         "psr-4": { "Github\\": "lib/Github/" }

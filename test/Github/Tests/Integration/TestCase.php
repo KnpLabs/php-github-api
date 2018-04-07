@@ -2,6 +2,7 @@
 
 namespace Github\Tests\Integration;
 
+use Dotenv\Dotenv;
 use Github\Client;
 use Github\Exception\ApiLimitExceedException;
 use Github\Exception\RuntimeException;
@@ -20,6 +21,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
     {
         // You have to specify authentication here to run full suite
         $client = new Client();
+        $this->auth($client);
 
         try {
             $client->api('current_user')->show();
@@ -32,5 +34,17 @@ class TestCase extends \PHPUnit\Framework\TestCase
         }
 
         $this->client = $client;
+    }
+
+    protected function auth(Client &$client, $accountNumber = 1)
+    {
+        (new Dotenv(__DIR__ . "/../../../../"))->load();
+        $method = getenv('GITHUB_AUTH_METHOD');
+        if ($method) {
+            $client->authenticate($method, getenv("GITHUB_TOKEN_{$accountNumber}"));
+        } else {
+            $client->authenticate($method, getenv("GITHUB_USERNAME_{$accountNumber}"),
+                getenv("GITHUB_PASSWORD_{$accountNumber}"));
+        }
     }
 }

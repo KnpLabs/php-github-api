@@ -3,3 +3,7 @@ phpunit.xml
 composer.lock
 composer.phar
 vendor/*
+#
+.idea
+.DS_STORE
+.env
