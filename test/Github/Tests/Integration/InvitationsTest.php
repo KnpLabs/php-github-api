@@ -2,7 +2,6 @@
 
 namespace Github\Tests\Integration;
 
-use function Clue\StreamFilter\remove;
 use Github\Client;
 
 /**

@@ -39,7 +39,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
     protected function auth(Client &$client, $accountNumber = 1)
     {
         try {
-            (new Dotenv(__DIR__ . "/../../../../"))->load();
+            (new Dotenv(__DIR__.'/../../../../'))->load();
             $method = getenv('GITHUB_AUTH_METHOD');
             if (!getenv('GITHUB_AUTH_METHOD')) {
                 return;
