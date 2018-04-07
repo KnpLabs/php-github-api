@@ -19,8 +19,8 @@ class InvitationsTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->username = getenv("GITHUB_USER_1");
-        $this->repo = getenv("GITHUB_REPO_1");
+        $this->username = getenv('GITHUB_USER_1');
+        $this->repo = getenv('GITHUB_REPO_1');
 
         $this->invitedClient = new Client();
         $this->auth($this->invitedClient, 2);
@@ -65,7 +65,7 @@ class InvitationsTest extends TestCase
         $this->updateInvitation($invitation['id']);
         $invitations = $this->listInvitations();
         $invitation = $invitations[$originalSize];
-        $this->assertEquals("read", $invitation['permissions']);
+        $this->assertEquals('read', $invitation['permissions']);
 
         $this->removeInvitation($invitation['id']);
         $invitations = $this->listInvitations();

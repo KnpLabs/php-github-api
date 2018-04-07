@@ -45,16 +45,16 @@ class TestCase extends \PHPUnit\Framework\TestCase
                 return;
             }
             switch ($method) {
-                case "token":
-                    $client->authenticate($method, getenv("GITHUB_TOKEN_{$accountNumber}"));
+                case 'token':
+                    $client->authenticate($method, getenv('GITHUB_TOKEN_'.$accountNumber));
                     break;
-                case "login":
-                    $client->authenticate($method, getenv("GITHUB_USERNAME_{$accountNumber}"),
-                        getenv("GITHUB_PASSWORD_{$accountNumber}"));
+                case 'login':
+                    $client->authenticate($method, getenv('GITHUB_USERNAME_'.$accountNumber),
+                        getenv('GITHUB_PASSWORD_{$accountNumber}'));
                     break;
             }
         } catch (\Exception $e) {
-            error_log("Unable to authenticated", 0);
+            error_log('Unable to authenticated', 0);
         }
     }
 }
