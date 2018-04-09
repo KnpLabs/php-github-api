@@ -36,25 +36,21 @@ class TestCase extends \PHPUnit\Framework\TestCase
         $this->client = $client;
     }
 
-    protected function auth(Client &$client, $accountNumber = 1)
+    protected function auth(Client $client, $accountNumber = 1)
     {
-        try {
-            (new Dotenv(__DIR__.'/../../../../'))->load();
-            $method = getenv('GITHUB_AUTH_METHOD');
-            if (!getenv('GITHUB_AUTH_METHOD')) {
-                return;
-            }
-            switch ($method) {
-                case 'token':
-                    $client->authenticate($method, getenv('GITHUB_TOKEN_'.$accountNumber));
-                    break;
-                case 'login':
-                    $client->authenticate($method, getenv('GITHUB_USERNAME_'.$accountNumber),
-                        getenv('GITHUB_PASSWORD_{$accountNumber}'));
-                    break;
-            }
-        } catch (\Exception $e) {
-            error_log('Unable to authenticated', 0);
+        (new Dotenv(__DIR__.'/../../../../'))->load();
+        $method = getenv('GITHUB_AUTH_METHOD');
+        if (!getenv('GITHUB_AUTH_METHOD')) {
+            return;
+        }
+        switch ($method) {
+            case 'token':
+                $client->authenticate($method, getenv('GITHUB_TOKEN_'.$accountNumber));
+                break;
+            case 'login':
+                $client->authenticate($method, getenv('GITHUB_USERNAME_'.$accountNumber),
+                    getenv('GITHUB_PASSWORD_{$accountNumber}'));
+                break;
         }
     }
 }
