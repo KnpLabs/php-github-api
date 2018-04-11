@@ -3,9 +3,6 @@
 namespace Github\Tests\Integration;
 
 use Github\Client;
-use Github\Exception\ApiLimitExceedException;
-use Github\Exception\RuntimeException;
-use Symfony\Component\Dotenv\Dotenv;
 
 /**
  * @group integration
