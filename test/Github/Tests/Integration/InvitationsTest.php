@@ -3,6 +3,9 @@
 namespace Github\Tests\Integration;
 
 use Github\Client;
+use Github\Exception\ApiLimitExceedException;
+use Github\Exception\RuntimeException;
+use Symfony\Component\Dotenv\Dotenv;
 
 /**
  * @group integration
@@ -17,12 +20,13 @@ class InvitationsTest extends TestCase
 
     public function setUp()
     {
-        parent::setUp();
+        $this->client = new Client();
+        $this->invitedClient = new Client();
+        $this->authenticate($this->client);
+        $this->authenticate($this->invitedClient, 2);
+
         $this->username = getenv('GITHUB_USER_1');
         $this->repo = getenv('GITHUB_REPO_1');
-
-        $this->invitedClient = new Client();
-        $this->auth($this->invitedClient, 2);
     }
 
     /**
