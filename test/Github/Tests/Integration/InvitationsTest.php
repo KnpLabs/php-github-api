@@ -2,6 +2,7 @@
 
 namespace Github\Tests\Integration;
 
+use Github\Api\Repository\Invitations;
 use Github\Client;
 
 /**
@@ -34,7 +35,7 @@ class InvitationsTest extends TestCase
         $invitations = $this->listInvitations();
         $originalSize = count($invitations);
 
-        $this->client->repo()->collaborators()->add($this->username, $this->repo, getenv('GITHUB_USER_2'));
+        $this->client->repo()->invitations()->add($this->username, $this->repo, getenv('GITHUB_USER_2'));
         $invitations = $this->listInvitations();
         $this->assertEquals($originalSize + 1, count($invitations));
         $invitation = $invitations[$originalSize];
@@ -74,19 +75,17 @@ class InvitationsTest extends TestCase
 
     public function decline($id)
     {
-        return $this->invitedClient->repo()->invitations()->decline($id);
+        $this->invitedClient->repo()->invitations()->decline($id);
     }
 
     public function accept($id)
     {
-        return $this->invitedClient->repo()->invitations()->accept($id);
+        $this->invitedClient->repo()->invitations()->accept($id);
     }
 
     public function updateInvitation($id)
     {
-        return $this->client->repo()->invitations()->update($this->username, $this->repo, $id, [
-            'permissions' => 'read',
-        ]);
+        $this->client->repo()->invitations()->updatePermissions($this->username, $this->repo, $id, Invitations::READ_PERMISSIONS);
     }
 
     public function listInvitations()

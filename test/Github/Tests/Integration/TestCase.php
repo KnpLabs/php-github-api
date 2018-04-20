@@ -2,10 +2,10 @@
 
 namespace Github\Tests\Integration;
 
+use Dotenv\Dotenv;
 use Github\Client;
 use Github\Exception\ApiLimitExceedException;
 use Github\Exception\RuntimeException;
-use Symfony\Component\Dotenv\Dotenv;
 
 /**
  * @group integration
@@ -28,12 +28,12 @@ class TestCase extends \PHPUnit\Framework\TestCase
     protected function authenticate(Client $client, $accountNumber = 1)
     {
         $envFilePath = __DIR__.'/../../../../.env';
-        if (!file_exists($envFilePath)){
+        if (!file_exists($envFilePath)) {
             $this->markTestSkipped('Missing .env file');
             return;
         }
 
-        (new Dotenv())->load($envFilePath);
+        (new Dotenv(__DIR__.'/../../../../'))->load();
         $method = getenv('GITHUB_AUTH_METHOD');
         if (!getenv('GITHUB_AUTH_METHOD')) {
             $this->markTestSkipped('Missing authentication settings');
@@ -53,7 +53,8 @@ class TestCase extends \PHPUnit\Framework\TestCase
         $this->checkAuthentication($client);
     }
 
-    protected function checkAuthentication(Client $client){
+    protected function checkAuthentication(Client $client)
+    {
         try {
             $client->me()->show();
         } catch (ApiLimitExceedException $e) {
