@@ -6,11 +6,6 @@ use Github\Api\AbstractApi;
 
 /**
  * @link   https://developer.github.com/v3/repos/invitations/
- * @package Github\Api\Repository
- * Class Invitations
- *
- * The Invitations API allows you to invite other users to collaborate on a repo.
- * The invited users can choose to accept or decline the invitations.
  *
  * @author Daniel Camargo <daniel.camargo.eti@gmail.com>
  */
@@ -18,16 +13,19 @@ class Invitations extends AbstractApi
 {
     /**
      * Represents the read permissions.
+     *
      * @var string
      */
     const READ_PERMISSIONS = 'read';
     /**
      * Represents the write permissions.
+     *
      * @var string
      */
     const WRITE_PERMISSIONS = 'write';
     /**
      * Represents the admin permissions.
+     *
      * @var string
      */
     const ADMIN_PERMISSIONS = 'admin';
@@ -40,7 +38,7 @@ class Invitations extends AbstractApi
      * @param string $username
      * @param string $repository
      * @param string $collaborator
-     * @param array $params
+     * @param array  $params
      *
      * @return array
      */
@@ -52,9 +50,11 @@ class Invitations extends AbstractApi
     /**
      * Returns a list of all currently open repository invitations. The invitations are returned sorted by creation
      * date, with the oldest invitations appearing first.
-     * @param $username
-     * @param $repository
-     * @param array $params
+     *
+     * @param string $username
+     * @param string $repository
+     * @param array  $params
+     *
      * @return array
      */
     public function all($username, $repository, array $params = [])
@@ -67,10 +67,11 @@ class Invitations extends AbstractApi
      *
      * Updates the permissions of an invitations. Possible values are: read, write, and admin.
      *
-     * @param string $username
-     * @param string $repository
+     * @param string     $username
+     * @param string     $repository
      * @param int|string $invitation
-     * @param string $permissions
+     * @param string     $permissions
+     *
      * @return array
      */
     public function updatePermissions($username, $repository, $invitation, $permissions)
@@ -103,8 +104,8 @@ class Invitations extends AbstractApi
      *
      * Removes an invitation. Only an admin can remove an invitation.
      *
-     * @param string $username
-     * @param string $repository
+     * @param string     $username
+     * @param string     $repository
      * @param int|string $invitation
      */
     public function remove($username, $repository, $invitation)
