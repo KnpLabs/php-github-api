@@ -1,6 +1,11 @@
 ## Repo / Contents API
 [Back to the "Repos API"](../repos.md) | [Back to the navigation](../README.md)
 
+---
+
+You can read about references [here](https://developer.github.com/v3/git/refs/).
+
+
 ### Get a repository's README
 
 ```php
