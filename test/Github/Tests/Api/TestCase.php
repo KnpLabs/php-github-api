@@ -21,7 +21,10 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
             ->getMock();
         $httpClient
             ->expects($this->any())
-            ->method('sendRequest');
+            ->method('sendRequest')
+            ->willReturnCallback(function ($a) {
+                return $a;
+            });
 
         $client = \Github\Client::createWithHttpClient($httpClient);
 

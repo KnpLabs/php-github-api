@@ -3,6 +3,7 @@
 namespace Github\Api\Repository;
 
 use Github\Api\AbstractApi;
+use Github\Exception\InvalidArgumentException;
 
 /**
  * @link   https://developer.github.com/v3/repos/invitations/
@@ -22,7 +23,19 @@ class Invitations extends AbstractApi
      *
      * @var string
      */
+    const PULL_PERMISSIONS = 'pull';
+    /**
+     * Represents the write permissions.
+     *
+     * @var string
+     */
     const WRITE_PERMISSIONS = 'write';
+    /**
+     * Represents the write permissions.
+     *
+     * @var string
+     */
+    const PUSH_PERMISSIONS = 'push';
     /**
      * Represents the admin permissions.
      *
@@ -38,12 +51,21 @@ class Invitations extends AbstractApi
      * @param string $username
      * @param string $repository
      * @param string $collaborator
-     * @param array  $params
+     * @param string $permissions is optional and possible values are: pull, push, and admin.
      *
      * @return array
      */
-    public function add($username, $repository, $collaborator, array $params = [])
+    public function add($username, $repository, $collaborator, $permissions = null)
     {
+        if (!in_array($permissions, [null, self::PULL_PERMISSIONS, self::PULL_PERMISSIONS, self::ADMIN_PERMISSIONS])) {
+            throw new InvalidArgumentException('Invalid collaborator permissions: '.$permissions);
+        }
+
+        $params = [];
+        if ($permissions) {
+            $params['permissions'] = $permissions;
+        }
+
         return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/collaborators/'.rawurlencode($collaborator), $params);
     }
 
@@ -65,17 +87,21 @@ class Invitations extends AbstractApi
     /**
      * @link https://developer.github.com/v3/repos/invitations/#update-a-repository-invitation
      *
-     * Updates the permissions of an invitations. Possible values are: read, write, and admin.
+     * Updates the permissions of an invitations.
      *
      * @param string     $username
      * @param string     $repository
      * @param int|string $invitation
-     * @param string     $permissions
+     * @param string     $permissions possible values are: read, write, and admin.
      *
      * @return array
      */
     public function updatePermissions($username, $repository, $invitation, $permissions)
     {
+        if (!in_array($permissions, [self::READ_PERMISSIONS, self::WRITE_PERMISSIONS, self::ADMIN_PERMISSIONS])) {
+            throw new InvalidArgumentException('Invalid invitation permissions: '.$permissions);
+        }
+
         return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/invitations/'.rawurlencode($invitation), ['permissions' => $permissions]);
     }
 
