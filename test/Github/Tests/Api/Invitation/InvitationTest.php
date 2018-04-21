@@ -161,11 +161,13 @@ class InvitationTest extends TestCase
                 if (is_callable($callback)) {
                     call_user_func($callback, $request);
                 }
+
                 return $response;
             });
 
         /** @var HttpClient $httpClient */
         $httpClient = $stub;
+
         return Client::createWithHttpClient($httpClient);
     }
 }
