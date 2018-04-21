@@ -143,7 +143,7 @@ class InvitationTest extends TestCase
     }
 
     /**
-     * @param  callable  $callback
+     * @param callable   $callback
      * @param null|array $result
      *
      * @return Client

@@ -51,7 +51,7 @@ class Invitations extends AbstractApi
      * @param string $username
      * @param string $repository
      * @param string $collaborator
-     * @param string $permissions is optional and possible values are: pull, push, and admin.
+     * @param string $permissions  is optional and possible values are: pull, push, and admin.
      *
      * @return array
      */
