@@ -30,6 +30,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
         $envFilePath = __DIR__.'/../../../../.env';
         if (!file_exists($envFilePath)) {
             $this->markTestSkipped('Missing .env file');
+
             return;
         }
 
@@ -37,6 +38,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
         $method = getenv('GITHUB_AUTH_METHOD');
         if (!getenv('GITHUB_AUTH_METHOD')) {
             $this->markTestSkipped('Missing authentication settings');
+
             return;
         }
         switch ($method) {
