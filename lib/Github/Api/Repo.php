@@ -10,6 +10,7 @@ use Github\Api\Repository\DeployKeys;
 use Github\Api\Repository\Downloads;
 use Github\Api\Repository\Forks;
 use Github\Api\Repository\Hooks;
+use Github\Api\Repository\Invitations;
 use Github\Api\Repository\Labels;
 use Github\Api\Repository\Projects;
 use Github\Api\Repository\Protection;
@@ -281,6 +282,18 @@ class Repo extends AbstractApi
     public function collaborators()
     {
         return new Collaborators($this->client);
+    }
+
+    /**
+     * Manage the invitations of a repository.
+     *
+     * @link http://developer.github.com/v3/repos/invitations/
+     *
+     * @return Invitations
+     */
+    public function invitations()
+    {
+        return new Invitations($this->client);
     }
 
     /**
