@@ -101,7 +101,7 @@ class Search extends AbstractApi
      *
      * @link https://developer.github.com/v3/search/#search-topics
      *
-     * @param string $q     the filter
+     * @param string $q the filter
      *
      * @return array
      */
