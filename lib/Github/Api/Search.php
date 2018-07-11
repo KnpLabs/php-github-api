@@ -95,4 +95,18 @@ class Search extends AbstractApi
 
         return $this->get('/search/commits', ['q' => $q, 'sort' => $sort, 'order' => $order]);
     }
+
+    /**
+     * Search commits by filter (q).
+     *
+     * @link https://developer.github.com/v3/search/#search-topics
+     *
+     * @param string $q     the filter
+     *
+     * @return array
+     */
+    public function topics($q)
+    {
+        return $this->get('/search/topics', ['q' => $q]);
+    }
 }

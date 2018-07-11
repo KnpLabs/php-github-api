@@ -197,6 +197,26 @@ class SearchTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function shouldSearchTopics()
+    {
+        $expectedArray = ['total_count' => '0'];
+
+        $api = $this->getApiMock();
+
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/search/topics', ['q' => 'query text'])
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals(
+            $expectedArray,
+            $api->topics('query text')
+        );
+    }
+
+    /**
      * @return string
      */
     protected function getApiClass()
