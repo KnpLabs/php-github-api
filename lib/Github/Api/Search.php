@@ -107,6 +107,9 @@ class Search extends AbstractApi
      */
     public function topics($q)
     {
+        //This api is in preview mode, so set the correct accept-header
+        $this->acceptHeaderValue = 'application/vnd.github.mercy-preview+json';
+
         return $this->get('/search/topics', ['q' => $q]);
     }
 }
