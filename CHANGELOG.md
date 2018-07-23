@@ -7,6 +7,12 @@ The change log describes what is "Added", "Removed", "Changed" or "Fixed" betwee
 ### Added
 
 - API endpoint `Github\Api\Repo::transfer()`
+- API endpoint `Github\Api\Notification::markThreadRead()`
+- API endpoint `Github\Api\Search::topics()`
+
+### Fixed
+
+- Make sure to always reset the "per page" in `Github\ResultPager::fetchAll()`.
 
 ## 2.8.0
 
