@@ -66,6 +66,7 @@ $jwt = (new Builder)
     ->setIssuer($integrationId)
     ->setIssuedAt(time())
     ->setExpiration(time() + 60)
+    // `file://` prefix for file path or file contents itself
     ->sign(new Sha256(),  new Key('file:///path/to/integration.private-key.pem'))
     ->getToken();
 
