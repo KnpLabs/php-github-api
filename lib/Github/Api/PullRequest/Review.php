@@ -112,11 +112,7 @@ class Review extends AbstractApi
      */
     public function create($username, $repository, $pullRequest, array $params = [])
     {
-        if (!isset($params['event'])) {
-            throw new MissingArgumentException('event');
-        }
-
-        if (!in_array($params['event'], ['APPROVE', 'REQUEST_CHANGES', 'COMMENT'], true)) {
+        if (array_key_exists('event', $params) && !in_array($params['event'], ['APPROVE', 'REQUEST_CHANGES', 'COMMENT'], true)) {
             throw new InvalidArgumentException(sprintf('"event" must be one of ["APPROVE", "REQUEST_CHANGES", "COMMENT"] ("%s" given).', $params['event']));
         }
 
