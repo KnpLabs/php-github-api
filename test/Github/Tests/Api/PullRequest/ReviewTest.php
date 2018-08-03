@@ -212,9 +212,8 @@ class ReviewTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
-    public function shouldNotCreateReviewWithoutEvent()
+    public function shouldCreatePendingReviewWithoutEvent()
     {
         $data = [
             'body' => 'Nice change',
@@ -222,8 +221,9 @@ class ReviewTest extends TestCase
 
         $api = $this->getApiMock();
         $api
-            ->expects($this->never())
+            ->expects($this->once())
             ->method('post')
+            ->with('/repos/octocat/Hello-World/pulls/12/reviews')
         ;
 
         $api->create('octocat', 'Hello-World', 12, $data);
