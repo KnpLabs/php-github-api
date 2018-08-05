@@ -41,7 +41,6 @@ class Notification extends AbstractApi
             $parameters['before'] = $before->format(DateTime::ISO8601);
         }
 
-
         return $this->get('/notifications', $parameters);
     }
 
