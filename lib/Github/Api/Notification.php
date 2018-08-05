@@ -26,7 +26,7 @@ class Notification extends AbstractApi
      *
      * @return array array of notifications
      */
-    public function all($includingRead = false, $participating = false, DateTime $since = null)
+    public function all($includingRead = false, $participating = false, DateTime $since = null, DateTime $before = null)
     {
         $parameters = [
             'all' => $includingRead,
@@ -36,6 +36,11 @@ class Notification extends AbstractApi
         if ($since !== null) {
             $parameters['since'] = $since->format(DateTime::ISO8601);
         }
+
+        if ($before !== null) {
+            $parameters['before'] = $before->format(DateTime::ISO8601);
+        }
+
 
         return $this->get('/notifications', $parameters);
     }
