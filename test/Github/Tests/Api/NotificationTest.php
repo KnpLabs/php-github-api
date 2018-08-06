@@ -48,6 +48,27 @@ class NotificationTest extends TestCase
     /**
      * @test
      */
+    public function shouldGetNotificationsBefore()
+    {
+        $before = new DateTime('now');
+
+        $parameters = [
+            'all' => false,
+            'participating' => false,
+            'before' => $before->format(DateTime::ISO8601),
+        ];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/notifications', $parameters);
+
+        $api->all(false, false, null, $before);
+    }
+
+    /**
+     * @test
+     */
     public function shouldGetNotificationsIncludingAndParticipating()
     {
         $parameters = [
