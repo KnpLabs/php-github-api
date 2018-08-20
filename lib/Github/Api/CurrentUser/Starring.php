@@ -28,6 +28,7 @@ class Starring extends AbstractApi
         if ('star' === $bodyType) {
             $this->acceptHeaderValue = sprintf('application/vnd.github.%s.star+json', $this->client->getApiVersion());
         }
+
         return $this;
     }
 
