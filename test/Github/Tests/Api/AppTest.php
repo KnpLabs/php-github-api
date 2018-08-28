@@ -7,6 +7,26 @@ class AppTest extends TestCase
     /**
      * @test
      */
+    public function shouldCreateInstallationTokenForInstallation()
+    {
+        $result = [
+            'token' => 'v1.1f699f1069f60xxx',
+            'expires_at' => '2016-07-11T22:14:10Z',
+        ];
+        $installationId = 'installation1';
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('post')
+            ->with('/app/installations/'.$installationId.'/access_tokens', [])
+            ->willReturn($result);
+
+        $this->assertEquals($result, $api->createInstallationToken($installationId));
+    }
+
+    /**
+     * @test
+     */
     public function shouldFindRepositoriesForApplication()
     {
         $result = ['installation1', 'installation2'];
