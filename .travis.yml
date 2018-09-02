@@ -2,9 +2,13 @@ language: php
 sudo: false
 
 cache:
-    directories:
-        - vendor
-        - $HOME/.composer/cache
+  directories:
+    - vendor
+    - $HOME/.composer/cache
+
+env:
+  global:
+    - TEST_COMMAND="vendor/bin/phpunit --verbose --coverage-text"
 
 php:
   - 5.6
@@ -16,9 +20,15 @@ matrix:
   include:
     - php: hhvm
       dist: trusty
+    - php: 7.2
+      name: Backward compatibillity check
+      env: DEPENDENCIES="roave/backward-compatibility-check" TEST_COMMAND="./vendor/bin/roave-backward-compatibility-check"
+
+before_install:
+    - if ! [ -z "$DEPENDENCIES" ]; then composer require --no-update ${DEPENDENCIES}; fi;
 
 install:
   - travis_retry composer install --no-interaction
 
 script:
-  - vendor/bin/phpunit --verbose --coverage-text
+  - $TEST_COMMAND
