@@ -16,6 +16,8 @@ class Apps extends AbstractApi
      * @param int $userId         An optional user id on behalf of whom the
      *                            token will be requested
      *
+     * @link https://developer.github.com/v3/apps/#create-a-new-installation-token
+     *
      * @return array token and token metadata
      */
     public function createInstallationToken($installationId, $userId = null)
@@ -25,7 +27,7 @@ class Apps extends AbstractApi
             $parameters['user_id'] = $userId;
         }
 
-        return $this->post('/installations/'.rawurlencode($installationId).'/access_tokens', $parameters);
+        return $this->post('/app/installations/'.rawurlencode($installationId).'/access_tokens', $parameters);
     }
 
     /**
