@@ -2,6 +2,22 @@
 
 The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release.
 
+## 2.10.0
+
+### Added
+
+- Support for "before" parameter on Notification API (#724)
+
+### Changed
+
+- Allow unspecified `event` when creating review (#723)
+
+### Fixed
+
+- Adjust: installationn access token endpoint (#731)
+- Fixed "get single label" example and add correct example for getting issue's labels (#732)
+- Add comment about `Key` constructor argument (#722)
+
 ## 2.9.0
 
 ### Added
