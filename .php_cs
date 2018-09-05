@@ -1,14 +1,14 @@
 <?php
 
-require __DIR__.'/vendor/autoload.php';
+$finder = PhpCsFixer\Finder::create()
+    ->in(__DIR__);
 
-use SLLH\StyleCIBridge\ConfigBridge;
+$config = PhpCsFixer\Config::create()
+    ->setRiskyAllowed(true)
+    ->setRules([
 
-$config = ConfigBridge::create();
-$config->setUsingCache(true);
-
-if (method_exists($config, 'setRiskyAllowed')) {
-    $config->setRiskyAllowed(true);
-}
+    ])
+    ->setFinder($finder)
+;
 
 return $config;
