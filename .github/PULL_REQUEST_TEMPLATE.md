@@ -19,7 +19,3 @@ _Put an `x` in the boxe(s) that apply_
 ## Agreement
 
 I have read the [CONTRIBUTING](https://github.com/KnpLabs/php-github-api/blob/master/CONTRIBUTING.md) and [CODING GUIDELINE](https://github.com/KnpLabs/php-github-api/blob/master/CODING_GUIDELINE.md) docs
-
-## Further comments
-
-If this is a relatively large or complex change, kick off the discussion by explaining why you chose the solution you did and what alternatives you considered, etc...
