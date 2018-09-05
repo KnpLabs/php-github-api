@@ -21,7 +21,7 @@ class RateLimit extends AbstractApi
     /**
      * Get rate limits data in an array.
      *
-     * @deprecated 2.10.. Use `->getResources()` instead
+     * @deprecated since 2.11.0 Use `->getResources()` instead
      *
      * @return array
      */
@@ -83,7 +83,7 @@ class RateLimit extends AbstractApi
     /**
      * Get core rate limit.
      *
-     * @deprecated 2.10.. Use `->getResource('core')->getLimit()` instead
+     * @deprecated since 2.11.0 Use `->getResource('core')->getLimit()` instead
      *
      * @return int
      */
@@ -95,7 +95,7 @@ class RateLimit extends AbstractApi
     /**
      * Get search rate limit.
      *
-     * @deprecated 2.10.. Use `->getResource('core')->getLimit()` instead
+     * @deprecated since 2.11.0 Use `->getResource('core')->getLimit()` instead
      *
      * @return int
      */
