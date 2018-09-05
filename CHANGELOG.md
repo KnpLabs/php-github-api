@@ -2,6 +2,17 @@
 
 The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release.
 
+## 2.10.1
+
+### Fixed
+
+- Convert the assignee parameter to array to avoid getting a 422 error on github (#738)
+- Fix GraphQL test warnings when they do not assert anything (#735)
+
+### Changed
+
+- Check for BC breaks during the travis build (#734)
+
 ## 2.10.0
 
 ### Added
