@@ -27,7 +27,8 @@ class GraphQLTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $api->method('post')
+        $api->expects($this->once())
+            ->method('post')
             ->with('/graphql', $this->arrayHasKey('variables'));
 
         $api->execute('bar', ['variable' => 'foo']);
@@ -40,7 +41,8 @@ class GraphQLTest extends TestCase
     {
         $api = $this->getApiMock();
 
-        $api->method('post')
+        $api->expects($this->once())
+            ->method('post')
             ->with('/graphql', $this->equalTo([
                 'query'=>'bar',
                 'variables' => '{"variable":"foo"}',
