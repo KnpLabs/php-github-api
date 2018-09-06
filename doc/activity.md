@@ -31,6 +31,15 @@ $activity = $client->api('current_user')->starring()->all();
 ```
 Returns an array of starred repos.
 
+### Get repos that a authenticated user has starred with creation date
+
+Support for getting the star creation timestamp in the response, using the custom `Accept: application/vnd.github.v3.star+json` header.
+
+```php
+$activity = $client->api('current_user')->starring()->configure('star')->all();
+```
+Returns an array of starred repos, including the `created_at` attribute for every star.
+
 ### Check if authenticated user has starred a specific repo
 
 ```php
