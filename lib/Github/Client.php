@@ -25,6 +25,7 @@ use Psr\Cache\CacheItemPoolInterface;
  * @method Api\Enterprise enterprise()
  * @method Api\Miscellaneous\CodeOfConduct codeOfConduct()
  * @method Api\Miscellaneous\Emojis emojis()
+ * @method Api\Miscellaneous\Licenses licenses()
  * @method Api\GitData git()
  * @method Api\GitData gitData()
  * @method Api\Gists gist()
@@ -219,6 +220,10 @@ class Client
 
             case 'markdown':
                 $api = new Api\Markdown($this);
+                break;
+
+            case 'licenses':
+                $api = new Api\Licenses($this);
                 break;
 
             case 'notification':
