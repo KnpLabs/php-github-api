@@ -223,7 +223,7 @@ class Client
                 break;
 
             case 'licenses':
-                $api = new Api\Licenses($this);
+                $api = new Api\Miscellaneous\Licenses($this);
                 break;
 
             case 'notification':
