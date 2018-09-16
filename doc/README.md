@@ -34,6 +34,7 @@ v3 APIs:
   * [Code of conduct](miscellaneous/codeofconduct.md)
   * [Emojis](miscellaneous/emojis.md)
   * [Gitignore](miscellaneous/gitignore.md)
+  * [Licenses](miscellaneous/licenses.md)
   * [Markdown](miscellaneous/markdown.md)
 * [Organization](organization.md)
   * [Members](organization/members.md)
