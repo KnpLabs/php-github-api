@@ -8,7 +8,7 @@
 [![Monthly Downloads](https://poser.pugx.org/knplabs/github-api/d/monthly)](https://packagist.org/packages/knplabs/github-api)
 [![Daily Downloads](https://poser.pugx.org/knplabs/github-api/d/daily)](https://packagist.org/packages/knplabs/github-api)
 
-A simple Object Oriented wrapper for GitHub API, written with PHP5.
+A simple Object Oriented wrapper for GitHub API, written with PHP.
 
 Uses [GitHub API v3](http://developer.github.com/v3/) & supports [GitHub API v4](http://developer.github.com/v4). The object API (v3) is very similar to the RESTful API.
 
