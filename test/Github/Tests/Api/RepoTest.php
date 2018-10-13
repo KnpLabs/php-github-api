@@ -135,6 +135,7 @@ class RepoTest extends TestCase
                 'has_wiki'      => false,
                 'has_downloads' => false,
                 'auto_init'     => false,
+                'has_projects' => true,
             ])
             ->will($this->returnValue($expectedArray));
 
@@ -160,6 +161,7 @@ class RepoTest extends TestCase
                 'has_wiki'      => false,
                 'has_downloads' => false,
                 'auto_init'     => false,
+                'has_projects' => true,
             ])
             ->will($this->returnValue($expectedArray));
 
@@ -329,6 +331,7 @@ class RepoTest extends TestCase
                 'has_wiki'      => false,
                 'has_downloads' => false,
                 'auto_init'     => false,
+                'has_projects' => true,
             ])
             ->will($this->returnValue($expectedArray));
 
