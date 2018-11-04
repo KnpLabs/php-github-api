@@ -21,7 +21,7 @@ Note: Draft releases are only visible to authenticated users who have push acces
 ### List releases for a tag
 
 ```php
-$release = $client->api('repo')->releases()->all('twbs', 'bootstrap', 'd890eec');
+$release = $client->api('repo')->releases()->tag('twbs', 'bootstrap', 'd890eec');
 ```
 
 ### List all releases
