@@ -21,7 +21,7 @@ class Comments extends AbstractApi
      * @link https://developer.github.com/v3/pulls/comments/#custom-media-types
      *
      * @param string|null $bodyType
-     * @param string|null @apiVersion
+     * @param string|null $apiVersion
      *
      * @return self
      */

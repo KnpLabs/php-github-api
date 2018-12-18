@@ -361,7 +361,7 @@ class Client
     /**
      * Add a cache plugin to cache responses locally.
      *
-     * @param CacheItemPoolInterface $cache
+     * @param CacheItemPoolInterface $cachePool
      * @param array                  $config
      */
     public function addCache(CacheItemPoolInterface $cachePool, array $config = [])
