@@ -143,7 +143,7 @@ class Contents extends AbstractApi
                 'ref' => $reference,
             ]);
 
-            if ($response->getStatusCode() != 200) {
+            if ($response->getStatusCode() !== 200) {
                 return false;
             }
         } catch (TwoFactorAuthenticationRequiredException $ex) {

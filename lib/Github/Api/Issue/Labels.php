@@ -120,10 +120,10 @@ class Labels extends AbstractApi
      *
      * @link https://developer.github.com/v3/issues/labels/#remove-a-label-from-an-issue
      *
-     * @param string $username
-     * @param string $repository
-     * @param int    $issue
-     * @param string $labels
+     * @param string       $username
+     * @param string       $repository
+     * @param int          $issue
+     * @param string|array $labels
      *
      * @return array
      *
@@ -134,7 +134,7 @@ class Labels extends AbstractApi
         if (is_string($labels)) {
             $labels = [$labels];
         } elseif (0 === count($labels)) {
-            throw new InvalidArgumentException();
+            throw new InvalidArgumentException('The labels parameter should be a single label or an array of labels');
         }
 
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/labels', $labels);
