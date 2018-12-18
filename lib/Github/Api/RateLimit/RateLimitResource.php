@@ -7,6 +7,18 @@ namespace Github\Api\RateLimit;
  */
 class RateLimitResource
 {
+    /** @var string */
+    private $name;
+
+    /** @var int */
+    private $limit;
+
+    /** @var int */
+    private $reset;
+
+    /** @var int */
+    private $remaining;
+
     /**
      * @param string $name
      * @param array  $data
