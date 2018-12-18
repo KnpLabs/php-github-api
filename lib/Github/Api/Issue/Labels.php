@@ -167,7 +167,7 @@ class Labels extends AbstractApi
      * @param string $issue
      * @param string $label
      *
-     * @return null
+     * @return array|string
      */
     public function remove($username, $repository, $issue, $label)
     {
@@ -183,7 +183,7 @@ class Labels extends AbstractApi
      * @param string $repository
      * @param string $issue
      *
-     * @return null
+     * @return array|string
      */
     public function clear($username, $repository, $issue)
     {
