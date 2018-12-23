@@ -35,7 +35,9 @@ class GithubExceptionThrowerTest extends TestCase
         $plugin = new GithubExceptionThrower();
 
         if ($exception) {
-            $this->expectExceptionObject($exception);
+            $this->expectException(get_class($exception));
+            $this->expectExceptionCode($exception->getCode());
+            $this->expectExceptionMessage($exception->getMessage());
         }
 
         $plugin->handleRequest(
