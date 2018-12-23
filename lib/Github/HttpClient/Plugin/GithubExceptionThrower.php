@@ -84,6 +84,17 @@ class GithubExceptionThrower implements Plugin
                 }
             }
 
+            if (502 == $response->getStatusCode() && isset($content['errors']) && is_array($content['errors'])) {
+                $errors = [];
+                foreach ($content['errors'] as $error) {
+                    if (isset($error['message'])) {
+                        $errors[] = $error['message'];
+                    }
+                }
+
+                throw new RuntimeException(implode(', ', $errors), 502);
+            }
+
             throw new RuntimeException(isset($content['message']) ? $content['message'] : $content, $response->getStatusCode());
         });
     }
