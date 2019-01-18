@@ -2,6 +2,8 @@
 
 namespace Github\Api;
 
+use Github\Exception\MissingArgumentException;
+
 /**
  * Creating, deleting and listing authorizations.
  *
@@ -43,6 +45,10 @@ class Authorizations extends AbstractApi
      */
     public function create(array $params, $OTPCode = null)
     {
+        if (!isset($params['note'])) {
+            throw new MissingArgumentException(['note']);
+        }
+
         $headers = null === $OTPCode ? [] : ['X-GitHub-OTP' => $OTPCode];
 
         return $this->post('/authorizations', $params, $headers);

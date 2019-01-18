@@ -134,7 +134,7 @@ class Review extends AbstractApi
      *
      * @return array the pull request review
      */
-    public function submit($username, $repository, $pullRequest, $id, array $params = [])
+    public function submit($username, $repository, $pullRequest, $id, array $params)
     {
         if (!isset($params['event'])) {
             throw new MissingArgumentException('event');

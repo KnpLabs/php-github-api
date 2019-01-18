@@ -81,7 +81,7 @@ class Notifications extends AbstractApi
      *
      * @return array
      */
-    public function markAsRead($id, array $params)
+    public function markAsRead($id, array $params = [])
     {
         return $this->patch('/notifications/threads/'.rawurlencode($id), $params);
     }
@@ -124,7 +124,7 @@ class Notifications extends AbstractApi
      *
      * @return array
      */
-    public function createSubscription($id, array $params)
+    public function createSubscription($id, array $params = [])
     {
         return $this->put('/notifications/threads/'.rawurlencode($id).'/subscription', $params);
     }

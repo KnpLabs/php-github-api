@@ -11,7 +11,7 @@ use Github\Api\AbstractApi;
  */
 class Commits extends AbstractApi
 {
-    public function all($username, $repository, array $params)
+    public function all($username, $repository, array $params = [])
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/commits', $params);
     }

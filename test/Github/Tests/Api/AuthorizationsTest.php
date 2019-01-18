@@ -39,6 +39,21 @@ class AuthorizationsTest extends TestCase
 
     /**
      * @test
+     * @expectedException \Github\Exception\MissingArgumentException
+     */
+    public function shouldNotAuthorizationWithoutNote()
+    {
+        $input = [];
+
+        $api = $this->getApiMock();
+        $api->expects($this->never())
+            ->method('post');
+
+        $api->create($input);
+    }
+
+    /**
+     * @test
      */
     public function shouldAuthorization()
     {
