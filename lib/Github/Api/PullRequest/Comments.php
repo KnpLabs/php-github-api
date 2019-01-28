@@ -27,7 +27,7 @@ class Comments extends AbstractApi
      */
     public function configure($bodyType = null, $apiVersion = null)
     {
-        if (!in_array($apiVersion, ['squirrel-girl-preview'])) {
+        if ($apiVersion !== 'squirrel-girl-preview') {
             $apiVersion = $this->client->getApiVersion();
         }
 
