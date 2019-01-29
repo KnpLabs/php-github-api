@@ -3,7 +3,7 @@ namespace Github\Model;
 
 use function Makasim\Values\get_value;
 
-class User
+final class User
 {
     private $values = [];
 
