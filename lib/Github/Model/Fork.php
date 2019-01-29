@@ -60,7 +60,7 @@ class Fork
 
     public function getUrl()
     {
-        return get_value($this, 'fork');
+        return get_value($this, 'url');
     }
 
     public function getForksUrl()
