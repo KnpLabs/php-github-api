@@ -4,7 +4,7 @@ namespace Github\Model;
 use function Makasim\Values\get_objects;
 use function Makasim\Values\get_value;
 
-class SearchIssuesResult
+final class SearchIssuesResult
 {
     private $values = [];
 
