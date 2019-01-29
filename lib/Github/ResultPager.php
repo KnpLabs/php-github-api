@@ -5,6 +5,8 @@ namespace Github;
 use Github\Api\ApiInterface;
 use Github\Api\Search;
 use Github\HttpClient\Message\ResponseMediator;
+use function Makasim\Values\set_objects;
+use function Makasim\Values\set_values;
 
 /**
  * Pager class for supporting pagination in github classes.
@@ -82,14 +84,23 @@ class ResultPager implements ResultPagerInterface
             $result = $this->callApi($api, $method, $parameters);
             $this->postFetch();
 
-            if ($isSearch) {
+            if ($isSearch && is_object($result)) {
+                $result = $result->getItems();
+            } else if ($isSearch) {
                 $result = isset($result['items']) ? $result['items'] : $result;
             }
 
             while ($this->hasNext()) {
                 $next = $this->fetchNext();
 
-                if ($isSearch) {
+                if ($isSearch && is_object($result)) {
+                    $resultClass = get_class($result);
+
+                    $nextResult = new $resultClass;
+                    set_values($nextResult, $next);
+
+                    $result = array_merge($result, $nextResult->getItems());
+                } else if ($isSearch) {
                     $result = array_merge($result, $next['items']);
                 } else {
                     $result = array_merge($result, $next);

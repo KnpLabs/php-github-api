@@ -4,6 +4,8 @@ namespace Github\Api\Repository;
 
 use Github\Api\AbstractApi;
 use Github\Api\AcceptHeaderTrait;
+use Github\Model\User;
+use function Makasim\Values\set_values;
 
 /**
  * @link   https://developer.github.com/v3/activity/starring/#list-stargazers
@@ -33,8 +35,21 @@ class Stargazers extends AbstractApi
         return $this;
     }
 
+    /**
+     * @return User[]
+     */
     public function all($username, $repository)
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/stargazers');
+        $rawStargazers = $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/stargazers');
+
+        $stargazers = [];
+        foreach ($rawStargazers as $rawStargazer) {
+            $stargazer = new User();
+            set_values($stargazer, $rawStargazer);
+
+            $stargazers[] = $stargazer;
+        }
+
+        return $stargazers;
     }
 }

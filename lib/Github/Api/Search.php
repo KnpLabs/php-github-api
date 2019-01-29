@@ -1,6 +1,8 @@
 <?php
 
 namespace Github\Api;
+use Github\Model\SearchIssuesResult;
+use function Makasim\Values\set_values;
 
 /**
  * Implement the Search API.
@@ -38,11 +40,16 @@ class Search extends AbstractApi
      * @param string $sort  the sort field
      * @param string $order asc/desc
      *
-     * @return array list of issues found
+     * @return SearchIssuesResult
      */
     public function issues($q, $sort = 'updated', $order = 'desc')
     {
-        return $this->get('/search/issues', ['q' => $q, 'sort' => $sort, 'order' => $order]);
+        $rawResult = $this->get('/search/issues', ['q' => $q, 'sort' => $sort, 'order' => $order]);
+
+        $result = new SearchIssuesResult();
+        set_values($result, $rawResult);
+
+        return $result;
     }
 
     /**
