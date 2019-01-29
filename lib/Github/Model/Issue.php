@@ -5,7 +5,7 @@ use function Makasim\Values\get_object;
 use function Makasim\Values\get_objects;
 use function Makasim\Values\get_value;
 
-class Issue
+final class Issue
 {
     private $values = [];
 
