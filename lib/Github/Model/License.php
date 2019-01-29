@@ -3,7 +3,7 @@ namespace Github\Model;
 
 use function Makasim\Values\get_value;
 
-class License
+final class License
 {
     private $values = [];
 
