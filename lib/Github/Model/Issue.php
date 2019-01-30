@@ -1,4 +1,5 @@
 <?php
+
 namespace Github\Model;
 
 use function Makasim\Values\get_object;

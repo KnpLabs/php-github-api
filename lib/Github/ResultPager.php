@@ -5,7 +5,6 @@ namespace Github;
 use Github\Api\ApiInterface;
 use Github\Api\Search;
 use Github\HttpClient\Message\ResponseMediator;
-use function Makasim\Values\set_objects;
 use function Makasim\Values\set_values;
 
 /**
@@ -86,7 +85,7 @@ class ResultPager implements ResultPagerInterface
 
             if ($isSearch && is_object($result)) {
                 $result = $result->getItems();
-            } else if ($isSearch) {
+            } elseif ($isSearch) {
                 $result = isset($result['items']) ? $result['items'] : $result;
             }
 
@@ -96,11 +95,11 @@ class ResultPager implements ResultPagerInterface
                 if ($isSearch && is_object($result)) {
                     $resultClass = get_class($result);
 
-                    $nextResult = new $resultClass;
+                    $nextResult = new $resultClass();
                     set_values($nextResult, $next);
 
                     $result = array_merge($result, $nextResult->getItems());
-                } else if ($isSearch) {
+                } elseif ($isSearch) {
                     $result = array_merge($result, $next['items']);
                 } else {
                     $result = array_merge($result, $next);

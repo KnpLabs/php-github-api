@@ -1,6 +1,7 @@
 <?php
 
 namespace Github\Api;
+
 use Github\Model\SearchIssuesResult;
 use function Makasim\Values\set_values;
 
