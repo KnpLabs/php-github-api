@@ -9,6 +9,7 @@ use Github\Exception\TwoFactorAuthenticationRequiredException;
 use Github\Exception\ValidationFailedException;
 use Github\HttpClient\Message\ResponseMediator;
 use Http\Client\Common\Plugin;
+use Http\Promise\Promise;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -21,7 +22,7 @@ class GithubExceptionThrower implements Plugin
     /**
      * {@inheritdoc}
      */
-    public function handleRequest(RequestInterface $request, callable $next, callable $first)
+    public function handleRequest(RequestInterface $request, callable $next, callable $first): Promise
     {
         return $next($request)->then(function (ResponseInterface $response) use ($request) {
             if ($response->getStatusCode() < 400 || $response->getStatusCode() > 600) {

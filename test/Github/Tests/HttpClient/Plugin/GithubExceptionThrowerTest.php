@@ -4,8 +4,9 @@ namespace Github\Tests\HttpClient\Plugin;
 
 use Github\Exception\ExceptionInterface;
 use Github\HttpClient\Plugin\GithubExceptionThrower;
-use GuzzleHttp\Promise\FulfilledPromise;
 use GuzzleHttp\Psr7\Response;
+use Http\Promise\FulfilledPromise;
+use Http\Promise\Promise;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -25,11 +26,11 @@ class GithubExceptionThrowerTest extends TestCase
         /** @var RequestInterface $request */
         $request = $this->getMockForAbstractClass(RequestInterface::class);
 
-        $promise = $this->getMockBuilder(FulfilledPromise::class)->disableOriginalConstructor()->getMock();
+        $promise = $this->getMockBuilder(Promise::class)->getMock();
         $promise->expects($this->once())
             ->method('then')
             ->willReturnCallback(function ($callback) use ($response) {
-                return $callback($response);
+                return new FulfilledPromise($callback($response));
             });
 
         $plugin = new GithubExceptionThrower();

@@ -4,6 +4,8 @@ namespace Github\Tests\HttpClient\Plugin;
 
 use Github\HttpClient\Plugin\PathPrepend;
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
+use Http\Promise\FulfilledPromise;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -22,6 +24,8 @@ class PathPrependTest extends TestCase
         $newRequest = null;
         $plugin->handleRequest($request, function ($request) use (&$newRequest) {
             $newRequest = $request;
+
+            return new FulfilledPromise(new Response());
         }, function () {
             throw new \RuntimeException('Did not expect plugin to call first');
         });

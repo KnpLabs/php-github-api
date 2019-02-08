@@ -5,6 +5,7 @@ namespace Github\HttpClient\Plugin;
 use Github\Client;
 use Github\Exception\RuntimeException;
 use Http\Client\Common\Plugin;
+use Http\Promise\Promise;
 use Psr\Http\Message\RequestInterface;
 
 /**
@@ -28,7 +29,7 @@ class Authentication implements Plugin
     /**
      * {@inheritdoc}
      */
-    public function handleRequest(RequestInterface $request, callable $next, callable $first)
+    public function handleRequest(RequestInterface $request, callable $next, callable $first): Promise
     {
         switch ($this->method) {
             case Client::AUTH_HTTP_PASSWORD:
