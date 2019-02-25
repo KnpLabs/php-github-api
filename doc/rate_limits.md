@@ -6,7 +6,7 @@ Get rate limit wrappers from [GitHub Rate Limit API](http://developer.github.com
 #### Get All Rate Limits
 
 ```php
-/** @var \Github\Api\RateLimit\RateLimitResource[] $rateLimits
+/** @var \Github\Api\RateLimit\RateLimitResource[] $rateLimits */
 $rateLimits = $client->api('rate_limit')->getLimits();
 ```
 
