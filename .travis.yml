@@ -11,16 +11,12 @@ env:
     - TEST_COMMAND="vendor/bin/phpunit --verbose --coverage-text"
 
 php:
-  - 5.6
-  - 7.0
   - 7.1
   - 7.2
   - 7.3
 
 matrix:
   include:
-    - php: hhvm
-      dist: trusty
     - php: 7.2
       name: Backward compatibillity check
       env: DEPENDENCIES="roave/backward-compatibility-check" TEST_COMMAND="./vendor/bin/roave-backward-compatibility-check"
