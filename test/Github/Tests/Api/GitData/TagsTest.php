@@ -89,9 +89,8 @@ class TagsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
-    public function shouldNotCreateTagWithoutTaggerParam()
+    public function shouldCreateTagWithoutTaggerParam()
     {
         $data = [
             'message' => 'some message',
@@ -101,7 +100,7 @@ class TagsTest extends TestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects($this->never())
+        $api->expects($this->once())
             ->method('post');
 
         $api->create('KnpLabs', 'php-github-api', $data);
