@@ -100,17 +100,20 @@ class Labels extends AbstractApi
      * @param string $username
      * @param string $repository
      * @param string $label
-     * @param string $newName
-     * @param string $color
+     * @param array  $params
+     *
+     * @throws \Github\Exception\MissingArgumentException
      *
      * @return array
      */
-    public function update($username, $repository, $label, $newName, $color)
+    public function update($username, $repository, $label, array $params)
     {
-        $params = [
-            'name'  => $newName,
-            'color' => $color,
-        ];
+        if (!isset($params['name'])) {
+            throw new MissingArgumentException('name');
+        }
+        if (!isset($params['color'])) {
+            throw new MissingArgumentException('color');
+        }
 
         return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels/'.rawurlencode($label), $params);
     }
