@@ -46,6 +46,7 @@ v3 APIs:
   * [Comments](pull_request/comments.md)
 * [Rate Limits](rate_limits.md)
 * [Repositories](repos.md)
+  * [Checks](repo/checks.md)
   * [Contents](repo/contents.md)
   * [Deployments](repo/deployments.md)
   * [Protection](repo/protection.md)
