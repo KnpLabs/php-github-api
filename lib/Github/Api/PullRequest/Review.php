@@ -174,4 +174,32 @@ class Review extends AbstractApi
           'message' => $message,
         ]);
     }
+
+    /**
+     * Update a pull request review by the username, repository, pull request number and the review id.
+     *
+     * @link https://developer.github.com/v3/pulls/reviews/#update-a-pull-request-review
+     *
+     * @param string $username    the username
+     * @param string $repository  the repository
+     * @param int    $pullRequest the pull request number
+     * @param int    $id          the review id
+     * @param string $body        a mandatory dismissal message
+     *
+     * @return array|string
+     */
+    public function update($username, $repository, $pullRequest, $id, $body)
+    {
+        if (!is_string($body)) {
+            throw new InvalidArgumentException(sprintf('"body" must be a valid string ("%s" given).', gettype($body)));
+        }
+
+        if (empty($body)) {
+            throw new InvalidArgumentException('"body" is mandatory and cannot be empty');
+        }
+
+        return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.$pullRequest.'/reviews/'.$id, [
+            'body' => $body
+        ]);
+    }
 }
