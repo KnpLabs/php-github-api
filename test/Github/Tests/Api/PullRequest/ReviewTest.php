@@ -401,7 +401,7 @@ class ReviewTest extends TestCase
     {
         $expectedValue = [
             'id' => 80,
-            "node_id" => "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3ODA=",
+            'node_id' => 'MDE3OlB1bGxSZXF1ZXN0UmV2aWV3ODA=',
             'user' => [
                 'login' => 'octocat',
                 'id' => 1,
