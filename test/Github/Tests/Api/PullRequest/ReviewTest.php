@@ -394,6 +394,59 @@ class ReviewTest extends TestCase
         $this->assertSame($expectedValue, $api->dismiss('octocat', 'Hello-World', 12, 80, 'Dismiss reason'));
     }
 
+    /**
+     * @test
+     */
+    public function shouldUpdateReviewComment()
+    {
+        $expectedValue = [
+            'id' => 80,
+            "node_id" => "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3ODA=",
+            'user' => [
+                'login' => 'octocat',
+                'id' => 1,
+                'avatar_url' => 'https://github.com/images/error/octocat_happy.gif',
+                'gravatar_id' => '',
+                'url' => 'https://api.github.com/users/octocat',
+                'html_url' => 'https://github.com/octocat',
+                'followers_url' => 'https://api.github.com/users/octocat/followers',
+                'following_url' => 'https://api.github.com/users/octocat/following{/other_user}',
+                'gists_url' => 'https://api.github.com/users/octocat/gists{/gist_id}',
+                'starred_url' => 'https://api.github.com/users/octocat/starred{/owner}{/repo}',
+                'subscriptions_url' => 'https://api.github.com/users/octocat/subscriptions',
+                'organizations_url' => 'https://api.github.com/users/octocat/orgs',
+                'repos_url' => 'https://api.github.com/users/octocat/repos',
+                'events_url' => 'https://api.github.com/users/octocat/events{/privacy}',
+                'received_events_url' => 'https://api.github.com/users/octocat/received_events',
+                'type' => 'User',
+                'site_admin' => false,
+            ],
+            'body' => 'Great stuff',
+            'commit_id' => 'ecdd80bb57125d7ba9641ffaa4d7d2c19d3f3091',
+            'state' => 'CHANGES_REQUESTED',
+            'html_url' => 'https://github.com/octocat/Hello-World/pull/12#pullrequestreview-80',
+            'pull_request_url' => 'https://api.github.com/repos/octocat/Hello-World/pulls/12',
+            '_links' => [
+                'html' => [
+                    'href' => 'https://github.com/octocat/Hello-World/pull/12#pullrequestreview-80',
+                ],
+                'pull_request' => [
+                    'href' => 'https://api.github.com/repos/octocat/Hello-World/pulls/12',
+                ],
+            ],
+        ];
+        $body = 'Nice change';
+
+        $api = $this->getApiMock();
+        $api
+            ->expects($this->once())
+            ->method('put')
+            ->with('/repos/octocat/Hello-World/pulls/12/reviews/80')
+            ->willReturn($expectedValue);
+
+        $this->assertSame($expectedValue, $api->update('octocat', 'Hello-World', 12, 80, $body));
+    }
+
     protected function getApiClass()
     {
         return Review::class;
