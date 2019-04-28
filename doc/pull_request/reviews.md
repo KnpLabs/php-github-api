@@ -44,3 +44,8 @@ $client->api('pull_request')->reviews()->remove('twbs', 'bootstrap', 12, $review
 ```php
 $client->api('pull_request')->reviews()->remove('twbs', 'bootstrap', 12, $reviewId);
 ```
+
+### Update a review
+```php
+$client->api('pull_request')->reviews()->update('twbs', 'bootstrap', 12, $reviewId, 'Review body (mandatory)')
+```
