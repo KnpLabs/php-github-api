@@ -110,10 +110,10 @@ class DeployKeysTest extends TestCase
         $data = ['key' => 'ssh-rsa 12323213'];
 
         $api = $this->getApiMock();
-	    $api->expects($this->never())
-	        ->method('delete');
-	    $api->expects($this->never())
-	        ->method('post');
+        $api->expects($this->never())
+            ->method('delete');
+        $api->expects($this->never())
+            ->method('post');
 
         $api->update('KnpLabs', 'php-github-api', 123, $data);
     }
@@ -144,14 +144,14 @@ class DeployKeysTest extends TestCase
         $data = ['title' => 'test', 'key' => 'ssh-rsa 12312312321...'];
 
         $api = $this->getApiMock();
-	    $api->expects($this->once())
-	        ->method('delete')
-	        ->with('/repos/KnpLabs/php-github-api/keys/123')
-	        ->will($this->returnValue($expectedValue));
-	    $api->expects($this->once())
-	        ->method('post')
-	        ->with('/repos/KnpLabs/php-github-api/keys', $data)
-	        ->will($this->returnValue($expectedValue));
+        $api->expects($this->once())
+            ->method('delete')
+            ->with('/repos/KnpLabs/php-github-api/keys/123')
+            ->will($this->returnValue($expectedValue));
+        $api->expects($this->once())
+            ->method('post')
+            ->with('/repos/KnpLabs/php-github-api/keys', $data)
+            ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->update('KnpLabs', 'php-github-api', 123, $data));
     }
