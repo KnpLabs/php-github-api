@@ -111,7 +111,9 @@ class DeployKeysTest extends TestCase
 
         $api = $this->getApiMock();
         $api->expects($this->never())
-            ->method('patch');
+            ->method('delete');
+        $api->expects($this->never())
+            ->method('post');
 
         $api->update('KnpLabs', 'php-github-api', 123, $data);
     }
@@ -126,7 +128,9 @@ class DeployKeysTest extends TestCase
 
         $api = $this->getApiMock();
         $api->expects($this->never())
-            ->method('patch');
+            ->method('delete');
+        $api->expects($this->never())
+            ->method('post');
 
         $api->update('KnpLabs', 'php-github-api', 123, $data);
     }
@@ -141,8 +145,12 @@ class DeployKeysTest extends TestCase
 
         $api = $this->getApiMock();
         $api->expects($this->once())
-            ->method('patch')
-            ->with('/repos/KnpLabs/php-github-api/keys/123', $data)
+            ->method('delete')
+            ->with('/repos/KnpLabs/php-github-api/keys/123')
+            ->will($this->returnValue($expectedValue));
+        $api->expects($this->once())
+            ->method('post')
+            ->with('/repos/KnpLabs/php-github-api/keys', $data)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->update('KnpLabs', 'php-github-api', 123, $data));
