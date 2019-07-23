@@ -91,13 +91,15 @@ See the [`doc` directory](doc/) for more detailed documentation.
 
 `php-github-api` is licensed under the MIT License - see the LICENSE file for details
 
-## Credits
+## Maintainers
 
-### Sponsored by
+Please read [this post](https://knplabs.com/en/blog/news-for-our-foss-projects-maintenance) first.
 
-[![KnpLabs Team](http://knplabs.com/front/images/knp-labs-logo.png)](http://knplabs.com)
+This library is maintained by the following people (alphabetically sorted) :
+- @acrobat
+- @Nyholm
 
-### Contributors
+## Contributors
 
 - Thanks to [Thibault Duplessis aka. ornicar](http://github.com/ornicar) for his first version of this library.
 - Thanks to [Joseph Bielawski aka. stloyd](http://github.com/stloyd) for his contributions and support.
