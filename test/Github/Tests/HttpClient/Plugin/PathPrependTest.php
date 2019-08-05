@@ -20,7 +20,7 @@ class PathPrependTest extends TestCase
         $plugin = new PathPrepend('/api/v3');
 
         $newRequest = null;
-        $plugin->handleRequest($request, function ($request) use (&$newRequest) {
+        $plugin->doHandleRequest($request, function ($request) use (&$newRequest) {
             $newRequest = $request;
         }, function () {
             throw new \RuntimeException('Did not expect plugin to call first');

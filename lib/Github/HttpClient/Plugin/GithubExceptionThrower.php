@@ -18,10 +18,12 @@ use Psr\Http\Message\ResponseInterface;
  */
 class GithubExceptionThrower implements Plugin
 {
+    use Plugin\VersionBridgePlugin;
+
     /**
      * {@inheritdoc}
      */
-    public function handleRequest(RequestInterface $request, callable $next, callable $first)
+    public function doHandleRequest(RequestInterface $request, callable $next, callable $first)
     {
         return $next($request)->then(function (ResponseInterface $response) use ($request) {
             if ($response->getStatusCode() < 400 || $response->getStatusCode() > 600) {

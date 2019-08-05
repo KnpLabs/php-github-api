@@ -40,7 +40,7 @@ class GithubExceptionThrowerTest extends TestCase
             $this->expectExceptionMessage($exception->getMessage());
         }
 
-        $plugin->handleRequest(
+        $plugin->doHandleRequest(
             $request,
             function (RequestInterface $request) use ($promise) {
                 return $promise;
