@@ -51,6 +51,21 @@ class Gists extends AbstractApi
         return $this->get('/gists/'.rawurlencode($number));
     }
 
+    /**
+     * Get a specific revision of a gist.
+     *
+     * @param int    $number
+     * @param string $sha
+     *
+     * @link https://developer.github.com/v3/gists/#get-a-specific-revision-of-a-gist
+     *
+     * @return array
+     */
+    public function revision($number, $sha)
+    {
+        return $this->get('/gists/'.rawurlencode($number).'/'.rawurlencode($sha));
+    }
+
     public function create(array $params)
     {
         if (!isset($params['files']) || (!is_array($params['files']) || 0 === count($params['files']))) {
