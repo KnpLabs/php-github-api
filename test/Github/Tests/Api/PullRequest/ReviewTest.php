@@ -2,8 +2,9 @@
 
 namespace Github\Tests\Api\PullRequest;
 
-use Github\Api\PullRequest\Comments;
 use Github\Api\PullRequest\Review;
+use Github\Exception\InvalidArgumentException;
+use Github\Exception\MissingArgumentException;
 use Github\Tests\Api\TestCase;
 
 class ReviewTest extends TestCase
@@ -231,10 +232,10 @@ class ReviewTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\InvalidArgumentException
      */
     public function shouldNotCreateReviewWithInvalidEvent()
     {
+        $this->expectException(InvalidArgumentException::class);
         $data = [
             'event' => 'DISMISSED',
             'body' => 'Nice change',
@@ -306,10 +307,10 @@ class ReviewTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotSubmitReviewWithoutEvent()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [
             'body' => 'Nice change',
         ];
@@ -325,10 +326,10 @@ class ReviewTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\InvalidArgumentException
      */
     public function shouldNotSubmitReviewWithInvalidEvent()
     {
+        $this->expectException(InvalidArgumentException::class);
         $data = [
             'event' => 'DISMISSED',
             'body' => 'Nice change',

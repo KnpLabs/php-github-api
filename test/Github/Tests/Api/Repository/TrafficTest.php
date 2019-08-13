@@ -1,5 +1,7 @@
 <?php
 
+namespace Github\Tests\Api\Repository;
+
 use Github\Tests\Api\TestCase;
 
 class TrafficTest extends TestCase

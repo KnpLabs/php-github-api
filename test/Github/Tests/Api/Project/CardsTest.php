@@ -2,6 +2,7 @@
 
 namespace Github\Tests\Api\Project;
 
+use Github\Exception\MissingArgumentException;
 use Github\Tests\Api\TestCase;
 
 class CardsTest extends TestCase
@@ -90,10 +91,10 @@ class CardsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotMoveWithoutPosition()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [];
 
         $api = $this->getApiMock();

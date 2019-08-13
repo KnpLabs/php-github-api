@@ -1,6 +1,9 @@
 <?php
 
-namespace Github\Tests\Api;
+namespace Github\Tests\Api\GitData;
+
+use Github\Exception\MissingArgumentException;
+use Github\Tests\Api\TestCase;
 
 class ReferencesTest extends TestCase
 {
@@ -119,10 +122,10 @@ class ReferencesTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateReferenceWithoutShaParam()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = ['ref' => '123'];
 
         $api = $this->getApiMock();
@@ -134,10 +137,10 @@ class ReferencesTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateReferenceWithoutRefsParam()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = ['sha' => '1234'];
 
         $api = $this->getApiMock();
@@ -166,10 +169,10 @@ class ReferencesTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNoUpdateReferenceWithoutSha()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [];
 
         $api = $this->getApiMock();

@@ -5,6 +5,7 @@ namespace Github\Tests;
 use Github\Api;
 use Github\Client;
 use Github\Exception\BadMethodCallException;
+use Github\Exception\InvalidArgumentException;
 use Github\HttpClient\Builder;
 use Github\HttpClient\Plugin\Authentication;
 use GuzzleHttp\Psr7\Response;
@@ -112,10 +113,10 @@ class ClientTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\InvalidArgumentException
      */
     public function shouldThrowExceptionWhenAuthenticatingWithoutMethodSet()
     {
+        $this->expectException(InvalidArgumentException::class);
         $client = new Client();
 
         $client->authenticate('login', null, null);
@@ -145,20 +146,20 @@ class ClientTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\InvalidArgumentException
      */
     public function shouldNotGetApiInstance()
     {
+        $this->expectException(InvalidArgumentException::class);
         $client = new Client();
         $client->api('do_not_exist');
     }
 
     /**
      * @test
-     * @expectedException BadMethodCallException
      */
     public function shouldNotGetMagicApiInstance()
     {
+        $this->expectException(BadMethodCallException::class);
         $client = new Client();
         $client->doNotExist();
     }

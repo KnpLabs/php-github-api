@@ -2,6 +2,7 @@
 
 namespace Github\Tests\Api\Project;
 
+use Github\Exception\MissingArgumentException;
 use Github\Tests\Api\TestCase;
 
 class ColumnsTest extends TestCase
@@ -40,10 +41,10 @@ class ColumnsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateWithoutName()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [];
 
         $api = $this->getApiMock();
@@ -72,10 +73,10 @@ class ColumnsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotUpdateWithoutName()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [];
 
         $api = $this->getApiMock();
@@ -120,10 +121,10 @@ class ColumnsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotMoveWithoutPosition()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [];
 
         $api = $this->getApiMock();

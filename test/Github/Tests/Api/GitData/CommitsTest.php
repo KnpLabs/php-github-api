@@ -1,6 +1,9 @@
 <?php
 
-namespace Github\Tests\Api;
+namespace Github\Tests\Api\GitData;
+
+use Github\Exception\MissingArgumentException;
+use Github\Tests\Api\TestCase;
 
 class CommitsTest extends TestCase
 {
@@ -39,10 +42,10 @@ class CommitsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateCommitWithoutMessageParam()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = ['tree' => 1234, 'parents' => []];
 
         $api = $this->getApiMock();
@@ -54,10 +57,10 @@ class CommitsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateCommitWithoutTreeParam()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = ['message' => 'some message', 'parents' => []];
 
         $api = $this->getApiMock();
@@ -69,10 +72,10 @@ class CommitsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateCommitWithoutParentsParam()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = ['message' => 'some message', 'tree' => '12334'];
 
         $api = $this->getApiMock();

@@ -2,6 +2,7 @@
 
 namespace Github\Tests\Api\Organization;
 
+use Github\Exception\MissingArgumentException;
 use Github\Tests\Api\TestCase;
 
 class ProjectsTest extends TestCase
@@ -24,10 +25,10 @@ class ProjectsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateWithoutName()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [];
 
         $api = $this->getApiMock();

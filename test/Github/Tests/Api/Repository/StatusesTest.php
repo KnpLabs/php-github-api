@@ -2,6 +2,7 @@
 
 namespace Github\Tests\Api\Repository;
 
+use Github\Exception\MissingArgumentException;
 use Github\Tests\Api\TestCase;
 
 class StatusesTest extends TestCase
@@ -57,10 +58,10 @@ class StatusesTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateWithoutStatus()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [];
 
         $api = $this->getApiMock();

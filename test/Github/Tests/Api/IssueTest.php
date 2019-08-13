@@ -2,6 +2,8 @@
 
 namespace Github\Tests\Api;
 
+use Github\Exception\MissingArgumentException;
+
 class IssueTest extends TestCase
 {
     /**
@@ -88,10 +90,10 @@ class IssueTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateIssueWithoutTitle()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [
             'body'  => 'some body',
         ];

@@ -1,6 +1,9 @@
 <?php
 
-namespace Github\Tests\Api;
+namespace Github\Tests\Api\CurrentUser;
+
+use Github\Exception\InvalidArgumentException;
+use Github\Tests\Api\TestCase;
 
 class EmailsTest extends TestCase
 {
@@ -54,10 +57,10 @@ class EmailsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\InvalidArgumentException
      */
     public function shouldNotRemoveEmailsWhenAreNotPass()
     {
+        $this->expectException(InvalidArgumentException::class);
         $api = $this->getApiMock();
         $api->expects($this->any())
             ->method('delete');
@@ -99,10 +102,10 @@ class EmailsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\InvalidArgumentException
      */
     public function shouldNotAddEmailsWhenAreNotPass()
     {
+        $this->expectException(InvalidArgumentException::class);
         $api = $this->getApiMock();
         $api->expects($this->any())
             ->method('post');

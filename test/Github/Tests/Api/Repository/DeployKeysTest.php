@@ -2,6 +2,7 @@
 
 namespace Github\Tests\Api\Repository;
 
+use Github\Exception\MissingArgumentException;
 use Github\Tests\Api\TestCase;
 
 class DeployKeysTest extends TestCase
@@ -56,10 +57,10 @@ class DeployKeysTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateDeployKeyWithoutName()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = ['config' => 'conf'];
 
         $api = $this->getApiMock();
@@ -71,10 +72,10 @@ class DeployKeysTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateDeployKeyWithoutColor()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = ['name' => 'test'];
 
         $api = $this->getApiMock();
@@ -103,10 +104,10 @@ class DeployKeysTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotUpdateDeployKeyWithoutTitle()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = ['key' => 'ssh-rsa 12323213'];
 
         $api = $this->getApiMock();
@@ -120,10 +121,10 @@ class DeployKeysTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotUpdateDeployKeyWithoutKey()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = ['title' => 'test'];
 
         $api = $this->getApiMock();

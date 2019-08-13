@@ -2,6 +2,7 @@
 
 namespace Github\Tests\Api\Issue;
 
+use Github\Exception\InvalidArgumentException;
 use Github\Tests\Api\TestCase;
 
 class LabelsTest extends TestCase
@@ -191,10 +192,10 @@ class LabelsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\InvalidArgumentException
      */
     public function shouldNotAddWhenDoNotHaveLabelsToAdd()
     {
+        $this->expectException(InvalidArgumentException::class);
         $api = $this->getApiMock();
         $api->expects($this->any())
             ->method('post');

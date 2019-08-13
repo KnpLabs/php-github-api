@@ -2,6 +2,7 @@
 
 namespace Github\Tests\Api\Issue;
 
+use Github\Exception\MissingArgumentException;
 use Github\Tests\Api\TestCase;
 
 class MilestonesTest extends TestCase
@@ -41,10 +42,10 @@ class MilestonesTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateMilestoneWithoutTitle()
     {
+        $this->expectException(MissingArgumentException::class);
         $expectedValue = [['title' => 'milestone']];
         $data = [];
 

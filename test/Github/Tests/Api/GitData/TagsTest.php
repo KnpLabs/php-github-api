@@ -1,6 +1,9 @@
 <?php
 
-namespace Github\Tests\Api;
+namespace Github\Tests\Api\GitData;
+
+use Github\Exception\MissingArgumentException;
+use Github\Tests\Api\TestCase;
 
 class TagsTest extends TestCase
 {
@@ -65,10 +68,10 @@ class TagsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateTagWithoutMessageParam()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [
             'tag' => 'v2.2',
             'object' => 'test',
@@ -108,10 +111,10 @@ class TagsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateTagWithoutTaggerNameParam()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [
             'message' => 'some message',
             'tag' => 'v2.2',
@@ -132,10 +135,10 @@ class TagsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateTagWithoutTaggerEmailParam()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [
             'message' => 'some message',
             'tag' => 'v2.2',
@@ -156,10 +159,10 @@ class TagsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateTagWithoutTaggerDateParam()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [
             'message' => 'some message',
             'tag' => 'v2.2',
@@ -180,10 +183,10 @@ class TagsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateTagWithoutTagParam()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [
             'message' => 'some message',
             'object' => 'test',
@@ -204,10 +207,10 @@ class TagsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateTagWithoutObjectParam()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [
             'message' => 'some message',
             'tag' => 'v2.2',
@@ -228,10 +231,10 @@ class TagsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateTagWithoutTypeParam()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [
             'message' => 'some message',
             'tag' => 'v2.2',

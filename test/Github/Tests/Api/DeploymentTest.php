@@ -2,6 +2,8 @@
 
 namespace Github\Tests\Api;
 
+use Github\Exception\MissingArgumentException;
+
 class DeploymentTest extends TestCase
 {
     /**
@@ -79,10 +81,10 @@ class DeploymentTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldRejectStatusUpdateWithoutStateField()
     {
+        $this->expectException(MissingArgumentException::class);
         $api = $this->getApiMock();
         $statusData = ['description' => 'waiting to start'];
 

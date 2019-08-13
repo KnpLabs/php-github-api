@@ -17,7 +17,8 @@ class RateLimitTest extends TestCase
         $response = $this->client->api('rate_limit')->getRateLimits();
 
         $this->assertArrayHasKey('resources', $response);
-        $this->assertArraySubset(['resources' => ['core' => ['limit' => 60]]], $response);
+        $this->assertArrayHasKey('resources', $response);
+        $this->assertSame(['core' => ['limit' => 60]], $response['resources']);
     }
 
     /**
@@ -27,7 +28,7 @@ class RateLimitTest extends TestCase
     {
         $response = $this->client->api('rate_limit')->getLimits();
 
-        $this->assertInternalType('array', $response);
+        $this->assertIsArray($response);
         $this->assertContainsOnlyInstancesOf(RateLimitResource::class, $response);
         $this->assertEquals(60, $response->getLimit('core')->getLimit());
     }

@@ -3,6 +3,7 @@
 namespace Github\Tests\Api\Issue;
 
 use Github\Api\Issue\Assignees;
+use Github\Exception\MissingArgumentException;
 use Github\Tests\Api\TestCase;
 
 class AssigneesTest extends TestCase
@@ -35,10 +36,10 @@ class AssigneesTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotAddAssigneeMissingParameter()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [];
 
         $api = $this->getApiMock();
@@ -67,10 +68,10 @@ class AssigneesTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotRemoveAssigneeMissingParameter()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [];
 
         $api = $this->getApiMock();

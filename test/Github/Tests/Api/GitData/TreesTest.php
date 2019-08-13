@@ -1,6 +1,9 @@
 <?php
 
-namespace Github\Tests\Api;
+namespace Github\Tests\Api\GitData;
+
+use Github\Exception\MissingArgumentException;
+use Github\Tests\Api\TestCase;
 
 class TreesTest extends TestCase
 {
@@ -86,10 +89,10 @@ class TreesTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateTreeWithoutShaAndContentParam()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [
             'tree' => [
                 'path' => 'path',
@@ -107,10 +110,10 @@ class TreesTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateTreeWithoutPathParam()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [
             'tree' => [
                 'mode' => 'mode',
@@ -128,10 +131,10 @@ class TreesTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateTreeWithoutModeParam()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [
             'tree' => [
                 'path' => 'path',
@@ -149,10 +152,10 @@ class TreesTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateTreeWithoutTypeParam()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [
             'tree' => [
                 'path' => 'path',
@@ -170,10 +173,10 @@ class TreesTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateTreeWithoutTreeParam()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [];
 
         $api = $this->getApiMock();
@@ -185,10 +188,10 @@ class TreesTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateTreeWhenTreeParamIsNotArray()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [
             'tree' => '',
         ];

@@ -2,16 +2,17 @@
 
 namespace Github\Tests\Api\Repository;
 
+use Github\Exception\MissingArgumentException;
 use Github\Tests\Api\TestCase;
 
 class ChecksTest extends TestCase
 {
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateWithoutHeadSha()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = ['name' => 'my check'];
 
         $api = $this->getApiMock();
@@ -23,10 +24,10 @@ class ChecksTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateWithoutName()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = ['head_sha' => 'commitSHA123456'];
 
         $api = $this->getApiMock();

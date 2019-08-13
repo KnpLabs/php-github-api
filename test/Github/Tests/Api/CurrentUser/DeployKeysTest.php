@@ -1,6 +1,9 @@
 <?php
 
-namespace Github\Tests\Api;
+namespace Github\Tests\Api\CurrentUser;
+
+use Github\Exception\MissingArgumentException;
+use Github\Tests\Api\TestCase;
 
 class DeployKeysTest extends TestCase
 {
@@ -55,10 +58,10 @@ class DeployKeysTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateKeyWithoutTitleParam()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = ['key' => 'ssh-rsa ...'];
 
         $api = $this->getApiMock();
@@ -70,10 +73,10 @@ class DeployKeysTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateKeyWithoutKeyParam()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = ['title' => 'my key'];
 
         $api = $this->getApiMock();

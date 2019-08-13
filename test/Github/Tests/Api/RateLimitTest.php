@@ -41,10 +41,8 @@ class RateLimitTest extends TestCase
      *
      * {@inheritdoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
-        parent::setUp();
-
         $this->api = $this->getApiMock();
         $this->api->expects($this->once())
             ->method('get')

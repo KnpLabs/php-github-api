@@ -2,6 +2,7 @@
 
 namespace Github\Tests\Api\Repository;
 
+use Github\Exception\MissingArgumentException;
 use Github\Tests\Api\TestCase;
 
 class LabelsTest extends TestCase
@@ -56,10 +57,10 @@ class LabelsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateLabelWithoutName()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = ['color' => 'red'];
 
         $api = $this->getApiMock();
@@ -71,10 +72,10 @@ class LabelsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateLabelWithoutColor()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = ['name' => 'test'];
 
         $api = $this->getApiMock();
@@ -103,10 +104,10 @@ class LabelsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotUpdateLabelWithoutName()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = ['color' => 'red'];
 
         $api = $this->getApiMock();
@@ -118,10 +119,10 @@ class LabelsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotUpdateLabelWithoutColor()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = ['name' => 'test'];
 
         $api = $this->getApiMock();

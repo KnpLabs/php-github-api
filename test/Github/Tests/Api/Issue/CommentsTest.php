@@ -2,6 +2,7 @@
 
 namespace Github\Tests\Api\Issue;
 
+use Github\Exception\MissingArgumentException;
 use Github\Tests\Api\TestCase;
 
 class CommentsTest extends TestCase
@@ -40,10 +41,10 @@ class CommentsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateWithoutBody()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [];
 
         $api = $this->getApiMock();
@@ -72,10 +73,10 @@ class CommentsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotUpdateWithoutBody()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = ['somedata'];
 
         $api = $this->getApiMock();
