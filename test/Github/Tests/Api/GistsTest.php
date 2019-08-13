@@ -55,6 +55,22 @@ class GistsTest extends TestCase
     /**
      * @test
      */
+    public function shouldShowGistWithSpecificReference()
+    {
+        $expectedArray = ['id' => '123', 'sha' => 'd189dbd4c5d96442db74ebcb62bb38e661a0c8ce'];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/gists/123/d189dbd4c5d96442db74ebcb62bb38e661a0c8ce')
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->revision(123, 'd189dbd4c5d96442db74ebcb62bb38e661a0c8ce'));
+    }
+
+    /**
+     * @test
+     */
     public function shouldShowCommits()
     {
         $expectedArray = ['id' => '123'];

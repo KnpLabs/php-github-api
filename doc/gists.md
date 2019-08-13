@@ -37,6 +37,12 @@ $gists = $github->api('gists')->all();
 $gist = $github->api('gists')->show(1);
 ```
 
+#### Get a specific revision of a gist
+
+```php
+$gist = $github->api('gists')->show(1, 'd189dbd4c5d96442db74ebcb62bb38e661a0c8ce');
+```
+
 #### Get commits for a single gist
 
 ```php
