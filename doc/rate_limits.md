@@ -5,9 +5,17 @@ Get rate limit wrappers from [GitHub Rate Limit API](http://developer.github.com
 
 #### Get All Rate Limits
 
+##### new way
 ```php
 /** @var \Github\Api\RateLimit\RateLimitResource[] $rateLimits */
-$rateLimits = $client->api('rate_limit')->getLimits();
+$rateLimits = $client->api('rate_limit')->getResources();
+```
+
+##### deprecated way
+
+```php
+/** @var array $rateLimits */
+$rateLimits = $client->api('rate_limit')->getRateLimits();
 ```
 
 #### Get Core Rate Limit
