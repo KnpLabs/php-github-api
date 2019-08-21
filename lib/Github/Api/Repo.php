@@ -5,8 +5,8 @@ namespace Github\Api;
 use Github\Api\Repository\Collaborators;
 use Github\Api\Repository\Comments;
 use Github\Api\Repository\Commits;
-use Github\Api\Repository\Contents;
 use Github\Api\Repository\Checks;
+use Github\Api\Repository\Contents;
 use Github\Api\Repository\DeployKeys;
 use Github\Api\Repository\Downloads;
 use Github\Api\Repository\Forks;
@@ -314,9 +314,9 @@ class Repo extends AbstractApi
     /**
      * Manage checks on a repository.
      *
-     * @link http://developer.github.com/v3/repos/commits/
+     * @link https://developer.github.com/v3/checks/
      *
-     * @return Commits
+     * @return Checks
      */
     public function checks() 
     {
