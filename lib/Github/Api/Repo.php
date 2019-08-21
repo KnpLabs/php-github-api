@@ -318,11 +318,11 @@ class Repo extends AbstractApi
      *
      * @return Checks
      */
-    public function checks() 
+    public function checks()
     {
         return new Checks($this->client);
     }
-
+    
     /**
      * Manage the content of a repository.
      *
