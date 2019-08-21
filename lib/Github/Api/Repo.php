@@ -322,7 +322,7 @@ class Repo extends AbstractApi
     {
         return new Checks($this->client);
     }
-    
+
     /**
      * Manage the content of a repository.
      *
