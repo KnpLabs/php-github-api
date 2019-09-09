@@ -19,7 +19,7 @@ Uses [GitHub API v3](http://developer.github.com/v3/) & supports [GitHub API v4]
 
 ## Requirements
 
-* PHP >= 5.6
+* PHP >= 7.1
 * A [HTTP client](https://packagist.org/providers/php-http/client-implementation)
 * A [PSR-7 implementation](https://packagist.org/providers/psr/http-message-implementation)
 * (optional) PHPUnit to run tests.
