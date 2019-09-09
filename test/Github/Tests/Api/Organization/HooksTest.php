@@ -2,6 +2,7 @@
 
 namespace Github\Tests\Api\Organization;
 
+use Github\Exception\MissingArgumentException;
 use Github\Tests\Api\TestCase;
 
 class HooksTest extends TestCase
@@ -56,10 +57,10 @@ class HooksTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateHookWithoutName()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = ['config' => 'conf'];
 
         $api = $this->getApiMock();
@@ -71,10 +72,10 @@ class HooksTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateHookWithoutConfig()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = ['name' => 'test'];
 
         $api = $this->getApiMock();
@@ -103,10 +104,10 @@ class HooksTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotUpdateHookWithoutConfig()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [];
 
         $api = $this->getApiMock();

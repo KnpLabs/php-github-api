@@ -2,6 +2,7 @@
 
 namespace Github\Tests\Api\Repository;
 
+use Github\Exception\MissingArgumentException;
 use Github\Exception\TwoFactorAuthenticationRequiredException;
 use Github\Tests\Api\TestCase;
 use GuzzleHttp\Psr7\Response;
@@ -85,10 +86,10 @@ class ContentsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\TwoFactorAuthenticationRequiredException
      */
     public function shouldBubbleTwoFactorAuthenticationRequiredExceptionsWhenCheckingFileRequiringAuth()
     {
+        $this->expectException(TwoFactorAuthenticationRequiredException::class);
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('head')
@@ -126,11 +127,11 @@ class ContentsTest extends TestCase
 
     /**
      * @test
-     * @expectedException        \Github\Exception\MissingArgumentException
-     * @expectedExceptionMessage One or more of required ("name", "email") parameters is missing!
      */
     public function shouldThrowExceptionWhenCreateNewFileWithInvalidCommitter()
     {
+        $this->expectException(MissingArgumentException::class);
+        $this->expectExceptionMessage('One or more of required ("name", "email") parameters is missing!');
         $committer = ['invalid_key' => 'some data'];
         $api = $this->getApiMock();
         $api->create('KnpLabs', 'php-github-api', 'test/Github/Tests/Api/Repository/ContentsTest.php', 'some content', 'a commit message', null, $committer);
@@ -166,11 +167,11 @@ class ContentsTest extends TestCase
 
     /**
      * @test
-     * @expectedException        \Github\Exception\MissingArgumentException
-     * @expectedExceptionMessage One or more of required ("name", "email") parameters is missing!
      */
     public function shouldThrowExceptionWhenUpdateFileWithInvalidCommitter()
     {
+        $this->expectException(MissingArgumentException::class);
+        $this->expectExceptionMessage('One or more of required ("name", "email") parameters is missing!');
         $committer = ['invalid_key' => 'some data'];
         $api = $this->getApiMock();
         $api->update('KnpLabs', 'php-github-api', 'test/Github/Tests/Api/Repository/ContentsTest.php', 'some content', 'a commit message', null, null, $committer);
@@ -204,11 +205,11 @@ class ContentsTest extends TestCase
 
     /**
      * @test
-     * @expectedException        \Github\Exception\MissingArgumentException
-     * @expectedExceptionMessage One or more of required ("name", "email") parameters is missing!
      */
     public function shouldThrowExceptionWhenDeleteFileWithInvalidCommitter()
     {
+        $this->expectException(MissingArgumentException::class);
+        $this->expectExceptionMessage('One or more of required ("name", "email") parameters is missing!');
         $committer = ['invalid_key' => 'some data'];
         $api = $this->getApiMock();
         $api->rm('KnpLabs', 'php-github-api', 'test/Github/Tests/Api/Repository/ContentsTest.php', 'a commit message', null, null, $committer);

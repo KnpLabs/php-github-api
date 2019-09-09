@@ -2,6 +2,7 @@
 
 namespace Github\Tests\Api\Repository;
 
+use Github\Exception\MissingArgumentException;
 use Github\Tests\Api\TestCase;
 
 class ReleasesTest extends TestCase
@@ -94,10 +95,10 @@ class ReleasesTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateRepositoryReleaseWithoutTagName()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = ['not_a_tag_name' => '1.1'];
 
         $api = $this->getApiMock();

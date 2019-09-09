@@ -1,6 +1,8 @@
 <?php
 
-namespace Github\Tests\Api;
+namespace Github\Tests\Api\CurrentUser;
+
+use Github\Tests\Api\TestCase;
 
 class FollowersTest extends TestCase
 {

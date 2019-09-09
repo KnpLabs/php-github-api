@@ -1,6 +1,9 @@
 <?php
 
-namespace Github\Tests\Api;
+namespace Github\Tests\Api\GitData;
+
+use Github\Exception\MissingArgumentException;
+use Github\Tests\Api\TestCase;
 
 class BlobsTest extends TestCase
 {
@@ -67,10 +70,10 @@ class BlobsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateBlobWithoutEncoding()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = ['content' => 'some cotent'];
 
         $api = $this->getApiMock();
@@ -82,10 +85,10 @@ class BlobsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateBlobWithoutContent()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = ['encoding' => 'utf8'];
 
         $api = $this->getApiMock();

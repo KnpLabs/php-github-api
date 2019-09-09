@@ -171,13 +171,13 @@ class AbstractApiTest extends TestCase
         $api = $this->getAbstractApiObject($client);
         $actual = $this->getMethod($api, 'get')->invokeArgs($api, ['/path', ['ref' => null]]);
 
-        $this->assertInternalType('array', $actual);
+        $this->assertIsArray($actual);
     }
 
     /**
      * @param $client
      *
-     * @return \PHPUnit_Framework_MockObject_MockObject
+     * @return \PHPUnit\Framework\MockObject\MockObject
      */
     protected function getAbstractApiObject($client)
     {

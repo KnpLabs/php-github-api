@@ -21,7 +21,7 @@ class RepoTest extends TestCase
 
         $diff = $this->client->api('pull_request')->show('KnpLabs', 'php-github-api', '92');
 
-        $this->assertInternalType('string', $diff);
+        $this->assertIsString($diff);
     }
 
     /**
@@ -38,7 +38,7 @@ class RepoTest extends TestCase
             'e50d5e946385cff052636e2f09f36b03d1c368f4'
         );
 
-        $this->assertInternalType('string', $contents);
+        $this->assertIsString($contents);
         $this->assertStringStartsWith('<?php', $contents);
     }
 
@@ -56,7 +56,7 @@ class RepoTest extends TestCase
             'dc16d3e77fd4e40638cb722927ffe15fa85b1434'
         );
 
-        $this->assertInternalType('string', $contents);
+        $this->assertIsString($contents);
         $this->assertStringStartsWith('{', $contents);
     }
 

@@ -2,6 +2,8 @@
 
 namespace Github\Tests\Api;
 
+use Github\Exception\MissingArgumentException;
+
 class PullRequestTest extends TestCase
 {
     /**
@@ -244,10 +246,10 @@ class PullRequestTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreatePullRequestWithoutBase()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [
             'head' => 'virtualtestbranch',
             'title' => 'TITLE: Testing pull-request creation from PHP Github API',
@@ -263,10 +265,10 @@ class PullRequestTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreatePullRequestWithoutHead()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [
             'base' => 'master',
             'title' => 'TITLE: Testing pull-request creation from PHP Github API',
@@ -282,10 +284,10 @@ class PullRequestTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreatePullRequestUsingTitleButWithoutBody()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [
             'base' => 'master',
             'head' => 'virtualtestbranch',
@@ -301,10 +303,10 @@ class PullRequestTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreatePullRequestWithoutIssueIdOrTitle()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [
             'base' => 'master',
             'head' => 'virtualtestbranch',

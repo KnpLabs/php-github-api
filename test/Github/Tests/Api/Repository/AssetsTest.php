@@ -2,6 +2,7 @@
 
 namespace Github\Tests\Api\Repository;
 
+use Github\Exception\MissingArgumentException;
 use Github\Tests\Api\TestCase;
 
 class AssetsTest extends TestCase
@@ -86,10 +87,10 @@ class AssetsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotEditReleaseAssetWithoutName()
     {
+        $this->expectException(MissingArgumentException::class);
         $assetId = 5;
         $data = ['not_a_name' => 'just a value'];
 

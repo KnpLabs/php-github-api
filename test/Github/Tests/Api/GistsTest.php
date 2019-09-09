@@ -2,6 +2,8 @@
 
 namespace Github\Tests\Api;
 
+use Github\Exception\MissingArgumentException;
+
 class GistsTest extends TestCase
 {
     /**
@@ -128,10 +130,10 @@ class GistsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateGistWithoutFile()
     {
+        $this->expectException(MissingArgumentException::class);
         $input = [
             'description' => '',
             'public' => false,

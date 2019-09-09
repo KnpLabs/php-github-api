@@ -16,7 +16,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
      */
     protected $client;
 
-    public function setUp()
+    public function setUp(): void
     {
         // You have to specify authentication here to run full suite
         $client = new Client();

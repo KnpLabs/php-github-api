@@ -12,7 +12,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
     abstract protected function getApiClass();
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
+     * @return \PHPUnit\Framework\MockObject\MockObject
      */
     protected function getApiMock()
     {
