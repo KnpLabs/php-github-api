@@ -62,6 +62,7 @@ use Psr\Cache\CacheItemPoolInterface;
  * @method Api\Authorizations authorizations()
  * @method Api\Meta meta()
  * @method Api\GraphQL graphql()
+ * @method Api\Migrations\SourceImport sourceImport()
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  *
@@ -298,6 +299,11 @@ class Client
 
             case 'graphql':
                 $api = new Api\GraphQL($this);
+                break;
+
+            case 'source_import':
+            case 'sourceImport':
+                $api = new Api\Migrations\SourceImport($this);
                 break;
 
             default:
