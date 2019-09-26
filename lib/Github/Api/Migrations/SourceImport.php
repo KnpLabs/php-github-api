@@ -1,7 +1,9 @@
 <?php
 
-namespace Github\Api;
+namespace Github\Api\Migrations;
 
+use Github\Api\AbstractApi;
+use Github\Api\AcceptHeaderTrait;
 use Github\Exception\MissingArgumentException;
 use Github\Exception\InvalidArgumentException;
 
@@ -16,19 +18,6 @@ class SourceImport extends AbstractApi
 {
     use AcceptHeaderTrait;
 
-    /**
-     * Set to preview mode
-     *
-     * @link https://developer.github.com/v3/migrations/source_imports/
-     *
-     * @return self
-     */
-    public function configure()
-    {
-        $this->acceptHeaderValue = sprintf('application/vnd.github.%s.%s', 'barred-rock-preview');
-
-        return $this;
-    }
 
     /**
      * Start import of repo from other VCS
@@ -39,7 +28,8 @@ class SourceImport extends AbstractApi
      */
     public function start($params,$owner, $repoName)
     {
-        if (is_null($params['vcs']))
+        $this->acceptHeaderValue = sprintf('application/vnd.github.barred-rock-preview');
+        if (!empty($params['vcs']))
         {
            if (!in_array($vcs, ['subversion','git','mercurial','tfvc']))
                 throw new InvalidArgumentException('vcs');
@@ -48,8 +38,9 @@ class SourceImport extends AbstractApi
         {
                 throw new MissingArgumentException('vcs_url');
         }
-
-        return $this->put('/repos/'.rawurlencode($owner).'/'.rawurlencode($repo).'/import', $params);
+        var_dump('/repos/'.rawurlencode($owner).'/'.rawurlencode($repoName).'/import');
+        var_dump($params);
+        return $this->put('/repos/'.rawurlencode($owner).'/'.rawurlencode($repoName).'/import', $params);
     }
 
     /**
@@ -61,6 +52,7 @@ class SourceImport extends AbstractApi
      */
     public function status($owner, $repoName)
     {
-            return $this->get('/repos/'.rawurlencode($owner).'/'.rawurlencode($repo).'/import');
+        $this->acceptHeaderValue = sprintf('application/vnd.github.barred-rock-preview');
+        return $this->get('/repos/'.rawurlencode($owner).'/'.rawurlencode($repo).'/import');
     }
 }
