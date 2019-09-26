@@ -31,15 +31,13 @@ class SourceImport extends AbstractApi
         $this->acceptHeaderValue = sprintf('application/vnd.github.barred-rock-preview');
         if (!empty($params['vcs']))
         {
-           if (!in_array($vcs, ['subversion','git','mercurial','tfvc']))
+           if (!in_array($params['vcs'], ['subversion','git','mercurial','tfvc']))
                 throw new InvalidArgumentException('vcs');
         }
         if (empty($params['vcs_url']))
         {
                 throw new MissingArgumentException('vcs_url');
         }
-        var_dump('/repos/'.rawurlencode($owner).'/'.rawurlencode($repoName).'/import');
-        var_dump($params);
         return $this->put('/repos/'.rawurlencode($owner).'/'.rawurlencode($repoName).'/import', $params);
     }
 
