@@ -51,6 +51,6 @@ class SourceImport extends AbstractApi
     public function status($owner, $repoName)
     {
         $this->acceptHeaderValue = sprintf('application/vnd.github.barred-rock-preview');
-        return $this->get('/repos/'.rawurlencode($owner).'/'.rawurlencode($repo).'/import');
+        return $this->get('/repos/'.rawurlencode($owner).'/'.rawurlencode($repoName).'/import');
     }
 }
