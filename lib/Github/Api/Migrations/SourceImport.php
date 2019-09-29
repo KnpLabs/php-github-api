@@ -18,7 +18,6 @@ class SourceImport extends AbstractApi
 {
     use AcceptHeaderTrait;
 
-
     /**
      * Start import of repo from other VCS.
      *
@@ -30,13 +29,14 @@ class SourceImport extends AbstractApi
     {
         $this->acceptHeaderValue = sprintf('application/vnd.github.barred-rock-preview');
         if (!empty($params['vcs'])) {
-           if (!in_array($params['vcs'], ['subversion', 'git', 'mercurial', 'tfvc']))
+            if (!in_array($params['vcs'], ['subversion', 'git', 'mercurial', 'tfvc'])) {
                 throw new InvalidArgumentException('vcs');
+            }
         }
         if (empty($params['vcs_url'])) {
-                throw new MissingArgumentException('vcs_url');
+            throw new MissingArgumentException('vcs_url');
         }
-        
+
         return $this->put('/repos/'.rawurlencode($owner).'/'.rawurlencode($repoName).'/import', $params);
     }
 
@@ -50,6 +50,7 @@ class SourceImport extends AbstractApi
     public function status($owner, $repoName)
     {
         $this->acceptHeaderValue = sprintf('application/vnd.github.barred-rock-preview');
+
         return $this->get('/repos/'.rawurlencode($owner).'/'.rawurlencode($repoName).'/import');
     }
 }
