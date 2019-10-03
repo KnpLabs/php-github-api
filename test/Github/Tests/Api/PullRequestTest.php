@@ -97,10 +97,26 @@ class PullRequestTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/ezsystems/ezpublish/pulls/15/files')
+            ->with('/repos/ezsystems/ezpublish/pulls/15/files', ['page' => 1, 'per_page' => 30])
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->files('ezsystems', 'ezpublish', '15'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldShowFilesFromPullRequestForPage()
+    {
+        $expectedArray = [['id' => 'id', 'sha' => '123123']];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/repos/ezsystems/ezpublish/pulls/15/files', ['page' => 2, 'per_page' => 30])
+            ->willReturn($expectedArray);
+
+        $this->assertSame($expectedArray, $api->files('ezsystems', 'ezpublish', '15', ['page' => 2, 'per_page' => 30]));
     }
 
     /**
@@ -211,10 +227,10 @@ class PullRequestTest extends TestCase
     public function shouldCreatePullRequestUsingTitle()
     {
         $data = [
-            'base' => 'master',
-            'head' => 'virtualtestbranch',
+            'base'  => 'master',
+            'head'  => 'virtualtestbranch',
             'title' => 'TITLE: Testing pull-request creation from PHP Github API',
-            'body' => 'BODY: Testing pull-request creation from PHP Github API',
+            'body'  => 'BODY: Testing pull-request creation from PHP Github API',
         ];
 
         $api = $this->getApiMock();
@@ -231,8 +247,8 @@ class PullRequestTest extends TestCase
     public function shouldCreatePullRequestUsingIssueId()
     {
         $data = [
-            'base' => 'master',
-            'head' => 'virtualtestbranch',
+            'base'  => 'master',
+            'head'  => 'virtualtestbranch',
             'issue' => 25,
         ];
 
@@ -251,9 +267,9 @@ class PullRequestTest extends TestCase
     {
         $this->expectException(MissingArgumentException::class);
         $data = [
-            'head' => 'virtualtestbranch',
+            'head'  => 'virtualtestbranch',
             'title' => 'TITLE: Testing pull-request creation from PHP Github API',
-            'body' => 'BODY: Testing pull-request creation from PHP Github API',
+            'body'  => 'BODY: Testing pull-request creation from PHP Github API',
         ];
 
         $api = $this->getApiMock();
@@ -270,9 +286,9 @@ class PullRequestTest extends TestCase
     {
         $this->expectException(MissingArgumentException::class);
         $data = [
-            'base' => 'master',
+            'base'  => 'master',
             'title' => 'TITLE: Testing pull-request creation from PHP Github API',
-            'body' => 'BODY: Testing pull-request creation from PHP Github API',
+            'body'  => 'BODY: Testing pull-request creation from PHP Github API',
         ];
 
         $api = $this->getApiMock();
@@ -289,8 +305,8 @@ class PullRequestTest extends TestCase
     {
         $this->expectException(MissingArgumentException::class);
         $data = [
-            'base' => 'master',
-            'head' => 'virtualtestbranch',
+            'base'  => 'master',
+            'head'  => 'virtualtestbranch',
             'title' => 'TITLE: Testing pull-request creation from PHP Github API',
         ];
 
