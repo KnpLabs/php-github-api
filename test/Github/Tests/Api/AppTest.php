@@ -27,7 +27,7 @@ class AppTest extends TestCase
     /**
      * @test
      */
-    public function shouldFindRepositoriesForApplication()
+    public function shouldFindInstallationsForApplication()
     {
         $result = ['installation1', 'installation2'];
 
@@ -38,6 +38,22 @@ class AppTest extends TestCase
             ->willReturn($result);
 
         $this->assertEquals($result, $api->findInstallations());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetInstallationForApplication()
+    {
+        $result = ['installation1'];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/app/installations/1234')
+            ->willReturn($result);
+
+        $this->assertEquals($result, $api->getInstallation('1234'));
     }
 
     /**

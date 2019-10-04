@@ -54,6 +54,19 @@ class Apps extends AbstractApi
     }
 
     /**
+     * Get an installation of the application
+     *
+     * @link https://developer.github.com/v3/apps/#get-an-installation
+     *
+     * @param $installation_id An integration installation id
+     * @return array
+     */
+    public function getInstallation($installation_id)
+    {
+        return $this->get('/app/installations/'.rawurldecode($installation_id));
+    }
+
+    /**
      * List repositories that are accessible to the authenticated installation.
      *
      * @link https://developer.github.com/v3/apps/installations/#list-repositories
