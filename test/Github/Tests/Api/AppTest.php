@@ -59,6 +59,20 @@ class AppTest extends TestCase
     /**
      * @test
      */
+    public function shouldDeleteInstallationForApplication()
+    {
+        $id = 123;
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('delete')
+            ->with('/app/installations/'.$id);
+
+        $api->removeInstallation($id);
+    }
+
+    /**
+     * @test
+     */
     public function shouldGetRepositoriesFromInstallation()
     {
         $result = ['repo1', 'repo2'];

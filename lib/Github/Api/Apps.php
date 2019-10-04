@@ -67,6 +67,18 @@ class Apps extends AbstractApi
     }
 
     /**
+     * Delete an installation of the application
+     *
+     * @link https://developer.github.com/v3/apps/#delete-an-installation
+     *
+     * @param $installation_id An integration installation id
+     */
+    public function removeInstallation($installation_id)
+    {
+        $this->delete('/app/installations/'.rawurldecode($installation_id));
+    }
+
+    /**
      * List repositories that are accessible to the authenticated installation.
      *
      * @link https://developer.github.com/v3/apps/installations/#list-repositories
