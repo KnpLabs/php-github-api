@@ -75,6 +75,22 @@ class AppTest extends TestCase
     /**
      * @test
      */
+    public function shouldGetInstallationForRepo()
+    {
+        $result = ['installation1'];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/repos/MyOrg/MyRepo/installation')
+            ->willReturn($result);
+
+        $this->assertEquals($result, $api->getInstallationForRepo('MyOrg', 'MyRepo'));
+    }
+
+    /**
+     * @test
+     */
     public function shouldDeleteInstallationForApplication()
     {
         $id = 123;

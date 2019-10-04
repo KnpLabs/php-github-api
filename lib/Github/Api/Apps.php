@@ -80,6 +80,20 @@ class Apps extends AbstractApi
     }
 
     /**
+     * Get an installation of the application for a repository
+     *
+     * @link https://developer.github.com/v3/apps/#get-a-repository-installation
+     *
+     * @param $owner the owner of a repository
+     * @param $repo the name of the repository
+     * @return array
+     */
+    public function getInstallationForRepo($owner, $repo)
+    {
+        return $this->get('/repos/'.rawurldecode($owner).'/'.rawurldecode($repo).'/installation');
+    }
+
+    /**
      * Delete an installation of the application
      *
      * @link https://developer.github.com/v3/apps/#delete-an-installation
