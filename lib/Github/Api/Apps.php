@@ -54,11 +54,12 @@ class Apps extends AbstractApi
     }
 
     /**
-     * Get an installation of the application
+     * Get an installation of the application.
      *
      * @link https://developer.github.com/v3/apps/#get-an-installation
      *
      * @param $installation_id An integration installation id
+     *
      * @return array
      */
     public function getInstallation($installation_id)
@@ -67,11 +68,12 @@ class Apps extends AbstractApi
     }
 
     /**
-     * Get an installation of the application for an organization
+     * Get an installation of the application for an organization.
      *
      * @link https://developer.github.com/v3/apps/#get-an-organization-installation
      *
      * @param $org An organization
+     *
      * @return array
      */
     public function getInstallationForOrganization($org)
@@ -80,12 +82,13 @@ class Apps extends AbstractApi
     }
 
     /**
-     * Get an installation of the application for a repository
+     * Get an installation of the application for a repository.
      *
      * @link https://developer.github.com/v3/apps/#get-a-repository-installation
      *
      * @param $owner the owner of a repository
      * @param $repo the name of the repository
+     *
      * @return array
      */
     public function getInstallationForRepo($owner, $repo)
@@ -94,11 +97,12 @@ class Apps extends AbstractApi
     }
 
     /**
-     * Get an installation of the application for a user
+     * Get an installation of the application for a user.
      *
      * @link https://developer.github.com/v3/apps/#get-a-user-installation
      *
      * @param $username
+     *
      * @return array
      */
     public function getInstallationForUser($username)
@@ -107,7 +111,7 @@ class Apps extends AbstractApi
     }
 
     /**
-     * Delete an installation of the application
+     * Delete an installation of the application.
      *
      * @link https://developer.github.com/v3/apps/#delete-an-installation
      *
