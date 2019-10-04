@@ -41,18 +41,24 @@ class Comments extends AbstractApi
      *
      * @link https://developer.github.com/v3/issues/comments/#list-comments-on-an-issue
      *
-     * @param string $username
-     * @param string $repository
-     * @param int    $issue
-     * @param int    $page
+     * @param string    $username
+     * @param string    $repository
+     * @param int       $issue
+     * @param int|array $page
      *
      * @return array
      */
     public function all($username, $repository, $issue, $page = 1)
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/comments', [
-            'page' => $page,
-        ]);
+        if (is_array($page)) {
+            $parameters = $page;
+        } else {
+            $parameters = [
+                'page' => $page,
+            ];
+        }
+
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($issue).'/comments', $parameters);
     }
 
     /**

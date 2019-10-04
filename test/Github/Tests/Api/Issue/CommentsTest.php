@@ -25,6 +25,24 @@ class CommentsTest extends TestCase
     /**
      * @test
      */
+    public function shouldGetAllIssueCommentsBySpecifyParameters()
+    {
+        $expectedValue = [['comment1data'], ['comment2data']];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/repos/KnpLabs/php-github-api/issues/123/comments', ['since' => '1990-08-03T00:00:00Z'])
+            ->will($this->returnValue($expectedValue));
+
+        $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', 123, [
+            'since' => '1990-08-03T00:00:00Z'
+        ]));
+    }
+
+    /**
+     * @test
+     */
     public function shouldShowIssueComment()
     {
         $expectedValue = ['comment1'];
