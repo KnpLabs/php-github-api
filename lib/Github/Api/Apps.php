@@ -67,6 +67,19 @@ class Apps extends AbstractApi
     }
 
     /**
+     * Get an installation of the application for an organization
+     *
+     * @link https://developer.github.com/v3/apps/#get-an-organization-installation
+     *
+     * @param $org An organization
+     * @return array
+     */
+    public function getInstallationForOrganization($org)
+    {
+        return $this->get('/org/'.rawurldecode($org).'/installation');
+    }
+
+    /**
      * Delete an installation of the application
      *
      * @link https://developer.github.com/v3/apps/#delete-an-installation
