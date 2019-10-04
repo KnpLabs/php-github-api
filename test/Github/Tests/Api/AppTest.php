@@ -91,6 +91,22 @@ class AppTest extends TestCase
     /**
      * @test
      */
+    public function shouldGetInstallationForUser()
+    {
+        $result = ['installation1'];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/users/octocat/installation')
+            ->willReturn($result);
+
+        $this->assertEquals($result, $api->getInstallationForUser('octocat'));
+    }
+
+    /**
+     * @test
+     */
     public function shouldDeleteInstallationForApplication()
     {
         $id = 123;

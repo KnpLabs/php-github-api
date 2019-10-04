@@ -94,6 +94,19 @@ class Apps extends AbstractApi
     }
 
     /**
+     * Get an installation of the application for a user
+     *
+     * @link https://developer.github.com/v3/apps/#get-a-user-installation
+     *
+     * @param $username
+     * @return array
+     */
+    public function getInstallationForUser($username)
+    {
+        return $this->get('/users/'.rawurldecode($username).'/installation');
+    }
+
+    /**
      * Delete an installation of the application
      *
      * @link https://developer.github.com/v3/apps/#delete-an-installation
