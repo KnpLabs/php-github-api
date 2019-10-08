@@ -36,7 +36,7 @@ class CommentsTest extends TestCase
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', 123, [
-            'since' => '1990-08-03T00:00:00Z'
+            'since' => '1990-08-03T00:00:00Z',
         ]));
     }
 
