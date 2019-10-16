@@ -29,7 +29,7 @@ Uses [GitHub API v3](http://developer.github.com/v3/) & supports [GitHub API v4]
 Via Composer:
 
 ```bash
-$ composer require knplabs/github-api php-http/guzzle6-adapter "^1.1"
+$ composer require knplabs/github-api php-http/guzzle6-adapter "^2.0"
 ```
 
 Why `php-http/guzzle6-adapter`? We are decoupled from any HTTP messaging client with help by [HTTPlug](http://httplug.io/). Read about clients in our [docs](doc/customize.md).
