@@ -44,7 +44,7 @@ class Comments extends AbstractApi
      * @param string    $username
      * @param string    $repository
      * @param int       $issue
-     * @param int|array $page
+     * @param int|array $page       Passing integer is deprecated and will throw an exception in php-github-api version 3.0. Pass an array instead.
      *
      * @return array
      */
@@ -53,6 +53,7 @@ class Comments extends AbstractApi
         if (is_array($page)) {
             $parameters = $page;
         } else {
+            @trigger_error(sprintf('Passing integer to the "page" argument in "%s" is deprecated and will throw an exception in php-github-api version 3.0. Pass an array instead.', __METHOD__), E_USER_DEPRECATED);
             $parameters = [
                 'page' => $page,
             ];
