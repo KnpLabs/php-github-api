@@ -30,6 +30,7 @@
         "phpunit/phpunit": "^7.0 || ^8.0",
         "php-http/guzzle6-adapter": "^1.0",
         "php-http/mock-client": "^1.0",
+        "friendsofphp/php-cs-fixer": "^2.15",
         "guzzlehttp/psr7": "^1.2",
         "cache/array-adapter": "^0.4"
     },

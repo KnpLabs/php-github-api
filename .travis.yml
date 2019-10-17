@@ -28,4 +28,5 @@ install:
   - travis_retry composer install --no-interaction
 
 script:
+  - PHP_CS_FIXER_FUTURE_MODE=1 ./vendor/bin/php-cs-fixer fix --ansi --diff --dry-run --verbose
   - $TEST_COMMAND

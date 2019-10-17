@@ -126,9 +126,7 @@ abstract class AbstractApi implements ApiInterface
             unset($parameters['ref']);
         }
 
-        $response = $this->client->getHttpClient()->head($path.'?'.http_build_query($parameters), $requestHeaders);
-
-        return $response;
+        return $this->client->getHttpClient()->head($path.'?'.http_build_query($parameters), $requestHeaders);
     }
 
     /**
