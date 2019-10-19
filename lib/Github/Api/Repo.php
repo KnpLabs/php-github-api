@@ -2,6 +2,7 @@
 
 namespace Github\Api;
 
+use Github\Api\Repository\Checks;
 use Github\Api\Repository\Collaborators;
 use Github\Api\Repository\Comments;
 use Github\Api\Repository\Commits;
@@ -681,5 +682,17 @@ class Repo extends AbstractApi
         $this->acceptHeaderValue = 'application/vnd.github.nightshade-preview+json';
 
         return $this->post('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/transfer', ['new_owner' => $newOwner, 'team_id' => $teamId]);
+    }
+
+    /**
+     * Manage the checks of a repository.
+     *
+     * @link https://developer.github.com/v3/checks
+     *
+     * @return Checks
+     */
+    public function checks()
+    {
+        return new Checks($this->client);
     }
 }
