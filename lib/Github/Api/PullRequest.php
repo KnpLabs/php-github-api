@@ -156,7 +156,12 @@ class PullRequest extends AbstractApi
             throw new MissingArgumentException(['issue', 'body']);
         }
 
-        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls', $params);
+        $headers = [];
+        if (isset($params['draft']) && $params['draft'] == true) {
+            $headers['Accept'] = 'application/vnd.github.shadow-cat-preview+json';
+        }
+
+        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls', $params, $headers);
     }
 
     public function update($username, $repository, $id, array $params)

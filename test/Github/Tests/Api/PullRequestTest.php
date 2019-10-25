@@ -263,6 +263,27 @@ class PullRequestTest extends TestCase
     /**
      * @test
      */
+    public function shouldCreateDraftPullRequest()
+    {
+        $data = [
+            'base'  => 'master',
+            'head'  => 'virtualtestbranch',
+            'title' => 'TITLE: Testing draft pull-request creation from PHP Github API',
+            'body'  => 'BODY: Testing draft pull-request creation from PHP Github API',
+            'draft' => 'true',
+        ];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('post')
+            ->with('/repos/ezsystems/ezpublish/pulls', $data, ['Accept' => 'application/vnd.github.shadow-cat-preview+json']);
+
+        $api->create('ezsystems', 'ezpublish', $data);
+    }
+
+    /**
+     * @test
+     */
     public function shouldNotCreatePullRequestWithoutBase()
     {
         $this->expectException(MissingArgumentException::class);
