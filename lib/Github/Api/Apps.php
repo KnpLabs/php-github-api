@@ -9,6 +9,16 @@ namespace Github\Api;
  */
 class Apps extends AbstractApi
 {
+    use AcceptHeaderTrait;
+
+    public function configure()
+    {
+        $this->acceptHeaderValue = 'application/vnd.github.machine-man-preview+json';
+
+        return $this;
+    }
+
+
     /**
      * Create an access token for an installation.
      *
