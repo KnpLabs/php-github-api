@@ -18,7 +18,6 @@ class Apps extends AbstractApi
         return $this;
     }
 
-
     /**
      * Create an access token for an installation.
      *
