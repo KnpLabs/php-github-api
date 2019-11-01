@@ -701,16 +701,4 @@ class Repo extends AbstractApi
 
         return $this->post('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/transfer', ['new_owner' => $newOwner, 'team_id' => $teamId]);
     }
-
-    /**
-     * Manage the checks of a repository.
-     *
-     * @link https://developer.github.com/v3/checks
-     *
-     * @return Checks
-     */
-    public function checks()
-    {
-        return new Checks($this->client);
-    }
 }
