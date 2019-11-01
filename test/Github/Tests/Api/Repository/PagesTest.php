@@ -7,19 +7,18 @@ use Github\Tests\Api\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
- * Class PagesTest
- * @package Github\Tests\Api\Repository
+ * Class PagesTest.
+ *
  * @method Pages|MockObject getApiMock()
  */
 class PagesTest extends TestCase
 {
-
     /**
      * @test
      */
     public function shouldGetPagesInfo()
     {
-        $expectedValue = ["status" => "built"];
+        $expectedValue = ['status' => 'built'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -69,7 +68,7 @@ class PagesTest extends TestCase
     public function shouldUpdatePages()
     {
         $params = [
-            'source' => "master /docs",
+            'source' => 'master /docs',
         ];
 
         $api = $this->getApiMock();
@@ -98,7 +97,7 @@ class PagesTest extends TestCase
      */
     public function shouldGetAllPagesBuilds()
     {
-        $expectedValue = [["status" => "built"]];
+        $expectedValue = [['status' => 'built']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -114,7 +113,7 @@ class PagesTest extends TestCase
      */
     public function shouldGetLatestPagesBuild()
     {
-        $expectedValue = ["status" => "built"];
+        $expectedValue = ['status' => 'built'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -130,7 +129,7 @@ class PagesTest extends TestCase
      */
     public function showGetOnePagesBuild()
     {
-        $expectedValue = ["status" => "built"];
+        $expectedValue = ['status' => 'built'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())

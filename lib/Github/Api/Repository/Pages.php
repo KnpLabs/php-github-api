@@ -23,41 +23,41 @@ class Pages extends AbstractApi
 
     public function show($username, $repository)
     {
-        return $this->get('/repos/' . rawurlencode($username) . '/' . rawurlencode($repository) . '/pages');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pages');
     }
 
     public function enable($username, $repository, array $params = [])
     {
-        return $this->post('/repos/' . rawurlencode($username) . '/' . rawurlencode($repository) . '/pages', $params);
+        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pages', $params);
     }
 
     public function disable($username, $repository)
     {
-        return $this->delete('/repos/' . rawurlencode($username) . '/' . rawurlencode($repository) . '/pages');
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pages');
     }
 
     public function update($username, $repository, array $params = [])
     {
-        return $this->put('/repos/' . rawurlencode($username) . '/' . rawurlencode($repository) . '/pages', $params);
+        return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pages', $params);
     }
 
     public function requestBuild($username, $repository)
     {
-        return $this->post('/repos/' . rawurlencode($username) . '/' . rawurlencode($repository) . '/pages/builds');
+        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pages/builds');
     }
 
     public function builds($username, $repository)
     {
-        return $this->get('/repos/' . rawurlencode($username) . '/' . rawurlencode($repository) . '/pages/builds');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pages/builds');
     }
 
     public function showLatestBuild($username, $repository)
     {
-        return $this->get('/repos/' . rawurlencode($username) . '/' . rawurlencode($repository) . '/pages/builds/latest');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pages/builds/latest');
     }
 
     public function showBuild($username, $repository, $id)
     {
-        return $this->get('/repos/' . rawurlencode($username) . '/' . rawurlencode($repository) . '/pages/builds/' . rawurlencode($id));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pages/builds/'.rawurlencode($id));
     }
 }
