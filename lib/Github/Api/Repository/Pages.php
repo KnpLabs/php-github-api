@@ -22,12 +22,14 @@ class Pages extends AbstractApi
     public function enable($username, $repository, array $params = [])
     {
         $this->acceptHeaderValue = 'application/vnd.github.switcheroo-preview+json';
+
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pages', $params);
     }
 
     public function disable($username, $repository)
     {
         $this->acceptHeaderValue = 'application/vnd.github.switcheroo-preview+json';
+
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pages');
     }
 
