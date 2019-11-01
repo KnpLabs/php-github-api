@@ -312,6 +312,18 @@ class Repo extends AbstractApi
     }
 
     /**
+     * Manage checks on a repository.
+     *
+     * @link https://developer.github.com/v3/checks/
+     *
+     * @return Checks
+     */
+    public function checks()
+    {
+        return new Checks($this->client);
+    }
+
+    /**
      * Manage the content of a repository.
      *
      * @link http://developer.github.com/v3/repos/contents/
