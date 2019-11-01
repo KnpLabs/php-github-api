@@ -11,11 +11,9 @@ class Apps extends AbstractApi
 {
     use AcceptHeaderTrait;
 
-    public function configure()
+    final public function configurePreviewHeader()
     {
         $this->acceptHeaderValue = 'application/vnd.github.machine-man-preview+json';
-
-        return $this;
     }
 
     /**
@@ -36,7 +34,7 @@ class Apps extends AbstractApi
             $parameters['user_id'] = $userId;
         }
 
-        $this->configure();
+        $this->configurePreviewHeader();
 
         return $this->post('/app/installations/'.rawurlencode($installationId).'/access_tokens', $parameters);
     }
@@ -50,7 +48,7 @@ class Apps extends AbstractApi
      */
     public function findInstallations()
     {
-        $this->configure();
+        $this->configurePreviewHeader();
 
         return $this->get('/app/installations');
     }
@@ -71,7 +69,7 @@ class Apps extends AbstractApi
             $parameters['user_id'] = $userId;
         }
 
-        $this->configure();
+        $this->configurePreviewHeader();
 
         return $this->get('/installation/repositories', $parameters);
     }
@@ -88,7 +86,7 @@ class Apps extends AbstractApi
      */
     public function addRepository($installationId, $repositoryId)
     {
-        $this->configure();
+        $this->configurePreviewHeader();
 
         return $this->put('/installations/'.rawurlencode($installationId).'/repositories/'.rawurlencode($repositoryId));
     }
@@ -105,7 +103,7 @@ class Apps extends AbstractApi
      */
     public function removeRepository($installationId, $repositoryId)
     {
-        $this->configure();
+        $this->configurePreviewHeader();
 
         return $this->delete('/installations/'.rawurlencode($installationId).'/repositories/'.rawurlencode($repositoryId));
     }
