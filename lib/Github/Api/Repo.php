@@ -12,6 +12,7 @@ use Github\Api\Repository\Downloads;
 use Github\Api\Repository\Forks;
 use Github\Api\Repository\Hooks;
 use Github\Api\Repository\Labels;
+use Github\Api\Repository\Pages;
 use Github\Api\Repository\Projects;
 use Github\Api\Repository\Protection;
 use Github\Api\Repository\Releases;
@@ -605,6 +606,11 @@ class Repo extends AbstractApi
     public function traffic()
     {
         return new Traffic($this->client);
+    }
+
+    public function pages()
+    {
+        return new Pages($this->client);
     }
 
     /**
