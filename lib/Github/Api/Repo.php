@@ -12,6 +12,7 @@ use Github\Api\Repository\Downloads;
 use Github\Api\Repository\Forks;
 use Github\Api\Repository\Hooks;
 use Github\Api\Repository\Labels;
+use Github\Api\Repository\Pages;
 use Github\Api\Repository\Projects;
 use Github\Api\Repository\Protection;
 use Github\Api\Repository\Releases;
@@ -312,6 +313,18 @@ class Repo extends AbstractApi
     }
 
     /**
+     * Manage checks on a repository.
+     *
+     * @link https://developer.github.com/v3/checks/
+     *
+     * @return Checks
+     */
+    public function checks()
+    {
+        return new Checks($this->client);
+    }
+
+    /**
      * Manage the content of a repository.
      *
      * @link http://developer.github.com/v3/repos/contents/
@@ -595,6 +608,11 @@ class Repo extends AbstractApi
         return new Traffic($this->client);
     }
 
+    public function pages()
+    {
+        return new Pages($this->client);
+    }
+
     /**
      * @param string $username
      * @param string $repository
@@ -682,17 +700,5 @@ class Repo extends AbstractApi
         $this->acceptHeaderValue = 'application/vnd.github.nightshade-preview+json';
 
         return $this->post('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/transfer', ['new_owner' => $newOwner, 'team_id' => $teamId]);
-    }
-
-    /**
-     * Manage the checks of a repository.
-     *
-     * @link https://developer.github.com/v3/checks
-     *
-     * @return Checks
-     */
-    public function checks()
-    {
-        return new Checks($this->client);
     }
 }
