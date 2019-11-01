@@ -11,7 +11,7 @@ class Apps extends AbstractApi
 {
     use AcceptHeaderTrait;
 
-    final public function configurePreviewHeader()
+    private function configurePreviewHeader()
     {
         $this->acceptHeaderValue = 'application/vnd.github.machine-man-preview+json';
     }
