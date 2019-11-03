@@ -4,6 +4,7 @@ namespace Github\Tests\Api;
 
 use Github\Api\AbstractApi;
 use GuzzleHttp\Psr7\Response;
+use Http\Client\Common\HttpMethodsClientInterface;
 
 class AbstractApiTest extends TestCase
 {
@@ -212,26 +213,15 @@ class AbstractApiTest extends TestCase
      */
     protected function getHttpMethodsMock(array $methods = [])
     {
-        $methods = array_merge(['sendRequest'], $methods);
-        $mock = $this->getMockBuilder(\Http\Client\Common\HttpMethodsClient::class)
-            ->disableOriginalConstructor()
-            ->setMethods($methods)
-            ->getMock();
-        $mock
-            ->expects($this->any())
-            ->method('sendRequest');
-
-        return $mock;
-    }
-
-    /**
-     * @return \Http\Client\HttpClient
-     */
-    protected function getHttpClientMock()
-    {
-        $mock = $this->getMockBuilder(\Http\Client\HttpClient::class)
-            ->setMethods(['sendRequest'])
-            ->getMock();
+        if (interface_exists(HttpMethodsClientInterface::class)) {
+            $mock = $this->createMock(HttpMethodsClientInterface::class);
+        } else {
+            $methods = array_merge(['sendRequest'], $methods);
+            $mock = $this->getMockBuilder(\Http\Client\Common\HttpMethodsClient::class)
+                ->disableOriginalConstructor()
+                ->setMethods($methods)
+                ->getMock();
+        }
         $mock
             ->expects($this->any())
             ->method('sendRequest');

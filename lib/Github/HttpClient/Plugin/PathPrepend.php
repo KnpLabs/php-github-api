@@ -12,6 +12,8 @@ use Psr\Http\Message\RequestInterface;
  */
 class PathPrepend implements Plugin
 {
+    use Plugin\VersionBridgePlugin;
+
     private $path;
 
     /**
@@ -25,7 +27,7 @@ class PathPrepend implements Plugin
     /**
      * {@inheritdoc}
      */
-    public function handleRequest(RequestInterface $request, callable $next, callable $first)
+    public function doHandleRequest(RequestInterface $request, callable $next, callable $first)
     {
         $currentPath = $request->getUri()->getPath();
         if (strpos($currentPath, $this->path) !== 0) {

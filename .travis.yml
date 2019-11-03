@@ -3,7 +3,6 @@ sudo: false
 
 cache:
   directories:
-    - vendor
     - $HOME/.composer/cache
 
 env:
@@ -19,7 +18,7 @@ matrix:
   include:
     - php: 7.2
       name: Backward compatibillity check
-      env: DEPENDENCIES="roave/backward-compatibility-check" TEST_COMMAND="./vendor/bin/roave-backward-compatibility-check"
+      env: DEPENDENCIES="roave/backward-compatibility-check" TEST_COMMAND="./.github/bc-test.sh"
 
 before_install:
     - if ! [ -z "$DEPENDENCIES" ]; then composer require --no-update ${DEPENDENCIES}; fi;
