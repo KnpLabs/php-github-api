@@ -2,6 +2,36 @@
 
 The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release.
 
+## 2.12.0
+
+### Added
+
+- Support for HTTPlug 2.0 and PSR-18
+- Add support for GitHub Checks
+- Add support for GitHub Pages
+- Add support to update a Pull Request Review
+- Add support to get specific revision of a gist
+- Added a 4th argument `$parameters` to `PullRequest::files()`
+- Added `Accept` headers to Github Apps 
+
+### Removed
+
+- Active support for HHVM
+- Support for PHP <7.1
+
+### Changed
+
+- Allow tags to be created without the `Tagger` object
+- When updating DeployKeys we will first remove existing then add a new DeployKey
+
+### Fixed
+
+- In `Trees` we should check if `array_key_exists('sha', $tree)` instead of `isset` to avoid issues with `null`.  (#822)
+
+### Deprecated
+
+- Passing an integer (`$page`) as 4th arugment in `Comments::all()` is deprecated. It should be an array.
+
 ## 2.11.0
 
 ### Added
