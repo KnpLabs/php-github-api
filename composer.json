@@ -20,7 +20,7 @@
         "php": "^7.1",
         "psr/http-message": "^1.0",
         "psr/cache": "^1.0",
-        "php-http/httplug": "^1.1",
+        "php-http/httplug": "^1.1 || ^2.0",
         "php-http/discovery": "^1.0",
         "php-http/client-implementation": "^1.0",
         "php-http/client-common": "^1.6",
