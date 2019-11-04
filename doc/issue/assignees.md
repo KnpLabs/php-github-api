@@ -18,11 +18,11 @@ $info = $client->api('issue')->assignees()->check('KnpLabs', 'php-github-api', '
 ### Add assignee
 
 ```php
-$client->api('issue')->assignees()->add('KnpLabs', 'php-github-api', 4, ['assignees' => 'test-user']);
+$client->api('issue')->assignees()->add('KnpLabs', 'php-github-api', 4, ['assignees' => ['test-user']]);
 ```
 
 ### Remove assignee
 
 ```php
-$client->api('issue')->assignees()->remove('KnpLabs', 'php-github-api', 4, ['assignees' => 'test-user']);
+$client->api('issue')->assignees()->remove('KnpLabs', 'php-github-api', 4, ['assignees' => ['test-user']]);
 ```
