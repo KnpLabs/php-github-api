@@ -76,13 +76,18 @@ class GithubExceptionThrower implements Plugin
                                 break;
 
                             default:
-                                $errors[] = $error['message'];
+                                if (isset($error['message'])) {
+                                    $errors[] = $error['message'];
+                                }
                                 break;
 
                         }
                     }
 
-                    throw new ValidationFailedException('Validation Failed: '.implode(', ', $errors), 422);
+                    throw new ValidationFailedException(
+                        $errors ? 'Validation Failed: '.implode(', ', $errors) : 'Validation Failed',
+                        422
+                    );
                 }
             }
 
