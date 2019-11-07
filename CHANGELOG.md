@@ -2,6 +2,13 @@
 
 The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release.
 
+## 2.12.1
+
+### Fixed
+
+- Fixed bug in handling of validation errors
+- Updated docs to not use deprected string parameter in issue assignee call
+
 ## 2.12.0
 
 ### Added
