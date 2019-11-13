@@ -58,15 +58,15 @@ class Apps extends AbstractApi
      *
      * @link https://developer.github.com/v3/apps/#get-an-installation
      *
-     * @param $installation_id An integration installation id
+     * @param $installationId An integration installation id
      *
      * @return array
      */
-    public function getInstallation($installation_id)
+    public function getInstallation($installationId)
     {
         $this->configurePreviewHeader();
 
-        return $this->get('/app/installations/'.rawurldecode($installation_id));
+        return $this->get('/app/installations/'.rawurldecode($installationId));
     }
 
     /**
@@ -123,13 +123,13 @@ class Apps extends AbstractApi
      *
      * @link https://developer.github.com/v3/apps/#delete-an-installation
      *
-     * @param $installation_id An integration installation id
+     * @param $installationId An integration installation id
      */
-    public function removeInstallation($installation_id)
+    public function removeInstallation($installationId)
     {
         $this->configurePreviewHeader();
 
-        $this->delete('/app/installations/'.rawurldecode($installation_id));
+        $this->delete('/app/installations/'.rawurldecode($installationId));
     }
 
     /**
