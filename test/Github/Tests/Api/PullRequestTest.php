@@ -276,7 +276,7 @@ class PullRequestTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('/repos/ezsystems/ezpublish/pulls', $data, ['Accept' => 'application/vnd.github.shadow-cat-preview+json']);
+            ->with('/repos/ezsystems/ezpublish/pulls', $data);
 
         $api->create('ezsystems', 'ezpublish', $data);
     }
