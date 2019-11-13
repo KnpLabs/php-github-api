@@ -64,6 +64,8 @@ class Apps extends AbstractApi
      */
     public function getInstallation($installation_id)
     {
+        $this->configurePreviewHeader();
+
         return $this->get('/app/installations/'.rawurldecode($installation_id));
     }
 
@@ -78,6 +80,8 @@ class Apps extends AbstractApi
      */
     public function getInstallationForOrganization($org)
     {
+        $this->configurePreviewHeader();
+
         return $this->get('/org/'.rawurldecode($org).'/installation');
     }
 
@@ -93,6 +97,8 @@ class Apps extends AbstractApi
      */
     public function getInstallationForRepo($owner, $repo)
     {
+        $this->configurePreviewHeader();
+
         return $this->get('/repos/'.rawurldecode($owner).'/'.rawurldecode($repo).'/installation');
     }
 
@@ -107,6 +113,8 @@ class Apps extends AbstractApi
      */
     public function getInstallationForUser($username)
     {
+        $this->configurePreviewHeader();
+
         return $this->get('/users/'.rawurldecode($username).'/installation');
     }
 
@@ -119,6 +127,8 @@ class Apps extends AbstractApi
      */
     public function removeInstallation($installation_id)
     {
+        $this->configurePreviewHeader();
+
         $this->delete('/app/installations/'.rawurldecode($installation_id));
     }
 
