@@ -54,6 +54,85 @@ class Apps extends AbstractApi
     }
 
     /**
+     * Get an installation of the application.
+     *
+     * @link https://developer.github.com/v3/apps/#get-an-installation
+     *
+     * @param $installationId An integration installation id
+     *
+     * @return array
+     */
+    public function getInstallation($installationId)
+    {
+        $this->configurePreviewHeader();
+
+        return $this->get('/app/installations/'.rawurldecode($installationId));
+    }
+
+    /**
+     * Get an installation of the application for an organization.
+     *
+     * @link https://developer.github.com/v3/apps/#get-an-organization-installation
+     *
+     * @param $org An organization
+     *
+     * @return array
+     */
+    public function getInstallationForOrganization($org)
+    {
+        $this->configurePreviewHeader();
+
+        return $this->get('/org/'.rawurldecode($org).'/installation');
+    }
+
+    /**
+     * Get an installation of the application for a repository.
+     *
+     * @link https://developer.github.com/v3/apps/#get-a-repository-installation
+     *
+     * @param $owner the owner of a repository
+     * @param $repo the name of the repository
+     *
+     * @return array
+     */
+    public function getInstallationForRepo($owner, $repo)
+    {
+        $this->configurePreviewHeader();
+
+        return $this->get('/repos/'.rawurldecode($owner).'/'.rawurldecode($repo).'/installation');
+    }
+
+    /**
+     * Get an installation of the application for a user.
+     *
+     * @link https://developer.github.com/v3/apps/#get-a-user-installation
+     *
+     * @param $username
+     *
+     * @return array
+     */
+    public function getInstallationForUser($username)
+    {
+        $this->configurePreviewHeader();
+
+        return $this->get('/users/'.rawurldecode($username).'/installation');
+    }
+
+    /**
+     * Delete an installation of the application.
+     *
+     * @link https://developer.github.com/v3/apps/#delete-an-installation
+     *
+     * @param $installationId An integration installation id
+     */
+    public function removeInstallation($installationId)
+    {
+        $this->configurePreviewHeader();
+
+        $this->delete('/app/installations/'.rawurldecode($installationId));
+    }
+
+    /**
      * List repositories that are accessible to the authenticated installation.
      *
      * @link https://developer.github.com/v3/apps/installations/#list-repositories

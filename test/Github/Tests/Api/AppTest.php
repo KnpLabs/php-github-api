@@ -27,7 +27,7 @@ class AppTest extends TestCase
     /**
      * @test
      */
-    public function shouldFindRepositoriesForApplication()
+    public function shouldFindInstallationsForApplication()
     {
         $result = ['installation1', 'installation2'];
 
@@ -38,6 +38,84 @@ class AppTest extends TestCase
             ->willReturn($result);
 
         $this->assertEquals($result, $api->findInstallations());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetInstallationForApplication()
+    {
+        $result = ['installation1'];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/app/installations/1234')
+            ->willReturn($result);
+
+        $this->assertEquals($result, $api->getInstallation('1234'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetInstallationForOrganization()
+    {
+        $result = ['installation1'];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/org/1234/installation')
+            ->willReturn($result);
+
+        $this->assertEquals($result, $api->getInstallationForOrganization('1234'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetInstallationForRepo()
+    {
+        $result = ['installation1'];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/repos/MyOrg/MyRepo/installation')
+            ->willReturn($result);
+
+        $this->assertEquals($result, $api->getInstallationForRepo('MyOrg', 'MyRepo'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetInstallationForUser()
+    {
+        $result = ['installation1'];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/users/octocat/installation')
+            ->willReturn($result);
+
+        $this->assertEquals($result, $api->getInstallationForUser('octocat'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldDeleteInstallationForApplication()
+    {
+        $id = 123;
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('delete')
+            ->with('/app/installations/'.$id);
+
+        $api->removeInstallation($id);
     }
 
     /**
