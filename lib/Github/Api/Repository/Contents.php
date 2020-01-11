@@ -102,8 +102,8 @@ class Contents extends AbstractApi
         $url = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
 
         $parameters = [
-          'content' => base64_encode($content),
-          'message' => $message,
+            'content' => base64_encode($content),
+            'message' => $message,
         ];
 
         if (null !== $branch) {
@@ -178,9 +178,9 @@ class Contents extends AbstractApi
         $url = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
 
         $parameters = [
-          'content' => base64_encode($content),
-          'message' => $message,
-          'sha'     => $sha,
+            'content' => base64_encode($content),
+            'message' => $message,
+            'sha'     => $sha,
         ];
 
         if (null !== $branch) {
@@ -219,8 +219,8 @@ class Contents extends AbstractApi
         $url = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
 
         $parameters = [
-          'message' => $message,
-          'sha'     => $sha,
+            'message' => $message,
+            'sha'     => $sha,
         ];
 
         if (null !== $branch) {

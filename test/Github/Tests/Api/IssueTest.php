@@ -16,7 +16,7 @@ class IssueTest extends TestCase
         ];
         $sentData = $data + [
             'page' => 1,
-            ];
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -43,7 +43,7 @@ class IssueTest extends TestCase
         ];
         $sentData = $data + [
             'page' => 1,
-            ];
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())

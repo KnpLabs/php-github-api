@@ -43,9 +43,7 @@ class Blobs extends AbstractApi
      */
     public function show($username, $repository, $sha)
     {
-        $response = $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/blobs/'.rawurlencode($sha));
-
-        return $response;
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/blobs/'.rawurlencode($sha));
     }
 
     /**

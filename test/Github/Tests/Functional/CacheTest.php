@@ -61,7 +61,7 @@ class CacheTest extends \PHPUnit\Framework\TestCase
         ];
 
         $body = \GuzzleHttp\Psr7\stream_for(json_encode([
-          'login' => $username,
+            'login' => $username,
         ]));
 
         return new Response(200, $headers, $body);
