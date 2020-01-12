@@ -30,7 +30,7 @@ OUTPUT=`echo "$OUTPUT" | sed '/Method __toString() was added to interface Github
 BC_BREAKS=`echo "$OUTPUT" | grep -o '\[BC\]' | wc -l | awk '{ print $1 }'`
 
 # The last row of the output is "X backwards-incompatible changes detected". Find X.
-STATED_BREAKS=`echo "$OUTPUT" | tail -n 1 | awk -F' ' '{ print $1 }'`
+STATED_BREAKS=`echo "$OUTPUT" | tail -n 1 | awk -F' ' '{ print $1 }' | sed s/No/0/`
 
 # If
 #   We found "[BC]" in the command output after we removed suppressed lines
