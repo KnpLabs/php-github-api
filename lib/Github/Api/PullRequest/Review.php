@@ -171,7 +171,7 @@ class Review extends AbstractApi
         }
 
         return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.$pullRequest.'/reviews/'.$id.'/dismissals', [
-          'message' => $message,
+            'message' => $message,
         ]);
     }
 

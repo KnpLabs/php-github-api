@@ -14,7 +14,7 @@ class CommentsTest extends TestCase
     public function shouldGetAllReviewCommentsForAPullRequest()
     {
         $expectedValue = [
-                [
+            [
                 'url' => 'https://api.github.com/repos/octocat/Hello-World/pulls/comments/1',
                 'id' => 1,
                 'pull_request_review_id' => 42,

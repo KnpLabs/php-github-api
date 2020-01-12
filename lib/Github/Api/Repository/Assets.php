@@ -74,9 +74,7 @@ class Assets extends AbstractApi
         // Asset creation requires a separate endpoint, uploads.github.com.
         // Change the base url for the HTTP client temporarily while we execute
         // this request.
-        $response = $this->postRaw('https://uploads.github.com/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode($id).'/assets?name='.$name, $content, ['Content-Type' => $contentType]);
-
-        return $response;
+        return $this->postRaw('https://uploads.github.com/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/releases/'.rawurlencode($id).'/assets?name='.$name, $content, ['Content-Type' => $contentType]);
     }
 
     /**
