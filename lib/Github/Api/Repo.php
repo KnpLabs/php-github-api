@@ -83,6 +83,21 @@ class Repo extends AbstractApi
     }
 
     /**
+     * Get the contents of the repository's license file, if one is detected.
+     *
+     * @link https://developer.github.com/v3/licenses/#get-the-contents-of-a-repositorys-license
+     *
+     * @param string $username   the user who owns the repository
+     * @param string $repository the name of the repository
+     *
+     * @return array contents of the repository's license file, if one is detected.
+     */
+    public function license($username, $repository)
+    {
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/license');
+    }
+
+    /**
      * Get contributor commit statistics for a repository.
      *
      * @link http://developer.github.com/v3/repos/statistics/#contributors
