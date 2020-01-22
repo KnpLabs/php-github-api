@@ -35,10 +35,10 @@ class ReviewRequestTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('/repos/octocat/Hello-World/pulls/12/requested_reviewers', ['reviewers' => ['testuser']])
+            ->with('/repos/octocat/Hello-World/pulls/12/requested_reviewers', ['reviewers' => ['testuser'], 'team_reviewers' => ['testteam']])
         ;
 
-        $api->create('octocat', 'Hello-World', 12, ['testuser']);
+        $api->create('octocat', 'Hello-World', 12, ['testuser'], ['testteam']);
     }
 
     /**
@@ -49,10 +49,10 @@ class ReviewRequestTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('/repos/octocat/Hello-World/pulls/12/requested_reviewers', ['reviewers' => ['testuser']])
+            ->with('/repos/octocat/Hello-World/pulls/12/requested_reviewers', ['reviewers' => ['testuser'], 'team_reviewers' => ['testteam']])
         ;
 
-        $api->remove('octocat', 'Hello-World', 12, ['testuser']);
+        $api->remove('octocat', 'Hello-World', 12, ['testuser'], ['testteam']);
     }
 
     /**
