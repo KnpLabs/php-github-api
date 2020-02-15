@@ -696,9 +696,6 @@ class Repo extends AbstractApi
      */
     public function transfer($username, $repository, $newOwner, $teamId = [])
     {
-        //This api is in preview mode, so set the correct accept-header
-        $this->acceptHeaderValue = 'application/vnd.github.nightshade-preview+json';
-
         return $this->post('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/transfer', ['new_owner' => $newOwner, 'team_id' => $teamId]);
     }
 }
