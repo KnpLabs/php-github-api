@@ -541,6 +541,22 @@ class RepoTest extends TestCase
     /**
      * @test
      */
+    public function shouldGetRepositoryCommunityProfile()
+    {
+        $expectedArray = ['health_percentage' => 100, 'description' => 'A simple PHP GitHub API client...'];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/repos/KnpLabs/php-github-api/community/profile')
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->communityProfile('KnpLabs', 'php-github-api'));
+    }
+
+    /**
+     * @test
+     */
     public function shouldGetRepositoryCodeOfConduct()
     {
         $expectedArray = ['name' => 'Contributor Covenant', 'url' => 'http://...'];

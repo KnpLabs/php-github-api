@@ -628,6 +628,24 @@ class Repo extends AbstractApi
     }
 
     /**
+     * Get the community profile metrics for a repository.
+     *
+     * @link https://developer.github.com/v3/repos/community/#retrieve-community-profile-metrics
+     *
+     * @param string $username
+     * @param string $repository
+     *
+     * @return array
+     */
+    public function communityProfile($username, $repository)
+    {
+        //This api is in preview mode, so set the correct accept-header
+        $this->acceptHeaderValue = 'application/vnd.github.black-panther-preview+json';
+
+        return $this->get('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/community/profile');
+    }
+
+    /**
      * Get the contents of a repository's code of conduct.
      *
      * @link https://developer.github.com/v3/codes_of_conduct/#get-the-contents-of-a-repositorys-code-of-conduct

@@ -312,6 +312,12 @@ $milestones = $client->api('repo')->milestones('ornicar', 'php-github-api');
 
 Returns a list of milestones.
 
+### Get the community profile metrics for a repository
+
+```php
+$communityProfile = $client->api('repo')->communityProfile('ornicar', 'php-github-api');
+```
+
 ### Get the contents of a repository's code of conduct
 
 ```php
