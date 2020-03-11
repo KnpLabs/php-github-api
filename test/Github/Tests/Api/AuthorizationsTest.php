@@ -89,6 +89,24 @@ class AuthorizationsTest extends TestCase
     /**
      * @test
      */
+    public function shouldCheckApplicationToken()
+    {
+        $id = 123;
+        $token = 'abc';
+        $expectedArray = ['id' => $id];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('post')
+            ->with('/applications/'.$id.'/token', ['access_token' => $token])
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->checkToken($id, $token));
+    }
+
+    /**
+     * @test
+     */
     public function shouldCheckAuthorization()
     {
         $id = 123;
@@ -123,6 +141,24 @@ class AuthorizationsTest extends TestCase
     /**
      * @test
      */
+    public function shouldResetApplicationToken()
+    {
+        $id = 123;
+        $token = 'abcde';
+        $expectedArray = ['id' => $id];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('patch')
+            ->with('/applications/'.$id.'/token', ['access_token' => $token])
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->resetToken($id, $token));
+    }
+
+    /**
+     * @test
+     */
     public function shouldRevokeAuthorization()
     {
         $id = 123;
@@ -149,6 +185,38 @@ class AuthorizationsTest extends TestCase
             ->with('/applications/'.$id.'/tokens');
 
         $api->revokeAll($id);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldDeleteApplicationToken()
+    {
+        $id = 123;
+        $token = 'abcde';
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('delete')
+            ->with('/applications/'.$id.'/token', ['access_token' => $token]);
+
+        $api->deleteToken($id, $token);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldDeleteApplicationAuthorization()
+    {
+        $id = 123;
+        $token = 'abcde';
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('delete')
+            ->with('/applications/'.$id.'/grant', ['access_token' => $token]);
+
+        $api->deleteGrant($id, $token);
     }
 
     /**

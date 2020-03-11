@@ -11,10 +11,19 @@ namespace Github\Api;
  */
 class Authorizations extends AbstractApi
 {
+    use AcceptHeaderTrait;
+
+    private function configurePreviewHeader()
+    {
+        $this->acceptHeaderValue = 'application/vnd.github.doctor-strange-preview+json';
+    }
+
     /**
      * List all authorizations.
      *
      * @return array
+     *
+     * @deprecated GitHub will remove this endpoint on 13th November 2020. No replacement will be offered. The "web application flow" should be used instead.
      */
     public function all()
     {
@@ -27,6 +36,8 @@ class Authorizations extends AbstractApi
      * @param string $clientId
      *
      * @return array
+     *
+     * @deprecated GitHub will remove this endpoint on 13th November 2020. No replacement will be offered. The "web application flow" should be used instead.
      */
     public function show($clientId)
     {
@@ -36,10 +47,12 @@ class Authorizations extends AbstractApi
     /**
      * Create an authorization.
      *
-     * @param array $params
-     * @param null  $OTPCode
+     * @param array       $params
+     * @param string|null $OTPCode
      *
      * @return array
+     *
+     * @deprecated GitHub will remove this endpoint on 13th November 2020. No replacement will be offered. The "web application flow" should be used instead.
      */
     public function create(array $params, $OTPCode = null)
     {
@@ -55,6 +68,8 @@ class Authorizations extends AbstractApi
      * @param array  $params
      *
      * @return array
+     *
+     * @deprecated GitHub will remove this endpoint on 13th November 2020. No replacement will be offered. The "web application flow" should be used instead.
      */
     public function update($clientId, array $params)
     {
@@ -67,6 +82,8 @@ class Authorizations extends AbstractApi
      * @param string $clientId
      *
      * @return array
+     *
+     * @deprecated GitHub will remove this endpoint on 13th November 2020. No replacement will be offered. The "web application flow" should be used instead.
      */
     public function remove($clientId)
     {
@@ -80,10 +97,27 @@ class Authorizations extends AbstractApi
      * @param string $token
      *
      * @return array
+     *
+     * @deprecated GitHub will remove this endpoint on 1st July 2020. Use self::checkToken() instead.
      */
     public function check($clientId, $token)
     {
         return $this->get('/applications/'.rawurlencode($clientId).'/tokens/'.rawurlencode($token));
+    }
+
+    /**
+     * Check an application token.
+     *
+     * @param string      $clientId
+     * @param string|null $token
+     *
+     * @return array
+     */
+    public function checkToken($clientId, $token = null)
+    {
+        $this->configurePreviewHeader();
+
+        return $this->post('/applications/'.rawurlencode($clientId).'/token', $token ? ['access_token' => $token] : []);
     }
 
     /**
@@ -93,6 +127,8 @@ class Authorizations extends AbstractApi
      * @param string $token
      *
      * @return array
+     *
+     * @deprecated GitHub will remove this endpoint on 1st July 2020. Use self::resetToken() instead.
      */
     public function reset($clientId, $token)
     {
@@ -100,10 +136,27 @@ class Authorizations extends AbstractApi
     }
 
     /**
+     * Reset an application token.
+     *
+     * @param string      $clientId
+     * @param string|null $token
+     *
+     * @return array
+     */
+    public function resetToken($clientId, $token = null)
+    {
+        $this->configurePreviewHeader();
+
+        return $this->patch('/applications/'.rawurlencode($clientId).'/token', $token ? ['access_token' => $token] : []);
+    }
+
+    /**
      * Remove an authorization.
      *
      * @param string $clientId
      * @param string $token
+     *
+     * @deprecated GitHub will remove this endpoint on 1st July 2020. Use self::deleteToken() instead.
      */
     public function revoke($clientId, $token)
     {
@@ -114,9 +167,41 @@ class Authorizations extends AbstractApi
      * Revoke all authorizations.
      *
      * @param string $clientId
+     *
+     * @deprecated GitHub will remove this endpoint on 1st July 2020. Use self::deleteGrant() instead.
      */
     public function revokeAll($clientId)
     {
         $this->delete('/applications/'.rawurlencode($clientId).'/tokens');
+    }
+
+    /**
+     * Revoke an application token.
+     *
+     * @param string      $clientId
+     * @param string|null $token
+     *
+     * @return void
+     */
+    public function deleteToken($clientId, $token = null)
+    {
+        $this->configurePreviewHeader();
+
+        $this->delete('/applications/'.rawurlencode($clientId).'/token', $token ? ['access_token' => $token] : []);
+    }
+
+    /**
+     * Revoke an application authorization.
+     *
+     * @param string      $clientId
+     * @param string|null $token
+     *
+     * @return void
+     */
+    public function deleteGrant($clientId, $token = null)
+    {
+        $this->configurePreviewHeader();
+
+        $this->delete('/applications/'.rawurlencode($clientId).'/grant', $token ? ['access_token' => $token] : []);
     }
 }
