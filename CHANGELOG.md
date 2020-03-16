@@ -2,6 +2,20 @@
 
 The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release.
 
+## 2.13.0
+
+### Added
+
+- Support the new authorizations API
+- Repo community profile API endpoint
+- Support for draft PRs
+- Missing Apps endpoints
+- Test against php 7.4
+
+### Changed
+
+- Allow create & remove to set and remove requests for teams
+
 ## 2.12.1
 
 ### Fixed
