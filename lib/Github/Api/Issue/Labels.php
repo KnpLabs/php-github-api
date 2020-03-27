@@ -118,7 +118,7 @@ class Labels extends AbstractApi
     /**
      * Add a label to an issue.
      *
-     * @link https://developer.github.com/v3/issues/labels/#remove-a-label-from-an-issue
+     * @link https://developer.github.com/v3/issues/labels/#add-labels-to-an-issue
      *
      * @param string       $username
      * @param string       $repository
