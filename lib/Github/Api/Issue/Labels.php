@@ -164,7 +164,7 @@ class Labels extends AbstractApi
      *
      * @param string $username
      * @param string $repository
-     * @param string $issue
+     * @param int    $issue
      * @param string $label
      *
      * @return array|string
@@ -181,7 +181,7 @@ class Labels extends AbstractApi
      *
      * @param string $username
      * @param string $repository
-     * @param string $issue
+     * @param int    $issue
      *
      * @return array|string
      */
