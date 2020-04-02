@@ -590,7 +590,7 @@ class Repo extends AbstractApi
     /**
      * @param string $username
      * @param string $repository
-     * @param array $parameters
+     * @param array  $parameters
      *
      * @return array
      */
