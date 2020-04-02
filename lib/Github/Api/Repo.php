@@ -590,12 +590,13 @@ class Repo extends AbstractApi
     /**
      * @param string $username
      * @param string $repository
+     * @param array  $parameters
      *
      * @return array
      */
-    public function milestones($username, $repository)
+    public function milestones($username, $repository, array $parameters = [])
     {
-        return $this->get('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/milestones');
+        return $this->get('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/milestones', $parameters);
     }
 
     public function projects()
