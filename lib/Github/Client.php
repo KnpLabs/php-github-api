@@ -412,7 +412,7 @@ class Client
     /**
      * @return Builder
      */
-    protected function getHttpClientBuilder()
+    public function getHttpClientBuilder()
     {
         return $this->httpClientBuilder;
     }
