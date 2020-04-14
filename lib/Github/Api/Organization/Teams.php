@@ -35,15 +35,19 @@ class Teams extends AbstractApi
     /**
      * @link https://developer.github.com/v3/teams/#list-teams
      */
-    public function show($team, $organization)
+    public function show($team, $organization = null)
     {
-        return $this->get('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team));
+        if ($organization) {
+            return $this->get('/orgs/' . rawurlencode($organization) . '/teams/' . rawurlencode($team));
+        }
+
+        return $this->get('/teams/'.rawurlencode($team));
     }
 
     /**
      * @link https://developer.github.com/v3/teams/#edit-team
      */
-    public function update($team, array $params, $organization)
+    public function update($team, array $params, $organization = null)
     {
         if (!isset($params['name'])) {
             throw new MissingArgumentException('name');
@@ -52,47 +56,71 @@ class Teams extends AbstractApi
             $params['permission'] = 'pull';
         }
 
-        return $this->patch('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team), $params);
+        if ($organization) {
+            return $this->patch('/teams/' . rawurlencode($team), $params);
+        }
+
+        return $this->patch('/orgs/' . rawurlencode($organization) . '/teams/' . rawurlencode($team), $params);
     }
 
     /**
      * @link https://developer.github.com/v3/teams/#delete-team
      */
-    public function remove($team, $organization)
+    public function remove($team, $organization = null)
     {
-        return $this->delete('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team));
+        if ($organization) {
+            return $this->delete('/orgs/' . rawurlencode($organization) . '/teams/' . rawurlencode($team));
+        }
+
+        return $this->delete('/teams/' . rawurlencode($team));
     }
 
     /**
      * @link https://developer.github.com/v3/teams/members/#list-team-members
      */
-    public function members($team, $organization)
+    public function members($team, $organization = null)
     {
-        return $this->get('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team).'/members');
+        if ($organization) {
+            return $this->get('/orgs/' . rawurlencode($organization) . '/teams/' . rawurlencode($team) . '/members');
+        }
+
+        return $this->get('/teams/' . rawurlencode($team) . '/members');
     }
 
     /**
      * @link https://developer.github.com/v3/teams/members/#get-team-membership
      */
-    public function check($team, $username, $organization)
+    public function check($team, $username, $organization = null)
     {
-        return $this->get('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team).'/memberships/'.rawurlencode($username));
+        if ($organization) {
+            return $this->get('/orgs/' . rawurlencode($organization) . '/teams/' . rawurlencode($team) . '/memberships/' . rawurlencode($username));
+        }
+
+        return $this->get('/teams/'.rawurlencode($team).'/memberships/'.rawurlencode($username));
     }
 
     /**
      * @link https://developer.github.com/v3/teams/members/#add-or-update-team-membership
      */
-    public function addMember($team, $username, $organization)
+    public function addMember($team, $username, $organization = null)
     {
-        return $this->put('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team).'/memberships/'.rawurlencode($username));
+        if ($organization) {
+            return $this->put('/orgs/' . rawurlencode($organization) . '/teams/' . rawurlencode($team) . '/memberships/' . rawurlencode($username));
+        }
+
+        return $this->put('/teams/' . rawurlencode($team) . '/memberships/' . rawurlencode($username));
     }
 
     /**
      * @link https://developer.github.com/v3/teams/members/#remove-team-membership
      */
-    public function removeMember($team, $username, $organization)
+    public function removeMember($team, $username, $organization = null)
     {
-        return $this->delete('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team).'/memberships/'.rawurlencode($username));
+        if ($organization) {
+            return $this->delete('/orgs/' . rawurlencode($organization) . '/teams/' . rawurlencode($team) . '/memberships/' . rawurlencode($username));
+        }
+
+        return $this->delete('/teams/' . rawurlencode($team) . '/memberships/' . rawurlencode($username));
     }
 
     public function repositories($team)
