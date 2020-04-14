@@ -81,7 +81,7 @@ class Teams extends AbstractApi
     public function members($team, $organization = null)
     {
         if ($organization) {
-            return $this->get('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team) . '/members');
+            return $this->get('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team).'/members');
         }
 
         return $this->get('/teams/'.rawurlencode($team).'/members');
@@ -93,7 +93,7 @@ class Teams extends AbstractApi
     public function check($team, $username, $organization = null)
     {
         if ($organization) {
-            return $this->get('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team) . '/memberships/' . rawurlencode($username));
+            return $this->get('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team).'/memberships/'.rawurlencode($username));
         }
 
         return $this->get('/teams/'.rawurlencode($team).'/memberships/'.rawurlencode($username));
@@ -105,7 +105,7 @@ class Teams extends AbstractApi
     public function addMember($team, $username, $organization = null)
     {
         if ($organization) {
-            return $this->put('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team) . '/memberships/' . rawurlencode($username));
+            return $this->put('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team).'/memberships/'.rawurlencode($username));
         }
 
         return $this->put('/teams/'.rawurlencode($team).'/memberships/'.rawurlencode($username));
@@ -117,7 +117,7 @@ class Teams extends AbstractApi
     public function removeMember($team, $username, $organization = null)
     {
         if ($organization) {
-            return $this->delete('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team) . '/memberships/' . rawurlencode($username));
+            return $this->delete('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team).'/memberships/'.rawurlencode($username));
         }
 
         return $this->delete('/teams/'.rawurlencode($team).'/memberships/'.rawurlencode($username));
