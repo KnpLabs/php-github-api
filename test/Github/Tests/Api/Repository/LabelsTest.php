@@ -105,40 +105,10 @@ class LabelsTest extends TestCase
     /**
      * @test
      */
-    public function shouldNotUpdateLabelWithoutName()
-    {
-        $this->expectException(MissingArgumentException::class);
-        $data = ['color' => 'red'];
-
-        $api = $this->getApiMock();
-        $api->expects($this->never())
-            ->method('patch');
-
-        $api->update('KnpLabs', 'php-github-api', 'labelName', $data);
-    }
-
-    /**
-     * @test
-     */
-    public function shouldNotUpdateLabelWithoutColor()
-    {
-        $this->expectException(MissingArgumentException::class);
-        $data = ['name' => 'test'];
-
-        $api = $this->getApiMock();
-        $api->expects($this->never())
-            ->method('patch');
-
-        $api->update('KnpLabs', 'php-github-api', 'labelName', $data);
-    }
-
-    /**
-     * @test
-     */
     public function shouldUpdateLabel()
     {
-        $expectedValue = ['label' => 'somename'];
-        $data = ['name' => 'test', 'color' => 'red'];
+        $expectedValue = ['name' => 'test'];
+        $data = ['new_name' => 'test', 'color' => 'red'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())

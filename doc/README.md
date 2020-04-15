@@ -49,6 +49,7 @@ v3 APIs:
   * [Checks](repo/checks.md)
   * [Contents](repo/contents.md)
   * [Deployments](repo/deployments.md)
+  * [Labels](repo/labels.md)
   * [Protection](repo/protection.md)
   * [Releases](repo/releases.md)
     * [Assets](repo/assets.md)
