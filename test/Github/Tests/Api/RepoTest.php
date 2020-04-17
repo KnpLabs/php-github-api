@@ -378,10 +378,10 @@ class RepoTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('/repos/l3l0Repo/uknown-repo')
+            ->with('/repos/l3l0Repo/unknown-repo')
             ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($expectedArray, $api->remove('l3l0Repo', 'uknown-repo'));
+        $this->assertEquals($expectedArray, $api->remove('l3l0Repo', 'unknown-repo'));
     }
 
     /**
