@@ -7,7 +7,6 @@ use Github\Exception\MissingArgumentException;
 
 /**
  * @link   http://developer.github.com/v3/orgs/teams/
- *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class Teams extends AbstractApi
@@ -37,11 +36,13 @@ class Teams extends AbstractApi
      */
     public function show($team, $organization = null)
     {
-        if ($organization) {
-            return $this->get('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team));
+        if (null === $organization) {
+            @trigger_error('Not passing the $organisation parameter is deprecated in knpLabs/php-github-api v2.14 and will be mandatory in v3.0.', E_USER_DEPRECATED);
+
+            return $this->get('/teams/'.rawurlencode($team));
         }
 
-        return $this->get('/teams/'.rawurlencode($team));
+        return $this->get('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team));
     }
 
     /**
@@ -56,11 +57,13 @@ class Teams extends AbstractApi
             $params['permission'] = 'pull';
         }
 
-        if ($organization) {
-            return $this->patch('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team), $params);
+        if (null === $organization) {
+            @trigger_error('Not passing the $organisation parameter is deprecated in knpLabs/php-github-api v2.14 and will be mandatory in v3.0.', E_USER_DEPRECATED);
+
+            return $this->patch('/teams/'.rawurlencode($team), $params);
         }
 
-        return $this->patch('/teams/'.rawurlencode($team), $params);
+        return $this->patch('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team), $params);
     }
 
     /**
@@ -68,11 +71,13 @@ class Teams extends AbstractApi
      */
     public function remove($team, $organization = null)
     {
-        if ($organization) {
-            return $this->delete('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team));
+        if (null === $organization) {
+            @trigger_error('Not passing the $organisation parameter is deprecated in knpLabs/php-github-api v2.14 and will be mandatory in v3.0.', E_USER_DEPRECATED);
+
+            return $this->delete('/teams/'.rawurlencode($team));
         }
 
-        return $this->delete('/teams/'.rawurlencode($team));
+        return $this->delete('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team));
     }
 
     /**
@@ -80,11 +85,13 @@ class Teams extends AbstractApi
      */
     public function members($team, $organization = null)
     {
-        if ($organization) {
-            return $this->get('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team).'/members');
+        if (null === $organization) {
+            @trigger_error('Not passing the $organisation parameter is deprecated in knpLabs/php-github-api v2.14 and will be mandatory in v3.0.', E_USER_DEPRECATED);
+
+            return $this->get('/teams/'.rawurlencode($team).'/members');
         }
 
-        return $this->get('/teams/'.rawurlencode($team).'/members');
+        return $this->get('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team).'/members');
     }
 
     /**
@@ -92,11 +99,13 @@ class Teams extends AbstractApi
      */
     public function check($team, $username, $organization = null)
     {
-        if ($organization) {
-            return $this->get('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team).'/memberships/'.rawurlencode($username));
+        if (null === $organization) {
+            @trigger_error('Not passing the $organisation parameter is deprecated in knpLabs/php-github-api v2.14 and will be mandatory in v3.0.', E_USER_DEPRECATED);
+
+            return $this->get('/teams/'.rawurlencode($team).'/memberships/'.rawurlencode($username));
         }
 
-        return $this->get('/teams/'.rawurlencode($team).'/memberships/'.rawurlencode($username));
+        return $this->get('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team).'/memberships/'.rawurlencode($username));
     }
 
     /**
@@ -104,11 +113,13 @@ class Teams extends AbstractApi
      */
     public function addMember($team, $username, $organization = null)
     {
-        if ($organization) {
-            return $this->put('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team).'/memberships/'.rawurlencode($username));
+        if (null === $organization) {
+            @trigger_error('Not passing the $organisation parameter is deprecated in knpLabs/php-github-api v2.14 and will be mandatory in v3.0.', E_USER_DEPRECATED);
+
+            return $this->put('/teams/'.rawurlencode($team).'/memberships/'.rawurlencode($username));
         }
 
-        return $this->put('/teams/'.rawurlencode($team).'/memberships/'.rawurlencode($username));
+        return $this->put('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team).'/memberships/'.rawurlencode($username));
     }
 
     /**
@@ -116,11 +127,13 @@ class Teams extends AbstractApi
      */
     public function removeMember($team, $username, $organization = null)
     {
-        if ($organization) {
-            return $this->delete('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team).'/memberships/'.rawurlencode($username));
+        if (null === $organization) {
+            @trigger_error('Not passing the $organisation parameter is deprecated in knpLabs/php-github-api v2.14 and will be mandatory in v3.0.', E_USER_DEPRECATED);
+
+            return $this->delete('/teams/'.rawurlencode($team).'/memberships/'.rawurlencode($username));
         }
 
-        return $this->delete('/teams/'.rawurlencode($team).'/memberships/'.rawurlencode($username));
+        return $this->delete('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team).'/memberships/'.rawurlencode($username));
     }
 
     public function repositories($team)
