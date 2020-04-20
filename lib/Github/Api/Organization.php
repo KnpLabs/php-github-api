@@ -64,7 +64,7 @@ class Organization extends AbstractApi
             'type' => $type,
             'page' => $page,
             'sort' => $sort,
-            'direction' => $direction
+            'direction' => $direction,
         ]);
     }
 
