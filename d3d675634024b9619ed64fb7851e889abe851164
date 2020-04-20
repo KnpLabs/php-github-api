@@ -1,0 +1,54 @@
+---------------------------------------------------------------------------
+
+by lolos at 2020-04-14T09:59:38Z
+
+@acrobat @Nyholm
+any suggestion for the backward compatibility failed check?
+
+Should I make `$organization` optional or create a PR to v3-dev branch?
+
+---------------------------------------------------------------------------
+
+by staabm at 2020-04-14T11:44:38Z
+
+> any suggestion for the backward compatibility failed check?
+
+we could add the organization as a optional argument, and also adjust the implementation to be BC compatibel, e.g.
+
+instead of
+```
+    /**
+     * @link https://developer.github.com/v3/teams/#list-teams
+     */
+    public function show($team, $organization)
+    {
+        return $this->get('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team));
+    }
+```
+
+use
+
+```
+    /**
+     * @link https://developer.github.com/v3/teams/#list-teams
+     */
+    public function show($team, $organization = null)
+    {
+        if ($organization) {
+            return $this->get('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team));
+        }
+        return $this->get('/teams/'.rawurlencode($team));
+    }
+```
+
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2020-04-14T13:41:57Z
+
+Don't worry about StyleCI. Its fixes will be automatically applied when the PR is merged (assuming the package author has enabled that option).
+
+---------------------------------------------------------------------------
+
+by lolos at 2020-04-14T13:44:07Z
+
+@staabm I've changed it to your suggested way but keep in mind that in a next version, the $organization should be set as required since the api calls don't work without an organization set.
