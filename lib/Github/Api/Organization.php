@@ -65,11 +65,11 @@ class Organization extends AbstractApi
             'page' => $page,
         ];
 
-        if($sort !== null){
+        if ($sort !== null) {
             $parameters['sort'] = $sort;
         }
 
-        if($direction !== null){
+        if ($direction !== null) {
             $parameters['direction'] = $direction;
         }
 
