@@ -7,6 +7,7 @@ use Github\Exception\MissingArgumentException;
 
 /**
  * @link   http://developer.github.com/v3/orgs/teams/
+ *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class Teams extends AbstractApi
