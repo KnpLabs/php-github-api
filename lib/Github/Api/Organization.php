@@ -53,14 +53,18 @@ class Organization extends AbstractApi
      * @param string $organization the user name
      * @param string $type         the type of repositories
      * @param int    $page         the page
+     * @param string $sort         sort by
+     * @param string $direction    direction of sort, asc or desc
      *
      * @return array the repositories
      */
-    public function repositories($organization, $type = 'all', $page = 1)
+    public function repositories($organization, $type = 'all', $page = 1, $sort = 'created', $direction = 'desc')
     {
         return $this->get('/orgs/'.rawurlencode($organization).'/repos', [
             'type' => $type,
             'page' => $page,
+            'sort' => $sort,
+            'direction' => $direction
         ]);
     }
 
