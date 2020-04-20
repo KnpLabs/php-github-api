@@ -58,14 +58,22 @@ class Organization extends AbstractApi
      *
      * @return array the repositories
      */
-    public function repositories($organization, $type = 'all', $page = 1, $sort = 'created', $direction = 'desc')
+    public function repositories($organization, $type = 'all', $page = 1, $sort = null, $direction = null)
     {
-        return $this->get('/orgs/'.rawurlencode($organization).'/repos', [
+        $parameters = [
             'type' => $type,
             'page' => $page,
-            'sort' => $sort,
-            'direction' => $direction,
-        ]);
+        ];
+
+        if($sort !== null){
+            $parameters['sort'] = $sort;
+        }
+
+        if($direction !== null){
+            $parameters['direction'] = $direction;
+        }
+
+        return $this->get('/orgs/'.rawurlencode($organization).'/repos', $parameters);
     }
 
     /**
