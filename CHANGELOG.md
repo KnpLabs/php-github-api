@@ -2,6 +2,23 @@
 
 The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release.
 
+## 2.14.0
+
+### Added
+- Replace deprecated Organization\Teams api calls ([lolos](https://github.com/lolos)) [#860](https://github.com/KnpLabs/php-github-api/issues/860)
+- Add sort and direction for fetching organizations repos ([pgrimaud](https://github.com/pgrimaud)) [#863](https://github.com/KnpLabs/php-github-api/issues/863)
+- Added parameters to Repo/milestones() method ([dereuromark](https://github.com/dereuromark)) [#856](https://github.com/KnpLabs/php-github-api/issues/856)
+
+### Fixed 
+
+- Remove incorrect MissingArgumentException in Labels api ([bobeagan](https://github.com/bobeagan)) [#861](https://github.com/KnpLabs/php-github-api/issues/861)
+
+### Changed
+- Fix typos in test/Github/Tests/Api/RepoTest.php ([pgrimaud](https://github.com/pgrimaud)) [#862](https://github.com/KnpLabs/php-github-api/issues/862)
+- further detail on ResultPager parameters ([sepiariver](https://github.com/sepiariver)) [#843](https://github.com/KnpLabs/php-github-api/issues/843)
+- fix phpdoc in labels api ([staabm](https://github.com/staabm)) [#854](https://github.com/KnpLabs/php-github-api/issues/854)
+- fix api link in Issue\Labels::add() phpdoc ([staabm](https://github.com/staabm)) [#853](https://github.com/KnpLabs/php-github-api/issues/853)
+
 ## 2.13.0
 
 ### Added
