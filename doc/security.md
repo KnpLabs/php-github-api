@@ -15,11 +15,16 @@ $client->authenticate($usernameOrToken, $password, $method);
 `$usernameOrToken` is, of course, the username (or in some cases token/client ID, more details you can find below),
 and guess what should contain `$password`. The `$method` can contain one of the five allowed values:
 
-* `Github\Client::AUTH_URL_TOKEN`
-* `Github\Client::AUTH_URL_CLIENT_ID`
-* `Github\Client::AUTH_HTTP_TOKEN`
-* `Github\Client::AUTH_HTTP_PASSWORD`
-* `Github\Client::AUTH_JWT`
+#### Deprecated methods
+* `Github\Client::AUTH_URL_TOKEN` use `Github\Client::AUTH_ACCESS_TOKEN` instead.
+* `Github\Client::AUTH_URL_CLIENT_ID` use `Github\Client::AUTH_CLIENT_ID` instead.
+* `Github\Client::AUTH_HTTP_TOKEN` use `Github\Client::AUTH_ACCESS_TOKEN` instead.
+* `Github\Client::AUTH_HTTP_PASSWORD` use `Github\Client::AUTH_ACCESS_TOKEN` instead.
+
+#### Supported methods
+* `Github\Client::AUTH_CLIENT_ID` - https://developer.github.com/v3/#oauth2-keysecret
+* `Github\Client::AUTH_ACCESS_TOKEN` - https://developer.github.com/v3/#oauth2-token-sent-in-a-header
+* `Github\Client::AUTH_JWT` - https://developer.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app
 
 The required value of `$password` depends on the chosen `$method`. For `Github\Client::AUTH_URL_TOKEN`,
 `Github\Client::AUTH_HTTP_TOKEN` and `Github\Client::JWT` methods you should provide the API token in
