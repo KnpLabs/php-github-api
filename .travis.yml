@@ -21,6 +21,10 @@ matrix:
     - php: 7.2
       name: Backward compatibillity check
       env: DEPENDENCIES="roave/backward-compatibility-check" TEST_COMMAND="./.github/bc-test.sh"
+    - php: 7.1
+      name: phpstan
+      script:
+        - vendor/bin/phpstan analyze
 
 before_install:
     - if ! [ -z "$DEPENDENCIES" ]; then composer require --no-update ${DEPENDENCIES}; fi;
