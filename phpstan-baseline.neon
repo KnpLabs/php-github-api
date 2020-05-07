@@ -1,32 +1,3 @@
 parameters:
 	ignoreErrors:
-		-
-			message: "#^PHPDoc tag @param has invalid value \\(\\$installationId An integration installation id\\)\\: Unexpected token \"\\$installationId\", expected type at offset 155$#"
-			count: 1
-			path: lib/Github/Api/Apps.php
-
-		-
-			message: "#^PHPDoc tag @param has invalid value \\(\\$org An organization\\)\\: Unexpected token \"\\$org\", expected type at offset 188$#"
-			count: 1
-			path: lib/Github/Api/Apps.php
-
-		-
-			message: "#^PHPDoc tag @param has invalid value \\(\\$owner the owner of a repository\\)\\: Unexpected token \"\\$owner\", expected type at offset 182$#"
-			count: 1
-			path: lib/Github/Api/Apps.php
-
-		-
-			message: "#^PHPDoc tag @param has invalid value \\(\\$repo the name of the repository\\)\\: Unexpected token \"\\$repo\", expected type at offset 230$#"
-			count: 1
-			path: lib/Github/Api/Apps.php
-
-		-
-			message: "#^PHPDoc tag @param has invalid value \\(\\$username\\)\\: Unexpected token \"\\$username\", expected type at offset 170$#"
-			count: 1
-			path: lib/Github/Api/Apps.php
-
-		-
-			message: "#^PHPDoc tag @param has invalid value \\(\\$installationId An integration installation id\\)\\: Unexpected token \"\\$installationId\", expected type at offset 161$#"
-			count: 1
-			path: lib/Github/Api/Apps.php
-
+		[]
