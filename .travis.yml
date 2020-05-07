@@ -24,7 +24,7 @@ matrix:
     - php: 7.1
       name: phpstan
       script:
-        - vendor/bin/phpstan analyze
+        - vendor/bin/phpstan analyse
 
 before_install:
     - if ! [ -z "$DEPENDENCIES" ]; then composer require --no-update ${DEPENDENCIES}; fi;

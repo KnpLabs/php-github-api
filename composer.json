@@ -31,7 +31,8 @@
         "php-http/guzzle6-adapter": "^1.0 || ^2.0",
         "php-http/mock-client": "^1.2",
         "guzzlehttp/psr7": "^1.2",
-        "cache/array-adapter": "^0.4"
+        "cache/array-adapter": "^0.4",
+        "phpstan/phpstan": "^0.12.23"
     },
     "autoload": {
         "psr-4": { "Github\\": "lib/Github/" }
