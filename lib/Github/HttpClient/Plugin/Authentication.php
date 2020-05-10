@@ -79,7 +79,6 @@ class Authentication implements Plugin
 
             default:
                 throw new RuntimeException(sprintf('%s not yet implemented', $this->method));
-                break;
         }
 
         return $next($request);
