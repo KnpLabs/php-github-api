@@ -58,7 +58,7 @@ class Apps extends AbstractApi
      *
      * @link https://developer.github.com/v3/apps/#get-an-installation
      *
-     * @param $installationId An integration installation id
+     * @param int $installationId An integration installation id
      *
      * @return array
      */
@@ -74,7 +74,7 @@ class Apps extends AbstractApi
      *
      * @link https://developer.github.com/v3/apps/#get-an-organization-installation
      *
-     * @param $org An organization
+     * @param string $org An organization
      *
      * @return array
      */
@@ -90,8 +90,8 @@ class Apps extends AbstractApi
      *
      * @link https://developer.github.com/v3/apps/#get-a-repository-installation
      *
-     * @param $owner the owner of a repository
-     * @param $repo the name of the repository
+     * @param string $owner the owner of a repository
+     * @param string $repo  the name of the repository
      *
      * @return array
      */
@@ -107,7 +107,7 @@ class Apps extends AbstractApi
      *
      * @link https://developer.github.com/v3/apps/#get-a-user-installation
      *
-     * @param $username
+     * @param string $username
      *
      * @return array
      */
@@ -123,7 +123,7 @@ class Apps extends AbstractApi
      *
      * @link https://developer.github.com/v3/apps/#delete-an-installation
      *
-     * @param $installationId An integration installation id
+     * @param int $installationId An integration installation id
      */
     public function removeInstallation($installationId)
     {
