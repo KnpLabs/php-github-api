@@ -26,6 +26,34 @@ class References extends AbstractApi
     }
 
     /**
+     * Get all matching references for a particular branch of a repository.
+     *
+     * @param string $username
+     * @param string $repository
+     * @param string $branch
+     *
+     * @return array
+     */
+    public function matchingBranch($username, $repository, $branch)
+    {
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/matching-refs/heads/'.$branch);
+    }
+
+    /**
+     * Get all matching references for a particular branch of a repository.
+     *
+     * @param string $username
+     * @param string $repository
+     * @param string $tag
+     *
+     * @return array
+     */
+    public function matchingTag($username, $repository, $tag)
+    {
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/matching-refs/tags/'.$tag);
+    }
+
+    /**
      * Get all branches of a repository.
      *
      * @param string $username
