@@ -74,6 +74,38 @@ class ReferencesTest extends TestCase
     /**
      * @test
      */
+    public function shouldGetAllMatchingBranchRepoReferences()
+    {
+        $expectedValue = [['reference' => 'some data']];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/repos/l3l0/l3l0repo/git/matching-refs/heads/branchName')
+            ->will($this->returnValue($expectedValue));
+
+        $this->assertEquals($expectedValue, $api->matchingBranch('l3l0', 'l3l0repo', 'branchName'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetAllMatchingTagRepoReferences()
+    {
+        $expectedValue = [['reference' => 'some data']];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/repos/l3l0/l3l0repo/git/matching-refs/tags/tagName')
+            ->will($this->returnValue($expectedValue));
+
+        $this->assertEquals($expectedValue, $api->matchingTag('l3l0', 'l3l0repo', 'tagName'));
+    }
+
+    /**
+     * @test
+     */
     public function shouldGetAllRepoBranches()
     {
         $expectedValue = [['branch' => 'some data']];
