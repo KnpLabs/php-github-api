@@ -72,30 +72,48 @@ class Client
     /**
      * Constant for authentication method. Indicates the default, but deprecated
      * login with username and token in URL.
+     *
+     * @deprecated Use `Client::AUTH_ACCESS_TOKEN` instead. See https://developer.github.com/changes/2019-11-05-deprecated-passwords-and-authorizations-api/#authenticating-using-query-parameters
      */
     const AUTH_URL_TOKEN = 'url_token';
 
     /**
      * Constant for authentication method. Not indicates the new login, but allows
      * usage of unauthenticated rate limited requests for given client_id + client_secret.
+     *
+     * @deprecated Use `Client::AUTH_CLIENT_ID` instead. See https://developer.github.com/changes/2019-11-05-deprecated-passwords-and-authorizations-api/#authenticating-using-query-parameters
      */
     const AUTH_URL_CLIENT_ID = 'url_client_id';
 
     /**
      * Constant for authentication method. Indicates the new favored login method
      * with username and password via HTTP Authentication.
+     *
+     * @deprecated Use `Client::AUTH_ACCESS_TOKEN` instead. See https://developer.github.com/changes/2019-11-05-deprecated-passwords-and-authorizations-api/#authenticating-using-query-parameters
      */
     const AUTH_HTTP_PASSWORD = 'http_password';
 
     /**
      * Constant for authentication method. Indicates the new login method with
      * with username and token via HTTP Authentication.
+     *
+     * @deprecated Use `Client::AUTH_ACCESS_TOKEN` instead.
      */
     const AUTH_HTTP_TOKEN = 'http_token';
 
     /**
+     * Authenticate using a client_id/client_secret combination.
+     */
+    const AUTH_CLIENT_ID = 'client_id_header';
+
+    /**
+     * Authenticate using a GitHub access token.
+     */
+    const AUTH_ACCESS_TOKEN = 'access_token_header';
+
+    /**
      * Constant for authentication method. Indicates JSON Web Token
-     * authentication required for integration access to the API.
+     * authentication required for GitHub apps access to the API.
      */
     const AUTH_JWT = 'jwt';
 

@@ -71,7 +71,10 @@ class ClientTest extends \PHPUnit\Framework\TestCase
             ['login', 'password', Client::AUTH_HTTP_PASSWORD],
             ['token', null, Client::AUTH_HTTP_TOKEN],
             ['token', null, Client::AUTH_URL_TOKEN],
+            ['token', null, Client::AUTH_ACCESS_TOKEN],
             ['client_id', 'client_secret', Client::AUTH_URL_CLIENT_ID],
+            ['client_id', 'client_secret', Client::AUTH_CLIENT_ID],
+            ['token', null, Client::AUTH_JWT],
         ];
     }
 
