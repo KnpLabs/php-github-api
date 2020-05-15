@@ -34,9 +34,9 @@ class References extends AbstractApi
      *
      * @return array
      */
-    public function matchingBranch($username, $repository, $branch)
+    public function matchingBranch(string $username, string $repository, string $branch): array
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/matching-refs/heads/'.$branch);
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/matching-refs/heads/'.rawurlencode($branch));
     }
 
     /**
@@ -48,9 +48,9 @@ class References extends AbstractApi
      *
      * @return array
      */
-    public function matchingTag($username, $repository, $tag)
+    public function matchingTag(string $username, string $repository, string $tag): array
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/matching-refs/tags/'.$tag);
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/matching-refs/tags/'.rawurlencode($tag));
     }
 
     /**
