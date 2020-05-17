@@ -7,6 +7,11 @@
 $references = $client->api('gitData')->references()->all('KnpLabs', 'php-github-api');
 ```
 
+### List Matching references
+```php
+$references = $client->api('gitData')->references()->matching('KnpLabs', 'php-github-api', 'heads/branchName'); // use 'tags/tagName' for third argument if ref is tag
+```
+
 ### Show a reference
 
 ```php
