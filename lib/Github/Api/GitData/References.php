@@ -26,31 +26,19 @@ class References extends AbstractApi
     }
 
     /**
-     * Get all matching references for a particular branch of a repository.
+     * Get all matching references for the supplied reference name
+     *
+     * https://developer.github.com/v3/git/refs/#list-matching-references
      *
      * @param string $username
      * @param string $repository
-     * @param string $branch
+     * @param string $reference
      *
      * @return array
      */
-    public function matchingBranch(string $username, string $repository, string $branch): array
+    public function matching(string $username, string $repository, string $reference): array
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/matching-refs/heads/'.rawurlencode($branch));
-    }
-
-    /**
-     * Get all matching references for a particular branch of a repository.
-     *
-     * @param string $username
-     * @param string $repository
-     * @param string $tag
-     *
-     * @return array
-     */
-    public function matchingTag(string $username, string $repository, string $tag): array
-    {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/matching-refs/tags/'.rawurlencode($tag));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/matching-refs/'.rawurlencode($reference));
     }
 
     /**
