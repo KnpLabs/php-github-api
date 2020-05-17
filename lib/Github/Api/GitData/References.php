@@ -28,8 +28,6 @@ class References extends AbstractApi
     /**
      * Get all matching references for the supplied reference name
      *
-     * https://developer.github.com/v3/git/refs/#list-matching-references
-     *
      * @param string $username
      * @param string $repository
      * @param string $reference
