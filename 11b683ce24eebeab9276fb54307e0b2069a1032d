@@ -1,0 +1,39 @@
+---------------------------------------------------------------------------
+
+by nickpoulos at 2020-05-16T17:50:17Z
+
+Sure thing, let me write something up I'll get it in there later tonight. Thanks man
+
+---------------------------------------------------------------------------
+
+by nickpoulos at 2020-05-17T06:04:23Z
+
+Hmm, after writing the docs, I am wondering if I am not quite sticking to conventions the package has set.  For example to show a reference, based on a tag or branch, you must include the either 'head/' or 'tag/' as part of the last argument, like so:
+
+### Show a reference
+
+```php
+$reference = $client->api('gitData')->references()->show('KnpLabs', 'php-github-api', 'heads/featureA');
+```
+
+The last argument contains both '/head/'and the branch name, and would contain 'tag/' and a tag name for tags, so they can use one endpoint and method for both tag/branch.   I have abstracted that out into two methods, where you don't prefix 'head/' or 'tag/' in your third argument.
+
+I am suggesting I rewrite to a singular method as the rest of the package appears to do.
+
+---------------------------------------------------------------------------
+
+by acrobat at 2020-05-17T07:43:16Z
+
+Can you also fix the styleci issue? (I know it's a nitpick but this will let all pr checks pass before I merge 😄)
+
+---------------------------------------------------------------------------
+
+by nickpoulos at 2020-05-17T17:25:21Z
+
+> Can you also fix the styleci issue? (I know it's a nitpick but this will let all pr checks pass before I merge 😄)
+
+Yea I noticed this, and I would love to fix it. But when I click on the StyleCI details it gives me a very generic error:
+
+`Issues have been identified`
+
+And then I can't seem to find any more information. When I examine the code it pointed out as incorrect, nothing glaring jumps out at me? Any ideas there? Sorry if this is another easy one, my StyleCI-foo is prob not up to snuff.
