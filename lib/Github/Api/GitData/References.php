@@ -26,7 +26,7 @@ class References extends AbstractApi
     }
 
     /**
-     * Get all matching references for the supplied reference name
+     * Get all matching references for the supplied reference name.
      *
      * @param string $username
      * @param string $repository
