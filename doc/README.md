@@ -44,6 +44,8 @@ v3 APIs:
     * [Cards](project/cards.md)
 * [Pull Requests](pull_requests.md)
   * [Comments](pull_request/comments.md)
+  * [Review Request](pull_request/review_request.md)
+  * [Reviews](pull_request/reviews.md)
 * [Rate Limits](rate_limits.md)
 * [Repositories](repos.md)
   * [Checks](repo/checks.md)
