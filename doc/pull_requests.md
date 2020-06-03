@@ -3,6 +3,8 @@
 
 Additional APIs:
 * [Review Comments](pull_request/comments.md)
+* [Review Request](pull_request/review_request.md)
+* [Reviews](pull_request/reviews.md)
 
 Lets you list pull requests for a given repository, list one pull request in particular along
 with its discussion, and create a pull-request.
