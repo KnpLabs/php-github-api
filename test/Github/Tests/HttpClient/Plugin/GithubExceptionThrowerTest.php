@@ -92,11 +92,11 @@ class GithubExceptionThrowerTest extends TestCase
                     ],
                     json_encode(
                         [
-                            'message' => 'Bad Request',
+                            'message' => 'Problems parsing JSON',
                         ]
                     )
                 ),
-                'exception' => new \Github\Exception\ErrorException('Bad Request', 400),
+                'exception' => new \Github\Exception\ErrorException('Problems parsing JSON (Bad Request)', 400),
             ],
             '422 Unprocessable Entity' => [
                 'response' => new Response(
