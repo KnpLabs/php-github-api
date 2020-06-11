@@ -1,0 +1,31 @@
+---------------------------------------------------------------------------
+
+by acrobat at 2020-06-11T20:47:52Z
+
+@iBotPeaches thanks for the pullrequest! But can you change the code so that we set the required acceptHeaderValue in the specific methods instead? This way users don't need to call the configure method and it would resolve issues with multiple preview modes for api endpoints in the same class.
+
+There are 4 endpoint that would need this acceptHeaderValue: https://developer.github.com/changes/2018-03-16-protected-branches-required-approving-reviews/
+
+Example:
+https://github.com/KnpLabs/php-github-api/blob/8c26dc85f732cc6b426bd85af4cf18bdfcdb20ff/lib/Github/Api/Repository/Checks.php#L51-L57
+
+---------------------------------------------------------------------------
+
+by iBotPeaches at 2020-06-11T21:08:16Z
+
+@acrobat - I could not find 2 of the endpoints supported/built, so only patched the two that matched in the list you provided.
+
+Should I revert the change to configure() ?
+
+---------------------------------------------------------------------------
+
+by acrobat at 2020-06-11T21:11:34Z
+
+> @acrobat - I could not find 2 of the endpoints supported/built, so only patched the two that matched in the list you provided.
+
+Great 👌
+
+>
+> Should I revert the change to configure() ?
+
+Yeah, revert it for now!
