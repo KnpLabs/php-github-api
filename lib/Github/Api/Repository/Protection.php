@@ -16,7 +16,7 @@ class Protection extends AbstractApi
 
     public function configure()
     {
-        $this->acceptHeaderValue = 'application/vnd.github.luke-cage-preview+json';
+        $this->acceptHeaderValue = 'application/vnd.github.loki-preview+json';
 
         return $this;
     }
