@@ -48,7 +48,7 @@ class GithubExceptionThrower implements Plugin
             $content = ResponseMediator::getContent($response);
             if (is_array($content) && isset($content['message'])) {
                 if (400 === $response->getStatusCode()) {
-                    throw new ErrorException($content['message'], 400);
+                    throw new ErrorException(sprintf('%s (%s)', $content['message'], $response->getReasonPhrase()), 400);
                 }
 
                 if (422 === $response->getStatusCode() && isset($content['errors'])) {
