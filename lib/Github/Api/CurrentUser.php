@@ -18,6 +18,8 @@ use Github\Api\CurrentUser\Watchers;
  */
 class CurrentUser extends AbstractApi
 {
+    use AcceptHeaderTrait;
+
     public function show()
     {
         return $this->get('/user');
@@ -185,23 +187,27 @@ class CurrentUser extends AbstractApi
     }
 
     /**
-     * @link https://developer.github.com/v3/integrations/#list-installations-for-user
+     * @link https://developer.github.com/v3/apps/installations/#list-app-installations-accessible-to-the-user-access-token
      *
      * @param array $params
      */
     public function installations(array $params = [])
     {
+        $this->acceptHeaderValue = 'application/vnd.github.machine-man-preview+json';
+
         return $this->get('/user/installations', array_merge(['page' => 1], $params));
     }
 
     /**
-     * @link https://developer.github.com/v3/integrations/installations/#list-repositories-accessible-to-the-user-for-an-installation
+     * @link https://developer.github.com/v3/apps/installations/#list-repositories-accessible-to-the-user-access-token
      *
      * @param string $installationId the ID of the Installation
      * @param array  $params
      */
     public function repositoriesByInstallation($installationId, array $params = [])
     {
+        $this->acceptHeaderValue = 'application/vnd.github.machine-man-preview+json';
+
         return $this->get(sprintf('/user/installations/%s/repositories', $installationId), array_merge(['page' => 1], $params));
     }
 }
