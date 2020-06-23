@@ -2,3 +2,5 @@ parameters:
     level: 4
     paths:
         - lib
+    excludes_analyse:
+        - lib/Github/HttpClient/Plugin/HistoryTrait.php
