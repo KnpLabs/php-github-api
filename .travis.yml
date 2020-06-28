@@ -18,9 +18,9 @@ php:
 
 matrix:
   include:
-    - php: 7.2
+    - php: 7.4.7
       name: Backward compatibillity check
-      env: DEPENDENCIES="roave/backward-compatibility-check" TEST_COMMAND="./.github/bc-test.sh"
+      env: DEPENDENCIES="roave/backward-compatibility-check" TEST_COMMAND="vendor/bin/roave-backward-compatibility-check"
     - php: 7.1
       name: phpstan
       script:
