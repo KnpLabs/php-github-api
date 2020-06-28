@@ -11,8 +11,6 @@ namespace Github\Api;
  */
 class Authorizations extends AbstractApi
 {
-    use AcceptHeaderTrait;
-
     /**
      * Check an application token.
      *
@@ -23,8 +21,6 @@ class Authorizations extends AbstractApi
      */
     public function checkToken($clientId, $token = null)
     {
-        $this->configurePreviewHeader();
-
         return $this->post('/applications/'.rawurlencode($clientId).'/token', $token ? ['access_token' => $token] : []);
     }
 
@@ -38,8 +34,6 @@ class Authorizations extends AbstractApi
      */
     public function resetToken($clientId, $token = null)
     {
-        $this->configurePreviewHeader();
-
         return $this->patch('/applications/'.rawurlencode($clientId).'/token', $token ? ['access_token' => $token] : []);
     }
 
@@ -53,8 +47,6 @@ class Authorizations extends AbstractApi
      */
     public function deleteToken($clientId, $token = null)
     {
-        $this->configurePreviewHeader();
-
         $this->delete('/applications/'.rawurlencode($clientId).'/token', $token ? ['access_token' => $token] : []);
     }
 
@@ -68,8 +60,6 @@ class Authorizations extends AbstractApi
      */
     public function deleteGrant($clientId, $token = null)
     {
-        $this->configurePreviewHeader();
-
         $this->delete('/applications/'.rawurlencode($clientId).'/grant', $token ? ['access_token' => $token] : []);
     }
 }
