@@ -183,7 +183,7 @@ class Repo extends AbstractApi
      * @param string      $description  repository description
      * @param string      $homepage     homepage url
      * @param bool        $public       `true` for public, `false` for private
-     * @param null|string $organization username of organization if applicable
+     * @param string|null $organization username of organization if applicable
      * @param bool        $hasIssues    `true` to enable issues for this repository, `false` to disable them
      * @param bool        $hasWiki      `true` to enable the wiki for this repository, `false` to disable it
      * @param bool        $hasDownloads `true` to enable downloads for this repository, `false` to disable them

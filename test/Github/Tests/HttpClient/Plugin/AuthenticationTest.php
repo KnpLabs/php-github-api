@@ -5,6 +5,7 @@ namespace Github\Tests\HttpClient\Plugin;
 use Github\Client;
 use Github\HttpClient\Plugin\Authentication;
 use GuzzleHttp\Psr7\Request;
+use Http\Promise\FulfilledPromise;
 use PHPUnit\Framework\TestCase;
 
 class AuthenticationTest extends TestCase
@@ -19,9 +20,11 @@ class AuthenticationTest extends TestCase
 
         /** @var Request $newRequest */
         $newRequest = null;
-        $plugin->doHandleRequest($request, static function ($request) use (&$newRequest) {
+        $plugin->handleRequest($request, static function ($request) use (&$newRequest) {
             /** @var Request $newRequest */
             $newRequest = $request;
+
+            return new FulfilledPromise('FOO');
         }, static function () {
             throw new \RuntimeException('Did not expect plugin to call first');
         });

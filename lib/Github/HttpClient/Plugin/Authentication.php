@@ -5,6 +5,7 @@ namespace Github\HttpClient\Plugin;
 use Github\Client;
 use Github\Exception\RuntimeException;
 use Http\Client\Common\Plugin;
+use Http\Promise\Promise;
 use Psr\Http\Message\RequestInterface;
 
 /**
@@ -14,12 +15,26 @@ use Psr\Http\Message\RequestInterface;
  */
 class Authentication implements Plugin
 {
-    use Plugin\VersionBridgePlugin;
-
+    /**
+     * @var string
+     */
     private $tokenOrLogin;
+
+    /**
+     * @var string|null
+     */
     private $password;
+
+    /**
+     * @var string|null
+     */
     private $method;
 
+    /**
+     * @param string      $tokenOrLogin GitHub private token/username/client ID
+     * @param string|null $password     GitHub password/secret (optionally can contain $method)
+     * @param string|null $method       One of the AUTH_* class constants
+     */
     public function __construct($tokenOrLogin, $password, $method)
     {
         $this->tokenOrLogin = $tokenOrLogin;
@@ -30,7 +45,7 @@ class Authentication implements Plugin
     /**
      * {@inheritdoc}
      */
-    public function doHandleRequest(RequestInterface $request, callable $next, callable $first)
+    public function handleRequest(RequestInterface $request, callable $next, callable $first): Promise
     {
         switch ($this->method) {
             case Client::AUTH_HTTP_PASSWORD:

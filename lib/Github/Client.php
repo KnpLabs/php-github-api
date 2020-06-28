@@ -12,9 +12,9 @@ use Github\HttpClient\Plugin\History;
 use Github\HttpClient\Plugin\PathPrepend;
 use Http\Client\Common\HttpMethodsClient;
 use Http\Client\Common\Plugin;
-use Http\Client\HttpClient;
 use Http\Discovery\UriFactoryDiscovery;
 use Psr\Cache\CacheItemPoolInterface;
+use Psr\Http\Client\ClientInterface;
 
 /**
  * Simple yet very cool PHP GitHub client.
@@ -161,13 +161,13 @@ class Client
     }
 
     /**
-     * Create a Github\Client using a HttpClient.
+     * Create a Github\Client using a HTTP client.
      *
-     * @param HttpClient $httpClient
+     * @param ClientInterface $httpClient
      *
      * @return Client
      */
-    public static function createWithHttpClient(HttpClient $httpClient)
+    public static function createWithHttpClient(ClientInterface $httpClient)
     {
         $builder = new Builder($httpClient);
 
@@ -329,8 +329,8 @@ class Client
      * Authenticate a user for all next requests.
      *
      * @param string      $tokenOrLogin GitHub private token/username/client ID
-     * @param null|string $password     GitHub password/secret (optionally can contain $authMethod)
-     * @param null|string $authMethod   One of the AUTH_* class constants
+     * @param string|null $password     GitHub password/secret (optionally can contain $authMethod)
+     * @param string|null $authMethod   One of the AUTH_* class constants
      *
      * @throws InvalidArgumentException If no authentication method was given
      */
