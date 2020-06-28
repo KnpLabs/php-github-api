@@ -1,0 +1,27 @@
+---------------------------------------------------------------------------
+
+by acrobat at 2020-06-28T08:26:56Z
+
+Thanks for the PR @GrahamCampbell! So in a nutshell this would mean dropping httplug v1 support as v2 already supports psr-18?
+
+Can we also remove the other bc layers then? https://github.com/KnpLabs/php-github-api/blob/b3a72529a029c0e10f7944e0c32920a0ce3843d5/lib/Github/HttpClient/Plugin/PathPrepend.php#L15
+
+Can you also check the failing tests? Thanks!
+
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2020-06-28T09:33:15Z
+
+Yes and yes. :)
+
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2020-06-28T10:26:24Z
+
+This PR is ready now. :)
+
+---------------------------------------------------------------------------
+
+by acrobat at 2020-06-28T16:31:33Z
+
+Thank you @GrahamCampbell
