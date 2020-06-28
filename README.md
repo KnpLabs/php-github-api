@@ -28,12 +28,6 @@ Uses [GitHub API v3](http://developer.github.com/v3/) & supports [GitHub API v4]
 
 Via [Composer](https://getcomposer.org).
 
-### PHP 7.2+:
-
-```bash
-composer require knplabs/github-api guzzlehttp/guzzle:^7.0.1
-```
-
 ### PHP 7.1+:
 
 ```bash
