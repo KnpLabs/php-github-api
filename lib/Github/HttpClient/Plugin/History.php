@@ -3,6 +3,7 @@
 namespace Github\HttpClient\Plugin;
 
 use Http\Client\Common\Plugin\Journal;
+use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -13,10 +14,8 @@ use Psr\Http\Message\ResponseInterface;
  */
 class History implements Journal
 {
-    use HistoryTrait;
-
     /**
-     * @var ResponseInterface
+     * @var ResponseInterface|null
      */
     private $lastResponse;
 
@@ -31,5 +30,9 @@ class History implements Journal
     public function addSuccess(RequestInterface $request, ResponseInterface $response)
     {
         $this->lastResponse = $response;
+    }
+
+    public function addFailure(RequestInterface $request, ClientExceptionInterface $exception)
+    {
     }
 }

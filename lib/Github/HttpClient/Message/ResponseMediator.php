@@ -52,7 +52,7 @@ class ResponseMediator
     /**
      * @param ResponseInterface $response
      *
-     * @return null|string
+     * @return string|null
      */
     public static function getApiLimit(ResponseInterface $response)
     {

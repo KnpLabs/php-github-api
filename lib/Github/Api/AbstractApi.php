@@ -232,7 +232,7 @@ abstract class AbstractApi implements ApiInterface
      *
      * @param array $parameters Request parameters
      *
-     * @return null|string
+     * @return string|null
      */
     protected function createJsonBody(array $parameters)
     {

@@ -9,7 +9,7 @@ use Github\Exception\InvalidArgumentException;
 use Github\HttpClient\Builder;
 use Github\HttpClient\Plugin\Authentication;
 use GuzzleHttp\Psr7\Response;
-use Http\Client\HttpClient;
+use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 
 class ClientTest extends \PHPUnit\Framework\TestCase
@@ -21,7 +21,7 @@ class ClientTest extends \PHPUnit\Framework\TestCase
     {
         $client = new Client();
 
-        $this->assertInstanceOf(\Http\Client\HttpClient::class, $client->getHttpClient());
+        $this->assertInstanceOf(ClientInterface::class, $client->getHttpClient());
     }
 
     /**
@@ -29,12 +29,12 @@ class ClientTest extends \PHPUnit\Framework\TestCase
      */
     public function shouldPassHttpClientInterfaceToConstructor()
     {
-        $httpClientMock = $this->getMockBuilder(\Http\Client\HttpClient::class)
+        $httpClientMock = $this->getMockBuilder(ClientInterface::class)
             ->getMock();
 
         $client = Client::createWithHttpClient($httpClientMock);
 
-        $this->assertInstanceOf(\Http\Client\HttpClient::class, $client->getHttpClient());
+        $this->assertInstanceOf(ClientInterface::class, $client->getHttpClient());
     }
 
     /**
@@ -43,7 +43,7 @@ class ClientTest extends \PHPUnit\Framework\TestCase
      */
     public function shouldAuthenticateUsingAllGivenParameters($login, $password, $method)
     {
-        $builder = $this->getMockBuilder(\Github\HttpClient\Builder::class)
+        $builder = $this->getMockBuilder(Builder::class)
             ->setMethods(['addPlugin', 'removePlugin'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -84,7 +84,7 @@ class ClientTest extends \PHPUnit\Framework\TestCase
      */
     public function shouldAuthenticateUsingGivenParameters($token, $method)
     {
-        $builder = $this->getMockBuilder(\Github\HttpClient\Builder::class)
+        $builder = $this->getMockBuilder(Builder::class)
             ->setMethods(['addPlugin', 'removePlugin'])
             ->getMock();
         $builder->expects($this->once())
@@ -217,7 +217,7 @@ class ClientTest extends \PHPUnit\Framework\TestCase
      */
     public function testEnterpriseUrl()
     {
-        $httpClientMock = $this->getMockBuilder(HttpClient::class)
+        $httpClientMock = $this->getMockBuilder(ClientInterface::class)
             ->setMethods(['sendRequest'])
             ->getMock();
 

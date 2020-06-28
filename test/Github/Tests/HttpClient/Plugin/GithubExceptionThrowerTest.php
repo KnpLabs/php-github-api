@@ -4,8 +4,9 @@ namespace Github\Tests\HttpClient\Plugin;
 
 use Github\Exception\ExceptionInterface;
 use Github\HttpClient\Plugin\GithubExceptionThrower;
-use GuzzleHttp\Promise\FulfilledPromise;
 use GuzzleHttp\Psr7\Response;
+use Http\Client\Promise\HttpFulfilledPromise;
+use Http\Client\Promise\HttpRejectedPromise;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -25,22 +26,11 @@ class GithubExceptionThrowerTest extends TestCase
         /** @var RequestInterface $request */
         $request = $this->getMockForAbstractClass(RequestInterface::class);
 
-        $promise = $this->getMockBuilder(FulfilledPromise::class)->disableOriginalConstructor()->getMock();
-        $promise->expects($this->once())
-            ->method('then')
-            ->willReturnCallback(function ($callback) use ($response) {
-                return $callback($response);
-            });
+        $promise = new HttpFulfilledPromise($response);
 
         $plugin = new GithubExceptionThrower();
 
-        if ($exception) {
-            $this->expectException(get_class($exception));
-            $this->expectExceptionCode($exception->getCode());
-            $this->expectExceptionMessage($exception->getMessage());
-        }
-
-        $plugin->doHandleRequest(
+        $result = $plugin->handleRequest(
             $request,
             function (RequestInterface $request) use ($promise) {
                 return $promise;
@@ -49,6 +39,20 @@ class GithubExceptionThrowerTest extends TestCase
                 return $promise;
             }
         );
+
+        if ($exception) {
+            $this->assertInstanceOf(HttpRejectedPromise::class, $result);
+        } else {
+            $this->assertInstanceOf(HttpFulfilledPromise::class, $result);
+        }
+
+        if ($exception) {
+            $this->expectException(get_class($exception));
+            $this->expectExceptionCode($exception->getCode());
+            $this->expectExceptionMessage($exception->getMessage());
+        }
+
+        $result->wait();
     }
 
     /**

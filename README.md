@@ -20,24 +20,34 @@ Uses [GitHub API v3](http://developer.github.com/v3/) & supports [GitHub API v4]
 ## Requirements
 
 * PHP >= 7.1
-* A [HTTP client](https://packagist.org/providers/php-http/client-implementation)
+* A [HTTP client](https://packagist.org/providers/psr/http-client-implementation)
 * A [PSR-7 implementation](https://packagist.org/providers/psr/http-message-implementation)
 * (optional) PHPUnit to run tests.
 
 ## Install
 
-Via Composer:
+Via [Composer](https://getcomposer.org).
+
+### PHP 7.2+:
 
 ```bash
-$ composer require knplabs/github-api php-http/guzzle6-adapter "^1.1"
+composer require knplabs/github-api guzzlehttp/guzzle:^7.0.1
 ```
 
-Why `php-http/guzzle6-adapter`? We are decoupled from any HTTP messaging client with help by [HTTPlug](http://httplug.io/). Read about clients in our [docs](doc/customize.md).
+### PHP 7.1+:
 
+```bash
+composer require knplabs/github-api php-http/guzzle6-adapter:^2.0.1
+```
 
-## Using Laravel?
+### Laravel 5.5+:
 
-[Laravel GitHub](https://github.com/GrahamCampbell/Laravel-GitHub) by [Graham Campbell](https://github.com/GrahamCampbell) might interest you.
+```bash
+composer require graham-campbell/github guzzlehttp/guzzle:^7.0.1
+```
+
+We are decoupled from any HTTP messaging client with help by [HTTPlug](http://httplug.io). Read about clients in our [docs](doc/customize.md). [graham-campbell/github](https://github.com/GrahamCampbell/Laravel-GitHub) is by [Graham Campbell](https://github.com/GrahamCampbell).
+
 
 ## Basic usage of `php-github-api` client
 
