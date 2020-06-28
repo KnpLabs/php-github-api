@@ -95,7 +95,7 @@ class RateLimit extends AbstractApi
     /**
      * Get search rate limit.
      *
-     * @deprecated since 2.11.0 Use `->getResource('core')->getLimit()` instead
+     * @deprecated since 2.11.0 Use `->getResource('search')->getLimit()` instead
      *
      * @return int
      */
