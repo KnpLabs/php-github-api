@@ -31,8 +31,6 @@ use Psr\Http\Client\ClientInterface;
  * @method Api\Gists gist()
  * @method Api\Gists gists()
  * @method Api\Miscellaneous\Gitignore gitignore()
- * @method Api\Integrations integration() (deprecated)
- * @method Api\Integrations integrations() (deprecated)
  * @method Api\Apps apps()
  * @method Api\Issue issue()
  * @method Api\Issue issues()
@@ -70,50 +68,26 @@ use Psr\Http\Client\ClientInterface;
 class Client
 {
     /**
-     * Constant for authentication method. Indicates the default, but deprecated
-     * login with username and token in URL.
-     *
-     * @deprecated Use `Client::AUTH_ACCESS_TOKEN` instead. See https://developer.github.com/changes/2019-11-05-deprecated-passwords-and-authorizations-api/#authenticating-using-query-parameters
-     */
-    const AUTH_URL_TOKEN = 'url_token';
-
-    /**
-     * Constant for authentication method. Not indicates the new login, but allows
-     * usage of unauthenticated rate limited requests for given client_id + client_secret.
-     *
-     * @deprecated Use `Client::AUTH_CLIENT_ID` instead. See https://developer.github.com/changes/2019-11-05-deprecated-passwords-and-authorizations-api/#authenticating-using-query-parameters
-     */
-    const AUTH_URL_CLIENT_ID = 'url_client_id';
-
-    /**
-     * Constant for authentication method. Indicates the new favored login method
-     * with username and password via HTTP Authentication.
-     *
-     * @deprecated Use `Client::AUTH_ACCESS_TOKEN` instead. See https://developer.github.com/changes/2019-11-05-deprecated-passwords-and-authorizations-api/#authenticating-using-query-parameters
-     */
-    const AUTH_HTTP_PASSWORD = 'http_password';
-
-    /**
-     * Constant for authentication method. Indicates the new login method with
-     * with username and token via HTTP Authentication.
-     *
-     * @deprecated Use `Client::AUTH_ACCESS_TOKEN` instead.
-     */
-    const AUTH_HTTP_TOKEN = 'http_token';
-
-    /**
      * Authenticate using a client_id/client_secret combination.
+     *
+     * @var string
      */
     const AUTH_CLIENT_ID = 'client_id_header';
 
     /**
      * Authenticate using a GitHub access token.
+     *
+     * @var string
      */
     const AUTH_ACCESS_TOKEN = 'access_token_header';
 
     /**
-     * Constant for authentication method. Indicates JSON Web Token
-     * authentication required for GitHub apps access to the API.
+     * Constant for authentication method.
+     *
+     * Indicates JSON Web Token authentication required for GitHub apps access
+     * to the API.
+     *
+     * @var string
      */
     const AUTH_JWT = 'jwt';
 
@@ -222,11 +196,6 @@ class Client
                 $api = new Api\Miscellaneous\Gitignore($this);
                 break;
 
-            case 'integration':
-            case 'integrations':
-                $api = new Api\Integrations($this);
-                break;
-
             case 'apps':
                 $api = new Api\Apps($this);
                 break;
@@ -333,22 +302,16 @@ class Client
      * @param string|null $authMethod   One of the AUTH_* class constants
      *
      * @throws InvalidArgumentException If no authentication method was given
-     *
-     * @return void
      */
     public function authenticate($tokenOrLogin, $password = null, $authMethod = null)
     {
-        if (null === $password && null === $authMethod) {
-            throw new InvalidArgumentException('You need to specify authentication method!');
-        }
-
-        if (null === $authMethod && in_array($password, [self::AUTH_URL_TOKEN, self::AUTH_URL_CLIENT_ID, self::AUTH_HTTP_PASSWORD, self::AUTH_HTTP_TOKEN, self::AUTH_ACCESS_TOKEN, self::AUTH_JWT], true)) {
+        if (null === $authMethod && (self::AUTH_JWT === $password || self::AUTH_ACCESS_TOKEN === $password)) {
             $authMethod = $password;
             $password = null;
         }
 
         if (null === $authMethod) {
-            $authMethod = self::AUTH_HTTP_PASSWORD;
+            throw new InvalidArgumentException('You need to specify authentication method!');
         }
 
         $this->getHttpClientBuilder()->removePlugin(Authentication::class);

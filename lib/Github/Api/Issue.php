@@ -59,28 +59,6 @@ class Issue extends AbstractApi
     }
 
     /**
-     * Search issues by username, repo, state and keyword.
-     *
-     * @deprecated This method is deprecated use the Search api instead. See https://developer.github.com/v3/search/legacy/#legacy-search-api-is-deprecated
-     * @link http://developer.github.com/v3/search/#search-issues
-     *
-     * @param string $username   the username
-     * @param string $repository the repository
-     * @param string $state      the issue state, can be open or closed
-     * @param string $keyword    the keyword to filter issues by
-     *
-     * @return array list of issues found
-     */
-    public function find($username, $repository, $state, $keyword)
-    {
-        if (!in_array($state, ['open', 'closed'])) {
-            $state = 'open';
-        }
-
-        return $this->get('/legacy/issues/search/'.rawurlencode($username).'/'.rawurlencode($repository).'/'.rawurlencode($state).'/'.rawurlencode($keyword));
-    }
-
-    /**
      * List issues by organization.
      *
      * @link http://developer.github.com/v3/issues/

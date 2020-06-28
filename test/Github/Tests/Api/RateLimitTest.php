@@ -53,14 +53,6 @@ class RateLimitTest extends TestCase
     /**
      * @test
      */
-    public function shouldReturnRateLimitArray()
-    {
-        $this->assertSame($this->expectedArray, $this->api->getRateLimits());
-    }
-
-    /**
-     * @test
-     */
     public function shouldReturnArrayOfLimitInstances()
     {
         $this->assertContainsOnlyInstancesOf(RateLimit\RateLimitResource::class, $this->api->getResources());

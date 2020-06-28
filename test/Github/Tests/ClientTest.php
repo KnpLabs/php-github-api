@@ -68,11 +68,7 @@ class ClientTest extends \PHPUnit\Framework\TestCase
     public function getAuthenticationFullData()
     {
         return [
-            ['login', 'password', Client::AUTH_HTTP_PASSWORD],
-            ['token', null, Client::AUTH_HTTP_TOKEN],
-            ['token', null, Client::AUTH_URL_TOKEN],
             ['token', null, Client::AUTH_ACCESS_TOKEN],
-            ['client_id', 'client_secret', Client::AUTH_URL_CLIENT_ID],
             ['client_id', 'client_secret', Client::AUTH_CLIENT_ID],
             ['token', null, Client::AUTH_JWT],
         ];
@@ -80,16 +76,15 @@ class ClientTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @test
-     * @dataProvider getAuthenticationPartialData
      */
-    public function shouldAuthenticateUsingGivenParameters($token, $method)
+    public function shouldAuthenticateUsingGivenParameters()
     {
         $builder = $this->getMockBuilder(Builder::class)
             ->setMethods(['addPlugin', 'removePlugin'])
             ->getMock();
         $builder->expects($this->once())
             ->method('addPlugin')
-            ->with($this->equalTo(new Authentication($token, null, $method)));
+            ->with($this->equalTo(new Authentication('token', null, Client::AUTH_ACCESS_TOKEN)));
 
         $builder->expects($this->once())
             ->method('removePlugin')
@@ -103,15 +98,7 @@ class ClientTest extends \PHPUnit\Framework\TestCase
             ->method('getHttpClientBuilder')
             ->willReturn($builder);
 
-        $client->authenticate($token, $method);
-    }
-
-    public function getAuthenticationPartialData()
-    {
-        return [
-            ['token', Client::AUTH_HTTP_TOKEN],
-            ['token', Client::AUTH_URL_TOKEN],
-        ];
+        $client->authenticate('token', Client::AUTH_ACCESS_TOKEN);
     }
 
     /**

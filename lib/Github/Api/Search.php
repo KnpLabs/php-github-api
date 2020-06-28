@@ -90,7 +90,7 @@ class Search extends AbstractApi
      */
     public function commits($q, $sort = null, $order = 'desc')
     {
-        //This api is in preview mode, so set the correct accept-header
+        // This api is in preview mode, so set the correct accept-header
         $this->acceptHeaderValue = 'application/vnd.github.cloak-preview';
 
         return $this->get('/search/commits', ['q' => $q, 'sort' => $sort, 'order' => $order]);
@@ -107,7 +107,7 @@ class Search extends AbstractApi
      */
     public function topics($q)
     {
-        //This api is in preview mode, so set the correct accept-header
+        // This api is in preview mode, so set the correct accept-header
         $this->acceptHeaderValue = 'application/vnd.github.mercy-preview+json';
 
         return $this->get('/search/topics', ['q' => $q]);

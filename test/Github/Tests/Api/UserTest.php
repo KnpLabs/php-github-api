@@ -120,25 +120,6 @@ class UserTest extends TestCase
     /**
      * @test
      */
-    public function shouldSearchUsers()
-    {
-        $expectedArray = [
-            ['id' => 1, 'username' => 'l3l0'],
-            ['id' => 2, 'username' => 'l3l0test'],
-        ];
-
-        $api = $this->getApiMock();
-        $api->expects($this->once())
-            ->method('get')
-            ->with('/legacy/user/search/l3l0')
-            ->will($this->returnValue($expectedArray));
-
-        $this->assertEquals($expectedArray, $api->find('l3l0'));
-    }
-
-    /**
-     * @test
-     */
     public function shouldGetFollowingUsers()
     {
         $expectedArray = [['id' => 1, 'username' => 'l3l0test']];

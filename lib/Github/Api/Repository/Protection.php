@@ -14,13 +14,6 @@ class Protection extends AbstractApi
 {
     use AcceptHeaderTrait;
 
-    public function configure()
-    {
-        $this->acceptHeaderValue = 'application/vnd.github.loki-preview+json';
-
-        return $this;
-    }
-
     /**
      * Retrieves configured protection for the provided branch.
      *

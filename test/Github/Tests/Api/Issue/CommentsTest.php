@@ -17,7 +17,7 @@ class CommentsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/issues/123/comments', ['page' => 1])
+            ->with('/repos/KnpLabs/php-github-api/issues/123/comments', [])
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', 123));

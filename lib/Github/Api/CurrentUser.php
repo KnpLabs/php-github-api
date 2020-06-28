@@ -151,31 +151,11 @@ class CurrentUser extends AbstractApi
     }
 
     /**
-     * @deprecated Use watchers() instead
-     */
-    public function watched($page = 1)
-    {
-        return $this->get('/user/watched', [
-            'page' => $page,
-        ]);
-    }
-
-    /**
      * @return Starring
      */
     public function starring()
     {
         return new Starring($this->client);
-    }
-
-    /**
-     * @deprecated Use starring() instead
-     */
-    public function starred($page = 1)
-    {
-        return $this->get('/user/starred', [
-            'page' => $page,
-        ]);
     }
 
     /**
