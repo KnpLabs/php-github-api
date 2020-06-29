@@ -1,0 +1,17 @@
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2020-06-28T21:29:40Z
+
+I think this is breaking because the last release had a v on the front by mistake?
+
+---------------------------------------------------------------------------
+
+by acrobat at 2020-06-28T21:45:38Z
+
+No not by mistake, I switched to a cli tool to do the merges/releases etc and this tool tags versions with the `v` prefix. which actually doesn't matter for composer, but the version lib used in roave lost that prefix along the way so an incorrect tag was searched. This was fixed in [roave/backward-compatibility-check v5](https://github.com/Roave/BackwardCompatibilityCheck/pull/199).
+
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2020-06-28T22:10:37Z
+
+Ah, right. 👍
