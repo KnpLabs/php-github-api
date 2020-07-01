@@ -14,7 +14,7 @@ $client->authenticate($usernameOrToken, $password, $method);
 ```
 
 `$usernameOrToken` is, of course, the username (or in some cases token/client ID, more details you can find below),
-and guess what should contain `$password`. The `$method` can contain one of the five allowed values:
+and guess what should contain `$password`. The `$method` can contain one of the three allowed values:
 
 #### Supported methods
 * `Github\Client::AUTH_CLIENT_ID` - https://developer.github.com/v3/#oauth2-keysecret
