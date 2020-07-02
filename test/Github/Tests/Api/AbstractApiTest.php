@@ -209,19 +209,12 @@ class AbstractApiTest extends TestCase
      *
      * @param array $methods
      *
-     * @return \Http\Client\Common\HttpMethodsClient
+     * @return \Http\Client\Common\HttpMethodsClientInterface
      */
     protected function getHttpMethodsMock(array $methods = [])
     {
-        if (interface_exists(HttpMethodsClientInterface::class)) {
-            $mock = $this->createMock(HttpMethodsClientInterface::class);
-        } else {
-            $methods = array_merge(['sendRequest'], $methods);
-            $mock = $this->getMockBuilder(\Http\Client\Common\HttpMethodsClient::class)
-                ->disableOriginalConstructor()
-                ->setMethods($methods)
-                ->getMock();
-        }
+        $mock = $this->createMock(HttpMethodsClientInterface::class);
+
         $mock
             ->expects($this->any())
             ->method('sendRequest');
