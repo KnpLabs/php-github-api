@@ -71,7 +71,7 @@ class User extends AbstractApi
      */
     public function showById($id)
     {
-        return $this->get('/user/'.rawurlencode($id));
+        return $this->get('/user/'.$id);
     }
 
     /**
