@@ -110,7 +110,7 @@ class RepoTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repositories?since=2')
+            ->with('/repositories', ['since' => 2])
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->all(2));

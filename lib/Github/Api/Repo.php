@@ -64,7 +64,7 @@ class Repo extends AbstractApi
             return $this->get('/repositories');
         }
 
-        return $this->get('/repositories?since='.rawurldecode($id));
+        return $this->get('/repositories', ['since' => $id]);
     }
 
     /**
@@ -171,7 +171,7 @@ class Repo extends AbstractApi
      */
     public function showById($id)
     {
-        return $this->get('/repositories/'.rawurlencode($id));
+        return $this->get('/repositories/'.$id);
     }
 
     /**
