@@ -28,6 +28,9 @@ class History implements Journal
         return $this->lastResponse;
     }
 
+    /**
+     * @return void
+     */
     public function addSuccess(RequestInterface $request, ResponseInterface $response)
     {
         $this->lastResponse = $response;

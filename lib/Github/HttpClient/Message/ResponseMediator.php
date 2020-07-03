@@ -59,7 +59,7 @@ class ResponseMediator
         $remainingCalls = self::getHeader($response, 'X-RateLimit-Remaining');
 
         if (null !== $remainingCalls && 1 > $remainingCalls) {
-            throw new ApiLimitExceedException($remainingCalls);
+            throw new ApiLimitExceedException((int) $remainingCalls);
         }
 
         return $remainingCalls;

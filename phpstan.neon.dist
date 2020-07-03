@@ -1,4 +1,13 @@
 parameters:
-    level: 4
+    level: 6
     paths:
         - lib
+
+    ignoreErrors:
+        # Ignore typehint errors on api classes
+        -
+            message: '#Method (.*) with no typehint specified\.#'
+            path: lib/Github/Api
+        -
+            message: '#Method (.*) has no return typehint specified\.#'
+            path: lib/Github/Api

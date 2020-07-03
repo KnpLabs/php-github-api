@@ -113,6 +113,8 @@ class Builder
      * Add a new plugin to the end of the plugin chain.
      *
      * @param Plugin $plugin
+     *
+     * @return void
      */
     public function addPlugin(Plugin $plugin)
     {
@@ -124,6 +126,8 @@ class Builder
      * Remove a plugin by its fully qualified class name (FQCN).
      *
      * @param string $fqcn
+     *
+     * @return void
      */
     public function removePlugin($fqcn)
     {
@@ -137,6 +141,8 @@ class Builder
 
     /**
      * Clears used headers.
+     *
+     * @return void
      */
     public function clearHeaders()
     {
@@ -148,6 +154,8 @@ class Builder
 
     /**
      * @param array $headers
+     *
+     * @return void
      */
     public function addHeaders(array $headers)
     {
@@ -160,6 +168,8 @@ class Builder
     /**
      * @param string $header
      * @param string $headerValue
+     *
+     * @return void
      */
     public function addHeaderValue($header, $headerValue)
     {
@@ -178,6 +188,8 @@ class Builder
      *
      * @param CacheItemPoolInterface $cachePool
      * @param array                  $config
+     *
+     * @return void
      */
     public function addCache(CacheItemPoolInterface $cachePool, array $config = [])
     {
@@ -190,6 +202,8 @@ class Builder
 
     /**
      * Remove the cache plugin.
+     *
+     * @return void
      */
     public function removeCache()
     {

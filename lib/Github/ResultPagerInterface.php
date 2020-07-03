@@ -43,6 +43,8 @@ interface ResultPagerInterface
 
     /**
      * Method that performs the actual work to refresh the pagination property.
+     *
+     * @return void
      */
     public function postFetch();
 

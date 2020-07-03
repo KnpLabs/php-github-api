@@ -333,6 +333,8 @@ class Client
      * @param null|string $authMethod   One of the AUTH_* class constants
      *
      * @throws InvalidArgumentException If no authentication method was given
+     *
+     * @return void
      */
     public function authenticate($tokenOrLogin, $password = null, $authMethod = null)
     {
@@ -357,6 +359,8 @@ class Client
      * Sets the URL of your GitHub Enterprise instance.
      *
      * @param string $enterpriseUrl URL of the API in the form of http(s)://hostname
+     *
+     * @return void
      */
     private function setEnterpriseUrl($enterpriseUrl)
     {
@@ -381,6 +385,8 @@ class Client
      *
      * @param CacheItemPoolInterface $cachePool
      * @param array                  $config
+     *
+     * @return void
      */
     public function addCache(CacheItemPoolInterface $cachePool, array $config = [])
     {
@@ -389,6 +395,8 @@ class Client
 
     /**
      * Remove the cache plugin.
+     *
+     * @return void
      */
     public function removeCache()
     {
@@ -397,8 +405,7 @@ class Client
 
     /**
      * @param string $name
-     *
-     * @throws BadMethodCallException
+     * @param array  $args
      *
      * @return ApiInterface
      */
