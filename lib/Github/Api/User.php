@@ -58,10 +58,10 @@ class User extends AbstractApi
     {
         return $this->get('/users/'.rawurlencode($username));
     }
-    
+
     /**
      * Get extended information about a user by its id.
-     * Note: at time of writing this is an undocumented feature
+     * Note: at time of writing this is an undocumented feature but GitHub support have advised that it can be relied on.
      *
      * @link http://developer.github.com/v3/users/
      *
