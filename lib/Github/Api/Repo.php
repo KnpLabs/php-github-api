@@ -171,7 +171,7 @@ class Repo extends AbstractApi
      */
     public function showById($id)
     {
-        return $this->get('/repositories/'.rawurlencode($id));
+        return $this->get('/repositories/'.$id);
     }
 
     /**
