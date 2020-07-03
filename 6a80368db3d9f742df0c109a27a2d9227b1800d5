@@ -1,0 +1,29 @@
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2020-07-03T20:15:33Z
+
+Nice. 👍
+
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2020-07-03T20:16:01Z
+
+I wonder if we should add strict typing to all the files in 3.x?
+
+---------------------------------------------------------------------------
+
+by acrobat at 2020-07-03T20:43:48Z
+
+I think that could be a next step indeed. I'm preping a PR to set all docblocks correctly in the 2.x branch, which will allow us to use an automatic tool to convert these to typehints in v3.
+
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2020-07-03T20:45:54Z
+
+Could be risky if there are mistakes in the doc. I am in the process of doing something similar for the GitLab client https://github.com/m4tthumphrey/php-gitlab-api, however I won't add any scalar types to anything in the Api namespace for fear of breaking stuff. I will, however add strict typing everywhere, and scalar typehints everywhere else in that package. ;)
+
+---------------------------------------------------------------------------
+
+by acrobat at 2020-07-03T20:48:38Z
+
+Yes, that does mean that the docblocks should be correct. Something we can check but it's not a must for me, if we indeed have typehints in the other parts and enable strict typing it would a step forward!
