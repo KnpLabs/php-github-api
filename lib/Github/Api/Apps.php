@@ -36,7 +36,7 @@ class Apps extends AbstractApi
 
         $this->configurePreviewHeader();
 
-        return $this->post('/app/installations/'.rawurlencode($installationId).'/access_tokens', $parameters);
+        return $this->post('/app/installations/'.$installationId.'/access_tokens', $parameters);
     }
 
     /**
@@ -66,7 +66,7 @@ class Apps extends AbstractApi
     {
         $this->configurePreviewHeader();
 
-        return $this->get('/app/installations/'.rawurldecode($installationId));
+        return $this->get('/app/installations/'.$installationId);
     }
 
     /**
@@ -129,7 +129,7 @@ class Apps extends AbstractApi
     {
         $this->configurePreviewHeader();
 
-        $this->delete('/app/installations/'.rawurldecode($installationId));
+        $this->delete('/app/installations/'.$installationId);
     }
 
     /**
@@ -167,7 +167,7 @@ class Apps extends AbstractApi
     {
         $this->configurePreviewHeader();
 
-        return $this->put('/installations/'.rawurlencode($installationId).'/repositories/'.rawurlencode($repositoryId));
+        return $this->put('/installations/'.$installationId.'/repositories/'.$repositoryId);
     }
 
     /**
@@ -184,6 +184,6 @@ class Apps extends AbstractApi
     {
         $this->configurePreviewHeader();
 
-        return $this->delete('/installations/'.rawurlencode($installationId).'/repositories/'.rawurlencode($repositoryId));
+        return $this->delete('/installations/'.$installationId.'/repositories/'.$repositoryId);
     }
 }
