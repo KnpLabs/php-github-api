@@ -35,6 +35,9 @@ class History implements Journal
         $this->lastResponse = $response;
     }
 
+    /**
+     * @return void
+     */
     public function addFailure(RequestInterface $request, ClientExceptionInterface $exception)
     {
     }
