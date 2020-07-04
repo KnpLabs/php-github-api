@@ -65,10 +65,10 @@ class ResponseMediator
         $remainingCalls = (int) $remainingCallsHeader;
 
         if (1 > $remainingCalls) {
-            throw new ApiLimitExceedException((int) $remainingCalls);
+            throw new ApiLimitExceedException($remainingCalls);
         }
 
-        return $remainingCalls;
+        return $remainingCallsHeader;
     }
 
     /**
