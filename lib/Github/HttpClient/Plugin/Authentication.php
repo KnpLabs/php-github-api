@@ -5,6 +5,7 @@ namespace Github\HttpClient\Plugin;
 use Github\Client;
 use Github\Exception\RuntimeException;
 use Http\Client\Common\Plugin;
+use Http\Promise\Promise;
 use Psr\Http\Message\RequestInterface;
 
 /**
@@ -16,10 +17,18 @@ class Authentication implements Plugin
 {
     use Plugin\VersionBridgePlugin;
 
+    /** @var string */
     private $tokenOrLogin;
+    /** @var string|null */
     private $password;
+    /** @var string|null */
     private $method;
 
+    /**
+     * @param string      $tokenOrLogin
+     * @param string|null $password
+     * @param string|null $method
+     */
     public function __construct($tokenOrLogin, $password, $method)
     {
         $this->tokenOrLogin = $tokenOrLogin;
@@ -28,7 +37,7 @@ class Authentication implements Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * @return Promise
      */
     public function doHandleRequest(RequestInterface $request, callable $next, callable $first)
     {

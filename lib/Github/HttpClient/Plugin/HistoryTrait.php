@@ -15,6 +15,9 @@ if (\interface_exists(\Http\Client\Common\HttpMethodsClientInterface::class)) {
      */
     trait HistoryTrait
     {
+        /**
+         * @return void
+         */
         public function addFailure(RequestInterface $request, ClientExceptionInterface $exception)
         {
         }
@@ -25,6 +28,9 @@ if (\interface_exists(\Http\Client\Common\HttpMethodsClientInterface::class)) {
      */
     trait HistoryTrait
     {
+        /**
+         * @return void
+         */
         public function addFailure(RequestInterface $request, Exception $exception)
         {
         }

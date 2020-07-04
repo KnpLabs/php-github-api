@@ -9,6 +9,7 @@ use Github\Exception\TwoFactorAuthenticationRequiredException;
 use Github\Exception\ValidationFailedException;
 use Github\HttpClient\Message\ResponseMediator;
 use Http\Client\Common\Plugin;
+use Http\Promise\Promise;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -21,7 +22,7 @@ class GithubExceptionThrower implements Plugin
     use Plugin\VersionBridgePlugin;
 
     /**
-     * {@inheritdoc}
+     * @return Promise
      */
     public function doHandleRequest(RequestInterface $request, callable $next, callable $first)
     {
@@ -33,8 +34,8 @@ class GithubExceptionThrower implements Plugin
             // If error:
             $remaining = ResponseMediator::getHeader($response, 'X-RateLimit-Remaining');
             if (null !== $remaining && 1 > $remaining && 'rate_limit' !== substr($request->getRequestTarget(), 1, 10)) {
-                $limit = ResponseMediator::getHeader($response, 'X-RateLimit-Limit');
-                $reset = ResponseMediator::getHeader($response, 'X-RateLimit-Reset');
+                $limit = (int) ResponseMediator::getHeader($response, 'X-RateLimit-Limit');
+                $reset = (int) ResponseMediator::getHeader($response, 'X-RateLimit-Reset');
 
                 throw new ApiLimitExceedException($limit, $reset);
             }
