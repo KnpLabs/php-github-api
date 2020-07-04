@@ -340,7 +340,7 @@ class Client
             throw new InvalidArgumentException('You need to specify authentication method!');
         }
 
-        if (null === $authMethod && in_array($password, [self::AUTH_URL_TOKEN, self::AUTH_URL_CLIENT_ID, self::AUTH_HTTP_PASSWORD, self::AUTH_HTTP_TOKEN, self::AUTH_JWT], true)) {
+        if (null === $authMethod && in_array($password, [self::AUTH_URL_TOKEN, self::AUTH_URL_CLIENT_ID, self::AUTH_HTTP_PASSWORD, self::AUTH_HTTP_TOKEN, self::AUTH_ACCESS_TOKEN, self::AUTH_JWT], true)) {
             $authMethod = $password;
             $password = null;
         }
