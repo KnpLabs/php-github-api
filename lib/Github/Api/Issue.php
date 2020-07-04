@@ -113,7 +113,7 @@ class Issue extends AbstractApi
      */
     public function show($username, $repository, $id)
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($id));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.$id);
     }
 
     /**
@@ -154,7 +154,7 @@ class Issue extends AbstractApi
      */
     public function update($username, $repository, $id, array $params)
     {
-        return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($id), $params);
+        return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.$id, $params);
     }
 
     /**
@@ -170,7 +170,7 @@ class Issue extends AbstractApi
      */
     public function lock($username, $repository, $id)
     {
-        return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($id).'/lock');
+        return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.$id.'/lock');
     }
 
     /**
@@ -186,7 +186,7 @@ class Issue extends AbstractApi
      */
     public function unlock($username, $repository, $id)
     {
-        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.rawurlencode($id).'/lock');
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.$id.'/lock');
     }
 
     /**

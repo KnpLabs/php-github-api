@@ -25,6 +25,6 @@ There are three values that can be passed into the `repositories` method: `type`
 
 ```php
 $client = new \Github\Client(); 
-$client->authenticate($github_token, null, \Github\Client::AUTH_HTTP_TOKEN);
+$client->authenticate($github_token, null, \Github\Client::AUTH_ACCESS_TOKEN);
 $client->currentUser()->repositories();
 ```

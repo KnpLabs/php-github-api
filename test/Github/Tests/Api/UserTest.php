@@ -23,6 +23,22 @@ class UserTest extends TestCase
     /**
      * @test
      */
+    public function shouldShowByIdUser()
+    {
+        $expectedArray = ['id' => 1, 'username' => 'l3l0'];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/user/1')
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->showById(1));
+    }
+
+    /**
+     * @test
+     */
     public function shouldGetUserOrganizations()
     {
         $expectedArray = [[

@@ -42,7 +42,7 @@ class User extends AbstractApi
             return $this->get('/users');
         }
 
-        return $this->get('/users', ['since' => rawurldecode($id)]);
+        return $this->get('/users', ['since' => $id]);
     }
 
     /**
@@ -57,6 +57,21 @@ class User extends AbstractApi
     public function show($username)
     {
         return $this->get('/users/'.rawurlencode($username));
+    }
+
+    /**
+     * Get extended information about a user by its id.
+     * Note: at time of writing this is an undocumented feature but GitHub support have advised that it can be relied on.
+     *
+     * @link http://developer.github.com/v3/users/
+     *
+     * @param int $id the id of the user to show
+     *
+     * @return array information about the user
+     */
+    public function showById($id)
+    {
+        return $this->get('/user/'.$id);
     }
 
     /**

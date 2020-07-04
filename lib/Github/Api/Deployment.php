@@ -38,7 +38,7 @@ class Deployment extends AbstractApi
      */
     public function show($username, $repository, $id)
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/deployments/'.rawurlencode($id));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/deployments/'.$id);
     }
 
     /**
@@ -88,7 +88,7 @@ class Deployment extends AbstractApi
             throw new MissingArgumentException(['state']);
         }
 
-        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/deployments/'.rawurlencode($id).'/statuses', $params);
+        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/deployments/'.$id.'/statuses', $params);
     }
 
     /**
@@ -102,6 +102,6 @@ class Deployment extends AbstractApi
      */
     public function getStatuses($username, $repository, $id)
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/deployments/'.rawurlencode($id).'/statuses');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/deployments/'.$id.'/statuses');
     }
 }

@@ -77,7 +77,7 @@ class PullRequest extends AbstractApi
      */
     public function show($username, $repository, $id)
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.$id);
     }
 
     public function commits($username, $repository, $id)
@@ -154,11 +154,6 @@ class PullRequest extends AbstractApi
         // If `issue` is not sent, then `body` must be sent
         if (!isset($params['issue']) && !isset($params['body'])) {
             throw new MissingArgumentException(['issue', 'body']);
-        }
-
-        if (isset($params['draft']) && $params['draft'] === true) {
-            //This feature is in preview mode, so set the correct accept-header
-            $this->acceptHeaderValue = 'application/vnd.github.shadow-cat-preview+json';
         }
 
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls', $params);
