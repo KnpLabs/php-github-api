@@ -36,6 +36,13 @@ $user = $client->api('user')->show('KnpLabs');
 
 Returns an array of information about the user.
 
+
+You can also use the User ID, but it will use an undocumented Github API
+
+```php
+$user = $client->api('user')->showById(202732);
+```
+
 ### Update user information
 
 > Requires [authentication](security.md).
