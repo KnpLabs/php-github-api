@@ -18,9 +18,6 @@ php:
 
 matrix:
   include:
-    - php: 7.4.7
-      name: Backward compatibillity check
-      env: DEPENDENCIES="roave/backward-compatibility-check" TEST_COMMAND="vendor/bin/roave-backward-compatibility-check"
     - php: 7.4
       name: phpstan
       script:
