@@ -1,0 +1,37 @@
+---------------------------------------------------------------------------
+
+by acrobat at 2020-07-04T13:12:18Z
+
+Maybe it's better to set it as an allow_failure in travis until v3 is released. On the other hand we use a feature like Roave/BackwardCompatibilityCheck#81
+
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2020-07-04T13:34:16Z
+
+Maybe we could comment it out in the travis file, to try and make sure it's not forgotten about. That's what Guzzle did during Guzzle 7 development. Alternatively, I could always open a PR to revert this one marked as draft, so it's nor forgotten?
+
+I'd be against setting to allow failure on the grounds that it's a waste of electricity to run the job.
+
+---------------------------------------------------------------------------
+
+by acrobat at 2020-07-04T13:43:37Z
+
+Comment it out in this PR and add a small comment above why it's commented and indeed open a draft PR to revert. I will set the milestone to 3.0 for that draft pr so we can revert it around/after the release!
+
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2020-07-04T13:54:07Z
+
+Done. :)
+
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2020-07-04T13:54:37Z
+
+Once this is merged, I'll rebase the PSR-17 PR, so we can see a passing build. 🎉
+
+---------------------------------------------------------------------------
+
+by acrobat at 2020-07-04T14:08:59Z
+
+Thank you @GrahamCampbell
