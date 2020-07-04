@@ -55,7 +55,7 @@ class Authentication implements Plugin
         return $next($request);
     }
 
-    private function getAuthorizationHeader()
+    private function getAuthorizationHeader(): string
     {
         switch ($this->method) {
             case Client::AUTH_CLIENT_ID:

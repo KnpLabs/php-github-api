@@ -302,6 +302,8 @@ class Client
      * @param string|null $authMethod   One of the AUTH_* class constants
      *
      * @throws InvalidArgumentException If no authentication method was given
+     *
+     * @return void
      */
     public function authenticate($tokenOrLogin, $password = null, $authMethod = null)
     {
