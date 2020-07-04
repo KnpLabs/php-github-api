@@ -43,7 +43,7 @@ class Authentication implements Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * @return Promise
      */
     public function handleRequest(RequestInterface $request, callable $next, callable $first): Promise
     {

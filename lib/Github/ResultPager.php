@@ -161,6 +161,8 @@ class ResultPager implements ResultPagerInterface
 
     /**
      * @param string $key
+     *
+     * @return bool
      */
     protected function has($key)
     {
@@ -169,6 +171,8 @@ class ResultPager implements ResultPagerInterface
 
     /**
      * @param string $key
+     *
+     * @return array
      */
     protected function get($key)
     {
@@ -178,6 +182,8 @@ class ResultPager implements ResultPagerInterface
 
             return ResponseMediator::getContent($result);
         }
+
+        return [];
     }
 
     /**

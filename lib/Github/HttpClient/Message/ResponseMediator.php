@@ -56,13 +56,19 @@ class ResponseMediator
      */
     public static function getApiLimit(ResponseInterface $response)
     {
-        $remainingCalls = self::getHeader($response, 'X-RateLimit-Remaining');
+        $remainingCallsHeader = self::getHeader($response, 'X-RateLimit-Remaining');
 
-        if (null !== $remainingCalls && 1 > $remainingCalls) {
+        if (null === $remainingCallsHeader) {
+            return null;
+        }
+
+        $remainingCalls = (int) $remainingCallsHeader;
+
+        if (1 > $remainingCalls) {
             throw new ApiLimitExceedException($remainingCalls);
         }
 
-        return $remainingCalls;
+        return $remainingCallsHeader;
     }
 
     /**

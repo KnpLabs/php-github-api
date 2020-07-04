@@ -27,7 +27,11 @@ class PathPrepend implements Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * @param RequestInterface $request
+     * @param callable         $next
+     * @param callable         $first
+     *
+     * @return Promise
      */
     public function handleRequest(RequestInterface $request, callable $next, callable $first): Promise
     {
