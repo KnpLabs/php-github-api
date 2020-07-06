@@ -1,0 +1,29 @@
+---------------------------------------------------------------------------
+
+by acrobat at 2020-07-03T21:24:51Z
+
+Thanks for the work already @GrahamCampbell! Just a few comments/changes.
+
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2020-07-04T10:16:07Z
+
+Just rebased and applied changes based on the feedback.
+
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2020-07-04T13:38:25Z
+
+@acrobat If you do another 2.x -> master merge, I'll rebase this PR again, so that you don't have additional merge conflicts in the authentication class later on.
+
+---------------------------------------------------------------------------
+
+by acrobat at 2020-07-04T13:46:28Z
+
+Upmerge is done!
+
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2020-07-04T15:21:08Z
+
+Build green now. :)
