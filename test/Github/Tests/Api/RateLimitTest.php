@@ -37,25 +37,15 @@ class RateLimitTest extends TestCase
     protected $api;
 
     /**
-     * Used to construct common expectations for the API input data in each unit test.
-     *
-     * {@inheritdoc}
+     * @before
      */
-    protected function setUp(): void
+    public function initMocks()
     {
         $this->api = $this->getApiMock();
         $this->api->expects($this->once())
             ->method('get')
             ->with('/rate_limit')
             ->will($this->returnValue($this->expectedArray));
-    }
-
-    /**
-     * @test
-     */
-    public function shouldReturnRateLimitArray()
-    {
-        $this->assertSame($this->expectedArray, $this->api->getRateLimits());
     }
 
     /**

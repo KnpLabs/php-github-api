@@ -39,44 +39,6 @@ class RepoTest extends TestCase
     /**
      * @test
      */
-    public function shouldSearchRepositories()
-    {
-        $expectedArray = [
-            ['id' => 1, 'name' => 'php'],
-            ['id' => 2, 'name' => 'php-cs'],
-        ];
-
-        $api = $this->getApiMock();
-        $api->expects($this->once())
-            ->method('get')
-            ->with('/legacy/repos/search/php', ['myparam' => 2, 'start_page' => 1])
-            ->will($this->returnValue($expectedArray));
-
-        $this->assertEquals($expectedArray, $api->find('php', ['myparam' => 2]));
-    }
-
-    /**
-     * @test
-     */
-    public function shouldPaginateFoundRepositories()
-    {
-        $expectedArray = [
-            ['id' => 3, 'name' => 'fork of php'],
-            ['id' => 4, 'name' => 'fork of php-cs'],
-        ];
-
-        $api = $this->getApiMock();
-        $api->expects($this->once())
-            ->method('get')
-            ->with('/legacy/repos/search/php', ['start_page' => 2])
-            ->will($this->returnValue($expectedArray));
-
-        $this->assertEquals($expectedArray, $api->find('php', ['start_page' => 2]));
-    }
-
-    /**
-     * @test
-     */
     public function shouldGetAllRepositories()
     {
         $expectedArray = [

@@ -159,54 +159,6 @@ class IssueTest extends TestCase
     /**
      * @test
      */
-    public function shouldSearchOpenIssues()
-    {
-        $expectedArray = [['id' => '123']];
-
-        $api = $this->getApiMock();
-        $api->expects($this->once())
-            ->method('get')
-            ->with('/legacy/issues/search/KnpLabs/php-github-api/open/Invalid%20Commits')
-            ->will($this->returnValue($expectedArray));
-
-        $this->assertEquals($expectedArray, $api->find('KnpLabs', 'php-github-api', 'open', 'Invalid Commits'));
-    }
-
-    /**
-     * @test
-     */
-    public function shouldSearchClosedIssues()
-    {
-        $expectedArray = [['id' => '123']];
-
-        $api = $this->getApiMock();
-        $api->expects($this->once())
-            ->method('get')
-            ->with('/legacy/issues/search/KnpLabs/php-github-api/closed/Invalid%20Commits')
-            ->will($this->returnValue($expectedArray));
-
-        $this->assertEquals($expectedArray, $api->find('KnpLabs', 'php-github-api', 'closed', 'Invalid Commits'));
-    }
-
-    /**
-     * @test
-     */
-    public function shouldSearchOpenIssuesWhenStateNotRecognized()
-    {
-        $expectedArray = [['id' => '123']];
-
-        $api = $this->getApiMock();
-        $api->expects($this->once())
-            ->method('get')
-            ->with('/legacy/issues/search/KnpLabs/php-github-api/open/Invalid%20Commits')
-            ->will($this->returnValue($expectedArray));
-
-        $this->assertEquals($expectedArray, $api->find('KnpLabs', 'php-github-api', 'abc', 'Invalid Commits'));
-    }
-
-    /**
-     * @test
-     */
     public function shouldGetCommentsApiObject()
     {
         $api = $this->getApiMock();

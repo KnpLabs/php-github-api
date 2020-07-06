@@ -71,22 +71,6 @@ class CurrentUserTest extends TestCase
     /**
      * @test
      */
-    public function shouldGetWatchedRepositories()
-    {
-        $expectedArray = [['id' => 1, 'name' => 'l3l0repo']];
-
-        $api = $this->getApiMock();
-        $api->expects($this->once())
-            ->method('get')
-            ->with('/user/watched', ['page' => 1])
-            ->will($this->returnValue($expectedArray));
-
-        $this->assertEquals($expectedArray, $api->watched(1));
-    }
-
-    /**
-     * @test
-     */
     public function shouldGetInstallations()
     {
         $result = ['installation1', 'installation2'];

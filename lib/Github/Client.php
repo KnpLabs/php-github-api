@@ -10,9 +10,9 @@ use Github\HttpClient\Plugin\Authentication;
 use Github\HttpClient\Plugin\GithubExceptionThrower;
 use Github\HttpClient\Plugin\History;
 use Github\HttpClient\Plugin\PathPrepend;
-use Http\Client\Common\HttpMethodsClient;
+use Http\Client\Common\HttpMethodsClientInterface;
 use Http\Client\Common\Plugin;
-use Http\Discovery\UriFactoryDiscovery;
+use Http\Discovery\Psr17FactoryDiscovery;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Http\Client\ClientInterface;
 
@@ -31,8 +31,6 @@ use Psr\Http\Client\ClientInterface;
  * @method Api\Gists gist()
  * @method Api\Gists gists()
  * @method Api\Miscellaneous\Gitignore gitignore()
- * @method Api\Integrations integration() (deprecated)
- * @method Api\Integrations integrations() (deprecated)
  * @method Api\Apps apps()
  * @method Api\Issue issue()
  * @method Api\Issue issues()
@@ -70,50 +68,26 @@ use Psr\Http\Client\ClientInterface;
 class Client
 {
     /**
-     * Constant for authentication method. Indicates the default, but deprecated
-     * login with username and token in URL.
-     *
-     * @deprecated Use `Client::AUTH_ACCESS_TOKEN` instead. See https://developer.github.com/changes/2019-11-05-deprecated-passwords-and-authorizations-api/#authenticating-using-query-parameters
-     */
-    const AUTH_URL_TOKEN = 'url_token';
-
-    /**
-     * Constant for authentication method. Not indicates the new login, but allows
-     * usage of unauthenticated rate limited requests for given client_id + client_secret.
-     *
-     * @deprecated Use `Client::AUTH_CLIENT_ID` instead. See https://developer.github.com/changes/2019-11-05-deprecated-passwords-and-authorizations-api/#authenticating-using-query-parameters
-     */
-    const AUTH_URL_CLIENT_ID = 'url_client_id';
-
-    /**
-     * Constant for authentication method. Indicates the new favored login method
-     * with username and password via HTTP Authentication.
-     *
-     * @deprecated Use `Client::AUTH_ACCESS_TOKEN` instead. See https://developer.github.com/changes/2019-11-05-deprecated-passwords-and-authorizations-api/#authenticating-using-query-parameters
-     */
-    const AUTH_HTTP_PASSWORD = 'http_password';
-
-    /**
-     * Constant for authentication method. Indicates the new login method with
-     * with username and token via HTTP Authentication.
-     *
-     * @deprecated Use `Client::AUTH_ACCESS_TOKEN` instead.
-     */
-    const AUTH_HTTP_TOKEN = 'http_token';
-
-    /**
      * Authenticate using a client_id/client_secret combination.
+     *
+     * @var string
      */
     const AUTH_CLIENT_ID = 'client_id_header';
 
     /**
      * Authenticate using a GitHub access token.
+     *
+     * @var string
      */
     const AUTH_ACCESS_TOKEN = 'access_token_header';
 
     /**
-     * Constant for authentication method. Indicates JSON Web Token
-     * authentication required for GitHub apps access to the API.
+     * Constant for authentication method.
+     *
+     * Indicates JSON Web Token authentication required for GitHub apps access
+     * to the API.
+     *
+     * @var string
      */
     const AUTH_JWT = 'jwt';
 
@@ -142,12 +116,12 @@ class Client
     public function __construct(Builder $httpClientBuilder = null, $apiVersion = null, $enterpriseUrl = null)
     {
         $this->responseHistory = new History();
-        $this->httpClientBuilder = $builder = $httpClientBuilder ?: new Builder();
+        $this->httpClientBuilder = $builder = $httpClientBuilder ?? new Builder();
 
         $builder->addPlugin(new GithubExceptionThrower());
         $builder->addPlugin(new Plugin\HistoryPlugin($this->responseHistory));
         $builder->addPlugin(new Plugin\RedirectPlugin());
-        $builder->addPlugin(new Plugin\AddHostPlugin(UriFactoryDiscovery::find()->createUri('https://api.github.com')));
+        $builder->addPlugin(new Plugin\AddHostPlugin(Psr17FactoryDiscovery::findUrlFactory()->createUri('https://api.github.com')));
         $builder->addPlugin(new Plugin\HeaderDefaultsPlugin([
             'User-Agent' => 'php-github-api (http://github.com/KnpLabs/php-github-api)',
         ]));
@@ -220,11 +194,6 @@ class Client
 
             case 'gitignore':
                 $api = new Api\Miscellaneous\Gitignore($this);
-                break;
-
-            case 'integration':
-            case 'integrations':
-                $api = new Api\Integrations($this);
                 break;
 
             case 'apps':
@@ -338,17 +307,13 @@ class Client
      */
     public function authenticate($tokenOrLogin, $password = null, $authMethod = null)
     {
-        if (null === $password && null === $authMethod) {
-            throw new InvalidArgumentException('You need to specify authentication method!');
-        }
-
-        if (null === $authMethod && in_array($password, [self::AUTH_URL_TOKEN, self::AUTH_URL_CLIENT_ID, self::AUTH_HTTP_PASSWORD, self::AUTH_HTTP_TOKEN, self::AUTH_ACCESS_TOKEN, self::AUTH_JWT], true)) {
+        if (null === $authMethod && (self::AUTH_JWT === $password || self::AUTH_ACCESS_TOKEN === $password)) {
             $authMethod = $password;
             $password = null;
         }
 
         if (null === $authMethod) {
-            $authMethod = self::AUTH_HTTP_PASSWORD;
+            throw new InvalidArgumentException('You need to specify authentication method!');
         }
 
         $this->getHttpClientBuilder()->removePlugin(Authentication::class);
@@ -368,7 +333,7 @@ class Client
         $builder->removePlugin(Plugin\AddHostPlugin::class);
         $builder->removePlugin(PathPrepend::class);
 
-        $builder->addPlugin(new Plugin\AddHostPlugin(UriFactoryDiscovery::find()->createUri($enterpriseUrl)));
+        $builder->addPlugin(new Plugin\AddHostPlugin(Psr17FactoryDiscovery::findUrlFactory()->createUri($enterpriseUrl)));
         $builder->addPlugin(new PathPrepend(sprintf('/api/%s', $this->getApiVersion())));
     }
 
@@ -427,7 +392,7 @@ class Client
     }
 
     /**
-     * @return HttpMethodsClient
+     * @return HttpMethodsClientInterface
      */
     public function getHttpClient()
     {

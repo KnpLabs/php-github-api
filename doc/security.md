@@ -6,47 +6,29 @@ properties on Repositories and some others. Therefore this step is facultative.
 
 ### Authenticate
 
-GitHub provides some different ways of authentication. This API implementation implements three of them which are handled by one function:
+GitHub provides some different ways of authentication. This API implementation implements three of them which are
+handled by one function:
 
 ```php
 $client->authenticate($usernameOrToken, $password, $method);
 ```
 
 `$usernameOrToken` is, of course, the username (or in some cases token/client ID, more details you can find below),
-and guess what should contain `$password`. The `$method` can contain one of the five allowed values:
-
-#### Deprecated methods
-* `Github\Client::AUTH_URL_TOKEN` use `Github\Client::AUTH_ACCESS_TOKEN` instead.
-* `Github\Client::AUTH_URL_CLIENT_ID` use `Github\Client::AUTH_CLIENT_ID` instead.
-* `Github\Client::AUTH_HTTP_TOKEN` use `Github\Client::AUTH_ACCESS_TOKEN` instead.
-* `Github\Client::AUTH_HTTP_PASSWORD` use `Github\Client::AUTH_ACCESS_TOKEN` instead.
+and guess what should contain `$password`. The `$method` can contain one of the three allowed values:
 
 #### Supported methods
 * `Github\Client::AUTH_CLIENT_ID` - https://developer.github.com/v3/#oauth2-keysecret
 * `Github\Client::AUTH_ACCESS_TOKEN` - https://developer.github.com/v3/#oauth2-token-sent-in-a-header
 * `Github\Client::AUTH_JWT` - https://developer.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app
 
-The required value of `$password` depends on the chosen `$method`. For `Github\Client::AUTH_URL_TOKEN`,
-`Github\Client::AUTH_HTTP_TOKEN` and `Github\Client::JWT` methods you should provide the API token in
-`$usernameOrToken` variable (`$password` is omitted in this particular case). For the
-`Github\Client::AUTH_HTTP_PASSWORD`, you should provide the password of the account. When using `Github\Client::AUTH_URL_CLIENT_ID`
-`$usernameOrToken` should contain your client ID, and `$password` should contain client secret.
+The required value of `$password` depends on the chosen `$method`. For `Github\Client::AUTH_ACCESS_TOKEN` and
+`Github\Client::JWT` methods you should provide the API token in `$usernameOrToken` variable (`$password` is omitted in
+this particular case).
 
-After executing the `$client->authenticate($usernameOrToken, $secret, $method);` method using correct credentials,
-all further requests are done as the given user.
-
-### About authentication methods
-
-The `Github\Client::AUTH_URL_TOKEN` authentication method sends the API token in URL parameters.
-The `Github\Client::AUTH_URL_CLIENT_ID` authentication method sends the client ID and secret in URL parameters.
-The `Github\Client::AUTH_HTTP_*` authentication methods send their values to GitHub using HTTP Basic Authentication.
 The `Github\Client::AUTH_JWT` authentication method sends the specified JSON Web Token in an Authorization header.
 
-`Github\Client::AUTH_URL_TOKEN` used to be the only available authentication method. To prevent existing applications
-from changing their behavior in case of an API upgrade, this method is chosen as the default for this API implementation.
-
-Note however that GitHub describes this method as deprecated. In most case you should use the
-`Github\Client::AUTH_HTTP_TOKEN` instead.
+After executing the `$client->authenticate($usernameOrToken, $secret, $method);` method using correct credentials, all
+further requests are done as the given user.
 
 ### Authenticating as an Integration
 

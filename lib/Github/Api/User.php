@@ -13,21 +13,6 @@ namespace Github\Api;
 class User extends AbstractApi
 {
     /**
-     * Search users by username.
-     *
-     * @deprecated This method is deprecated use the Search api instead. See https://developer.github.com/v3/search/legacy/#legacy-search-api-is-deprecated
-     * @link http://developer.github.com/v3/search/#search-users
-     *
-     * @param string $keyword the keyword to search
-     *
-     * @return array list of users found
-     */
-    public function find($keyword)
-    {
-        return $this->get('/legacy/user/search/'.rawurlencode($keyword));
-    }
-
-    /**
      * Request all users.
      *
      * @link https://developer.github.com/v3/users/#get-all-users
@@ -130,20 +115,6 @@ class User extends AbstractApi
     public function followers($username, array $parameters = [], array $requestHeaders = [])
     {
         return $this->get('/users/'.rawurlencode($username).'/followers', $parameters, $requestHeaders);
-    }
-
-    /**
-     * Request the repository that a specific user is watching.
-     *
-     * @deprecated see subscriptions method
-     *
-     * @param string $username the username
-     *
-     * @return array list of watched repositories
-     */
-    public function watched($username)
-    {
-        return $this->get('/users/'.rawurlencode($username).'/watched');
     }
 
     /**

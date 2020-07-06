@@ -34,22 +34,6 @@ class Repo extends AbstractApi
     use AcceptHeaderTrait;
 
     /**
-     * Search repositories by keyword.
-     *
-     * @deprecated This method is deprecated use the Search api instead. See https://developer.github.com/v3/search/legacy/#legacy-search-api-is-deprecated
-     * @link http://developer.github.com/v3/search/#search-repositories
-     *
-     * @param string $keyword the search query
-     * @param array  $params
-     *
-     * @return array list of found repositories
-     */
-    public function find($keyword, array $params = [])
-    {
-        return $this->get('/legacy/repos/search/'.rawurlencode($keyword), array_merge(['start_page' => 1], $params));
-    }
-
-    /**
      * List all public repositories.
      *
      * @link https://developer.github.com/v3/repos/#list-all-public-repositories
@@ -528,22 +512,6 @@ class Repo extends AbstractApi
     public function teams($username, $repository)
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/teams');
-    }
-
-    /**
-     * @deprecated see subscribers method
-     *
-     * @param string $username
-     * @param string $repository
-     * @param int    $page
-     *
-     * @return array
-     */
-    public function watchers($username, $repository, $page = 1)
-    {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/watchers', [
-            'page' => $page,
-        ]);
     }
 
     /**
