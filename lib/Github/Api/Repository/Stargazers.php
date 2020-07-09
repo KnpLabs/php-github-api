@@ -33,8 +33,21 @@ class Stargazers extends AbstractApi
         return $this;
     }
 
-    public function all($username, $repository)
+    /**
+     * @see https://developer.github.com/v3/activity/starring/#list-stargazers
+     *
+     * @param $username
+     * @param $repository
+     * @param int $page
+     * @param int $perPage
+     *
+     * @return array|string
+     */
+    public function all($username, $repository, $page = 1, $perPage = 30)
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/stargazers');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/stargazers', [
+            'page' => $page,
+            'per_page' => $perPage,
+        ]);
     }
 }
