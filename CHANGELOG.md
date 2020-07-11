@@ -1,6 +1,4 @@
-# Change Log
-
-The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release.
+# Changelog
 
 ## 2.14.0
 
