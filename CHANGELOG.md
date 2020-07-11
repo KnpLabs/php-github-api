@@ -1,5 +1,32 @@
 # Changelog
 
+## 2.15.0
+
+### Added
+- Prepare deprecation of authentication methods ([acrobat](https://github.com/acrobat)) [#870](https://github.com/KnpLabs/php-github-api/issues/870)
+- Add Support For GitData Reference Matching Methods ([nickpoulos](https://github.com/nickpoulos)) [#875](https://github.com/KnpLabs/php-github-api/issues/875)
+- Make invalid request error more clear ([acrobat](https://github.com/acrobat)) [#880](https://github.com/KnpLabs/php-github-api/issues/880)
+- Show user by ID ([genintho](https://github.com/genintho)) [#894](https://github.com/KnpLabs/php-github-api/issues/894)
+- add additional check run methods ([bobeagan](https://github.com/bobeagan), [acrobat](https://github.com/acrobat)) [#865](https://github.com/KnpLabs/php-github-api/issues/865)
+
+### Changed
+- Added phpstan ([clxkoders](https://github.com/clxkoders)) [#871](https://github.com/KnpLabs/php-github-api/issues/871)
+- Increase phpstan to level 4 ([acrobat](https://github.com/acrobat)) [#874](https://github.com/KnpLabs/php-github-api/issues/874)
+- [Documentation] Add Missing Children to Pull Request Index ([jimlind](https://github.com/jimlind)) [#877](https://github.com/KnpLabs/php-github-api/issues/877)
+- [Documentation] Include links to Pull Request Children on Pull Request Doc. ([jimlind](https://github.com/jimlind)) [#878](https://github.com/KnpLabs/php-github-api/issues/878)
+- Fix typo in /lib/Github/Api/RateLimit.php ([yoonper](https://github.com/yoonper)) [#886](https://github.com/KnpLabs/php-github-api/issues/886)
+- Don't use deprecated auth in examples ([GrahamCampbell](https://github.com/GrahamCampbell)) [#892](https://github.com/KnpLabs/php-github-api/issues/892)
+- Removed shadow-cat ([GrahamCampbell](https://github.com/GrahamCampbell)) [#893](https://github.com/KnpLabs/php-github-api/issues/893)
+- Don't urlencode integer values ([acrobat](https://github.com/acrobat)) [#895](https://github.com/KnpLabs/php-github-api/issues/895)
+- phpstan level 6 fixes ([acrobat](https://github.com/acrobat), [GrahamCampbell](https://github.com/GrahamCampbell)) [#897](https://github.com/KnpLabs/php-github-api/issues/897)
+
+### Fixed
+- fix: use new media type for branch protections ([iBotPeaches](https://github.com/iBotPeaches)) [#881](https://github.com/KnpLabs/php-github-api/issues/881)
+- Added missing 'machine-man-preview' accept headers ([vovayatsyuk](https://github.com/vovayatsyuk)) [#883](https://github.com/KnpLabs/php-github-api/issues/883)
+- Fix broken roave/bc-check test ([acrobat](https://github.com/acrobat)) [#890](https://github.com/KnpLabs/php-github-api/issues/890)
+- Fixed incorrect MissingArgumentException parent constructor values ([acrobat](https://github.com/acrobat)) [#896](https://github.com/KnpLabs/php-github-api/issues/896)
+- Added AUTH_ACCESS_TOKEN to allowed methods ([GrahamCampbell](https://github.com/GrahamCampbell)) [#899](https://github.com/KnpLabs/php-github-api/issues/899)
+
 ## 2.14.0
 
 ### Added
