@@ -72,6 +72,45 @@ class ChecksTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function shouldGetAllChecksForRef()
+    {
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/repos/KnpLabs/php-github-api/commits/cb4abc15424c0015b4468d73df55efb8b60a4a3d/check-runs');
+
+        $api->all('KnpLabs', 'php-github-api', 'cb4abc15424c0015b4468d73df55efb8b60a4a3d');
+    }
+
+    /**
+     * @test
+     */
+    public function shouldShowSingleCheckRun()
+    {
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/repos/KnpLabs/php-github-api/check-runs/14');
+
+        $api->show('KnpLabs', 'php-github-api', 14);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldListCheckRunAnnotations()
+    {
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/repos/KnpLabs/php-github-api/check-runs/14/annotations');
+
+        $api->annotations('KnpLabs', 'php-github-api', 14);
+    }
+
+    /**
      * @return string
      */
     protected function getApiClass()
