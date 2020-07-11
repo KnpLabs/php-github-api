@@ -1,0 +1,11 @@
+---------------------------------------------------------------------------
+
+by acrobat at 2020-04-25T08:16:28Z
+
+Looks good @bobeagan, can you just add some basic tests to have some coverage for these methods? Thanks!
+
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2020-07-04T15:14:04Z
+
+This needs re-targetting to 2.x.
