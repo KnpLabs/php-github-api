@@ -440,17 +440,18 @@ class Repo extends AbstractApi
      * @param string $username   the username
      * @param string $repository the name of the repository
      * @param string $branch     the name of the branch
+     * @param array  $params     the additional parameters
      *
      * @return array list of the repository branches
      */
-    public function branches($username, $repository, $branch = null)
+    public function branches($username, $repository, $branch = null, array $params = [])
     {
         $url = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/branches';
         if (null !== $branch) {
             $url .= '/'.rawurlencode($branch);
         }
 
-        return $this->get($url);
+        return $this->get($url, $params);
     }
 
     /**
