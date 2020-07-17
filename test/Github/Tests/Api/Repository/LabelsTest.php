@@ -2,6 +2,7 @@
 
 namespace Github\Tests\Api\Repository;
 
+use Github\Exception\MissingArgumentException;
 use Github\Tests\Api\TestCase;
 
 class LabelsTest extends TestCase
@@ -11,7 +12,7 @@ class LabelsTest extends TestCase
      */
     public function shouldGetAllRepositoryLabelss()
     {
-        $expectedValue = array(array('name' => 'label'));
+        $expectedValue = [['name' => 'label']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -27,7 +28,7 @@ class LabelsTest extends TestCase
      */
     public function shouldShowLabel()
     {
-        $expectedValue = array('label' => 'somename');
+        $expectedValue = ['label' => 'somename'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -43,7 +44,7 @@ class LabelsTest extends TestCase
      */
     public function shouldRemoveLabel()
     {
-        $expectedValue = array('someOutput');
+        $expectedValue = ['someOutput'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -56,11 +57,11 @@ class LabelsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateLabelWithoutName()
     {
-        $data = array('color' => 'red');
+        $this->expectException(MissingArgumentException::class);
+        $data = ['color' => 'red'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -71,11 +72,11 @@ class LabelsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateLabelWithoutColor()
     {
-        $data = array('name' => 'test');
+        $this->expectException(MissingArgumentException::class);
+        $data = ['name' => 'test'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -89,8 +90,8 @@ class LabelsTest extends TestCase
      */
     public function shouldCreateLabel()
     {
-        $expectedValue = array('label' => 'somename');
-        $data = array('name' => 'test', 'color' => 'red');
+        $expectedValue = ['label' => 'somename'];
+        $data = ['name' => 'test', 'color' => 'red'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -103,41 +104,11 @@ class LabelsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
-    public function shouldNotUpdateLabelWithoutName()
-    {
-        $data = array('color' => 'red');
-
-        $api = $this->getApiMock();
-        $api->expects($this->never())
-            ->method('patch');
-
-        $api->update('KnpLabs', 'php-github-api', 'labelName', $data);
-    }
-
-    /**
-     * @test
-     * @expectedException \Github\Exception\MissingArgumentException
-     */
-    public function shouldNotUpdateLabelWithoutColor()
-    {
-        $data = array('name' => 'test');
-
-        $api = $this->getApiMock();
-        $api->expects($this->never())
-            ->method('patch');
-
-        $api->update('KnpLabs', 'php-github-api', 'labelName', $data);
-    }
-
-    /**
-     * @test
      */
     public function shouldUpdateLabel()
     {
-        $expectedValue = array('label' => 'somename');
-        $data = array('name' => 'test', 'color' => 'red');
+        $expectedValue = ['name' => 'test'];
+        $data = ['new_name' => 'test', 'color' => 'red'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())

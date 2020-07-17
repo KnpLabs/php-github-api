@@ -1,6 +1,8 @@
 <?php
 
-namespace Github\Tests\Api;
+namespace Github\Tests\Api\CurrentUser;
+
+use Github\Tests\Api\TestCase;
 
 class WatchersTest extends TestCase
 {
@@ -9,10 +11,10 @@ class WatchersTest extends TestCase
      */
     public function shouldGetWatchers()
     {
-        $expectedValue = array(
-            array('name' => 'l3l0/test'),
-            array('name' => 'cordoval/test')
-        );
+        $expectedValue = [
+            ['name' => 'l3l0/test'],
+            ['name' => 'cordoval/test'],
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())

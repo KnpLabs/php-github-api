@@ -11,7 +11,7 @@ class DownloadsTest extends TestCase
      */
     public function shouldGetAllRepositoryDownloads()
     {
-        $expectedValue = array(array('download'));
+        $expectedValue = [['download']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -27,7 +27,7 @@ class DownloadsTest extends TestCase
      */
     public function shouldShowRepositoryDownload()
     {
-        $expectedValue = array('download');
+        $expectedValue = ['download'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())

@@ -11,7 +11,7 @@ class CollaboratorsTest extends TestCase
      */
     public function shouldGetAllRepositoryCollaborators()
     {
-        $expectedValue = array(array('username' => 'l3l0'));
+        $expectedValue = [['username' => 'l3l0']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -68,6 +68,22 @@ class CollaboratorsTest extends TestCase
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->remove('KnpLabs', 'php-github-api', 'l3l0'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetRepositoryCollaboratorPermission()
+    {
+        $expectedValue = [['permission' => 'admin', 'user' => 'l3l0']];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/repos/KnpLabs/php-github-api/collaborators/l3l0/permission')
+            ->will($this->returnValue($expectedValue));
+
+        $this->assertEquals($expectedValue, $api->permission('KnpLabs', 'php-github-api', 'l3l0'));
     }
 
     /**

@@ -7,6 +7,7 @@ use Github\Exception\MissingArgumentException;
 
 /**
  * @link   http://developer.github.com/v3/users/keys/
+ *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class PublicKeys extends AbstractApi
@@ -28,13 +29,13 @@ class PublicKeys extends AbstractApi
      *
      * @link https://developer.github.com/v3/users/keys/
      *
-     * @param string $id
+     * @param int $id
      *
      * @return array
      */
     public function show($id)
     {
-        return $this->get('/user/keys/'.rawurlencode($id));
+        return $this->get('/user/keys/'.$id);
     }
 
     /**
@@ -51,7 +52,7 @@ class PublicKeys extends AbstractApi
     public function create(array $params)
     {
         if (!isset($params['title'], $params['key'])) {
-            throw new MissingArgumentException(array('title', 'key'));
+            throw new MissingArgumentException(['title', 'key']);
         }
 
         return $this->post('/user/keys', $params);
@@ -62,12 +63,12 @@ class PublicKeys extends AbstractApi
      *
      * @link https://developer.github.com/v3/users/keys/
      *
-     * @param string $id
+     * @param int $id
      *
      * @return array
      */
     public function remove($id)
     {
-        return $this->delete('/user/keys/'.rawurlencode($id));
+        return $this->delete('/user/keys/'.$id);
     }
 }

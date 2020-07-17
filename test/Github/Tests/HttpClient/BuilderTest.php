@@ -7,7 +7,7 @@ use Http\Client\Common\Plugin;
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class BuilderTest extends \PHPUnit_Framework_TestCase
+class BuilderTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test
@@ -15,7 +15,7 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
     public function shouldClearHeaders()
     {
         $builder = $this->getMockBuilder(\Github\HttpClient\Builder::class)
-            ->setMethods(array('addPlugin', 'removePlugin'))
+            ->setMethods(['addPlugin', 'removePlugin'])
             ->getMock();
         $builder->expects($this->once())
             ->method('addPlugin')
@@ -33,10 +33,10 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldAddHeaders()
     {
-        $headers = array('header1', 'header2');
+        $headers = ['header1', 'header2'];
 
         $client = $this->getMockBuilder(\Github\HttpClient\Builder::class)
-            ->setMethods(array('addPlugin', 'removePlugin'))
+            ->setMethods(['addPlugin', 'removePlugin'])
             ->getMock();
         $client->expects($this->once())
             ->method('addPlugin')
@@ -60,7 +60,7 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
         ];
 
         $client = $this->getMockBuilder(\Github\HttpClient\Builder::class)
-            ->setMethods(array('removePlugin', 'addPlugin'))
+            ->setMethods(['removePlugin', 'addPlugin'])
             ->getMock();
 
         $client->expects($this->once())

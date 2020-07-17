@@ -2,10 +2,11 @@
 
 namespace Github\Tests\Api;
 
-use Github\HttpClient\Builder;
+use Github\Client;
+use Psr\Http\Client\ClientInterface;
 use ReflectionMethod;
 
-abstract class TestCase extends \PHPUnit_Framework_TestCase
+abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
     /**
      * @return string
@@ -13,28 +14,29 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     abstract protected function getApiClass();
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
+     * @return \PHPUnit\Framework\MockObject\MockObject
      */
     protected function getApiMock()
     {
-        $httpClient = $this->getMockBuilder(\Http\Client\HttpClient::class)
-            ->setMethods(array('sendRequest'))
+        $httpClient = $this->getMockBuilder(ClientInterface::class)
+            ->setMethods(['sendRequest'])
             ->getMock();
         $httpClient
             ->expects($this->any())
             ->method('sendRequest');
 
-        $client = \Github\Client::createWithHttpClient($httpClient);
+        $client = Client::createWithHttpClient($httpClient);
 
         return $this->getMockBuilder($this->getApiClass())
-            ->setMethods(array('get', 'post', 'postRaw', 'patch', 'delete', 'put', 'head'))
-            ->setConstructorArgs(array($client))
+            ->setMethods(['get', 'post', 'postRaw', 'patch', 'delete', 'put', 'head'])
+            ->setConstructorArgs([$client])
             ->getMock();
     }
 
     /**
      * @param object $object
      * @param string $methodName
+     *
      * @return ReflectionMethod
      */
     protected function getMethod($object, $methodName)

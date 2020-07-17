@@ -19,7 +19,7 @@ $key = $client->user()->keys()->show(1234);
 
 ### Add a public key to the authenticated user.
 
-> Requires [authentication](security.md).
+> Requires [authentication](../security.md).
 
 ```php
 $key = $client->user()->keys()->create(array('title' => 'key title', 'key' => 12345));
@@ -29,7 +29,7 @@ Adds a key with title 'key title' to the authenticated user and returns a the cr
 
 ### Remove a public key from the authenticated user.
 
-> Requires [authentication](security.md).
+> Requires [authentication](../security.md).
 
 ```php
 $client->user()->keys()->remove(12345);

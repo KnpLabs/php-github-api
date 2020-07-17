@@ -2,6 +2,7 @@
 
 namespace Github\Tests\Api\Repository;
 
+use Github\Exception\MissingArgumentException;
 use Github\Tests\Api\TestCase;
 
 class StatusesTest extends TestCase
@@ -11,10 +12,10 @@ class StatusesTest extends TestCase
      */
     public function shouldShowCommitStatuses()
     {
-        $expectedValue = array(
-            array('state' => 'success', 'context' => 'Travis'),
-            array('state' => 'pending', 'context' => 'Travis')
-        );
+        $expectedValue = [
+            ['state' => 'success', 'context' => 'Travis'],
+            ['state' => 'pending', 'context' => 'Travis'],
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -30,21 +31,21 @@ class StatusesTest extends TestCase
      */
     public function shouldShowCombinedCommitStatuses()
     {
-        $expectedValue = array(
-            array(
+        $expectedValue = [
+            [
                 'state' => 'success',
-                'statuses' => array(
-                    array(
+                'statuses' => [
+                    [
                         'state' => 'success',
-                        'context' => 'Travis'
-                    ),
-                    array(
+                        'context' => 'Travis',
+                    ],
+                    [
                         'state' => 'success',
-                        'context' => 'Jenkins'
-                    )
-                )
-            )
-        );
+                        'context' => 'Jenkins',
+                    ],
+                ],
+            ],
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -57,11 +58,11 @@ class StatusesTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateWithoutStatus()
     {
-        $data = array();
+        $this->expectException(MissingArgumentException::class);
+        $data = [];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -75,8 +76,8 @@ class StatusesTest extends TestCase
      */
     public function shouldCreateCommitStatus()
     {
-        $expectedValue = array('state' => 'success');
-        $data = array('state' => 'success');
+        $expectedValue = ['state' => 'success'];
+        $data = ['state' => 'success'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())

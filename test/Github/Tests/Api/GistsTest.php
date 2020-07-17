@@ -2,6 +2,8 @@
 
 namespace Github\Tests\Api;
 
+use Github\Exception\MissingArgumentException;
+
 class GistsTest extends TestCase
 {
     /**
@@ -9,7 +11,7 @@ class GistsTest extends TestCase
      */
     public function shouldGetStarredGists()
     {
-        $expectedArray = array(array('id' => '123'));
+        $expectedArray = [['id' => '123']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -25,7 +27,7 @@ class GistsTest extends TestCase
      */
     public function shouldGetAllGists()
     {
-        $expectedArray = array(array('id' => '123'));
+        $expectedArray = [['id' => '123']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -41,7 +43,7 @@ class GistsTest extends TestCase
      */
     public function shouldShowGist()
     {
-        $expectedArray = array('id' => '123');
+        $expectedArray = ['id' => '123'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -55,9 +57,25 @@ class GistsTest extends TestCase
     /**
      * @test
      */
+    public function shouldShowGistWithSpecificReference()
+    {
+        $expectedArray = ['id' => '123', 'sha' => 'd189dbd4c5d96442db74ebcb62bb38e661a0c8ce'];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/gists/123/d189dbd4c5d96442db74ebcb62bb38e661a0c8ce')
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->revision(123, 'd189dbd4c5d96442db74ebcb62bb38e661a0c8ce'));
+    }
+
+    /**
+     * @test
+     */
     public function shouldShowCommits()
     {
-        $expectedArray = array('id' => '123');
+        $expectedArray = ['id' => '123'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -83,7 +101,7 @@ class GistsTest extends TestCase
      */
     public function shouldForkGist()
     {
-        $expectedArray = array('id' => '123');
+        $expectedArray = ['id' => '123'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -99,7 +117,7 @@ class GistsTest extends TestCase
      */
     public function shouldListGistForks()
     {
-        $expectedArray = array('id' => '123');
+        $expectedArray = ['id' => '123'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -112,14 +130,14 @@ class GistsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateGistWithoutFile()
     {
-        $input = array(
+        $this->expectException(MissingArgumentException::class);
+        $input = [
             'description' => '',
             'public' => false,
-        );
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -133,7 +151,7 @@ class GistsTest extends TestCase
      */
     public function shouldCheckGist()
     {
-        $expectedArray = array('id' => '123');
+        $expectedArray = ['id' => '123'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -149,7 +167,7 @@ class GistsTest extends TestCase
      */
     public function shouldStarGist()
     {
-        $expectedArray = array('id' => '123');
+        $expectedArray = ['id' => '123'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -165,7 +183,7 @@ class GistsTest extends TestCase
      */
     public function shouldUnstarGist()
     {
-        $expectedArray = array('id' => '123');
+        $expectedArray = ['id' => '123'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -181,15 +199,15 @@ class GistsTest extends TestCase
      */
     public function shouldCreateAnonymousGist()
     {
-        $input = array(
+        $input = [
             'description' => '',
             'public' => false,
-            'files' => array(
-                'filename.txt' => array(
-                    'content' => 'content'
-                )
-            )
-        );
+            'files' => [
+                'filename.txt' => [
+                    'content' => 'content',
+                ],
+            ],
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -204,18 +222,18 @@ class GistsTest extends TestCase
      */
     public function shouldUpdateGist()
     {
-        $input = array(
+        $input = [
             'description' => 'jimbo',
-            'files' => array(
-                'filename.txt' => array(
+            'files' => [
+                'filename.txt' => [
                     'filename' => 'new_name.txt',
-                    'content'  => 'content'
-                ),
-                'filename_new.txt' => array(
-                    'content'  => 'content new'
-                )
-            )
-        );
+                    'content'  => 'content',
+                ],
+                'filename_new.txt' => [
+                    'content'  => 'content new',
+                ],
+            ],
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())

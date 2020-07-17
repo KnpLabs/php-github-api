@@ -57,7 +57,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetch(ApiInterface $api, $method, array $parameters = array())
+    public function fetch(ApiInterface $api, $method, array $parameters = [])
     {
         $result = $this->callApi($api, $method, $parameters);
         $this->postFetch();
@@ -68,7 +68,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetchAll(ApiInterface $api, $method, array $parameters = array())
+    public function fetchAll(ApiInterface $api, $method, array $parameters = [])
     {
         $isSearch = $api instanceof Search;
 
@@ -78,25 +78,27 @@ class ResultPager implements ResultPagerInterface
         // set parameters per_page to GitHub max to minimize number of requests
         $api->setPerPage(100);
 
-        $result = $this->callApi($api, $method, $parameters);
-        $this->postFetch();
-
-        if ($isSearch) {
-            $result = isset($result['items']) ? $result['items'] : $result;
-        }
-
-        while ($this->hasNext()) {
-            $next = $this->fetchNext();
+        try {
+            $result = $this->callApi($api, $method, $parameters);
+            $this->postFetch();
 
             if ($isSearch) {
-                $result = array_merge($result, $next['items']);
-            } else {
-                $result = array_merge($result, $next);
+                $result = isset($result['items']) ? $result['items'] : $result;
             }
-        }
 
-        // restore the perPage
-        $api->setPerPage($perPage);
+            while ($this->hasNext()) {
+                $next = $this->fetchNext();
+
+                if ($isSearch) {
+                    $result = array_merge($result, $next['items']);
+                } else {
+                    $result = array_merge($result, $next);
+                }
+            }
+        } finally {
+            // restore the perPage
+            $api->setPerPage($perPage);
+        }
 
         return $result;
     }
@@ -158,7 +160,9 @@ class ResultPager implements ResultPagerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $key
+     *
+     * @return bool
      */
     protected function has($key)
     {
@@ -166,7 +170,9 @@ class ResultPager implements ResultPagerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $key
+     *
+     * @return array
      */
     protected function get($key)
     {
@@ -176,17 +182,19 @@ class ResultPager implements ResultPagerInterface
 
             return ResponseMediator::getContent($result);
         }
+
+        return [];
     }
 
     /**
      * @param ApiInterface $api
-     * @param $method
-     * @param array $parameters
+     * @param string       $method
+     * @param array        $parameters
      *
      * @return mixed
      */
     protected function callApi(ApiInterface $api, $method, array $parameters)
     {
-        return call_user_func_array(array($api, $method), $parameters);
+        return call_user_func_array([$api, $method], $parameters);
     }
 }

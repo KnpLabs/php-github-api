@@ -28,16 +28,16 @@ class ResponseMediator
     /**
      * @param ResponseInterface $response
      *
-     * @return array|null
+     * @return array|void
      */
     public static function getPagination(ResponseInterface $response)
     {
         if (!$response->hasHeader('Link')) {
-            return null;
+            return;
         }
 
         $header = self::getHeader($response, 'Link');
-        $pagination = array();
+        $pagination = [];
         foreach (explode(',', $header) as $link) {
             preg_match('/<(.*)>; rel="(.*)"/i', trim($link, ','), $match);
 
@@ -52,23 +52,30 @@ class ResponseMediator
     /**
      * @param ResponseInterface $response
      *
-     * @return null|string
+     * @return string|null
      */
     public static function getApiLimit(ResponseInterface $response)
     {
-        $remainingCalls = self::getHeader($response, 'X-RateLimit-Remaining');
+        $remainingCallsHeader = self::getHeader($response, 'X-RateLimit-Remaining');
 
-        if (null !== $remainingCalls && 1 > $remainingCalls) {
+        if (null === $remainingCallsHeader) {
+            return null;
+        }
+
+        $remainingCalls = (int) $remainingCallsHeader;
+
+        if (1 > $remainingCalls) {
             throw new ApiLimitExceedException($remainingCalls);
         }
-        
-        return $remainingCalls;
+
+        return $remainingCallsHeader;
     }
-    
+
     /**
-     * Get the value for a single header
+     * Get the value for a single header.
+     *
      * @param ResponseInterface $response
-     * @param string $name
+     * @param string            $name
      *
      * @return string|null
      */

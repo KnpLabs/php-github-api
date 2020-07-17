@@ -2,6 +2,7 @@
 
 namespace Github\Tests\Api\Issue;
 
+use Github\Exception\MissingArgumentException;
 use Github\Tests\Api\TestCase;
 
 class CommentsTest extends TestCase
@@ -11,12 +12,12 @@ class CommentsTest extends TestCase
      */
     public function shouldGetAllIssueComments()
     {
-        $expectedValue = array(array('comment1data'), array('comment2data'));
+        $expectedValue = [['comment1data'], ['comment2data']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/issues/123/comments', array('page' => 1))
+            ->with('/repos/KnpLabs/php-github-api/issues/123/comments', [])
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', 123));
@@ -25,9 +26,27 @@ class CommentsTest extends TestCase
     /**
      * @test
      */
+    public function shouldGetAllIssueCommentsBySpecifyParameters()
+    {
+        $expectedValue = [['comment1data'], ['comment2data']];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/repos/KnpLabs/php-github-api/issues/123/comments', ['since' => '1990-08-03T00:00:00Z'])
+            ->will($this->returnValue($expectedValue));
+
+        $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api', 123, [
+            'since' => '1990-08-03T00:00:00Z',
+        ]));
+    }
+
+    /**
+     * @test
+     */
     public function shouldShowIssueComment()
     {
-        $expectedValue = array('comment1');
+        $expectedValue = ['comment1'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -40,11 +59,11 @@ class CommentsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateWithoutBody()
     {
-        $data = array();
+        $this->expectException(MissingArgumentException::class);
+        $data = [];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -58,8 +77,8 @@ class CommentsTest extends TestCase
      */
     public function shouldCreateIssueComment()
     {
-        $expectedValue = array('comment1data');
-        $data = array('body' => 'test body');
+        $expectedValue = ['comment1data'];
+        $data = ['body' => 'test body'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -72,11 +91,11 @@ class CommentsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotUpdateWithoutBody()
     {
-        $data = array('somedata');
+        $this->expectException(MissingArgumentException::class);
+        $data = ['somedata'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -90,8 +109,8 @@ class CommentsTest extends TestCase
      */
     public function shouldUpdateIssueComment()
     {
-        $expectedValue = array('comment1data');
-        $data = array('body' => 'body test');
+        $expectedValue = ['comment1data'];
+        $data = ['body' => 'body test'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -107,7 +126,7 @@ class CommentsTest extends TestCase
      */
     public function shouldRemoveComment()
     {
-        $expectedValue = array('someOutput');
+        $expectedValue = ['someOutput'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())

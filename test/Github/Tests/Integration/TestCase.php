@@ -1,22 +1,25 @@
 <?php
 
-namespace Github\Tests\Functional;
+namespace Github\Tests\Integration;
 
 use Github\Client;
 use Github\Exception\ApiLimitExceedException;
 use Github\Exception\RuntimeException;
 
 /**
- * @group functional
+ * @group integration
  */
-class TestCase extends \PHPUnit_Framework_TestCase
+class TestCase extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Client
      */
     protected $client;
 
-    public function setUp()
+    /**
+     * @before
+     */
+    public function initClient()
     {
         // You have to specify authentication here to run full suite
         $client = new Client();

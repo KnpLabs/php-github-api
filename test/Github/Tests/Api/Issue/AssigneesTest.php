@@ -3,6 +3,7 @@
 namespace Github\Tests\Api\Issue;
 
 use Github\Api\Issue\Assignees;
+use Github\Exception\MissingArgumentException;
 use Github\Tests\Api\TestCase;
 
 class AssigneesTest extends TestCase
@@ -35,11 +36,11 @@ class AssigneesTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotAddAssigneeMissingParameter()
     {
-        $data = array();
+        $this->expectException(MissingArgumentException::class);
+        $data = [];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -53,9 +54,9 @@ class AssigneesTest extends TestCase
      */
     public function shouldAddAssignee()
     {
-        $data = array(
-            'assignees' => array('test-user')
-        );
+        $data = [
+            'assignees' => ['test-user'],
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -67,11 +68,11 @@ class AssigneesTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotRemoveAssigneeMissingParameter()
     {
-        $data = array();
+        $this->expectException(MissingArgumentException::class);
+        $data = [];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -85,9 +86,9 @@ class AssigneesTest extends TestCase
      */
     public function shouldRemoveAssignee()
     {
-        $data = array(
-            'assignees' => array('test-user')
-        );
+        $data = [
+            'assignees' => ['test-user'],
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())

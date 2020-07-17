@@ -1,9 +1,11 @@
 <?php
 
-namespace Github\Tests\Functional;
+namespace Github\Tests\Integration;
+
+use Github\Exception\RuntimeException;
 
 /**
- * @group functional
+ * @group integration
  */
 class UserTest extends TestCase
 {
@@ -32,11 +34,11 @@ class UserTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\RuntimeException
      */
     public function shouldNotUpdateUserWithoutAuthorization()
     {
-        $this->client->api('current_user')->update(array('email' => 'leszek.prabucki@gmail.com'));
+        $this->expectException(RuntimeException::class);
+        $this->client->api('current_user')->update(['email' => 'leszek.prabucki@gmail.com']);
     }
 
     /**
@@ -69,19 +71,19 @@ class UserTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\RuntimeException
      */
     public function shouldNotFollowUserWithoutAuthorization()
     {
+        $this->expectException(RuntimeException::class);
         $this->client->api('current_user')->follow()->follow('KnpLabs');
     }
 
     /**
      * @test
-     * @expectedException \Github\Exception\RuntimeException
      */
     public function shouldNotUnfollowUserWithoutAuthorization()
     {
+        $this->expectException(RuntimeException::class);
         $this->client->api('current_user')->follow()->unfollow('KnpLabs');
     }
 

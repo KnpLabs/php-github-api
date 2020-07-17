@@ -1,9 +1,9 @@
 <?php
 
-namespace Github\Tests\Functional;
+namespace Github\Tests\Integration;
 
 /**
- * @group functional
+ * @group integration
  */
 class RepoCommentTest extends TestCase
 {
@@ -13,10 +13,10 @@ class RepoCommentTest extends TestCase
     public function shouldRetrieveComments()
     {
         $username = 'fabpot';
-        $repo     = 'Twig';
+        $repo = 'Twig';
 
         $comments = $this->client->api('repo')->comments()->all($username, $repo);
-        $comment  = array_pop($comments);
+        $comment = array_pop($comments);
 
         $this->assertArrayHasKey('line', $comment);
         $this->assertArrayHasKey('body', $comment);
@@ -32,11 +32,11 @@ class RepoCommentTest extends TestCase
     public function shouldRetrieveCommentsForCommit()
     {
         $username = 'fabpot';
-        $repo     = 'Twig';
-        $sha      = '3506cfad1d946f4a87e8c55849a18044efe2d5dc';
+        $repo = 'Twig';
+        $sha = '3506cfad1d946f4a87e8c55849a18044efe2d5dc';
 
         $comments = $this->client->api('repo')->comments()->all($username, $repo, $sha);
-        $comment  = array_pop($comments);
+        $comment = array_pop($comments);
 
         $this->assertArrayHasKey('line', $comment);
         $this->assertArrayHasKey('body', $comment);
@@ -52,9 +52,9 @@ class RepoCommentTest extends TestCase
     public function shouldCreateCommentForCommit()
     {
         $username = 'KnpLabs';
-        $repo     = 'php-github-api';
-        $sha      = '22655813eb54e7d4e21545e396f919bcd245b50d';
-        $params   = array('body' => '%');
+        $repo = 'php-github-api';
+        $sha = '22655813eb54e7d4e21545e396f919bcd245b50d';
+        $params = ['body' => '%'];
 
         $comment = $this->client->api('repo')->comments()->create($username, $repo, $sha, $params);
 
@@ -75,7 +75,7 @@ class RepoCommentTest extends TestCase
     public function shouldShowCommentByCommentId($commentId)
     {
         $username = 'KnpLabs';
-        $repo     = 'php-github-api';
+        $repo = 'php-github-api';
 
         $comment = $this->client->api('repo')->comments()->show($username, $repo, $commentId);
 
@@ -96,8 +96,8 @@ class RepoCommentTest extends TestCase
     public function shouldUpdateCommentByCommentId($commentId)
     {
         $username = 'KnpLabs';
-        $repo     = 'php-github-api';
-        $params   = array('body' => 'test update');
+        $repo = 'php-github-api';
+        $params = ['body' => 'test update'];
 
         $comment = $this->client->api('repo')->comments()->update($username, $repo, $commentId, $params);
 
@@ -118,7 +118,7 @@ class RepoCommentTest extends TestCase
     public function shouldRemoveCommentByCommentId($commentId)
     {
         $username = 'KnpLabs';
-        $repo     = 'php-github-api';
+        $repo = 'php-github-api';
 
         $this->client->api('repo')->comments()->remove($username, $repo, $commentId);
     }

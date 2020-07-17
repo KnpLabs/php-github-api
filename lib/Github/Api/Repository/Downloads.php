@@ -6,6 +6,7 @@ use Github\Api\AbstractApi;
 
 /**
  * @link   http://developer.github.com/v3/repos/downloads/
+ *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class Downloads extends AbstractApi
@@ -38,7 +39,7 @@ class Downloads extends AbstractApi
      */
     public function show($username, $repository, $id)
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/downloads/'.rawurlencode($id));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/downloads/'.$id);
     }
 
     /**
@@ -54,6 +55,6 @@ class Downloads extends AbstractApi
      */
     public function remove($username, $repository, $id)
     {
-        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/downloads/'.rawurlencode($id));
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/downloads/'.$id);
     }
 }

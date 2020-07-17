@@ -7,6 +7,7 @@ use Github\Exception\MissingArgumentException;
 
 /**
  * @link   http://developer.github.com/v3/git/tags/
+ *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class Tags extends AbstractApi
@@ -45,22 +46,18 @@ class Tags extends AbstractApi
      * @param string $repository
      * @param array  $params
      *
-     * @return array
-     *
      * @throws \Github\Exception\MissingArgumentException
+     *
+     * @return array
      */
     public function create($username, $repository, array $params)
     {
         if (!isset($params['tag'], $params['message'], $params['object'], $params['type'])) {
-            throw new MissingArgumentException(array('tag', 'message', 'object', 'type'));
+            throw new MissingArgumentException(['tag', 'message', 'object', 'type']);
         }
 
-        if (!isset($params['tagger'])) {
-            throw new MissingArgumentException('tagger');
-        }
-
-        if (!isset($params['tagger']['name'], $params['tagger']['email'], $params['tagger']['date'])) {
-            throw new MissingArgumentException(array('tagger.name', 'tagger.email', 'tagger.date'));
+        if (isset($params['tagger']) && !isset($params['tagger']['name'], $params['tagger']['email'], $params['tagger']['date'])) {
+            throw new MissingArgumentException(['tagger.name', 'tagger.email', 'tagger.date']);
         }
 
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/tags', $params);

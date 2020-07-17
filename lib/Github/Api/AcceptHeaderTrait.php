@@ -9,52 +9,54 @@ namespace Github\Api;
  */
 trait AcceptHeaderTrait
 {
-    protected $acceptHeaderValue = null;
+    /** @var string */
+    protected $acceptHeaderValue;
 
-    protected function get($path, array $parameters = array(), array $requestHeaders = array())
+    protected function get($path, array $parameters = [], array $requestHeaders = [])
     {
         return parent::get($path, $parameters, $this->mergeHeaders($requestHeaders));
     }
 
-    protected function head($path, array $parameters = array(), array $requestHeaders = array())
+    protected function head($path, array $parameters = [], array $requestHeaders = [])
     {
         return parent::head($path, $parameters, $this->mergeHeaders($requestHeaders));
     }
 
-    protected function post($path, array $parameters = array(), array $requestHeaders = array())
+    protected function post($path, array $parameters = [], array $requestHeaders = [])
     {
         return parent::post($path, $parameters, $this->mergeHeaders($requestHeaders));
     }
 
-    protected function postRaw($path, $body, array $requestHeaders = array())
+    protected function postRaw($path, $body, array $requestHeaders = [])
     {
         return parent::postRaw($path, $body, $this->mergeHeaders($requestHeaders));
     }
 
-    protected function patch($path, array $parameters = array(), array $requestHeaders = array())
+    protected function patch($path, array $parameters = [], array $requestHeaders = [])
     {
         return parent::patch($path, $parameters, $this->mergeHeaders($requestHeaders));
     }
 
-    protected function put($path, array $parameters = array(), array $requestHeaders = array())
+    protected function put($path, array $parameters = [], array $requestHeaders = [])
     {
         return parent::put($path, $parameters, $this->mergeHeaders($requestHeaders));
     }
 
-    protected function delete($path, array $parameters = array(), array $requestHeaders = array())
+    protected function delete($path, array $parameters = [], array $requestHeaders = [])
     {
         return parent::delete($path, $parameters, $this->mergeHeaders($requestHeaders));
     }
 
     /**
-     * Append a new accept header on all requests
+     * Append a new accept header on all requests.
+     *
      * @return array
      */
-    private function mergeHeaders(array $headers = array())
+    private function mergeHeaders(array $headers = [])
     {
-        $default = array();
+        $default = [];
         if ($this->acceptHeaderValue) {
-            $default = array('Accept' => $this->acceptHeaderValue);
+            $default = ['Accept' => $this->acceptHeaderValue];
         }
 
         return array_merge($default, $headers);

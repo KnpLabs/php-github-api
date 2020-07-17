@@ -1,16 +1,17 @@
 <?php
 
+namespace Github\Tests\Api\Repository;
+
 use Github\Tests\Api\TestCase;
 
 class TrafficTest extends TestCase
 {
-
     /**
      * @test
      */
     public function shouldgetReferers()
     {
-        $expectedValue = json_encode(["referrer" => "github.com","count" => 112,"uniques" => 15]);
+        $expectedValue = json_encode(['referrer' => 'github.com', 'count' => 112, 'uniques' => 15]);
 
         $api = $this->getApiMock();
 
@@ -26,7 +27,7 @@ class TrafficTest extends TestCase
 
     public function shouldgetPaths()
     {
-        $expectedValue = json_encode(["path" => "/knplabs/php-github-api","title" => "KnpLabs/php-github-api: A simple PHP GitHub API client, Object Oriented, tested and documented. For 5.5+.","count" => 203,"uniques" => 54]);
+        $expectedValue = json_encode(['path' => '/knplabs/php-github-api', 'title' => 'KnpLabs/php-github-api: A simple PHP GitHub API client, Object Oriented, tested and documented. For 5.5+.', 'count' => 203, 'uniques' => 54]);
 
         $api = $this->getApiMock();
 
@@ -42,7 +43,7 @@ class TrafficTest extends TestCase
 
     public function shouldgetViews()
     {
-        $expectedValue = json_encode(["count" => 813,"uniques" => 61,"views" => [["timestamp" => "2017-03-12T00:00:00Z","count" => 40,"uniques" => 3]]]);
+        $expectedValue = json_encode(['count' => 813, 'uniques' => 61, 'views' => [['timestamp' => '2017-03-12T00:00:00Z', 'count' => 40, 'uniques' => 3]]]);
 
         $api = $this->getApiMock();
 
@@ -58,7 +59,7 @@ class TrafficTest extends TestCase
 
     public function shouldgetClones()
     {
-        $expectedValue = json_encode(["count" => 813,"uniques" => 61,"clones" => [["timestamp" => "2017-03-12T00:00:00Z","count" => 14,"uniques" => 8]]]);
+        $expectedValue = json_encode(['count' => 813, 'uniques' => 61, 'clones' => [['timestamp' => '2017-03-12T00:00:00Z', 'count' => 14, 'uniques' => 8]]]);
 
         $api = $this->getApiMock();
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Github\Tests\Functional;
+namespace Github\Tests\Integration;
 
 /**
- * @group functional
+ * @group integration
  */
 class IssueCommentTest extends TestCase
 {
@@ -13,11 +13,11 @@ class IssueCommentTest extends TestCase
     public function shouldRetrieveCommentsForIssue()
     {
         $username = 'KnpLabs';
-        $repo     = 'php-github-api';
-        $issue    = 13;
+        $repo = 'php-github-api';
+        $issue = 13;
 
         $comments = $this->client->api('issue')->comments()->all($username, $repo, $issue);
-        $comment  = array_pop($comments);
+        $comment = array_pop($comments);
 
         $this->assertArrayHasKey('id', $comment);
         $this->assertArrayHasKey('url', $comment);
@@ -36,7 +36,7 @@ class IssueCommentTest extends TestCase
     public function shouldRetrieveSingleComment($commentId)
     {
         $username = 'KnpLabs';
-        $repo     = 'php-github-api';
+        $repo = 'php-github-api';
 
         $comment = $this->client->api('issue')->comments()->show($username, $repo, $commentId);
 
@@ -54,9 +54,9 @@ class IssueCommentTest extends TestCase
     public function shouldCreateCommentForIssue()
     {
         $username = 'KnpLabs';
-        $repo     = 'php-github-api';
-        $issue    = 13;
-        $params   = array('body' => '%');
+        $repo = 'php-github-api';
+        $issue = 13;
+        $params = ['body' => '%'];
 
         $comment = $this->client->api('issue')->comments()->create($username, $repo, $issue, $params);
 
@@ -69,6 +69,7 @@ class IssueCommentTest extends TestCase
 
         return $comment['id'];
     }
+
     /**
      * @test
      * @depends shouldCreateCommentForIssue
@@ -76,8 +77,8 @@ class IssueCommentTest extends TestCase
     public function shouldUpdateCommentByCommentId($commentId)
     {
         $username = 'KnpLabs';
-        $repo     = 'php-github-api';
-        $params   = array('body' => 'test update');
+        $repo = 'php-github-api';
+        $params = ['body' => 'test update'];
 
         $comment = $this->client->api('issue')->comments()->update($username, $repo, $commentId, $params);
 
@@ -98,7 +99,7 @@ class IssueCommentTest extends TestCase
     public function shouldRemoveCommentByCommentId($commentId)
     {
         $username = 'KnpLabs';
-        $repo     = 'php-github-api';
+        $repo = 'php-github-api';
 
         $this->client->api('issue')->comments()->remove($username, $repo, $commentId);
     }

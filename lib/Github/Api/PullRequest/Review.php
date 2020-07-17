@@ -11,6 +11,7 @@ use Github\Exception\MissingArgumentException;
  * API for accessing Pull Request Reviews from your Git/Github repositories.
  *
  * @link https://developer.github.com/v3/pulls/reviews/
+ *
  * @author Christian Flothmann <christian.flothmann@sensiolabs.de>
  */
 class Review extends AbstractApi
@@ -19,8 +20,6 @@ class Review extends AbstractApi
 
     public function configure()
     {
-        $this->acceptHeaderValue = 'application/vnd.github.black-cat-preview+json';
-
         return $this;
     }
 
@@ -40,7 +39,7 @@ class Review extends AbstractApi
     {
         $parameters = array_merge([
             'page' => 1,
-            'per_page' => 30
+            'per_page' => 30,
         ], $params);
 
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.$pullRequest.'/reviews', $parameters);
@@ -94,7 +93,7 @@ class Review extends AbstractApi
      */
     public function comments($username, $repository, $pullRequest, $id)
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($pullRequest).'/reviews/'.rawurlencode($id).'/comments');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.$pullRequest.'/reviews/'.$id.'/comments');
     }
 
     /**
@@ -113,11 +112,7 @@ class Review extends AbstractApi
      */
     public function create($username, $repository, $pullRequest, array $params = [])
     {
-        if (!isset($params['event'])) {
-            throw new MissingArgumentException('event');
-        }
-
-        if (!in_array($params['event'], ["APPROVE", "REQUEST_CHANGES", "COMMENT"], true)) {
+        if (array_key_exists('event', $params) && !in_array($params['event'], ['APPROVE', 'REQUEST_CHANGES', 'COMMENT'], true)) {
             throw new InvalidArgumentException(sprintf('"event" must be one of ["APPROVE", "REQUEST_CHANGES", "COMMENT"] ("%s" given).', $params['event']));
         }
 
@@ -145,7 +140,7 @@ class Review extends AbstractApi
             throw new MissingArgumentException('event');
         }
 
-        if (!in_array($params['event'], ["APPROVE", "REQUEST_CHANGES", "COMMENT"], true)) {
+        if (!in_array($params['event'], ['APPROVE', 'REQUEST_CHANGES', 'COMMENT'], true)) {
             throw new InvalidArgumentException(sprintf('"event" must be one of ["APPROVE", "REQUEST_CHANGES", "COMMENT"] ("%s" given).', $params['event']));
         }
 
@@ -161,11 +156,50 @@ class Review extends AbstractApi
      * @param string $repository  the repository
      * @param int    $pullRequest the pull request number
      * @param int    $id          the review id
+     * @param string $message     a mandatory dismissal message
      *
      * @return array|string
      */
-    public function dismiss($username, $repository, $pullRequest, $id)
+    public function dismiss($username, $repository, $pullRequest, $id, $message)
     {
-        return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.$pullRequest.'/reviews/'.$id.'/dismissals');
+        if (!is_string($message)) {
+            throw new InvalidArgumentException(sprintf('"message" must be a valid string ("%s" given).', gettype($message)));
+        }
+
+        if (empty($message)) {
+            throw new InvalidArgumentException('"message" is mandatory and cannot be empty');
+        }
+
+        return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.$pullRequest.'/reviews/'.$id.'/dismissals', [
+            'message' => $message,
+        ]);
+    }
+
+    /**
+     * Update a pull request review by the username, repository, pull request number and the review id.
+     *
+     * @link https://developer.github.com/v3/pulls/reviews/#update-a-pull-request-review
+     *
+     * @param string $username    the username
+     * @param string $repository  the repository
+     * @param int    $pullRequest the pull request number
+     * @param int    $id          the review id
+     * @param string $body        a mandatory dismissal message
+     *
+     * @return array|string
+     */
+    public function update($username, $repository, $pullRequest, $id, $body)
+    {
+        if (!is_string($body)) {
+            throw new InvalidArgumentException(sprintf('"body" must be a valid string ("%s" given).', gettype($body)));
+        }
+
+        if (empty($body)) {
+            throw new InvalidArgumentException('"body" is mandatory and cannot be empty');
+        }
+
+        return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.$pullRequest.'/reviews/'.$id, [
+            'body' => $body,
+        ]);
     }
 }

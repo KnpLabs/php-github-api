@@ -2,35 +2,82 @@
 
 namespace Github\Tests\Api;
 
+use Github\Api\RateLimit;
+
 class RateLimitTest extends TestCase
 {
     /**
-     * @test
+     * Used for common assertions in each test.
+     *
+     * @var array
      */
-    public function shouldReturnRateLimitArray()
-    {
-        $expectedArray = array(
-            'resources' => array(
-                'core' => array(
-                    'limit' => 5000,
-                    'remaining' => 4999,
-                    'reset' => 1372700873
-                ),
-                'search' => array(
-                    'limit' => 30,
-                    'remaining' => 18,
-                    'reset' => 1372697452
-                )
-            )
-        );
+    protected $expectedArray = [
+        'resources' => [
+            'core' => [
+                'limit' => 5000,
+                'remaining' => 4999,
+                'reset' => 1372700873,
+            ],
+            'search' => [
+                'limit' => 30,
+                'remaining' => 18,
+                'reset' => 1372697452,
+            ],
+            'graphql' => [
+                'limit' => 5000,
+                'remaining' => 4030,
+                'reset' => 1372697452,
+            ],
+        ],
+    ];
 
-        $api = $this->getApiMock();
-        $api->expects($this->once())
+    /**
+     * @var RateLimit
+     */
+    protected $api;
+
+    /**
+     * @before
+     */
+    public function initMocks()
+    {
+        $this->api = $this->getApiMock();
+        $this->api->expects($this->once())
             ->method('get')
             ->with('/rate_limit')
-            ->will($this->returnValue($expectedArray));
+            ->will($this->returnValue($this->expectedArray));
+    }
 
-        $this->assertEquals($expectedArray, $api->getRateLimits());
+    /**
+     * @test
+     */
+    public function shouldReturnArrayOfLimitInstances()
+    {
+        $this->assertContainsOnlyInstancesOf(RateLimit\RateLimitResource::class, $this->api->getResources());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReturnRemainingGraphQLRequests()
+    {
+        $this->assertSame(4030, $this->api->getResource('graphql')->getRemaining());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReturnResetForSearch()
+    {
+        $this->assertSame(1372697452, $this->api->getResource('search')->getReset());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReturnFalseWhenResourceIsNotFound()
+    {
+        $this->assertFalse($this->api->getResource('non-exitent'));
     }
 
     /**

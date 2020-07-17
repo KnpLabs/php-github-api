@@ -1,9 +1,11 @@
 <?php
 
-namespace Github\Tests\Functional;
+namespace Github\Tests\Integration;
+
+use Github\Exception\RuntimeException;
 
 /**
- * @group functional
+ * @group integration
  */
 class GistTest extends TestCase
 {
@@ -25,10 +27,10 @@ class GistTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\RuntimeException
      */
     public function shouldNotGetStarredListWithoutAuthorization()
     {
+        $this->expectException(RuntimeException::class);
         $this->client->api('gists')->all('starred');
     }
 

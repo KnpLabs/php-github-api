@@ -2,6 +2,7 @@
 
 namespace Github\Tests\Api\Repository;
 
+use Github\Exception\MissingArgumentException;
 use Github\Tests\Api\TestCase;
 
 class ReleasesTest extends TestCase
@@ -11,7 +12,7 @@ class ReleasesTest extends TestCase
      */
     public function shouldGetLatestRelease()
     {
-        $expectedValue = array('latest_release_data');
+        $expectedValue = ['latest_release_data'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -27,7 +28,7 @@ class ReleasesTest extends TestCase
      */
     public function shouldGetReleaseByTag()
     {
-        $expectedValue = array('latest_release_data');
+        $expectedValue = ['latest_release_data'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -47,7 +48,7 @@ class ReleasesTest extends TestCase
      */
     public function shouldGetAllRepositoryReleases()
     {
-        $expectedValue = array(array('release1data'), array('release2data'));
+        $expectedValue = [['release1data'], ['release2data']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -63,7 +64,7 @@ class ReleasesTest extends TestCase
      */
     public function shouldGetSingleRepositoryRelease()
     {
-        $expectedValue = array('releaseData');
+        $expectedValue = ['releaseData'];
         $id = 331;
 
         $api = $this->getApiMock();
@@ -80,8 +81,8 @@ class ReleasesTest extends TestCase
      */
     public function shouldCreateRepositoryRelease()
     {
-        $expectedValue = array('newReleaseData');
-        $data = array('tag_name' => '1.1');
+        $expectedValue = ['newReleaseData'];
+        $data = ['tag_name' => '1.1'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -94,11 +95,11 @@ class ReleasesTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateRepositoryReleaseWithoutTagName()
     {
-        $data = array('not_a_tag_name' => '1.1');
+        $this->expectException(MissingArgumentException::class);
+        $data = ['not_a_tag_name' => '1.1'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -112,9 +113,9 @@ class ReleasesTest extends TestCase
      */
     public function shouldEditRepositoryRelease()
     {
-        $expectedValue = array('updatedData');
+        $expectedValue = ['updatedData'];
         $id = 332;
-        $data = array('some' => 'thing');
+        $data = ['some' => 'thing'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -130,7 +131,7 @@ class ReleasesTest extends TestCase
      */
     public function shouldRemoveRepositoryRelease()
     {
-        $expectedValue = array('deleted');
+        $expectedValue = ['deleted'];
         $id = 333;
 
         $api = $this->getApiMock();

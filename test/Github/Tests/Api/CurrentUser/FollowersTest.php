@@ -1,6 +1,8 @@
 <?php
 
-namespace Github\Tests\Api;
+namespace Github\Tests\Api\CurrentUser;
+
+use Github\Tests\Api\TestCase;
 
 class FollowersTest extends TestCase
 {
@@ -9,10 +11,10 @@ class FollowersTest extends TestCase
      */
     public function shouldGetFollowers()
     {
-        $expectedValue = array(
-            array('login' => 'l3l0'),
-            array('login' => 'cordoval')
-        );
+        $expectedValue = [
+            ['login' => 'l3l0'],
+            ['login' => 'cordoval'],
+        ];
 
         $api = $this->getApiMock();
         $api->expects($this->once())

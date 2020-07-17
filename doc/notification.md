@@ -37,9 +37,18 @@ $client->api('notification')->markRead(new DateTime('2015/01/01'));
 
 Marks all notifications as read up until the current date, unless a date is given
 
-## Get a single notification using his ID
+### Mark a thread as read using its ID
+
+```php
+$client->api('notification')->markThreadRead($id);
+```
+
+Marks a single thread as read using its ID.
+
+### Get a single thread using its ID
 
 ```php
 $client->api('notification')->id($id);
 ```
-Retrieves single notification data using his ID.
+
+Retrieves single thread's data using its ID.

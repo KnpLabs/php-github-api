@@ -8,14 +8,14 @@ use GuzzleHttp\Psr7\Response;
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class ResponseMediatorTest extends \PHPUnit_Framework_TestCase
+class ResponseMediatorTest extends \PHPUnit\Framework\TestCase
 {
     public function testGetContent()
     {
-        $body = array('foo' => 'bar');
+        $body = ['foo' => 'bar'];
         $response = new Response(
             200,
-            array('Content-Type'=>'application/json'),
+            ['Content-Type'=>'application/json'],
             \GuzzleHttp\Psr7\stream_for(json_encode($body))
         );
 
@@ -30,7 +30,7 @@ class ResponseMediatorTest extends \PHPUnit_Framework_TestCase
         $body = 'foobar';
         $response = new Response(
             200,
-            array(),
+            [],
             \GuzzleHttp\Psr7\stream_for($body)
         );
 
@@ -38,14 +38,14 @@ class ResponseMediatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Make sure we return the body if we have invalid json
+     * Make sure we return the body if we have invalid json.
      */
     public function testGetContentInvalidJson()
     {
         $body = 'foobar';
         $response = new Response(
             200,
-            array('Content-Type'=>'application/json'),
+            ['Content-Type'=>'application/json'],
             \GuzzleHttp\Psr7\stream_for($body)
         );
 
@@ -54,22 +54,22 @@ class ResponseMediatorTest extends \PHPUnit_Framework_TestCase
 
     public function testGetPagination()
     {
-        $header = <<<TEXT
+        $header = <<<'TEXT'
 <http://github.com>; rel="first",
 <http://github.com>; rel="next",
 <http://github.com>; rel="prev",
 <http://github.com>; rel="last",
 TEXT;
 
-        $pagination = array(
+        $pagination = [
             'first' => 'http://github.com',
             'next' => 'http://github.com',
             'prev' => 'http://github.com',
-            'last' => 'http://github.com'
-        );
+            'last' => 'http://github.com',
+        ];
 
         // response mock
-        $response = new Response(200, array('link'=>$header));
+        $response = new Response(200, ['link'=>$header]);
         $result = ResponseMediator::getPagination($response);
 
         $this->assertEquals($pagination, $result);
@@ -80,7 +80,7 @@ TEXT;
         $header = 'application/json';
         $response = new Response(
             200,
-            array('Content-Type'=> $header)
+            ['Content-Type'=> $header]
         );
 
         $this->assertEquals($header, ResponseMediator::getHeader($response, 'content-type'));

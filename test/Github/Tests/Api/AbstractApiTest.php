@@ -4,6 +4,7 @@ namespace Github\Tests\Api;
 
 use Github\Api\AbstractApi;
 use GuzzleHttp\Psr7\Response;
+use Http\Client\Common\HttpMethodsClientInterface;
 
 class AbstractApiTest extends TestCase
 {
@@ -12,16 +13,16 @@ class AbstractApiTest extends TestCase
      */
     public function shouldPassGETRequestToClient()
     {
-        $expectedArray = array('value');
+        $expectedArray = ['value'];
 
-        $httpClient = $this->getHttpMethodsMock(array('get'));
+        $httpClient = $this->getHttpMethodsMock(['get']);
         $httpClient
             ->expects($this->any())
             ->method('get')
-            ->with('/path?param1=param1value', array('header1' => 'header1value'))
+            ->with('/path?param1=param1value', ['header1' => 'header1value'])
             ->will($this->returnValue($this->getPSR7Response($expectedArray)));
         $client = $this->getMockBuilder(\Github\Client::class)
-            ->setMethods(array('getHttpClient'))
+            ->setMethods(['getHttpClient'])
             ->getMock();
         $client->expects($this->any())
             ->method('getHttpClient')
@@ -40,17 +41,17 @@ class AbstractApiTest extends TestCase
      */
     public function shouldPassPOSTRequestToClient()
     {
-        $expectedArray = array('value');
+        $expectedArray = ['value'];
 
-        $httpClient = $this->getHttpMethodsMock(array('post'));
+        $httpClient = $this->getHttpMethodsMock(['post']);
         $httpClient
             ->expects($this->once())
             ->method('post')
-            ->with('/path', array('option1' => 'option1value'), json_encode(array('param1' => 'param1value')))
+            ->with('/path', ['option1' => 'option1value'], json_encode(['param1' => 'param1value']))
             ->will($this->returnValue($this->getPSR7Response($expectedArray)));
 
         $client = $this->getMockBuilder(\Github\Client::class)
-            ->setMethods(array('getHttpClient'))
+            ->setMethods(['getHttpClient'])
             ->getMock();
         $client->expects($this->any())
             ->method('getHttpClient')
@@ -68,17 +69,17 @@ class AbstractApiTest extends TestCase
      */
     public function shouldPassPATCHRequestToClient()
     {
-        $expectedArray = array('value');
+        $expectedArray = ['value'];
 
-        $httpClient = $this->getHttpMethodsMock(array('patch'));
+        $httpClient = $this->getHttpMethodsMock(['patch']);
         $httpClient
             ->expects($this->once())
             ->method('patch')
-            ->with('/path', array('option1' => 'option1value'), json_encode(array('param1' => 'param1value')))
+            ->with('/path', ['option1' => 'option1value'], json_encode(['param1' => 'param1value']))
             ->will($this->returnValue($this->getPSR7Response($expectedArray)));
 
         $client = $this->getMockBuilder(\Github\Client::class)
-            ->setMethods(array('getHttpClient'))
+            ->setMethods(['getHttpClient'])
             ->getMock();
         $client->expects($this->any())
             ->method('getHttpClient')
@@ -96,17 +97,17 @@ class AbstractApiTest extends TestCase
      */
     public function shouldPassPUTRequestToClient()
     {
-        $expectedArray = array('value');
+        $expectedArray = ['value'];
 
-        $httpClient = $this->getHttpMethodsMock(array('put'));
+        $httpClient = $this->getHttpMethodsMock(['put']);
         $httpClient
             ->expects($this->once())
             ->method('put')
-            ->with('/path', array('option1' => 'option1value'), json_encode(array('param1' => 'param1value')))
+            ->with('/path', ['option1' => 'option1value'], json_encode(['param1' => 'param1value']))
             ->will($this->returnValue($this->getPSR7Response($expectedArray)));
 
         $client = $this->getMockBuilder('Github\Client')
-            ->setMethods(array('getHttpClient'))
+            ->setMethods(['getHttpClient'])
             ->getMock();
         $client->expects($this->any())
             ->method('getHttpClient')
@@ -124,22 +125,21 @@ class AbstractApiTest extends TestCase
      */
     public function shouldPassDELETERequestToClient()
     {
-        $expectedArray = array('value');
+        $expectedArray = ['value'];
 
-        $httpClient = $this->getHttpMethodsMock(array('delete'));
+        $httpClient = $this->getHttpMethodsMock(['delete']);
         $httpClient
             ->expects($this->once())
             ->method('delete')
-            ->with('/path', array('option1' => 'option1value'), json_encode(array('param1' => 'param1value')))
+            ->with('/path', ['option1' => 'option1value'], json_encode(['param1' => 'param1value']))
             ->will($this->returnValue($this->getPSR7Response($expectedArray)));
 
         $client = $this->getMockBuilder('Github\Client')
-            ->setMethods(array('getHttpClient'))
+            ->setMethods(['getHttpClient'])
             ->getMock();
         $client->expects($this->any())
             ->method('getHttpClient')
             ->willReturn($httpClient);
-
 
         $api = $this->getAbstractApiObject($client);
         $actual = $this->getMethod($api, 'delete')
@@ -153,17 +153,17 @@ class AbstractApiTest extends TestCase
      */
     public function shouldNotPassEmptyRefToClient()
     {
-        $expectedArray = array('value');
+        $expectedArray = ['value'];
 
-        $httpClient = $this->getHttpMethodsMock(array('get'));
+        $httpClient = $this->getHttpMethodsMock(['get']);
         $httpClient
             ->expects($this->any())
             ->method('get')
-            ->with('/path', array())
+            ->with('/path', [])
             ->will($this->returnValue($this->getPSR7Response($expectedArray)));
 
         $client = $this->getMockBuilder(\Github\Client::class)
-            ->setMethods(array('getHttpClient'))
+            ->setMethods(['getHttpClient'])
             ->getMock();
         $client->expects($this->any())
             ->method('getHttpClient')
@@ -172,12 +172,13 @@ class AbstractApiTest extends TestCase
         $api = $this->getAbstractApiObject($client);
         $actual = $this->getMethod($api, 'get')->invokeArgs($api, ['/path', ['ref' => null]]);
 
-        $this->assertInternalType('array', $actual);
+        $this->assertIsArray($actual);
     }
 
     /**
      * @param $client
-     * @return \PHPUnit_Framework_MockObject_MockObject
+     *
+     * @return \PHPUnit\Framework\MockObject\MockObject
      */
     protected function getAbstractApiObject($client)
     {
@@ -204,32 +205,16 @@ class AbstractApiTest extends TestCase
     }
 
     /**
-     * Return a HttpMethods client mock
+     * Return a HttpMethods client mock.
      *
      * @param array $methods
-     * @return \Http\Client\Common\HttpMethodsClient
+     *
+     * @return \Http\Client\Common\HttpMethodsClientInterface
      */
-    protected function getHttpMethodsMock(array $methods = array())
+    protected function getHttpMethodsMock(array $methods = [])
     {
-        $methods = array_merge(array('sendRequest'), $methods);
-        $mock = $this->getMockBuilder(\Http\Client\Common\HttpMethodsClient::class)
-            ->disableOriginalConstructor()
-            ->setMethods($methods)
-            ->getMock();
-        $mock
-            ->expects($this->any())
-            ->method('sendRequest');
+        $mock = $this->createMock(HttpMethodsClientInterface::class);
 
-        return $mock;
-    }
-    /**
-     * @return \Http\Client\HttpClient
-     */
-    protected function getHttpClientMock()
-    {
-        $mock = $this->getMockBuilder(\Http\Client\HttpClient::class)
-            ->setMethods(array('sendRequest'))
-            ->getMock();
         $mock
             ->expects($this->any())
             ->method('sendRequest');
@@ -246,7 +231,7 @@ class AbstractApiTest extends TestCase
     {
         return new Response(
             200,
-            array('Content-Type' => 'application/json'),
+            ['Content-Type' => 'application/json'],
             \GuzzleHttp\Psr7\stream_for(json_encode($expectedArray))
         );
     }

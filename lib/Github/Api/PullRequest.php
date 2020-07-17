@@ -5,12 +5,14 @@ namespace Github\Api;
 use Github\Api\PullRequest\Comments;
 use Github\Api\PullRequest\Review;
 use Github\Api\PullRequest\ReviewRequest;
+use Github\Exception\InvalidArgumentException;
 use Github\Exception\MissingArgumentException;
 
 /**
  * API for accessing Pull Requests from your Git/Github repositories.
  *
- * @link   http://developer.github.com/v3/pulls/
+ * @see   http://developer.github.com/v3/pulls/
+ *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class PullRequest extends AbstractApi
@@ -21,6 +23,7 @@ class PullRequest extends AbstractApi
      * Configure the body type.
      *
      * @link https://developer.github.com/v3/pulls/#custom-media-types
+     *
      * @param string|null $bodyType
      * @param string|null $apiVersion
      *
@@ -28,19 +31,19 @@ class PullRequest extends AbstractApi
      */
     public function configure($bodyType = null, $apiVersion = null)
     {
-        if (!in_array($apiVersion, array('polaris-preview'))) {
+        if (null === $apiVersion) {
             $apiVersion = $this->client->getApiVersion();
         }
 
-        if (!in_array($bodyType, array('text', 'html', 'full', 'diff', 'patch'))) {
+        if (!in_array($bodyType, ['text', 'html', 'full', 'diff', 'patch'])) {
             $bodyType = 'raw';
         }
 
-        if (!in_array($bodyType, array('diff', 'patch'))) {
+        if (!in_array($bodyType, ['diff', 'patch'])) {
             $bodyType .= '+json';
         }
 
-        $this->acceptHeaderValue = sprintf('application/vnd.github.%s.%s', $this->client->getApiVersion(), $bodyType);
+        $this->acceptHeaderValue = sprintf('application/vnd.github.%s.%s', $apiVersion, $bodyType);
 
         return $this;
     }
@@ -52,17 +55,12 @@ class PullRequest extends AbstractApi
      *
      * @param string $username   the username
      * @param string $repository the repository
-     * @param array  $params     a list of extra parameters.
+     * @param array  $parameters a list of extra parameters.
      *
      * @return array array of pull requests for the project
      */
-    public function all($username, $repository, array $params = array())
+    public function all($username, $repository, array $parameters = [])
     {
-        $parameters = array_merge(array(
-            'page' => 1,
-            'per_page' => 30
-        ), $params);
-
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls', $parameters);
     }
 
@@ -73,13 +71,13 @@ class PullRequest extends AbstractApi
      *
      * @param string $username   the username
      * @param string $repository the repository
-     * @param string $id         the ID of the pull request for which details are retrieved
+     * @param int    $id         the ID of the pull request for which details are retrieved
      *
-     * @return array array of pull requests for the project
+     * @return array|string pull request details
      */
     public function show($username, $repository, $id)
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.$id);
     }
 
     public function commits($username, $repository, $id)
@@ -87,9 +85,27 @@ class PullRequest extends AbstractApi
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/commits');
     }
 
-    public function files($username, $repository, $id)
+    public function files($username, $repository, $id, array $parameters = [])
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/files');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/files', $parameters);
+    }
+
+    /**
+     * All statuses which are the statuses of its head branch.
+     *
+     * @see http://developer.github.com/v3/pulls/
+     *
+     * @param string $username   the username
+     * @param string $repository the repository
+     * @param int    $id         the ID of the pull request for which statuses are retrieved
+     *
+     * @return array array of statuses for the project
+     */
+    public function status($username, $repository, $id)
+    {
+        $link = $this->show($username, $repository, $id)['_links']['statuses']['href'];
+
+        return $this->get($link);
     }
 
     public function comments()
@@ -128,16 +144,16 @@ class PullRequest extends AbstractApi
     {
         // Two ways to create PR, using issue or title
         if (!isset($params['issue']) && !isset($params['title'])) {
-            throw new MissingArgumentException(array('issue', 'title'));
+            throw new MissingArgumentException(['issue', 'title']);
         }
 
         if (!isset($params['base'], $params['head'])) {
-            throw new MissingArgumentException(array('base', 'head'));
+            throw new MissingArgumentException(['base', 'head']);
         }
 
         // If `issue` is not sent, then `body` must be sent
         if (!isset($params['issue']) && !isset($params['body'])) {
-            throw new MissingArgumentException(array('issue', 'body'));
+            throw new MissingArgumentException(['issue', 'body']);
         }
 
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls', $params);
@@ -145,7 +161,7 @@ class PullRequest extends AbstractApi
 
     public function update($username, $repository, $id, array $params)
     {
-        if (isset($params['state']) && !in_array($params['state'], array('open', 'closed'))) {
+        if (isset($params['state']) && !in_array($params['state'], ['open', 'closed'])) {
             $params['state'] = 'open';
         }
 
@@ -163,11 +179,15 @@ class PullRequest extends AbstractApi
             $mergeMethod = $mergeMethod ? 'squash' : 'merge';
         }
 
-        $params = array(
+        if (!in_array($mergeMethod, ['merge', 'squash', 'rebase'], true)) {
+            throw new InvalidArgumentException(sprintf('"$mergeMethod" must be one of ["merge", "squash", "rebase"] ("%s" given).', $mergeMethod));
+        }
+
+        $params = [
             'commit_message' => $message,
             'sha' => $sha,
             'merge_method' => $mergeMethod,
-        );
+        ];
 
         if (is_string($title)) {
             $params['commit_title'] = $title;

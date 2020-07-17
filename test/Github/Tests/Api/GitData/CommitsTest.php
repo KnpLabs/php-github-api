@@ -1,6 +1,9 @@
 <?php
 
-namespace Github\Tests\Api;
+namespace Github\Tests\Api\GitData;
+
+use Github\Exception\MissingArgumentException;
+use Github\Tests\Api\TestCase;
 
 class CommitsTest extends TestCase
 {
@@ -9,7 +12,7 @@ class CommitsTest extends TestCase
      */
     public function shouldShowCommitUsingSha()
     {
-        $expectedValue = array('sha' => '123', 'comitter');
+        $expectedValue = ['sha' => '123', 'comitter'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -25,8 +28,8 @@ class CommitsTest extends TestCase
      */
     public function shouldCreateCommit()
     {
-        $expectedValue = array('sha' => '123', 'comitter');
-        $data = array('message' => 'some message', 'tree' => 1234, 'parents' => array());
+        $expectedValue = ['sha' => '123', 'comitter'];
+        $data = ['message' => 'some message', 'tree' => 1234, 'parents' => []];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -39,11 +42,11 @@ class CommitsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateCommitWithoutMessageParam()
     {
-        $data = array('tree' => 1234, 'parents' => array());
+        $this->expectException(MissingArgumentException::class);
+        $data = ['tree' => 1234, 'parents' => []];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -54,11 +57,11 @@ class CommitsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateCommitWithoutTreeParam()
     {
-        $data = array('message' => 'some message', 'parents' => array());
+        $this->expectException(MissingArgumentException::class);
+        $data = ['message' => 'some message', 'parents' => []];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -69,11 +72,11 @@ class CommitsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateCommitWithoutParentsParam()
     {
-        $data = array('message' => 'some message', 'tree' => '12334');
+        $this->expectException(MissingArgumentException::class);
+        $data = ['message' => 'some message', 'tree' => '12334'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())

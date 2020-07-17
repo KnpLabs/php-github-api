@@ -1,9 +1,9 @@
 <?php
 
-namespace Github\Tests\Functional;
+namespace Github\Tests\Integration;
 
 /**
- * @group functional
+ * @group integration
  */
 class RepoTest extends TestCase
 {
@@ -13,15 +13,15 @@ class RepoTest extends TestCase
     public function shouldShowPRDiffIfHeaderIsPresent()
     {
         $this->client->addHeaders(
-            array('Accept' => sprintf(
+            ['Accept' => sprintf(
                 'application/vnd.github.%s.diff',
                 $this->client->getApiVersion()
-            ))
+            )]
         );
 
         $diff = $this->client->api('pull_request')->show('KnpLabs', 'php-github-api', '92');
 
-        $this->assertTrue('string' === gettype($diff));
+        $this->assertIsString($diff);
     }
 
     /**
@@ -38,7 +38,7 @@ class RepoTest extends TestCase
             'e50d5e946385cff052636e2f09f36b03d1c368f4'
         );
 
-        $this->assertInternalType('string', $contents);
+        $this->assertIsString($contents);
         $this->assertStringStartsWith('<?php', $contents);
     }
 
@@ -56,7 +56,7 @@ class RepoTest extends TestCase
             'dc16d3e77fd4e40638cb722927ffe15fa85b1434'
         );
 
-        $this->assertInternalType('string', $contents);
+        $this->assertIsString($contents);
         $this->assertStringStartsWith('{', $contents);
     }
 
@@ -66,7 +66,7 @@ class RepoTest extends TestCase
     public function shouldRetrieveContributorsList()
     {
         $username = 'KnpLabs';
-        $repo     = 'php-github-api';
+        $repo = 'php-github-api';
 
         $contributors = $this->client->api('repo')->contributors($username, $repo);
         $contributor = array_pop($contributors);
@@ -85,7 +85,7 @@ class RepoTest extends TestCase
     public function shouldShowRepo()
     {
         $username = 'KnpLabs';
-        $repo     = 'php-github-api';
+        $repo = 'php-github-api';
 
         $repo = $this->client->api('repo')->show($username, $repo);
 

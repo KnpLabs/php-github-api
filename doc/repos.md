@@ -27,10 +27,9 @@ $repos = $client->api('repo')->find('symfony');
 ```
 
 Returns a list of repositories.
-
 #### Advanced search
 
-You can filter the results by language. It takes the same values as the language drop down on [http://github.com/search](http://github).
+You can filter the results by language. It takes the same values as the language drop down on [http://github.com/search](http://github.com/search).
 
 ```php
 $repos = $client->api('repo')->find('chess', array('language' => 'php'));
@@ -44,8 +43,16 @@ $repos = $client->api('repo')->find('chess', array('language' => 'php', 'start_p
 
 ### Get extended information about a repository
 
+Using the username of the repository owner and the repository name:
+
 ```php
 $repo = $client->api('repo')->show('KnpLabs', 'php-github-api')
+```
+
+Or by using the repository id (note that this is at time of writing an undocumented feature, see [here](https://github.com/piotrmurach/github/issues/283) and [here](https://github.com/piotrmurach/github/issues/282)):
+
+```php
+$repo = $client->api('repo')->showById(123456)
 ```
 
 Returns an array of information about the specified repository.
@@ -171,20 +178,29 @@ Returns a list of the collaborators for the 'reponame' repository.
 ### Add a collaborator to a repository
 
 ```php
-$client->api('repo')->collaborators()->add('username', 'reponame', 'KnpLabs');
+$client->api('repo')->collaborators()->add('username', 'reponame', 'collaborator');
 ```
 
-Adds the 'username' user as collaborator to the 'reponame' repository.
+Adds the 'collaborator' user as collaborator to the 'reponame' repository.
 
 ### Remove a collaborator from a repository
 
 > Requires [authentication](security.md).
 
 ```php
-$client->api('repo')->collaborators()->remove('username', 'reponame', 'KnpLabs');
+$client->api('repo')->collaborators()->remove('username', 'reponame', 'collaborator');
 ```
 
-Remove the 'username' collaborator from the 'reponame' repository.
+Remove the 'collaborator' collaborator from the 'reponame' repository.
+
+### Get the permissions of a collaborator for a repository
+
+```php
+$permissions = $client->api('repo')->collaborators()->permission('username', 'reponame', 'collaborator');
+```
+
+Returns the permissions of 'collaborator' collaborator for the 'reponame' repository.
+
 
 ### Watch and unwatch a repository
 
@@ -295,3 +311,38 @@ $milestones = $client->api('repo')->milestones('ornicar', 'php-github-api');
 ```
 
 Returns a list of milestones.
+
+### Get the community profile metrics for a repository
+
+```php
+$communityProfile = $client->api('repo')->communityProfile('ornicar', 'php-github-api');
+```
+
+### Get the contents of a repository's code of conduct
+
+```php
+$codeOfConduct = $client->api('repo')->codeOfConduct('ornicar', 'php-github-api');
+```
+
+### List all topics for a repository
+
+```php
+$topics = $client->api('repo')->topics('ornicar', 'php-github-api');
+```
+
+### Replace all topics for a repository
+
+```php
+$currentTopics = $client->api('repo')->replaceTopics('ornicar', 'php-github-api', ['new', 'topics']);
+```
+
+### Transfer a repo to another user
+
+```php
+$repo = $client->api('repo')->transfer('KnpLabs', 'php-github-api', 'github');
+```
+You can optionally assign some teams by passing an array with their ID's if you're transferring the repo to an organization:
+
+```php
+$repo = $client->api('repo')->transfer('KnpLabs', 'php-github-api', 'github', [1234]);
+```

@@ -2,6 +2,7 @@
 
 namespace Github\Tests\Api\Repository;
 
+use Github\Exception\MissingArgumentException;
 use Github\Tests\Api\TestCase;
 
 class DeployKeysTest extends TestCase
@@ -11,7 +12,7 @@ class DeployKeysTest extends TestCase
      */
     public function shouldGetAllRepositoryDeployKeys()
     {
-        $expectedValue = array(array('name' => 'key'));
+        $expectedValue = [['name' => 'key']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -27,7 +28,7 @@ class DeployKeysTest extends TestCase
      */
     public function shouldShowDeployKey()
     {
-        $expectedValue = array('key' => 'somename');
+        $expectedValue = ['key' => 'somename'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -43,7 +44,7 @@ class DeployKeysTest extends TestCase
      */
     public function shouldRemoveDeployKey()
     {
-        $expectedValue = array('someOutput');
+        $expectedValue = ['someOutput'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -56,11 +57,11 @@ class DeployKeysTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateDeployKeyWithoutName()
     {
-        $data = array('config' => 'conf');
+        $this->expectException(MissingArgumentException::class);
+        $data = ['config' => 'conf'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -71,11 +72,11 @@ class DeployKeysTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateDeployKeyWithoutColor()
     {
-        $data = array('name' => 'test');
+        $this->expectException(MissingArgumentException::class);
+        $data = ['name' => 'test'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -89,8 +90,8 @@ class DeployKeysTest extends TestCase
      */
     public function shouldCreateDeployKey()
     {
-        $expectedValue = array('key' => 'somename');
-        $data = array('title' => 'test', 'key' => 'ssh-rsa 1231234232');
+        $expectedValue = ['key' => 'somename'];
+        $data = ['title' => 'test', 'key' => 'ssh-rsa 1231234232'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -103,30 +104,34 @@ class DeployKeysTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotUpdateDeployKeyWithoutTitle()
     {
-        $data = array('key' => 'ssh-rsa 12323213');
+        $this->expectException(MissingArgumentException::class);
+        $data = ['key' => 'ssh-rsa 12323213'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
-            ->method('patch');
+            ->method('delete');
+        $api->expects($this->never())
+            ->method('post');
 
         $api->update('KnpLabs', 'php-github-api', 123, $data);
     }
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotUpdateDeployKeyWithoutKey()
     {
-        $data = array('title' => 'test');
+        $this->expectException(MissingArgumentException::class);
+        $data = ['title' => 'test'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
-            ->method('patch');
+            ->method('delete');
+        $api->expects($this->never())
+            ->method('post');
 
         $api->update('KnpLabs', 'php-github-api', 123, $data);
     }
@@ -136,13 +141,17 @@ class DeployKeysTest extends TestCase
      */
     public function shouldUpdateDeployKey()
     {
-        $expectedValue = array('key' => 'somename');
-        $data = array('title' => 'test', 'key' => 'ssh-rsa 12312312321...');
+        $expectedValue = ['key' => 'somename'];
+        $data = ['title' => 'test', 'key' => 'ssh-rsa 12312312321...'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
-            ->method('patch')
-            ->with('/repos/KnpLabs/php-github-api/keys/123', $data)
+            ->method('delete')
+            ->with('/repos/KnpLabs/php-github-api/keys/123')
+            ->will($this->returnValue($expectedValue));
+        $api->expects($this->once())
+            ->method('post')
+            ->with('/repos/KnpLabs/php-github-api/keys', $data)
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->update('KnpLabs', 'php-github-api', 123, $data));

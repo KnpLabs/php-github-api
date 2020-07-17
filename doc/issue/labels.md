@@ -15,7 +15,7 @@ Returns an array of project labels.
 ### Get a single label
 
 ```php
-$label = $client->api('issue')->labels()->all('KnpLabs', 'php-github-api', 'label1');
+$label = $client->api('issue')->labels()->show('KnpLabs', 'php-github-api', 'label1');
 ```
 
 ### Create a label
@@ -56,6 +56,12 @@ $labels = $client->api('issue')->labels()->add('KnpLabs', 'php-github-api', 4, '
 Add a label to the issue by username, repo, issue number label name and. If the label is not yet in
 the system, it will be created.
 Returns an array of the issue labels.
+
+### Get all labels for an issue
+
+```php
+$label = $client->api('issue')->labels()->all('KnpLabs', 'php-github-api', 4);
+```
 
 ### Replace all labels for an issue
 

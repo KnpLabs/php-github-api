@@ -2,14 +2,15 @@
 
 namespace Github\HttpClient\Plugin;
 
-use Http\Client\Common\Plugin;
-use Psr\Http\Message\RequestInterface;
-use Github\Exception\TwoFactorAuthenticationRequiredException;
-use Github\HttpClient\Message\ResponseMediator;
 use Github\Exception\ApiLimitExceedException;
 use Github\Exception\ErrorException;
 use Github\Exception\RuntimeException;
+use Github\Exception\TwoFactorAuthenticationRequiredException;
 use Github\Exception\ValidationFailedException;
+use Github\HttpClient\Message\ResponseMediator;
+use Http\Client\Common\Plugin;
+use Http\Promise\Promise;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -19,9 +20,9 @@ use Psr\Http\Message\ResponseInterface;
 class GithubExceptionThrower implements Plugin
 {
     /**
-     * {@inheritdoc}
+     * @return Promise
      */
-    public function handleRequest(RequestInterface $request, callable $next, callable $first)
+    public function handleRequest(RequestInterface $request, callable $next, callable $first): Promise
     {
         return $next($request)->then(function (ResponseInterface $response) use ($request) {
             if ($response->getStatusCode() < 400 || $response->getStatusCode() > 600) {
@@ -30,27 +31,27 @@ class GithubExceptionThrower implements Plugin
 
             // If error:
             $remaining = ResponseMediator::getHeader($response, 'X-RateLimit-Remaining');
-            if (null != $remaining && 1 > $remaining && 'rate_limit' !== substr($request->getRequestTarget(), 1, 10)) {
-                $limit = ResponseMediator::getHeader($response, 'X-RateLimit-Limit');
-                $reset = ResponseMediator::getHeader($response, 'X-RateLimit-Reset');
-                
+            if (null !== $remaining && 1 > $remaining && 'rate_limit' !== substr($request->getRequestTarget(), 1, 10)) {
+                $limit = (int) ResponseMediator::getHeader($response, 'X-RateLimit-Limit');
+                $reset = (int) ResponseMediator::getHeader($response, 'X-RateLimit-Reset');
+
                 throw new ApiLimitExceedException($limit, $reset);
             }
 
-            if (401 === $response->getStatusCode()) {
-                if ($response->hasHeader('X-GitHub-OTP') && 0 === strpos((string) ResponseMediator::getHeader($response, 'X-GitHub-OTP'), 'required;')) {
-                    $type = substr((string) ResponseMediator::getHeader($response, 'X-GitHub-OTP'), 9);
+            if ((401 === $response->getStatusCode()) && $response->hasHeader('X-GitHub-OTP') && 0 === strpos((string) ResponseMediator::getHeader($response, 'X-GitHub-OTP'), 'required;')) {
+                $type = substr((string) ResponseMediator::getHeader($response, 'X-GitHub-OTP'), 9);
 
-                    throw new TwoFactorAuthenticationRequiredException($type);
-                }
+                throw new TwoFactorAuthenticationRequiredException($type);
             }
 
             $content = ResponseMediator::getContent($response);
             if (is_array($content) && isset($content['message'])) {
-                if (400 == $response->getStatusCode()) {
-                    throw new ErrorException($content['message'], 400);
-                } elseif (422 == $response->getStatusCode() && isset($content['errors'])) {
-                    $errors = array();
+                if (400 === $response->getStatusCode()) {
+                    throw new ErrorException(sprintf('%s (%s)', $content['message'], $response->getReasonPhrase()), 400);
+                }
+
+                if (422 === $response->getStatusCode() && isset($content['errors'])) {
+                    $errors = [];
                     foreach ($content['errors'] as $error) {
                         switch ($error['code']) {
                             case 'missing':
@@ -74,14 +75,30 @@ class GithubExceptionThrower implements Plugin
                                 break;
 
                             default:
-                                $errors[] = $error['message'];
+                                if (isset($error['message'])) {
+                                    $errors[] = $error['message'];
+                                }
                                 break;
 
                         }
                     }
 
-                    throw new ValidationFailedException('Validation Failed: '.implode(', ', $errors), 422);
+                    throw new ValidationFailedException(
+                        $errors ? 'Validation Failed: '.implode(', ', $errors) : 'Validation Failed',
+                        422
+                    );
                 }
+            }
+
+            if (502 == $response->getStatusCode() && isset($content['errors']) && is_array($content['errors'])) {
+                $errors = [];
+                foreach ($content['errors'] as $error) {
+                    if (isset($error['message'])) {
+                        $errors[] = $error['message'];
+                    }
+                }
+
+                throw new RuntimeException(implode(', ', $errors), 502);
             }
 
             throw new RuntimeException(isset($content['message']) ? $content['message'] : $content, $response->getStatusCode());

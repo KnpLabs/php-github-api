@@ -6,6 +6,7 @@ use Github\Api\AbstractApi;
 
 /**
  * @link   http://developer.github.com/v3/activity/notifications/
+ *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class Notifications extends AbstractApi
@@ -19,7 +20,7 @@ class Notifications extends AbstractApi
      *
      * @return array
      */
-    public function all(array $params = array())
+    public function all(array $params = [])
     {
         return $this->get('/notifications', $params);
     }
@@ -35,7 +36,7 @@ class Notifications extends AbstractApi
      *
      * @return array
      */
-    public function allInRepository($username, $repository, array $params = array())
+    public function allInRepository($username, $repository, array $params = [])
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/notifications', $params);
     }
@@ -49,7 +50,7 @@ class Notifications extends AbstractApi
      *
      * @return array
      */
-    public function markAsReadAll(array $params = array())
+    public function markAsReadAll(array $params = [])
     {
         return $this->put('/notifications', $params);
     }
@@ -65,7 +66,7 @@ class Notifications extends AbstractApi
      *
      * @return array
      */
-    public function markAsReadInRepository($username, $repository, array $params = array())
+    public function markAsReadInRepository($username, $repository, array $params = [])
     {
         return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/notifications', $params);
     }
@@ -75,14 +76,14 @@ class Notifications extends AbstractApi
      *
      * @link http://developer.github.com/v3/activity/notifications/#mark-a-thread-as-read
      *
-     * @param string $id     the notification number
-     * @param array  $params
+     * @param int   $id     the notification number
+     * @param array $params
      *
      * @return array
      */
     public function markAsRead($id, array $params)
     {
-        return $this->patch('/notifications/threads/'.rawurlencode($id), $params);
+        return $this->patch('/notifications/threads/'.$id, $params);
     }
 
     /**
@@ -90,13 +91,13 @@ class Notifications extends AbstractApi
      *
      * @link http://developer.github.com/v3/activity/notifications/#view-a-single-thread
      *
-     * @param string $id the notification number
+     * @param int $id the notification number
      *
      * @return array
      */
     public function show($id)
     {
-        return $this->get('/notifications/threads/'.rawurlencode($id));
+        return $this->get('/notifications/threads/'.$id);
     }
 
     /**
@@ -104,13 +105,13 @@ class Notifications extends AbstractApi
      *
      * @link http://developer.github.com/v3/activity/notifications/#get-a-thread-subscription
      *
-     * @param string $id the notification number
+     * @param int $id the notification number
      *
      * @return array
      */
     public function showSubscription($id)
     {
-        return $this->get('/notifications/threads/'.rawurlencode($id).'/subscription');
+        return $this->get('/notifications/threads/'.$id.'/subscription');
     }
 
     /**
@@ -118,14 +119,14 @@ class Notifications extends AbstractApi
      *
      * @link http://developer.github.com/v3/activity/notifications/#set-a-thread-subscription
      *
-     * @param string $id     the notification number
-     * @param array  $params
+     * @param int   $id     the notification number
+     * @param array $params
      *
      * @return array
      */
     public function createSubscription($id, array $params)
     {
-        return $this->put('/notifications/threads/'.rawurlencode($id).'/subscription', $params);
+        return $this->put('/notifications/threads/'.$id.'/subscription', $params);
     }
 
     /**
@@ -133,12 +134,12 @@ class Notifications extends AbstractApi
      *
      * @link http://developer.github.com/v3/activity/notifications/#delete-a-thread-subscription
      *
-     * @param string $id the notification number
+     * @param int $id the notification number
      *
      * @return array
      */
     public function removeSubscription($id)
     {
-        return $this->delete('/notifications/threads/'.rawurlencode($id).'/subscription');
+        return $this->delete('/notifications/threads/'.$id.'/subscription');
     }
 }

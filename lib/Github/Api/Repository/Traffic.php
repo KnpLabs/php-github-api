@@ -1,11 +1,12 @@
 <?php
+
 namespace Github\Api\Repository;
 
 use Github\Api\AbstractApi;
-use Github\Exception\MissingArgumentException;
 
 /**
  * @link   https://developer.github.com/v3/repos/traffic/
+ *
  * @author Miguel Piedrafita <soy@miguelpiedrafita.com>
  */
 class Traffic extends AbstractApi
@@ -22,6 +23,7 @@ class Traffic extends AbstractApi
     {
         return $this->get('/repos/'.rawurlencode($owner).'/'.rawurlencode($repository).'/traffic/popular/referrers');
     }
+
     /**
      * @link https://developer.github.com/v3/repos/traffic/#list-paths
      *
@@ -34,12 +36,13 @@ class Traffic extends AbstractApi
     {
         return $this->get('/repos/'.rawurlencode($owner).'/'.rawurlencode($repository).'/traffic/popular/paths');
     }
+
     /**
      * @link https://developer.github.com/v3/repos/traffic/#views
      *
      * @param string $owner
      * @param string $repository
-     * @param string|day $per
+     * @param string $per
      *
      * @return array
      */
@@ -47,12 +50,13 @@ class Traffic extends AbstractApi
     {
         return $this->get('/repos/'.rawurlencode($owner).'/'.rawurlencode($repository).'/traffic/views?per='.rawurlencode($per));
     }
+
     /**
      * @link https://developer.github.com/v3/repos/traffic/#clones
      *
      * @param string $owner
      * @param string $repository
-     * @param string|day $per
+     * @param string $per
      *
      * @return array
      */

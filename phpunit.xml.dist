@@ -8,8 +8,7 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="false"
-         syntaxCheck="false"
-         bootstrap="test/bootstrap.php"
+         bootstrap="vendor/autoload.php"
 >
     <testsuites>
         <testsuite name="php-github-api Test Suite">
@@ -19,7 +18,7 @@
 
     <groups>
         <exclude>
-            <group>functional</group>
+            <group>integration</group>
         </exclude>
     </groups>
 

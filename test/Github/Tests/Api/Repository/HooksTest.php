@@ -2,6 +2,7 @@
 
 namespace Github\Tests\Api\Repository;
 
+use Github\Exception\MissingArgumentException;
 use Github\Tests\Api\TestCase;
 
 class HooksTest extends TestCase
@@ -11,7 +12,7 @@ class HooksTest extends TestCase
      */
     public function shouldGetAllRepositoryHooks()
     {
-        $expectedValue = array(array('name' => 'hook'));
+        $expectedValue = [['name' => 'hook']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -27,7 +28,7 @@ class HooksTest extends TestCase
      */
     public function shouldShowHook()
     {
-        $expectedValue = array('hook' => 'somename');
+        $expectedValue = ['hook' => 'somename'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -43,7 +44,7 @@ class HooksTest extends TestCase
      */
     public function shouldRemoveHook()
     {
-        $expectedValue = array('someOutput');
+        $expectedValue = ['someOutput'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -56,11 +57,11 @@ class HooksTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateHookWithoutName()
     {
-        $data = array('config' => 'conf');
+        $this->expectException(MissingArgumentException::class);
+        $data = ['config' => 'conf'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -71,11 +72,11 @@ class HooksTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateHookWithoutColor()
     {
-        $data = array('name' => 'test');
+        $this->expectException(MissingArgumentException::class);
+        $data = ['name' => 'test'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -89,8 +90,8 @@ class HooksTest extends TestCase
      */
     public function shouldCreateHook()
     {
-        $expectedValue = array('hook' => 'somename');
-        $data = array('name' => 'test', 'config' => 'someconfig');
+        $expectedValue = ['hook' => 'somename'];
+        $data = ['name' => 'test', 'config' => 'someconfig'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -103,11 +104,11 @@ class HooksTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotUpdateHookWithoutConfig()
     {
-        $data = array('name' => 'test');
+        $this->expectException(MissingArgumentException::class);
+        $data = ['name' => 'test'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -121,8 +122,8 @@ class HooksTest extends TestCase
      */
     public function shouldUpdateHook()
     {
-        $expectedValue = array('hook' => 'somename');
-        $data = array('name' => 'test', 'config' => 'config');
+        $expectedValue = ['hook' => 'somename'];
+        $data = ['name' => 'test', 'config' => 'config'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -138,7 +139,7 @@ class HooksTest extends TestCase
      */
     public function shouldTestHook()
     {
-        $expectedValue = array(array('name' => 'hook'));
+        $expectedValue = [['name' => 'hook']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())

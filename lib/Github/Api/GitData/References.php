@@ -7,6 +7,7 @@ use Github\Exception\MissingArgumentException;
 
 /**
  * @link   http://developer.github.com/v3/git/references/
+ *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class References extends AbstractApi
@@ -22,6 +23,22 @@ class References extends AbstractApi
     public function all($username, $repository)
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs');
+    }
+
+    /**
+     * Get all matching references for the supplied reference name.
+     *
+     * @param string $username
+     * @param string $repository
+     * @param string $reference
+     *
+     * @return array
+     */
+    public function matching(string $username, string $repository, string $reference): array
+    {
+        $reference = $this->encodeReference($reference);
+
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/matching-refs/'.$reference);
     }
 
     /**
@@ -73,14 +90,14 @@ class References extends AbstractApi
      * @param string $repository
      * @param array  $params
      *
-     * @return array
-     *
      * @throws \Github\Exception\MissingArgumentException
+     *
+     * @return array
      */
     public function create($username, $repository, array $params)
     {
         if (!isset($params['ref'], $params['sha'])) {
-            throw new MissingArgumentException(array('ref', 'sha'));
+            throw new MissingArgumentException(['ref', 'sha']);
         }
 
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/git/refs', $params);
@@ -94,9 +111,9 @@ class References extends AbstractApi
      * @param string $reference
      * @param array  $params
      *
-     * @return array
-     *
      * @throws \Github\Exception\MissingArgumentException
+     *
+     * @return array
      */
     public function update($username, $repository, $reference, array $params)
     {

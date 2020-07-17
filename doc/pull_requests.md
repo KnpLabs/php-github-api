@@ -3,6 +3,8 @@
 
 Additional APIs:
 * [Review Comments](pull_request/comments.md)
+* [Review Request](pull_request/review_request.md)
+* [Reviews](pull_request/reviews.md)
 
 Lets you list pull requests for a given repository, list one pull request in particular along
 with its discussion, and create a pull-request.
@@ -54,6 +56,7 @@ The ``$pullRequest`` array contains the same elements as every entry in the resu
 
 A pull request can either be created by supplying both the Title & Body, OR an Issue ID.
 Details regarding the content of parameters 3 and 4 of the ``create``.
+You can create a draft pull request by adding a parameter with key `draft` and value `true`.
 
 #### Populated with Title and Body
 

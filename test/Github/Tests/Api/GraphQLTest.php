@@ -4,7 +4,6 @@ namespace Github\Tests\Api;
 
 class GraphQLTest extends TestCase
 {
-
     /**
      * @test
      */
@@ -19,6 +18,37 @@ class GraphQLTest extends TestCase
 
         $result = $api->execute('bar');
         $this->assertEquals('foo', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldSupportGraphQLVariables()
+    {
+        $api = $this->getApiMock();
+
+        $api->expects($this->once())
+            ->method('post')
+            ->with('/graphql', $this->arrayHasKey('variables'));
+
+        $api->execute('bar', ['variable' => 'foo']);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldJSONEncodeGraphQLVariables()
+    {
+        $api = $this->getApiMock();
+
+        $api->expects($this->once())
+            ->method('post')
+            ->with('/graphql', $this->equalTo([
+                'query'=>'bar',
+                'variables' => '{"variable":"foo"}',
+            ]));
+
+        $api->execute('bar', ['variable' => 'foo']);
     }
 
     protected function getApiClass()

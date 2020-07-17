@@ -3,7 +3,7 @@
 namespace Github\Tests\Api\PullRequest;
 
 use Github\Api\PullRequest\Comments;
-use Github\Api\PullRequest\ReviewComment;
+use Github\Exception\MissingArgumentException;
 use Github\Tests\Api\TestCase;
 
 class CommentsTest extends TestCase
@@ -14,7 +14,7 @@ class CommentsTest extends TestCase
     public function shouldGetAllReviewCommentsForAPullRequest()
     {
         $expectedValue = [
-                [
+            [
                 'url' => 'https://api.github.com/repos/octocat/Hello-World/pulls/comments/1',
                 'id' => 1,
                 'pull_request_review_id' => 42,
@@ -267,10 +267,10 @@ class CommentsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateReviewCommentWithoutCommitId()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [
             'path' => 'file1.txt',
             'position' => 4,
@@ -288,10 +288,10 @@ class CommentsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateReviewCommentWithoutPath()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [
             'commit_id' => '6dcb09b5b57875f334f61aebed695e2e4193db5e',
             'position' => 4,
@@ -309,10 +309,10 @@ class CommentsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateReviewCommentWithoutPosition()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [
             'commit_id' => '6dcb09b5b57875f334f61aebed695e2e4193db5e',
             'path' => 'file1.txt',
@@ -330,10 +330,10 @@ class CommentsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateReviewCommentWithoutBody()
     {
+        $this->expectException(MissingArgumentException::class);
         $data = [
             'commit_id' => '6dcb09b5b57875f334f61aebed695e2e4193db5e',
             'path' => 'file1.txt',
@@ -415,10 +415,10 @@ class CommentsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotUpdateReviewCommentWithoutBody()
     {
+        $this->expectException(MissingArgumentException::class);
         $expectedValue = [
             'url' => 'https://api.github.com/repos/octocat/Hello-World/pulls/comments/1',
             'id' => 1,

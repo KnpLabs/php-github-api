@@ -20,6 +20,13 @@ abstract class AbstractApi implements ApiInterface
     protected $client;
 
     /**
+     * The requested page (GitHub pagination).
+     *
+     * @var null|int
+     */
+    private $page;
+
+    /**
      * Number of items per page (GitHub pagination).
      *
      * @var null|int
@@ -36,6 +43,24 @@ abstract class AbstractApi implements ApiInterface
 
     public function configure()
     {
+    }
+
+    /**
+     * @return null|int
+     */
+    public function getPage()
+    {
+        return $this->page;
+    }
+
+    /**
+     * @param null|int $page
+     */
+    public function setPage($page)
+    {
+        $this->page = (null === $page ? $page : (int) $page);
+
+        return $this;
     }
 
     /**
@@ -65,12 +90,15 @@ abstract class AbstractApi implements ApiInterface
      *
      * @return array|string
      */
-    protected function get($path, array $parameters = array(), array $requestHeaders = array())
+    protected function get($path, array $parameters = [], array $requestHeaders = [])
     {
+        if (null !== $this->page && !isset($parameters['page'])) {
+            $parameters['page'] = $this->page;
+        }
         if (null !== $this->perPage && !isset($parameters['per_page'])) {
             $parameters['per_page'] = $this->perPage;
         }
-        if (array_key_exists('ref', $parameters) && is_null($parameters['ref'])) {
+        if (array_key_exists('ref', $parameters) && null === $parameters['ref']) {
             unset($parameters['ref']);
         }
 
@@ -92,15 +120,13 @@ abstract class AbstractApi implements ApiInterface
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    protected function head($path, array $parameters = array(), array $requestHeaders = array())
+    protected function head($path, array $parameters = [], array $requestHeaders = [])
     {
-        if (array_key_exists('ref', $parameters) && is_null($parameters['ref'])) {
+        if (array_key_exists('ref', $parameters) && null === $parameters['ref']) {
             unset($parameters['ref']);
         }
 
-        $response = $this->client->getHttpClient()->head($path.'?'.http_build_query($parameters), $requestHeaders);
-
-        return $response;
+        return $this->client->getHttpClient()->head($path.'?'.http_build_query($parameters), $requestHeaders);
     }
 
     /**
@@ -112,7 +138,7 @@ abstract class AbstractApi implements ApiInterface
      *
      * @return array|string
      */
-    protected function post($path, array $parameters = array(), array $requestHeaders = array())
+    protected function post($path, array $parameters = [], array $requestHeaders = [])
     {
         return $this->postRaw(
             $path,
@@ -130,7 +156,7 @@ abstract class AbstractApi implements ApiInterface
      *
      * @return array|string
      */
-    protected function postRaw($path, $body, array $requestHeaders = array())
+    protected function postRaw($path, $body, array $requestHeaders = [])
     {
         $response = $this->client->getHttpClient()->post(
             $path,
@@ -150,7 +176,7 @@ abstract class AbstractApi implements ApiInterface
      *
      * @return array|string
      */
-    protected function patch($path, array $parameters = array(), array $requestHeaders = array())
+    protected function patch($path, array $parameters = [], array $requestHeaders = [])
     {
         $response = $this->client->getHttpClient()->patch(
             $path,
@@ -170,7 +196,7 @@ abstract class AbstractApi implements ApiInterface
      *
      * @return array|string
      */
-    protected function put($path, array $parameters = array(), array $requestHeaders = array())
+    protected function put($path, array $parameters = [], array $requestHeaders = [])
     {
         $response = $this->client->getHttpClient()->put(
             $path,
@@ -190,7 +216,7 @@ abstract class AbstractApi implements ApiInterface
      *
      * @return array|string
      */
-    protected function delete($path, array $parameters = array(), array $requestHeaders = array())
+    protected function delete($path, array $parameters = [], array $requestHeaders = [])
     {
         $response = $this->client->getHttpClient()->delete(
             $path,
@@ -206,7 +232,7 @@ abstract class AbstractApi implements ApiInterface
      *
      * @param array $parameters Request parameters
      *
-     * @return null|string
+     * @return string|null
      */
     protected function createJsonBody(array $parameters)
     {

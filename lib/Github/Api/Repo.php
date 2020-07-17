@@ -2,18 +2,20 @@
 
 namespace Github\Api;
 
+use Github\Api\Repository\Checks;
 use Github\Api\Repository\Collaborators;
 use Github\Api\Repository\Comments;
 use Github\Api\Repository\Commits;
 use Github\Api\Repository\Contents;
 use Github\Api\Repository\DeployKeys;
 use Github\Api\Repository\Downloads;
-use Github\Api\Repository\Projects;
-use Github\Api\Repository\Protection;
-use Github\Api\Repository\Releases;
 use Github\Api\Repository\Forks;
 use Github\Api\Repository\Hooks;
 use Github\Api\Repository\Labels;
+use Github\Api\Repository\Pages;
+use Github\Api\Repository\Projects;
+use Github\Api\Repository\Protection;
+use Github\Api\Repository\Releases;
 use Github\Api\Repository\Stargazers;
 use Github\Api\Repository\Statuses;
 use Github\Api\Repository\Traffic;
@@ -23,25 +25,13 @@ use Github\Api\Repository\Traffic;
  * and managing repository information for authenticated users.
  *
  * @link   http://developer.github.com/v3/repos/
+ *
  * @author Joseph Bielawski <stloyd@gmail.com>
  * @author Thibault Duplessis <thibault.duplessis at gmail dot com>
  */
 class Repo extends AbstractApi
 {
-    /**
-     * Search repositories by keyword.
-     *
-     * @link http://developer.github.com/v3/search/#search-repositories
-     *
-     * @param string $keyword the search query
-     * @param array  $params
-     *
-     * @return array list of found repositories
-     */
-    public function find($keyword, array $params = array())
-    {
-        return $this->get('/legacy/repos/search/'.rawurlencode($keyword), array_merge(array('start_page' => 1), $params));
-    }
+    use AcceptHeaderTrait;
 
     /**
      * List all public repositories.
@@ -58,7 +48,7 @@ class Repo extends AbstractApi
             return $this->get('/repositories');
         }
 
-        return $this->get('/repositories?since=' . rawurldecode($id));
+        return $this->get('/repositories', ['since' => $id]);
     }
 
     /**
@@ -131,9 +121,9 @@ class Repo extends AbstractApi
      *
      * @return array list of organization repositories
      */
-    public function org($organization, array $params = array())
+    public function org($organization, array $params = [])
     {
-        return $this->get('/orgs/'.$organization.'/repos', array_merge(array('start_page' => 1), $params));
+        return $this->get('/orgs/'.$organization.'/repos', array_merge(['start_page' => 1], $params));
     }
 
     /**
@@ -152,6 +142,23 @@ class Repo extends AbstractApi
     }
 
     /**
+     * Get extended information about a repository by its id.
+     * Note: at time of writing this is an undocumented feature but GitHub support have advised that it can be relied on.
+     *
+     * @link http://developer.github.com/v3/repos/
+     * @link https://github.com/piotrmurach/github/issues/283
+     * @link https://github.com/piotrmurach/github/issues/282
+     *
+     * @param int $id the id of the repository
+     *
+     * @return array information about the repository
+     */
+    public function showById($id)
+    {
+        return $this->get('/repositories/'.$id);
+    }
+
+    /**
      * Create repository.
      *
      * @link http://developer.github.com/v3/repos/
@@ -160,12 +167,13 @@ class Repo extends AbstractApi
      * @param string      $description  repository description
      * @param string      $homepage     homepage url
      * @param bool        $public       `true` for public, `false` for private
-     * @param null|string $organization username of organization if applicable
+     * @param string|null $organization username of organization if applicable
      * @param bool        $hasIssues    `true` to enable issues for this repository, `false` to disable them
      * @param bool        $hasWiki      `true` to enable the wiki for this repository, `false` to disable it
      * @param bool        $hasDownloads `true` to enable downloads for this repository, `false` to disable them
      * @param int         $teamId       The id of the team that will be granted access to this repository. This is only valid when creating a repo in an organization.
      * @param bool        $autoInit     `true` to create an initial commit with empty README, `false` for no initial commit
+     * @param bool        $hasProjects  `true` to enable projects for this repository or false to disable them.
      *
      * @return array returns repository data
      */
@@ -179,11 +187,12 @@ class Repo extends AbstractApi
         $hasWiki = false,
         $hasDownloads = false,
         $teamId = null,
-        $autoInit = false
+        $autoInit = false,
+        $hasProjects = true
     ) {
         $path = null !== $organization ? '/orgs/'.$organization.'/repos' : '/user/repos';
 
-        $parameters = array(
+        $parameters = [
             'name'          => $name,
             'description'   => $description,
             'homepage'      => $homepage,
@@ -191,8 +200,9 @@ class Repo extends AbstractApi
             'has_issues'    => $hasIssues,
             'has_wiki'      => $hasWiki,
             'has_downloads' => $hasDownloads,
-            'auto_init'     => $autoInit
-        );
+            'auto_init'     => $autoInit,
+            'has_projects' => $hasProjects,
+        ];
 
         if ($organization && $teamId) {
             $parameters['team_id'] = $teamId;
@@ -239,9 +249,9 @@ class Repo extends AbstractApi
      *
      * @param string $username   the user who owns the repository
      * @param string $repository the name of the repository
-     * @param string $format     one of formats: "raw" or "html"
+     * @param string $format     one of formats: "raw", "html", or "v3+json"
      *
-     * @return array the readme content
+     * @return string|array the readme content
      */
     public function readme($username, $repository, $format = 'raw')
     {
@@ -284,6 +294,18 @@ class Repo extends AbstractApi
     public function commits()
     {
         return new Commits($this->client);
+    }
+
+    /**
+     * Manage checks on a repository.
+     *
+     * @link https://developer.github.com/v3/checks/
+     *
+     * @return Checks
+     */
+    public function checks()
+    {
+        return new Checks($this->client);
     }
 
     /**
@@ -441,9 +463,9 @@ class Repo extends AbstractApi
      */
     public function contributors($username, $repository, $includingAnonymous = false)
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contributors', array(
-            'anon' => $includingAnonymous ?: null
-        ));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contributors', [
+            'anon' => $includingAnonymous ?: null,
+        ]);
     }
 
     /**
@@ -493,22 +515,6 @@ class Repo extends AbstractApi
     }
 
     /**
-     * @deprecated see subscribers method
-     *
-     * @param string $username
-     * @param string $repository
-     * @param int    $page
-     *
-     * @return array
-     */
-    public function watchers($username, $repository, $page = 1)
-    {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/watchers', array(
-            'page' => $page
-        ));
-    }
-
-    /**
      * @param string $username
      * @param string $repository
      * @param int    $page
@@ -517,9 +523,9 @@ class Repo extends AbstractApi
      */
     public function subscribers($username, $repository, $page = 1)
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/subscribers', array(
-            'page' => $page
-        ));
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/subscribers', [
+            'page' => $page,
+        ]);
     }
 
     /**
@@ -537,10 +543,10 @@ class Repo extends AbstractApi
      */
     public function merge($username, $repository, $base, $head, $message = null)
     {
-        $parameters = array(
+        $parameters = [
             'base' => $base,
             'head' => $head,
-        );
+        ];
 
         if (is_string($message)) {
             $parameters['commit_message'] = $message;
@@ -552,20 +558,131 @@ class Repo extends AbstractApi
     /**
      * @param string $username
      * @param string $repository
+     * @param array  $parameters
+     *
      * @return array
      */
-    public function milestones($username, $repository)
+    public function milestones($username, $repository, array $parameters = [])
     {
-        return $this->get('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/milestones');
+        return $this->get('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/milestones', $parameters);
     }
 
     public function projects()
     {
         return new Projects($this->client);
     }
-    
+
     public function traffic()
     {
         return new Traffic($this->client);
+    }
+
+    public function pages()
+    {
+        return new Pages($this->client);
+    }
+
+    /**
+     * @param string $username
+     * @param string $repository
+     * @param int    $page
+     *
+     * @return array|string
+     *
+     * @see https://developer.github.com/v3/activity/events/#list-repository-events
+     */
+    public function events($username, $repository, $page = 1)
+    {
+        return $this->get('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/events', ['page' => $page]);
+    }
+
+    /**
+     * Get the community profile metrics for a repository.
+     *
+     * @link https://developer.github.com/v3/repos/community/#retrieve-community-profile-metrics
+     *
+     * @param string $username
+     * @param string $repository
+     *
+     * @return array
+     */
+    public function communityProfile($username, $repository)
+    {
+        //This api is in preview mode, so set the correct accept-header
+        $this->acceptHeaderValue = 'application/vnd.github.black-panther-preview+json';
+
+        return $this->get('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/community/profile');
+    }
+
+    /**
+     * Get the contents of a repository's code of conduct.
+     *
+     * @link https://developer.github.com/v3/codes_of_conduct/#get-the-contents-of-a-repositorys-code-of-conduct
+     *
+     * @param string $username
+     * @param string $repository
+     *
+     * @return array
+     */
+    public function codeOfConduct($username, $repository)
+    {
+        //This api is in preview mode, so set the correct accept-header
+        $this->acceptHeaderValue = 'application/vnd.github.scarlet-witch-preview+json';
+
+        return $this->get('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/community/code_of_conduct');
+    }
+
+    /**
+     * List all topics for a repository.
+     *
+     * @link https://developer.github.com/v3/repos/#list-all-topics-for-a-repository
+     *
+     * @param string $username
+     * @param string $repository
+     *
+     * @return array
+     */
+    public function topics($username, $repository)
+    {
+        //This api is in preview mode, so set the correct accept-header
+        $this->acceptHeaderValue = 'application/vnd.github.mercy-preview+json';
+
+        return $this->get('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/topics');
+    }
+
+    /**
+     * Replace all topics for a repository.
+     *
+     * @link https://developer.github.com/v3/repos/#replace-all-topics-for-a-repository
+     *
+     * @param string $username
+     * @param string $repository
+     * @param array  $topics
+     *
+     * @return array
+     */
+    public function replaceTopics($username, $repository, array $topics)
+    {
+        //This api is in preview mode, so set the correct accept-header
+        $this->acceptHeaderValue = 'application/vnd.github.mercy-preview+json';
+
+        return $this->put('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/topics', ['names' => $topics]);
+    }
+
+    /**
+     * Transfer a repository.
+     *
+     * @link https://developer.github.com/v3/repos/#transfer-a-repository
+     *
+     * @param string $username
+     * @param string $repository
+     * @param string $newOwner
+     * @param array  $teamId
+     *
+     * @return array
+     */
+    public function transfer($username, $repository, $newOwner, $teamId = [])
+    {
+        return $this->post('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/transfer', ['new_owner' => $newOwner, 'team_id' => $teamId]);
     }
 }

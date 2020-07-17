@@ -6,116 +6,60 @@ namespace Github\Api;
  * Creating, deleting and listing authorizations.
  *
  * @link   http://developer.github.com/v3/oauth_authorizations/
+ *
  * @author Evgeniy Guseletov <d46k16@gmail.com>
  */
 class Authorizations extends AbstractApi
 {
     /**
-     * List all authorizations.
+     * Check an application token.
+     *
+     * @param string      $clientId
+     * @param string|null $token
      *
      * @return array
      */
-    public function all()
+    public function checkToken($clientId, $token = null)
     {
-        return $this->get('/authorizations');
+        return $this->post('/applications/'.rawurlencode($clientId).'/token', $token ? ['access_token' => $token] : []);
     }
 
     /**
-     * Show a single authorization.
+     * Reset an application token.
      *
-     * @param $clientId
+     * @param string      $clientId
+     * @param string|null $token
      *
      * @return array
      */
-    public function show($clientId)
+    public function resetToken($clientId, $token = null)
     {
-        return $this->get('/authorizations/'.rawurlencode($clientId));
+        return $this->patch('/applications/'.rawurlencode($clientId).'/token', $token ? ['access_token' => $token] : []);
     }
 
     /**
-     * Create an authorization.
+     * Revoke an application token.
      *
-     * @param array $params
-     * @param null $OTPCode
+     * @param string      $clientId
+     * @param string|null $token
      *
-     * @return array
+     * @return void
      */
-    public function create(array $params, $OTPCode = null)
+    public function deleteToken($clientId, $token = null)
     {
-        $headers = null === $OTPCode ? array() : array('X-GitHub-OTP' => $OTPCode);
-
-        return $this->post('/authorizations', $params, $headers);
+        $this->delete('/applications/'.rawurlencode($clientId).'/token', $token ? ['access_token' => $token] : []);
     }
 
     /**
-     * Update an authorization.
+     * Revoke an application authorization.
      *
-     * @param $clientId
-     * @param array $params
+     * @param string      $clientId
+     * @param string|null $token
      *
-     * @return array
+     * @return void
      */
-    public function update($clientId, array $params)
+    public function deleteGrant($clientId, $token = null)
     {
-        return $this->patch('/authorizations/'.rawurlencode($clientId), $params);
-    }
-
-    /**
-     * Remove an authorization.
-     *
-     * @param $clientId
-     *
-     * @return array
-     */
-    public function remove($clientId)
-    {
-        return $this->delete('/authorizations/'.rawurlencode($clientId));
-    }
-
-    /**
-     * Check an authorization.
-     *
-     * @param $clientId
-     * @param $token
-     *
-     * @return array
-     */
-    public function check($clientId, $token)
-    {
-        return $this->get('/applications/'.rawurlencode($clientId).'/tokens/'.rawurlencode($token));
-    }
-
-    /**
-     * Reset an authorization.
-     *
-     * @param $clientId
-     * @param $token
-     *
-     * @return array
-     */
-    public function reset($clientId, $token)
-    {
-        return $this->post('/applications/'.rawurlencode($clientId).'/tokens/'.rawurlencode($token));
-    }
-
-    /**
-     * Remove an authorization.
-     *
-     * @param $clientId
-     * @param $token
-     */
-    public function revoke($clientId, $token)
-    {
-        $this->delete('/applications/'.rawurlencode($clientId).'/tokens/'.rawurlencode($token));
-    }
-
-    /**
-     * Revoke all authorizations.
-     *
-     * @param $clientId
-     */
-    public function revokeAll($clientId)
-    {
-        $this->delete('/applications/'.rawurlencode($clientId).'/tokens');
+        $this->delete('/applications/'.rawurlencode($clientId).'/grant', $token ? ['access_token' => $token] : []);
     }
 }

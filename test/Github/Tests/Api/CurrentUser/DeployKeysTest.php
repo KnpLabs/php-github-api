@@ -1,6 +1,9 @@
 <?php
 
-namespace Github\Tests\Api;
+namespace Github\Tests\Api\CurrentUser;
+
+use Github\Exception\MissingArgumentException;
+use Github\Tests\Api\TestCase;
 
 class DeployKeysTest extends TestCase
 {
@@ -9,7 +12,7 @@ class DeployKeysTest extends TestCase
      */
     public function shouldShowKey()
     {
-        $expectedValue = array('id' => '12', 'key' => 'ssh-rsa ...');
+        $expectedValue = ['id' => '12', 'key' => 'ssh-rsa ...'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -25,7 +28,7 @@ class DeployKeysTest extends TestCase
      */
     public function shouldGetKeys()
     {
-        $expectedValue = array(array('id' => '12', 'key' => 'ssh-rsa ...'));
+        $expectedValue = [['id' => '12', 'key' => 'ssh-rsa ...']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -41,8 +44,8 @@ class DeployKeysTest extends TestCase
      */
     public function shouldCreateKey()
     {
-        $expectedValue = array('id' => '123', 'key' => 'ssh-rsa ...');
-        $data = array('title' => 'my key', 'key' => 'ssh-rsa ...');
+        $expectedValue = ['id' => '123', 'key' => 'ssh-rsa ...'];
+        $data = ['title' => 'my key', 'key' => 'ssh-rsa ...'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -55,11 +58,11 @@ class DeployKeysTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateKeyWithoutTitleParam()
     {
-        $data = array('key' => 'ssh-rsa ...');
+        $this->expectException(MissingArgumentException::class);
+        $data = ['key' => 'ssh-rsa ...'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -70,11 +73,11 @@ class DeployKeysTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateKeyWithoutKeyParam()
     {
-        $data = array('title' => 'my key');
+        $this->expectException(MissingArgumentException::class);
+        $data = ['title' => 'my key'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -88,7 +91,7 @@ class DeployKeysTest extends TestCase
      */
     public function shouldRemoveKey()
     {
-        $expectedValue = array('some value');
+        $expectedValue = ['some value'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())

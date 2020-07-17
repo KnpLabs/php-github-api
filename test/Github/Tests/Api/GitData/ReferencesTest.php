@@ -1,6 +1,9 @@
 <?php
 
-namespace Github\Tests\Api;
+namespace Github\Tests\Api\GitData;
+
+use Github\Exception\MissingArgumentException;
+use Github\Tests\Api\TestCase;
 
 class ReferencesTest extends TestCase
 {
@@ -9,7 +12,7 @@ class ReferencesTest extends TestCase
      */
     public function shouldNotEscapeSlashesInReferences()
     {
-        $expectedValue = array('reference' => 'some data');
+        $expectedValue = ['reference' => 'some data'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -25,7 +28,7 @@ class ReferencesTest extends TestCase
      */
     public function shouldShowReference()
     {
-        $expectedValue = array('reference' => 'some data');
+        $expectedValue = ['reference' => 'some data'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -41,7 +44,7 @@ class ReferencesTest extends TestCase
      */
     public function shouldRemoveReference()
     {
-        $expectedValue = array('reference' => 'some data');
+        $expectedValue = ['reference' => 'some data'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -57,7 +60,7 @@ class ReferencesTest extends TestCase
      */
     public function shouldGetAllRepoReferences()
     {
-        $expectedValue = array(array('reference' => 'some data'));
+        $expectedValue = [['reference' => 'some data']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -71,9 +74,25 @@ class ReferencesTest extends TestCase
     /**
      * @test
      */
+    public function shouldGetAllMatchingReferences()
+    {
+        $expectedValue = [['reference' => 'some data']];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/repos/l3l0/l3l0repo/git/matching-refs/heads/refName')
+            ->will($this->returnValue($expectedValue));
+
+        $this->assertEquals($expectedValue, $api->matching('l3l0', 'l3l0repo', 'heads/refName'));
+    }
+
+    /**
+     * @test
+     */
     public function shouldGetAllRepoBranches()
     {
-        $expectedValue = array(array('branch' => 'some data'));
+        $expectedValue = [['branch' => 'some data']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -89,7 +108,7 @@ class ReferencesTest extends TestCase
      */
     public function shouldGetAllRepoTags()
     {
-        $expectedValue = array(array('tag' => 'some data'));
+        $expectedValue = [['tag' => 'some data']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -105,8 +124,8 @@ class ReferencesTest extends TestCase
      */
     public function shouldCreateReference()
     {
-        $expectedValue = array('reference' => 'some data');
-        $data = array('ref' => '122', 'sha' => '1234');
+        $expectedValue = ['reference' => 'some data'];
+        $data = ['ref' => '122', 'sha' => '1234'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -119,11 +138,11 @@ class ReferencesTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateReferenceWithoutShaParam()
     {
-        $data = array('ref' => '123');
+        $this->expectException(MissingArgumentException::class);
+        $data = ['ref' => '123'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -134,11 +153,11 @@ class ReferencesTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateReferenceWithoutRefsParam()
     {
-        $data = array('sha' => '1234');
+        $this->expectException(MissingArgumentException::class);
+        $data = ['sha' => '1234'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -152,8 +171,8 @@ class ReferencesTest extends TestCase
      */
     public function shouldUpdateReference()
     {
-        $expectedValue = array('reference' => 'some data');
-        $data = array('sha' => '12345sha');
+        $expectedValue = ['reference' => 'some data'];
+        $data = ['sha' => '12345sha'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -166,11 +185,11 @@ class ReferencesTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNoUpdateReferenceWithoutSha()
     {
-        $data = array();
+        $this->expectException(MissingArgumentException::class);
+        $data = [];
 
         $api = $this->getApiMock();
         $api->expects($this->never())

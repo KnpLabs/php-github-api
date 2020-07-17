@@ -3,18 +3,18 @@
 namespace Github;
 
 use Github\Api\ApiInterface;
-use Github\Exception\InvalidArgumentException;
 use Github\Exception\BadMethodCallException;
+use Github\Exception\InvalidArgumentException;
 use Github\HttpClient\Builder;
 use Github\HttpClient\Plugin\Authentication;
 use Github\HttpClient\Plugin\GithubExceptionThrower;
 use Github\HttpClient\Plugin\History;
 use Github\HttpClient\Plugin\PathPrepend;
-use Http\Client\Common\HttpMethodsClient;
+use Http\Client\Common\HttpMethodsClientInterface;
 use Http\Client\Common\Plugin;
-use Http\Client\HttpClient;
-use Http\Discovery\UriFactoryDiscovery;
+use Http\Discovery\Psr17FactoryDiscovery;
 use Psr\Cache\CacheItemPoolInterface;
+use Psr\Http\Client\ClientInterface;
 
 /**
  * Simple yet very cool PHP GitHub client.
@@ -23,14 +23,15 @@ use Psr\Cache\CacheItemPoolInterface;
  * @method Api\CurrentUser me()
  * @method Api\Enterprise ent()
  * @method Api\Enterprise enterprise()
+ * @method Api\Miscellaneous\CodeOfConduct codeOfConduct()
  * @method Api\Miscellaneous\Emojis emojis()
+ * @method Api\Miscellaneous\Licenses licenses()
  * @method Api\GitData git()
  * @method Api\GitData gitData()
  * @method Api\Gists gist()
  * @method Api\Gists gists()
  * @method Api\Miscellaneous\Gitignore gitignore()
- * @method Api\Integrations integration()
- * @method Api\Integrations integrations()
+ * @method Api\Apps apps()
  * @method Api\Issue issue()
  * @method Api\Issue issues()
  * @method Api\Markdown markdown()
@@ -51,8 +52,8 @@ use Psr\Cache\CacheItemPoolInterface;
  * @method Api\Repo repository()
  * @method Api\Repo repositories()
  * @method Api\Search search()
- * @method Api\Organization team()
- * @method Api\Organization teams()
+ * @method Api\Organization\Teams team()
+ * @method Api\Organization\Teams teams()
  * @method Api\User user()
  * @method Api\User users()
  * @method Api\Authorizations authorization()
@@ -67,32 +68,26 @@ use Psr\Cache\CacheItemPoolInterface;
 class Client
 {
     /**
-     * Constant for authentication method. Indicates the default, but deprecated
-     * login with username and token in URL.
+     * Authenticate using a client_id/client_secret combination.
+     *
+     * @var string
      */
-    const AUTH_URL_TOKEN = 'url_token';
+    const AUTH_CLIENT_ID = 'client_id_header';
 
     /**
-     * Constant for authentication method. Not indicates the new login, but allows
-     * usage of unauthenticated rate limited requests for given client_id + client_secret.
+     * Authenticate using a GitHub access token.
+     *
+     * @var string
      */
-    const AUTH_URL_CLIENT_ID = 'url_client_id';
+    const AUTH_ACCESS_TOKEN = 'access_token_header';
 
     /**
-     * Constant for authentication method. Indicates the new favored login method
-     * with username and password via HTTP Authentication.
-     */
-    const AUTH_HTTP_PASSWORD = 'http_password';
-
-    /**
-     * Constant for authentication method. Indicates the new login method with
-     * with username and token via HTTP Authentication.
-     */
-    const AUTH_HTTP_TOKEN = 'http_token';
-
-    /**
-     * Constant for authentication method. Indicates JSON Web Token
-     * authentication required for integration access to the API.
+     * Constant for authentication method.
+     *
+     * Indicates JSON Web Token authentication required for GitHub apps access
+     * to the API.
+     *
+     * @var string
      */
     const AUTH_JWT = 'jwt';
 
@@ -121,15 +116,15 @@ class Client
     public function __construct(Builder $httpClientBuilder = null, $apiVersion = null, $enterpriseUrl = null)
     {
         $this->responseHistory = new History();
-        $this->httpClientBuilder = $builder = $httpClientBuilder ?: new Builder();
+        $this->httpClientBuilder = $builder = $httpClientBuilder ?? new Builder();
 
         $builder->addPlugin(new GithubExceptionThrower());
         $builder->addPlugin(new Plugin\HistoryPlugin($this->responseHistory));
         $builder->addPlugin(new Plugin\RedirectPlugin());
-        $builder->addPlugin(new Plugin\AddHostPlugin(UriFactoryDiscovery::find()->createUri('https://api.github.com')));
-        $builder->addPlugin(new Plugin\HeaderDefaultsPlugin(array(
+        $builder->addPlugin(new Plugin\AddHostPlugin(Psr17FactoryDiscovery::findUrlFactory()->createUri('https://api.github.com')));
+        $builder->addPlugin(new Plugin\HeaderDefaultsPlugin([
             'User-Agent' => 'php-github-api (http://github.com/KnpLabs/php-github-api)',
-        )));
+        ]));
 
         $this->apiVersion = $apiVersion ?: 'v3';
         $builder->addHeaderValue('Accept', sprintf('application/vnd.github.%s+json', $this->apiVersion));
@@ -140,13 +135,13 @@ class Client
     }
 
     /**
-     * Create a Github\Client using a HttpClient.
+     * Create a Github\Client using a HTTP client.
      *
-     * @param HttpClient $httpClient
+     * @param ClientInterface $httpClient
      *
      * @return Client
      */
-    public static function createWithHttpClient(HttpClient $httpClient)
+    public static function createWithHttpClient(ClientInterface $httpClient)
     {
         $builder = new Builder($httpClient);
 
@@ -167,6 +162,9 @@ class Client
             case 'current_user':
             case 'currentUser':
                 $api = new Api\CurrentUser($this);
+                break;
+            case 'codeOfConduct':
+                $api = new Api\Miscellaneous\CodeOfConduct($this);
                 break;
 
             case 'deployment':
@@ -198,9 +196,8 @@ class Client
                 $api = new Api\Miscellaneous\Gitignore($this);
                 break;
 
-            case 'integration':
-            case 'integrations':
-                $api = new Api\Integrations($this);
+            case 'apps':
+                $api = new Api\Apps($this);
                 break;
 
             case 'issue':
@@ -212,6 +209,10 @@ class Client
                 $api = new Api\Markdown($this);
                 break;
 
+            case 'licenses':
+                $api = new Api\Miscellaneous\Licenses($this);
+                break;
+
             case 'notification':
             case 'notifications':
                 $api = new Api\Notification($this);
@@ -221,6 +222,7 @@ class Client
             case 'organizations':
                 $api = new Api\Organization($this);
                 break;
+
             case 'org_project':
             case 'orgProject':
             case 'org_projects':
@@ -280,6 +282,7 @@ class Client
             case 'meta':
                 $api = new Api\Meta($this);
                 break;
+
             case 'graphql':
                 $api = new Api\GraphQL($this);
                 break;
@@ -295,24 +298,22 @@ class Client
      * Authenticate a user for all next requests.
      *
      * @param string      $tokenOrLogin GitHub private token/username/client ID
-     * @param null|string $password     GitHub password/secret (optionally can contain $authMethod)
-     * @param null|string $authMethod   One of the AUTH_* class constants
+     * @param string|null $password     GitHub password/secret (optionally can contain $authMethod)
+     * @param string|null $authMethod   One of the AUTH_* class constants
      *
      * @throws InvalidArgumentException If no authentication method was given
+     *
+     * @return void
      */
     public function authenticate($tokenOrLogin, $password = null, $authMethod = null)
     {
-        if (null === $password && null === $authMethod) {
-            throw new InvalidArgumentException('You need to specify authentication method!');
-        }
-
-        if (null === $authMethod && in_array($password, array(self::AUTH_URL_TOKEN, self::AUTH_URL_CLIENT_ID, self::AUTH_HTTP_PASSWORD, self::AUTH_HTTP_TOKEN, self::AUTH_JWT))) {
+        if (null === $authMethod && (self::AUTH_JWT === $password || self::AUTH_ACCESS_TOKEN === $password)) {
             $authMethod = $password;
             $password = null;
         }
 
         if (null === $authMethod) {
-            $authMethod = self::AUTH_HTTP_PASSWORD;
+            throw new InvalidArgumentException('You need to specify authentication method!');
         }
 
         $this->getHttpClientBuilder()->removePlugin(Authentication::class);
@@ -323,6 +324,8 @@ class Client
      * Sets the URL of your GitHub Enterprise instance.
      *
      * @param string $enterpriseUrl URL of the API in the form of http(s)://hostname
+     *
+     * @return void
      */
     private function setEnterpriseUrl($enterpriseUrl)
     {
@@ -330,7 +333,7 @@ class Client
         $builder->removePlugin(Plugin\AddHostPlugin::class);
         $builder->removePlugin(PathPrepend::class);
 
-        $builder->addPlugin(new Plugin\AddHostPlugin(UriFactoryDiscovery::find()->createUri($enterpriseUrl)));
+        $builder->addPlugin(new Plugin\AddHostPlugin(Psr17FactoryDiscovery::findUrlFactory()->createUri($enterpriseUrl)));
         $builder->addPlugin(new PathPrepend(sprintf('/api/%s', $this->getApiVersion())));
     }
 
@@ -345,8 +348,10 @@ class Client
     /**
      * Add a cache plugin to cache responses locally.
      *
-     * @param CacheItemPoolInterface $cache
+     * @param CacheItemPoolInterface $cachePool
      * @param array                  $config
+     *
+     * @return void
      */
     public function addCache(CacheItemPoolInterface $cachePool, array $config = [])
     {
@@ -355,6 +360,8 @@ class Client
 
     /**
      * Remove the cache plugin.
+     *
+     * @return void
      */
     public function removeCache()
     {
@@ -363,8 +370,7 @@ class Client
 
     /**
      * @param string $name
-     *
-     * @throws BadMethodCallException
+     * @param array  $args
      *
      * @return ApiInterface
      */
@@ -386,7 +392,7 @@ class Client
     }
 
     /**
-     * @return HttpMethodsClient
+     * @return HttpMethodsClientInterface
      */
     public function getHttpClient()
     {

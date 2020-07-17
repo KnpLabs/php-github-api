@@ -3,6 +3,7 @@
 namespace Github\HttpClient\Plugin;
 
 use Http\Client\Common\Plugin;
+use Http\Promise\Promise;
 use Psr\Http\Message\RequestInterface;
 
 /**
@@ -12,6 +13,9 @@ use Psr\Http\Message\RequestInterface;
  */
 class PathPrepend implements Plugin
 {
+    /**
+     * @var string
+     */
     private $path;
 
     /**
@@ -23,14 +27,19 @@ class PathPrepend implements Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * @param RequestInterface $request
+     * @param callable         $next
+     * @param callable         $first
+     *
+     * @return Promise
      */
-    public function handleRequest(RequestInterface $request, callable $next, callable $first)
+    public function handleRequest(RequestInterface $request, callable $next, callable $first): Promise
     {
         $currentPath = $request->getUri()->getPath();
-        $uri = $request->getUri()->withPath($this->path.$currentPath);
-
-        $request = $request->withUri($uri);
+        if (strpos($currentPath, $this->path) !== 0) {
+            $uri = $request->getUri()->withPath($this->path.$currentPath);
+            $request = $request->withUri($uri);
+        }
 
         return $next($request);
     }

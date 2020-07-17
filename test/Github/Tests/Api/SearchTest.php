@@ -9,7 +9,7 @@ class SearchTest extends TestCase
      */
     public function shouldSearchRepositoriesByQuery()
     {
-        $expectedArray = array(array('total_count' => '0'));
+        $expectedArray = [['total_count' => '0']];
 
         $api = $this->getApiMock();
 
@@ -17,7 +17,7 @@ class SearchTest extends TestCase
             ->method('get')
             ->with(
                 '/search/repositories',
-                array('q' => 'query text', 'sort' => 'updated', 'order' => 'desc')
+                ['q' => 'query text', 'sort' => 'updated', 'order' => 'desc']
             )
             ->will($this->returnValue($expectedArray));
 
@@ -29,7 +29,7 @@ class SearchTest extends TestCase
      */
     public function shouldSearchRepositoriesRegardingSortAndOrder()
     {
-        $expectedArray = array(array('total_count' => '0'));
+        $expectedArray = [['total_count' => '0']];
 
         $api = $this->getApiMock();
 
@@ -37,7 +37,7 @@ class SearchTest extends TestCase
             ->method('get')
             ->with(
                 '/search/repositories',
-                array('q' => 'query text', 'sort' => 'created', 'order' => 'asc')
+                ['q' => 'query text', 'sort' => 'created', 'order' => 'asc']
             )
             ->will($this->returnValue($expectedArray));
 
@@ -52,7 +52,7 @@ class SearchTest extends TestCase
      */
     public function shouldSearchIssuesByQuery()
     {
-        $expectedArray = array(array('total_count' => '0'));
+        $expectedArray = [['total_count' => '0']];
 
         $api = $this->getApiMock();
 
@@ -60,7 +60,7 @@ class SearchTest extends TestCase
             ->method('get')
             ->with(
                 '/search/issues',
-                array('q' => 'query text', 'sort' => 'updated', 'order' => 'desc')
+                ['q' => 'query text', 'sort' => 'updated', 'order' => 'desc']
             )
             ->will($this->returnValue($expectedArray));
 
@@ -72,7 +72,7 @@ class SearchTest extends TestCase
      */
     public function shouldSearchIssuesRegardingSortAndOrder()
     {
-        $expectedArray = array(array('total_count' => '0'));
+        $expectedArray = [['total_count' => '0']];
 
         $api = $this->getApiMock();
 
@@ -80,7 +80,7 @@ class SearchTest extends TestCase
             ->method('get')
             ->with(
                 '/search/issues',
-                array('q' => 'query text', 'sort' => 'created', 'order' => 'asc')
+                ['q' => 'query text', 'sort' => 'created', 'order' => 'asc']
             )
             ->will($this->returnValue($expectedArray));
 
@@ -95,7 +95,7 @@ class SearchTest extends TestCase
      */
     public function shouldSearchCodeByQuery()
     {
-        $expectedArray = array(array('total_count' => '0'));
+        $expectedArray = [['total_count' => '0']];
 
         $api = $this->getApiMock();
 
@@ -103,7 +103,7 @@ class SearchTest extends TestCase
             ->method('get')
             ->with(
                 '/search/code',
-                array('q' => 'query text', 'sort' => 'updated', 'order' => 'desc')
+                ['q' => 'query text', 'sort' => 'updated', 'order' => 'desc']
             )
             ->will($this->returnValue($expectedArray));
 
@@ -115,7 +115,7 @@ class SearchTest extends TestCase
      */
     public function shouldSearchCodeRegardingSortAndOrder()
     {
-        $expectedArray = array(array('total_count' => '0'));
+        $expectedArray = [['total_count' => '0']];
 
         $api = $this->getApiMock();
 
@@ -123,7 +123,7 @@ class SearchTest extends TestCase
             ->method('get')
             ->with(
                 '/search/code',
-                array('q' => 'query text', 'sort' => 'created', 'order' => 'asc')
+                ['q' => 'query text', 'sort' => 'created', 'order' => 'asc']
             )
             ->will($this->returnValue($expectedArray));
 
@@ -138,7 +138,7 @@ class SearchTest extends TestCase
      */
     public function shouldSearchUsersByQuery()
     {
-        $expectedArray = array(array('total_count' => '0'));
+        $expectedArray = [['total_count' => '0']];
 
         $api = $this->getApiMock();
 
@@ -146,7 +146,7 @@ class SearchTest extends TestCase
             ->method('get')
             ->with(
                 '/search/users',
-                array('q' => 'query text', 'sort' => 'updated', 'order' => 'desc')
+                ['q' => 'query text', 'sort' => 'updated', 'order' => 'desc']
             )
             ->will($this->returnValue($expectedArray));
 
@@ -158,7 +158,7 @@ class SearchTest extends TestCase
      */
     public function shouldSearchUsersRegardingSortAndOrder()
     {
-        $expectedArray = array(array('total_count' => '0'));
+        $expectedArray = [['total_count' => '0']];
 
         $api = $this->getApiMock();
 
@@ -166,13 +166,53 @@ class SearchTest extends TestCase
             ->method('get')
             ->with(
                 '/search/users',
-                array('q' => 'query text', 'sort' => 'created', 'order' => 'asc')
+                ['q' => 'query text', 'sort' => 'created', 'order' => 'asc']
             )
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals(
             $expectedArray,
             $api->users('query text', 'created', 'asc')
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function shouldSearchCommitsRegardingSortAndOrder()
+    {
+        $expectedArray = ['total_count' => '0'];
+
+        $api = $this->getApiMock();
+
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/search/commits', ['q' => 'query text', 'sort' => 'author-date', 'order' => 'asc'])
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals(
+            $expectedArray,
+            $api->commits('query text', 'author-date', 'asc')
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function shouldSearchTopics()
+    {
+        $expectedArray = ['total_count' => '0'];
+
+        $api = $this->getApiMock();
+
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/search/topics', ['q' => 'query text'])
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals(
+            $expectedArray,
+            $api->topics('query text')
         );
     }
 

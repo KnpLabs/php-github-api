@@ -11,7 +11,7 @@ class CommentsTest extends TestCase
      */
     public function shouldGetAllGistComments()
     {
-        $expectedValue = array(array('comment1data'), array('comment2data'));
+        $expectedValue = [['comment1data'], ['comment2data']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -27,7 +27,7 @@ class CommentsTest extends TestCase
      */
     public function shouldShowGistComment()
     {
-        $expectedValue = array('comment1');
+        $expectedValue = ['comment1'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -43,12 +43,12 @@ class CommentsTest extends TestCase
      */
     public function shouldCreateGistComment()
     {
-        $expectedValue = array('comment1data');
+        $expectedValue = ['comment1data'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('/gists/123/comments', array('body' => 'Test body'))
+            ->with('/gists/123/comments', ['body' => 'Test body'])
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->create('123', 'Test body'));
@@ -59,8 +59,8 @@ class CommentsTest extends TestCase
      */
     public function shouldUpdateGistComment()
     {
-        $expectedValue = array('comment1data');
-        $data = array('body' => 'body test');
+        $expectedValue = ['comment1data'];
+        $data = ['body' => 'body test'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -76,7 +76,7 @@ class CommentsTest extends TestCase
      */
     public function shouldRemoveComment()
     {
-        $expectedValue = array('someOutput');
+        $expectedValue = ['someOutput'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())

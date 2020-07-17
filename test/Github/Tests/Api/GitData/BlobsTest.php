@@ -1,6 +1,9 @@
 <?php
 
-namespace Github\Tests\Api;
+namespace Github\Tests\Api\GitData;
+
+use Github\Exception\MissingArgumentException;
+use Github\Tests\Api\TestCase;
 
 class BlobsTest extends TestCase
 {
@@ -9,7 +12,7 @@ class BlobsTest extends TestCase
      */
     public function shouldShowBlob()
     {
-        $expectedValue = array('blob' => 'some data');
+        $expectedValue = ['blob' => 'some data'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -25,15 +28,15 @@ class BlobsTest extends TestCase
      */
     public function shouldShowRawBlob()
     {
-        $expectedValue = array('blob' => 'some data');
+        $expectedValue = ['blob' => 'some data'];
 
         $client = $this->getMockBuilder('Github\Client')
             ->disableOriginalConstructor()
             ->getMock();
 
         $api = $this->getMockBuilder($this->getApiClass())
-            ->setMethods(array('configure', 'get'))
-            ->setConstructorArgs(array($client))
+            ->setMethods(['configure', 'get'])
+            ->setConstructorArgs([$client])
             ->getMock();
         $api->expects($this->once())
             ->method('configure')
@@ -53,8 +56,8 @@ class BlobsTest extends TestCase
      */
     public function shouldCreateBlob()
     {
-        $expectedValue = array('blob' => 'some data');
-        $data = array('content' => 'some cotent', 'encoding' => 'utf8');
+        $expectedValue = ['blob' => 'some data'];
+        $data = ['content' => 'some cotent', 'encoding' => 'utf8'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -67,11 +70,11 @@ class BlobsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateBlobWithoutEncoding()
     {
-        $data = array('content' => 'some cotent');
+        $this->expectException(MissingArgumentException::class);
+        $data = ['content' => 'some cotent'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -82,11 +85,11 @@ class BlobsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateBlobWithoutContent()
     {
-        $data = array('encoding' => 'utf8');
+        $this->expectException(MissingArgumentException::class);
+        $data = ['encoding' => 'utf8'];
 
         $api = $this->getApiMock();
         $api->expects($this->never())

@@ -2,6 +2,7 @@
 
 namespace Github\Tests\Api\Project;
 
+use Github\Exception\MissingArgumentException;
 use Github\Tests\Api\TestCase;
 
 class ColumnsTest extends TestCase
@@ -11,7 +12,7 @@ class ColumnsTest extends TestCase
      */
     public function shouldGetAllProjectColumns()
     {
-        $expectedValue = array(array('column1data'), array('column2data'));
+        $expectedValue = [['column1data'], ['column2data']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -27,7 +28,7 @@ class ColumnsTest extends TestCase
      */
     public function shouldShowColumn()
     {
-        $expectedValue = array('column1');
+        $expectedValue = ['column1'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -40,11 +41,11 @@ class ColumnsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotCreateWithoutName()
     {
-        $data = array();
+        $this->expectException(MissingArgumentException::class);
+        $data = [];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -58,8 +59,8 @@ class ColumnsTest extends TestCase
      */
     public function shouldCreateColumn()
     {
-        $expectedValue = array('column1data');
-        $data = array('name' => 'column 1');
+        $expectedValue = ['column1data'];
+        $data = ['name' => 'column 1'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -72,11 +73,11 @@ class ColumnsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotUpdateWithoutName()
     {
-        $data = array();
+        $this->expectException(MissingArgumentException::class);
+        $data = [];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -90,8 +91,8 @@ class ColumnsTest extends TestCase
      */
     public function shouldUpdateColumn()
     {
-        $expectedValue = array('column1data');
-        $data = array('name' => 'column 1 update');
+        $expectedValue = ['column1data'];
+        $data = ['name' => 'column 1 update'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -107,7 +108,7 @@ class ColumnsTest extends TestCase
      */
     public function shouldRemoveCard()
     {
-        $expectedValue = array('someOutput');
+        $expectedValue = ['someOutput'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
@@ -120,11 +121,11 @@ class ColumnsTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Github\Exception\MissingArgumentException
      */
     public function shouldNotMoveWithoutPosition()
     {
-        $data = array();
+        $this->expectException(MissingArgumentException::class);
+        $data = [];
 
         $api = $this->getApiMock();
         $api->expects($this->never())
@@ -138,8 +139,8 @@ class ColumnsTest extends TestCase
      */
     public function shouldMoveCard()
     {
-        $expectedValue = array('card1');
-        $data = array('position' => 'first');
+        $expectedValue = ['card1'];
+        $data = ['position' => 'first'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
