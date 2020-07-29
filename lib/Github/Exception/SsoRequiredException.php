@@ -1,0 +1,25 @@
+<?php
+
+namespace Github\Exception;
+
+/**
+ * SsoRequiredException.
+ */
+class SsoRequiredException extends RuntimeException
+{
+    private $url;
+
+    public function __construct($url, $code = 0, $previous = null)
+    {
+        $this->url = $url;
+
+        parent::__construct('Resource protected by organization SAML enforcement. You must grant your personal token access to this organization.', $code, $previous);
+    }
+
+
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+}

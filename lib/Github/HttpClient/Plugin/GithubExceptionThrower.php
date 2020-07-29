@@ -5,6 +5,7 @@ namespace Github\HttpClient\Plugin;
 use Github\Exception\ApiLimitExceedException;
 use Github\Exception\ErrorException;
 use Github\Exception\RuntimeException;
+use Github\Exception\SsoRequiredException;
 use Github\Exception\TwoFactorAuthenticationRequiredException;
 use Github\Exception\ValidationFailedException;
 use Github\HttpClient\Message\ResponseMediator;
@@ -101,6 +102,16 @@ class GithubExceptionThrower implements Plugin
                 }
 
                 throw new RuntimeException(implode(', ', $errors), 502);
+            }
+
+            if ((403 === $response->getStatusCode()) && $response->hasHeader('X-GitHub-SSO') && 0 === strpos((string) ResponseMediator::getHeader($response, 'X-GitHub-SSO'), 'required;')) {
+                // The header will look something like this:
+                // required; url=https://github.com/orgs/octodocs-test/sso?authorization_request=AZSCKtL4U8yX1H3sCQIVnVgmjmon5fWxks5YrqhJgah0b2tlbl9pZM4EuMz4
+                // So we strip out the first 14 characters, leaving only the URL.
+                // @see https://developer.github.com/v3/auth/#authenticating-for-saml-sso
+                $url = substr((string) ResponseMediator::getHeader($response, 'X-GitHub-SSO'), 14);
+
+                throw new SsoRequiredException($url);
             }
 
             throw new RuntimeException(isset($content['message']) ? $content['message'] : $content, $response->getStatusCode());
