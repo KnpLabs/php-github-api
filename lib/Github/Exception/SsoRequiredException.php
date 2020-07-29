@@ -16,10 +16,8 @@ class SsoRequiredException extends RuntimeException
         parent::__construct('Resource protected by organization SAML enforcement. You must grant your personal token access to this organization.', $code, $previous);
     }
 
-
     public function getUrl()
     {
         return $this->url;
     }
-
 }
