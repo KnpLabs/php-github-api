@@ -103,7 +103,7 @@ abstract class AbstractApi implements ApiInterface
         }
 
         if (count($parameters) > 0) {
-            $path .= '?'.http_build_query($parameters);
+            $path .= '?'.http_build_query($parameters, '', '&', PHP_QUERY_RFC3986);
         }
 
         $response = $this->client->getHttpClient()->get($path, $requestHeaders);
@@ -126,7 +126,7 @@ abstract class AbstractApi implements ApiInterface
             unset($parameters['ref']);
         }
 
-        return $this->client->getHttpClient()->head($path.'?'.http_build_query($parameters), $requestHeaders);
+        return $this->client->getHttpClient()->head($path.'?'.http_build_query($parameters, '', '&', PHP_QUERY_RFC3986), $requestHeaders);
     }
 
     /**
