@@ -1,0 +1,23 @@
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2020-07-16T21:26:04Z
+
+The default (PHP_QUERY_RFC1738) is actually what's meant to be used to build request bodies of application/x-www-form-urlencoded, and not query strings for URIs. This is another blunder in the PHP naming of functions. RFC3986 is the (only) specification for query strings, and it should have been used always (though it only differs in a couple of edge cases, so people probably didn't notice things going wrong). :P
+
+---------------------------------------------------------------------------
+
+by acrobat at 2020-07-16T21:29:27Z
+
+That's clear, thanks for the explanation! 😄 Can you target the 2.x branch so we can already avoid these edge cases in v2!
+
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2020-07-16T21:30:30Z
+
+The reason I didn't originally target v2 was in case people had already worked around these edge cases themselves, and they find their work around break when we change the encoding. I can still send to 2.x if you want though. :)
+
+---------------------------------------------------------------------------
+
+by acrobat at 2020-08-11T19:03:59Z
+
+Thank you @GrahamCampbell
