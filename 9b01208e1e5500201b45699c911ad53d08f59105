@@ -1,0 +1,19 @@
+---------------------------------------------------------------------------
+
+by eiriksm at 2020-07-29T07:06:58Z
+
+As a reference, here are some docs referencing this header and how to use it:
+
+https://developer.github.com/v3/auth/#authenticating-for-saml-sso
+
+---------------------------------------------------------------------------
+
+by acrobat at 2020-08-11T18:55:57Z
+
+Looks good @eiriksm! Can you apply the suggested changes from styleci and add a test for the new exception logic? Thanks!
+
+---------------------------------------------------------------------------
+
+by eiriksm at 2020-08-15T12:59:15Z
+
+Added a test and got styleCI passing :ship:
