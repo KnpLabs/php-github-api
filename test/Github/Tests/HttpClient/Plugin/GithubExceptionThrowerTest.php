@@ -3,6 +3,7 @@
 namespace Github\Tests\HttpClient\Plugin;
 
 use Github\Exception\ExceptionInterface;
+use Github\Exception\SsoRequiredException;
 use Github\HttpClient\Plugin\GithubExceptionThrower;
 use GuzzleHttp\Promise\FulfilledPromise;
 use GuzzleHttp\Psr7\Response;
@@ -135,6 +136,16 @@ class GithubExceptionThrowerTest extends TestCase
                     )
                 ),
                 'exception' => new \Github\Exception\RuntimeException('Something went wrong with executing your query', 502),
+            ],
+            'Sso required Response' => [
+                'response' => new Response(
+                    403,
+                    [
+                        'Content-Type' => 'application/json',
+                        'X-GitHub-SSO' => 'required; url=https://github.com/orgs/octodocs-test/sso?authorization_request=AZSCKtL4U8yX1H3sCQIVnVgmjmon5fWxks5YrqhJgah0b2tlbl9pZM4EuMz4',
+                    ]
+                ),
+                'exception' => new \Github\Exception\SsoRequiredException('https://github.com/orgs/octodocs-test/sso?authorization_request=AZSCKtL4U8yX1H3sCQIVnVgmjmon5fWxks5YrqhJgah0b2tlbl9pZM4EuMz4')
             ],
             'Default handling' => [
                 'response' => new Response(
