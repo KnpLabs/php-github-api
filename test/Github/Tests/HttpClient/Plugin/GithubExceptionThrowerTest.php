@@ -3,7 +3,6 @@
 namespace Github\Tests\HttpClient\Plugin;
 
 use Github\Exception\ExceptionInterface;
-use Github\Exception\SsoRequiredException;
 use Github\HttpClient\Plugin\GithubExceptionThrower;
 use GuzzleHttp\Promise\FulfilledPromise;
 use GuzzleHttp\Psr7\Response;
