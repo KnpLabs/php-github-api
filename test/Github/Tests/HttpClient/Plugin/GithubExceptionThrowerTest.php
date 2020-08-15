@@ -144,7 +144,7 @@ class GithubExceptionThrowerTest extends TestCase
                         'X-GitHub-SSO' => 'required; url=https://github.com/orgs/octodocs-test/sso?authorization_request=AZSCKtL4U8yX1H3sCQIVnVgmjmon5fWxks5YrqhJgah0b2tlbl9pZM4EuMz4',
                     ]
                 ),
-                'exception' => new \Github\Exception\SsoRequiredException('https://github.com/orgs/octodocs-test/sso?authorization_request=AZSCKtL4U8yX1H3sCQIVnVgmjmon5fWxks5YrqhJgah0b2tlbl9pZM4EuMz4')
+                'exception' => new \Github\Exception\SsoRequiredException('https://github.com/orgs/octodocs-test/sso?authorization_request=AZSCKtL4U8yX1H3sCQIVnVgmjmon5fWxks5YrqhJgah0b2tlbl9pZM4EuMz4'),
             ],
             'Default handling' => [
                 'response' => new Response(
