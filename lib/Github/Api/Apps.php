@@ -135,15 +135,15 @@ class Apps extends AbstractApi
     /**
      * List repositories that are accessible to the authenticated installation.
      *
-     * @link https://developer.github.com/v3/apps/installations/#list-repositories
+     * @link https://docs.github.com/en/rest/reference/apps#list-repositories-accessible-to-the-app-installation
      *
      * @param int $userId
+     * @param array $parameters
      *
      * @return array
      */
-    public function listRepositories($userId = null)
+    public function listRepositories($userId = null, array $parameters = [])
     {
-        $parameters = [];
         if ($userId) {
             $parameters['user_id'] = $userId;
         }
