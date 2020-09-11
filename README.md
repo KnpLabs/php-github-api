@@ -42,7 +42,7 @@ composer require knplabs/github-api:^3.0 guzzlehttp/guzzle:^7.0.1 http-interop/h
 ### Laravel 6+:
 
 ```bash
-composer require graham-campbell/github^10.0 guzzlehttp/guzzle:^7.0.1 http-interop/http-factory-guzzle:^1.0
+composer require graham-campbell/github:^10.0 guzzlehttp/guzzle:^7.0.1 http-interop/http-factory-guzzle:^1.0
 ```
 
 We are decoupled from any HTTP messaging client with help by [HTTPlug](http://httplug.io). Read about clients in our [docs](doc/customize.md). [graham-campbell/github](https://github.com/GrahamCampbell/Laravel-GitHub) is by [Graham Campbell](https://github.com/GrahamCampbell).
