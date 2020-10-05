@@ -3,7 +3,6 @@
 namespace Github\Api\Repository;
 
 use Github\Api\AbstractApi;
-use Github\Api\AcceptHeaderTrait;
 use Github\Exception\MissingArgumentException;
 
 /**
@@ -13,8 +12,6 @@ use Github\Exception\MissingArgumentException;
  */
 class Checks extends AbstractApi
 {
-    use AcceptHeaderTrait;
-
     /**
      * @link https://developer.github.com/v3/checks/runs/#create-a-check-run
      *
@@ -32,9 +29,6 @@ class Checks extends AbstractApi
             throw new MissingArgumentException(['name', 'head_sha']);
         }
 
-        // This api is in preview mode, so set the correct accept-header.
-        $this->acceptHeaderValue = 'application/vnd.github.antiope-preview+json';
-
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/check-runs', $params);
     }
 
@@ -50,9 +44,6 @@ class Checks extends AbstractApi
      */
     public function update($username, $repository, $checkRunId, array $params = [])
     {
-        // This api is in preview mode, so set the correct accept-header.
-        $this->acceptHeaderValue = 'application/vnd.github.antiope-preview+json';
-
         return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/check-runs/'.rawurlencode($checkRunId), $params);
     }
 
@@ -68,9 +59,6 @@ class Checks extends AbstractApi
      */
     public function all($username, $repository, $ref, $params = [])
     {
-        // This api is in preview mode, so set the correct accept-header.
-        $this->acceptHeaderValue = 'application/vnd.github.antiope-preview+json';
-
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/commits/'.rawurlencode($ref).'/check-runs', $params);
     }
 
@@ -85,9 +73,6 @@ class Checks extends AbstractApi
      */
     public function show($username, $repository, $checkRunId)
     {
-        // This api is in preview mode, so set the correct accept-header.
-        $this->acceptHeaderValue = 'application/vnd.github.antiope-preview+json';
-
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/check-runs/'.rawurlencode($checkRunId));
     }
 
@@ -102,9 +87,6 @@ class Checks extends AbstractApi
      */
     public function annotations($username, $repository, $checkRunId)
     {
-        // This api is in preview mode, so set the correct accept-header.
-        $this->acceptHeaderValue = 'application/vnd.github.antiope-preview+json';
-
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/check-runs/'.rawurlencode($checkRunId).'/annotations');
     }
 }
