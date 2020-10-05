@@ -19,18 +19,18 @@ use Psr\Http\Client\ClientInterface;
 /**
  * Simple yet very cool PHP GitHub client.
  *
- * @method Api\CurrentUser currentUser()
- * @method Api\CurrentUser me()
- * @method Api\Enterprise ent()
- * @method Api\Enterprise enterprise()
- * @method Api\Miscellaneous\CodeOfConduct codeOfConduct()
- * @method Api\Miscellaneous\Emojis emojis()
- * @method Api\Miscellaneous\Licenses licenses()
- * @method Api\GitData git()
- * @method Api\GitData gitData()
- * @method Api\Gists gist()
- * @method Api\Gists gists()
- * @method Api\Miscellaneous\Gitignore gitignore()
+ * @method Api\CurrentUser                       currentUser()
+ * @method Api\CurrentUser                       me()
+ * @method Api\Enterprise                        ent()
+ * @method Api\Enterprise                        enterprise()
+ * @method Api\Miscellaneous\CodeOfConduct       codeOfConduct()
+ * @method Api\Miscellaneous\Emojis              emojis()
+ * @method Api\Miscellaneous\Licenses            licenses()
+ * @method Api\GitData                           git()
+ * @method Api\GitData                           gitData()
+ * @method Api\Gists                             gist()
+ * @method Api\Gists                             gists()
+ * @method Api\Miscellaneous\Gitignore           gitignore()
  * @method Api\Apps apps()
  * @method Api\Issue issue()
  * @method Api\Issue issues()
@@ -43,23 +43,24 @@ use Psr\Http\Client\ClientInterface;
  * @method Api\Organization\Projects orgProjects()
  * @method Api\Organization\Projects organizationProject()
  * @method Api\Organization\Projects organizationProjects()
- * @method Api\PullRequest pr()
- * @method Api\PullRequest pullRequest()
- * @method Api\PullRequest pullRequests()
- * @method Api\RateLimit rateLimit()
- * @method Api\Repo repo()
- * @method Api\Repo repos()
- * @method Api\Repo repository()
- * @method Api\Repo repositories()
- * @method Api\Search search()
- * @method Api\Organization\Teams team()
- * @method Api\Organization\Teams teams()
- * @method Api\User user()
- * @method Api\User users()
- * @method Api\Authorizations authorization()
- * @method Api\Authorizations authorizations()
- * @method Api\Meta meta()
- * @method Api\GraphQL graphql()
+ * @method Api\Organization\OutsideCollaborators outsideCollaborators()
+ * @method Api\PullRequest                       pr()
+ * @method Api\PullRequest                       pullRequest()
+ * @method Api\PullRequest                       pullRequests()
+ * @method Api\RateLimit                         rateLimit()
+ * @method Api\Repo                              repo()
+ * @method Api\Repo                              repos()
+ * @method Api\Repo                              repository()
+ * @method Api\Repo                              repositories()
+ * @method Api\Search                            search()
+ * @method Api\Organization\Teams                team()
+ * @method Api\Organization\Teams                teams()
+ * @method Api\User                              user()
+ * @method Api\User                              users()
+ * @method Api\Authorizations                    authorization()
+ * @method Api\Authorizations                    authorizations()
+ * @method Api\Meta                              meta()
+ * @method Api\GraphQL                           graphql()
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  *
@@ -285,6 +286,11 @@ class Client
 
             case 'graphql':
                 $api = new Api\GraphQL($this);
+                break;
+
+            case 'outsideCollaborators':
+            case 'outside_collaborators':
+                $api = new Api\Organization\OutsideCollaborators($this);
                 break;
 
             default:

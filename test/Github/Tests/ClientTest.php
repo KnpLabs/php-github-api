@@ -196,6 +196,9 @@ class ClientTest extends \PHPUnit\Framework\TestCase
             ['authorizations', Api\Authorizations::class],
 
             ['meta', Api\Meta::class],
+
+            ['outsideCollaborators', Api\Organization\OutsideCollaborators::class],
+            ['outside_collaborators', Api\Organization\OutsideCollaborators::class],
         ];
     }
 

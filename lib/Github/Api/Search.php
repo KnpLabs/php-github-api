@@ -97,7 +97,7 @@ class Search extends AbstractApi
     }
 
     /**
-     * Search commits by filter (q).
+     * Search topics by filter (q).
      *
      * @link https://developer.github.com/v3/search/#search-topics
      *
