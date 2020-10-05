@@ -4,6 +4,7 @@ namespace Github\Api;
 
 use Github\Api\Organization\Hooks;
 use Github\Api\Organization\Members;
+use Github\Api\Organization\OutsideCollaborators;
 use Github\Api\Organization\Teams;
 
 /**
@@ -98,6 +99,14 @@ class Organization extends AbstractApi
     public function teams()
     {
         return new Teams($this->client);
+    }
+
+    /**
+     * @return OutsideCollaborators
+     */
+    public function outsideCollaborators()
+    {
+        return new OutsideCollaborators($this->client);
     }
 
     /**
