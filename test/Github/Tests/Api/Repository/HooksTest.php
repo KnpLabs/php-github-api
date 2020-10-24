@@ -144,7 +144,7 @@ class HooksTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
-            ->with('/repos/KnpLabs/php-github-api/hooks/123/test')
+            ->with('/repos/KnpLabs/php-github-api/hooks/123/tests')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->test('KnpLabs', 'php-github-api', 123));
