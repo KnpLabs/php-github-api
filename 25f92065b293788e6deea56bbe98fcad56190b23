@@ -1,0 +1,84 @@
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2020-08-02T21:35:34Z
+
+Interesting. Are you calling this from a "GitHub app" or an "OAuth app". Do you know what version of GitHub Enterprise supports the new endpoint. Changing this could break things for those users.
+
+---------------------------------------------------------------------------
+
+by morrislaptop at 2020-08-03T06:11:42Z
+
+The result was the same for both GithubApp and oAuth App.
+
+I don’t have GitHub enterprise so can’t comment on that.
+
+On Sun, 2 Aug 2020 at 22:35, Graham Campbell <notifications@github.com>
+wrote:
+
+> Interesting. Are you calling this from a "GitHub app" or an "OAuth app".
+> Do you know what version of GitHub Enterprise supports the new endpoint.
+> Changing this could break things for those users.
+>
+> —
+> You are receiving this because you authored the thread.
+> Reply to this email directly, view it on GitHub
+> <https://github.com/KnpLabs/php-github-api/pull/915#issuecomment-667727625>,
+> or unsubscribe
+> <https://github.com/notifications/unsubscribe-auth/AAAQRX75VNYKQ72J3OQVX4LR6XL3DANCNFSM4PSU4EIA>
+> .
+>
+
+---------------------------------------------------------------------------
+
+by acrobat at 2020-08-11T18:48:26Z
+
+I think we can safely apply this change, as in the github enterprise 2.18 docs the endpoint url is also like the note indicates
+
+```json
+{
+   "/repos/{owner}/{repo}/hooks/{hook_id}/tests":{
+      "post":{
+         "summary":"Test the push repository webhook",
+         "description":"This will trigger the hook with the latest push to the current repository if the hook is subscribed to `push` events. If the hook is not subscribed to `push` events, the server will respond with 204 but no test POST will be generated.\n\n**Note**: Previously `/repos/:owner/:repo/hooks/:hook_id/test`",
+         "tags":[
+            "repos"
+         ],
+         "operationId":"repos/test-push-webhook",
+         "externalDocs":{
+            "description":"API method documentation",
+            "url":"https://developer.github.com/enterprise/2.18/v3/repos/hooks/#test-the-push-repository-webhook"
+         },
+         "parameters":[
+            {
+               "$ref":"#/components/parameters/owner"
+            },
+            {
+               "$ref":"#/components/parameters/repo"
+            },
+            {
+               "$ref":"#/components/parameters/hook-id"
+            }
+         ],
+         "responses":{
+            "204":{
+               "description":"Empty response"
+            },
+            "404":{
+               "$ref":"#/components/responses/not_found"
+            }
+         },
+         "x-github":{
+            "githubCloudOnly":false,
+            "enabledForGitHubApps":true,
+            "previews":[
+
+            ]
+         }
+      }
+   }
+}
+```
+
+https://github.com/github/rest-api-description/blob/main/descriptions/ghes-2.18/ghes-2.18.json
+
+What do you think @GrahamCampbell?
