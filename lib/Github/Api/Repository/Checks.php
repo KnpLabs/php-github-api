@@ -3,6 +3,7 @@
 namespace Github\Api\Repository;
 
 use Github\Api\AbstractApi;
+use Github\Api\AcceptHeaderTrait;
 use Github\Exception\MissingArgumentException;
 
 /**
@@ -12,6 +13,9 @@ use Github\Exception\MissingArgumentException;
  */
 class Checks extends AbstractApi
 {
+    // NEXT_MAJOR: remove trait use.
+    use AcceptHeaderTrait;
+
     /**
      * @link https://developer.github.com/v3/checks/runs/#create-a-check-run
      *
