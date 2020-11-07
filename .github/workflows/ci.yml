@@ -11,7 +11,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php-versions: ['7.1', '7.2', '7.3', '7.4']
+                php-versions: ['7.2', '7.3', '7.4', '8.0']
 
         steps:
             - uses: actions/checkout@v2
@@ -48,7 +48,7 @@ jobs:
 
             - uses: shivammathur/setup-php@v2
               with:
-                  php-version: 7.1
+                  php-version: 7.2
                   coverage: none
 
             - name: Install Composer Dependencies
