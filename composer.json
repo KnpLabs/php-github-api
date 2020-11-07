@@ -20,7 +20,7 @@
         "php": "^7.1",
         "php-http/client-common": "^2.3",
         "php-http/cache-plugin": "^1.7",
-        "php-http/discovery": "^1.9",
+        "php-http/discovery": "^1.11",
         "php-http/httplug": "^2.1",
         "php-http/multipart-stream-builder": "^1.1",
         "psr/cache": "^1.0",

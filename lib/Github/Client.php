@@ -122,7 +122,7 @@ class Client
         $builder->addPlugin(new GithubExceptionThrower());
         $builder->addPlugin(new Plugin\HistoryPlugin($this->responseHistory));
         $builder->addPlugin(new Plugin\RedirectPlugin());
-        $builder->addPlugin(new Plugin\AddHostPlugin(Psr17FactoryDiscovery::findUrlFactory()->createUri('https://api.github.com')));
+        $builder->addPlugin(new Plugin\AddHostPlugin(Psr17FactoryDiscovery::findUriFactory()->createUri('https://api.github.com')));
         $builder->addPlugin(new Plugin\HeaderDefaultsPlugin([
             'User-Agent' => 'php-github-api (http://github.com/KnpLabs/php-github-api)',
         ]));
@@ -339,7 +339,7 @@ class Client
         $builder->removePlugin(Plugin\AddHostPlugin::class);
         $builder->removePlugin(PathPrepend::class);
 
-        $builder->addPlugin(new Plugin\AddHostPlugin(Psr17FactoryDiscovery::findUrlFactory()->createUri($enterpriseUrl)));
+        $builder->addPlugin(new Plugin\AddHostPlugin(Psr17FactoryDiscovery::findUriFactory()->createUri($enterpriseUrl)));
         $builder->addPlugin(new PathPrepend(sprintf('/api/%s', $this->getApiVersion())));
     }
 
