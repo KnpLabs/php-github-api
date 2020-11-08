@@ -346,3 +346,11 @@ You can optionally assign some teams by passing an array with their ID's if you'
 ```php
 $repo = $client->api('repo')->transfer('KnpLabs', 'php-github-api', 'github', [1234]);
 ```
+
+### Create a repository dispatch event
+
+Example when you want to configure custom github action workflows.
+
+```php
+$client->api('repo')->dispatch('KnpLabs', 'php-github-api', 'acme-event', ['foo'=>'bar']);
+```
