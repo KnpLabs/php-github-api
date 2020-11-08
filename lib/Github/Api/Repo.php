@@ -277,7 +277,7 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Create a repository dispatch event
+     * Create a repository dispatch event.
      *
      * @link https://developer.github.com/v3/repos/#create-a-repository-dispatch-event
      *
@@ -294,7 +294,6 @@ class Repo extends AbstractApi
             'client_payload' => $clientPayload,
         ]);
     }
-
 
     /**
      * Manage the collaborators of a repository.
