@@ -289,7 +289,7 @@ class Repo extends AbstractApi
      */
     public function dispatch($username, $repository, $eventType, array $clientPayload)
     {
-        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/dispatches', [
+        return $this->post(\sprintf('/repos/%s/%s/dispatches', rawurlencode($username), rawurlencode($repository)), [
             'event_type' => $eventType,
             'client_payload' => $clientPayload,
         ]);
