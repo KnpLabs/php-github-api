@@ -31,18 +31,18 @@ use Psr\Http\Client\ClientInterface;
  * @method Api\Gists                             gist()
  * @method Api\Gists                             gists()
  * @method Api\Miscellaneous\Gitignore           gitignore()
- * @method Api\Apps apps()
- * @method Api\Issue issue()
- * @method Api\Issue issues()
- * @method Api\Markdown markdown()
- * @method Api\Notification notification()
- * @method Api\Notification notifications()
- * @method Api\Organization organization()
- * @method Api\Organization organizations()
- * @method Api\Organization\Projects orgProject()
- * @method Api\Organization\Projects orgProjects()
- * @method Api\Organization\Projects organizationProject()
- * @method Api\Organization\Projects organizationProjects()
+ * @method Api\Apps                              apps()
+ * @method Api\Issue                             issue()
+ * @method Api\Issue                             issues()
+ * @method Api\Markdown                          markdown()
+ * @method Api\Notification                      notification()
+ * @method Api\Notification                      notifications()
+ * @method Api\Organization                      organization()
+ * @method Api\Organization                      organizations()
+ * @method Api\Organization\Projects             orgProject()
+ * @method Api\Organization\Projects             orgProjects()
+ * @method Api\Organization\Projects             organizationProject()
+ * @method Api\Organization\Projects             organizationProjects()
  * @method Api\Organization\OutsideCollaborators outsideCollaborators()
  * @method Api\PullRequest                       pr()
  * @method Api\PullRequest                       pullRequest()
@@ -122,7 +122,7 @@ class Client
         $builder->addPlugin(new GithubExceptionThrower());
         $builder->addPlugin(new Plugin\HistoryPlugin($this->responseHistory));
         $builder->addPlugin(new Plugin\RedirectPlugin());
-        $builder->addPlugin(new Plugin\AddHostPlugin(Psr17FactoryDiscovery::findUrlFactory()->createUri('https://api.github.com')));
+        $builder->addPlugin(new Plugin\AddHostPlugin(Psr17FactoryDiscovery::findUriFactory()->createUri('https://api.github.com')));
         $builder->addPlugin(new Plugin\HeaderDefaultsPlugin([
             'User-Agent' => 'php-github-api (http://github.com/KnpLabs/php-github-api)',
         ]));
@@ -339,7 +339,7 @@ class Client
         $builder->removePlugin(Plugin\AddHostPlugin::class);
         $builder->removePlugin(PathPrepend::class);
 
-        $builder->addPlugin(new Plugin\AddHostPlugin(Psr17FactoryDiscovery::findUrlFactory()->createUri($enterpriseUrl)));
+        $builder->addPlugin(new Plugin\AddHostPlugin(Psr17FactoryDiscovery::findUriFactory()->createUri($enterpriseUrl)));
         $builder->addPlugin(new PathPrepend(sprintf('/api/%s', $this->getApiVersion())));
     }
 
