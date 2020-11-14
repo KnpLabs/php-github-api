@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.17.0
+
+### Added
+
+- Improve checks api implementation ([acrobat](https://github.com/acrobat)) [#932](https://github.com/KnpLabs/php-github-api/issues/932)
+
+### Changed
+- Missing auth method in list of omitted passwords. ([tobyS](https://github.com/tobyS)) [#933](https://github.com/KnpLabs/php-github-api/issues/933)
+- Improve github actions setup ([acrobat](https://github.com/acrobat)) [#935](https://github.com/KnpLabs/php-github-api/issues/935)
+
 ## 2.16.0
 
 ### Added
