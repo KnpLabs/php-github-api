@@ -3,6 +3,8 @@
 namespace Github\Api;
 
 use Github\Api\Repository\Checks;
+use Github\Api\Repository\Checks\CheckRuns;
+use Github\Api\Repository\Checks\CheckSuites;
 use Github\Api\Repository\Collaborators;
 use Github\Api\Repository\Comments;
 use Github\Api\Repository\Commits;
@@ -335,12 +337,31 @@ class Repo extends AbstractApi
      * Manage checks on a repository.
      *
      * @link https://developer.github.com/v3/checks/
+     * @deprecated since 2.17 and will be removed in 3.0. Use the "checkRuns" or "checkSuites" api's instead.
      *
      * @return Checks
      */
     public function checks()
     {
+        @trigger_error(sprintf('The "%s" is deprecated since knp-labs/php-github-api 2.17 and will be removed in knp-labs/php-github-api 3.0. Use the "checkRuns" or "checkSuites" api\'s instead.', __METHOD__), E_USER_DEPRECATED);
+
         return new Checks($this->client);
+    }
+
+    /**
+     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/checks#check-runs
+     */
+    public function checkRuns(): CheckRuns
+    {
+        return new CheckRuns($this->client);
+    }
+
+    /**
+     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/checks#check-suites
+     */
+    public function checkSuites(): CheckSuites
+    {
+        return new CheckSuites($this->client);
     }
 
     /**
