@@ -36,7 +36,7 @@ $repositories = $client->api('apps')->listRepositories(456);
 
 ### List repositories for a given installation and user
 
-```
+```php
 $repositories = $client->api('current_user')->repositoriesByInstallation(456);
 ```
 

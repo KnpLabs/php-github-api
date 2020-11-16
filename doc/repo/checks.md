@@ -1,6 +1,8 @@
 ## Repo / Checks API
 [Back to the "Repos API"](../repos.md) | [Back to the navigation](../README.md)
 
+**This API class is deprecated use the [Check runs](check_runs.md) and the [Check suites](check_suites.md) api classes.**
+
 ### Create a check for a commit
 
 [Visit GitHub for a full of list of parameters and their descriptions.](https://developer.github.com/v3/checks/runs/#create-a-check-run)

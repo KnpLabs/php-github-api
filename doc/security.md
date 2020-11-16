@@ -21,7 +21,7 @@ and guess what should contain `$password`. The `$method` can contain one of the 
 * `Github\Client::AUTH_ACCESS_TOKEN` - https://developer.github.com/v3/#oauth2-token-sent-in-a-header
 * `Github\Client::AUTH_JWT` - https://developer.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app
 
-The required value of `$password` depends on the chosen `$method`. For `Github\Client::AUTH_ACCESS_TOKEN` and
+The required value of `$password` depends on the chosen `$method`. For `Github\Client::AUTH_ACCESS_TOKEN`, `Github\Client::AUTH_ACCESS_TOKEN` and
 `Github\Client::JWT` methods you should provide the API token in `$usernameOrToken` variable (`$password` is omitted in
 this particular case).
 

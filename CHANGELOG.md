@@ -1,5 +1,30 @@
 # Changelog
 
+## 2.17.0
+
+### Added
+
+- Improve checks api implementation ([acrobat](https://github.com/acrobat)) [#932](https://github.com/KnpLabs/php-github-api/issues/932)
+
+### Changed
+- Missing auth method in list of omitted passwords. ([tobyS](https://github.com/tobyS)) [#933](https://github.com/KnpLabs/php-github-api/issues/933)
+- Improve github actions setup ([acrobat](https://github.com/acrobat)) [#935](https://github.com/KnpLabs/php-github-api/issues/935)
+
+## 2.16.0
+
+### Added
+- Add support for SSO errors coming from the API ([eiriksm](https://github.com/eiriksm)) [#913](https://github.com/KnpLabs/php-github-api/issues/913)
+- Add OutsideCollaborators api ([Matth--](https://github.com/Matth--)) [#925](https://github.com/KnpLabs/php-github-api/issues/925)
+- Add support for creating a repo dispatch event ([Nyholm](https://github.com/Nyholm)) [#931](https://github.com/KnpLabs/php-github-api/issues/931)
+
+### Changed
+- Fix: Wrong PHPDoc description ([OskarStark](https://github.com/OskarStark)) [#922](https://github.com/KnpLabs/php-github-api/issues/922)
+- Adding GitHub authentication to GraphQL documentation ([legionth](https://github.com/legionth)) [#927](https://github.com/KnpLabs/php-github-api/issues/927)
+
+### Fixed
+- Use RFC3986 for building URI query strings ([GrahamCampbell](https://github.com/GrahamCampbell)) [#908](https://github.com/KnpLabs/php-github-api/issues/908)
+- Fix call to test a webhook method ([morrislaptop](https://github.com/morrislaptop)) [#915](https://github.com/KnpLabs/php-github-api/issues/915)
+
 ## 2.15.0
 
 ### Added

@@ -5,10 +5,11 @@ on:
 
 jobs:
     test:
-        name: Test on ${{ matrix.php-versions }} PHP
+        name: Test on PHP ${{ matrix.php-versions }}
         runs-on: ubuntu-latest
 
         strategy:
+            fail-fast: false
             matrix:
                 php-versions: ['7.1', '7.2', '7.3', '7.4']
 
@@ -19,13 +20,13 @@ jobs:
               uses: shivammathur/setup-php@v2
               with:
                   php-version: ${{ matrix.php-versions }}
-                  coverage: xdebug
+                  coverage: none
 
             - name: Install Composer Dependencies
               uses: ramsey/composer-install@v1
 
             - name: Run phpunit
-              run: vendor/bin/phpunit --verbose --coverage-text
+              run: vendor/bin/phpunit --verbose
 
     roave_bc_check:
         name: Roave BC Check
@@ -39,6 +40,7 @@ jobs:
 #              uses: docker://nyholm/roave-bc-check-ga
 
     phpstan:
+        name: PHPStan
         runs-on: ubuntu-latest
 
         steps:
@@ -47,6 +49,7 @@ jobs:
             - uses: shivammathur/setup-php@v2
               with:
                   php-version: 7.1
+                  coverage: none
 
             - name: Install Composer Dependencies
               uses: ramsey/composer-install@v1

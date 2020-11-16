@@ -7,7 +7,8 @@ use Github\Api\AcceptHeaderTrait;
 use Github\Exception\MissingArgumentException;
 
 /**
- * @link   https://developer.github.com/v3/checks/
+ * @link https://developer.github.com/v3/checks/
+ * @deprecated since 2.17 and will be removed in 3.0. Use the "Github\Api\Repository\Checks\CheckRuns" or "Github\Api\Repository\Checks\CheckSuits" api classes instead.
  *
  * @author Zack Galbreath <zack.galbreath@kitware.com>
  */
@@ -29,6 +30,8 @@ class Checks extends AbstractApi
      */
     public function create($username, $repository, array $params = [])
     {
+        @trigger_error(sprintf('The "%s" method is deprecated since knp-labs/php-github-api 2.17 and will be removed in knp-labs/php-github-api 3.0. Use the "Github\Api\Repository\Checks\CheckRuns::create" method instead.', __METHOD__), E_USER_DEPRECATED);
+
         if (!isset($params['name'], $params['head_sha'])) {
             throw new MissingArgumentException(['name', 'head_sha']);
         }
@@ -48,6 +51,8 @@ class Checks extends AbstractApi
      */
     public function update($username, $repository, $checkRunId, array $params = [])
     {
+        @trigger_error(sprintf('The "%s" method is deprecated since knp-labs/php-github-api 2.17 and will be removed in knp-labs/php-github-api 3.0. Use the "Github\Api\Repository\Checks\CheckRuns::update" method instead.', __METHOD__), E_USER_DEPRECATED);
+
         return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/check-runs/'.rawurlencode($checkRunId), $params);
     }
 
@@ -63,6 +68,8 @@ class Checks extends AbstractApi
      */
     public function all($username, $repository, $ref, $params = [])
     {
+        @trigger_error(sprintf('The "%s" method is deprecated since knp-labs/php-github-api 2.17 and will be removed in knp-labs/php-github-api 3.0. Use the "Github\Api\Repository\Checks\CheckRuns::allForReference" method instead.', __METHOD__), E_USER_DEPRECATED);
+
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/commits/'.rawurlencode($ref).'/check-runs', $params);
     }
 
@@ -77,6 +84,8 @@ class Checks extends AbstractApi
      */
     public function show($username, $repository, $checkRunId)
     {
+        @trigger_error(sprintf('The "%s" method is deprecated since knp-labs/php-github-api 2.17 and will be removed in knp-labs/php-github-api 3.0. Use the "Github\Api\Repository\Checks\CheckRuns::show" method instead.', __METHOD__), E_USER_DEPRECATED);
+
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/check-runs/'.rawurlencode($checkRunId));
     }
 
@@ -91,6 +100,8 @@ class Checks extends AbstractApi
      */
     public function annotations($username, $repository, $checkRunId)
     {
+        @trigger_error(sprintf('The "%s" method is deprecated since knp-labs/php-github-api 2.17 and will be removed in knp-labs/php-github-api 3.0. Use the "Github\Api\Repository\Checks\CheckRuns::annotations" method instead.', __METHOD__), E_USER_DEPRECATED);
+
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/check-runs/'.rawurlencode($checkRunId).'/annotations');
     }
 }
