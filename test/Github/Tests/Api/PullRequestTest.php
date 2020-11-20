@@ -90,6 +90,22 @@ class PullRequestTest extends TestCase
     /**
      * @test
      */
+    public function shouldShowCommitsFromPullRequestForPage()
+    {
+        $expectedArray = [['id' => 'id', 'sha' => '123123']];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/repos/ezsystems/ezpublish/pulls/15/commits', ['page' => 2, 'per_page' => 30])
+            ->willReturn($expectedArray);
+
+        $this->assertEquals($expectedArray, $api->commits('ezsystems', 'ezpublish', '15', ['page' => 2, 'per_page' => 30]));
+    }
+
+    /**
+     * @test
+     */
     public function shouldShowFilesFromPullRequest()
     {
         $expectedArray = [['id' => 'id', 'sha' => '123123']];

@@ -80,9 +80,9 @@ class PullRequest extends AbstractApi
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.$id);
     }
 
-    public function commits($username, $repository, $id)
+    public function commits($username, $repository, $id, array $parameters = [])
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/commits');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/commits', $parameters);
     }
 
     public function files($username, $repository, $id, array $parameters = [])
