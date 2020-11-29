@@ -2,9 +2,9 @@
 
 namespace Github\Tests\Functional;
 
-use Cache\Adapter\PHPArray\ArrayCachePool;
 use Github\Client;
 use GuzzleHttp\Psr7\Response;
+use Symfony\Component\Cache\Adapter\ArrayAdapter;
 
 /**
  * @group functional
@@ -23,7 +23,7 @@ class CacheTest extends \PHPUnit\Framework\TestCase
         $mockClient->addResponse($this->getCurrentUserResponse('octocat'));
 
         $github = Client::createWithHttpClient($mockClient);
-        $github->addCache(new ArrayCachePool(), ['default_ttl'=>600]);
+        $github->addCache(new ArrayAdapter(), ['default_ttl'=>600]);
 
         $github->authenticate('fake_token_aaa', Client::AUTH_ACCESS_TOKEN);
         $userA = $github->currentUser()->show();
@@ -43,7 +43,7 @@ class CacheTest extends \PHPUnit\Framework\TestCase
         $mockClient->addResponse($this->getCurrentUserResponse('octocat'));
 
         $github = Client::createWithHttpClient($mockClient);
-        $github->addCache(new ArrayCachePool(), ['default_ttl'=>600]);
+        $github->addCache(new ArrayAdapter(), ['default_ttl'=>600]);
 
         $github->authenticate('fake_token_aaa', Client::AUTH_ACCESS_TOKEN);
         $userA = $github->currentUser()->show();
