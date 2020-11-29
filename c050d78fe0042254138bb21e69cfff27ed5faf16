@@ -1,0 +1,19 @@
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2020-11-12T23:58:06Z
+
+No real need to drop PHP 7.1 support?
+
+---------------------------------------------------------------------------
+
+by acrobat at 2020-11-13T06:54:23Z
+
+I did it so I didn't need to support phpunit 7, 8 and 9 to test the whole range of php versions, because of the changes in phpunit 8 and 9 it would not be possible to easily support this (or we had to use something like the symfony phpunit bridge). Also php 7.1 is almost 1 year EOL so this might be a good time to drop support.
+
+I plan on still supporting 2.x for a while (which still supports 7.1 but no 8) so users really needing a php 7.1 compatible version can use 2.x.
+
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2020-11-28T23:07:36Z
+
+Looks fine, after https://github.com/acrobat/php-github-api/pull/2 has been applied.
