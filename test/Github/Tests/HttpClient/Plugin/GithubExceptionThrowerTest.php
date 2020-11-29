@@ -154,6 +154,29 @@ class GithubExceptionThrowerTest extends TestCase
                 ),
                 'exception' => new \Github\Exception\RuntimeException('Error message', 555),
             ],
+            'Graphql error response (200)' => [
+                'response' => new Response(
+                    200,
+                    [
+                        'content-type' => 'application/json',
+                    ],
+                    json_encode(
+                        [
+                            'errors' => [
+                                [
+                                    ['path' => ['query', 'repository']],
+                                    'message' => 'Field "xxxx" doesn\'t exist on type "Issue"',
+                                ],
+                                [
+                                    ['path' => ['query', 'repository']],
+                                    'message' => 'Field "dummy" doesn\'t exist on type "PullRequest"',
+                                ],
+                            ],
+                        ]
+                    )
+                ),
+                'exception' => new \Github\Exception\RuntimeException('Field "xxxx" doesn\'t exist on type "Issue", Field "dummy" doesn\'t exist on type "PullRequest"'),
+            ],
         ];
     }
 }

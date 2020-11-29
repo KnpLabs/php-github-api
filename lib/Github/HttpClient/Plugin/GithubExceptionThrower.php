@@ -29,6 +29,8 @@ class GithubExceptionThrower implements Plugin
     {
         return $next($request)->then(function (ResponseInterface $response) use ($request) {
             if ($response->getStatusCode() < 400 || $response->getStatusCode() > 600) {
+                $this->checkGraphqlErrors($response);
+
                 return $response;
             }
 
@@ -116,5 +118,39 @@ class GithubExceptionThrower implements Plugin
 
             throw new RuntimeException(isset($content['message']) ? $content['message'] : $content, $response->getStatusCode());
         });
+    }
+
+    /**
+     * The graphql api doesn't return a 5xx http status for errors. Instead it returns a 200 with an error body.
+     *
+     * @throws RuntimeException
+     */
+    private function checkGraphqlErrors(ResponseInterface $response): void
+    {
+        if ($response->getStatusCode() !== 200) {
+            return;
+        }
+
+        $content = ResponseMediator::getContent($response);
+        if (!is_array($content)) {
+            return;
+        }
+
+        if (!isset($content['errors']) || !is_array($content['errors'])) {
+            return;
+        }
+
+        $errors = [];
+        foreach ($content['errors'] as $error) {
+            if (isset($error['message'])) {
+                $errors[] = $error['message'];
+            }
+        }
+
+        if (empty($errors)) {
+            return;
+        }
+
+        throw new RuntimeException(implode(', ', $errors));
     }
 }
