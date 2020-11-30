@@ -22,7 +22,7 @@ class Enterprise extends AbstractApi
      */
     public function stats()
     {
-        return new Stats($this->client);
+        return new Stats($this->getClient(), $this->getPerPage());
     }
 
     /**
@@ -30,7 +30,7 @@ class Enterprise extends AbstractApi
      */
     public function license()
     {
-        return new License($this->client);
+        return new License($this->getClient(), $this->getPerPage());
     }
 
     /**
@@ -38,7 +38,7 @@ class Enterprise extends AbstractApi
      */
     public function console()
     {
-        return new ManagementConsole($this->client);
+        return new ManagementConsole($this->getClient(), $this->getPerPage());
     }
 
     /**
@@ -46,6 +46,6 @@ class Enterprise extends AbstractApi
      */
     public function userAdmin()
     {
-        return new UserAdmin($this->client);
+        return new UserAdmin($this->getClient(), $this->getPerPage());
     }
 }

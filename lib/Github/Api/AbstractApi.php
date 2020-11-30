@@ -4,81 +4,100 @@ namespace Github\Api;
 
 use Github\Client;
 use Github\HttpClient\Message\ResponseMediator;
+use ValueError;
 
 /**
- * Abstract class for Api classes.
- *
  * @author Joseph Bielawski <stloyd@gmail.com>
+ * @author Graham Campbell <graham@alt-three.com>
  */
 abstract class AbstractApi implements ApiInterface
 {
     /**
-     * The client.
+     * The client instance.
      *
      * @var Client
      */
-    protected $client;
+    private $client;
 
     /**
-     * The requested page (GitHub pagination).
+     * The per page parameter.
      *
-     * @var null|int
+     * @var int|null
      */
-    private $page;
+    private $perPage;
 
     /**
-     * Number of items per page (GitHub pagination).
+     * Create a new API instance.
      *
-     * @var null|int
+     * @param Client   $client
+     * @param int|null $perPage
+     *
+     * @return void
      */
-    protected $perPage;
-
-    /**
-     * @param Client $client
-     */
-    public function __construct(Client $client)
+    public function __construct(Client $client, int $perPage = null)
     {
+        if (null !== $perPage && ($perPage < 1 || $perPage > 100)) {
+            throw new ValueError(sprintf('%s::__construct(): Argument #2 ($perPage) must be between 1 and 100, or null', self::class));
+        }
+
         $this->client = $client;
-    }
-
-    public function configure()
-    {
+        $this->perPage = $perPage;
     }
 
     /**
-     * @return null|int
+     * Get the client instance.
+     *
+     * @return Client
      */
-    public function getPage()
+    protected function getClient()
     {
-        return $this->page;
+        return $this->client;
     }
 
     /**
-     * @param null|int $page
+     * Get the API version.
+     *
+     * @return string
      */
-    public function setPage($page)
+    protected function getApiVersion()
     {
-        $this->page = (null === $page ? $page : (int) $page);
-
-        return $this;
+        return $this->client->getApiVersion();
     }
 
     /**
-     * @return null|int
+     * Get the number of values to fetch per page.
+     *
+     * @return int|null
      */
-    public function getPerPage()
+    protected function getPerPage()
     {
         return $this->perPage;
     }
 
     /**
-     * @param null|int $perPage
+     * Create a new instance with the given page parameter.
+     *
+     * This must be an integer between 1 and 100.
+     *
+     * @param int|null $perPage
+     *
+     * @return static
      */
-    public function setPerPage($perPage)
+    public function perPage(?int $perPage)
     {
-        $this->perPage = (null === $perPage ? $perPage : (int) $perPage);
+        if (null !== $perPage && ($perPage < 1 || $perPage > 100)) {
+            throw new ValueError(sprintf('%s::perPage(): Argument #1 ($perPage) must be between 1 and 100, or null', self::class));
+        }
 
-        return $this;
+        $copy = clone $this;
+
+        $copy->perPage = $perPage;
+
+        return $copy;
+    }
+
+    public function configure()
+    {
     }
 
     /**
@@ -92,12 +111,10 @@ abstract class AbstractApi implements ApiInterface
      */
     protected function get($path, array $parameters = [], array $requestHeaders = [])
     {
-        if (null !== $this->page && !isset($parameters['page'])) {
-            $parameters['page'] = $this->page;
-        }
         if (null !== $this->perPage && !isset($parameters['per_page'])) {
             $parameters['per_page'] = $this->perPage;
         }
+
         if (array_key_exists('ref', $parameters) && null === $parameters['ref']) {
             unset($parameters['ref']);
         }

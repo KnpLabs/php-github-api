@@ -9,14 +9,10 @@ use Github\Api\ApiInterface;
  *
  * @author Ramon de la Fuente <ramon@future500.nl>
  * @author Mitchel Verschoof <mitchel@future500.nl>
+ * @author Graham Campbell <graham@alt-three.com>
  */
 interface ResultPagerInterface
 {
-    /**
-     * @return null|array pagination result of last request
-     */
-    public function getPagination();
-
     /**
      * Fetch a single result (page) from an api call.
      *
@@ -26,7 +22,7 @@ interface ResultPagerInterface
      *
      * @return array returns the result of the Api::$method() call
      */
-    public function fetch(ApiInterface $api, $method, array $parameters = []);
+    public function fetch(ApiInterface $api, string $method, array $parameters = []);
 
     /**
      * Fetch all results (pages) from an api call.
@@ -39,7 +35,20 @@ interface ResultPagerInterface
      *
      * @return array returns a merge of the results of the Api::$method() call
      */
-    public function fetchAll(ApiInterface $api, $method, array $parameters = []);
+    public function fetchAll(ApiInterface $api, string $method, array $parameters = []);
+
+    /**
+     * Lazily fetch all results (pages) from an api call.
+     *
+     * Use with care - there is no maximum.
+     *
+     * @param ApiInterface $api        the Api instance
+     * @param string       $method     the method name to call on the Api instance
+     * @param array        $parameters the method parameters in an array
+     *
+     * @return \Generator returns a merge of the results of the Api::$method() call
+     */
+    public function fetchAllLazy(ApiInterface $api, string $method, array $parameters = []);
 
     /**
      * Method that performs the actual work to refresh the pagination property.

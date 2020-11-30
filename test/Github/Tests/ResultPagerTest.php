@@ -2,7 +2,6 @@
 
 namespace Github\Tests;
 
-use Github\Api\ApiInterface;
 use Github\Api\Organization\Members;
 use Github\Api\Search;
 use Github\ResultPager;
@@ -11,8 +10,6 @@ use Http\Client\HttpClient;
 use Psr\Http\Client\ClientInterface;
 
 /**
- * ResultPagerTest.
- *
  * @author Ramon de la Fuente <ramon@future500.nl>
  * @author Mitchel Verschoof <mitchel@future500.nl>
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
@@ -94,28 +91,5 @@ class ResultPagerTest extends \PHPUnit\Framework\TestCase
         $result = $paginator->fetchAll($searchApi, $method, ['knplabs']);
 
         $this->assertCount($amountLoops * count($content['items']), $result);
-    }
-
-    public function testFetch()
-    {
-        $result = 'foo';
-        $method = 'bar';
-        $parameters = ['baz'];
-        $api = $this->getMockBuilder(ApiInterface::class)
-            ->getMock();
-
-        $paginator = $this->getMockBuilder(ResultPager::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['callApi', 'postFetch'])
-            ->getMock();
-        $paginator->expects($this->once())
-            ->method('callApi')
-            ->with($api, $method, $parameters)
-            ->willReturn($result);
-
-        $paginator->expects($this->once())
-            ->method('postFetch');
-
-        $this->assertEquals($result, $paginator->fetch($api, $method, $parameters));
     }
 }

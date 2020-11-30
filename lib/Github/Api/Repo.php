@@ -290,7 +290,7 @@ class Repo extends AbstractApi
      */
     public function collaborators()
     {
-        return new Collaborators($this->client);
+        return new Collaborators($this->getClient(), $this->getPerPage());
     }
 
     /**
@@ -302,7 +302,7 @@ class Repo extends AbstractApi
      */
     public function comments()
     {
-        return new Comments($this->client);
+        return new Comments($this->getClient(), $this->getPerPage());
     }
 
     /**
@@ -314,7 +314,7 @@ class Repo extends AbstractApi
      */
     public function commits()
     {
-        return new Commits($this->client);
+        return new Commits($this->getClient(), $this->getPerPage());
     }
 
     /**
@@ -329,7 +329,7 @@ class Repo extends AbstractApi
     {
         @trigger_error(sprintf('The "%s" is deprecated since knp-labs/php-github-api 2.17 and will be removed in knp-labs/php-github-api 3.0. Use the "checkRuns" or "checkSuites" api\'s instead.', __METHOD__), E_USER_DEPRECATED);
 
-        return new Checks($this->client);
+        return new Checks($this->getClient(), $this->getPerPage());
     }
 
     /**
@@ -337,7 +337,7 @@ class Repo extends AbstractApi
      */
     public function checkRuns(): CheckRuns
     {
-        return new CheckRuns($this->client);
+        return new CheckRuns($this->getClient(), $this->getPerPage());
     }
 
     /**
@@ -345,7 +345,7 @@ class Repo extends AbstractApi
      */
     public function checkSuites(): CheckSuites
     {
-        return new CheckSuites($this->client);
+        return new CheckSuites($this->getClient(), $this->getPerPage());
     }
 
     /**
@@ -357,7 +357,7 @@ class Repo extends AbstractApi
      */
     public function contents()
     {
-        return new Contents($this->client);
+        return new Contents($this->getClient(), $this->getPerPage());
     }
 
     /**
@@ -369,7 +369,7 @@ class Repo extends AbstractApi
      */
     public function downloads()
     {
-        return new Downloads($this->client);
+        return new Downloads($this->getClient(), $this->getPerPage());
     }
 
     /**
@@ -381,7 +381,7 @@ class Repo extends AbstractApi
      */
     public function releases()
     {
-        return new Releases($this->client);
+        return new Releases($this->getClient(), $this->getPerPage());
     }
 
     /**
@@ -393,7 +393,7 @@ class Repo extends AbstractApi
      */
     public function keys()
     {
-        return new DeployKeys($this->client);
+        return new DeployKeys($this->getClient(), $this->getPerPage());
     }
 
     /**
@@ -405,7 +405,7 @@ class Repo extends AbstractApi
      */
     public function forks()
     {
-        return new Forks($this->client);
+        return new Forks($this->getClient(), $this->getPerPage());
     }
 
     /**
@@ -417,7 +417,7 @@ class Repo extends AbstractApi
      */
     public function stargazers()
     {
-        return new Stargazers($this->client);
+        return new Stargazers($this->getClient(), $this->getPerPage());
     }
 
     /**
@@ -429,7 +429,7 @@ class Repo extends AbstractApi
      */
     public function hooks()
     {
-        return new Hooks($this->client);
+        return new Hooks($this->getClient(), $this->getPerPage());
     }
 
     /**
@@ -441,7 +441,7 @@ class Repo extends AbstractApi
      */
     public function labels()
     {
-        return new Labels($this->client);
+        return new Labels($this->getClient(), $this->getPerPage());
     }
 
     /**
@@ -453,7 +453,7 @@ class Repo extends AbstractApi
      */
     public function statuses()
     {
-        return new Statuses($this->client);
+        return new Statuses($this->getClient(), $this->getPerPage());
     }
 
     /**
@@ -486,7 +486,7 @@ class Repo extends AbstractApi
      */
     public function protection()
     {
-        return new Protection($this->client);
+        return new Protection($this->getClient(), $this->getPerPage());
     }
 
     /**
@@ -609,17 +609,17 @@ class Repo extends AbstractApi
 
     public function projects()
     {
-        return new Projects($this->client);
+        return new Projects($this->getClient(), $this->getPerPage());
     }
 
     public function traffic()
     {
-        return new Traffic($this->client);
+        return new Traffic($this->getClient(), $this->getPerPage());
     }
 
     public function pages()
     {
-        return new Pages($this->client);
+        return new Pages($this->getClient(), $this->getPerPage());
     }
 
     /**

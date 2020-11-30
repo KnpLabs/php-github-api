@@ -22,7 +22,7 @@ class GitData extends AbstractApi
      */
     public function blobs()
     {
-        return new Blobs($this->client);
+        return new Blobs($this->getClient(), $this->getPerPage());
     }
 
     /**
@@ -30,7 +30,7 @@ class GitData extends AbstractApi
      */
     public function commits()
     {
-        return new Commits($this->client);
+        return new Commits($this->getClient(), $this->getPerPage());
     }
 
     /**
@@ -38,7 +38,7 @@ class GitData extends AbstractApi
      */
     public function references()
     {
-        return new References($this->client);
+        return new References($this->getClient(), $this->getPerPage());
     }
 
     /**
@@ -46,7 +46,7 @@ class GitData extends AbstractApi
      */
     public function tags()
     {
-        return new Tags($this->client);
+        return new Tags($this->getClient(), $this->getPerPage());
     }
 
     /**
@@ -54,6 +54,6 @@ class GitData extends AbstractApi
      */
     public function trees()
     {
-        return new Trees($this->client);
+        return new Trees($this->getClient(), $this->getPerPage());
     }
 }
