@@ -4,13 +4,12 @@ namespace Github\Api;
 
 use Github\Client;
 use Github\HttpClient\Message\ResponseMediator;
-use ValueError;
 
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
  * @author Graham Campbell <graham@alt-three.com>
  */
-abstract class AbstractApi implements ApiInterface
+abstract class AbstractApi
 {
     /**
      * The client instance.
@@ -29,19 +28,13 @@ abstract class AbstractApi implements ApiInterface
     /**
      * Create a new API instance.
      *
-     * @param Client   $client
-     * @param int|null $perPage
+     * @param Client $client
      *
      * @return void
      */
-    public function __construct(Client $client, int $perPage = null)
+    public function __construct(Client $client)
     {
-        if (null !== $perPage && ($perPage < 1 || $perPage > 100)) {
-            throw new ValueError(sprintf('%s::__construct(): Argument #2 ($perPage) must be between 1 and 100, or null', self::class));
-        }
-
         $this->client = $client;
-        $this->perPage = $perPage;
     }
 
     /**
@@ -62,38 +55,6 @@ abstract class AbstractApi implements ApiInterface
     protected function getApiVersion()
     {
         return $this->client->getApiVersion();
-    }
-
-    /**
-     * Get the number of values to fetch per page.
-     *
-     * @return int|null
-     */
-    protected function getPerPage()
-    {
-        return $this->perPage;
-    }
-
-    /**
-     * Create a new instance with the given page parameter.
-     *
-     * This must be an integer between 1 and 100.
-     *
-     * @param int|null $perPage
-     *
-     * @return static
-     */
-    public function perPage(?int $perPage)
-    {
-        if (null !== $perPage && ($perPage < 1 || $perPage > 100)) {
-            throw new ValueError(sprintf('%s::perPage(): Argument #1 ($perPage) must be between 1 and 100, or null', self::class));
-        }
-
-        $copy = clone $this;
-
-        $copy->perPage = $perPage;
-
-        return $copy;
     }
 
     public function configure()

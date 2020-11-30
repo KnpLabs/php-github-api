@@ -177,6 +177,6 @@ class Gists extends AbstractApi
      */
     public function comments()
     {
-        return new Comments($this->getClient(), $this->getPerPage());
+        return new Comments($this->getClient());
     }
 }

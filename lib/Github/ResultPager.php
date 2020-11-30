@@ -2,7 +2,7 @@
 
 namespace Github;
 
-use Github\Api\ApiInterface;
+use Github\Api\AbstractApi;
 use Github\HttpClient\Message\ResponseMediator;
 use ValueError;
 
@@ -71,9 +71,18 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetch(ApiInterface $api, string $method, array $parameters = [])
+    public function fetch(AbstractApi $api, string $method, array $parameters = [])
     {
-        $result = $api->perPage($this->perPage)->$method(...$parameters);
+        $paginatorPerPage = $this->perPage;
+        $closure = \Closure::bind(function (AbstractApi $api) use ($paginatorPerPage) {
+            $clone = clone $api;
+            $clone->perPage = $paginatorPerPage;
+
+            return $clone;
+        }, null, AbstractApi::class);
+
+        $api = $closure($api);
+        $result = $api->$method(...$parameters);
 
         $this->postFetch();
 
@@ -83,7 +92,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetchAll(ApiInterface $api, string $method, array $parameters = [])
+    public function fetchAll(AbstractApi $api, string $method, array $parameters = [])
     {
         return iterator_to_array($this->fetchAllLazy($api, $method, $parameters));
     }
@@ -91,7 +100,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetchAllLazy(ApiInterface $api, string $method, array $parameters = [])
+    public function fetchAllLazy(AbstractApi $api, string $method, array $parameters = [])
     {
         $result = $this->fetch($api, $method, $parameters);
 

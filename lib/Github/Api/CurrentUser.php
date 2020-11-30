@@ -35,7 +35,7 @@ class CurrentUser extends AbstractApi
      */
     public function emails()
     {
-        return new Emails($this->getClient(), $this->getPerPage());
+        return new Emails($this->getClient());
     }
 
     /**
@@ -43,7 +43,7 @@ class CurrentUser extends AbstractApi
      */
     public function follow()
     {
-        return new Followers($this->getClient(), $this->getPerPage());
+        return new Followers($this->getClient());
     }
 
     public function followers($page = 1)
@@ -71,7 +71,7 @@ class CurrentUser extends AbstractApi
      */
     public function keys()
     {
-        return new PublicKeys($this->getClient(), $this->getPerPage());
+        return new PublicKeys($this->getClient());
     }
 
     /**
@@ -79,7 +79,7 @@ class CurrentUser extends AbstractApi
      */
     public function notifications()
     {
-        return new Notifications($this->getClient(), $this->getPerPage());
+        return new Notifications($this->getClient());
     }
 
     /**
@@ -87,7 +87,7 @@ class CurrentUser extends AbstractApi
      */
     public function memberships()
     {
-        return new Memberships($this->getClient(), $this->getPerPage());
+        return new Memberships($this->getClient());
     }
 
     /**
@@ -147,7 +147,7 @@ class CurrentUser extends AbstractApi
      */
     public function watchers()
     {
-        return new Watchers($this->getClient(), $this->getPerPage());
+        return new Watchers($this->getClient());
     }
 
     /**
@@ -155,7 +155,7 @@ class CurrentUser extends AbstractApi
      */
     public function starring()
     {
-        return new Starring($this->getClient(), $this->getPerPage());
+        return new Starring($this->getClient());
     }
 
     /**

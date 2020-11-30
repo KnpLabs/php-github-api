@@ -40,6 +40,6 @@ abstract class AbstractProjectApi extends AbstractApi
 
     public function columns()
     {
-        return new Columns($this->getClient(), $this->getPerPage());
+        return new Columns($this->getClient());
     }
 }
