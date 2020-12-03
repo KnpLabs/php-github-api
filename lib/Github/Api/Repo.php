@@ -2,6 +2,12 @@
 
 namespace Github\Api;
 
+use Github\Api\Repository\Actions\Artifacts;
+use Github\Api\Repository\Actions\Secrets;
+use Github\Api\Repository\Actions\SelfHostedRunners;
+use Github\Api\Repository\Actions\WorkflowJobs;
+use Github\Api\Repository\Actions\WorkflowRuns;
+use Github\Api\Repository\Actions\Workflows;
 use Github\Api\Repository\Checks;
 use Github\Api\Repository\Checks\CheckRuns;
 use Github\Api\Repository\Checks\CheckSuites;
@@ -362,6 +368,54 @@ class Repo extends AbstractApi
     public function checkSuites(): CheckSuites
     {
         return new CheckSuites($this->client);
+    }
+
+    /**
+     * @link https://developer.github.com/v3/actions/artifacts/#artifacts
+     */
+    public function artifacts(): Artifacts
+    {
+        return new Artifacts($this->client);
+    }
+
+    /**
+     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#workflows
+     */
+    public function workflows(): Workflows
+    {
+        return new Workflows($this->client);
+    }
+
+    /**
+     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#workflow-runs
+     */
+    public function workflowRuns(): WorkflowRuns
+    {
+        return new WorkflowRuns($this->client);
+    }
+
+    /**
+     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#workflow-jobs
+     */
+    public function workflowJobs(): WorkflowJobs
+    {
+        return new WorkflowJobs($this->client);
+    }
+
+    /**
+     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#self-hosted-runners
+     */
+    public function selfHostedRunners(): SelfHostedRunners
+    {
+        return new SelfHostedRunners($this->client);
+    }
+
+    /**
+     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#secrets
+     */
+    public function secrets(): Secrets
+    {
+        return new Secrets($this->client);
     }
 
     /**

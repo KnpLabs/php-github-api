@@ -109,5 +109,6 @@ This library is maintained by the following people (alphabetically sorted) :
 - Thanks to [Nicolas Pastorino](http://github.com/jeanvoye) for his contribution on the Pull Request API.
 - Thanks to [Edoardo Rivello](http://github.com/erivello) for his contribution on the Gists API.
 - Thanks to [Miguel Piedrafita](https://github.com/m1guelpf) for his contribution to the v4 & Apps API.
+- Thanks to [Emre DEGER](https://github.com/lexor) for his contribution to the Actions API.
 
 Thanks to GitHub for the high quality API and documentation.
