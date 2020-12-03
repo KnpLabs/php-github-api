@@ -1,0 +1,93 @@
+---------------------------------------------------------------------------
+
+by acrobat at 2020-11-26T19:36:31Z
+
+Thanks for working on this @lexor! Let me know when it's ready for review 🚢
+
+---------------------------------------------------------------------------
+
+by fodinabor at 2020-11-27T16:08:09Z
+
+What's missing from the developer.github.com documentation is e.g. dispatching:
+https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#create-a-workflow-dispatch-event
+
+I've been successful with:
+```php
+    /**
+     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#create-a-workflow-dispatch-event
+     *
+     * @param string $username
+     * @param string $repository
+     * @param string $workflowId
+     * @param string $ref
+     * @param array  $inputs
+     *
+     * @return array|string
+     */
+    public function dispatches(string $username, string $repository, string $workflowId, string $ref, array $inputs = [])
+    {
+        $parameters = array('ref' => $ref, 'inputs' => $inputs);
+        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/actions/workflows/'.rawurlencode($workflowId).'/dispatches', $parameters);
+    }
+```
+
+Another note: `workflowId` is in most cases allowed to contain the filename of the workflow, so string should be preferred over int
+
+---------------------------------------------------------------------------
+
+by lexor at 2020-11-28T05:14:26Z
+
+> What's missing from the developer.github.com documentation is e.g. dispatching:
+> [docs.github.com/en/free-pro-team@latest/rest/reference/actions#create-a-workflow-dispatch-event](https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#create-a-workflow-dispatch-event)
+
+Thanks for sharing the `dispatches` function, but this pull request based on [this documentation](https://developer.github.com/v3/actions/). After this pull request I can work on [this documentation](https://docs.github.com/en/free-pro-team@latest/rest/reference/actions).
+
+I'm not add organization endpoints (self-hosted runners) because marked on documentation. Organization endpoints currently in public beta and can be change.
+
+> Another note: `workflowId` is in most cases allowed to contain the filename of the workflow, so string should be preferred over int
+
+I think it can be changed from `workflowId` to `workflow`.
+
+---------------------------------------------------------------------------
+
+by lexor at 2020-11-28T10:20:27Z
+
+Hey @acrobat. This pull request awaiting review.
+
+---------------------------------------------------------------------------
+
+by fodinabor at 2020-11-28T10:32:36Z
+
+For [Get a workflow](https://developer.github.com/v3/actions/workflows/#get-a-workflow) for example the docs write:
+
+> Gets a specific workflow. You can also replace :workflow_id with :workflow_file_name. For example, you could use main.yml.
+
+So, yeah I guess a string parameter named just workflow would make sense here.
+
+---------------------------------------------------------------------------
+
+by acrobat at 2020-11-29T09:59:45Z
+
+@fodinabor the repo dispatch api endpoint is already added in #931
+
+@lexor A general remark before I do a full review, can you update the doc links to directly link to the new documentation? Example: https://docs.github.com/en/free-pro-team@latest/rest/reference/actions
+
+---------------------------------------------------------------------------
+
+by lexor at 2020-11-29T16:44:34Z
+
+> @lexor A general remark before I do a full review, can you update the doc links to directly link to the new documentation? Example: [docs.github.com/en/free-pro-team@latest/rest/reference/actions](https://docs.github.com/en/free-pro-team@latest/rest/reference/actions)
+
+Done, I updated 👍
+
+---------------------------------------------------------------------------
+
+by lexor at 2020-11-30T13:55:41Z
+
+> Can you replace the non url parameters with a `array $params/parameters `, so our code isn't fixed on a certain set of parameters of github decides to add new options.
+
+Sure, replaced. Now non url parameters moved on `array $parameters`.
+
+> Can you also add a docs entry for the added endpoints? The rest of PR looks good 👌
+
+I updated functions and test cases. Also added docs for added endpoints.
