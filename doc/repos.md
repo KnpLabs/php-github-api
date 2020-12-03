@@ -271,6 +271,22 @@ $languages = $client->api('repo')->languages('ornicar', 'php-github-api');
 
 Returns a list of languages.
 
+### Enable automated security fixes
+
+https://docs.github.com/en/free-pro-team@latest/rest/reference/repos#enable-automated-security-fixes
+
+```php
+$client->api('repo')->enableAutomatedSecurityFixes('KnpLabs', 'php-github-api');
+```
+
+### Disable automated security fixes
+
+https://docs.github.com/en/free-pro-team@latest/rest/reference/repos#disable-automated-security-fixes
+
+```php
+$client->api('repo')->disableAutomatedSecurityFixes('KnpLabs', 'php-github-api');
+```
+
 ### Get the contributors of a repository
 
 ```php

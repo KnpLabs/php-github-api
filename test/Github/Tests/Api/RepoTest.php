@@ -2,6 +2,9 @@
 
 namespace Github\Tests\Api;
 
+use Github\Api\Repo;
+use PHPUnit\Framework\MockObject\MockObject;
+
 class RepoTest extends TestCase
 {
     /**
@@ -262,6 +265,44 @@ class RepoTest extends TestCase
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->milestones('KnpLabs', 'php-github-api'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldEnableAutomatedSecurityFixes()
+    {
+        $expectedResponse = 'response';
+
+        /** @var Repo|MockObject $api */
+        $api = $this->getApiMock();
+
+        $api
+            ->expects($this->once())
+            ->method('put')
+            ->with('/repos/KnpLabs/php-github-api/automated-security-fixes')
+            ->will($this->returnValue($expectedResponse));
+
+        $this->assertEquals($expectedResponse, $api->enableAutomatedSecurityFixes('KnpLabs', 'php-github-api'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldDisableAutomatedSecurityFixes()
+    {
+        $expectedResponse = 'response';
+
+        /** @var Repo|MockObject $api */
+        $api = $this->getApiMock();
+
+        $api
+            ->expects($this->once())
+            ->method('delete')
+            ->with('/repos/KnpLabs/php-github-api/automated-security-fixes')
+            ->will($this->returnValue($expectedResponse));
+
+        $this->assertEquals($expectedResponse, $api->disableAutomatedSecurityFixes('KnpLabs', 'php-github-api'));
     }
 
     /**
