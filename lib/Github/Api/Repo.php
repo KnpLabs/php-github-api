@@ -693,6 +693,36 @@ class Repo extends AbstractApi
         return $this->get('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/milestones', $parameters);
     }
 
+    /**
+     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/repos#enable-automated-security-fixes
+     *
+     * @param string $username
+     * @param string $repository
+     *
+     * @return array|string
+     */
+    public function enableAutomatedSecurityFixes(string $username, string $repository)
+    {
+        $this->acceptHeaderValue = 'application/vnd.github.london-preview+json';
+
+        return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/automated-security-fixes');
+    }
+
+    /**
+     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/repos#disable-automated-security-fixes
+     *
+     * @param string $username
+     * @param string $repository
+     *
+     * @return array|string
+     */
+    public function disableAutomatedSecurityFixes(string $username, string $repository)
+    {
+        $this->acceptHeaderValue = 'application/vnd.github.london-preview+json';
+
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/automated-security-fixes');
+    }
+
     public function projects()
     {
         return new Projects($this->client);
