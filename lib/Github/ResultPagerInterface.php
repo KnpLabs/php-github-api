@@ -9,6 +9,8 @@ use Github\Api\ApiInterface;
  *
  * @author Ramon de la Fuente <ramon@future500.nl>
  * @author Mitchel Verschoof <mitchel@future500.nl>
+ *
+ * @method fetchAllLazy(ApiInterface $api, string $method, array $parameters = []): iterator
  */
 interface ResultPagerInterface
 {

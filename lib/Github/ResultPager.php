@@ -2,8 +2,8 @@
 
 namespace Github;
 
+use Github\Api\AbstractApi;
 use Github\Api\ApiInterface;
-use Github\Api\Search;
 use Github\HttpClient\Message\ResponseMediator;
 
 /**
@@ -14,6 +14,13 @@ use Github\HttpClient\Message\ResponseMediator;
  */
 class ResultPager implements ResultPagerInterface
 {
+    /**
+     * The default number of entries to request per page.
+     *
+     * @var int
+     */
+    private const PER_PAGE = 100;
+
     /**
      * The GitHub Client to use for pagination.
      *
@@ -28,6 +35,9 @@ class ResultPager implements ResultPagerInterface
      */
     protected $pagination;
 
+    /** @var int */
+    private $perPage;
+
     /**
      * The Github client to use for pagination.
      *
@@ -41,9 +51,10 @@ class ResultPager implements ResultPagerInterface
      *
      * @param \Github\Client $client
      */
-    public function __construct(Client $client)
+    public function __construct(Client $client, int $perPage = null)
     {
         $this->client = $client;
+        $this->perPage = $perPage ?? self::PER_PAGE;
     }
 
     /**
@@ -59,7 +70,25 @@ class ResultPager implements ResultPagerInterface
      */
     public function fetch(ApiInterface $api, $method, array $parameters = [])
     {
+        $paginatorPerPage = $this->perPage;
+        $closure = \Closure::bind(function (ApiInterface $api) use ($paginatorPerPage) {
+            $clone = clone $api;
+
+            if (null !== $api->getPerPage()) {
+                @trigger_error(sprintf('Setting the perPage value on an api class is deprecated sinc 2.18 and will be removed in 3.0. Pass the desired items per page value in the constructor of "%s"', __CLASS__), E_USER_DEPRECATED);
+
+                return $clone;
+            }
+
+            /* @phpstan-ignore-next-line */
+            $clone->perPage = $paginatorPerPage;
+
+            return $clone;
+        }, null, AbstractApi::class);
+
+        $api = $closure($api);
         $result = $this->callApi($api, $method, $parameters);
+
         $this->postFetch();
 
         return $result;
@@ -70,37 +99,24 @@ class ResultPager implements ResultPagerInterface
      */
     public function fetchAll(ApiInterface $api, $method, array $parameters = [])
     {
-        $isSearch = $api instanceof Search;
+        return iterator_to_array($this->fetchAllLazy($api, $method, $parameters));
+    }
 
-        // get the perPage from the api
-        $perPage = $api->getPerPage();
+    public function fetchAllLazy(ApiInterface $api, string $method, array $parameters = []): \Generator
+    {
+        $result = $this->fetch($api, $method, $parameters);
 
-        // set parameters per_page to GitHub max to minimize number of requests
-        $api->setPerPage(100);
-
-        try {
-            $result = $this->callApi($api, $method, $parameters);
-            $this->postFetch();
-
-            if ($isSearch) {
-                $result = isset($result['items']) ? $result['items'] : $result;
-            }
-
-            while ($this->hasNext()) {
-                $next = $this->fetchNext();
-
-                if ($isSearch) {
-                    $result = array_merge($result, $next['items']);
-                } else {
-                    $result = array_merge($result, $next);
-                }
-            }
-        } finally {
-            // restore the perPage
-            $api->setPerPage($perPage);
+        foreach ($result['items'] ?? $result as $item) {
+            yield $item;
         }
 
-        return $result;
+        while ($this->hasNext()) {
+            $result = $this->fetchNext();
+
+            foreach ($result['items'] ?? $result as $item) {
+                yield $item;
+            }
+        }
     }
 
     /**
@@ -187,6 +203,8 @@ class ResultPager implements ResultPagerInterface
     }
 
     /**
+     * @deprecated since 2.18 and will be removed in 3.0.
+     *
      * @param ApiInterface $api
      * @param string       $method
      * @param array        $parameters

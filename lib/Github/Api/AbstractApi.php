@@ -64,6 +64,8 @@ abstract class AbstractApi implements ApiInterface
     }
 
     /**
+     * @deprecated since 2.18 and will removed in 3.0. Changing items per page will be done internally by the `ResultPager`.
+     *
      * @return null|int
      */
     public function getPerPage()
@@ -72,6 +74,8 @@ abstract class AbstractApi implements ApiInterface
     }
 
     /**
+     * @deprecated since 2.18 and will removed in 3.0. Changing items per page will be done internally by the `ResultPager`.
+     *
      * @param null|int $perPage
      */
     public function setPerPage($perPage)

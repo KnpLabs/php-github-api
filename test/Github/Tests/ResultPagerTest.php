@@ -7,29 +7,36 @@ use Github\Api\Search;
 use Github\ResultPager;
 use Github\Tests\Mock\PaginatedResponse;
 use Http\Client\HttpClient;
+use PHPUnit\Framework\TestCase;
 
 /**
- * ResultPagerTest.
- *
  * @author Ramon de la Fuente <ramon@future500.nl>
  * @author Mitchel Verschoof <mitchel@future500.nl>
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class ResultPagerTest extends \PHPUnit\Framework\TestCase
+class ResultPagerTest extends TestCase
 {
+    public function provideFetchCases()
+    {
+        return [
+            ['fetchAll'],
+            ['fetchAllLazy'],
+        ];
+    }
+
     /**
-     * @test
+     * @test provideFetchCases
      *
-     * description fetchAll
+     * @dataProvider provideFetchCases
      */
-    public function shouldGetAllResults()
+    public function shouldGetAllResults(string $fetchMethod)
     {
         $amountLoops = 3;
         $content = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
         $response = new PaginatedResponse($amountLoops, $content);
 
         // httpClient mock
-        $httpClientMock = $this->getMockBuilder(\Http\Client\HttpClient::class)
+        $httpClientMock = $this->getMockBuilder(HttpClient::class)
             ->setMethods(['sendRequest'])
             ->getMock();
         $httpClientMock
@@ -47,7 +54,13 @@ class ResultPagerTest extends \PHPUnit\Framework\TestCase
 
         // Run fetchAll on result paginator
         $paginator = new ResultPager($client);
-        $result = $paginator->fetchAll($memberApi, $method, $parameters);
+        $result = $paginator->$fetchMethod($memberApi, $method, $parameters);
+
+        if (is_array($result)) {
+            $this->assertSame('fetchAll', $fetchMethod);
+        } else {
+            $result = iterator_to_array($result);
+        }
 
         $this->assertCount($amountLoops * count($content), $result);
     }
@@ -76,7 +89,7 @@ class ResultPagerTest extends \PHPUnit\Framework\TestCase
         $response = new PaginatedResponse($amountLoops, $content);
 
         // httpClient mock
-        $httpClientMock = $this->getMockBuilder(\Http\Client\HttpClient::class)
+        $httpClientMock = $this->getMockBuilder(HttpClient::class)
             ->setMethods(['sendRequest'])
             ->getMock();
         $httpClientMock
@@ -97,19 +110,21 @@ class ResultPagerTest extends \PHPUnit\Framework\TestCase
     public function testFetch()
     {
         $result = 'foo';
-        $method = 'bar';
+        $method = 'all';
         $parameters = ['baz'];
-        $api = $this->getMockBuilder(\Github\Api\ApiInterface::class)
-            ->getMock();
-
-        $paginator = $this->getMockBuilder(\Github\ResultPager::class)
+        $api = $this->getMockBuilder(Members::class)
             ->disableOriginalConstructor()
-            ->setMethods(['callApi', 'postFetch'])
+            ->setMethods(['all'])
             ->getMock();
-        $paginator->expects($this->once())
-            ->method('callApi')
-            ->with($api, $method, $parameters)
+        $api->expects($this->once())
+            ->method('all')
+            ->with(...$parameters)
             ->willReturn($result);
+
+        $paginator = $this->getMockBuilder(ResultPager::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['postFetch'])
+            ->getMock();
 
         $paginator->expects($this->once())
             ->method('postFetch');
