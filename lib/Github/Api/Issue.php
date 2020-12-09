@@ -37,7 +37,7 @@ class Issue extends AbstractApi
             $bodyType = 'raw';
         }
 
-        $this->acceptHeaderValue = sprintf('application/vnd.github.%s.%s+json', $this->client->getApiVersion(), $bodyType);
+        $this->acceptHeaderValue = sprintf('application/vnd.github.%s.%s+json', $this->getApiVersion(), $bodyType);
 
         return $this;
     }
@@ -176,7 +176,7 @@ class Issue extends AbstractApi
      */
     public function comments()
     {
-        return new Comments($this->client);
+        return new Comments($this->getClient());
     }
 
     /**
@@ -188,7 +188,7 @@ class Issue extends AbstractApi
      */
     public function events()
     {
-        return new Events($this->client);
+        return new Events($this->getClient());
     }
 
     /**
@@ -200,7 +200,7 @@ class Issue extends AbstractApi
      */
     public function labels()
     {
-        return new Labels($this->client);
+        return new Labels($this->getClient());
     }
 
     /**
@@ -212,7 +212,7 @@ class Issue extends AbstractApi
      */
     public function milestones()
     {
-        return new Milestones($this->client);
+        return new Milestones($this->getClient());
     }
 
     /**
@@ -224,7 +224,7 @@ class Issue extends AbstractApi
      */
     public function assignees()
     {
-        return new Assignees($this->client);
+        return new Assignees($this->getClient());
     }
 
     /**
@@ -236,6 +236,6 @@ class Issue extends AbstractApi
      */
     public function timeline()
     {
-        return new Timeline($this->client);
+        return new Timeline($this->getClient());
     }
 }

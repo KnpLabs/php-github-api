@@ -6,79 +6,59 @@ use Github\Client;
 use Github\HttpClient\Message\ResponseMediator;
 
 /**
- * Abstract class for Api classes.
- *
  * @author Joseph Bielawski <stloyd@gmail.com>
+ * @author Graham Campbell <graham@alt-three.com>
  */
-abstract class AbstractApi implements ApiInterface
+abstract class AbstractApi
 {
     /**
-     * The client.
+     * The client instance.
      *
      * @var Client
      */
-    protected $client;
+    private $client;
 
     /**
-     * The requested page (GitHub pagination).
+     * The per page parameter.
      *
-     * @var null|int
+     * @var int|null
      */
-    private $page;
+    private $perPage;
 
     /**
-     * Number of items per page (GitHub pagination).
+     * Create a new API instance.
      *
-     * @var null|int
-     */
-    protected $perPage;
-
-    /**
      * @param Client $client
+     *
+     * @return void
      */
     public function __construct(Client $client)
     {
         $this->client = $client;
     }
 
+    /**
+     * Get the client instance.
+     *
+     * @return Client
+     */
+    protected function getClient()
+    {
+        return $this->client;
+    }
+
+    /**
+     * Get the API version.
+     *
+     * @return string
+     */
+    protected function getApiVersion()
+    {
+        return $this->client->getApiVersion();
+    }
+
     public function configure()
     {
-    }
-
-    /**
-     * @return null|int
-     */
-    public function getPage()
-    {
-        return $this->page;
-    }
-
-    /**
-     * @param null|int $page
-     */
-    public function setPage($page)
-    {
-        $this->page = (null === $page ? $page : (int) $page);
-
-        return $this;
-    }
-
-    /**
-     * @return null|int
-     */
-    public function getPerPage()
-    {
-        return $this->perPage;
-    }
-
-    /**
-     * @param null|int $perPage
-     */
-    public function setPerPage($perPage)
-    {
-        $this->perPage = (null === $perPage ? $perPage : (int) $perPage);
-
-        return $this;
     }
 
     /**
@@ -92,12 +72,10 @@ abstract class AbstractApi implements ApiInterface
      */
     protected function get($path, array $parameters = [], array $requestHeaders = [])
     {
-        if (null !== $this->page && !isset($parameters['page'])) {
-            $parameters['page'] = $this->page;
-        }
         if (null !== $this->perPage && !isset($parameters['per_page'])) {
             $parameters['per_page'] = $this->perPage;
         }
+
         if (array_key_exists('ref', $parameters) && null === $parameters['ref']) {
             unset($parameters['ref']);
         }

@@ -122,6 +122,6 @@ class Releases extends AbstractApi
      */
     public function assets()
     {
-        return new Assets($this->client);
+        return new Assets($this->getClient());
     }
 }

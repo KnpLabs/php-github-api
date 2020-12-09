@@ -2,7 +2,7 @@
 
 namespace Github;
 
-use Github\Api\ApiInterface;
+use Github\Api\AbstractApi;
 use Github\Exception\BadMethodCallException;
 use Github\Exception\InvalidArgumentException;
 use Github\HttpClient\Builder;
@@ -154,7 +154,7 @@ class Client
      *
      * @throws InvalidArgumentException
      *
-     * @return ApiInterface
+     * @return AbstractApi
      */
     public function api($name)
     {
@@ -378,7 +378,7 @@ class Client
      * @param string $name
      * @param array  $args
      *
-     * @return ApiInterface
+     * @return AbstractApi
      */
     public function __call($name, $args)
     {

@@ -82,7 +82,7 @@ class Organization extends AbstractApi
      */
     public function members()
     {
-        return new Members($this->client);
+        return new Members($this->getClient());
     }
 
     /**
@@ -90,7 +90,7 @@ class Organization extends AbstractApi
      */
     public function hooks()
     {
-        return new Hooks($this->client);
+        return new Hooks($this->getClient());
     }
 
     /**
@@ -98,7 +98,7 @@ class Organization extends AbstractApi
      */
     public function teams()
     {
-        return new Teams($this->client);
+        return new Teams($this->getClient());
     }
 
     /**
@@ -106,7 +106,7 @@ class Organization extends AbstractApi
      */
     public function outsideCollaborators()
     {
-        return new OutsideCollaborators($this->client);
+        return new OutsideCollaborators($this->getClient());
     }
 
     /**
