@@ -1,0 +1,209 @@
+---------------------------------------------------------------------------
+
+by acrobat at 2020-09-27T17:36:03Z
+
+@GrahamCampbell I'm testing this PR but it doesn't seem to work. Is it a bug or am I doing something wrong?
+
+```php
+$paginator  = new Github\ResultPager($client);
+$api = $client->api('user');
+$api = $api->perPage(2);
+
+$result = $paginator->fetch($api, 'repositories', ['acrobat']);
+```
+
+This fetch function still uses the default of 100 items per page
+
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2020-09-27T19:01:33Z
+
+Yeh, that is what I would expect to happen, and it's also how the current paginator works.
+
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2020-09-27T19:01:58Z
+
+The paginator intentionally doesn't allow users to change the internal number of items per page.
+
+---------------------------------------------------------------------------
+
+by acrobat at 2020-09-27T20:04:34Z
+
+Well actually this does work with the old pager
+
+dev-master
+```php
+<?php
+
+require_once 'vendor/autoload.php';
+
+$client = new \Github\Client();
+$client->authenticate('xxxxxx', \Github\Client::AUTH_ACCESS_TOKEN);
+
+$paginator  = new Github\ResultPager($client);
+$api = $client->api('user');
+$api->setPerPage(2);
+
+$result = $paginator->fetch($api, 'repositories', ['knplabs']);
+
+echo \count($result) .PHP_EOL;
+while (($result = $paginator->fetchNext()) !== []) {
+    echo \count($result) .PHP_EOL;
+}
+```
+
+Output
+```
+→ php test.php
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+// Stopped the script here
+```
+
+pager changes code:
+```php
+<?php
+
+require_once 'vendor/autoload.php';
+
+$client = new \Github\Client();
+$client->authenticate('xxxxx', \Github\Client::AUTH_ACCESS_TOKEN);
+
+$paginator  = new Github\ResultPager($client);
+$api = $client->api('user');
+$api = $api->perPage(2);
+
+$result = $paginator->fetch($api, 'repositories', ['knplabs']);
+
+echo \count($result) .PHP_EOL;
+while (($result = $paginator->fetchNext()) !== []) {
+    echo \count($result) .PHP_EOL;
+}
+```
+
+output
+```
+→ php test.php
+100
+8
+```
+
+Previously the `callApi` method was used as we now call the perPage method first
+
+https://github.com/KnpLabs/php-github-api/blob/9b01208e1e5500201b45699c911ad53d08f59105/lib/Github/ResultPager.php#L62
+
+https://github.com/KnpLabs/php-github-api/pull/907/files#diff-40de580826089d3ae27bf74e6b2b9402R76
+
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2020-09-27T22:04:06Z
+
+Hmm, right. I suppose my question is why would anyone want to do that?
+
+---------------------------------------------------------------------------
+
+by acrobat at 2020-09-29T07:21:40Z
+
+I can see use cases for this like forexample the travis-ci settings page where you show all available repositories to enable. This could be a paginated list with 20 items per page. If there is no usecase for changing the per page amount, why do we have the `perPage` method?
+
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2020-09-29T15:37:15Z
+
+The perPage method allows the paginator to set the number of pages it wants. It has to be able to interface with the api classes somehow.
+
+---------------------------------------------------------------------------
+
+by acrobat at 2020-10-05T17:47:04Z
+
+Hmm I see there was the confusion on my part. Setting the per page amount in the resultpager constructor does the job.
+
+```php
+$paginator  = new Github\ResultPager($client, 2);
+```
+
+But now I thinking that this might be confusing to for the users of this library. Could we keep the private property but use a closure bind setup to clone and update the perpage value without having a public perpage method which doesn't actually work with the paginator? What do you think @GrahamCampbell?
+
+```php
+public function fetch(ApiInterface $api, string $method, array $parameters = [])
+    {
+        $paginatorPerPage = $this->perPage;
+        $closure = \Closure::bind(function (AbstractApi $api) use ($paginatorPerPage) {
+            $clone = clone $api;
+            $clone->perPage = $paginatorPerPage;
+
+            return $clone;
+        }, null, AbstractApi::class);
+
+        $api = $closure($api);
+        $result = $api->$method(...$parameters);
+
+        $this->postFetch();
+
+        return $result;
+    }
+```
+
+---------------------------------------------------------------------------
+
+by acrobat at 2020-10-24T09:05:09Z
+
+@GrahamCampbell what do you think of the solution above? Would this be the way to finish this PR?
+
+---------------------------------------------------------------------------
+
+by acrobat at 2020-11-12T17:26:59Z
+
+@GrahamCampbell what do you think of the proposed solution? I would like to finish this PR and release the 3.0 😄
+
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2020-11-20T15:26:24Z
+
+Sorry for the delay here. I will get to this soon. NB There are currently merge conflicts.
+
+---------------------------------------------------------------------------
+
+by acrobat at 2020-11-20T16:30:10Z
+
+No worries! 😄
+
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2020-11-29T19:16:40Z
+
+Rebased and made the relevant changes you wanted. How is this looking now, @acrobat?
+
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2020-11-30T23:25:40Z
+
+I've applied the changes you asked for. :)
+
+---------------------------------------------------------------------------
+
+by acrobat at 2020-12-01T08:36:17Z
+
+Yes, thank you! I will try to do a review and test in my demo app later tonight!
+
+---------------------------------------------------------------------------
+
+by acrobat at 2020-12-03T10:52:44Z
+
+My "test app" for the pagination worked great and intuitive with the latest changes 👌  I will do a quick code review later and prepare a PR for 2.x to deprecate some things changed/removed in this PR
+
+---------------------------------------------------------------------------
+
+by acrobat at 2020-12-09T07:40:54Z
+
+Thank you @GrahamCampbell
