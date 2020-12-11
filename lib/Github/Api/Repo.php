@@ -2,6 +2,12 @@
 
 namespace Github\Api;
 
+use Github\Api\Repository\Actions\Artifacts;
+use Github\Api\Repository\Actions\Secrets;
+use Github\Api\Repository\Actions\SelfHostedRunners;
+use Github\Api\Repository\Actions\WorkflowJobs;
+use Github\Api\Repository\Actions\WorkflowRuns;
+use Github\Api\Repository\Actions\Workflows;
 use Github\Api\Repository\Checks;
 use Github\Api\Repository\Checks\CheckRuns;
 use Github\Api\Repository\Checks\CheckSuites;
@@ -349,6 +355,54 @@ class Repo extends AbstractApi
     }
 
     /**
+     * @link https://developer.github.com/v3/actions/artifacts/#artifacts
+     */
+    public function artifacts(): Artifacts
+    {
+        return new Artifacts($this->client);
+    }
+
+    /**
+     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#workflows
+     */
+    public function workflows(): Workflows
+    {
+        return new Workflows($this->client);
+    }
+
+    /**
+     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#workflow-runs
+     */
+    public function workflowRuns(): WorkflowRuns
+    {
+        return new WorkflowRuns($this->client);
+    }
+
+    /**
+     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#workflow-jobs
+     */
+    public function workflowJobs(): WorkflowJobs
+    {
+        return new WorkflowJobs($this->client);
+    }
+
+    /**
+     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#self-hosted-runners
+     */
+    public function selfHostedRunners(): SelfHostedRunners
+    {
+        return new SelfHostedRunners($this->client);
+    }
+
+    /**
+     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#secrets
+     */
+    public function secrets(): Secrets
+    {
+        return new Secrets($this->client);
+    }
+
+    /**
      * Manage the content of a repository.
      *
      * @link http://developer.github.com/v3/repos/contents/
@@ -605,6 +659,36 @@ class Repo extends AbstractApi
     public function milestones($username, $repository, array $parameters = [])
     {
         return $this->get('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/milestones', $parameters);
+    }
+
+    /**
+     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/repos#enable-automated-security-fixes
+     *
+     * @param string $username
+     * @param string $repository
+     *
+     * @return array|string
+     */
+    public function enableAutomatedSecurityFixes(string $username, string $repository)
+    {
+        $this->acceptHeaderValue = 'application/vnd.github.london-preview+json';
+
+        return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/automated-security-fixes');
+    }
+
+    /**
+     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/repos#disable-automated-security-fixes
+     *
+     * @param string $username
+     * @param string $repository
+     *
+     * @return array|string
+     */
+    public function disableAutomatedSecurityFixes(string $username, string $repository)
+    {
+        $this->acceptHeaderValue = 'application/vnd.github.london-preview+json';
+
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/automated-security-fixes');
     }
 
     public function projects()
