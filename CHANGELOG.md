@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.18.0
+
+### Added
+- Add parameters to PullRequest commits method ([seanmtaylor](https://github.com/seanmtaylor)) [#938](https://github.com/KnpLabs/php-github-api/issues/938)
+- Actions (#872) ([lexor](https://github.com/lexor)) [#939](https://github.com/KnpLabs/php-github-api/issues/939)
+- automated security endpoints (#868) ([lexor](https://github.com/lexor)) [#944](https://github.com/KnpLabs/php-github-api/issues/944)
+
+### Changed
+- Update apps.md ([clarkeash](https://github.com/clarkeash)) [#936](https://github.com/KnpLabs/php-github-api/issues/936)
+
+### Fixed
+- Throw exception for graphql errors ([acrobat](https://github.com/acrobat)) [#941](https://github.com/KnpLabs/php-github-api/issues/941)
+
 ## 2.17.0
 
 ### Added
