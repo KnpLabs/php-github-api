@@ -627,16 +627,6 @@ class RepoTest extends TestCase
     }
 
     /**
-     * @test
-     */
-    public function shouldGetChecksApiObject()
-    {
-        $api = $this->getApiMock();
-
-        $this->assertInstanceOf(\Github\Api\Repository\Checks::class, $api->checks());
-    }
-
-    /**
      * @return string
      */
     protected function getApiClass()
