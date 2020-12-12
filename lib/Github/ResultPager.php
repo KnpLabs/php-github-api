@@ -2,6 +2,8 @@
 
 namespace Github;
 
+use Closure;
+use Generator;
 use Github\Api\AbstractApi;
 use Github\HttpClient\Message\ResponseMediator;
 use ValueError;
@@ -71,10 +73,10 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetch(AbstractApi $api, string $method, array $parameters = [])
+    public function fetch(AbstractApi $api, string $method, array $parameters = []): array
     {
         $paginatorPerPage = $this->perPage;
-        $closure = \Closure::bind(function (AbstractApi $api) use ($paginatorPerPage) {
+        $closure = Closure::bind(function (AbstractApi $api) use ($paginatorPerPage) {
             $clone = clone $api;
             $clone->perPage = $paginatorPerPage;
 
@@ -92,7 +94,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetchAll(AbstractApi $api, string $method, array $parameters = [])
+    public function fetchAll(AbstractApi $api, string $method, array $parameters = []): array
     {
         return iterator_to_array($this->fetchAllLazy($api, $method, $parameters));
     }
@@ -100,7 +102,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetchAllLazy(AbstractApi $api, string $method, array $parameters = [])
+    public function fetchAllLazy(AbstractApi $api, string $method, array $parameters = []): Generator
     {
         $result = $this->fetch($api, $method, $parameters);
 
@@ -122,7 +124,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function postFetch()
+    public function postFetch(): void
     {
         $this->pagination = ResponseMediator::getPagination($this->client->getLastResponse());
     }
@@ -130,7 +132,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function hasNext()
+    public function hasNext(): bool
     {
         return isset($this->pagination['next']);
     }
@@ -138,7 +140,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetchNext()
+    public function fetchNext(): array
     {
         return $this->get('next');
     }
@@ -146,7 +148,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPrevious()
+    public function hasPrevious(): bool
     {
         return isset($this->pagination['prev']);
     }
@@ -154,7 +156,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetchPrevious()
+    public function fetchPrevious(): array
     {
         return $this->get('prev');
     }
@@ -162,7 +164,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetchFirst()
+    public function fetchFirst(): array
     {
         return $this->get('first');
     }
@@ -170,7 +172,7 @@ class ResultPager implements ResultPagerInterface
     /**
      * {@inheritdoc}
      */
-    public function fetchLast()
+    public function fetchLast(): array
     {
         return $this->get('last');
     }
@@ -180,7 +182,7 @@ class ResultPager implements ResultPagerInterface
      *
      * @return array
      */
-    protected function get(string $key)
+    protected function get(string $key): array
     {
         if (!isset($this->pagination[$key])) {
             return [];

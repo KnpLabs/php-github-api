@@ -2,9 +2,9 @@
 
 namespace Github\Exception;
 
+use Throwable;
+
 /**
- * ApiLimitExceedException.
- *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class ApiLimitExceedException extends RuntimeException
@@ -15,12 +15,12 @@ class ApiLimitExceedException extends RuntimeException
     private $reset;
 
     /**
-     * @param int             $limit
-     * @param int             $reset
-     * @param int             $code
-     * @param \Throwable|null $previous
+     * @param int            $limit
+     * @param int            $reset
+     * @param int            $code
+     * @param Throwable|null $previous
      */
-    public function __construct($limit = 5000, $reset = 1800, $code = 0, $previous = null)
+    public function __construct(int $limit = 5000, int $reset = 1800, int $code = 0, Throwable $previous = null)
     {
         $this->limit = (int) $limit;
         $this->reset = (int) $reset;
@@ -31,7 +31,7 @@ class ApiLimitExceedException extends RuntimeException
     /**
      * @return int
      */
-    public function getLimit()
+    public function getLimit(): int
     {
         return $this->limit;
     }
@@ -39,7 +39,7 @@ class ApiLimitExceedException extends RuntimeException
     /**
      * @return int
      */
-    public function getResetTime()
+    public function getResetTime(): int
     {
         return $this->reset;
     }

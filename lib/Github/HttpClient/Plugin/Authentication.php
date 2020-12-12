@@ -35,7 +35,7 @@ class Authentication implements Plugin
      * @param string|null $password     GitHub password/secret (optionally can contain $method)
      * @param string|null $method       One of the AUTH_* class constants
      */
-    public function __construct($tokenOrLogin, $password, $method)
+    public function __construct(string $tokenOrLogin, ?string $password, ?string $method)
     {
         $this->tokenOrLogin = $tokenOrLogin;
         $this->password = $password;

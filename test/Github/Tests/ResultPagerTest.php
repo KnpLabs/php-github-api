@@ -110,7 +110,7 @@ class ResultPagerTest extends \PHPUnit\Framework\TestCase
 
     public function testFetch()
     {
-        $result = 'foo';
+        $result = ['foo'];
         $method = 'all';
         $parameters = ['baz'];
         $api = $this->getMockBuilder(Members::class)

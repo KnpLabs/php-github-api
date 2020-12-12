@@ -22,7 +22,7 @@ class Stargazers extends AbstractApi
      *
      * @param string $bodyType
      *
-     * @return self
+     * @return $this
      */
     public function configure($bodyType = null)
     {

@@ -22,7 +22,7 @@ class History implements Journal
     /**
      * @return ResponseInterface|null
      */
-    public function getLastResponse()
+    public function getLastResponse(): ?ResponseInterface
     {
         return $this->lastResponse;
     }
@@ -30,7 +30,7 @@ class History implements Journal
     /**
      * @return void
      */
-    public function addSuccess(RequestInterface $request, ResponseInterface $response)
+    public function addSuccess(RequestInterface $request, ResponseInterface $response): void
     {
         $this->lastResponse = $response;
     }
@@ -38,7 +38,7 @@ class History implements Journal
     /**
      * @return void
      */
-    public function addFailure(RequestInterface $request, ClientExceptionInterface $exception)
+    public function addFailure(RequestInterface $request, ClientExceptionInterface $exception): void
     {
     }
 }
