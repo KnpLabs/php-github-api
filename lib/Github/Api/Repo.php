@@ -359,7 +359,7 @@ class Repo extends AbstractApi
      */
     public function artifacts(): Artifacts
     {
-        return new Artifacts($this->client);
+        return new Artifacts($this->getClient());
     }
 
     /**
@@ -367,7 +367,7 @@ class Repo extends AbstractApi
      */
     public function workflows(): Workflows
     {
-        return new Workflows($this->client);
+        return new Workflows($this->getClient());
     }
 
     /**
@@ -375,7 +375,7 @@ class Repo extends AbstractApi
      */
     public function workflowRuns(): WorkflowRuns
     {
-        return new WorkflowRuns($this->client);
+        return new WorkflowRuns($this->getClient());
     }
 
     /**
@@ -383,7 +383,7 @@ class Repo extends AbstractApi
      */
     public function workflowJobs(): WorkflowJobs
     {
-        return new WorkflowJobs($this->client);
+        return new WorkflowJobs($this->getClient());
     }
 
     /**
@@ -391,7 +391,7 @@ class Repo extends AbstractApi
      */
     public function selfHostedRunners(): SelfHostedRunners
     {
-        return new SelfHostedRunners($this->client);
+        return new SelfHostedRunners($this->getClient());
     }
 
     /**
@@ -399,7 +399,7 @@ class Repo extends AbstractApi
      */
     public function secrets(): Secrets
     {
-        return new Secrets($this->client);
+        return new Secrets($this->getClient());
     }
 
     /**
