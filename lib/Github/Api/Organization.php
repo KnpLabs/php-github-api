@@ -107,7 +107,7 @@ class Organization extends AbstractApi
      */
     public function secrets(): Secrets
     {
-        return new Secrets($this->client);
+        return new Secrets($this->getClient());
     }
 
     /**
