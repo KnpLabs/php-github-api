@@ -55,30 +55,28 @@ and installation access token which is then usable with `Github\Client::AUTH_ACC
 authentication docs](https://developer.github.com/apps/building-github-apps/authentication-options-for-github-apps/#authenticating-as-a-github-app) describe the flow in detail.
 It´s important for integration requests to use the custom Accept header `application/vnd.github.machine-man-preview`.
 
-The following sample code authenticates as an installation using [lcobucci/jwt](https://github.com/lcobucci/jwt/tree/3.3.2)
+The following sample code authenticates as an installation using [lcobucci/jwt 3.4](https://github.com/lcobucci/jwt/tree/3.4)
 to generate a JSON Web Token (JWT).
 
 ```php
-use Http\Adapter\Guzzle6\Client as GuzzleClient;
-use Lcobucci\JWT\Builder;
-use Lcobucci\JWT\Signer\Key;
+use Lcobucci\JWT\Configuration;
+use Lcobucci\JWT\Signer\Key\LocalFileReference;
 use Lcobucci\JWT\Signer\Rsa\Sha256;
 
-$builder = new Github\HttpClient\Builder(new GuzzleClient());
 $github = new Github\Client($builder, 'machine-man-preview');
 
-$jwt = (new Builder)
-    ->setIssuer($integrationId)
-    ->setIssuedAt(time())
-    ->setExpiration(time() + 60)
-    // `file://` prefix for file path or file contents itself
-    ->sign(new Sha256(),  new Key('file:///path/to/integration.private-key.pem'))
-    ->getToken();
+$config = Configuration::forSymmetricSigner(
+    new Sha256(),
+    LocalFileReference::file('path/to/integration.private-key.pem')
+);
 
-$github->authenticate($jwt, null, Github\Client::AUTH_JWT);
+$jwt = $config->builder()
+    ->issuedBy($integrationId)
+    ->issuedAt(time())
+    ->expiresAt(time() + 60)
+    ->getToken($config->signer(), $config->signingKey()));
 
-$token = $github->api('apps')->createInstallationToken($installationId);
-$github->authenticate($token['token'], null, Github\Client::AUTH_ACCESS_TOKEN);
+$github->authenticate($jwt, null, Github\Client::AUTH_JWT)
 ```
 
 The `$integrationId` you can find in the about section of your github app.
