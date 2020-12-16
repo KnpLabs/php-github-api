@@ -4,6 +4,7 @@ namespace Github\Api;
 
 use Github\Client;
 use Github\HttpClient\Message\ResponseMediator;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
@@ -42,7 +43,7 @@ abstract class AbstractApi
      *
      * @return Client
      */
-    protected function getClient()
+    protected function getClient(): Client
     {
         return $this->client;
     }
@@ -52,13 +53,17 @@ abstract class AbstractApi
      *
      * @return string
      */
-    protected function getApiVersion()
+    protected function getApiVersion(): string
     {
         return $this->client->getApiVersion();
     }
 
+    /**
+     * @return $this
+     */
     public function configure()
     {
+        return $this;
     }
 
     /**
@@ -70,7 +75,7 @@ abstract class AbstractApi
      *
      * @return array|string
      */
-    protected function get($path, array $parameters = [], array $requestHeaders = [])
+    protected function get(string $path, array $parameters = [], array $requestHeaders = [])
     {
         if (null !== $this->perPage && !isset($parameters['per_page'])) {
             $parameters['per_page'] = $this->perPage;
@@ -96,9 +101,9 @@ abstract class AbstractApi
      * @param array  $parameters     HEAD parameters.
      * @param array  $requestHeaders Request headers.
      *
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
-    protected function head($path, array $parameters = [], array $requestHeaders = [])
+    protected function head(string $path, array $parameters = [], array $requestHeaders = []): ResponseInterface
     {
         if (array_key_exists('ref', $parameters) && null === $parameters['ref']) {
             unset($parameters['ref']);
@@ -116,7 +121,7 @@ abstract class AbstractApi
      *
      * @return array|string
      */
-    protected function post($path, array $parameters = [], array $requestHeaders = [])
+    protected function post(string $path, array $parameters = [], array $requestHeaders = [])
     {
         return $this->postRaw(
             $path,
@@ -134,7 +139,7 @@ abstract class AbstractApi
      *
      * @return array|string
      */
-    protected function postRaw($path, $body, array $requestHeaders = [])
+    protected function postRaw(string $path, $body, array $requestHeaders = [])
     {
         $response = $this->client->getHttpClient()->post(
             $path,
@@ -154,7 +159,7 @@ abstract class AbstractApi
      *
      * @return array|string
      */
-    protected function patch($path, array $parameters = [], array $requestHeaders = [])
+    protected function patch(string $path, array $parameters = [], array $requestHeaders = [])
     {
         $response = $this->client->getHttpClient()->patch(
             $path,
@@ -174,7 +179,7 @@ abstract class AbstractApi
      *
      * @return array|string
      */
-    protected function put($path, array $parameters = [], array $requestHeaders = [])
+    protected function put(string $path, array $parameters = [], array $requestHeaders = [])
     {
         $response = $this->client->getHttpClient()->put(
             $path,
@@ -194,7 +199,7 @@ abstract class AbstractApi
      *
      * @return array|string
      */
-    protected function delete($path, array $parameters = [], array $requestHeaders = [])
+    protected function delete(string $path, array $parameters = [], array $requestHeaders = [])
     {
         $response = $this->client->getHttpClient()->delete(
             $path,
@@ -212,7 +217,7 @@ abstract class AbstractApi
      *
      * @return string|null
      */
-    protected function createJsonBody(array $parameters)
+    protected function createJsonBody(array $parameters): ?string
     {
         return (count($parameters) === 0) ? null : json_encode($parameters, empty($parameters) ? JSON_FORCE_OBJECT : 0);
     }

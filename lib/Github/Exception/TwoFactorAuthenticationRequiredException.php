@@ -2,17 +2,19 @@
 
 namespace Github\Exception;
 
+use Throwable;
+
 class TwoFactorAuthenticationRequiredException extends RuntimeException
 {
     /** @var string */
     private $type;
 
     /**
-     * @param string          $type
-     * @param int             $code
-     * @param \Throwable|null $previous
+     * @param string         $type
+     * @param int            $code
+     * @param Throwable|null $previous
      */
-    public function __construct($type, $code = 0, $previous = null)
+    public function __construct(string $type, int $code = 0, Throwable $previous = null)
     {
         $this->type = $type;
         parent::__construct('Two factor authentication is enabled on this account', $code, $previous);
@@ -21,7 +23,7 @@ class TwoFactorAuthenticationRequiredException extends RuntimeException
     /**
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }

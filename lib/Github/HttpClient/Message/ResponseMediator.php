@@ -30,7 +30,7 @@ class ResponseMediator
      *
      * @return array<string,string>
      */
-    public static function getPagination(ResponseInterface $response)
+    public static function getPagination(ResponseInterface $response): array
     {
         $header = self::getHeader($response, 'Link');
 
@@ -56,7 +56,7 @@ class ResponseMediator
      *
      * @return string|null
      */
-    public static function getApiLimit(ResponseInterface $response)
+    public static function getApiLimit(ResponseInterface $response): ?string
     {
         $remainingCallsHeader = self::getHeader($response, 'X-RateLimit-Remaining');
 
@@ -81,7 +81,7 @@ class ResponseMediator
      *
      * @return string|null
      */
-    public static function getHeader(ResponseInterface $response, string $name)
+    public static function getHeader(ResponseInterface $response, string $name): ?string
     {
         $headers = $response->getHeader($name);
 

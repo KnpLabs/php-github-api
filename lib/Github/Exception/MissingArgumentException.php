@@ -2,19 +2,19 @@
 
 namespace Github\Exception;
 
+use Throwable;
+
 /**
- * MissingArgumentException.
- *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class MissingArgumentException extends ErrorException
 {
     /**
-     * @param string|array    $required
-     * @param int             $code
-     * @param \Throwable|null $previous
+     * @param string|array   $required
+     * @param int            $code
+     * @param Throwable|null $previous
      */
-    public function __construct($required, $code = 0, $previous = null)
+    public function __construct($required, int $code = 0, Throwable $previous = null)
     {
         if (is_string($required)) {
             $required = [$required];

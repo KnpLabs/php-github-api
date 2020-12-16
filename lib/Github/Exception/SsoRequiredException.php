@@ -2,20 +2,19 @@
 
 namespace Github\Exception;
 
-/**
- * SsoRequiredException.
- */
+use Throwable;
+
 class SsoRequiredException extends RuntimeException
 {
     /** @var string */
     private $url;
 
     /**
-     * @param string          $url
-     * @param int             $code
-     * @param \Throwable|null $previous
+     * @param string         $url
+     * @param int            $code
+     * @param Throwable|null $previous
      */
-    public function __construct($url, $code = 0, $previous = null)
+    public function __construct(string $url, int $code = 0, Throwable $previous = null)
     {
         $this->url = $url;
 

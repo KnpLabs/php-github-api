@@ -15,6 +15,7 @@ use Http\Client\Common\Plugin;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Simple yet very cool PHP GitHub client.
@@ -142,7 +143,7 @@ class Client
      *
      * @return Client
      */
-    public static function createWithHttpClient(ClientInterface $httpClient)
+    public static function createWithHttpClient(ClientInterface $httpClient): self
     {
         $builder = new Builder($httpClient);
 
@@ -156,7 +157,7 @@ class Client
      *
      * @return AbstractApi
      */
-    public function api($name)
+    public function api($name): AbstractApi
     {
         switch ($name) {
             case 'me':
@@ -311,7 +312,7 @@ class Client
      *
      * @return void
      */
-    public function authenticate($tokenOrLogin, $password = null, $authMethod = null)
+    public function authenticate($tokenOrLogin, $password = null, $authMethod = null): void
     {
         if (null === $authMethod && (self::AUTH_JWT === $password || self::AUTH_ACCESS_TOKEN === $password)) {
             $authMethod = $password;
@@ -333,7 +334,7 @@ class Client
      *
      * @return void
      */
-    private function setEnterpriseUrl($enterpriseUrl)
+    private function setEnterpriseUrl($enterpriseUrl): void
     {
         $builder = $this->getHttpClientBuilder();
         $builder->removePlugin(Plugin\AddHostPlugin::class);
@@ -346,7 +347,7 @@ class Client
     /**
      * @return string
      */
-    public function getApiVersion()
+    public function getApiVersion(): string
     {
         return $this->apiVersion;
     }
@@ -359,7 +360,7 @@ class Client
      *
      * @return void
      */
-    public function addCache(CacheItemPoolInterface $cachePool, array $config = [])
+    public function addCache(CacheItemPoolInterface $cachePool, array $config = []): void
     {
         $this->getHttpClientBuilder()->addCache($cachePool, $config);
     }
@@ -369,7 +370,7 @@ class Client
      *
      * @return void
      */
-    public function removeCache()
+    public function removeCache(): void
     {
         $this->getHttpClientBuilder()->removeCache();
     }
@@ -380,7 +381,7 @@ class Client
      *
      * @return AbstractApi
      */
-    public function __call($name, $args)
+    public function __call($name, $args): AbstractApi
     {
         try {
             return $this->api($name);
@@ -392,7 +393,7 @@ class Client
     /**
      * @return null|\Psr\Http\Message\ResponseInterface
      */
-    public function getLastResponse()
+    public function getLastResponse(): ?ResponseInterface
     {
         return $this->responseHistory->getLastResponse();
     }
@@ -400,7 +401,7 @@ class Client
     /**
      * @return HttpMethodsClientInterface
      */
-    public function getHttpClient()
+    public function getHttpClient(): HttpMethodsClientInterface
     {
         return $this->getHttpClientBuilder()->getHttpClient();
     }
@@ -408,7 +409,7 @@ class Client
     /**
      * @return Builder
      */
-    protected function getHttpClientBuilder()
+    protected function getHttpClientBuilder(): Builder
     {
         return $this->httpClientBuilder;
     }
