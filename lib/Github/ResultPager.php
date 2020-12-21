@@ -106,19 +106,25 @@ class ResultPager implements ResultPagerInterface
     {
         $result = $this->fetch($api, $method, $parameters);
 
-        foreach ($result['items'] ?? $result as $item) {
-            yield $item;
+        foreach ($result['items'] ?? $result as $key => $item) {
+            if (is_string($key)) {
+                yield $key => $item;
+            } else {
+                yield $item;
+            }
         }
 
         while ($this->hasNext()) {
             $result = $this->fetchNext();
 
-            foreach ($result['items'] ?? $result as $item) {
-                yield $item;
+            foreach ($result['items'] ?? $result as $key => $item) {
+                if (is_string($key)) {
+                    yield $key => $item;
+                } else {
+                    yield $item;
+                }
             }
         }
-
-        return $result;
     }
 
     /**
