@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.19.0
+
+### Added
+- Mark some classes as final ([acrobat](https://github.com/acrobat)) [#954](https://github.com/KnpLabs/php-github-api/issues/954)
+
 ## 2.18.0
 
 ### Added
