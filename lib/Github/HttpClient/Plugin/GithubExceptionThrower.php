@@ -17,6 +17,7 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
+ * @final since 2.19
  */
 class GithubExceptionThrower implements Plugin
 {
