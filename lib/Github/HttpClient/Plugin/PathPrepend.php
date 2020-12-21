@@ -10,6 +10,7 @@ use Psr\Http\Message\RequestInterface;
  * Prepend the URI with a string.
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
+ * @final since 2.19
  */
 class PathPrepend implements Plugin
 {
