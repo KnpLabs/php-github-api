@@ -8,7 +8,6 @@ use Github\Api\Repository\Actions\SelfHostedRunners;
 use Github\Api\Repository\Actions\WorkflowJobs;
 use Github\Api\Repository\Actions\WorkflowRuns;
 use Github\Api\Repository\Actions\Workflows;
-use Github\Api\Repository\Checks;
 use Github\Api\Repository\Checks\CheckRuns;
 use Github\Api\Repository\Checks\CheckSuites;
 use Github\Api\Repository\Collaborators;
@@ -321,21 +320,6 @@ class Repo extends AbstractApi
     public function commits()
     {
         return new Commits($this->getClient());
-    }
-
-    /**
-     * Manage checks on a repository.
-     *
-     * @link https://developer.github.com/v3/checks/
-     * @deprecated since 2.17 and will be removed in 3.0. Use the "checkRuns" or "checkSuites" api's instead.
-     *
-     * @return Checks
-     */
-    public function checks()
-    {
-        @trigger_error(sprintf('The "%s" is deprecated since knp-labs/php-github-api 2.17 and will be removed in knp-labs/php-github-api 3.0. Use the "checkRuns" or "checkSuites" api\'s instead.', __METHOD__), E_USER_DEPRECATED);
-
-        return new Checks($this->getClient());
     }
 
     /**
