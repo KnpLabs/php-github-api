@@ -31,13 +31,12 @@ jobs:
     roave_bc_check:
         name: Roave BC Check
         runs-on: ubuntu-latest
-        # BC check disabled until 3.0.0 is tagged
         steps:
             - run: echo true
-#            - uses: actions/checkout@v2
-#
-#            - name: Roave BC Check
-#              uses: docker://nyholm/roave-bc-check-ga
+            - uses: actions/checkout@v2
+
+            - name: Roave BC Check
+              uses: docker://nyholm/roave-bc-check-ga
 
     phpstan:
         name: PHPStan
