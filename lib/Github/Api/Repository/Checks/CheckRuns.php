@@ -3,12 +3,22 @@
 namespace Github\Api\Repository\Checks;
 
 use Github\Api\AbstractApi;
+use Github\Api\AcceptHeaderTrait;
 
 /**
  * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/checks
  */
 class CheckRuns extends AbstractApi
 {
+    use AcceptHeaderTrait;
+
+    public function configure()
+    {
+        $this->acceptHeaderValue = 'application/vnd.github.antiope-preview+json';
+
+        return $this;
+    }
+
     /**
      * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/checks#create-a-check-run
      *
