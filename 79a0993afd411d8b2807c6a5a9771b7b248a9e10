@@ -1,0 +1,13 @@
+---------------------------------------------------------------------------
+
+by acrobat at 2021-02-07T14:43:45Z
+
+@Agares thanks for the PR! Can you change the way the header is set to the "old" way we did this? This will add the header always so there is no need from the end user to call an extra method before using this api endpoint. It will also make it easier to remove the header without BC breaking issues.
+
+See the [previous PR #924](https://github.com/KnpLabs/php-github-api/pull/924/files) how to code was before
+
+---------------------------------------------------------------------------
+
+by Agares at 2021-02-08T09:33:04Z
+
+done!
