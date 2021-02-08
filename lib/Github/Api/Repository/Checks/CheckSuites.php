@@ -3,12 +3,15 @@
 namespace Github\Api\Repository\Checks;
 
 use Github\Api\AbstractApi;
+use Github\Api\AcceptHeaderTrait;
 
 /**
  * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/checks
  */
 class CheckSuites extends AbstractApi
 {
+    use AcceptHeaderTrait;
+
     /**
      * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/checks#create-a-check-suite
      *
@@ -16,6 +19,8 @@ class CheckSuites extends AbstractApi
      */
     public function create(string $username, string $repository, array $params = [])
     {
+        $this->acceptHeaderValue = 'application/vnd.github.antiope-preview+json';
+
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/check-suites', $params);
     }
 
@@ -26,6 +31,8 @@ class CheckSuites extends AbstractApi
      */
     public function updatePreferences(string $username, string $repository, array $params = [])
     {
+        $this->acceptHeaderValue = 'application/vnd.github.antiope-preview+json';
+
         return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/check-suites/preferences', $params);
     }
 
@@ -36,6 +43,8 @@ class CheckSuites extends AbstractApi
      */
     public function getCheckSuite(string $username, string $repository, int $checkSuiteId)
     {
+        $this->acceptHeaderValue = 'application/vnd.github.antiope-preview+json';
+
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/check-suites/'.$checkSuiteId);
     }
 
@@ -46,6 +55,8 @@ class CheckSuites extends AbstractApi
      */
     public function rerequest(string $username, string $repository, int $checkSuiteId)
     {
+        $this->acceptHeaderValue = 'application/vnd.github.antiope-preview+json';
+
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/check-suites/'.$checkSuiteId.'/rerequest');
     }
 
@@ -56,6 +67,8 @@ class CheckSuites extends AbstractApi
      */
     public function allForReference(string $username, string $repository, string $ref, array $params = [])
     {
+        $this->acceptHeaderValue = 'application/vnd.github.antiope-preview+json';
+
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/commits/'.rawurlencode($ref).'/check-suites', $params);
     }
 }
