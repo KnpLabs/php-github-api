@@ -14,7 +14,7 @@ $workflowRuns = $client->api('repo')->workflowRuns()->all('KnpLabs', 'php-github
 https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#list-workflow-runs
 
 ```php
-$runs = $client->api('repo')->workflowRuns()->listRuns('KnpLabs', 'php-github-api', $workflowId);
+$runs = $client->api('repo')->workflowRuns()->listRuns('KnpLabs', 'php-github-api', $workflow);
 ```
 
 ### Get a workflow run
