@@ -1,0 +1,31 @@
+---------------------------------------------------------------------------
+
+by bummzack at 2021-03-03T07:55:55Z
+
+I'm looking for this functionality as well. Any chance to get this merged?
+Or are there currently other ways to trigger a [workflow-dispatch](https://docs.github.com/en/rest/reference/actions#create-a-workflow-dispatch-event) event?
+
+---------------------------------------------------------------------------
+
+by bummzack at 2021-03-03T10:44:02Z
+
+I've tested using this PR, but there's an issue when dispatching without the optional `$inputs` param.
+
+> For 'properties/inputs', [] is not an object.
+
+I think inputs should be omitted if there's no input to be specified… this works:
+
+```php
+public function dispatches(string $username, string $repository, string $workflow, string $ref, array $inputs = null)
+{
+    $parameters = array_filter(['ref' => $ref, 'inputs' => $inputs]);
+
+    return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/actions/workflows/'.rawurlencode($workflow).'/dispatches', $parameters);
+}
+```
+
+---------------------------------------------------------------------------
+
+by fodinabor at 2021-03-06T10:36:47Z
+
+should be non-BC breaking now (even though Roave still doesn't like it), will wait for the URL update until this is merged
