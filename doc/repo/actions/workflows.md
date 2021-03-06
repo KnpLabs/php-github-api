@@ -14,7 +14,7 @@ $workflows = $client->api('repo')->workflows()->all('KnpLabs', 'php-github-api')
 https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#get-a-workflow
 
 ```php
-$workflow = $client->api('repo')->workflows()->show('KnpLabs', 'php-github-api', $workflowId);
+$workflow = $client->api('repo')->workflows()->show('KnpLabs', 'php-github-api', $workflow);
 ```
 
 ### Get workflow usage
@@ -22,5 +22,13 @@ $workflow = $client->api('repo')->workflows()->show('KnpLabs', 'php-github-api',
 https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#get-workflow-usage
 
 ```php
-$usage = $client->api('repo')->workflows()->usage('KnpLabs', 'php-github-api', $workflowId);
+$usage = $client->api('repo')->workflows()->usage('KnpLabs', 'php-github-api', $workflow);
+```
+
+### Dispatch a workflow
+
+https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#create-a-workflow-dispatch-event
+
+```php
+$client->api('repo')->workflows()->dispatches('KnpLabs', 'php-github-api', $workflow, 'main');
 ```

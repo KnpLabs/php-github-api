@@ -28,14 +28,14 @@ class WorkflowRuns extends AbstractApi
      *
      * @param string $username
      * @param string $repository
-     * @param string $workflowId
+     * @param string $workflow
      * @param array  $parameters
      *
      * @return array
      */
-    public function listRuns(string $username, string $repository, string $workflowId, array $parameters = [])
+    public function listRuns(string $username, string $repository, string $workflow, array $parameters = [])
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/actions/workflows/'.$workflowId.'/runs', $parameters);
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/actions/workflows/'.rawurlencode($workflow).'/runs', $parameters);
     }
 
     /**

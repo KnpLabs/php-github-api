@@ -89,6 +89,26 @@ class WorkflowsTest extends TestCase
         $this->assertEquals($expectedArray, $api->usage('KnpLabs', 'php-github-api', 1));
     }
 
+    /**
+     * @test
+     */
+    public function shouldDispatchWorkflow()
+    {
+        // empty
+        $expectedArray = [];
+
+        /** @var Workflows|MockObject $api */
+        $api = $this->getApiMock();
+
+        $api
+            ->expects($this->once())
+            ->method('post')
+            ->with('/repos/KnpLabs/php-github-api/actions/workflows/1/dispatches')
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->dispatches('KnpLabs', 'php-github-api', 1, 'main'));
+    }
+
     protected function getApiClass()
     {
         return Workflows::class;
