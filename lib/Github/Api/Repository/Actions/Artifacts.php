@@ -5,12 +5,12 @@ namespace Github\Api\Repository\Actions;
 use Github\Api\AbstractApi;
 
 /**
- * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#artifacts
+ * @link https://docs.github.com/en/rest/reference/actions#artifacts
  */
 class Artifacts extends AbstractApi
 {
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#list-artifacts-for-a-repository
+     * @link https://docs.github.com/en/rest/reference/actions#list-artifacts-for-a-repository
      *
      * @param string $username
      * @param string $repository
@@ -24,7 +24,7 @@ class Artifacts extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#list-workflow-run-artifacts
+     * @link https://docs.github.com/en/rest/reference/actions#list-workflow-run-artifacts
      *
      * @param string $username
      * @param string $repository
@@ -38,7 +38,7 @@ class Artifacts extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#get-an-artifact
+     * @link https://docs.github.com/en/rest/reference/actions#get-an-artifact
      *
      * @param string $username
      * @param string $repository
@@ -52,7 +52,7 @@ class Artifacts extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#delete-an-artifact
+     * @link https://docs.github.com/en/rest/reference/actions#delete-an-artifact
      *
      * @param string $username
      * @param string $repository
@@ -66,7 +66,7 @@ class Artifacts extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#download-an-artifact
+     * @link https://docs.github.com/en/rest/reference/actions#download-an-artifact
      *
      * @param string $username
      * @param string $repository

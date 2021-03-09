@@ -5,12 +5,12 @@ namespace Github\Api\Repository\Actions;
 use Github\Api\AbstractApi;
 
 /**
- * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#secrets
+ * @link https://docs.github.com/en/rest/reference/actions#secrets
  */
 class Secrets extends AbstractApi
 {
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#list-repository-secrets
+     * @link https://docs.github.com/en/rest/reference/actions#list-repository-secrets
      *
      * @param string $username
      * @param string $repository
@@ -23,7 +23,7 @@ class Secrets extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#get-a-repository-secret
+     * @link https://docs.github.com/en/rest/reference/actions#get-a-repository-secret
      *
      * @param string $username
      * @param string $repository
@@ -37,7 +37,7 @@ class Secrets extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#create-or-update-a-repository-secret
+     * @link https://docs.github.com/en/rest/reference/actions#create-or-update-a-repository-secret
      *
      * @param string $username
      * @param string $repository
@@ -52,7 +52,7 @@ class Secrets extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#create-or-update-a-repository-secret
+     * @link https://docs.github.com/en/rest/reference/actions#create-or-update-a-repository-secret
      *
      * @param string $username
      * @param string $repository
@@ -67,7 +67,7 @@ class Secrets extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#delete-a-repository-secret
+     * @link https://docs.github.com/en/rest/reference/actions#delete-a-repository-secret
      *
      * @param string $username
      * @param string $repository
@@ -81,7 +81,7 @@ class Secrets extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#get-a-repository-public-key
+     * @link https://docs.github.com/en/rest/reference/actions#get-a-repository-public-key
      *
      * @param string $username
      * @param string $repository

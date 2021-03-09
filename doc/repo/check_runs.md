@@ -3,7 +3,7 @@
 
 ### Create a check run
 
-[Visit GitHub for a full of list of parameters and their descriptions.](https://docs.github.com/en/free-pro-team@latest/rest/reference/checks#create-a-check-run)
+[Visit GitHub for a full of list of parameters and their descriptions.](https://docs.github.com/en/rest/reference/checks#create-a-check-run)
 
 ```php
 $params = [
@@ -17,7 +17,7 @@ $check = $client->api('repo')->checkRuns()->create('KnpLabs', 'php-github-api', 
 
 ### Get a check run
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/checks#get-a-check-run
+https://docs.github.com/en/rest/reference/checks#get-a-check-run
 
 ```php
 $check = $client->api('repo')->checkRuns()->show('KnpLabs', 'php-github-api', $checkRunId);
@@ -25,7 +25,7 @@ $check = $client->api('repo')->checkRuns()->show('KnpLabs', 'php-github-api', $c
 
 ### Update an existing check run
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/checks#update-a-check-run
+https://docs.github.com/en/rest/reference/checks#update-a-check-run
 
 ```php
 $params = [
@@ -38,7 +38,7 @@ $check = $client->api('repo')->checkRuns()->update('KnpLabs', 'php-github-api', 
 
 ### List check run annotations
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/checks#list-check-run-annotations
+https://docs.github.com/en/rest/reference/checks#list-check-run-annotations
 
 ```php
 $annotations = $client->api('repo')->checkRuns()->annotations('KnpLabs', 'php-github-api', $checkRunId);
@@ -46,7 +46,7 @@ $annotations = $client->api('repo')->checkRuns()->annotations('KnpLabs', 'php-gi
 
 ### List check runs for a check suite
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/checks#list-check-runs-in-a-check-suite
+https://docs.github.com/en/rest/reference/checks#list-check-runs-in-a-check-suite
 
 ```php
 $params = [/*...*/];
@@ -55,7 +55,7 @@ $checks = $client->api('repo')->checkRuns()->allForCheckSuite('KnpLabs', 'php-gi
 
 ### List check runs for a Git reference
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/checks#list-check-runs-for-a-git-reference
+https://docs.github.com/en/rest/reference/checks#list-check-runs-for-a-git-reference
 
 ```php
 $params = [/*...*/];

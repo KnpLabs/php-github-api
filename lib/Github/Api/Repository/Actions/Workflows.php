@@ -5,12 +5,12 @@ namespace Github\Api\Repository\Actions;
 use Github\Api\AbstractApi;
 
 /**
- * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#workflows
+ * @link https://docs.github.com/en/rest/reference/actions#workflows
  */
 class Workflows extends AbstractApi
 {
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#list-repository-workflows
+     * @link https://docs.github.com/en/rest/reference/actions#list-repository-workflows
      *
      * @param string $username
      * @param string $repository
@@ -24,7 +24,7 @@ class Workflows extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#get-a-workflow
+     * @link https://docs.github.com/en/rest/reference/actions#get-a-workflow
      *
      * @param string     $username
      * @param string     $repository
@@ -42,7 +42,7 @@ class Workflows extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#get-workflow-usage
+     * @link https://docs.github.com/en/rest/reference/actions#get-workflow-usage
      *
      * @param string     $username
      * @param string     $repository
@@ -60,7 +60,7 @@ class Workflows extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#create-a-workflow-dispatch-event
+     * @link https://docs.github.com/en/rest/reference/actions#create-a-workflow-dispatch-event
      *
      * @param string     $username
      * @param string     $repository
