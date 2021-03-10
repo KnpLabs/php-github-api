@@ -3,7 +3,7 @@
 
 ### List organization secrets
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#list-organization-secrets
+https://docs.github.com/en/rest/reference/actions#list-organization-secrets
 
 ```php
 $secrets = $client->organization()->secrets()->all('KnpLabs');
@@ -11,7 +11,7 @@ $secrets = $client->organization()->secrets()->all('KnpLabs');
 
 ### Get an organization secret
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#get-an-organization-secret
+https://docs.github.com/en/rest/reference/actions#get-an-organization-secret
 
 ```php
 $secret = $client->organization()->secrets()->show('KnpLabs', $secretName);
@@ -19,7 +19,7 @@ $secret = $client->organization()->secrets()->show('KnpLabs', $secretName);
 
 ### Create an organization secret
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#create-or-update-an-organization-secret
+https://docs.github.com/en/rest/reference/actions#create-or-update-an-organization-secret
 
 ```php
 $client->organization()->secrets()->create('KnpLabs', $secretName, [
@@ -31,7 +31,7 @@ $client->organization()->secrets()->create('KnpLabs', $secretName, [
 
 ### Update an organization secret
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#create-or-update-an-organization-secret
+https://docs.github.com/en/rest/reference/actions#create-or-update-an-organization-secret
 
 ```php
 $client->organization()->secrets()->update('KnpLabs', $secretName, [
@@ -43,7 +43,7 @@ $client->organization()->secrets()->update('KnpLabs', $secretName, [
 
 ### Delete an organization secret
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#delete-an-organization-secret
+https://docs.github.com/en/rest/reference/actions#delete-an-organization-secret
 
 ```php
 $client->organization()->secrets()->remove('KnpLabs', $secretName);
@@ -51,7 +51,7 @@ $client->organization()->secrets()->remove('KnpLabs', $secretName);
 
 ### List selected repositories for organization secret
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#list-selected-repositories-for-an-organization-secret
+https://docs.github.com/en/rest/reference/actions#list-selected-repositories-for-an-organization-secret
 
 ```php
 $client->organization()->secrets()->selectedRepositories('KnpLabs', $secretName);
@@ -59,7 +59,7 @@ $client->organization()->secrets()->selectedRepositories('KnpLabs', $secretName)
 
 ### Set selected repositories for an organization secret
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#set-selected-repositories-for-an-organization-secret
+https://docs.github.com/en/rest/reference/actions#set-selected-repositories-for-an-organization-secret
 
 ```php
 $client->organization()->secrets()->setSelectedRepositories('KnpLabs', 'secretName', [
@@ -69,7 +69,7 @@ $client->organization()->secrets()->setSelectedRepositories('KnpLabs', 'secretNa
 
 ### Remove selected repository from an organization secret
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#remove-selected-repository-from-an-organization-secret
+https://docs.github.com/en/rest/reference/actions#remove-selected-repository-from-an-organization-secret
 
 ```php
 $client->organization()->secrets()->addSecret('KnpLabs', $repositoryId, $secretName);
@@ -77,7 +77,7 @@ $client->organization()->secrets()->addSecret('KnpLabs', $repositoryId, $secretN
 
 ### Get an organization public key
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#get-an-organization-public-key
+https://docs.github.com/en/rest/reference/actions#get-an-organization-public-key
 
 ```php
 $client->organization()->secrets()->publicKey('KnpLabs');

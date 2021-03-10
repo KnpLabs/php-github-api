@@ -3,7 +3,7 @@
 
 ### Create a check suite
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/checks#create-a-check-suite
+https://docs.github.com/en/rest/reference/checks#create-a-check-suite
 
 ```php
 $params = [
@@ -14,7 +14,7 @@ $check = $client->api('repo')->checkSuites()->create('KnpLabs', 'php-github-api'
 
 ### Update check suite preferences
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/checks#update-repository-preferences-for-check-suites
+https://docs.github.com/en/rest/reference/checks#update-repository-preferences-for-check-suites
 
 ```php
 $params = [/*...*/];
@@ -23,7 +23,7 @@ $check = $client->api('repo')->checkSuites()->updatePreferences('KnpLabs', 'php-
 
 ### Get a check suite
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/checks#get-a-check-suite
+https://docs.github.com/en/rest/reference/checks#get-a-check-suite
 
 ```php
 $check = $client->api('repo')->checkSuites()->getCheckSuite('KnpLabs', 'php-github-api', $checkSuiteId);
@@ -31,7 +31,7 @@ $check = $client->api('repo')->checkSuites()->getCheckSuite('KnpLabs', 'php-gith
 
 ### Rerequest a check suite
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/checks#rerequest-a-check-suite
+https://docs.github.com/en/rest/reference/checks#rerequest-a-check-suite
 
 ```php
 $annotations = $client->api('repo')->checkSuites()->rerequest('KnpLabs', 'php-github-api', $checkSuiteId);
@@ -40,7 +40,7 @@ $annotations = $client->api('repo')->checkSuites()->rerequest('KnpLabs', 'php-gi
 
 ### List check suites for a Git reference
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/checks#list-check-suites-for-a-git-reference
+https://docs.github.com/en/rest/reference/checks#list-check-suites-for-a-git-reference
 
 ```php
 $params = [/*...*/];

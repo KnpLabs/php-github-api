@@ -6,14 +6,14 @@ use Github\Api\AbstractApi;
 use Github\Api\AcceptHeaderTrait;
 
 /**
- * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/checks
+ * @link https://docs.github.com/en/rest/reference/checks
  */
 class CheckRuns extends AbstractApi
 {
     use AcceptHeaderTrait;
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/checks#create-a-check-run
+     * @link https://docs.github.com/en/rest/reference/checks#create-a-check-run
      *
      * @return array
      */
@@ -25,7 +25,7 @@ class CheckRuns extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/checks#get-a-check-run
+     * @link https://docs.github.com/en/rest/reference/checks#get-a-check-run
      *
      * @return array
      */
@@ -37,7 +37,7 @@ class CheckRuns extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/checks#update-a-check-run
+     * @link https://docs.github.com/en/rest/reference/checks#update-a-check-run
      *
      * @return array
      */
@@ -49,7 +49,7 @@ class CheckRuns extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/checks#list-check-run-annotations
+     * @link https://docs.github.com/en/rest/reference/checks#list-check-run-annotations
      *
      * @return array
      */
@@ -61,7 +61,7 @@ class CheckRuns extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/checks#list-check-runs-in-a-check-suite
+     * @link https://docs.github.com/en/rest/reference/checks#list-check-runs-in-a-check-suite
      *
      * @return array
      */
@@ -73,7 +73,7 @@ class CheckRuns extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/checks#list-check-runs-for-a-git-reference
+     * @link https://docs.github.com/en/rest/reference/checks#list-check-runs-for-a-git-reference
      *
      * @return array
      */

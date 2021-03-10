@@ -5,12 +5,12 @@ namespace Github\Api\Repository\Actions;
 use Github\Api\AbstractApi;
 
 /**
- * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#self-hosted-runners
+ * @link https://docs.github.com/en/rest/reference/actions#self-hosted-runners
  */
 class SelfHostedRunners extends AbstractApi
 {
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#list-self-hosted-runners-for-a-repository
+     * @link https://docs.github.com/en/rest/reference/actions#list-self-hosted-runners-for-a-repository
      *
      * @param string $username
      * @param string $repository
@@ -23,7 +23,7 @@ class SelfHostedRunners extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#get-a-self-hosted-runner-for-a-repository
+     * @link https://docs.github.com/en/rest/reference/actions#get-a-self-hosted-runner-for-a-repository
      *
      * @param string $username
      * @param string $repository
@@ -37,7 +37,7 @@ class SelfHostedRunners extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#delete-a-self-hosted-runner-from-a-repository
+     * @link https://docs.github.com/en/rest/reference/actions#delete-a-self-hosted-runner-from-a-repository
      *
      * @param string $username
      * @param string $repository
@@ -51,7 +51,7 @@ class SelfHostedRunners extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#list-runner-applications-for-a-repository
+     * @link https://docs.github.com/en/rest/reference/actions#list-runner-applications-for-a-repository
      *
      * @param string $username
      * @param string $repository

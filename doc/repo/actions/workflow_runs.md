@@ -3,7 +3,7 @@
 
 ### List workflow runs for a repository
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#list-workflow-runs-for-a-repository
+https://docs.github.com/en/rest/reference/actions#list-workflow-runs-for-a-repository
 
 ```php
 $workflowRuns = $client->api('repo')->workflowRuns()->all('KnpLabs', 'php-github-api');
@@ -11,7 +11,7 @@ $workflowRuns = $client->api('repo')->workflowRuns()->all('KnpLabs', 'php-github
 
 ### List workflow runs
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#list-workflow-runs
+https://docs.github.com/en/rest/reference/actions#list-workflow-runs
 
 ```php
 $runs = $client->api('repo')->workflowRuns()->listRuns('KnpLabs', 'php-github-api', $workflow);
@@ -19,7 +19,7 @@ $runs = $client->api('repo')->workflowRuns()->listRuns('KnpLabs', 'php-github-ap
 
 ### Get a workflow run
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#get-a-workflow-run
+https://docs.github.com/en/rest/reference/actions#get-a-workflow-run
 
 ```php
 $workflowRun = $client->api('repo')->workflowRuns()->show('KnpLabs', 'php-github-api', $runId);
@@ -27,7 +27,7 @@ $workflowRun = $client->api('repo')->workflowRuns()->show('KnpLabs', 'php-github
 
 ### Delete a workflow run
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#delete-a-workflow-run
+https://docs.github.com/en/rest/reference/actions#delete-a-workflow-run
 
 ```php
 $client->api('repo')->workflowRuns()->remove('KnpLabs', 'php-github-api', $runId);
@@ -35,7 +35,7 @@ $client->api('repo')->workflowRuns()->remove('KnpLabs', 'php-github-api', $runId
 
 ### Re-run a workflow
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#re-run-a-workflow
+https://docs.github.com/en/rest/reference/actions#re-run-a-workflow
 
 ```php
 $client->api('repo')->workflowRuns()->rerun('KnpLabs', 'php-github-api', $runId);
@@ -43,7 +43,7 @@ $client->api('repo')->workflowRuns()->rerun('KnpLabs', 'php-github-api', $runId)
 
 ### Cancel a workflow run
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#cancel-a-workflow-run
+https://docs.github.com/en/rest/reference/actions#cancel-a-workflow-run
 
 ```php
 $client->api('repo')->workflowRuns()->cancel('KnpLabs', 'php-github-api', $runId);
@@ -51,7 +51,7 @@ $client->api('repo')->workflowRuns()->cancel('KnpLabs', 'php-github-api', $runId
 
 ### Get workflow run usage
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#get-workflow-run-usage
+https://docs.github.com/en/rest/reference/actions#get-workflow-run-usage
 
 ```php
 $workflowUsage = $client->api('repo')->workflowRuns()->usage('KnpLabs', 'php-github-api', $runId);
@@ -59,7 +59,7 @@ $workflowUsage = $client->api('repo')->workflowRuns()->usage('KnpLabs', 'php-git
 
 ### Download workflow run logs
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#download-workflow-run-logs
+https://docs.github.com/en/rest/reference/actions#download-workflow-run-logs
 
 ```php
 $logs = $client->api('repo')->workflowRuns()->downloadLogs('KnpLabs', 'php-github-api', $runId);
@@ -69,7 +69,7 @@ file_put_contents('logs.zip', $logs);
 
 ### Delete workflow run logs
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#delete-workflow-run-logs
+https://docs.github.com/en/rest/reference/actions#delete-workflow-run-logs
 
 ```php
 $client->api('repo')->workflowRuns()->deleteLogs('KnpLabs', 'php-github-api', $runId);

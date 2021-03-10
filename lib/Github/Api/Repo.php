@@ -323,7 +323,7 @@ class Repo extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/checks#check-runs
+     * @link https://docs.github.com/en/rest/reference/checks#check-runs
      */
     public function checkRuns(): CheckRuns
     {
@@ -331,7 +331,7 @@ class Repo extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/checks#check-suites
+     * @link https://docs.github.com/en/rest/reference/checks#check-suites
      */
     public function checkSuites(): CheckSuites
     {
@@ -347,7 +347,7 @@ class Repo extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#workflows
+     * @link https://docs.github.com/en/rest/reference/actions#workflows
      */
     public function workflows(): Workflows
     {
@@ -355,7 +355,7 @@ class Repo extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#workflow-runs
+     * @link https://docs.github.com/en/rest/reference/actions#workflow-runs
      */
     public function workflowRuns(): WorkflowRuns
     {
@@ -363,7 +363,7 @@ class Repo extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#workflow-jobs
+     * @link https://docs.github.com/en/rest/reference/actions#workflow-jobs
      */
     public function workflowJobs(): WorkflowJobs
     {
@@ -371,7 +371,7 @@ class Repo extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#self-hosted-runners
+     * @link https://docs.github.com/en/rest/reference/actions#self-hosted-runners
      */
     public function selfHostedRunners(): SelfHostedRunners
     {
@@ -379,7 +379,7 @@ class Repo extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#secrets
+     * @link https://docs.github.com/en/rest/reference/actions#secrets
      */
     public function secrets(): Secrets
     {
@@ -646,7 +646,7 @@ class Repo extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/repos#enable-automated-security-fixes
+     * @link https://docs.github.com/en/rest/reference/repos#enable-automated-security-fixes
      *
      * @param string $username
      * @param string $repository
@@ -661,7 +661,7 @@ class Repo extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/repos#disable-automated-security-fixes
+     * @link https://docs.github.com/en/rest/reference/repos#disable-automated-security-fixes
      *
      * @param string $username
      * @param string $repository

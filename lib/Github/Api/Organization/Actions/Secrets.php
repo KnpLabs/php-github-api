@@ -5,12 +5,12 @@ namespace Github\Api\Organization\Actions;
 use Github\Api\AbstractApi;
 
 /**
- * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#secrets
+ * @link https://docs.github.com/en/rest/reference/actions#secrets
  */
 class Secrets extends AbstractApi
 {
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#list-organization-secrets
+     * @link https://docs.github.com/en/rest/reference/actions#list-organization-secrets
      *
      * @param string $organization
      *
@@ -22,7 +22,7 @@ class Secrets extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#get-an-organization-secret
+     * @link https://docs.github.com/en/rest/reference/actions#get-an-organization-secret
      *
      * @param string $organization
      * @param string $secretName
@@ -35,7 +35,7 @@ class Secrets extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#create-or-update-an-organization-secret
+     * @link https://docs.github.com/en/rest/reference/actions#create-or-update-an-organization-secret
      *
      * @param string $organization
      * @param string $secretName
@@ -49,7 +49,7 @@ class Secrets extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#create-or-update-an-organization-secret
+     * @link https://docs.github.com/en/rest/reference/actions#create-or-update-an-organization-secret
      *
      * @param string $organization
      * @param string $secretName
@@ -63,7 +63,7 @@ class Secrets extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#delete-an-organization-secret
+     * @link https://docs.github.com/en/rest/reference/actions#delete-an-organization-secret
      *
      * @param string $organization
      * @param string $secretName
@@ -76,7 +76,7 @@ class Secrets extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#list-selected-repositories-for-an-organization-secret
+     * @link https://docs.github.com/en/rest/reference/actions#list-selected-repositories-for-an-organization-secret
      *
      * @param string $organization
      * @param string $secretName
@@ -89,7 +89,7 @@ class Secrets extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#set-selected-repositories-for-an-organization-secret
+     * @link https://docs.github.com/en/rest/reference/actions#set-selected-repositories-for-an-organization-secret
      *
      * @param string $organization
      * @param string $secretName
@@ -103,7 +103,7 @@ class Secrets extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#add-selected-repository-to-an-organization-secret
+     * @link https://docs.github.com/en/rest/reference/actions#add-selected-repository-to-an-organization-secret
      *
      * @param string $organization
      * @param string $repositoryId
@@ -117,7 +117,7 @@ class Secrets extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#remove-selected-repository-from-an-organization-secret
+     * @link https://docs.github.com/en/rest/reference/actions#remove-selected-repository-from-an-organization-secret
      *
      * @param string $organization
      * @param string $repositoryId
@@ -131,7 +131,7 @@ class Secrets extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#get-an-organization-public-key
+     * @link https://docs.github.com/en/rest/reference/actions#get-an-organization-public-key
      *
      * @param string $organization
      *

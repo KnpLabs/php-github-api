@@ -3,7 +3,7 @@
 
 # List self-hosted runners for a repository
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#list-self-hosted-runners-for-a-repository
+https://docs.github.com/en/rest/reference/actions#list-self-hosted-runners-for-a-repository
 
 ```php
 $runners = $client->api('repo')->selfHostedRunners()->all('KnpLabs', 'php-github-api');
@@ -11,7 +11,7 @@ $runners = $client->api('repo')->selfHostedRunners()->all('KnpLabs', 'php-github
 
 # Get a self-hosted runner for a repository
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#get-a-self-hosted-runner-for-a-repository
+https://docs.github.com/en/rest/reference/actions#get-a-self-hosted-runner-for-a-repository
 
 ```php
 $runner = $client->api('repo')->selfHostedRunners()->show('KnpLabs', 'php-github-api', $runnerId);
@@ -19,7 +19,7 @@ $runner = $client->api('repo')->selfHostedRunners()->show('KnpLabs', 'php-github
 
 # Delete a self-hosted runner from a repository
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#delete-a-self-hosted-runner-from-a-repository
+https://docs.github.com/en/rest/reference/actions#delete-a-self-hosted-runner-from-a-repository
 
 ```php
 $client->api('repo')->selfHostedRunners()->remove('KnpLabs', 'php-github-api', $runnerId);
@@ -27,7 +27,7 @@ $client->api('repo')->selfHostedRunners()->remove('KnpLabs', 'php-github-api', $
 
 # List runner applications for a repository
 
-https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#list-runner-applications-for-a-repository
+https://docs.github.com/en/rest/reference/actions#list-runner-applications-for-a-repository
 
 ```php
 $applications = $client->api('repo')->selfHostedRunners()->applications('KnpLabs', 'php-github-api');
