@@ -181,6 +181,25 @@ class GithubExceptionThrowerTest extends TestCase
                 ),
                 'exception' => new \Github\Exception\RuntimeException('Field "xxxx" doesn\'t exist on type "Issue", Field "dummy" doesn\'t exist on type "PullRequest"'),
             ],
+            'Grapql requires authentication' => [
+                'response' => new Response(
+                    401,
+                    [
+                        'content-type' => 'application/json',
+                        'X-RateLimit-Limit' => 0,
+                        'X-RateLimit-Remaining' => 0,
+                        'X-RateLimit-Reset' => 1609245810,
+                        'X-RateLimit-Used' => 0,
+                    ],
+                    json_encode(
+                        [
+                            'message' => 'This endpoint requires you to be authenticated.',
+                            'documentation_url' => 'https://docs.github.com/v3/#authentication',
+                        ]
+                    )
+                ),
+                'exception' => new \Github\Exception\RuntimeException('This endpoint requires you to be authenticated.', 401),
+            ],
         ];
     }
 }
