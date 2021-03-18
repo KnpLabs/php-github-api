@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.19.1
+
+### Fixed
+- ExceptionThrower: adjust rate limit detection ([glaubinix](https://github.com/glaubinix)) [#959](https://github.com/KnpLabs/php-github-api/issues/959)
+
+## 2.19.0
+
+### Added
+- Mark some classes as final ([acrobat](https://github.com/acrobat)) [#954](https://github.com/KnpLabs/php-github-api/issues/954)
+
 ## 2.18.0
 
 ### Added

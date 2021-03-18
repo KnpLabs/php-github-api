@@ -12,6 +12,7 @@ use Psr\Http\Message\RequestInterface;
  * Add authentication to the request.
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
+ * @final since 2.19
  */
 class Authentication implements Plugin
 {

@@ -17,6 +17,7 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
+ * @final since 2.19
  */
 class GithubExceptionThrower implements Plugin
 {
@@ -36,7 +37,7 @@ class GithubExceptionThrower implements Plugin
 
             // If error:
             $remaining = ResponseMediator::getHeader($response, 'X-RateLimit-Remaining');
-            if (null !== $remaining && 1 > $remaining && 'rate_limit' !== substr($request->getRequestTarget(), 1, 10)) {
+            if ((429 === $response->getStatusCode()) && null !== $remaining && 1 > $remaining && 'rate_limit' !== substr($request->getRequestTarget(), 1, 10)) {
                 $limit = (int) ResponseMediator::getHeader($response, 'X-RateLimit-Limit');
                 $reset = (int) ResponseMediator::getHeader($response, 'X-RateLimit-Reset');
 

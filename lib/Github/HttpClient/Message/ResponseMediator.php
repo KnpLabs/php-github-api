@@ -5,6 +5,9 @@ namespace Github\HttpClient\Message;
 use Github\Exception\ApiLimitExceedException;
 use Psr\Http\Message\ResponseInterface;
 
+/**
+ * @final since 2.19
+ */
 class ResponseMediator
 {
     /**
