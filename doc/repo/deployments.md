@@ -21,7 +21,7 @@ $deployments = $client->api('deployment')->all('KnpLabs', 'php-github-api', arra
 $deployment = $client->api('deployment')->show('KnpLabs', 'php-github-api', $id);
 ```
 
-#### Create a new deployments.
+#### Create a new deployment.
 
 The `ref` parameter is required.
 
