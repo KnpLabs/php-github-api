@@ -11,6 +11,8 @@ use Github\Exception\MissingArgumentException;
  */
 class Deployment extends AbstractApi
 {
+    use AcceptHeaderTrait;
+
     /**
      * List deployments for a particular repository.
      *
