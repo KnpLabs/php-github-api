@@ -12,9 +12,11 @@ use Github\Exception\MissingArgumentException;
  */
 class Labels extends AbstractApi
 {
-    public function all($username, $repository)
+    public function all($username, $repository, array $params = [])
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels', array_merge([
+            'page' => 1,
+        ], $params));
     }
 
     public function show($username, $repository, $label)
