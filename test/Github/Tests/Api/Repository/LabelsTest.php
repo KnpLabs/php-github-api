@@ -10,14 +10,14 @@ class LabelsTest extends TestCase
     /**
      * @test
      */
-    public function shouldGetAllRepositoryLabelss()
+    public function shouldGetAllRepositoryLabels()
     {
         $expectedValue = [['name' => 'label']];
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/labels')
+            ->with('/repos/KnpLabs/php-github-api/labels', ['page' => 1])
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->all('KnpLabs', 'php-github-api'));
