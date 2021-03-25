@@ -87,6 +87,15 @@ class Deployment extends AbstractApi
         if (!isset($params['state'])) {
             throw new MissingArgumentException(['state']);
         }
+        
+        // adjust media-type per github docs
+        // https://docs.github.com/en/rest/reference/repos#create-a-deployment-status
+        if ($params['state'] === 'inactive') {
+            $this->acceptHeaderValue = 'application/vnd.github.ant-man-preview+json';
+        }
+        if ($params['state'] === 'in_progress' || $params['state'] === 'queued') {
+            $this->acceptHeaderValue = 'application/vnd.github.flash-preview+json';
+        }        
 
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/deployments/'.$id.'/statuses', $params);
     }
