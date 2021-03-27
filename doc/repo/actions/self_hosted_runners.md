@@ -1,5 +1,5 @@
-## Repo / Self Hosted Runners API
-[Back to the "Repos API"](../repos.md) | [Back to the navigation](../README.md)
+## Repo / Actions / Self Hosted Runners API
+[Back to the "Repos API"](../../repos.md) | [Back to the navigation](../../README.md)
 
 # List self-hosted runners for a repository
 

@@ -1,5 +1,5 @@
-## Repo / Workflows API
-[Back to the "Repos API"](../repos.md) | [Back to the navigation](../README.md)
+## Repo / Actions / Workflows API
+[Back to the "Repos API"](../../repos.md) | [Back to the navigation](../../README.md)
 
 ### List repository workflows
 
