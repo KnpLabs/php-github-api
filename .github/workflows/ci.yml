@@ -28,16 +28,6 @@ jobs:
             - name: Run phpunit
               run: vendor/bin/phpunit --verbose
 
-    roave_bc_check:
-        name: Roave BC Check
-        runs-on: ubuntu-latest
-        steps:
-            - run: echo true
-            - uses: actions/checkout@v2
-
-            - name: Roave BC Check
-              uses: docker://nyholm/roave-bc-check-ga
-
     phpstan:
         name: PHPStan
         runs-on: ubuntu-latest
