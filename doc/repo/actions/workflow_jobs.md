@@ -1,5 +1,5 @@
-## Repo / Workflow Jobs API
-[Back to the "Repos API"](../repos.md) | [Back to the navigation](../README.md)
+## Repo / Actions / Workflow Jobs API
+[Back to the "Repos API"](../../repos.md) | [Back to the navigation](../../README.md)
 
 ### List jobs for a workflow run
 

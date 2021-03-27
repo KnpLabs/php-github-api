@@ -1,5 +1,5 @@
-## Repo / Artifacts API
-[Back to the "Repos API"](../repos.md) | [Back to the navigation](../README.md)
+## Repo / Actions / Artifacts API
+[Back to the "Repos API"](../../repos.md) | [Back to the navigation](../../README.md)
 
 ### List artifacts for a repository
 

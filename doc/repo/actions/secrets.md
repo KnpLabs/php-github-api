@@ -1,5 +1,5 @@
-## Repo / Secrets API
-[Back to the "Repos API"](../repos.md) | [Back to the navigation](../README.md)
+## Repo / Actions / Secrets API
+[Back to the "Repos API"](../../repos.md) | [Back to the navigation](../../README.md)
 
 ### List repository secrets
 
