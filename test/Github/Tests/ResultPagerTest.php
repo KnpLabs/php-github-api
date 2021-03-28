@@ -13,6 +13,7 @@ use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Utils;
 use Http\Client\HttpClient;
 use Psr\Http\Client\ClientInterface;
+use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
 
 /**
  * @author Ramon de la Fuente <ramon@future500.nl>
@@ -21,6 +22,8 @@ use Psr\Http\Client\ClientInterface;
  */
 class ResultPagerTest extends \PHPUnit\Framework\TestCase
 {
+    use ExpectDeprecationTrait;
+
     public function provideFetchCases()
     {
         return [
@@ -196,5 +199,19 @@ class ResultPagerTest extends \PHPUnit\Framework\TestCase
         $result = $paginator->fetchAll($api, 'all', ['knplabs', 'php-github-api']);
 
         $this->assertCount(9, $result);
+    }
+
+    /**
+     * @group legacy
+     */
+    public function testPostFetchDeprecation()
+    {
+        $this->expectDeprecation('Since KnpLabs/php-github-api 3.2: The "Github\ResultPager::postFetch" method is deprecated and will be removed.');
+
+        $clientMock = $this->createMock(Client::class);
+        $clientMock->method('getLastResponse')->willReturn(new PaginatedResponse(3, []));
+
+        $paginator = new ResultPager($clientMock);
+        $paginator->postFetch();
     }
 }
