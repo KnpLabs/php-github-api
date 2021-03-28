@@ -1,0 +1,54 @@
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2020-12-16T15:06:25Z
+
+Actually, the code should be the following, for compatibility with both 3.4.x and 4.x:
+
+```php
+$config = Configuration::forSymmetricSigner(
+    new Sha256(),
+    LocalFileReference::file('path/to/integration.private-key.pem')
+);
+
+$jwt = $config->builder()
+    ->issuedBy($integrationId)
+    ->issuedAt(time())
+    ->expiresAt(time() + 60)
+    ->getToken($config->signer(), $config->signingKey()));
+
+$github->authenticate($jwt, null, Github\Client::AUTH_JWT)
+```
+
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2020-12-16T15:06:57Z
+
+with the following imports at the top:
+
+```php
+use Lcobucci\JWT\Configuration;
+use Lcobucci\JWT\Signer\Key\LocalFileReference;
+use Lcobucci\JWT\Signer\Rsa\Sha256;
+```
+
+in place of the other `Lcobucci\JWT` imports.
+
+---------------------------------------------------------------------------
+
+by amacrobert-meq at 2021-03-18T15:44:28Z
+
+Closing this PR because I don't know why CI is failing (I did update the head branch with the most recent version of the base) and tbh I've lost interest in figuring it out.
+
+---------------------------------------------------------------------------
+
+by acrobat at 2021-03-18T16:49:03Z
+
+@amacrobert-meq Sorry I've lost track of this PR, the failing check can be ignored as it is unrelated. ~~I think the only "action" left here was to implement the sugested changes of @GrahamCampbell or are these already "resolved"?~~ I think these are already applied by you?
+
+So I think we can re-open this PR and have it ready to be merged!
+
+---------------------------------------------------------------------------
+
+by amacrobert-meq at 2021-03-18T17:44:27Z
+
+@acrobat Ok, in that case I'm reopening
