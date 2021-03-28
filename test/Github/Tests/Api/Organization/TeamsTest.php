@@ -161,7 +161,7 @@ class TeamsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('put')
-            ->with('/teams/KnpWorld/repos/l3l0/l3l0Repo')
+            ->with('/orgs/l3l0/teams/KnpWorld/repos/l3l0/l3l0Repo')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->addRepository('KnpWorld', 'l3l0', 'l3l0Repo'));
@@ -177,7 +177,7 @@ class TeamsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('/teams/KnpWorld/repos/l3l0/l3l0Repo')
+            ->with('/orgs/l3l0/teams/KnpWorld/repos/l3l0/l3l0Repo')
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->removeRepository('KnpWorld', 'l3l0', 'l3l0Repo'));

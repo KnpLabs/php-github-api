@@ -6,7 +6,7 @@ Wraps [GitHub User Public Keys API](https://developer.github.com/v3/users/keys/#
 ### List your public keys
 
 ```php
-$keys = $client->user()->keys()->all();
+$keys = $client->me()->keys()->all();
 ```
 
 Returns a list of public keys for the authenticated user.
@@ -14,7 +14,7 @@ Returns a list of public keys for the authenticated user.
 ### Shows a public key for the authenticated user.
 
 ```php
-$key = $client->user()->keys()->show(1234);
+$key = $client->me()->keys()->show(1234);
 ```
 
 ### Add a public key to the authenticated user.
@@ -22,7 +22,7 @@ $key = $client->user()->keys()->show(1234);
 > Requires [authentication](../security.md).
 
 ```php
-$key = $client->user()->keys()->create(array('title' => 'key title', 'key' => 12345));
+$key = $client->me()->keys()->create(array('title' => 'key title', 'key' => 12345));
 ```
 
 Adds a key with title 'key title' to the authenticated user and returns a the created key for the user.
@@ -32,5 +32,5 @@ Adds a key with title 'key title' to the authenticated user and returns a the cr
 > Requires [authentication](../security.md).
 
 ```php
-$client->user()->keys()->remove(12345);
+$client->me()->keys()->remove(12345);
 ```
