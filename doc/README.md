@@ -48,6 +48,13 @@ v3 APIs:
   * [Reviews](pull_request/reviews.md)
 * [Rate Limits](rate_limits.md)
 * [Repositories](repos.md)
+  * Actions
+    * [Artifacts](repo/actions/artifacts.md)
+    * [Secrets](repo/actions/secrets.md)
+    * [Self hosted runners](repo/actions/self_hosted_runners.md)
+    * [Workflow jobs](repo/actions/workflow_jobs.md)
+    * [Workflow runs](repo/actions/workflow_runs.md)
+    * [Workflows](repo/actions/workflows.md)
   * [Check Runs](repo/check_runs.md)
   * [Check Suites](repo/check_suites.md)
   * [Contents](repo/contents.md)
