@@ -31,23 +31,21 @@ $installations = $client->api('current_user')->installations();
 
 List repositories that are accessible to the authenticated installation.
 ```php
-$repositories = $client->api('apps')->listRepositories(456);
+$repositories = $client->api('apps')->listRepositories($userId);
 ```
 
 ### List repositories for a given installation and user
 
 ```php
-$repositories = $client->api('current_user')->repositoriesByInstallation(456);
+$repositories = $client->api('current_user')->repositoriesByInstallation($installationId, $parameters);
 ```
 
 ### Add repository to installation
-Add a single repository to an installation.
 ```php
-$client->api('apps')->addRepository(123);
+$client->api('apps')->addRepository($installationId, $repositoryId);
 ```
 
 ### Remove repository from installation
-Remove a single repository from an installation.
 ```php
-$client->api('apps')->removeRepository(123);
+$client->api('apps')->removeRepository($installationId, $repositoryId);
 ```
