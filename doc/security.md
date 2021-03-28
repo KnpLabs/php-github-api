@@ -70,11 +70,13 @@ $config = Configuration::forSymmetricSigner(
     LocalFileReference::file('path/to/integration.private-key.pem')
 );
 
+$now = new \DateTimeImmutable();
 $jwt = $config->builder()
     ->issuedBy($integrationId)
-    ->issuedAt(time())
-    ->expiresAt(time() + 60)
-    ->getToken($config->signer(), $config->signingKey()));
+    ->issuedAt($now)
+    ->expiresAt($now->modify('+1 minute'))
+    ->getToken($config->signer(), $config->signingKey())
+;
 
 $github->authenticate($jwt, null, Github\Client::AUTH_JWT)
 ```
