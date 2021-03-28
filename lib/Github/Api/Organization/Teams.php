@@ -149,15 +149,15 @@ class Teams extends AbstractApi
 
     public function addRepository($team, $organization, $repository, $params = [])
     {
-        if (isset($params['permission']) && !in_array($params['permission'], ['pull', 'push', 'admin'])) {
+        if (isset($params['permission']) && !in_array($params['permission'], ['pull', 'push', 'admin', 'maintain', 'triage'])) {
             $params['permission'] = 'pull';
         }
 
-        return $this->put('/teams/'.rawurlencode($team).'/repos/'.rawurlencode($organization).'/'.rawurlencode($repository), $params);
+        return $this->put('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team).'/repos/'.rawurlencode($organization).'/'.rawurlencode($repository), $params);
     }
 
     public function removeRepository($team, $organization, $repository)
     {
-        return $this->delete('/teams/'.rawurlencode($team).'/repos/'.rawurlencode($organization).'/'.rawurlencode($repository));
+        return $this->delete('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team).'/repos/'.rawurlencode($organization).'/'.rawurlencode($repository));
     }
 }
