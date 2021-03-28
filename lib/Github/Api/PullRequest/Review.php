@@ -20,6 +20,8 @@ class Review extends AbstractApi
 
     public function configure()
     {
+        trigger_deprecation('KnpLabs/php-github-api', '3.2', 'The "%s" is deprecated and will be removed.', __METHOD__);
+
         return $this;
     }
 
@@ -37,6 +39,10 @@ class Review extends AbstractApi
      */
     public function all($username, $repository, $pullRequest, array $params = [])
     {
+        if (!empty($params)) {
+            trigger_deprecation('KnpLabs/php-github-api', '3.2', 'The "$params" parameter is deprecated, to paginate the results use the "ResultPager" instead.');
+        }
+
         $parameters = array_merge([
             'page' => 1,
             'per_page' => 30,
