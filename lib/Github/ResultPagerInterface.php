@@ -54,6 +54,8 @@ interface ResultPagerInterface
     /**
      * Method that performs the actual work to refresh the pagination property.
      *
+     * @deprecated since 3.2 and will be removed in 4.0.
+     *
      * @return void
      */
     public function postFetch(): void;
