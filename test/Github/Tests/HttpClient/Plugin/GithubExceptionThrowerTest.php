@@ -196,6 +196,22 @@ class GithubExceptionThrowerTest extends TestCase
                 ),
                 'exception' => new \Github\Exception\RuntimeException('This endpoint requires you to be authenticated.', 401),
             ],
+            'Cannot delete active deployment' => [
+                'response' => new Response(
+                    422,
+                    [
+                        'content-type' => 'application/json',
+                    ],
+                    json_encode(
+                        [
+                            'message' => 'Validation Failed',
+                            'errors' => ['We cannot delete an active deployment unless it is the only deployment in a given environment.'],
+                            'documentation_url' => 'https://docs.github.com/rest/reference/repos#delete-a-deployment'
+                        ]
+                    )
+                ),
+                'exception' => new \Github\Exception\ValidationFailedException('Validation Failed', 422),
+            ],
         ];
     }
 }
