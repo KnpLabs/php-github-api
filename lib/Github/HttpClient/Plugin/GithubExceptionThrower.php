@@ -64,7 +64,7 @@ class GithubExceptionThrower implements Plugin
                             $code = $error['code'];
                         }
 
-                        switch ($code) {
+                        switch ($error['code'] ?? null) {
                             case 'missing':
                                 $errors[] = sprintf('The %s %s does not exist, for resource "%s"', $error['field'], $error['value'], $error['resource']);
                                 break;
