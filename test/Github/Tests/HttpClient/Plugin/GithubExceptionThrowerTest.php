@@ -206,7 +206,7 @@ class GithubExceptionThrowerTest extends TestCase
                         [
                             'message' => 'Validation Failed',
                             'errors' => ['We cannot delete an active deployment unless it is the only deployment in a given environment.'],
-                            'documentation_url' => 'https://docs.github.com/rest/reference/repos#delete-a-deployment'
+                            'documentation_url' => 'https://docs.github.com/rest/reference/repos#delete-a-deployment',
                         ]
                     )
                 ),
