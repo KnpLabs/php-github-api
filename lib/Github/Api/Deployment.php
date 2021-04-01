@@ -77,14 +77,14 @@ class Deployment extends AbstractApi
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
      * @param int    $id         the id of the deployment
-     * 
+     *
      * @return mixed null on success, array on error with 'message'
      */
     public function remove($username, $repository, $id)
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/deployments/'.$id);
     }
-    
+
     /**
      * Updates a deployment by creating a new status update.
      *
