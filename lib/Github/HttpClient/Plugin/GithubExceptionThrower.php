@@ -81,6 +81,12 @@ class GithubExceptionThrower implements Plugin
                                 break;
 
                             default:
+                                if (is_string($error)) {
+                                    $errors[] = $error;
+
+                                    break;
+                                }
+
                                 if (isset($error['message'])) {
                                     $errors[] = $error['message'];
                                 }

@@ -37,7 +37,7 @@ class GithubExceptionThrowerTest extends TestCase
         if ($exception) {
             $this->expectException(get_class($exception));
             $this->expectExceptionCode($exception->getCode());
-            $this->expectExceptionMessage($exception->getMessage());
+            $this->expectExceptionMessageRegExp('/'.preg_quote($exception->getMessage(), '/').'$/');
         }
 
         $plugin->doHandleRequest(
@@ -210,7 +210,7 @@ class GithubExceptionThrowerTest extends TestCase
                         ]
                     )
                 ),
-                'exception' => new \Github\Exception\ValidationFailedException('Validation Failed', 422),
+                'exception' => new \Github\Exception\ValidationFailedException('Validation Failed: We cannot delete an active deployment unless it is the only deployment in a given environment.', 422),
             ],
         ];
     }
