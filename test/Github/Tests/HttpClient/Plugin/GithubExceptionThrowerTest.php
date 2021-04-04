@@ -49,7 +49,7 @@ class GithubExceptionThrowerTest extends TestCase
         if ($exception) {
             $this->expectException(get_class($exception));
             $this->expectExceptionCode($exception->getCode());
-            $this->expectExceptionMessageRegExp('/'.preg_quote($exception->getMessage(), '/').'$/');
+            $this->expectExceptionMessageMatches('/'.preg_quote($exception->getMessage(), '/').'$/');
         }
 
         $result->wait();
