@@ -1,0 +1,46 @@
+---------------------------------------------------------------------------
+
+by clxmstaab at 2021-03-30T08:12:33Z
+
+I verified the unit test fails without the patch:
+```
+$ vendor/bin/phpunit --verbose
+PHPUnit 8.5.15 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 7.4.13
+Configuration: C:\dvl\GitHub\php-github-api\phpunit.xml.dist
+
+...............................................................  63 / 729 (  8%)
+............................................................... 126 / 729 ( 17%)
+............................................................... 189 / 729 ( 25%)
+............................................................... 252 / 729 ( 34%)
+............................................................... 315 / 729 ( 43%)
+............................................................... 378 / 729 ( 51%)
+............................................................... 441 / 729 ( 60%)
+............................................................... 504 / 729 ( 69%)
+............................................................... 567 / 729 ( 77%)
+............................................................... 630 / 729 ( 86%)
+............................................................... 693 / 729 ( 95%)
+..............................E.....                            729 / 729 (100%)
+
+Time: 477 ms, Memory: 20.00 MB
+
+There was 1 error:
+
+1) Github\Tests\HttpClient\Plugin\GithubExceptionThrowerTest::testHandleRequest with data set "Cannot delete active deployment" (GuzzleHttp\Psr7\Response Object (...), Github\Exception\ValidationFailedException Object (...))
+Illegal string offset 'code'
+
+C:\dvl\GitHub\php-github-api\lib\Github\HttpClient\Plugin\GithubExceptionThrower.php:62
+C:\dvl\GitHub\php-github-api\test\Github\Tests\HttpClient\Plugin\GithubExceptionThrowerTest.php:32
+C:\dvl\GitHub\php-github-api\lib\Github\HttpClient\Plugin\GithubExceptionThrower.php:121
+C:\dvl\GitHub\php-github-api\test\Github\Tests\HttpClient\Plugin\GithubExceptionThrowerTest.php:50
+
+ERRORS!
+Tests: 729, Assertions: 1272, Errors: 1.
+```
+
+---------------------------------------------------------------------------
+
+by acrobat at 2021-04-04T17:48:09Z
+
+Thank you @clxmstaab
