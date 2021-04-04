@@ -119,6 +119,7 @@ class Client
     {
         $this->responseHistory = new History();
         $this->httpClientBuilder = $builder = $httpClientBuilder ?? new Builder();
+        $this->apiVersion = $apiVersion ?: 'v3';
 
         $builder->addPlugin(new GithubExceptionThrower());
         $builder->addPlugin(new Plugin\HistoryPlugin($this->responseHistory));
@@ -126,10 +127,8 @@ class Client
         $builder->addPlugin(new Plugin\AddHostPlugin(Psr17FactoryDiscovery::findUriFactory()->createUri('https://api.github.com')));
         $builder->addPlugin(new Plugin\HeaderDefaultsPlugin([
             'User-Agent' => 'php-github-api (http://github.com/KnpLabs/php-github-api)',
+            'Accept' => sprintf('application/vnd.github.%s+json', $this->apiVersion),
         ]));
-
-        $this->apiVersion = $apiVersion ?: 'v3';
-        $builder->addHeaderValue('Accept', sprintf('application/vnd.github.%s+json', $this->apiVersion));
 
         if ($enterpriseUrl) {
             $this->setEnterpriseUrl($enterpriseUrl);

@@ -13,6 +13,12 @@ $assets = $client->api('repo')->releases()->assets()->all('twbs', 'bootstrap', $
 $asset = $client->api('repo')->releases()->assets()->show('twbs', 'bootstrap', $assetId);
 ```
 
+### Download binary content of asset
+
+```php
+$asset = $client->api('repo')->releases()->assets()->show('twbs', 'bootstrap', $assetId, true);
+```
+
 ### Create an asset
 
 ```php
