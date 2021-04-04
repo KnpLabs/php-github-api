@@ -78,7 +78,7 @@ class Deployment extends AbstractApi
      * @param int    $id         the deployment number
      * @param array  $params     The information about the deployment update.
      *                           Must include a "state" field of pending, success, error, or failure.
-     *                           May also be given a target_url and description, ßee link for more details.
+     *                           May also be given a target_url and description, see link for more details.
      *
      * @throws MissingArgumentException
      *

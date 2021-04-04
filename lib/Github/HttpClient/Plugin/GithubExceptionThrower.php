@@ -56,7 +56,7 @@ final class GithubExceptionThrower implements Plugin
                 if (422 === $response->getStatusCode() && isset($content['errors'])) {
                     $errors = [];
                     foreach ($content['errors'] as $error) {
-                        switch ($error['code']) {
+                        switch ($error['code'] ?? null) {
                             case 'missing':
                                 $errors[] = sprintf('The %s %s does not exist, for resource "%s"', $error['field'], $error['value'], $error['resource']);
                                 break;
@@ -78,6 +78,12 @@ final class GithubExceptionThrower implements Plugin
                                 break;
 
                             default:
+                                if (is_string($error)) {
+                                    $errors[] = $error;
+
+                                    break;
+                                }
+
                                 if (isset($error['message'])) {
                                     $errors[] = $error['message'];
                                 }
