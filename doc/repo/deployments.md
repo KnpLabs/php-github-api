@@ -21,7 +21,7 @@ $deployments = $client->api('deployment')->all('KnpLabs', 'php-github-api', arra
 $deployment = $client->api('deployment')->show('KnpLabs', 'php-github-api', $id);
 ```
 
-#### Create a new deployments.
+#### Create a new deployment.
 
 The `ref` parameter is required.
 
@@ -31,9 +31,19 @@ $data = $client->api('deployment')->create('KnpLabs', 'php-github-api', array('r
 
 Please note that once a deployment is created it cannot be edited. Only status updates can be created.
 
+#### Delete a existing deployment.
+
+```php
+$deployment = $client->api('deployment')->show('KnpLabs', 'php-github-api', $id);
+```
+
+Please note that a deployment can only be deleted when in inactive state.
+Consider transitioning the status to `inactive` beforehand using `updateStatus`.
+
+
 #### Create a new status update.
 
-The `state` parameter is required. At the time of writing, this must be pending, success, error, or failure.
+The `state` parameter is required. At the time of writing, this must be pending, queued, in_progress, success, inactive, error, or failure.
 
 ```php
 $data = $client->api('deployment')->updateStatus('KnpLabs', 'php-github-api', 1, array('state' => 'error', 'description' => 'syntax error'));
