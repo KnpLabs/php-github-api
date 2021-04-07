@@ -69,6 +69,21 @@ class Deployment extends AbstractApi
     }
 
     /**
+     * Delete a deployment for the given username and repo.
+     *
+     * @link https://docs.github.com/en/rest/reference/repos#delete-a-deployment
+     *
+     * Important: Deployments can only be deleted when in inactive state
+     * @see updateStatus
+     *
+     * @return mixed null on success, array on error with 'message'
+     */
+    public function remove(string $username, string $repository, int $id)
+    {
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/deployments/'.$id);
+    }
+
+    /**
      * Updates a deployment by creating a new status update.
      *
      * @link https://developer.github.com/v3/repos/deployments/#create-a-deployment-status
