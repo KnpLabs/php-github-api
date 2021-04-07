@@ -51,7 +51,7 @@ class DeploymentTest extends TestCase
     /**
      * @test
      */
-    public function shouldShowProject()
+    public function shouldShowDeployment()
     {
         $expectedValue = ['id' => 123, 'ref' => 'master'];
 
@@ -62,6 +62,20 @@ class DeploymentTest extends TestCase
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 123));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldDeleteDeployment()
+    {
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('delete')
+            ->with('/repos/KnpLabs/php-github-api/deployments/123')
+            ->will($this->returnValue(null));
+
+        $this->assertNull($api->remove('KnpLabs', 'php-github-api', 123));
     }
 
     /**
