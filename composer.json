@@ -44,7 +44,7 @@
     "prefer-stable": true,
     "extra": {
         "branch-alias": {
-            "dev-2.x": "2.19.x-dev",
+            "dev-2.x": "2.20.x-dev",
             "dev-master": "3.2.x-dev"
         }
     }
