@@ -646,80 +646,10 @@ class RepoTest extends TestCase
             ])
             ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($expectedArray, $api->createFromTemplate('acme', 'template', 'newrepo', 'johndoe'));
-    }
-
-    /**
-     * @test
-     */
-    public function shouldCreateRepositoryUsingTemplateWithDescription()
-    {
-        $expectedArray = [
-            'id' => 1,
+        $this->assertEquals($expectedArray, $api->createFromTemplate('acme', 'template', [
             'name' => 'newrepo',
-            'full_name' => 'johndoe/newrepo',
-            'description' => 'Lorem ipsum',
-        ];
-
-        $api = $this->getApiMock();
-        $api->expects($this->once())
-            ->method('post')
-            ->with('/repos/acme/template/generate', [
-                'name' => 'newrepo',
-                'owner' => 'johndoe',
-                'description' => 'Lorem ipsum',
-            ])
-            ->will($this->returnValue($expectedArray));
-
-        $this->assertEquals($expectedArray, $api->createFromTemplate('acme', 'template', 'newrepo', 'johndoe', 'Lorem ipsum'));
-    }
-
-    /**
-     * @test
-     */
-    public function shouldCreateRepositoryUsingTemplateWithAllBranches()
-    {
-        $expectedArray = [
-            'id' => 1,
-            'name' => 'newrepo',
-            'full_name' => 'johndoe/newrepo',
-        ];
-
-        $api = $this->getApiMock();
-        $api->expects($this->once())
-            ->method('post')
-            ->with('/repos/acme/template/generate', [
-                'name' => 'newrepo',
-                'owner' => 'johndoe',
-                'include_all_branches' => true,
-            ])
-            ->will($this->returnValue($expectedArray));
-
-        $this->assertEquals($expectedArray, $api->createFromTemplate('acme', 'template', 'newrepo', 'johndoe', null, true));
-    }
-
-    /**
-     * @test
-     */
-    public function shouldCreatePrivateRepositoryUsingTemplate()
-    {
-        $expectedArray = [
-            'id' => 1,
-            'name' => 'newrepo',
-            'full_name' => 'johndoe/newrepo',
-        ];
-
-        $api = $this->getApiMock();
-        $api->expects($this->once())
-            ->method('post')
-            ->with('/repos/acme/template/generate', [
-                'name' => 'newrepo',
-                'owner' => 'johndoe',
-                'private' => true,
-            ])
-            ->will($this->returnValue($expectedArray));
-
-        $this->assertEquals($expectedArray, $api->createFromTemplate('acme', 'template', 'newrepo', 'johndoe', null, false, true));
+            'owner' => 'johndoe',
+        ]));
     }
 
     /**
