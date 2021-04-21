@@ -138,4 +138,25 @@ class UserTest extends TestCase
         $this->assertArrayHasKey('git_url', $repo);
         $this->assertArrayHasKey('svn_url', $repo);
     }
+
+    /**
+     * @test
+     */
+    public function shouldGetEventsForAuthenticatedUserBeignWatched()
+    {
+        $username = 'l3l0';
+
+        $events = $this->client->api('user')->events($username);
+        $event = array_pop($events);
+
+        $this->assertArrayHasKey('id', $event);
+        $this->assertArrayHasKey('type', $event);
+        $this->assertArrayHasKey('actor', $event);
+        $this->assertArrayHasKey('login', $event['actor']);
+        $this->assertArrayHasKey('repo', $event);
+        $this->assertArrayHasKey('name', $event['repo']);
+        $this->assertArrayHasKey('payload', $event);
+        $this->assertArrayHasKey('public', $event);
+        $this->assertArrayHasKey('created_at', $event);
+    }
 }

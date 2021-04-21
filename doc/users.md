@@ -148,6 +148,17 @@ $users = $client->api('current_user')->starring()->all();
 
 Returns an array of starred repos.
 
+### Get the authenticated user activity
+
+> Requires [authentication](security.md).
+
+```php
+$activity = $client->api('user')->events('ornicar');
+```
+
+Returns an array of private and public events created for all repos related to the user.
+> See [more](activity.md).
+
 ### Get the authenticated user emails
 
 > Requires [authentication](security.md).
