@@ -240,17 +240,10 @@ class User extends AbstractApi
      *
      * @link https://docs.github.com/en/rest/reference/activity#list-events-for-the-authenticated-user
      *
-     * @param string $username
-     * @param int    $page     the page number of the paginated result set
-     * @param int    $perPage  the number of results per page
-     *
      * @return array
      */
-    public function events($username, $page = 1, $perPage = 30)
+    public function events(string $username)
     {
-        return $this->get('/users/'.rawurlencode($username).'/events', [
-            'page' => $page,
-            'per_page' => $perPage,
-        ]);
+        return $this->get('/users/'.rawurlencode($username).'/events');
     }
 }
