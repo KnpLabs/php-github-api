@@ -241,8 +241,8 @@ class User extends AbstractApi
      * @link https://docs.github.com/en/rest/reference/activity#list-events-for-the-authenticated-user
      *
      * @param string $username
-     * @param int    $page    the page number of the paginated result set
-     * @param int    $perPage the number of results per page
+     * @param int    $page     the page number of the paginated result set
+     * @param int    $perPage  the number of results per page
      *
      * @return array
      */
