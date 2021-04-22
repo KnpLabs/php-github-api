@@ -229,6 +229,29 @@ class UserTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function shouldGetAuthorizedUserEvents()
+    {
+        $expectedArray = [
+            [
+                'id' => 1,
+                'actor' => [
+                    'id' => 1,
+                    'login' => 'l3l0',
+                ],
+            ],
+        ];
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/users/l3l0/events')
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->events('l3l0'));
+    }
+
+    /**
      * @return string
      */
     protected function getApiClass()
