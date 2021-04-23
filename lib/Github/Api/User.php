@@ -234,4 +234,16 @@ class User extends AbstractApi
     {
         return $this->get('/users/'.rawurlencode($username).'/events/public');
     }
+
+    /**
+     * List events performed by an authenticated user.
+     *
+     * @link https://docs.github.com/en/rest/reference/activity#list-events-for-the-authenticated-user
+     *
+     * @return array
+     */
+    public function events(string $username)
+    {
+        return $this->get('/users/'.rawurlencode($username).'/events');
+    }
 }

@@ -31,6 +31,13 @@ $activity = $client->api('current_user')->starring()->all();
 ```
 Returns an array of starred repos.
 
+### Get list of private and public events for an authenticated user for all repos
+
+```php
+$activity = $client->api('user')->events('ornicar');
+```
+Returns an array of private and public events created for all repos related to the user.
+
 ### Get repos that a authenticated user has starred with creation date
 
 Support for getting the star creation timestamp in the response, using the custom `Accept: application/vnd.github.v3.star+json` header.
