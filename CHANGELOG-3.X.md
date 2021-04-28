@@ -1,5 +1,32 @@
 # Changelog
 
+## 3.2.0
+
+### Added
+- Deprecate ResultPager::postFetch method ([acrobat](https://github.com/acrobat)) [#986](https://github.com/KnpLabs/php-github-api/issues/986)
+- Add deprecations to the PR review methods to allow cleanup ([acrobat](https://github.com/acrobat)) [#984](https://github.com/KnpLabs/php-github-api/issues/984)
+- Allow binary content downloads of assets ([acrobat](https://github.com/acrobat)) [#990](https://github.com/KnpLabs/php-github-api/issues/990)
+- Deployments: added missing 'delete deployment' endpoint ([clxmstaab](https://github.com/clxmstaab)) [#991](https://github.com/KnpLabs/php-github-api/issues/991)
+- Events list per authenticated user for all repos ([richard015ar](https://github.com/richard015ar)) [#1000](https://github.com/KnpLabs/php-github-api/issues/1000)
+
+### Changed
+- Fixed branch alias ([GrahamCampbell](https://github.com/GrahamCampbell)) [#975](https://github.com/KnpLabs/php-github-api/issues/975)
+- fix typo ([staabm](https://github.com/staabm)) [#977](https://github.com/KnpLabs/php-github-api/issues/977)
+- Improved bc check ([acrobat](https://github.com/acrobat)) [#982](https://github.com/KnpLabs/php-github-api/issues/982)
+- Correctly link to github actions docs and fix backlinks ([acrobat](https://github.com/acrobat)) [#983](https://github.com/KnpLabs/php-github-api/issues/983)
+- Add missing repo hooks documentation ([acrobat](https://github.com/acrobat)) [#987](https://github.com/KnpLabs/php-github-api/issues/987)
+- Fix incorrect public key documentation ([acrobat](https://github.com/acrobat)) [#988](https://github.com/KnpLabs/php-github-api/issues/988)
+- Fixed incorrect parameters in apps docs ([acrobat](https://github.com/acrobat)) [#989](https://github.com/KnpLabs/php-github-api/issues/989)
+- phpdoc: fix typo ([clxmstaab](https://github.com/clxmstaab)) [#993](https://github.com/KnpLabs/php-github-api/issues/993)
+- Fix upmerged usage of deprecated phpunit assert ([acrobat](https://github.com/acrobat)) [#995](https://github.com/KnpLabs/php-github-api/issues/995)
+- Fix typo ([romainneutron](https://github.com/romainneutron)) [#997](https://github.com/KnpLabs/php-github-api/issues/997)
+
+### Fixed
+- Deployments: use proper media-type for in_progress/queued, inactive state ([staabm](https://github.com/staabm)) [#979](https://github.com/KnpLabs/php-github-api/issues/979)
+- [952] doc - Specify lcobucci/jwt version, fix deprecation ([amacrobert-meq](https://github.com/amacrobert-meq), [acrobat](https://github.com/acrobat)) [#953](https://github.com/KnpLabs/php-github-api/issues/953)
+- Replace deprecated organization team repository add/remove urls ([acrobat](https://github.com/acrobat)) [#985](https://github.com/KnpLabs/php-github-api/issues/985)
+- fixed php warning in GithubExceptionThrower ([clxmstaab](https://github.com/clxmstaab), [acrobat](https://github.com/acrobat)) [#992](https://github.com/KnpLabs/php-github-api/issues/992)
+
 ## 3.1.0
 
 ### Added
