@@ -18,6 +18,7 @@ class GraphQL extends AbstractApi
     /**
      * @param string $query
      * @param array  $variables
+     * @param string $acceptHeaderValue
      *
      * @return array
      */
