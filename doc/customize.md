@@ -4,14 +4,31 @@
 
 ### Inject a new HTTP client instance
 
-`php-github-api` relies on `php-http/discovery` to find an installed HTTP client. You may specify a HTTP client
-yourself by calling `\Github\Client::setHttpClient`. A HTTP client must implement `Http\Client\HttpClient`. A list of
+`php-github-api` relies on `php-http/discovery` to find an installed HTTP client. You may specify an HTTP client
+yourself by calling `\Github\Client::setHttpClient`. An HTTP client must implement `Http\Client\HttpClient`. A list of
 community provided clients is found here: https://packagist.org/providers/php-http/client-implementation
 
-You can inject a HTTP client through the `Github\Client` constructor:
+You can inject an HTTP client through the `Github\Client` constructor:
 
 ```php
 $client = Github\Client::createWithHttpClient(new Http\Adapter\Guzzle6\Client());
+```
+
+#### Example
+
+To use the symfony http client
+
+```bash
+composer require symfony/http-client nyholm/psr7
+```
+
+To set up the github client with this http client
+
+```php
+use Github\Client;
+use Symfony\Component\HttpClient\HttplugClient;
+
+$client = Client::createWithHttpClient(new HttplugClient());
 ```
 
 ### Configure the HTTP client
