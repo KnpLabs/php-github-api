@@ -123,7 +123,7 @@ class SecretsTest extends TestCase
         $api
             ->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/actions/secrets/secret-key')
+            ->with('/repos/KnpLabs/php-github-api/actions/secrets/public-key')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->publicKey('KnpLabs', 'php-github-api'));

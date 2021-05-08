@@ -206,7 +206,7 @@ class SecretsTest extends TestCase
         $api
             ->expects($this->once())
             ->method('get')
-            ->with('/orgs/KnpLabs/actions/secrets/secret-key')
+            ->with('/orgs/KnpLabs/actions/secrets/public-key')
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->publicKey('KnpLabs'));

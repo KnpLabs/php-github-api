@@ -90,6 +90,6 @@ class Secrets extends AbstractApi
      */
     public function publicKey(string $username, string $repository)
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/actions/secrets/secret-key');
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/actions/secrets/public-key');
     }
 }
