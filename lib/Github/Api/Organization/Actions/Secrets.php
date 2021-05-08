@@ -139,6 +139,6 @@ class Secrets extends AbstractApi
      */
     public function publicKey(string $organization)
     {
-        return $this->get('/orgs/'.rawurlencode($organization).'/actions/secrets/secret-key');
+        return $this->get('/orgs/'.rawurlencode($organization).'/actions/secrets/public-key');
     }
 }
