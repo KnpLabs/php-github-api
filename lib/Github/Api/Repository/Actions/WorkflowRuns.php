@@ -150,6 +150,6 @@ class WorkflowRuns extends AbstractApi
      */
     public function approve(string $username, string $repository, int $runId)
     {
-        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/actions/runs/'.$runId.'/approve');
+        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/actions/runs/'.$runId.'/approve');
     }
 }
