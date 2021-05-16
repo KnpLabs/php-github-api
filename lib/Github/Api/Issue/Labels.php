@@ -21,7 +21,7 @@ class Labels extends AbstractApi
      * @param string   $username
      * @param string   $repository
      * @param int|null $issue
-     * @param array  $params
+     * @param array    $params
      *
      * @return array
      */

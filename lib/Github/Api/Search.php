@@ -18,9 +18,9 @@ class Search extends AbstractApi
      *
      * @link https://developer.github.com/v3/search/#search-repositories
      *
-     * @param string $q     the filter
-     * @param string $sort  the sort field
-     * @param string $order asc/desc
+     * @param string $q      the filter
+     * @param string $sort   the sort field
+     * @param string $order  asc/desc
      * @param array  $params
      *
      * @return array list of repositories found
@@ -35,9 +35,9 @@ class Search extends AbstractApi
      *
      * @link https://developer.github.com/v3/search/#search-issues
      *
-     * @param string $q     the filter
-     * @param string $sort  the sort field
-     * @param string $order asc/desc
+     * @param string $q      the filter
+     * @param string $sort   the sort field
+     * @param string $order  asc/desc
      * @param array  $params
      *
      * @return array list of issues found
@@ -52,9 +52,9 @@ class Search extends AbstractApi
      *
      * @link https://developer.github.com/v3/search/#search-code
      *
-     * @param string $q     the filter
-     * @param string $sort  the sort field
-     * @param string $order asc/desc
+     * @param string $q      the filter
+     * @param string $sort   the sort field
+     * @param string $order  asc/desc
      * @param array  $params
      *
      * @return array list of code found
@@ -69,9 +69,9 @@ class Search extends AbstractApi
      *
      * @link https://developer.github.com/v3/search/#search-users
      *
-     * @param string $q     the filter
-     * @param string $sort  the sort field
-     * @param string $order asc/desc
+     * @param string $q      the filter
+     * @param string $sort   the sort field
+     * @param string $order  asc/desc
      * @param array  $params
      *
      * @return array list of users found
@@ -86,9 +86,9 @@ class Search extends AbstractApi
      *
      * @link https://developer.github.com/v3/search/#search-commits
      *
-     * @param string $q     the filter
-     * @param string $sort  the sort field
-     * @param string $order sort order. asc/desc
+     * @param string $q      the filter
+     * @param string $sort   the sort field
+     * @param string $order  sort order. asc/desc
      * @param array  $params
      *
      * @return array
@@ -106,7 +106,7 @@ class Search extends AbstractApi
      *
      * @link https://developer.github.com/v3/search/#search-topics
      *
-     * @param string $q the filter
+     * @param string $q      the filter
      * @param array  $params
      *
      * @return array
