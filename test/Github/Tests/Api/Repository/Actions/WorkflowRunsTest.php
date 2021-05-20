@@ -213,7 +213,7 @@ class WorkflowRunsTest extends TestCase
             ->with('/repos/KnpLabs/php-github-api/actions/runs/374473304/approve')
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->approve('KnpLabs', 'php-github-api', 374473304));
+        $this->assertSame($expectedValue, $api->approve('KnpLabs', 'php-github-api', 374473304));
     }
 
     protected function getApiClass()
