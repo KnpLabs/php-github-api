@@ -136,4 +136,20 @@ class WorkflowRuns extends AbstractApi
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/actions/runs/'.$runId.'/logs');
     }
+
+    /**
+     * @link https://docs.github.com/en/rest/reference/actions#approve-a-workflow-run-for-a-fork-pull-request
+     *
+     * @param string $username
+     * @param string $repository
+     * @param int    $runId
+     *
+     * @return array|string
+     *
+     * @experimental This endpoint is currently in beta.
+     */
+    public function approve(string $username, string $repository, int $runId)
+    {
+        return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/actions/runs/'.$runId.'/approve');
+    }
 }

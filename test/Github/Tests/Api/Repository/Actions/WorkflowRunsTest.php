@@ -198,6 +198,24 @@ class WorkflowRunsTest extends TestCase
         $this->assertEquals($expectedValue, $api->deleteLogs('KnpLabs', 'php-github-api', 374473304));
     }
 
+    /**
+     * @test
+     */
+    public function shouldApproveWorkflowRunLogs()
+    {
+        $expectedValue = 'response';
+
+        /** @var WorkflowRuns|MockObject $api */
+        $api = $this->getApiMock();
+
+        $api->expects($this->once())
+            ->method('post')
+            ->with('/repos/KnpLabs/php-github-api/actions/runs/374473304/approve')
+            ->will($this->returnValue($expectedValue));
+
+        $this->assertSame($expectedValue, $api->approve('KnpLabs', 'php-github-api', 374473304));
+    }
+
     protected function getApiClass()
     {
         return WorkflowRuns::class;

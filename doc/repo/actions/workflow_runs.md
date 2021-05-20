@@ -74,3 +74,11 @@ https://docs.github.com/en/rest/reference/actions#delete-workflow-run-logs
 ```php
 $client->api('repo')->workflowRuns()->deleteLogs('KnpLabs', 'php-github-api', $runId);
 ```
+
+### Approve workflow run
+
+https://docs.github.com/en/rest/reference/actions#approve-a-workflow-run-for-a-fork-pull-request
+
+```php
+$client->api('repo')->workflowRuns()->approve('KnpLabs', 'php-github-api', $runId);
+```
