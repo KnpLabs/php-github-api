@@ -1,0 +1,37 @@
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2021-05-13T09:07:16Z
+
+👎 here. The new design has this immutable doesn't it?
+
+---------------------------------------------------------------------------
+
+by Nyholm at 2021-05-13T09:08:35Z
+
+Okey, Then I'll remove the `AbstractApi::$perPage`.
+
+Thank you for the feedback
+
+---------------------------------------------------------------------------
+
+by Nyholm at 2021-05-13T09:17:42Z
+
+oops, Im wrong again.
+
+The `ResultPager` is using `AbstractApi::$perPage`. I've updated the integration tests and added a small comment.
+
+---------------------------------------------------------------------------
+
+by acrobat at 2021-05-14T09:06:01Z
+
+Yes, the resultpager is now the "main" point of entry for paginating results so that's the why the `perPage` property is not accessable anymore for the api classes. But the resultpager still use this property to do it's job.
+
+See #907 for more context on this.
+
+Thanks for the extra comment and fixed tests!
+
+---------------------------------------------------------------------------
+
+by acrobat at 2021-05-20T19:56:44Z
+
+Thank you @Nyholm
