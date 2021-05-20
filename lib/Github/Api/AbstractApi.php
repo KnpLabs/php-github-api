@@ -20,7 +20,7 @@ abstract class AbstractApi
     private $client;
 
     /**
-     * The per page parameter.
+     * The per page parameter. It is used by the ResultPager.
      *
      * @var int|null
      */
