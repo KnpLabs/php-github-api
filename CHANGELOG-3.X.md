@@ -1,5 +1,19 @@
 # Changelog
 
+## 3.3.0
+
+### Added
+- Allow costume accept headers for GraphQL Endpoint. ([Necmttn](https://github.com/Necmttn)) [#1001](https://github.com/KnpLabs/php-github-api/issues/1001)
+- Add endpoint for approve workflow run ([Nyholm](https://github.com/Nyholm)) [#1006](https://github.com/KnpLabs/php-github-api/issues/1006)
+
+### Changed
+- Update readme and add example for different http client usage ([acrobat](https://github.com/acrobat)) [#1002](https://github.com/KnpLabs/php-github-api/issues/1002)
+- Bumped branch alias after new feature merged ([GrahamCampbell](https://github.com/GrahamCampbell)) [#1004](https://github.com/KnpLabs/php-github-api/issues/1004)
+- Add comment on AbstractApi::$perPage() ([Nyholm](https://github.com/Nyholm)) [#1007](https://github.com/KnpLabs/php-github-api/issues/1007)
+
+### Fixed
+- Fix publicKey ([Yurunsoft](https://github.com/Yurunsoft)) [#1005](https://github.com/KnpLabs/php-github-api/issues/1005)
+
 ## 3.2.0
 
 ### Added
