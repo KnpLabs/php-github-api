@@ -26,7 +26,7 @@ Uses [GitHub API v3](http://developer.github.com/v3/) & supports [GitHub API v4]
 
 Via [Composer](https://getcomposer.org).
 
-This command will get you up and running quickly with a guzzle http client.
+This command will get you up and running quickly with a Guzzle HTTP client.
 
 ```bash
 composer require knplabs/github-api:^3.0 guzzlehttp/guzzle:^7.0.1 http-interop/http-factory-guzzle:^1.0
@@ -42,7 +42,7 @@ We are decoupled from any HTTP messaging client with help by [HTTPlug](https://h
 composer require knplabs/github-api:^3.0 symfony/http-client nyholm/psr7
 ```
 
-To set up the github client with this http client
+To set up the Github client with this HTTP client
 
 ```php
 use Github\Client;
