@@ -58,7 +58,7 @@ $jwt = $config->builder()
     ->issuedAt($now)
     ->expiresAt($now->modify('+1 minute'))
     ->getToken($config->signer(), $config->signingKey())
-;
+    ->payload();
 
 $github->authenticate($jwt, null, Github\Client::AUTH_JWT)
 ```
