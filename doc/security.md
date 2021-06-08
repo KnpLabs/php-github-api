@@ -37,11 +37,12 @@ and installation access token which is then usable with `Github\Client::AUTH_ACC
 authentication docs](https://developer.github.com/apps/building-github-apps/authentication-options-for-github-apps/#authenticating-as-a-github-app) describe the flow in detail.
 It´s important for integration requests to use the custom Accept header `application/vnd.github.machine-man-preview`.
 
-The following sample code authenticates as an installation using [lcobucci/jwt 3.4](https://github.com/lcobucci/jwt/tree/3.4)
+The following sample code authenticates as an installation using [lcobucci/jwt 4.1](https://github.com/lcobucci/jwt/tree/4.1.x)
 to generate a JSON Web Token (JWT).
 
 ```php
 use Lcobucci\JWT\Configuration;
+use Lcobucci\JWT\Encoding\ChainedFormatter;
 use Lcobucci\JWT\Signer\Key\LocalFileReference;
 use Lcobucci\JWT\Signer\Rsa\Sha256;
 
@@ -53,14 +54,14 @@ $config = Configuration::forSymmetricSigner(
 );
 
 $now = new \DateTimeImmutable();
-$jwt = $config->builder()
+$jwt = $config->builder(ChainedFormatter::withUnixTimestampDates())
     ->issuedBy($integrationId)
     ->issuedAt($now)
     ->expiresAt($now->modify('+1 minute'))
     ->getToken($config->signer(), $config->signingKey())
 ;
 
-$github->authenticate($jwt, null, Github\Client::AUTH_JWT)
+$github->authenticate($jwt->toString(), null, Github\Client::AUTH_JWT)
 ```
 
 The `$integrationId` you can find in the about section of your github app.
