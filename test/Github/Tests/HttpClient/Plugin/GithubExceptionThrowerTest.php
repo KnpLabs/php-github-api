@@ -4,6 +4,7 @@ namespace Github\Tests\HttpClient\Plugin;
 
 use Github\Exception\ExceptionInterface;
 use Github\HttpClient\Plugin\GithubExceptionThrower;
+use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use Http\Client\Promise\HttpFulfilledPromise;
 use Http\Client\Promise\HttpRejectedPromise;
@@ -17,14 +18,11 @@ use Psr\Http\Message\ResponseInterface;
 class GithubExceptionThrowerTest extends TestCase
 {
     /**
-     * @param ResponseInterface                  $response
-     * @param ExceptionInterface|\Exception|null $exception
      * @dataProvider responseProvider
      */
-    public function testHandleRequest(ResponseInterface $response, ExceptionInterface $exception = null)
+    public function testHandleRequest(ResponseInterface $response, ExceptionInterface $exception = null): void
     {
-        /** @var RequestInterface $request */
-        $request = $this->getMockForAbstractClass(RequestInterface::class);
+        $request = new Request('GET', 'https://api.github.com/issues');
 
         $promise = new HttpFulfilledPromise($response);
 
