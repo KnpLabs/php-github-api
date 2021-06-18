@@ -799,13 +799,9 @@ class Repo extends AbstractApi
      *
      * @link https://developer.github.com/v3/repos/#create-a-repository-using-a-template
      *
-     * @param string $templateOwner
-     * @param string $templateRepo
-     * @param array  $parameters
-     *
      * @return array
      */
-    public function createFromTemplate($templateOwner, $templateRepo, array $parameters = [])
+    public function createFromTemplate(string $templateOwner, string $templateRepo, array $parameters = [])
     {
         return $this->post('/repos/'.rawurldecode($templateOwner).'/'.rawurldecode($templateRepo).'/generate', $parameters);
     }
