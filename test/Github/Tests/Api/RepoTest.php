@@ -627,6 +627,32 @@ class RepoTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function shouldCreateRepositoryUsingTemplate()
+    {
+        $expectedArray = [
+            'id' => 1,
+            'name' => 'newrepo',
+            'full_name' => 'johndoe/newrepo',
+        ];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('post')
+            ->with('/repos/acme/template/generate', [
+                'name' => 'newrepo',
+                'owner' => 'johndoe',
+            ])
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->createFromTemplate('acme', 'template', [
+            'name' => 'newrepo',
+            'owner' => 'johndoe',
+        ]));
+    }
+
+    /**
      * @return string
      */
     protected function getApiClass()

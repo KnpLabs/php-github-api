@@ -370,3 +370,14 @@ Example when you want to configure custom github action workflows.
 ```php
 $client->api('repo')->dispatch('KnpLabs', 'php-github-api', 'acme-event', ['foo'=>'bar']);
 ```
+
+### Create a repository using a template
+
+Create a new repository using a repository template.
+
+```php
+$client->api('repo')->createFromTemplate('template-owner', 'template-repo', [
+    'name' => 'name-of-new-repo',
+    'owner' => 'name-of-new-repo-owner', // can be user or org
+]);
+```

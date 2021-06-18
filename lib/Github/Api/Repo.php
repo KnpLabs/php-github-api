@@ -793,4 +793,16 @@ class Repo extends AbstractApi
     {
         return $this->post('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/transfer', ['new_owner' => $newOwner, 'team_id' => $teamId]);
     }
+
+    /**
+     * Create a repository using a template.
+     *
+     * @link https://developer.github.com/v3/repos/#create-a-repository-using-a-template
+     *
+     * @return array
+     */
+    public function createFromTemplate(string $templateOwner, string $templateRepo, array $parameters = [])
+    {
+        return $this->post('/repos/'.rawurldecode($templateOwner).'/'.rawurldecode($templateRepo).'/generate', $parameters);
+    }
 }
