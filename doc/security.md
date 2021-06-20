@@ -41,10 +41,13 @@ The following sample code authenticates as an installation using [lcobucci/jwt 4
 to generate a JSON Web Token (JWT).
 
 ```php
+use Github\HttpClient\Builder;
 use Lcobucci\JWT\Configuration;
 use Lcobucci\JWT\Encoding\ChainedFormatter;
 use Lcobucci\JWT\Signer\Key\LocalFileReference;
 use Lcobucci\JWT\Signer\Rsa\Sha256;
+
+$builder = new Builder();
 
 $github = new Github\Client($builder, 'machine-man-preview');
 
