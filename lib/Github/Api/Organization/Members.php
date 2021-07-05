@@ -58,9 +58,13 @@ class Members extends AbstractApi
     /*
      * Add user to organization
      */
-    public function add($organization, $username)
+    public function add($organization, $username, array $params = [])
     {
-        return $this->put('/orgs/'.rawurlencode($organization).'/memberships/'.rawurlencode($username));
+        if (isset($params['role']) && !in_array($params['role'], ['admin', 'member'])) {
+            $params['role'] = 'member';
+        }
+
+        return $this->put('/orgs/'.rawurlencode($organization).'/memberships/'.rawurlencode($username), $params);
     }
 
     public function addMember($organization, $username)
