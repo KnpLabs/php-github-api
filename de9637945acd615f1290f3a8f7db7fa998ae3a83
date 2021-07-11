@@ -1,0 +1,32 @@
+---------------------------------------------------------------------------
+
+by raghavendra89 at 2021-06-08T14:11:20Z
+
+Thanks! I just wanted to submit a pull request for this. But saw yours.
+
+There is one more minor issue at line 48:
+`$github = new Github\Client($builder, 'machine-man-preview');`
+
+Here `$builder` variable is referenced, but it is not initiated. We can add this line before line 48:
+
+`$builder = new Builder(new GuzzleHttp\Client());`
+
+and include: `use Github\HttpClient\Builder;`
+
+---------------------------------------------------------------------------
+
+by acrobat at 2021-06-19T19:04:07Z
+
+@glaubinix can you apply the extra comments that @raghavendra89 made above? Thanks!
+
+---------------------------------------------------------------------------
+
+by glaubinix at 2021-06-20T14:26:47Z
+
+@acrobat done
+
+---------------------------------------------------------------------------
+
+by acrobat at 2021-07-11T19:56:44Z
+
+Thank you @glaubinix
