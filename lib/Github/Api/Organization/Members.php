@@ -60,10 +60,6 @@ class Members extends AbstractApi
      */
     public function add($organization, $username, array $params = [])
     {
-        if (isset($params['role']) && !in_array($params['role'], ['admin', 'member'])) {
-            $params['role'] = 'member';
-        }
-
         return $this->put('/orgs/'.rawurlencode($organization).'/memberships/'.rawurlencode($username), $params);
     }
 
