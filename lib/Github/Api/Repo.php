@@ -503,7 +503,7 @@ class Repo extends AbstractApi
      * @param string $username   the username
      * @param string $repository the name of the repository
      * @param string $branch     the name of the branch
-     * @param array $parameters parameters for the query string
+     * @param array  $parameters parameters for the query string
      *
      * @return array list of the repository branches
      */
