@@ -1,0 +1,73 @@
+---------------------------------------------------------------------------
+
+by nicolai-petrov-venngage at 2021-07-12T16:05:14Z
+
+example:
+```
+<?php
+require_once __DIR__ . '/vendor/autoload.php';
+
+$id = "GoogleCloudPlatform";
+$token = "topSecret";
+$repo = "click-to-deploy";
+
+$client = new \Github\Client();
+// $client->authenticate($token, \Github\Client::AUTH_ACCESS_TOKEN);
+
+// example: first page.
+$result1 = $client->api('repo')->branches($id, $repo, null, [
+    'per_page' => 100,
+    'page' => 1 ] );
+echo \count($result1) . " - branches found on the first page." .PHP_EOL;
+
+// example: second page.
+$result2 = $client->api('repo')->branches($id, $repo, null, [
+    'per_page' => 100,
+    'page' => 2 ] );
+echo \count($result2) . " - branches found on the second page." .PHP_EOL;
+
+```
+
+Output:
+
+```
+→ php testBranchLists.php
+100 - branches found on the first page.
+22 - branches found on the second page.
+
+```
+
+---------------------------------------------------------------------------
+
+by pitonic at 2021-07-13T02:26:55Z
+
+Documemtations:
+https://docs.github.com/en/rest/reference/repos
+#branches
+
+protected      |      boolean     |       query          |
+```
+ Setting to true returns only protected branches. When set to false, only unprotected branches are returned. Omitting this parameter returns all branches.
+```
+per_page         |      integer      |      query        |
+```
+Results per page (max 100).Default: 30
+```
+page          |         integer         |       query      |
+```
+Page number of the results to fetch.Default: 1
+```
+
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2021-07-13T10:30:32Z
+
+👎 This usage is incorrect. Use the ResultPager class.
+
+---------------------------------------------------------------------------
+
+by acrobat at 2021-07-13T17:15:10Z
+
+I'm going to merge this so we have support for the [`protected`](https://docs.github.com/en/rest/reference/repos#list-branches--parameters) parameter. But as @GrahamCampbell indicates to paginate over the api results you should use the `ResultPager` class. This class has all the logic implemented to easily loop over all the results/pages and even fetch them lazy.
+
+See: https://github.com/KnpLabs/php-github-api/blob/master/doc/result_pager.md
