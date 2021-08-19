@@ -63,7 +63,3 @@ $paginator->hasPrevious();
 $paginator->fetchPrevious();
 ```
 
-If you want to retrieve the pagination links (available after the call to fetch):
-```php
-$paginator->getPagination();
-```
