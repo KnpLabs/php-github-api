@@ -144,15 +144,15 @@ class PullRequestTest extends TestCase
         $expectedArray['_links']['statuses']['href'] = '/repos/ezsystems/ezpublish/pulls/15/statuses';
 
         $api = $this->getApiMock();
-        $api->expects($this->at(0))
-            ->method('get')
-            ->with('/repos/ezsystems/ezpublish/pulls/15')
-            ->will($this->returnValue($expectedArray));
 
-        $api->expects($this->at(1))
+        $api->expects($this->exactly(2))
             ->method('get')
-            ->with('/repos/ezsystems/ezpublish/pulls/15/statuses')
-            ->will($this->returnValue($expectedArray));
+            ->withConsecutive(
+                [$this->equalTo('/repos/ezsystems/ezpublish/pulls/15')],
+                [$this->equalTo('/repos/ezsystems/ezpublish/pulls/15/statuses')]
+            )
+            ->willReturn($expectedArray)
+        ;
 
         $this->assertEquals($expectedArray, $api->status('ezsystems', 'ezpublish', '15'));
     }
