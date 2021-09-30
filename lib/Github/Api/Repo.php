@@ -807,7 +807,7 @@ class Repo extends AbstractApi
     {
         //This api is in preview mode, so set the correct accept-header
         $this->acceptHeaderValue = 'application/vnd.github.baptiste-preview+json';
-        
+
         return $this->post('/repos/'.rawurldecode($templateOwner).'/'.rawurldecode($templateRepo).'/generate', $parameters);
     }
 }
