@@ -805,6 +805,9 @@ class Repo extends AbstractApi
      */
     public function createFromTemplate(string $templateOwner, string $templateRepo, array $parameters = [])
     {
+        //This api is in preview mode, so set the correct accept-header
+        $this->acceptHeaderValue = 'application/vnd.github.baptiste-preview+json';
+
         return $this->post('/repos/'.rawurldecode($templateOwner).'/'.rawurldecode($templateRepo).'/generate', $parameters);
     }
 }
