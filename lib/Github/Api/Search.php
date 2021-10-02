@@ -76,6 +76,7 @@ class Search extends AbstractApi
     public function code_with_match($q, $sort = 'updated', $order = 'desc')
     {
         $this->acceptHeaderValue = 'application/vnd.github.v3.text-match+json';
+
         return $this->code($q, $sort, $order);
     }
 
