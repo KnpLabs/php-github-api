@@ -62,6 +62,24 @@ class Search extends AbstractApi
     }
 
     /**
+     * Search code by filter (q), but will return additional data to highlight
+     * the matched results.
+     *
+     * @link https://docs.github.com/en/rest/reference/search#text-match-metadata
+     *
+     * @param string $q     the filter
+     * @param string $sort  the sort field
+     * @param string $order asc/desc
+     *
+     * @return array list of code found
+     */
+    public function code_with_match($q, $sort = 'updated', $order = 'desc')
+    {
+        $this->acceptHeaderValue = 'application/vnd.github.v3.text-match+json';
+        return $this->code($q, $sort, $order);
+    }
+
+    /**
      * Search users by filter (q).
      *
      * @link https://developer.github.com/v3/search/#search-users
