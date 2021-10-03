@@ -136,6 +136,49 @@ class SearchTest extends TestCase
     /**
      * @test
      */
+    public function shouldSearchCodeWithMatchByQuery()
+    {
+        $expectedArray = [['total_count' => '0']];
+
+        $api = $this->getApiMock();
+
+        $api->expects($this->once())
+            ->method('get')
+            ->with(
+                '/search/code',
+                ['q' => 'query text', 'sort' => 'updated', 'order' => 'desc']
+            )
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->codeWithMatch('query text'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldSearchCodeWithMatchRegardingSortAndOrder()
+    {
+        $expectedArray = [['total_count' => '0']];
+
+        $api = $this->getApiMock();
+
+        $api->expects($this->once())
+            ->method('get')
+            ->with(
+                '/search/code',
+                ['q' => 'query text', 'sort' => 'created', 'order' => 'asc']
+            )
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals(
+            $expectedArray,
+            $api->codeWithMatch('query text', 'created', 'asc')
+        );
+    }
+
+    /**
+     * @test
+     */
     public function shouldSearchUsersByQuery()
     {
         $expectedArray = [['total_count' => '0']];
