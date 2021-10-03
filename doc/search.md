@@ -21,7 +21,7 @@ $files = $client->api('search')->code('@todo language:php');
 Returns a list of files found by such criteria (containing "@todo" and language==php).
 
 ```php
-$files = $client->api('search')->code_with_match('@todo language:php');
+$files = $client->api('search')->codeWithMatch('@todo language:php');
 ```
 
 Same as code, with additional data to highlight the matching fragments (see [Text match metadata](https://docs.github.com/en/rest/reference/search#text-match-metadata)).

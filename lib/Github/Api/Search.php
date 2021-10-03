@@ -67,13 +67,13 @@ class Search extends AbstractApi
      *
      * @link https://docs.github.com/en/rest/reference/search#text-match-metadata
      *
-     * @param string $q     the filter
-     * @param string $sort  the sort field
-     * @param string $order asc/desc
+     * @param $q     the filter
+     * @param $sort  the sort field
+     * @param $order asc/desc
      *
      * @return array list of code found
      */
-    public function code_with_match($q, $sort = 'updated', $order = 'desc')
+    public function codeWithMatch(string $q, string $sort = 'updated', string $order = 'desc'): array
     {
         $this->acceptHeaderValue = 'application/vnd.github.v3.text-match+json';
 
