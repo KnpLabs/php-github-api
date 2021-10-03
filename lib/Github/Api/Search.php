@@ -67,10 +67,6 @@ class Search extends AbstractApi
      *
      * @link https://docs.github.com/en/rest/reference/search#text-match-metadata
      *
-     * @param $q     the filter
-     * @param $sort  the sort field
-     * @param $order asc/desc
-     *
      * @return array list of code found
      */
     public function codeWithMatch(string $q, string $sort = 'updated', string $order = 'desc'): array
