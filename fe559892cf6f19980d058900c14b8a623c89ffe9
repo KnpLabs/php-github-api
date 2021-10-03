@@ -1,0 +1,15 @@
+---------------------------------------------------------------------------
+
+by akehsanz at 2021-10-03T09:57:26Z
+
+UNSUBSCRIBING to this thread. but all emails arrive like a Deluge...
+
+---------------------------------------------------------------------------
+
+by QuentinRa at 2021-10-03T10:30:58Z
+
+Thanks! I looked for tests, and for CONTRIBUTING.md/code_style.*, but I haven't found any (I should've checked by myself, instead of relying on my IDE 😖).
+
+I added the return type too. I'm not sure if I should remove the "redundant" types in the DOC, my IDE is showing a warning 😶"Update PHPDoc comment - Argument type do not match the declared type" (PHPStorm).
+
+I'm not sure if my tests are what you wanted, I can't run them at all (and I don't have much time to look into it).
