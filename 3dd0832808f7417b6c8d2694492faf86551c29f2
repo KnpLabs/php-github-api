@@ -1,0 +1,11 @@
+---------------------------------------------------------------------------
+
+by AlexandrePavy at 2021-10-03T21:23:11Z
+
+As https://github.com/KnpLabs/php-github-api/pull/1019 is not yet released i put dir parameter before "params", no BC here
+
+---------------------------------------------------------------------------
+
+by AlexandrePavy at 2021-10-14T06:37:44Z
+
+Hello @acrobat (kind up :heart:), do you have time to take a look? any suggestion ?
