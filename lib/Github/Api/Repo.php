@@ -626,7 +626,7 @@ class Repo extends AbstractApi
      * @param string $head       The head to merge. This can be a branch name or a commit SHA1.
      * @param string $message    Commit message to use for the merge commit. If omitted, a default message will be used.
      *
-     * @return array|null
+     * @return array|string
      */
     public function merge($username, $repository, $base, $head, $message = null)
     {
