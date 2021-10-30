@@ -3,6 +3,7 @@
 namespace Github\Tests;
 
 use Github\Api;
+use Github\AuthMethod;
 use Github\Client;
 use Github\Exception\BadMethodCallException;
 use Github\Exception\InvalidArgumentException;
@@ -68,9 +69,9 @@ class ClientTest extends \PHPUnit\Framework\TestCase
     public function getAuthenticationFullData()
     {
         return [
-            ['token', null, Client::AUTH_ACCESS_TOKEN],
-            ['client_id', 'client_secret', Client::AUTH_CLIENT_ID],
-            ['token', null, Client::AUTH_JWT],
+            ['token', null, AuthMethod::AUTH_ACCESS_TOKEN],
+            ['client_id', 'client_secret', AuthMethod::AUTH_CLIENT_ID],
+            ['token', null, AuthMethod::AUTH_JWT],
         ];
     }
 
@@ -84,7 +85,7 @@ class ClientTest extends \PHPUnit\Framework\TestCase
             ->getMock();
         $builder->expects($this->once())
             ->method('addPlugin')
-            ->with($this->equalTo(new Authentication('token', null, Client::AUTH_ACCESS_TOKEN)));
+            ->with($this->equalTo(new Authentication('token', null, AuthMethod::AUTH_ACCESS_TOKEN)));
 
         $builder->expects($this->once())
             ->method('removePlugin')
@@ -98,7 +99,7 @@ class ClientTest extends \PHPUnit\Framework\TestCase
             ->method('getHttpClientBuilder')
             ->willReturn($builder);
 
-        $client->authenticate('token', Client::AUTH_ACCESS_TOKEN);
+        $client->authenticate('token', AuthMethod::AUTH_ACCESS_TOKEN);
     }
 
     /**

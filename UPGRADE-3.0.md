@@ -15,7 +15,7 @@
 
 ### Authentication methods
 
-* `Github\Client::AUTH_URL_TOKEN` use `Github\Client::AUTH_ACCESS_TOKEN` instead.
-* `Github\Client::AUTH_URL_CLIENT_ID` use `Github\Client::AUTH_CLIENT_ID` instead.
-* `Github\Client::AUTH_HTTP_TOKEN` use `Github\Client::AUTH_ACCESS_TOKEN` instead.
-* `Github\Client::AUTH_HTTP_PASSWORD` use `Github\Client::AUTH_ACCESS_TOKEN` instead.
+* `Github\Client::AUTH_ACCESS_TOKEN`  use `Github\AuthMethod::AUTH_ACCESS_TOKEN` instead.
+* `Github\Client::AUTH_CLIENT_ID`  use `Github\AuthMethod::AUTH_CLIENT_ID` instead.
+* `Github\Client::AUTH_ACCESS_TOKEN`  use `Github\AuthMethod::AUTH_ACCESS_TOKEN` instead.
+* `Github\Client::AUTH_ACCESS_TOKEN`  use `Github\AuthMethod::AUTH_ACCESS_TOKEN` instead.
