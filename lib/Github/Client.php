@@ -70,6 +70,36 @@ use Psr\Http\Message\ResponseInterface;
 class Client
 {
     /**
+     * Authenticate using a client_id/client_secret combination.
+     *
+     * @var string
+     *
+     * @deprecated Use the AuthMethod const
+     */
+    const AUTH_CLIENT_ID = 'client_id_header';
+
+    /**
+     * Authenticate using a GitHub access token.
+     *
+     * @var string
+     *
+     * @deprecated Use the AuthMethod const
+     */
+    const AUTH_ACCESS_TOKEN = 'access_token_header';
+
+    /**
+     * Constant for authentication method.
+     *
+     * Indicates JSON Web Token authentication required for GitHub apps access
+     * to the API.
+     *
+     * @var string
+     *
+     * @deprecated Use the AuthMethod const
+     */
+    const AUTH_JWT = 'jwt';
+
+    /**
      * @var string
      */
     private $apiVersion;
