@@ -41,9 +41,9 @@ class AuthenticationTest extends TestCase
     public function getAuthenticationData()
     {
         return [
-            ['access_token', null, AuthMethod::AUTH_ACCESS_TOKEN, 'token access_token'],
-            ['client_id', 'client_secret', AuthMethod::AUTH_CLIENT_ID, sprintf('Basic %s', base64_encode('client_id'.':'.'client_secret'))],
-            ['jwt_token', null, AuthMethod::AUTH_JWT, 'Bearer jwt_token'],
+            ['access_token', null, AuthMethod::ACCESS_TOKEN, 'token access_token'],
+            ['client_id', 'client_secret', AuthMethod::CLIENT_ID, sprintf('Basic %s', base64_encode('client_id'.':'.'client_secret'))],
+            ['jwt_token', null, AuthMethod::JWT, 'Bearer jwt_token'],
         ];
     }
 }

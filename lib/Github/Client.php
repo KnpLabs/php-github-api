@@ -76,7 +76,7 @@ class Client
      *
      * @deprecated Use the AuthMethod const
      */
-    const AUTH_CLIENT_ID = 'client_id_header';
+    const AUTH_CLIENT_ID = AuthMethod::CLIENT_ID;
 
     /**
      * Authenticate using a GitHub access token.
@@ -85,7 +85,7 @@ class Client
      *
      * @deprecated Use the AuthMethod const
      */
-    const AUTH_ACCESS_TOKEN = 'access_token_header';
+    const AUTH_ACCESS_TOKEN = AuthMethod::ACCESS_TOKEN;
 
     /**
      * Constant for authentication method.
@@ -97,7 +97,7 @@ class Client
      *
      * @deprecated Use the AuthMethod const
      */
-    const AUTH_JWT = 'jwt';
+    const AUTH_JWT = AuthMethod::JWT;
 
     /**
      * @var string
@@ -319,7 +319,7 @@ class Client
      */
     public function authenticate($tokenOrLogin, $password = null, $authMethod = null): void
     {
-        if (null === $authMethod && (AuthMethod::AUTH_JWT === $password || AuthMethod::AUTH_ACCESS_TOKEN === $password)) {
+        if (null === $authMethod && (AuthMethod::JWT === $password || AuthMethod::ACCESS_TOKEN === $password)) {
             $authMethod = $password;
             $password = null;
         }

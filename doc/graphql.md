@@ -14,7 +14,7 @@ $rateLimits = $client->api('graphql')->execute($query);
 To use [GitHub v4 API (GraphQL API)](http://developer.github.com/v4/) requests must [authenticated]((../security.md)).
 
 ```php
-$client->authenticate($token, null, Github\AuthMethod::AUTH_ACCESS_TOKEN);
+$client->authenticate($token, null, Github\AuthMethod::ACCESS_TOKEN);
 
 $result = $client->api('graphql')->execute($query);
 ```
@@ -51,7 +51,7 @@ $variables = [
     'organizationLogin' => 'KnpLabs'
 ];
 
-$client->authenticate('<your-token>', null, Github\AuthMethod::AUTH_ACCESS_TOKEN);
+$client->authenticate('<your-token>', null, Github\AuthMethod::ACCESS_TOKEN);
 
 $orgInfo = $client->api('graphql')->execute($query, $variables);
 ```

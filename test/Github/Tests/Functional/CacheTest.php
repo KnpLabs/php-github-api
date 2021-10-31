@@ -26,7 +26,7 @@ class CacheTest extends \PHPUnit\Framework\TestCase
         $github = Client::createWithHttpClient($mockClient);
         $github->addCache(new ArrayAdapter(), ['default_ttl'=>600]);
 
-        $github->authenticate('fake_token_aaa', AuthMethod::AUTH_ACCESS_TOKEN);
+        $github->authenticate('fake_token_aaa', AuthMethod::ACCESS_TOKEN);
         $userA = $github->currentUser()->show();
         $this->assertEquals('nyholm', $userA['login']);
 
@@ -46,11 +46,11 @@ class CacheTest extends \PHPUnit\Framework\TestCase
         $github = Client::createWithHttpClient($mockClient);
         $github->addCache(new ArrayAdapter(), ['default_ttl'=>600]);
 
-        $github->authenticate('fake_token_aaa', AuthMethod::AUTH_ACCESS_TOKEN);
+        $github->authenticate('fake_token_aaa', AuthMethod::ACCESS_TOKEN);
         $userA = $github->currentUser()->show();
         $this->assertEquals('nyholm', $userA['login']);
 
-        $github->authenticate('fake_token_bbb', AuthMethod::AUTH_ACCESS_TOKEN);
+        $github->authenticate('fake_token_bbb', AuthMethod::ACCESS_TOKEN);
         $userB = $github->currentUser()->show();
         $this->assertEquals('octocat', $userB['login'], 'We must vary on the Authorization header.');
     }

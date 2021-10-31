@@ -69,9 +69,9 @@ class ClientTest extends \PHPUnit\Framework\TestCase
     public function getAuthenticationFullData()
     {
         return [
-            ['token', null, AuthMethod::AUTH_ACCESS_TOKEN],
-            ['client_id', 'client_secret', AuthMethod::AUTH_CLIENT_ID],
-            ['token', null, AuthMethod::AUTH_JWT],
+            ['token', null, AuthMethod::ACCESS_TOKEN],
+            ['client_id', 'client_secret', AuthMethod::CLIENT_ID],
+            ['token', null, AuthMethod::JWT],
         ];
     }
 
@@ -85,7 +85,7 @@ class ClientTest extends \PHPUnit\Framework\TestCase
             ->getMock();
         $builder->expects($this->once())
             ->method('addPlugin')
-            ->with($this->equalTo(new Authentication('token', null, AuthMethod::AUTH_ACCESS_TOKEN)));
+            ->with($this->equalTo(new Authentication('token', null, AuthMethod::ACCESS_TOKEN)));
 
         $builder->expects($this->once())
             ->method('removePlugin')
@@ -99,7 +99,7 @@ class ClientTest extends \PHPUnit\Framework\TestCase
             ->method('getHttpClientBuilder')
             ->willReturn($builder);
 
-        $client->authenticate('token', AuthMethod::AUTH_ACCESS_TOKEN);
+        $client->authenticate('token', AuthMethod::ACCESS_TOKEN);
     }
 
     /**

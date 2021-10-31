@@ -58,11 +58,11 @@ final class Authentication implements Plugin
     private function getAuthorizationHeader(): string
     {
         switch ($this->method) {
-            case AuthMethod::AUTH_CLIENT_ID:
+            case AuthMethod::CLIENT_ID:
                 return sprintf('Basic %s', base64_encode($this->tokenOrLogin.':'.$this->password));
-            case AuthMethod::AUTH_ACCESS_TOKEN:
+            case AuthMethod::ACCESS_TOKEN:
                 return sprintf('token %s', $this->tokenOrLogin);
-            case AuthMethod::AUTH_JWT:
+            case AuthMethod::JWT:
                 return sprintf('Bearer %s', $this->tokenOrLogin);
             default:
                 throw new RuntimeException(sprintf('%s not yet implemented', $this->method));
