@@ -9,14 +9,14 @@ final class AuthMethod
      *
      * @var string
      */
-    const CLIENT_ID = 'client_id_header';
+    public const CLIENT_ID = 'client_id_header';
 
     /**
      * Authenticate using a GitHub access token.
      *
      * @var string
      */
-    const ACCESS_TOKEN = 'access_token_header';
+    public const ACCESS_TOKEN = 'access_token_header';
 
     /**
      * Constant for authentication method.
@@ -26,5 +26,5 @@ final class AuthMethod
      *
      * @var string
      */
-    const JWT = 'jwt';
+    public const JWT = 'jwt';
 }
