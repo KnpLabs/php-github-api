@@ -95,7 +95,7 @@ class RepoTest extends TestCase
                 'name'          => 'l3l0Repo',
                 'description'   => '',
                 'homepage'      => '',
-                'private'       => false,
+                'visibility'    => 'public',
                 'has_issues'    => false,
                 'has_wiki'      => false,
                 'has_downloads' => false,
@@ -121,7 +121,7 @@ class RepoTest extends TestCase
                 'name'          => 'KnpLabsRepo',
                 'description'   => '',
                 'homepage'      => '',
-                'private'       => false,
+                'visibility'    => 'public',
                 'has_issues'    => false,
                 'has_wiki'      => false,
                 'has_downloads' => false,
@@ -131,6 +131,48 @@ class RepoTest extends TestCase
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->create('KnpLabsRepo', '', '', true, 'KnpLabs'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldCreateRepositoryWithInternalVisibility()
+    {
+        $expectedArray = ['id' => 1, 'name' => 'KnpLabsRepo'];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('post')
+            ->with('/user/repos', [
+                'name'          => 'KnpLabsRepo',
+                'description'   => '',
+                'homepage'      => '',
+                'has_issues'    => false,
+                'has_wiki'      => false,
+                'has_downloads' => false,
+                'auto_init'     => false,
+                'has_projects'  => true,
+                'visibility'    => 'internal',
+            ])
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals(
+            $expectedArray,
+            $api->create(
+                'KnpLabsRepo',
+                '',
+                '',
+                false,
+                null,
+                false,
+                false,
+                false,
+                null,
+                false,
+                true,
+                'internal'
+            )
+        );
     }
 
     /**
@@ -329,7 +371,7 @@ class RepoTest extends TestCase
                 'name'          => 'l3l0Repo',
                 'description'   => 'test',
                 'homepage'      => 'http://l3l0.eu',
-                'private'       => true,
+                'visibility'    => 'private',
                 'has_issues'    => false,
                 'has_wiki'      => false,
                 'has_downloads' => false,
