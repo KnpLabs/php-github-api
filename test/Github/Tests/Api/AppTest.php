@@ -163,7 +163,8 @@ class AppTest extends TestCase
     /**
      * @test
      */
-    public function shouldGetAuthenticatedApp(){
+    public function shouldGetAuthenticatedApp()
+    {
         $api = $this->getApiMock();
 
         $result = ['authenticatedApp1'];

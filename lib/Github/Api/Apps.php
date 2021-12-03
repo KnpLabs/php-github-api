@@ -188,13 +188,14 @@ class Apps extends AbstractApi
     }
 
     /**
-     * Get the currently authenticated app
+     * Get the currently authenticated app.
      *
      * @link https://docs.github.com/en/rest/reference/apps#get-the-authenticated-app
      *
      * @return array
      */
-    public function getAuthenticatedApp(){
+    public function getAuthenticatedApp()
+    {
         return $this->get('/app');
     }
 }
