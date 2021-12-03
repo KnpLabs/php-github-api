@@ -53,5 +53,5 @@ $client->api('apps')->removeRepository($installationId, $repositoryId);
 ### Get authenticated app
 
 ```php
-$client->api('apps')->getAuthenticatedApp();
+$authenticatedApp = $client->api('apps')->getAuthenticatedApp();
 ```
