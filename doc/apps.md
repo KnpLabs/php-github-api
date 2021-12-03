@@ -49,3 +49,9 @@ $client->api('apps')->addRepository($installationId, $repositoryId);
 ```php
 $client->api('apps')->removeRepository($installationId, $repositoryId);
 ```
+
+### Get authenticated app
+
+```php
+$authenticatedApp = $client->api('apps')->getAuthenticatedApp();
+```

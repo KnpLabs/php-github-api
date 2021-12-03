@@ -186,4 +186,16 @@ class Apps extends AbstractApi
 
         return $this->delete('/installations/'.$installationId.'/repositories/'.$repositoryId);
     }
+
+    /**
+     * Get the currently authenticated app.
+     *
+     * @link https://docs.github.com/en/rest/reference/apps#get-the-authenticated-app
+     *
+     * @return array
+     */
+    public function getAuthenticatedApp()
+    {
+        return $this->get('/app');
+    }
 }
