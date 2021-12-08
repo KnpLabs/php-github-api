@@ -1,5 +1,30 @@
 # Changelog
 
+## 3.4.0
+
+### Added
+- Add create a repository using a template endpoint ([martinbean](https://github.com/martinbean)) [#994](https://github.com/KnpLabs/php-github-api/issues/994)
+- Allow fetching repo readme for a specific ref ([bery](https://github.com/bery)) [#1019](https://github.com/KnpLabs/php-github-api/issues/1019)
+- allow assigning role to organisation members ([luceos](https://github.com/luceos)) [#1018](https://github.com/KnpLabs/php-github-api/issues/1018)
+- Branch lists . ( ? query  per_page) ([pitonic](https://github.com/pitonic)) [#1020](https://github.com/KnpLabs/php-github-api/issues/1020)
+- Php8.1 support ([acrobat](https://github.com/acrobat)) [#1025](https://github.com/KnpLabs/php-github-api/issues/1025)
+- Allow psr/cache 2.0 as well as 1.0 ([johnnoel](https://github.com/johnnoel)) [#1029](https://github.com/KnpLabs/php-github-api/issues/1029)
+- adding code_with_match (#1024) ([QuentinRa](https://github.com/QuentinRa)) [#1031](https://github.com/KnpLabs/php-github-api/issues/1031)
+- Added dir parameter for Repo readme ([AlexandrePavy](https://github.com/AlexandrePavy)) [#1032](https://github.com/KnpLabs/php-github-api/issues/1032)
+- refs #955: deprecate Client::AUTH_* constants and replace them with AuthMethod::AUTH_* const ([ipalo](https://github.com/ipalo)) [#1036](https://github.com/KnpLabs/php-github-api/issues/1036)
+- feat: Add `visibility` option to repo create ([gerdemann](https://github.com/gerdemann)) [#1038](https://github.com/KnpLabs/php-github-api/issues/1038)
+- Feature get authenticated app ([kdaniel95](https://github.com/kdaniel95)) [#1041](https://github.com/KnpLabs/php-github-api/issues/1041)
+
+### Changed
+- Fix up typos ([dereuromark](https://github.com/dereuromark)) [#1011](https://github.com/KnpLabs/php-github-api/issues/1011)
+- Update integration authentication documentation for usage with lcobucci/jwt ^4 ([glaubinix](https://github.com/glaubinix)) [#1017](https://github.com/KnpLabs/php-github-api/issues/1017)
+- Update result_pager.md ([tomsowerby](https://github.com/tomsowerby)) [#1023](https://github.com/KnpLabs/php-github-api/issues/1023)
+- fix(doc): links to doc in CurrentUser class ([Nek-](https://github.com/Nek-)) [#1026](https://github.com/KnpLabs/php-github-api/issues/1026)
+- Fix incorrect phpdoc ([gemal](https://github.com/gemal)) [#1034](https://github.com/KnpLabs/php-github-api/issues/1034)
+
+### Fixed
+- Add accept header for creating repo from template ([davidpeach](https://github.com/davidpeach)) [#1030](https://github.com/KnpLabs/php-github-api/issues/1030)
+
 ## 3.3.0
 
 ### Added
