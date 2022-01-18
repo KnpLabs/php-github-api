@@ -24,7 +24,7 @@
         "php-http/discovery": "^1.12",
         "php-http/httplug": "^2.2",
         "php-http/multipart-stream-builder": "^1.1.2",
-        "psr/cache": "^1.0|^2.0",
+        "psr/cache": "^1.0|^2.0|^3.0",
         "psr/http-client-implementation": "^1.0",
         "psr/http-factory-implementation": "^1.0",
         "psr/http-message": "^1.0",
@@ -53,6 +53,11 @@
         "branch-alias": {
             "dev-2.x": "2.20.x-dev",
             "dev-master": "3.4.x-dev"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": true
         }
     }
 }
