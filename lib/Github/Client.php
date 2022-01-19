@@ -346,7 +346,14 @@ class Client
         $builder->removePlugin(PathPrepend::class);
 
         $builder->addPlugin(new Plugin\AddHostPlugin(Psr17FactoryDiscovery::findUriFactory()->createUri($enterpriseUrl)));
-        $builder->addPlugin(new PathPrepend(sprintf('/api/%s', $this->getApiVersion())));
+
+        // For GHE, v4 API endpoint is at `api/graphql` so we don't want to add the version number
+        // For earlier versions add the version number after /api
+        if ($this->getApiVersion() === 'v4') {
+            $builder->addPlugin(new PathPrepend('/api'));
+        } else {
+            $builder->addPlugin(new PathPrepend(sprintf('/api/%s', $this->getApiVersion())));
+        }
     }
 
     /**
