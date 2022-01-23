@@ -223,4 +223,25 @@ class ClientTest extends \PHPUnit\Framework\TestCase
         $client = new Client($httpClientBuilder, null, 'https://foobar.com');
         $client->enterprise()->stats()->show('all');
     }
+
+    /**
+     * Make sure that the prepend is correct when using the v4 endpoint on Enterprise.
+     */
+    public function testEnterprisePrependGraphQLV4()
+    {
+        $httpClientMock = $this->getMockBuilder(ClientInterface::class)
+            ->setMethods(['sendRequest'])
+            ->getMock();
+
+        $httpClientMock->expects($this->once())
+            ->method('sendRequest')
+            ->with($this->callback(function (RequestInterface $request) {
+                return (string) $request->getUri() === 'https://foobar.com/api/graphql';
+            }))
+            ->willReturn(new Response(200, [], '[]'));
+
+        $httpClientBuilder = new Builder($httpClientMock);
+        $client = new Client($httpClientBuilder, 'v4', 'https://foobar.com');
+        $client->graphql()->execute('query');
+    }
 }
