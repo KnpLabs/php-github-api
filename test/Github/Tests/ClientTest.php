@@ -225,7 +225,7 @@ class ClientTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Make sure that the prepend is correct when using the v4 endpoint on Enterprise
+     * Make sure that the prepend is correct when using the v4 endpoint on Enterprise.
      */
     public function testEnterprisePrependGraphQLV4()
     {
