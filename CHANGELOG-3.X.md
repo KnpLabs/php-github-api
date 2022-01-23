@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.5.0
+
+### Added
+- added support for psr\cache 3.0  ([rconfig](https://github.com/rconfig)) [#1046](https://github.com/KnpLabs/php-github-api/issues/1046)
+- Symfony: allow deprecation-contracts version 3 ([glaubinix](https://github.com/glaubinix)) [#1049](https://github.com/KnpLabs/php-github-api/issues/1049)
+
+### Changed
+- Fix internal doc link ([staudenmeir](https://github.com/staudenmeir)) [#1044](https://github.com/KnpLabs/php-github-api/issues/1044)
+
+### Fixed
+- Fix Client URL Prepending For GraphQL Endpoint on Enterprise ([asher-goldberg](https://github.com/asher-goldberg), [acrobat](https://github.com/acrobat)) [#1048](https://github.com/KnpLabs/php-github-api/issues/1048)
+
 ## 3.4.0
 
 ### Added
