@@ -118,10 +118,12 @@ class CurrentUser extends AbstractApi
      * @param string $direction   direction of sort, asc or desc
      * @param string $visibility  visibility of repository
      * @param string $affiliation relationship to repository
+     * @param int    $perPage     results per page
+     * @param int    $page        page number of the results to fetch
      *
      * @return array
      */
-    public function repositories($type = 'owner', $sort = 'full_name', $direction = 'asc', $visibility = null, $affiliation = null)
+    public function repositories($type = 'owner', $sort = 'full_name', $direction = 'asc', $visibility = null, $affiliation = null, $perPage = null, $page = null)
     {
         $params = [
             'type' => $type,
@@ -137,6 +139,14 @@ class CurrentUser extends AbstractApi
         if (null !== $affiliation) {
             unset($params['type']);
             $params['affiliation'] = $affiliation;
+        }
+
+        if (null !== $perPage) {
+            $params['per_page'] = $perPage;
+        }
+
+        if (null !== $page) {
+            $params['page'] = $page;
         }
 
         return $this->get('/user/repos', $params);
