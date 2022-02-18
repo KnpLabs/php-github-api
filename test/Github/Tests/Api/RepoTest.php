@@ -96,6 +96,7 @@ class RepoTest extends TestCase
                 'description'   => '',
                 'homepage'      => '',
                 'visibility'    => 'public',
+                'private'       => false,
                 'has_issues'    => false,
                 'has_wiki'      => false,
                 'has_downloads' => false,
@@ -122,6 +123,7 @@ class RepoTest extends TestCase
                 'description'   => '',
                 'homepage'      => '',
                 'visibility'    => 'public',
+                'private'       => false,
                 'has_issues'    => false,
                 'has_wiki'      => false,
                 'has_downloads' => false,
@@ -153,6 +155,7 @@ class RepoTest extends TestCase
                 'auto_init'     => false,
                 'has_projects'  => true,
                 'visibility'    => 'internal',
+                'private'       => false,
             ])
             ->will($this->returnValue($expectedArray));
 
@@ -372,6 +375,7 @@ class RepoTest extends TestCase
                 'description'   => 'test',
                 'homepage'      => 'http://l3l0.eu',
                 'visibility'    => 'private',
+                'private'       => true,
                 'has_issues'    => false,
                 'has_wiki'      => false,
                 'has_downloads' => false,

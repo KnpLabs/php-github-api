@@ -205,6 +205,7 @@ class Repo extends AbstractApi
             'name'          => $name,
             'description'   => $description,
             'homepage'      => $homepage,
+            'private'       => ($visibility ?? ($public ? 'public' : 'private')) === 'private',
             'visibility'    => $visibility ?? ($public ? 'public' : 'private'),
             'has_issues'    => $hasIssues,
             'has_wiki'      => $hasWiki,
