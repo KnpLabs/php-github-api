@@ -1,0 +1,38 @@
+---------------------------------------------------------------------------
+
+by mruell at 2022-01-24T18:33:49Z
+
+See: https://docs.github.com/en/rest/reference/repos#create-an-organization-repository
+
+---------------------------------------------------------------------------
+
+by mruell at 2022-02-01T19:16:32Z
+
+When do you think this can be merged?
+Change is very tiny, but the issue is causing team members not beeing able to create repos, since they are only allowed to create private ones
+
+Would be really happy to see this merged - thanks in advance! :)
+
+---------------------------------------------------------------------------
+
+by acrobat at 2022-02-01T21:03:51Z
+
+Hi @mruell, the change itself looks good! Can you just fix the tests? Thanks!
+
+---------------------------------------------------------------------------
+
+by mruell at 2022-02-07T18:28:43Z
+
+Just fixed the tests :)
+
+---------------------------------------------------------------------------
+
+by mruell at 2022-02-17T23:56:58Z
+
+Hi @acrobat
+
+Any update here?
+Seems like it's ready to merge :)
+
+Best,
+Marvin
