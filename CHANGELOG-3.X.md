@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.5.1
+
+### Fixed
+- Boolean private needed to create private repo! ([mruell](https://github.com/mruell)) [#1051](https://github.com/KnpLabs/php-github-api/issues/1051)
+
 ## 3.5.0
 
 ### Added
