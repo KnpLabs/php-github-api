@@ -6,11 +6,7 @@ Wrap [GitHub User API](http://developer.github.com/v3/users/).
 
 ### Search for users by keyword
 
-```php
-$users = $client->api('user')->find('KnpLabs');
-```
-
-Returns an array of found users.
+Use the [Search API](https://github.com/KnpLabs/php-github-api/blob/master/doc/search.md#search-users) to find users by keyword.
 
 ### Lists all users, in the order they signed up, since the last user you've seen
 
