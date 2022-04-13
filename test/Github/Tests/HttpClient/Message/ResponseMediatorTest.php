@@ -54,18 +54,13 @@ class ResponseMediatorTest extends \PHPUnit\Framework\TestCase
 
     public function testGetPagination()
     {
-        $header = <<<'TEXT'
-<http://github.com>; rel="first",
-<http://github.com>; rel="next",
-<http://github.com>; rel="prev",
-<http://github.com>; rel="last",
-TEXT;
+        $header = '<https://github.com>; rel="first",<https://github.com>; rel="next",<https://github.com>; rel="prev",<https://github.com>; rel="last",';
 
         $pagination = [
-            'first' => 'http://github.com',
-            'next' => 'http://github.com',
-            'prev' => 'http://github.com',
-            'last' => 'http://github.com',
+            'first' => 'https://github.com',
+            'next' => 'https://github.com',
+            'prev' => 'https://github.com',
+            'last' => 'https://github.com',
         ];
 
         // response mock

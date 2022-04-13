@@ -1,5 +1,21 @@
 # Changelog
 
+## 3.6.0
+
+### Added
+- Include optional params parameter for Commits compare method ([mountiny](https://github.com/mountiny)) [#1053](https://github.com/KnpLabs/php-github-api/issues/1053)
+
+### Changed
+- Update incorrect documentation ([pheeque1](https://github.com/pheeque1)) [#1058](https://github.com/KnpLabs/php-github-api/issues/1058)
+
+### Fixed
+- fix(Apps): use /orgs/ORG/installation ([ellisio](https://github.com/ellisio)) [#1056](https://github.com/KnpLabs/php-github-api/issues/1056)
+
+## 3.5.1
+
+### Fixed
+- Boolean private needed to create private repo! ([mruell](https://github.com/mruell)) [#1051](https://github.com/KnpLabs/php-github-api/issues/1051)
+
 ## 3.5.0
 
 ### Added
