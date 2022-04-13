@@ -206,13 +206,16 @@ class Repo extends AbstractApi
             'description'   => $description,
             'homepage'      => $homepage,
             'private'       => ($visibility ?? ($public ? 'public' : 'private')) === 'private',
-            'visibility'    => $visibility ?? ($public ? 'public' : 'private'),
             'has_issues'    => $hasIssues,
             'has_wiki'      => $hasWiki,
             'has_downloads' => $hasDownloads,
             'auto_init'     => $autoInit,
             'has_projects' => $hasProjects,
         ];
+
+        if ($visibility) {
+            $parameters['visibility'] = $visibility;
+        }
 
         if ($organization && $teamId) {
             $parameters['team_id'] = $teamId;
