@@ -12,11 +12,6 @@ use Github\Exception\MissingArgumentException;
  */
 class Teams extends AbstractApi
 {
-    public function all($organization)
-    {
-        return $this->get('/orgs/'.rawurlencode($organization).'/teams');
-    }
-
     public function create($organization, array $params)
     {
         if (!isset($params['name'])) {
@@ -33,7 +28,22 @@ class Teams extends AbstractApi
     }
 
     /**
-     * @link https://developer.github.com/v3/teams/#list-teams
+     * List all teams for an organization.
+     *
+     * @link https://docs.github.com/en/rest/reference/teams#list-teams
+     *
+     * @param string $organization the name of the organization
+     * @param array  $params
+     *
+     * @return array list of organization teams
+     */
+    public function org($organization, array $params = [])
+    {
+        return $this->get('/orgs/'.rawurlencode($organization).'/teams', $params);
+    }
+
+    /**
+     * @link https://docs.github.com/en/rest/reference/teams#get-a-team-by-name
      */
     public function show($team, $organization)
     {
