@@ -283,14 +283,19 @@ class Repo extends AbstractApi
      *
      * @link https://developer.github.com/v3/repos/#create-a-repository-dispatch-event
      *
-     * @param string $username   the user who owns the repository
-     * @param string $repository the name of the repository
-     * @param string $eventType  A custom webhook event name
+     * @param string $username            the user who owns the repository
+     * @param string $repository          the name of the repository
+     * @param string $eventType           A custom webhook event name
+     * @param array|object $clientPayload The payload to pass to Github.
      *
      * @return mixed null on success, array on error with 'message'
      */
-    public function dispatch($username, $repository, $eventType, array $clientPayload)
+    public function dispatch($username, $repository, $eventType, $clientPayload)
     {
+        if (is_array($clientPayload)) {
+            $clientPayload = (object) $clientPayload;
+        }
+
         return $this->post(\sprintf('/repos/%s/%s/dispatches', rawurlencode($username), rawurlencode($repository)), [
             'event_type' => $eventType,
             'client_payload' => $clientPayload,
