@@ -118,7 +118,7 @@ class Teams extends AbstractApi
             return $this->get('/teams/'.rawurlencode($team).'/repos', $parameters);
         }
 
-        return $this->get('/orgs/'. rawurlencode($organization) .'/teams/'.rawurlencode($team).'/repos', $parameters);
+        return $this->get('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team).'/repos', $parameters);
     }
 
     public function repository($team, $organization, $repository)
