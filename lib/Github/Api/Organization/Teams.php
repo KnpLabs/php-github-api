@@ -95,9 +95,30 @@ class Teams extends AbstractApi
         return $this->delete('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team).'/memberships/'.rawurlencode($username));
     }
 
-    public function repositories($team)
+    /**
+     * List a team's repositories.
+     *
+     * @link https://docs.github.com/en/rest/teams/teams#list-team-repositories
+     *
+     * @param string $team         team ID or slug of the team name
+     * @param string $organization organization name
+     * @param array  $params       list of extra parameters.
+     *
+     * @return array
+     */
+    public function repositories($team, $organization = '', $params = [])
     {
-        return $this->get('/teams/'.rawurlencode($team).'/repos');
+        $parameters = array_merge([
+            'page' => 1,
+            'per_page' => 30,
+        ], $params);
+
+        if (empty($organization)) {
+            // Legacy endpoint support
+            return $this->get('/teams/'.rawurlencode($team).'/repos', $parameters);
+        }
+
+        return $this->get('/orgs/'. rawurlencode($organization) .'/teams/'.rawurlencode($team).'/repos', $parameters);
     }
 
     public function repository($team, $organization, $repository)
@@ -105,6 +126,18 @@ class Teams extends AbstractApi
         return $this->get('/teams/'.rawurlencode($team).'/repos/'.rawurlencode($organization).'/'.rawurlencode($repository));
     }
 
+    /**
+     * Add a repository to team or update team's permission on a repository.
+     *
+     * @link https://docs.github.com/en/rest/teams/teams#add-or-update-team-repository-permissions
+     *
+     * @param string $team         the slug of the team name
+     * @param string $organization organization name
+     * @param string $repository   repository name
+     * @param string $params       list of extra parameters.
+     *
+     * @return array|string
+     */
     public function addRepository($team, $organization, $repository, $params = [])
     {
         if (isset($params['permission']) && !in_array($params['permission'], ['pull', 'push', 'admin', 'maintain', 'triage'])) {
@@ -114,6 +147,17 @@ class Teams extends AbstractApi
         return $this->put('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team).'/repos/'.rawurlencode($organization).'/'.rawurlencode($repository), $params);
     }
 
+    /**
+     * Remove a repository from a team.
+     *
+     * @link https://docs.github.com/en/rest/teams/teams#remove-a-repository-from-a-team
+     *
+     * @param string $team         the slug of the team name
+     * @param string $organization organization name
+     * @param string $repository   repository name.
+     *
+     * @return array|string
+     */
     public function removeRepository($team, $organization, $repository)
     {
         return $this->delete('/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($team).'/repos/'.rawurlencode($organization).'/'.rawurlencode($repository));

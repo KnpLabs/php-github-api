@@ -128,10 +128,10 @@ class AppTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/installation/repositories', ['user_id' => '1234'])
+            ->with('/installation/repositories', ['per_page' => '30', 'page' => 1])
             ->willReturn($result);
 
-        $this->assertEquals($result, $api->listRepositories('1234'));
+        $this->assertEquals($result, $api->listRepositories());
     }
 
     /**
