@@ -1,0 +1,22 @@
+---------------------------------------------------------------------------
+
+by mruell at 2022-05-17T13:58:36Z
+
+Hi @acrobat
+would you have time to approve this PR?
+
+This is pretty important for my team and I'd rather avoid having my own fork ^^
+
+Thank you in advance!
+
+---------------------------------------------------------------------------
+
+by acrobat at 2022-05-23T08:59:19Z
+
+I will take a look at this in the next few days and check if this changes doesn't break the current behaviour for github.com (latest) api's
+
+---------------------------------------------------------------------------
+
+by acrobat at 2022-06-12T17:37:06Z
+
+Thank you @mruell
