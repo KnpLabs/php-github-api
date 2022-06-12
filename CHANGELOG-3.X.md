@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.7.0
+
+### Added
+- added phpdocs ([staabm](https://github.com/staabm)) [#1068](https://github.com/KnpLabs/php-github-api/issues/1068)
+- added missing magic method phpdocs for deployments ([staabm](https://github.com/staabm)) [#1069](https://github.com/KnpLabs/php-github-api/issues/1069)
+- Fix issue https://github.com/KnpLabs/php-github-api/issues/1061 ([mruell](https://github.com/mruell)) [#1062](https://github.com/KnpLabs/php-github-api/issues/1062)
+
+### Changed
+- Updates ReviewRequest Create method to return type Array ([ejntaylor](https://github.com/ejntaylor)) [#1060](https://github.com/KnpLabs/php-github-api/issues/1060)
+
 ## 3.6.0
 
 ### Added
