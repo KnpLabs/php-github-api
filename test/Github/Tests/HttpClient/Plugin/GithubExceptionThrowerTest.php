@@ -75,6 +75,40 @@ class GithubExceptionThrowerTest extends TestCase
                 ),
                 'exception' => new \Github\Exception\ApiLimitExceedException(5000),
             ],
+            'Rate Limit Exceeded via 403 status' => [
+                'response' => new Response(
+                    403,
+                    [
+                        'Content-Type' => 'application/json',
+                        'X-RateLimit-Remaining' => 0,
+                        'X-RateLimit-Limit' => 5000,
+                        'X-RateLimit-Reset' => 1609245810,
+                    ],
+                    json_encode(
+                        [
+                            'message' => 'API rate limit exceeded for installation ID xxxxxxx.',
+                        ]
+                    )
+                ),
+                'exception' => new \Github\Exception\ApiLimitExceedException(5000),
+            ],
+            'Secondary Rate Limit Exceeded via 403 status' => [
+                'response' => new Response(
+                    403,
+                    [
+                        'Content-Type' => 'application/json',
+                        'X-RateLimit-Remaining' => 100,
+                        'X-RateLimit-Limit' => 5000,
+                        'X-RateLimit-Reset' => 1609245810,
+                    ],
+                    json_encode(
+                        [
+                            'message' => 'You have exceeded a secondary rate limit. Please wait a few minutes before you try again.',
+                        ]
+                    )
+                ),
+                'exception' => new \Github\Exception\ApiLimitExceedException(5000),
+            ],
             'Two Factor Authentication Required' => [
                 'response' => new Response(
                     401,
