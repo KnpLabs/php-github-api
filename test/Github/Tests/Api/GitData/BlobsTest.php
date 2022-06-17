@@ -71,21 +71,6 @@ class BlobsTest extends TestCase
     /**
      * @test
      */
-    public function shouldNotCreateBlobWithoutEncoding()
-    {
-        $this->expectException(MissingArgumentException::class);
-        $data = ['content' => 'some cotent'];
-
-        $api = $this->getApiMock();
-        $api->expects($this->never())
-            ->method('post');
-
-        $api->create('l3l0', 'l3l0repo', $data);
-    }
-
-    /**
-     * @test
-     */
     public function shouldNotCreateBlobWithoutContent()
     {
         $this->expectException(MissingArgumentException::class);
