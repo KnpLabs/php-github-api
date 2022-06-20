@@ -79,6 +79,26 @@ class ReleasesTest extends TestCase
     /**
      * @test
      */
+    public function shouldGenerateReleaseNotes()
+    {
+        $expectedValue = [
+            'name' => 'Release v1.0.0 is now available!',
+            'body' => '##Changes in Release v1.0.0 ... ##Contributors @monalisa',
+        ];
+        $data = ['tag_name' => 'some-tag'];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('post')
+            ->with('/repos/KnpLabs/php-github-api/releases/generate-notes')
+            ->will($this->returnValue($expectedValue));
+
+        $this->assertEquals($expectedValue, $api->generateNotes('KnpLabs', 'php-github-api', $data));
+    }
+
+    /**
+     * @test
+     */
     public function shouldCreateRepositoryRelease()
     {
         $expectedValue = ['newReleaseData'];
