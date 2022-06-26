@@ -1,0 +1,97 @@
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2022-06-13T11:22:22Z
+
+Does the secondary rate limit actually provide the retry headers?
+
+---------------------------------------------------------------------------
+
+by matthewnessworthy at 2022-06-13T11:41:51Z
+
+@GrahamCampbell yes they do, but the `X-RateLimit-Remaining` header is not always 0, but the `X-RateLimit-Reset` does provide an accurate time until a successful request can be made
+
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2022-06-13T11:43:33Z
+
+:shipit:
+
+---------------------------------------------------------------------------
+
+by matthewnessworthy at 2022-06-13T11:50:43Z
+
+Here's a dump of the headers and the response body so you can see what I mean about the `X-RateLimit-Remaining`
+
+Headers:
+```
+^ array:20 [
+  "Server" => array:1 [
+    0 => "GitHub.com"
+  ]
+  "Date" => array:1 [
+    0 => "Mon, 13 Jun 2022 11:48:53 GMT"
+  ]
+  "Content-Type" => array:1 [
+    0 => "application/json; charset=utf-8"
+  ]
+  "Transfer-Encoding" => array:1 [
+    0 => "chunked"
+  ]
+  "X-GitHub-Media-Type" => array:1 [
+    0 => "github.v3; format=json"
+  ]
+  "X-RateLimit-Limit" => array:1 [
+    0 => "30"
+  ]
+  "X-RateLimit-Remaining" => array:1 [
+    0 => "14"
+  ]
+  "X-RateLimit-Reset" => array:1 [
+    0 => "1655120964"
+  ]
+  "X-RateLimit-Used" => array:1 [
+    0 => "16"
+  ]
+  "X-RateLimit-Resource" => array:1 [
+    0 => "search"
+  ]
+  "Access-Control-Expose-Headers" => array:1 [
+    0 => "ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, X-GitHub-SSO, X-GitHub-Request-Id, Deprecation, Sunset"
+  ]
+  "Access-Control-Allow-Origin" => array:1 [
+    0 => "*"
+  ]
+  "Strict-Transport-Security" => array:1 [
+    0 => "max-age=31536000; includeSubdomains; preload"
+  ]
+  "X-Frame-Options" => array:1 [
+    0 => "deny"
+  ]
+  "X-Content-Type-Options" => array:1 [
+    0 => "nosniff"
+  ]
+  "X-XSS-Protection" => array:1 [
+    0 => "0"
+  ]
+  "Referrer-Policy" => array:1 [
+    0 => "origin-when-cross-origin, strict-origin-when-cross-origin"
+  ]
+  "Content-Security-Policy" => array:1 [
+    0 => "default-src 'none'"
+  ]
+  "Vary" => array:1 [
+    0 => "Accept-Encoding, Accept, X-Requested-With"
+  ]
+  "X-GitHub-Request-Id" => array:1 [
+    0 => "C247:371F:B59C8:C71BC:62A72425"
+  ]
+]
+```
+
+Body:
+```
+^ array:2 [
+  "documentation_url" => "https://docs.github.com/en/free-pro-team@latest/rest/overview/resources-in-the-rest-api#secondary-rate-limits"
+  "message" => "You have exceeded a secondary rate limit. Please wait a few minutes before you try again."
+]
+```
