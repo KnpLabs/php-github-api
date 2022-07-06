@@ -273,11 +273,9 @@ class Contents extends AbstractApi
      *
      * @return string|null content of file, or null in case of base64_decode failure
      */
-    public function download($username, $repository, $path, $reference = null, $bodyType = null)
+    public function download($username, $repository, $path, $reference = null)
     {
-        $file = $this->show($username, $repository, $path, $reference,[
-            'Accept' => 'application/vnd.github.VERSION.raw'
-        ]);
+        $file = $this->show($username, $repository, $path, $reference);
 
         if (!isset($file['type']) || !in_array($file['type'], ['file', 'symlink'], true)) {
             throw new InvalidArgumentException(sprintf('Path "%s" is not a file or a symlink to a file.', $path));
