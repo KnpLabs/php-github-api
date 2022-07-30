@@ -64,7 +64,7 @@ $jwt = $config->builder(ChainedFormatter::withUnixTimestampDates())
     ->getToken($config->signer(), $config->signingKey())
 ;
 
-$github->authenticate($jwt->toString(), null, Github\AuthMethod::JWT)
+$github->authenticate($jwt->toString(), null, Github\AuthMethod::JWT);
 ```
 
 The `$integrationId` you can find in the about section of your github app.
