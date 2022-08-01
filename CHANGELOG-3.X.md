@@ -1,5 +1,18 @@
 # Changelog
 
+## 3.8.0
+
+### Added
+- API rate limit error status can be 403 ([matthewnessworthy](https://github.com/matthewnessworthy)) [#1072](https://github.com/KnpLabs/php-github-api/issues/1072)
+- Add method to use generate release notes endpoint ([GuySartorelli](https://github.com/GuySartorelli)) [#1074](https://github.com/KnpLabs/php-github-api/issues/1074)
+- Fix typehint for repository dispatch method ([cweagans](https://github.com/cweagans)) [#1066](https://github.com/KnpLabs/php-github-api/issues/1066)
+
+### Changed
+- Update security.md ([secalith-code](https://github.com/secalith-code)) [#1076](https://github.com/KnpLabs/php-github-api/issues/1076)
+
+### Fixed
+- dont require encoding ([gemal](https://github.com/gemal)) [#1071](https://github.com/KnpLabs/php-github-api/issues/1071)
+
 ## 3.7.0
 
 ### Added
