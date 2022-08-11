@@ -61,11 +61,11 @@ class Contents extends AbstractApi
      *
      * @link http://developer.github.com/v3/repos/contents/
      *
-     * @param string      $username   the user who owns the repository
-     * @param string      $repository the name of the repository
-     * @param string|null $path       path to file or directory
-     * @param string|null $reference  reference to a branch or commit
-     * @param array  $requestHeaders request headers
+     * @param string      $username       the user who owns the repository
+     * @param string      $repository     the name of the repository
+     * @param string|null $path           path to file or directory
+     * @param string|null $reference      reference to a branch or commit
+     * @param array       $requestHeaders request headers
      *
      * @return array|string information for file | information for each item in directory
      */
@@ -297,7 +297,7 @@ class Contents extends AbstractApi
     }
 
     /**
-     * Get the raw content of a file in a repository
+     * Get the raw content of a file in a repository.
      *
      * Use this method instead of the download method if your file is bigger than 1MB
      *
@@ -310,9 +310,10 @@ class Contents extends AbstractApi
      *
      * @return array|string
      */
-    public function rawDownload($username, $repository, $path, $reference = null) {
+    public function rawDownload($username, $repository, $path, $reference = null)
+    {
         return $this->show($username, $repository, $path, $reference, [
-            'Accept' => 'application/vnd.github.VERSION.raw'
+            'Accept' => 'application/vnd.github.VERSION.raw',
         ]);
     }
 }

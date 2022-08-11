@@ -336,7 +336,6 @@ class ContentsTest extends TestCase
         $this->assertEquals($getValue, $api->rawDownload('KnpLabs', 'php-github-api', 'test/Github/Tests/Api/Repository/ContentsTest.php'));
     }
 
-
     /**
      * @return string
      */
