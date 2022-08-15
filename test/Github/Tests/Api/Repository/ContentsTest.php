@@ -320,6 +320,23 @@ class ContentsTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function shouldRawDownloadForGivenPath()
+    {
+        // The show() method return
+        $getValue = include __DIR__.'/fixtures/ContentsDownloadFixture.php';
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/repos/KnpLabs/php-github-api/contents/test%2FGithub%2FTests%2FApi%2FRepository%2FContentsTest.php', ['ref' => null])
+            ->will($this->returnValue($getValue));
+
+        $this->assertEquals($getValue, $api->rawDownload('KnpLabs', 'php-github-api', 'test/Github/Tests/Api/Repository/ContentsTest.php'));
+    }
+
+    /**
      * @return string
      */
     protected function getApiClass()
