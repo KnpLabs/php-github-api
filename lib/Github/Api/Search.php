@@ -24,9 +24,9 @@ class Search extends AbstractApi
      *
      * @return array list of repositories found
      */
-    public function repositories($q, $sort = 'updated', $order = 'desc')
+    public function repositories($q, $sort = 'updated', $order = 'desc', $page = 1, $perPage = 50)
     {
-        return $this->get('/search/repositories', ['q' => $q, 'sort' => $sort, 'order' => $order]);
+        return $this->get('/search/repositories', ['q' => $q, 'sort' => $sort, 'order' => $order, 'page' => $page, 'per_page' => $perPage]);
     }
 
     /**
