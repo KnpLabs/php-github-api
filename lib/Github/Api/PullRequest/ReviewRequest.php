@@ -63,7 +63,7 @@ class ReviewRequest extends AbstractApi
      * @param array  $reviewers
      * @param array  $teamReviewers
      *
-     * @return string
+     * @return array
      */
     public function remove($username, $repository, $pullRequest, array $reviewers = [], array $teamReviewers = [])
     {
