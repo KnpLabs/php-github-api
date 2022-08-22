@@ -51,7 +51,7 @@ class Assignees extends AbstractApi
      * @throws InvalidArgumentException
      * @throws MissingArgumentException
      *
-     * @return string
+     * @return array
      */
     public function add($username, $repository, $issue, array $parameters)
     {
