@@ -78,7 +78,7 @@ class Assignees extends AbstractApi
      *
      * @throws MissingArgumentException
      *
-     * @return string
+     * @return array
      */
     public function remove($username, $repository, $issue, array $parameters)
     {
