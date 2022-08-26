@@ -137,16 +137,16 @@ class Apps extends AbstractApi
      *
      * @link https://developer.github.com/v3/apps/installations/#list-repositories
      *
-     * @param int $userId
+     * @param array $params list of extra parameters.
      *
      * @return array
      */
-    public function listRepositories($userId = null)
+    public function listRepositories(array $params = [])
     {
-        $parameters = [];
-        if ($userId) {
-            $parameters['user_id'] = $userId;
-        }
+        $parameters = array_merge([
+            'page' => 1,
+            'per_page' => 30,
+        ], $params);
 
         $this->configurePreviewHeader();
 

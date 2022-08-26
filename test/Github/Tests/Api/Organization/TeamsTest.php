@@ -122,6 +122,22 @@ class TeamsTest extends TestCase
     /**
      * @test
      */
+    public function shouldGetTeamRepositoriesLegacyEndPoint()
+    {
+        $expectedValue = [['name' => 'l3l0repo']];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/teams/1234/repos')
+            ->will($this->returnValue($expectedValue));
+
+        $this->assertEquals($expectedValue, $api->repositories(1234));
+    }
+
+    /**
+     * @test
+     */
     public function shouldGetTeamRepositories()
     {
         $expectedValue = [['name' => 'l3l0repo']];
@@ -129,10 +145,10 @@ class TeamsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/teams/KnpWorld/repos')
+            ->with('/orgs/KnpLabs/teams/KnpWorld/repos', ['per_page' => '30', 'page' => 1])
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->repositories('KnpWorld'));
+        $this->assertEquals($expectedValue, $api->repositories('KnpWorld', 'KnpLabs'));
     }
 
     /**
