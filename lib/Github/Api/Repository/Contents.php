@@ -252,7 +252,7 @@ class Contents extends AbstractApi
      */
     public function archive($username, $repository, $format, $reference = null)
     {
-        if (!in_array($format, ['tarball', 'zipball'])) {
+        if (!in_array($format, ['tarball', 'zipball', 'archive'])) {
             $format = 'tarball';
         }
 
