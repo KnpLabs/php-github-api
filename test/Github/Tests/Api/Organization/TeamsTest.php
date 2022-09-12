@@ -129,6 +129,22 @@ class TeamsTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
+            ->with('/orgs/KnpLabs/teams/KnpWorld/repos')
+            ->will($this->returnValue($expectedValue));
+
+        $this->assertEquals($expectedValue, $api->repositories('KnpWorld', 'KnpLabs'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetTeamRepositoriesViaLegacy()
+    {
+        $expectedValue = [['name' => 'l3l0repo']];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
             ->with('/teams/KnpWorld/repos')
             ->will($this->returnValue($expectedValue));
 
