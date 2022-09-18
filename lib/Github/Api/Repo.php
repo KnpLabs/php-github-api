@@ -536,6 +536,25 @@ class Repo extends AbstractApi
     }
 
     /**
+     * Sync a fork branch with the upstream repository.
+     *
+     * @link https://docs.github.com/en/rest/branches/branches#sync-a-fork-branch-with-the-upstream-repository
+     *
+     * @param string      $username
+     * @param string      $repository
+     * @param string|null $branchName
+     *
+     * @return array|string
+     */
+    public function mergeUpstream($username, $repository, $branchName = null)
+    {
+        return $this->post(
+            '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/merge-upstream',
+            ['branch' => $branchName ?? 'main']
+        );
+    }
+
+    /**
      * Manage the protection of a repository branch.
      *
      * @link https://developer.github.com/v3/repos/branches/#get-branch-protection
