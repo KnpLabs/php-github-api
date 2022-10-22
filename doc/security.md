@@ -33,7 +33,7 @@ further requests are done as the given user.
 ### Authenticating as an Integration
 
 To authenticate as an integration you need to supply a JSON Web Token with `Github\AuthMethod::JWT` to request
-and installation access token which is then usable with `Github\AuthMethod::ACCESS_TOKEN`. [Github´s integration
+and installation access token which is then usable with `Github\AuthMethod::ACCESS_TOKEN`. [GitHub´s integration
 authentication docs](https://developer.github.com/apps/building-github-apps/authentication-options-for-github-apps/#authenticating-as-a-github-app) describe the flow in detail.
 It´s important for integration requests to use the custom Accept header `application/vnd.github.machine-man-preview`.
 
@@ -67,5 +67,5 @@ $jwt = $config->builder(ChainedFormatter::withUnixTimestampDates())
 $github->authenticate($jwt->toString(), null, Github\AuthMethod::JWT);
 ```
 
-The `$integrationId` you can find in the about section of your github app.
+The `$integrationId` you can find in the about section of your GitHub app.
 The `$installationId` you can find by installing the app and using the id in the url.

@@ -1,7 +1,7 @@
 ## Repo / Hooks API
 [Back to the "Repos API"](../repos.md) | [Back to the navigation](../README.md)
 
-For extended info see the [Github documentation](https://docs.github.com/en/rest/reference/repos#webhooks)
+For extended info see the [GitHub documentation](https://docs.github.com/en/rest/reference/repos#webhooks)
 
 ### List repository webhooks
 

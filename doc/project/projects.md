@@ -1,10 +1,10 @@
 ## Repo / Projects API
 [Back to the "Repos API"](../) | [Back to the navigation](../README.md)
 
-This api is currently only available to developers in Early Access. To access the API during the Early Access period, 
+This api is currently only available to developers in Early Access. To access the API during the Early Access period,
 you must provide a custom media type in the Accept header.
 
-Both repositories and organisations have projects. The api is only different for gettings all or a single project.
+Both repositories and organisations have projects. The api is only different for getting all or a single project.
 All the example use the repository projects api but this also works form the organization api (`$client->api('org_projects')`)
 
 ```php

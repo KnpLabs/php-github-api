@@ -1,4 +1,4 @@
-## Two factor authentication
+## Two-factor authentication
 [Back to the navigation](README.md)
 
 

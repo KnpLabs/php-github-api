@@ -22,7 +22,7 @@ To use the symfony http client
 composer require symfony/http-client nyholm/psr7
 ```
 
-To set up the github client with this http client
+To set up the GitHub client with this http client
 
 ```php
 use Github\Client;

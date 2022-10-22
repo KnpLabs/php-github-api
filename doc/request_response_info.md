@@ -3,7 +3,7 @@
 
 ### Get response headers
 
-Get the repsonse header for the latest request
+Get the response header for the latest request
 
 ```
 $headers = $githubClient->getLastResponse()->getHeaders();
