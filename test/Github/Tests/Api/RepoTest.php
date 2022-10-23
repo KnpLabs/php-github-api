@@ -243,6 +243,26 @@ class RepoTest extends TestCase
     /**
      * @test
      */
+    public function shouldMergeUpstreamRepository()
+    {
+        $expectedArray = [
+            'message' => 'Successfully fetched and fast-forwarded from upstream upstreamRepo:main',
+            'merge_type' => 'fast-forward',
+            'merge_branch' => 'upstreamRepo:main',
+        ];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('post')
+            ->with('/repos/KnpLabs/php-github-api/merge-upstream', ['branch' => 'main'])
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->mergeUpstream('KnpLabs', 'php-github-api', 'main'));
+    }
+
+    /**
+     * @test
+     */
     public function shouldGetRepositoryLanguages()
     {
         $expectedArray = ['lang1', 'lang2'];

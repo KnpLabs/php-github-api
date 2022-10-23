@@ -223,6 +223,15 @@ $repository = $client->api('repo')->forks()->create('ornicar', 'php-github-api')
 
 Creates a fork of the 'php-github-api' owned by 'ornicar' and returns the newly created repository.
 
+### Merge upstream repository
+
+> Requires [authentication](security.md).
+
+```php
+$repository = $client->api('repo')->mergeUpstream('ornicar', 'php-github-api', 'branchName');
+```
+Merge upstream a branch of a forked repository to keep it up-to-date with the upstream repository.
+
 ### Get the tags of a repository
 
 ```php
