@@ -310,8 +310,8 @@ $activity = $client->api('repo')->activity('ornicar', 'php-github-api');
 Returns an array of commit activity group by week.
 
 ### `Moved` repositories
-Github repositories can be moved to another org/user, but it remains the `id`.
-In case if you can't no more find repo, you can retrieve it by `id`:
+GitHub repositories can be moved to another org/user, but it remains the `id`.
+In case you can't find the repo anymore, you can retrieve it by `id`:
 
 ```php
 use Github\HttpClient\Message\ResponseMediator;
@@ -365,7 +365,7 @@ $repo = $client->api('repo')->transfer('KnpLabs', 'php-github-api', 'github', [1
 
 ### Create a repository dispatch event
 
-Example when you want to configure custom github action workflows.
+Example when you want to configure custom GitHub action workflows.
 
 ```php
 $client->api('repo')->dispatch('KnpLabs', 'php-github-api', 'acme-event', ['foo'=>'bar']);

@@ -25,7 +25,7 @@ $key = $client->me()->keys()->show(1234);
 $key = $client->me()->keys()->create(array('title' => 'key title', 'key' => 12345));
 ```
 
-Adds a key with title 'key title' to the authenticated user and returns a the created key for the user.
+Adds a key with title 'key title' to the authenticated user and returns the created key for the user.
 
 ### Remove a public key from the authenticated user.
 

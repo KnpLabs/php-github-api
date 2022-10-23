@@ -24,7 +24,7 @@ Returns an array of watched repos.
 
 > *** Requires [authentication](security.md). ***
 
-### Get repos that a authenticated user has starred
+### Get repos that an authenticated user has starred
 
 ```php
 $activity = $client->api('current_user')->starring()->all();
@@ -38,7 +38,7 @@ $activity = $client->api('user')->events('ornicar');
 ```
 Returns an array of private and public events created for all repos related to the user.
 
-### Get repos that a authenticated user has starred with creation date
+### Get repos that an authenticated user has starred with creation date
 
 Support for getting the star creation timestamp in the response, using the custom `Accept: application/vnd.github.v3.star+json` header.
 
@@ -75,7 +75,7 @@ $activity = $client->api('current_user')->starring()->unstar($owner, $repo);
 Throws an Exception in case of failure or NULL in case of success.
 
 
-### Get repos that a authenticated user is watching
+### Get repos that an authenticated user is watching
 
 ```php
 $activity = $client->api('current_user')->watchers()->all();

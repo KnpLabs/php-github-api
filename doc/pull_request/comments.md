@@ -67,7 +67,7 @@ $comment = $client->api('pull_request')->comments()->update('KnpLabs', 'php-gith
 
 This returns the details of the updated comment.
 
-### Remove a review comment from an pull request
+### Remove a review comment from a pull request
 
 > Requires [authentication](../security.md).
 

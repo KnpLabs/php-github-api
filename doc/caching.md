@@ -26,5 +26,5 @@ $client->removeCache();
 ```
 
 Using cache, the client will get cached responses if resources haven't changed since last time,
-**without** reaching the `X-Rate-Limit` [imposed by github](http://developer.github.com/v3/#rate-limiting).
+**without** reaching the `X-Rate-Limit` [imposed by GitHub](http://developer.github.com/v3/#rate-limiting).
 

@@ -3,7 +3,7 @@
 
 ### Usage examples
 
-#### Get all repositories of a organization
+#### Get all repositories of an organization
 
 ```php
 $client = new Github\Client();
@@ -21,7 +21,7 @@ Parameters of the `fetchAll` method:
 * The method of the API object you're using
 * The parameters of the method
 
-Parameters are passed to the API method via [call_user_func_array](https://www.php.net/manual/en/function.call-user-func-array.php). 
+Parameters are passed to the API method via [call_user_func_array](https://www.php.net/manual/en/function.call-user-func-array.php).
 
 ```php
 $parameters = array('github', 'all', 1); // $organization, $type, $page

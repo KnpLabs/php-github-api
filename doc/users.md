@@ -33,7 +33,7 @@ $user = $client->api('user')->show('KnpLabs');
 Returns an array of information about the user.
 
 
-You can also use the User ID, but it will use an undocumented Github API
+You can also use the User ID, but it will use an undocumented GitHub API
 
 ```php
 $user = $client->api('user')->showById(202732);
