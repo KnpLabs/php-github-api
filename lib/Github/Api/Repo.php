@@ -546,11 +546,11 @@ class Repo extends AbstractApi
      *
      * @return array|string
      */
-    public function mergeUpstream($username, $repository, $branchName = null)
+    public function mergeUpstream($username, $repository, $branchName = 'main')
     {
         return $this->post(
             '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/merge-upstream',
-            ['branch' => $branchName ?? 'main']
+            ['branch' => $branchName]
         );
     }
 
