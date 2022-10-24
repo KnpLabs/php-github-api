@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.9.0
+
+### Added
+- Add the ability to download raw file, needed when size > 1MB ([genintho](https://github.com/genintho)) [#1075](https://github.com/KnpLabs/php-github-api/issues/1075)
+- Feat: Support new Team Repositories Endpoint ([iBotPeaches](https://github.com/iBotPeaches)) [#1082](https://github.com/KnpLabs/php-github-api/issues/1082)
+- App: add hook endpoints ([glaubinix](https://github.com/glaubinix)) [#1086](https://github.com/KnpLabs/php-github-api/issues/1086)
+- Add sync a fork branch with the upstream repository  ([DAGpro](https://github.com/DAGpro)) [#1084](https://github.com/KnpLabs/php-github-api/issues/1084)
+
+### Changed
+- Fix return types in phpdoc for `Assignees` and `ReviewRequest` ([rob006](https://github.com/rob006)) [#1078](https://github.com/KnpLabs/php-github-api/issues/1078)
+- Fixed several typos and grammar errors ([AndrewDawes](https://github.com/AndrewDawes)) [#1088](https://github.com/KnpLabs/php-github-api/issues/1088)
+
 ## 3.8.0
 
 ### Added
