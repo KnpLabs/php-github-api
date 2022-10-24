@@ -1,0 +1,23 @@
+---------------------------------------------------------------------------
+
+by DAGpro at 2022-09-19T16:49:29Z
+
+> @DAGpro - You'll want to fix CI issues here. Looks like a basic lint issue so the test suite can move forward.
+
+The commit message must mention the issue?
+
+---------------------------------------------------------------------------
+
+by iBotPeaches at 2022-09-19T17:14:25Z
+
+> > @DAGpro - You'll want to fix CI issues here. Looks like a basic lint issue so the test suite can move forward.
+>
+> The commit message must mention the issue?
+
+The squash merge normally renames the commit anyway, so don't think that important. You still have some linting issues btw - https://github.styleci.io/analyses/xgBanO
+
+---------------------------------------------------------------------------
+
+by DAGpro at 2022-09-20T20:28:49Z
+
+@iBotPeaches now no problem to merge?
