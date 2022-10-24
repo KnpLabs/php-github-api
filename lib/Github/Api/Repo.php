@@ -540,13 +540,9 @@ class Repo extends AbstractApi
      *
      * @link https://docs.github.com/en/rest/branches/branches#sync-a-fork-branch-with-the-upstream-repository
      *
-     * @param string      $username
-     * @param string      $repository
-     * @param string|null $branchName
-     *
      * @return array|string
      */
-    public function mergeUpstream($username, $repository, $branchName)
+    public function mergeUpstream(string $username, string $repository, string $branchName)
     {
         return $this->post(
             '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/merge-upstream',
