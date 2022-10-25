@@ -15,18 +15,6 @@ $authorizations = $github->api('authorizations')->all();
 $authorization = $github->api('authorizations')->show(1);
 ```
 
-#### Create an authorization
-
-```php
-$data = array(
-    'note' => 'This is an optional description'
-);
-
-$authorization = $github->api('authorizations')->create($data);
-```
-
-Creates and returns an authorization.
-
 #### Update an authorization
 
 You can update ``note``.
