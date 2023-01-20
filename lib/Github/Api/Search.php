@@ -40,9 +40,9 @@ class Search extends AbstractApi
      *
      * @return array list of issues found
      */
-    public function issues($q, $sort = 'updated', $order = 'desc')
+    public function issues($q, $sort = 'updated', $order = 'desc', $page = 1)
     {
-        return $this->get('/search/issues', ['q' => $q, 'sort' => $sort, 'order' => $order]);
+        return $this->get('/search/issues', ['q' => $q, 'sort' => $sort, 'order' => $order, 'page' => $page]);
     }
 
     /**
