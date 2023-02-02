@@ -722,4 +722,58 @@ class RepoTest extends TestCase
     {
         return \Github\Api\Repo::class;
     }
+
+    /**
+     * @test
+     */
+    public function shouldCheckVulnerabilityAlertsEnabled()
+    {
+        $expectedResponse = '';
+
+        $api = $this->getApiMock();
+
+        $api
+            ->expects($this->once())
+            ->method('get')
+            ->with('/repos/KnpLabs/php-github-api/vulnerability-alerts')
+            ->will($this->returnValue($expectedResponse));
+
+        $this->assertEquals($expectedResponse, $api->isVulnerabilityAlertsEnabled('KnpLabs', 'php-github-api'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldEnableVulnerabilityAlerts()
+    {
+        $expectedResponse = '';
+
+        $api = $this->getApiMock();
+
+        $api
+            ->expects($this->once())
+            ->method('put')
+            ->with('/repos/KnpLabs/php-github-api/vulnerability-alerts')
+            ->will($this->returnValue($expectedResponse));
+
+        $this->assertEquals($expectedResponse, $api->enableVulnerabilityAlerts('KnpLabs', 'php-github-api'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldDisableVulnerabilityAlerts()
+    {
+        $expectedResponse = '';
+
+        $api = $this->getApiMock();
+
+        $api
+            ->expects($this->once())
+            ->method('delete')
+            ->with('/repos/KnpLabs/php-github-api/vulnerability-alerts')
+            ->will($this->returnValue($expectedResponse));
+
+        $this->assertEquals($expectedResponse, $api->disableVulnerabilityAlerts('KnpLabs', 'php-github-api'));
+    }
 }

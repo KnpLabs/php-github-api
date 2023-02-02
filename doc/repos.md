@@ -390,3 +390,27 @@ $client->api('repo')->createFromTemplate('template-owner', 'template-repo', [
     'owner' => 'name-of-new-repo-owner', // can be user or org
 ]);
 ```
+
+### Check if vulnerability alerts (dependabot alerts) are enabled for a repository
+
+https://developer.github.com/v3/repos/#check-if-vulnerability-alerts-are-enabled-for-a-repository
+
+```php
+$client->api('repo')->isVulnerabilityAlertsEnabled('KnpLabs', 'php-github-api');
+```
+
+### Enable vulnerability alerts (dependabot alerts)
+
+https://developer.github.com/v3/repos/#enable-vulnerability-alerts
+
+```php
+$client->api('repo')->enableVulnerabilityAlerts('KnpLabs', 'php-github-api');
+```
+
+### Disable vulnerability alerts (dependabot alerts)
+
+https://developer.github.com/v3/repos/#disable-vulnerability-alerts
+
+```php
+$client->api('repo')->disableVulnerabilityAlerts('KnpLabs', 'php-github-api');
+```
