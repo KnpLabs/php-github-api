@@ -843,4 +843,49 @@ class Repo extends AbstractApi
 
         return $this->post('/repos/'.rawurldecode($templateOwner).'/'.rawurldecode($templateRepo).'/generate', $parameters);
     }
+
+    /**
+     * Check if vulnerability alerts are enabled for a repository.
+     *
+     * @link https://developer.github.com/v3/repos/#check-if-vulnerability-alerts-are-enabled-for-a-repository
+     *
+     * @param string $username   the username
+     * @param string $repository the repository
+     *
+     * @return array|string
+     */
+    public function isVulnerabilityAlertsEnabled(string $username, string $repository)
+    {
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/vulnerability-alerts');
+    }
+
+    /**
+     * Enable vulnerability alerts for a repository.
+     *
+     * @link https://developer.github.com/v3/repos/#enable-vulnerability-alerts
+     *
+     * @param string $username   the username
+     * @param string $repository the repository
+     *
+     * @return array|string
+     */
+    public function enableVulnerabilityAlerts(string $username, string $repository)
+    {
+        return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/vulnerability-alerts');
+    }
+
+    /**
+     * Disable vulnerability alerts for a repository.
+     *
+     * @link https://developer.github.com/v3/repos/#disable-vulnerability-alerts
+     *
+     * @param string $username   the username
+     * @param string $repository the repository
+     *
+     * @return array|string
+     */
+    public function disableVulnerabilityAlerts(string $username, string $repository)
+    {
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/vulnerability-alerts');
+    }
 }
