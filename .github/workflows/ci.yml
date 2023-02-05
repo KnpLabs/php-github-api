@@ -23,7 +23,7 @@ jobs:
                   coverage: none
 
             - name: Install Composer Dependencies
-              uses: ramsey/composer-install@v1
+              uses: ramsey/composer-install@v2
 
             - name: Run phpunit
               run: vendor/bin/phpunit --verbose
@@ -41,7 +41,7 @@ jobs:
                   coverage: none
 
             - name: Install Composer Dependencies
-              uses: ramsey/composer-install@v1
+              uses: ramsey/composer-install@v2
 
             - name: Run phpstan
               run: vendor/bin/phpstan analyse --no-progress
