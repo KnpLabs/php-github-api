@@ -59,6 +59,7 @@ v3 APIs:
   * [Check Suites](repo/check_suites.md)
   * [Contents](repo/contents.md)
   * [Deployments](repo/deployments.md)
+  * [Environments](repo/environments.md)
   * [Labels](repo/labels.md)
   * [Protection](repo/protection.md)
   * [Releases](repo/releases.md)
