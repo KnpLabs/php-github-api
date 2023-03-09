@@ -67,20 +67,4 @@ class Environment extends AbstractApi
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/environments/'.$name);
     }
-
-    /**
-     * @link https://docs.github.com/en/rest/reference/actions#secrets
-     */
-    public function secrets(): Secrets
-    {
-        return new Secrets($this->getClient());
-    }
-
-    /**
-     * @link https://docs.github.com/en/rest/reference/actions#secrets
-     */
-    public function variables(): Variables
-    {
-        return new Variables($this->getClient());
-    }
 }
