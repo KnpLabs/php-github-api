@@ -36,7 +36,7 @@ class Environment extends AbstractApi
      */
     public function show($username, $repository, $name)
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/environments/'.$name);
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/environments/'.rawurlencode($name));
     }
 
     /**
@@ -53,7 +53,7 @@ class Environment extends AbstractApi
      */
     public function createOrUpdate($username, $repository, $name, array $params = [])
     {
-        return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/environments', $params);
+        return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/environments/'.rawurlencode($name), $params);
     }
 
     /**
@@ -65,6 +65,6 @@ class Environment extends AbstractApi
      */
     public function remove(string $username, string $repository, string $name)
     {
-        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/environments/'.$name);
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/environments/'.rawurlencode($name));
     }
 }
