@@ -4,6 +4,7 @@ namespace Github\Api;
 
 use Github\Api\Repository\Actions\Artifacts;
 use Github\Api\Repository\Actions\Secrets;
+use Github\Api\Repository\Actions\Variables;
 use Github\Api\Repository\Actions\SelfHostedRunners;
 use Github\Api\Repository\Actions\WorkflowJobs;
 use Github\Api\Repository\Actions\WorkflowRuns;
@@ -403,6 +404,14 @@ class Repo extends AbstractApi
     public function secrets(): Secrets
     {
         return new Secrets($this->getClient());
+    }
+
+    /**
+     * @link https://docs.github.com/en/rest/reference/actions#secrets
+     */
+    public function variables(): Variables
+    {
+        return new Variables($this->getClient());
     }
 
     /**

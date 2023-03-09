@@ -89,6 +89,16 @@ class OrganizationTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function shouldGetVariablesApiObject()
+    {
+        $api = $this->getApiMock();
+
+        $this->assertInstanceOf(\Github\Api\Organization\Actions\Variables::class, $api->variables());
+    }
+
+    /**
      * @return string
      */
     protected function getApiClass()
