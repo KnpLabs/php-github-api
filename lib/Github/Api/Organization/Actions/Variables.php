@@ -124,7 +124,7 @@ class Variables extends AbstractApi
      * @link https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#add-selected-repository-to-an-organization-variable
      *
      * @param string $organization
-     * @param string $repositoryId
+     * @param int    $repositoryId
      * @param string $variableName
      *
      * @return array|string
@@ -138,7 +138,7 @@ class Variables extends AbstractApi
      * @link https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#remove-selected-repository-from-an-organization-variable
      *
      * @param string $organization
-     * @param string $repositoryId
+     * @param int    $repositoryId
      * @param string $variableName
      *
      * @return array|string
