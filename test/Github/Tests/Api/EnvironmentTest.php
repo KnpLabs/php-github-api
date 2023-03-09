@@ -30,7 +30,7 @@ class EnvironmentTest extends TestCase
 
         $api->all('KnpLabs', 'php-github-api');
     }
-    
+
     /**
      * @test
      */
