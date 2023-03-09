@@ -2,8 +2,6 @@
 
 namespace Github\Tests\Api;
 
-use Github\Exception\MissingArgumentException;
-
 class EnvironmentTest extends TestCase
 {
     /**
@@ -32,6 +30,7 @@ class EnvironmentTest extends TestCase
 
         $api->all('KnpLabs', 'php-github-api');
     }
+    
     /**
      * @test
      */

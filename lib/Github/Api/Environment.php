@@ -55,7 +55,6 @@ class Environment extends AbstractApi
      */
     public function createOrUpdate($username, $repository, $name, array $params = [])
     {
-
         return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/environments', $params);
     }
 
