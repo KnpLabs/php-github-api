@@ -13,7 +13,7 @@ class Secrets extends AbstractApi
     /**
      * @link https://docs.github.com/en/rest/actions/secrets?apiVersion=2022-11-28#list-environment-secrets
      *
-     * @param int $id
+     * @param int    $id
      * @param string $name
      *
      * @return array|string
@@ -26,7 +26,7 @@ class Secrets extends AbstractApi
     /**
      * @link https://docs.github.com/en/rest/actions/secrets?apiVersion=2022-11-28#get-an-environment-secret
      *
-     * @param int $id
+     * @param int    $id
      * @param string $name
      * @param string $secretName
      *
@@ -40,7 +40,7 @@ class Secrets extends AbstractApi
     /**
      * @link https://docs.github.com/en/rest/actions/secrets?apiVersion=2022-11-28#create-or-update-an-environment-secret
      *
-     * @param int $id
+     * @param int    $id
      * @param string $name
      * @param string $secretName
      * @param array  $parameters
@@ -65,7 +65,7 @@ class Secrets extends AbstractApi
     /**
      * @link https://docs.github.com/en/rest/actions/secrets?apiVersion=2022-11-28#delete-an-environment-secret
      *
-     * @param int $id
+     * @param int    $id
      * @param string $name
      * @param string $secretName
      *
@@ -79,7 +79,7 @@ class Secrets extends AbstractApi
     /**
      * @link https://docs.github.com/en/rest/actions/secrets?apiVersion=2022-11-28#get-an-environment-public-key
      *
-     * @param int $id
+     * @param int    $id
      * @param string $name
      *
      * @return array|string

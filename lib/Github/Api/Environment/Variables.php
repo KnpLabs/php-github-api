@@ -13,7 +13,7 @@ class Variables extends AbstractApi
     /**
      * @link https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#list-environment-variables
      *
-     * @param int $id
+     * @param int    $id
      * @param string $name
      *
      * @return array|string
@@ -26,7 +26,7 @@ class Variables extends AbstractApi
     /**
      * @link https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#get-an-environment-variable
      *
-     * @param int $id
+     * @param int    $id
      * @param string $name
      * @param string $variableName
      *
@@ -40,7 +40,7 @@ class Variables extends AbstractApi
     /**
      * @link https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#create-an-environment-variable
      *
-     * @param int $id
+     * @param int    $id
      * @param string $name
      * @param array  $parameters
      *
@@ -64,7 +64,7 @@ class Variables extends AbstractApi
     /**
      * @link https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#update-an-environment-variable
      *
-     * @param int $id
+     * @param int    $id
      * @param string $name
      * @param string $variableName
      * @param array  $parameters
@@ -81,7 +81,7 @@ class Variables extends AbstractApi
     /**
      * @link https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#delete-an-environment-variable
      *
-     * @param int $id
+     * @param int    $id
      * @param string $name
      * @param string $variableName
      *

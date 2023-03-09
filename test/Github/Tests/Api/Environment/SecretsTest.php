@@ -16,7 +16,7 @@ class SecretsTest extends TestCase
         $expectedArray = [
             ['name' => 'name', 'created_at' => 'created_at', 'updated_at' => 'updated_at'],
             ['name' => 'name', 'created_at' => 'created_at', 'updated_at' => 'updated_at'],
-            ['name' => 'name', 'created_at' => 'created_at', 'updated_at' => 'updated_at']
+            ['name' => 'name', 'created_at' => 'created_at', 'updated_at' => 'updated_at'],
         ];
 
         /** @var Secrets|MockObject $api */
@@ -67,7 +67,7 @@ class SecretsTest extends TestCase
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->createOrUpdate(3948501, 'production', 'secretName', [
-            'encrypted_value' => 'foo', 'key_id' => 'key_id'
+            'encrypted_value' => 'foo', 'key_id' => 'key_id',
         ]));
     }
 

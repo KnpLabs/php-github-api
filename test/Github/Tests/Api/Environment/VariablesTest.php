@@ -67,7 +67,7 @@ class VariablesTest extends TestCase
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->create(3948501, 'production', [
-            'name' => 'foo', 'value' => 'bar'
+            'name' => 'foo', 'value' => 'bar',
         ]));
     }
 
@@ -88,7 +88,7 @@ class VariablesTest extends TestCase
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->update(3948501, 'production', 'variableName', [
-            'name' => 'variableName', 'value' => 'bar'
+            'name' => 'variableName', 'value' => 'bar',
         ]));
     }
 
