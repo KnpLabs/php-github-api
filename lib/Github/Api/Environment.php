@@ -9,8 +9,6 @@ namespace Github\Api;
  */
 class Environment extends AbstractApi
 {
-    use AcceptHeaderTrait;
-
     /**
      * List environments for a particular repository.
      *
@@ -68,5 +66,21 @@ class Environment extends AbstractApi
     public function remove(string $username, string $repository, string $name)
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/environments/'.$name);
+    }
+
+    /**
+     * @link https://docs.github.com/en/rest/reference/actions#secrets
+     */
+    public function secrets(): Secrets
+    {
+        return new Secrets($this->getClient());
+    }
+
+    /**
+     * @link https://docs.github.com/en/rest/reference/actions#secrets
+     */
+    public function variables(): Variables
+    {
+        return new Variables($this->getClient());
     }
 }
