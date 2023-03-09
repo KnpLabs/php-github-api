@@ -1,0 +1,36 @@
+---------------------------------------------------------------------------
+
+by Froxz at 2023-03-09T09:21:58Z
+
+@acrobat @Nyholm
+Can we merge this?
+
+---------------------------------------------------------------------------
+
+by Froxz at 2023-03-09T09:38:27Z
+
+Hi @Nyholm Will check why test are failing
+
+Also I will do few more PRs ( For ENV varaibles and Secrets)
+
+Also for ORG, Repo varaibles (currently is only secretes)
+
+---------------------------------------------------------------------------
+
+by Nyholm at 2023-03-09T10:00:19Z
+
+It seams like the tests are still failing
+
+---------------------------------------------------------------------------
+
+by Froxz at 2023-03-09T10:02:48Z
+
+Hi @Nyholm
+
+Tests are fixed now, except `BC check` I think is not related to this pull request
+
+---------------------------------------------------------------------------
+
+by acrobat at 2023-03-09T10:04:15Z
+
+The failing BC checker workflow can be ignored as it is not related to this change. One smal change/comment from my side, otherwise go to go!
