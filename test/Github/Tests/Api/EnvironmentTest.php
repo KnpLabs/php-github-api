@@ -15,7 +15,7 @@ class EnvironmentTest extends TestCase
             ->method('put')
             ->with('/repos/KnpLabs/php-github-api/environments');
 
-        $api->createOrUpdate('KnpLabs', 'php-github-api');
+        $api->createOrUpdate('KnpLabs', 'php-github-api', 'production');
     }
 
     /**
@@ -36,15 +36,15 @@ class EnvironmentTest extends TestCase
      */
     public function shouldShowEnvironment()
     {
-        $expectedValue = ['name' => 123];
+        $expectedValue = 'production';
 
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/repos/KnpLabs/php-github-api/environments/123')
+            ->with('/repos/KnpLabs/php-github-api/environments/production')
             ->will($this->returnValue($expectedValue));
 
-        $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 123));
+        $this->assertEquals($expectedValue, $api->show('KnpLabs', 'php-github-api', 'production'));
     }
 
     /**
@@ -55,10 +55,10 @@ class EnvironmentTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('delete')
-            ->with('/repos/KnpLabs/php-github-api/environments/123')
+            ->with('/repos/KnpLabs/php-github-api/environments/production')
             ->will($this->returnValue(null));
 
-        $this->assertNull($api->remove('KnpLabs', 'php-github-api', 123));
+        $this->assertNull($api->remove('KnpLabs', 'php-github-api', 'production'));
     }
 
     /**
