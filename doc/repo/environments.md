@@ -6,23 +6,23 @@ Provides information about environments for a repository. Wraps [GitHub Environm
 #### List all environments.
 
 ```php
-$environments = $client->api('environment')->all('KnpLabs', 'php-github-api');
+$environments = $client->deployment()->environment()->all('KnpLabs', 'php-github-api');
 ```
 
 ### Get one environment.
 
 ```php
-$environment = $client->api('environment')->show('KnpLabs', 'php-github-api', $name);
+$environment = $client->deployment()->environment()->show('KnpLabs', 'php-github-api', $name);
 ```
 
 #### Create or update environment.
 
 ```php
-$data = $client->api('environment')->createOrUpdate('KnpLabs', 'php-github-api', $name);
+$data = $client->deployment()->environment()->createOrUpdate('KnpLabs', 'php-github-api', $name);
 ```
 
 #### Delete a existing environment.
 
 ```php
-$environment = $client->api('environment')->remove('KnpLabs', 'php-github-api', $name);
+$environment = $client->deployment()->environment()->remove('KnpLabs', 'php-github-api', $name);
 ```

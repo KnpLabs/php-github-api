@@ -1,13 +1,15 @@
 <?php
 
-namespace Github\Api;
+namespace Github\Api\Deployment;
+
+use Github\Api\AbstractApi;
 
 /**
  * Listing, creating and updating environments.
  *
  * @link https://docs.github.com/en/rest/deployments/environments?apiVersion=2022-11-28#
  */
-class Environment extends AbstractApi
+class Environments extends AbstractApi
 {
     /**
      * List environments for a particular repository.

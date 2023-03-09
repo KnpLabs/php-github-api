@@ -1,6 +1,8 @@
 <?php
 
-namespace Github\Tests\Api;
+namespace Github\Tests\Api\Deployment;
+
+use Github\Tests\Api\TestCase;
 
 class EnvironmentTest extends TestCase
 {
@@ -66,6 +68,6 @@ class EnvironmentTest extends TestCase
      */
     protected function getApiClass()
     {
-        return \Github\Api\Environment::class;
+        return \Github\Api\Deployment\Environments::class;
     }
 }
