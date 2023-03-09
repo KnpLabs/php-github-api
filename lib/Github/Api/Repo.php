@@ -4,8 +4,8 @@ namespace Github\Api;
 
 use Github\Api\Repository\Actions\Artifacts;
 use Github\Api\Repository\Actions\Secrets;
-use Github\Api\Repository\Actions\Variables;
 use Github\Api\Repository\Actions\SelfHostedRunners;
+use Github\Api\Repository\Actions\Variables;
 use Github\Api\Repository\Actions\WorkflowJobs;
 use Github\Api\Repository\Actions\WorkflowRuns;
 use Github\Api\Repository\Actions\Workflows;
