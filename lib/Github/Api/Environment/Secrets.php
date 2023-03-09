@@ -20,7 +20,7 @@ class Secrets extends AbstractApi
      */
     public function all(int $id, string $name)
     {
-        return $this->get('/repositories/'.rawurlencode($id).'/environments/'.rawurlencode($name).'/secrets');
+        return $this->get('/repositories/'.$id.'/environments/'.rawurlencode($name).'/secrets');
     }
 
     /**
@@ -34,7 +34,7 @@ class Secrets extends AbstractApi
      */
     public function show(int $id, string $name, string $secretName)
     {
-        return $this->get('/repositories/'.rawurlencode($id).'/environments/'.rawurlencode($name).'/secrets/'.rawurlencode($secretName));
+        return $this->get('/repositories/'.$id.'/environments/'.rawurlencode($name).'/secrets/'.rawurlencode($secretName));
     }
 
     /**
@@ -59,7 +59,7 @@ class Secrets extends AbstractApi
             throw new MissingArgumentException(['key_id']);
         }
 
-        return $this->put('/repositories/'.rawurlencode($id).'/environments/'.rawurlencode($name).'/secrets/'.rawurlencode($secretName), $parameters);
+        return $this->put('/repositories/'.$id.'/environments/'.rawurlencode($name).'/secrets/'.rawurlencode($secretName), $parameters);
     }
 
     /**
@@ -73,7 +73,7 @@ class Secrets extends AbstractApi
      */
     public function remove(int $id, string $name, string $secretName)
     {
-        return $this->delete('/repositories/'.rawurlencode($id).'/environments/'.rawurlencode($name).'/secrets/'.rawurlencode($secretName));
+        return $this->delete('/repositories/'.$id.'/environments/'.rawurlencode($name).'/secrets/'.rawurlencode($secretName));
     }
 
     /**
@@ -86,6 +86,6 @@ class Secrets extends AbstractApi
      */
     public function publicKey(int $id, string $name)
     {
-        return $this->get('/repositories/'.rawurlencode($id).'/environments/'.rawurlencode($name).'/secrets/public-key');
+        return $this->get('/repositories/'.$id.'/environments/'.rawurlencode($name).'/secrets/public-key');
     }
 }

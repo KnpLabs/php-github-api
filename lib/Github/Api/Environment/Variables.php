@@ -20,7 +20,7 @@ class Variables extends AbstractApi
      */
     public function all(int $id, string $name)
     {
-        return $this->get('/repositories/'.rawurlencode($id).'/environments/'.rawurlencode($name).'/variables');
+        return $this->get('/repositories/'.$id.'/environments/'.rawurlencode($name).'/variables');
     }
 
     /**
@@ -34,7 +34,7 @@ class Variables extends AbstractApi
      */
     public function show(int $id, string $name, string $variableName)
     {
-        return $this->get('/repositories/'.rawurlencode($id).'/environments/'.rawurlencode($name).'/variables/'.rawurlencode($variableName));
+        return $this->get('/repositories/'.$id.'/environments/'.rawurlencode($name).'/variables/'.rawurlencode($variableName));
     }
 
     /**
@@ -58,7 +58,7 @@ class Variables extends AbstractApi
             throw new MissingArgumentException(['value']);
         }
 
-        return $this->post('/repositories/'.rawurlencode($id).'/environments/'.rawurlencode($name).'/variables', $parameters);
+        return $this->post('/repositories/'.$id.'/environments/'.rawurlencode($name).'/variables', $parameters);
     }
 
     /**
@@ -75,7 +75,7 @@ class Variables extends AbstractApi
      */
     public function update(int $id, string $name, string $variableName, array $parameters)
     {
-        return $this->patch('/repositories/'.rawurlencode($id).'/environments/'.rawurlencode($name).'/variables/'.rawurlencode($variableName), $parameters);
+        return $this->patch('/repositories/'.$id.'/environments/'.rawurlencode($name).'/variables/'.rawurlencode($variableName), $parameters);
     }
 
     /**
@@ -89,6 +89,6 @@ class Variables extends AbstractApi
      */
     public function remove(int $id, string $name, string $variableName)
     {
-        return $this->delete('/repositories/'.rawurlencode($id).'/environments/'.rawurlencode($name).'/variables/'.rawurlencode($variableName));
+        return $this->delete('/repositories/'.$id.'/environments/'.rawurlencode($name).'/variables/'.rawurlencode($variableName));
     }
 }
