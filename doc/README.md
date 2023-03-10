@@ -39,6 +39,8 @@ v3 APIs:
 * [Organization](organization.md)
   * [Members](organization/members.md)
   * [Teams](organization/teams.md)
+  * Actions
+    * [Self hosted runners](organization/actions/self_hosted_runners.md)
 * [Projects](project/projects.md)
   * [Columns](project/columns.md)
     * [Cards](project/cards.md)
