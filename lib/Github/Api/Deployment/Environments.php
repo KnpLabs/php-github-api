@@ -1,13 +1,17 @@
 <?php
 
-namespace Github\Api;
+namespace Github\Api\Deployment;
+
+use Github\Api\AbstractApi;
+use Github\Api\Environment\Secrets;
+use Github\Api\Environment\Variables;
 
 /**
  * Listing, creating and updating environments.
  *
  * @link https://docs.github.com/en/rest/deployments/environments?apiVersion=2022-11-28#
  */
-class Environment extends AbstractApi
+class Environments extends AbstractApi
 {
     /**
      * List environments for a particular repository.
@@ -66,5 +70,21 @@ class Environment extends AbstractApi
     public function remove(string $username, string $repository, string $name)
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/environments/'.rawurlencode($name));
+    }
+
+    /**
+     * @link https://docs.github.com/en/rest/actions/secrets?apiVersion=2022-11-28#about-secrets-in-github-actions
+     */
+    public function secrets(): Secrets
+    {
+        return new Secrets($this->getClient());
+    }
+
+    /**
+     * @link https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#about-variables-in-github-actions
+     */
+    public function variables(): Variables
+    {
+        return new Variables($this->getClient());
     }
 }

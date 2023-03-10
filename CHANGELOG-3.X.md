@@ -1,5 +1,18 @@
 # Changelog
 
+## 3.11.0
+
+### Added
+- Added environment variables & secrets ([Froxz](https://github.com/Froxz)) [#1104](https://github.com/KnpLabs/php-github-api/issues/1104)
+- Added Org & Repository variables ([Froxz](https://github.com/Froxz)) [#1106](https://github.com/KnpLabs/php-github-api/issues/1106)
+- Deployment branch policies ([Froxz](https://github.com/Froxz)) [#1108](https://github.com/KnpLabs/php-github-api/issues/1108)
+
+### Changed
+- Test on PHP 8.2 ([GrahamCampbell](https://github.com/GrahamCampbell)) [#1105](https://github.com/KnpLabs/php-github-api/issues/1105)
+
+### Fixed
+- Bugfix creating env ([Froxz](https://github.com/Froxz)) [#1107](https://github.com/KnpLabs/php-github-api/issues/1107)
+
 ## 3.10.0
 
 ### Added
