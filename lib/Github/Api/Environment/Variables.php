@@ -3,7 +3,6 @@
 namespace Github\Api\Environment;
 
 use Github\Api\AbstractApi;
-use Github\Exception\MissingArgumentException;
 
 /**
  * @link https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28
@@ -44,20 +43,10 @@ class Variables extends AbstractApi
      * @param string $name
      * @param array  $parameters
      *
-     * @throws MissingArgumentException
-     *
      * @return array|string
      */
     public function create(int $id, string $name, array $parameters)
     {
-        if (!isset($parameters['name'])) {
-            throw new MissingArgumentException(['name']);
-        }
-
-        if (!isset($parameters['value'])) {
-            throw new MissingArgumentException(['value']);
-        }
-
         return $this->post('/repositories/'.$id.'/environments/'.rawurlencode($name).'/variables', $parameters);
     }
 
@@ -68,8 +57,6 @@ class Variables extends AbstractApi
      * @param string $name
      * @param string $variableName
      * @param array  $parameters
-     *
-     * @throws MissingArgumentException
      *
      * @return array|string
      */

@@ -3,7 +3,6 @@
 namespace Github\Api\Environment;
 
 use Github\Api\AbstractApi;
-use Github\Exception\MissingArgumentException;
 
 /**
  * @link https://docs.github.com/en/rest/actions/secrets?apiVersion=2022-11-28
@@ -45,20 +44,10 @@ class Secrets extends AbstractApi
      * @param string $secretName
      * @param array  $parameters
      *
-     * @throws MissingArgumentException
-     *
      * @return array|string
      */
     public function createOrUpdate(int $id, string $name, string $secretName, array $parameters = [])
     {
-        if (!isset($parameters['encrypted_value'])) {
-            throw new MissingArgumentException(['encrypted_value']);
-        }
-
-        if (!isset($parameters['key_id'])) {
-            throw new MissingArgumentException(['key_id']);
-        }
-
         return $this->put('/repositories/'.$id.'/environments/'.rawurlencode($name).'/secrets/'.rawurlencode($secretName), $parameters);
     }
 
