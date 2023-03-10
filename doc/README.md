@@ -39,6 +39,8 @@ v3 APIs:
 * [Organization](organization.md)
   * [Members](organization/members.md)
   * [Teams](organization/teams.md)
+  * [Secrets](organization/actions/secrets.md)
+  * [Variables](organization/actions/variables.md)
 * [Projects](project/projects.md)
   * [Columns](project/columns.md)
     * [Cards](project/cards.md)
@@ -51,6 +53,7 @@ v3 APIs:
   * Actions
     * [Artifacts](repo/actions/artifacts.md)
     * [Secrets](repo/actions/secrets.md)
+    * [Variables](repo/actions/variables.md)
     * [Self hosted runners](repo/actions/self_hosted_runners.md)
     * [Workflow jobs](repo/actions/workflow_jobs.md)
     * [Workflow runs](repo/actions/workflow_runs.md)

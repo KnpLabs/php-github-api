@@ -3,6 +3,7 @@
 namespace Github\Api;
 
 use Github\Api\Organization\Actions\Secrets;
+use Github\Api\Organization\Actions\Variables;
 use Github\Api\Organization\Hooks;
 use Github\Api\Organization\Members;
 use Github\Api\Organization\OutsideCollaborators;
@@ -108,6 +109,14 @@ class Organization extends AbstractApi
     public function secrets(): Secrets
     {
         return new Secrets($this->getClient());
+    }
+
+    /**
+     * @return Variables
+     */
+    public function variables(): Variables
+    {
+        return new Variables($this->getClient());
     }
 
     /**
