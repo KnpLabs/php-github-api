@@ -15,7 +15,7 @@ class EnvironmentTest extends TestCase
 
         $api->expects($this->once())
             ->method('put')
-            ->with('/repos/KnpLabs/php-github-api/environments');
+            ->with('/repos/KnpLabs/php-github-api/environments/production');
 
         $api->createOrUpdate('KnpLabs', 'php-github-api', 'production');
     }

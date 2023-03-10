@@ -573,6 +573,16 @@ class RepoTest extends TestCase
     /**
      * @test
      */
+    public function shouldGetVariablesApiObject()
+    {
+        $api = $this->getApiMock();
+
+        $this->assertInstanceOf(\Github\Api\Repository\Actions\Variables::class, $api->variables());
+    }
+
+    /**
+     * @test
+     */
     public function shouldGetCommitActivity()
     {
         $expectedArray = [['days' => [0, 3, 26, 20, 39, 1, 0], 'total' => 89, 'week' => 1336280400]];

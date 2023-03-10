@@ -4,6 +4,9 @@ namespace Github\Api\Deployment;
 
 use Github\Api\AbstractApi;
 
+use Github\Api\Environment\Secrets;
+use Github\Api\Environment\Variables;
+
 /**
  * Listing, creating and updating environments.
  *
@@ -38,7 +41,7 @@ class Environments extends AbstractApi
      */
     public function show($username, $repository, $name)
     {
-        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/environments/'.$name);
+        return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/environments/'.rawurlencode($name));
     }
 
     /**
@@ -55,7 +58,7 @@ class Environments extends AbstractApi
      */
     public function createOrUpdate($username, $repository, $name, array $params = [])
     {
-        return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/environments', $params);
+        return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/environments/'.rawurlencode($name), $params);
     }
 
     /**
@@ -67,6 +70,22 @@ class Environments extends AbstractApi
      */
     public function remove(string $username, string $repository, string $name)
     {
-        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/environments/'.$name);
+        return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/environments/'.rawurlencode($name));
+    }
+
+    /**
+     * @link https://docs.github.com/en/rest/actions/secrets?apiVersion=2022-11-28#about-secrets-in-github-actions
+     */
+    public function secrets(): Secrets
+    {
+        return new Secrets($this->getClient());
+    }
+
+    /**
+     * @link https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#about-variables-in-github-actions
+     */
+    public function variables(): Variables
+    {
+        return new Variables($this->getClient());
     }
 }
