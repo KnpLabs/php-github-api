@@ -1,0 +1,23 @@
+---------------------------------------------------------------------------
+
+by Froxz at 2023-03-09T15:05:40Z
+
+Hi @acrobat @Nyholm  I promise this is the last PR :) for today, Just i'm building somethings that needs Deployments/Policies/Variables/Environments :)
+
+---------------------------------------------------------------------------
+
+by Froxz at 2023-03-10T11:24:14Z
+
+@acrobat I think I need to re-do the docs and put Policies and Env underDeployments? What you think?
+
+---------------------------------------------------------------------------
+
+by acrobat at 2023-03-10T11:26:32Z
+
+Sure, you can move those @Froxz
+
+---------------------------------------------------------------------------
+
+by acrobat at 2023-03-10T11:39:45Z
+
+Thank you @Froxz
