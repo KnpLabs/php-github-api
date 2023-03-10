@@ -12,14 +12,14 @@ use Github\Api\AbstractApi;
 class Policies extends AbstractApi
 {
     /**
-     * List deployment branch policies
+     * List deployment branch policies.
      *
      * @link https://docs.github.com/en/rest/deployments/branch-policies?apiVersion=2022-11-28#list-deployment-branch-policies
      *
-     * @param string $username   the username of the user who owns the repository
-     * @param string $repository the name of the repository
+     * @param string $username    the username of the user who owns the repository
+     * @param string $repository  the name of the repository
      * @param string $environment the name of the environment.
-     * @param array  $params     query parameters to filter deployments by (see link)
+     * @param array  $params      query parameters to filter deployments by (see link)
      *
      * @return array the deployments requested
      */
@@ -29,14 +29,14 @@ class Policies extends AbstractApi
     }
 
     /**
-     * Get a deployment branch policy
+     * Get a deployment branch policy.
      * 
      * @link https://docs.github.com/en/rest/deployments/branch-policies?apiVersion=2022-11-28#get-a-deployment-branch-policy
      *
-     * @param string $username   the username of the user who owns the repository
-     * @param string $repository the name of the repository
+     * @param string $username    the username of the user who owns the repository
+     * @param string $repository  the name of the repository
      * @param string $environment the name of the environment.
-     * @param int    $id         The unique identifier of the branch policy.
+     * @param int    $id          the unique identifier of the branch policy.
      *
      * @return array
      */
@@ -50,8 +50,8 @@ class Policies extends AbstractApi
      *
      * @link https://docs.github.com/en/rest/deployments/branch-policies?apiVersion=2022-11-28#create-a-deployment-branch-policy
      *
-     * @param string $username   the username of the user who owns the repository
-     * @param string $repository the name of the repository
+     * @param string $username    the username of the user who owns the repository
+     * @param string $repository  the name of the repository
      * @param string $environment the name of the environment.
      *
      * @return array information about the deployment branch policy
@@ -66,10 +66,10 @@ class Policies extends AbstractApi
      *
      * @link https://docs.github.com/en/rest/deployments/branch-policies?apiVersion=2022-11-28#update-a-deployment-branch-policy
      *
-     * @param string $username   the username of the user who owns the repository
-     * @param string $repository the name of the repository
+     * @param string $username    the username of the user who owns the repository
+     * @param string $repository  the name of the repository
      * @param string $environment the name of the environment.
-     * @param int    $id         The unique identifier of the branch policy.
+     * @param int    $id          the unique identifier of the branch policy.
      *
      * @return array information about the deployment branch policy
      */
@@ -79,14 +79,14 @@ class Policies extends AbstractApi
     }
 
     /**
-     * Delete a deployment branch policy
+     * Delete a deployment branch policy.
      *
      * @link https://docs.github.com/en/rest/deployments/branch-policies?apiVersion=2022-11-28#delete-a-deployment-branch-policy
      *
-     * @param string $username   the username of the user who owns the repository
-     * @param string $repository the name of the repository
+     * @param string $username    the username of the user who owns the repository
+     * @param string $repository  the name of the repository
      * @param string $environment the name of the environment.
-     * @param int    $id         The unique identifier of the branch policy.
+     * @param int    $id          the unique identifier of the branch policy.
      * 
      * @return mixed null on success, array on error with 'message'
      */

@@ -2,8 +2,8 @@
 
 namespace Github\Api;
 
-use Github\Api\Deployment\Policies;
 use Github\Api\Deployment\Environments;
+use Github\Api\Deployment\Policies;
 use Github\Exception\MissingArgumentException;
 
 /**

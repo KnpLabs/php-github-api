@@ -18,7 +18,7 @@ class PoliciesTest extends TestCase
             ->with('/repos/KnpLabs/php-github-api/environments/production/deployment-branch-policies');
 
         $api->create('KnpLabs', 'php-github-api', 'production', [
-            'name' => 'name'
+            'name' => 'name',
         ]);
     }
 
@@ -34,7 +34,7 @@ class PoliciesTest extends TestCase
             ->with('/repos/KnpLabs/php-github-api/environments/production/deployment-branch-policies/1');
 
         $api->update('KnpLabs', 'php-github-api', 'production', 1, [
-            'name' => 'name'
+            'name' => 'name',
         ]);
     }
 
