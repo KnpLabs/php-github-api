@@ -3,7 +3,6 @@
 namespace Github\Api\Organization\Actions;
 
 use Github\Api\AbstractApi;
-use Github\Exception\MissingArgumentException;
 
 /**
  * @link https://docs.github.com/en/rest/reference/actions#variables
@@ -41,24 +40,10 @@ class Variables extends AbstractApi
      * @param string $organization
      * @param array  $parameters
      *
-     * @throws MissingArgumentException
-     *
      * @return array|string
      */
     public function create(string $organization, array $parameters)
     {
-        if (!isset($parameters['name'])) {
-            throw new MissingArgumentException(['name']);
-        }
-
-        if (!isset($parameters['value'])) {
-            throw new MissingArgumentException(['value']);
-        }
-
-        if (!isset($parameters['visibility'])) {
-            throw new MissingArgumentException(['visibility']);
-        }
-
         return $this->post('/orgs/'.rawurlencode($organization).'/actions/variables', $parameters);
     }
 
@@ -113,10 +98,6 @@ class Variables extends AbstractApi
      */
     public function setSelectedRepositories(string $organization, string $variableName, array $parameters = [])
     {
-        if (!isset($parameters['selected_repository_ids'])) {
-            throw new MissingArgumentException(['selected_repository_ids']);
-        }
-
         return $this->put('/orgs/'.rawurlencode($organization).'/actions/variables/'.rawurlencode($variableName).'/repositories', $parameters);
     }
 
