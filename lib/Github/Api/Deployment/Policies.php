@@ -21,7 +21,7 @@ class Policies extends AbstractApi
      * @param string $environment the name of the environment.
      * @param array  $params      query parameters to filter deployments by (see link)
      *
-     * @return array the deployments requested
+     * @return array the branch policies requested
      */
     public function all(string $username, string $repository, string $environment, array $params = [])
     {
@@ -30,7 +30,7 @@ class Policies extends AbstractApi
 
     /**
      * Get a deployment branch policy.
-     * 
+     *
      * @link https://docs.github.com/en/rest/deployments/branch-policies?apiVersion=2022-11-28#get-a-deployment-branch-policy
      *
      * @param string $username    the username of the user who owns the repository
@@ -87,7 +87,7 @@ class Policies extends AbstractApi
      * @param string $repository  the name of the repository
      * @param string $environment the name of the environment.
      * @param int    $id          the unique identifier of the branch policy.
-     * 
+     *
      * @return mixed null on success, array on error with 'message'
      */
     public function remove(string $username, string $repository, string $environment, int $id)
