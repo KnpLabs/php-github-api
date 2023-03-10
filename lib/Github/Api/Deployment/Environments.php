@@ -3,7 +3,6 @@
 namespace Github\Api\Deployment;
 
 use Github\Api\AbstractApi;
-
 use Github\Api\Environment\Secrets;
 use Github\Api\Environment\Variables;
 
