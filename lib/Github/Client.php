@@ -181,11 +181,6 @@ class Client
                 $api = new Api\Deployment($this);
                 break;
 
-            case 'environment':
-            case 'environments':
-                $api = new Api\Environment($this);
-                break;
-
             case 'ent':
             case 'enterprise':
                 $api = new Api\Enterprise($this);

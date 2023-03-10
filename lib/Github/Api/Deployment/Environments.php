@@ -1,7 +1,8 @@
 <?php
 
-namespace Github\Api;
+namespace Github\Api\Deployment;
 
+use Github\Api\AbstractApi;
 use Github\Api\Environment\Secrets;
 use Github\Api\Environment\Variables;
 
@@ -10,7 +11,7 @@ use Github\Api\Environment\Variables;
  *
  * @link https://docs.github.com/en/rest/deployments/environments?apiVersion=2022-11-28#
  */
-class Environment extends AbstractApi
+class Environments extends AbstractApi
 {
     /**
      * List environments for a particular repository.

@@ -119,6 +119,26 @@ class DeploymentTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function shouldGetEnvironmentsApiObject()
+    {
+        $api = $this->getApiMock();
+
+        $this->assertInstanceOf(\Github\Api\Deployment\Environments::class, $api->environments());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetPoliciesApiObject()
+    {
+        $api = $this->getApiMock();
+
+        $this->assertInstanceOf(\Github\Api\Deployment\Policies::class, $api->policies());
+    }
+
+    /**
      * @return string
      */
     protected function getApiClass()
