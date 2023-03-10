@@ -1,5 +1,5 @@
-## Repo / Deployment branch policies API
-[Back to the "Repos API"](../repos.md) | [Back to the navigation](../index.md)
+## Deployment / Branch policies API
+[Back to the "Deployment API"](../deployments.md) | [Back to the navigation](../index.md)
 
 Provides information about deployment branch policies. Wraps [GitHub Deployment branch policies API](https://docs.github.com/en/rest/deployments/branch-policies?apiVersion=2022-11-28#about-deployment-branch-policies).
 

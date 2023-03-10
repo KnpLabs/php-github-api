@@ -1,5 +1,5 @@
 ## Environment / Secrets API
-[Back to the "Environments API"](../repo/environments.md) | [Back to the navigation](../README.md)
+[Back to the "Environments API"](../environments.md) | [Back to the navigation](../README.md)
 
 ### List environment secrets
 
