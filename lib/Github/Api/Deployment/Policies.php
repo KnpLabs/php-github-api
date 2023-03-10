@@ -3,7 +3,6 @@
 namespace Github\Api\Deployment;
 
 use Github\Api\AbstractApi;
-use Github\Exception\MissingArgumentException;
 
 /**
  * Listing, creating and updating deployments.
@@ -55,16 +54,10 @@ class Policies extends AbstractApi
      * @param string $repository the name of the repository
      * @param string $environment the name of the environment.
      *
-     * @throws MissingArgumentException
-     *
      * @return array information about the deployment branch policy
      */
     public function create(string $username, string $repository, string $environment, array $params)
     {
-        if (!isset($params['name'])) {
-            throw new MissingArgumentException(['name']);
-        }
-
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/environments/'.rawurlencode($environment).'/deployment-branch-policies', $params);
     }
 
@@ -82,10 +75,6 @@ class Policies extends AbstractApi
      */
     public function update(string $username, string $repository, string $environment, int $id, array $params)
     {
-        if (!isset($params['name'])) {
-            throw new MissingArgumentException(['name']);
-        }
-
         return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/environments/'.rawurlencode($environment).'/deployment-branch-policies/'.$id, $params);
     }
 
