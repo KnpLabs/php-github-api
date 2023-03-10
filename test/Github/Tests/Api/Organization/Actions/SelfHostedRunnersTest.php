@@ -113,4 +113,3 @@ class SelfHostedRunnersTest extends TestCase
         return SelfHostedRunners::class;
     }
 }
-

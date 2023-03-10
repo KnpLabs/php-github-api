@@ -11,7 +11,7 @@ class SelfHostedRunners extends AbstractApi
      *
      * @param string $organization
      * @param string $type
-     * @param int $page
+     * @param int    $page
      *
      * @return array|string
      */
@@ -42,7 +42,7 @@ class SelfHostedRunners extends AbstractApi
      * @link https://docs.github.com/en/rest/actions/self-hosted-runners?apiVersion=2022-11-28#delete-a-self-hosted-runner-from-an-organization
      *
      * @param string $organization
-     * @param int $runnerId
+     * @param int    $runnerId
      *
      * @return array|string
      */
