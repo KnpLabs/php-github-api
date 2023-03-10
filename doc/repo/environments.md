@@ -3,6 +3,10 @@
 
 Provides information about environments for a repository. Wraps [GitHub Environments API](https://docs.github.com/en/rest/deployments/environments?apiVersion=2022-11-28).
 
+Additional APIs:
+* [Secrets API](environment/secrets.md)
+* [Variables API](environment/variables.md)
+
 #### List all environments.
 
 ```php
