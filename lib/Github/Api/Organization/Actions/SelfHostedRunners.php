@@ -14,7 +14,7 @@ class SelfHostedRunners extends AbstractApi
      *
      * @return array|string
      */
-    public function all(string $organization, array $parameters)
+    public function all(string $organization, array $parameters = [])
     {
         return $this->get('/orgs/'.rawurlencode($organization).'/actions/runners', $parameters);
     }
