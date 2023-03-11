@@ -10,18 +10,12 @@ class SelfHostedRunners extends AbstractApi
      * @link https://docs.github.com/en/rest/actions/self-hosted-runners?apiVersion=2022-11-28#list-self-hosted-runners-for-an-organization
      *
      * @param string $organization
-     * @param string $type
-     * @param int    $page
+     * @param array $parameters
      *
      * @return array|string
      */
-    public function all(string $organization, string $type = 'all', int $page = 1)
+    public function all(string $organization, array $parameters)
     {
-        $parameters = [
-            'type' => $type,
-            'page' => $page,
-        ];
-
         return $this->get('/orgs/'.rawurlencode($organization).'/actions/runners', $parameters);
     }
 
