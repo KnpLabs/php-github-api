@@ -97,7 +97,7 @@ class OrganizationTest extends TestCase
 
         $this->assertInstanceOf(\Github\Api\Organization\Actions\SelfHostedRunners::class, $api->runners());
     }
-    
+
     /**
      * @test
      */

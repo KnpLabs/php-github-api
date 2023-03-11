@@ -10,7 +10,7 @@ class SelfHostedRunners extends AbstractApi
      * @link https://docs.github.com/en/rest/actions/self-hosted-runners?apiVersion=2022-11-28#list-self-hosted-runners-for-an-organization
      *
      * @param string $organization
-     * @param array $parameters
+     * @param array  $parameters
      *
      * @return array|string
      */
