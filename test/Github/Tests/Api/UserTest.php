@@ -2,6 +2,9 @@
 
 namespace Github\Tests\Api;
 
+use Github\Api\User;
+use PHPUnit\Framework\MockObject\MockObject;
+
 class UserTest extends TestCase
 {
     /**
@@ -188,13 +191,21 @@ class UserTest extends TestCase
     {
         $expectedArray = [['id' => 1, 'name' => 'l3l0repo']];
 
+        /** @var User|MockObject $api */
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/users/l3l0/repos', ['type' => 'owner', 'sort' => 'full_name', 'direction' => 'asc', 'visibility' => 'all', 'affiliation' => 'owner,collaborator,organization_member'])
+            ->with('/users/l3l0/repos')
             ->will($this->returnValue($expectedArray));
 
-        $this->assertEquals($expectedArray, $api->repositories('l3l0'));
+        $this->assertEquals($expectedArray, $api->repositories('l3l0', 'owner', 'full_name', '', '', '', [
+            'direction' => 'asc',
+            'visibility' => 'all',
+            'affiliation' => 'owner,collaborator,organization_member',
+            'params' => [
+                'per_page' => 1,
+            ]
+        ]));
     }
 
     /**
