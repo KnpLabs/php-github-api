@@ -2,6 +2,8 @@
 
 namespace Github\Api;
 
+use JetBrains\PhpStorm\Deprecated;
+
 /**
  * Searching users, getting user information.
  *
@@ -160,23 +162,38 @@ class User extends AbstractApi
      * @link https://developer.github.com/v3/repos/#list-user-repositories
      *
      * @param string $username    the username
-     * @param string $type        role in the repository
-     * @param string $sort        sort by
-     * @param string $direction   direction of sort, asc or desc
-     * @param string $visibility  visibility of repository
-     * @param string $affiliation relationship to repository
+     * @param string $type        role in the repository (Deprecated)
+     * @param string $sort        sort by (Deprecated)
+     * @param string $direction   direction of sort, asc or desc (Deprecated)
+     * @param string $visibility  visibility of repository (Deprecated)
+     * @param string $affiliation relationship to repository (Deprecated)
+     * @param array $params e.g. e.g. [
+     *  'type' => 'owner',
+     *  'sort' => 'full_name',
+     *  'direction'=> 'asc',
+     *  'visibility' => 'all',
+     *  'affiliation' => 'owner,collaborator,organization_member',
+     *  'per_page' => 50,
+     * ]
      *
      * @return array list of the user repositories
      */
-    public function repositories($username, $type = 'owner', $sort = 'full_name', $direction = 'asc', $visibility = 'all', $affiliation = 'owner,collaborator,organization_member')
-    {
-        return $this->get('/users/'.rawurlencode($username).'/repos', [
+    public function repositories(
+        string $username,
+        #[Deprecated(since: '3.12')]$type = 'owner',
+        #[Deprecated(since: '3.12')]$sort = 'full_name',
+        #[Deprecated(since: '3.12')]$direction = 'asc',
+        #[Deprecated(since: '3.12')]$visibility = 'all',
+        #[Deprecated(since: '3.12')]$affiliation = 'owner,collaborator,organization_member',
+        array $params = []
+    ) {
+        return $this->get('/users/'.rawurlencode($username).'/repos', array_merge([
             'type' => $type,
             'sort' => $sort,
             'direction' => $direction,
             'visibility' => $visibility,
             'affiliation' => $affiliation,
-        ]);
+        ], $params));
     }
 
     /**

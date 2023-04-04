@@ -125,6 +125,7 @@ class CurrentUser extends AbstractApi
      *  'direction'=> 'asc',
      *  'visibility' => null,
      *  'affiliation' => null,
+     *  'per_page' => 50,
      * ]
      *
      * @return array
