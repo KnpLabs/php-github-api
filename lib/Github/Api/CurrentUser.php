@@ -131,11 +131,11 @@ class CurrentUser extends AbstractApi
      * @return array
      */
     public function repositories(
-        #[Deprecated(since: '3.12')]$type = 'owner',
-        #[Deprecated(since: '3.12')]$sort = 'full_name',
-        #[Deprecated(since: '3.12')]$direction = 'asc',
-        #[Deprecated(since: '3.12')]$visibility = null,
-        #[Deprecated(since: '3.12')]$affiliation = null,
+        $type = 'owner',
+        $sort = 'full_name',
+        $direction = 'asc',
+        $visibility = null,
+        $affiliation = null,
         array $parameters = []
     ) {
         $params = [

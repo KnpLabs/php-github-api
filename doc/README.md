@@ -79,6 +79,7 @@ v3 APIs:
   * [Secret Scanning Alert](repo/secret-scanning.md)
 * [Search](search.md)
 * [Users](users.md)
+  * [Migrations](user/migration.md)
 
 Additional features:
 

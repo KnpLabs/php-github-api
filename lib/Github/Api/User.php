@@ -2,6 +2,7 @@
 
 namespace Github\Api;
 
+use Github\Api\User\Migration;
 use JetBrains\PhpStorm\Deprecated;
 
 /**
@@ -180,11 +181,11 @@ class User extends AbstractApi
      */
     public function repositories(
         string $username,
-        #[Deprecated(since: '3.12')]$type = 'owner',
-        #[Deprecated(since: '3.12')]$sort = 'full_name',
-        #[Deprecated(since: '3.12')]$direction = 'asc',
-        #[Deprecated(since: '3.12')]$visibility = 'all',
-        #[Deprecated(since: '3.12')]$affiliation = 'owner,collaborator,organization_member',
+        $type = 'owner',
+        $sort = 'full_name',
+        $direction = 'asc',
+        $visibility = 'all',
+        $affiliation = 'owner,collaborator,organization_member',
         array $params = []
     ) {
         return $this->get('/users/'.rawurlencode($username).'/repos', array_merge([
@@ -262,5 +263,13 @@ class User extends AbstractApi
     public function events(string $username)
     {
         return $this->get('/users/'.rawurlencode($username).'/events');
+    }
+
+    /**
+     * @return Migration
+     */
+    public function migration(): Migration
+    {
+        return new Migration($this->getClient());
     }
 }
