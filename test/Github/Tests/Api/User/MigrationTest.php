@@ -23,9 +23,9 @@ class MigrationTest extends TestCase
                     [
                         'id' => 1296269,
                         'name' => 'Hello-World',
-                        'full_name' => 'octocat/Hello-World'
-                    ]
-                ]
+                        'full_name' => 'octocat/Hello-World',
+                    ],
+                ],
             ],
             [
                 'id' => 2,
@@ -35,9 +35,9 @@ class MigrationTest extends TestCase
                     [
                         'id' => 123,
                         'name' => 'php-github-api',
-                        'full_name' => 'KnpLabs/php-github-api'
-                    ]
-                ]
+                        'full_name' => 'KnpLabs/php-github-api',
+                    ],
+                ],
             ],
         ];
 
@@ -82,9 +82,9 @@ class MigrationTest extends TestCase
                 [
                     'id' => 1296269,
                     'name' => 'Hello-World',
-                    'full_name' => 'octocat/Hello-World'
-                ]
-            ]
+                    'full_name' => 'octocat/Hello-World',
+                ],
+            ],
         ];
 
         /** @var Migration|MockObject $api */
@@ -98,8 +98,8 @@ class MigrationTest extends TestCase
         $this->assertEquals($expectedArray, $api->start([
             'lock_repositories' => true,
             'repositories' => [
-                'KnpLabs/php-github-api'
-            ]
+                'KnpLabs/php-github-api',
+            ],
         ]));
     }
 
@@ -116,9 +116,9 @@ class MigrationTest extends TestCase
                 [
                     'id' => 1296269,
                     'name' => 'Hello-World',
-                    'full_name' => 'octocat/Hello-World'
-                ]
-            ]
+                    'full_name' => 'octocat/Hello-World',
+                ],
+            ],
         ];
 
         /** @var Migration|MockObject $api */
@@ -171,14 +171,14 @@ class MigrationTest extends TestCase
     {
         $expectedArray = [
             [
-                "id" => 1296269,
-                "name" => "Hello-World",
-                "full_name" => "test/Hello-World",
+                'id' => 1296269,
+                'name' => 'Hello-World',
+                'full_name' => 'test/Hello-World',
             ],
             [
-                "id" => 234324,
-                "name" => "Hello-World2",
-                "full_name" => "test/Hello-World2",
+                'id' => 234324,
+                'name' => 'Hello-World2',
+                'full_name' => 'test/Hello-World2',
             ],
         ];
 

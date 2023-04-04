@@ -24,8 +24,9 @@ class Migration extends AbstractApi
      *
      * @param array $params
      *
-     * @return array|string
      * @throws MissingArgumentException
+     *
+     * @return array|string
      */
     public function start(array $params)
     {
@@ -39,7 +40,7 @@ class Migration extends AbstractApi
     /**
      * @link https://docs.github.com/en/rest/migrations/users?apiVersion=2022-11-28#get-a-user-migration-status
      *
-     * @param int $migrationId
+     * @param int   $migrationId
      * @param array $params
      *
      * @return array|string
@@ -64,7 +65,7 @@ class Migration extends AbstractApi
     /**
      * @link https://docs.github.com/en/rest/migrations/users?apiVersion=2022-11-28#unlock-a-user-repository
      *
-     * @param int $migrationId
+     * @param int    $migrationId
      * @param string $repository
      *
      * @return array|string
@@ -77,7 +78,7 @@ class Migration extends AbstractApi
     /**
      * @link https://docs.github.com/en/rest/migrations/users?apiVersion=2022-11-28#list-repositories-for-a-user-migration
      *
-     * @param int $migrationId
+     * @param int   $migrationId
      * @param array $params
      *
      * @return array|string
