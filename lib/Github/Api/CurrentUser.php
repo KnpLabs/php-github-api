@@ -119,14 +119,14 @@ class CurrentUser extends AbstractApi
      * @param string $direction   direction of sort, asc or desc  (Deprecated)
      * @param string $visibility  visibility of repository  (Deprecated)
      * @param string $affiliation relationship to repository  (Deprecated)
-     * @param array $parameters   e.g. [
-     *  'type' => 'owner',
-     *  'sort' => 'full_name',
-     *  'direction'=> 'asc',
-     *  'visibility' => null,
-     *  'affiliation' => null,
-     *  'per_page' => 50,
-     * ]
+     * @param array  $parameters  e.g. [
+     *                            'type' => 'owner',
+     *                            'sort' => 'full_name',
+     *                            'direction'=> 'asc',
+     *                            'visibility' => null,
+     *                            'affiliation' => null,
+     *                            'per_page' => 50,
+     *                            ]
      *
      * @return array
      */

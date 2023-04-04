@@ -30,7 +30,7 @@ class SecretScanningTest extends TestCase
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->alerts('KnpLabs', 'php-github-api', [
-            'state' => 'all'
+            'state' => 'all',
         ]));
     }
 
@@ -71,7 +71,7 @@ class SecretScanningTest extends TestCase
 
         $this->assertEquals($expectedArray, $api->updateAlert('KnpLabs', 'php-github-api', 2, [
             'state' => 'resolved',
-            'resolution' => 'false_positive'
+            'resolution' => 'false_positive',
         ]));
     }
 
@@ -82,33 +82,33 @@ class SecretScanningTest extends TestCase
     {
         $expectedArray = [
             [
-                "type" => "commit",
-                "details" => [
-                    "path" => "/example/secrets.txt",
-                    "start_line" => 1,
-                    "end_line" => 1,
-                    "start_column" => 1,
-                    "end_column" => 64,
-                    "blob_sha" => "af5626b4a114abcb82d63db7c8082c3c4756e51b",
-                    "blob_url" => "https://HOSTNAME/repos/octocat/hello-world/git/blobs/af5626b4a114abcb82d63db7c8082c3c4756e51b",
-                    "commit_sha" => "f14d7debf9775f957cf4f1e8176da0786431f72b",
-                    "commit_url" => "https://HOSTNAME/repos/octocat/hello-world/git/commits/f14d7debf9775f957cf4f1e8176da0786431f72b"
-                ]
+                'type' => 'commit',
+                'details' => [
+                    'path' => '/example/secrets.txt',
+                    'start_line' => 1,
+                    'end_line' => 1,
+                    'start_column' => 1,
+                    'end_column' => 64,
+                    'blob_sha' => 'af5626b4a114abcb82d63db7c8082c3c4756e51b',
+                    'blob_url' => 'https://HOSTNAME/repos/octocat/hello-world/git/blobs/af5626b4a114abcb82d63db7c8082c3c4756e51b',
+                    'commit_sha' => 'f14d7debf9775f957cf4f1e8176da0786431f72b',
+                    'commit_url' => 'https://HOSTNAME/repos/octocat/hello-world/git/commits/f14d7debf9775f957cf4f1e8176da0786431f72b',
+                ],
             ],
             [
-                "type" => "commit",
-                "details" => [
-                    "path" => "/example/secrets.txt",
-                    "start_line" => 5,
-                    "end_line" => 5,
-                    "start_column" => 1,
-                    "end_column" => 64,
-                    "blob_sha" => "9def38117ab2d8355b982429aa924e268b4b0065",
-                    "blob_url" => "https://HOSTNAME/repos/octocat/hello-world/git/blobs/9def38117ab2d8355b982429aa924e268b4b0065",
-                    "commit_sha" => "588483b99a46342501d99e3f10630cfc1219ea32",
-                    "commit_url" => "https://HOSTNAME/repos/octocat/hello-world/git/commits/588483b99a46342501d99e3f10630cfc1219ea32"
-                ]
-            ]
+                'type' => 'commit',
+                'details' => [
+                    'path' => '/example/secrets.txt',
+                    'start_line' => 5,
+                    'end_line' => 5,
+                    'start_column' => 1,
+                    'end_column' => 64,
+                    'blob_sha' => '9def38117ab2d8355b982429aa924e268b4b0065',
+                    'blob_url' => 'https://HOSTNAME/repos/octocat/hello-world/git/blobs/9def38117ab2d8355b982429aa924e268b4b0065',
+                    'commit_sha' => '588483b99a46342501d99e3f10630cfc1219ea32',
+                    'commit_url' => 'https://HOSTNAME/repos/octocat/hello-world/git/commits/588483b99a46342501d99e3f10630cfc1219ea32',
+                ],
+            ],
         ];
 
         /** @var SecretScanning|MockObject $api */

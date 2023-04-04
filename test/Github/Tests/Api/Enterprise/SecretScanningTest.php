@@ -30,7 +30,7 @@ class SecretScanningTest extends TestCase
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->alerts('KnpLabs', [
-            'state' => 'all'
+            'state' => 'all',
         ]));
     }
 

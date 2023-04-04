@@ -204,7 +204,7 @@ class UserTest extends TestCase
             'affiliation' => 'owner,collaborator,organization_member',
             'params' => [
                 'per_page' => 1,
-            ]
+            ],
         ]));
     }
 

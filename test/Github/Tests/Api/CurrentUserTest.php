@@ -185,7 +185,7 @@ class CurrentUserTest extends TestCase
             ->will($this->returnValue($expectedArray));
 
         $this->assertEquals($expectedArray, $api->repositories('owner', 'full_name', 'asc', null, null, [
-            'per_page' => 10
+            'per_page' => 10,
         ]));
     }
 

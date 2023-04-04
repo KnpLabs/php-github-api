@@ -9,7 +9,7 @@ class SecretScanning extends \Github\Api\AbstractApi
      *
      * @param string $username
      * @param string $repository
-     * @param array $params
+     * @param array  $params
      *
      * @return array|string
      */
@@ -23,7 +23,7 @@ class SecretScanning extends \Github\Api\AbstractApi
      *
      * @param string $username
      * @param string $repository
-     * @param int $alertNumber
+     * @param int    $alertNumber
      *
      * @return array|string
      */
@@ -37,8 +37,8 @@ class SecretScanning extends \Github\Api\AbstractApi
      *
      * @param string $username
      * @param string $repository
-     * @param int $alertNumber
-     * @param array $params
+     * @param int    $alertNumber
+     * @param array  $params
      *
      * @return array|string
      */
@@ -52,8 +52,8 @@ class SecretScanning extends \Github\Api\AbstractApi
      *
      * @param string $username
      * @param string $repository
-     * @param int $alertNumber
-     * @param array $params
+     * @param int    $alertNumber
+     * @param array  $params
      *
      * @return array|string
      */

@@ -168,14 +168,14 @@ class User extends AbstractApi
      * @param string $direction   direction of sort, asc or desc (Deprecated)
      * @param string $visibility  visibility of repository (Deprecated)
      * @param string $affiliation relationship to repository (Deprecated)
-     * @param array $params e.g. e.g. [
-     *  'type' => 'owner',
-     *  'sort' => 'full_name',
-     *  'direction'=> 'asc',
-     *  'visibility' => 'all',
-     *  'affiliation' => 'owner,collaborator,organization_member',
-     *  'per_page' => 50,
-     * ]
+     * @param array  $params      e.g. e.g. [
+     *                            'type' => 'owner',
+     *                            'sort' => 'full_name',
+     *                            'direction'=> 'asc',
+     *                            'visibility' => 'all',
+     *                            'affiliation' => 'owner,collaborator,organization_member',
+     *                            'per_page' => 50,
+     *                            ]
      *
      * @return array list of the user repositories
      */
