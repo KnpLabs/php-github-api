@@ -54,7 +54,6 @@ You can sort results using 2-3 arguments.
 
 ```php
 $repos = $client->api('search')->repositories('...', 'created', 'asc');
-$files = $client->api('search')->code('...........', 'indexed', 'desc');
 $issues = $client->api('search')->issues('.........', 'comments', 'asc');
 $users = $client->api('search')->users('..........', 'followers', 'asc');
 $commits = $client->api('search')->commits('..........', 'author-date', 'desc');
