@@ -50,15 +50,13 @@ class Search extends AbstractApi
      *
      * @link https://developer.github.com/v3/search/#search-code
      *
-     * @param string $q     the filter
-     * @param string $sort  the sort field
-     * @param string $order asc/desc
+     * @param string $q the filter
      *
      * @return array list of code found
      */
-    public function code($q, $sort = 'updated', $order = 'desc')
+    public function code(string $q)
     {
-        return $this->get('/search/code', ['q' => $q, 'sort' => $sort, 'order' => $order]);
+        return $this->get('/search/code', ['q' => $q]);
     }
 
     /**
@@ -69,11 +67,11 @@ class Search extends AbstractApi
      *
      * @return array list of code found
      */
-    public function codeWithMatch(string $q, string $sort = 'updated', string $order = 'desc'): array
+    public function codeWithMatch(string $q): array
     {
         $this->acceptHeaderValue = 'application/vnd.github.v3.text-match+json';
 
-        return $this->code($q, $sort, $order);
+        return $this->code($q);
     }
 
     /**
