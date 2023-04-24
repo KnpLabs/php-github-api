@@ -113,16 +113,30 @@ class CurrentUser extends AbstractApi
     /**
      * @link https://docs.github.com/en/rest/reference/repos#list-repositories-for-the-authenticated-user
      *
-     * @param string $type        role in the repository
-     * @param string $sort        sort by
-     * @param string $direction   direction of sort, asc or desc
-     * @param string $visibility  visibility of repository
-     * @param string $affiliation relationship to repository
+     * @param string $type        role in the repository (Deprecated)
+     * @param string $sort        sort by (Deprecated)
+     * @param string $direction   direction of sort, asc or desc  (Deprecated)
+     * @param string $visibility  visibility of repository  (Deprecated)
+     * @param string $affiliation relationship to repository  (Deprecated)
+     * @param array  $parameters  e.g. [
+     *                            'type' => 'owner',
+     *                            'sort' => 'full_name',
+     *                            'direction'=> 'asc',
+     *                            'visibility' => null,
+     *                            'affiliation' => null,
+     *                            'per_page' => 50,
+     *                            ]
      *
      * @return array
      */
-    public function repositories($type = 'owner', $sort = 'full_name', $direction = 'asc', $visibility = null, $affiliation = null)
-    {
+    public function repositories(
+        $type = 'owner',
+        $sort = 'full_name',
+        $direction = 'asc',
+        $visibility = null,
+        $affiliation = null,
+        array $parameters = []
+    ) {
         $params = [
             'type' => $type,
             'sort' => $sort,
@@ -139,7 +153,7 @@ class CurrentUser extends AbstractApi
             $params['affiliation'] = $affiliation;
         }
 
-        return $this->get('/user/repos', $params);
+        return $this->get('/user/repos', array_merge($params, $parameters));
     }
 
     /**
