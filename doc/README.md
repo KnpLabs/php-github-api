@@ -76,6 +76,7 @@ v3 APIs:
   * [Tags](repo/tags.md)
 * [Search](search.md)
 * [Users](users.md)
+  * [Migrations](user/migration.md)
 
 Additional features:
 
