@@ -62,4 +62,3 @@ class SecretScanning extends \Github\Api\AbstractApi
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/secret-scanning/alerts/'.$alertNumber.'/locations', $params);
     }
 }
-
