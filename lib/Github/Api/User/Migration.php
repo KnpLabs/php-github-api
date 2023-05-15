@@ -24,16 +24,10 @@ class Migration extends AbstractApi
      *
      * @param array $params
      *
-     * @throws MissingArgumentException
-     *
      * @return array|string
      */
     public function start(array $params)
     {
-        if (!isset($params['repositories'])) {
-            throw new MissingArgumentException(['repositories']);
-        }
-
         return $this->post('/user/migrations', $params);
     }
 
