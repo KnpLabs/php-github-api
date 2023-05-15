@@ -2,7 +2,6 @@
 
 namespace Github\Api;
 
-
 /**
  * Searching users, getting user information.
  *
