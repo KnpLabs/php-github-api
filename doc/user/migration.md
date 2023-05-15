@@ -6,9 +6,18 @@
 https://docs.github.com/en/rest/migrations/users?apiVersion=2022-11-28#list-user-migrations
 
 ```php
-$migrations = $client->api('user')->migration()->list([
-    'per_page' => 10
-]);
+$api = $github->api('user')->migration();
+$paginator  = new Github\ResultPager($github);
+$parameters = [];
+$migrations = $paginator->fetchAll($api, 'list', $parameters);
+
+do {
+    foreach ($migrations as $migration) {
+        // do something
+    }
+    $migrations = $paginator->fetchNext();
+}
+while($paginator->hasNext());
 ```
 
 # Start a User Migration
