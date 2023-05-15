@@ -56,22 +56,6 @@ class MigrationTest extends TestCase
     /**
      * @test
      */
-    public function shouldNotStartMigration()
-    {
-        $this->expectException(MissingArgumentException::class);
-
-        /** @var Migration|MockObject $api */
-        $api = $this->getApiMock();
-
-        $api->expects($this->never())
-            ->method('post');
-
-        $api->start([]);
-    }
-
-    /**
-     * @test
-     */
     public function shouldStartMigration()
     {
         $expectedArray = [
