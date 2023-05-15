@@ -3,7 +3,6 @@
 namespace Github\Api\User;
 
 use Github\Api\AbstractApi;
-use Github\Exception\MissingArgumentException;
 
 class Migration extends AbstractApi
 {

@@ -3,7 +3,6 @@
 namespace Github\Tests\Api\User;
 
 use Github\Api\User\Migration;
-use Github\Exception\MissingArgumentException;
 use Github\Tests\Api\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
