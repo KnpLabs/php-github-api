@@ -1,0 +1,10 @@
+<?php
+declare(strict_types=1);
+
+// see https://www.jetbrains.com/help/phpstorm/ide-advanced-metadata.html
+namespace PHPSTORM_META {
+
+    override(\Github\Client::api(0), map([
+        $METHODS$
+    ]));
+}
