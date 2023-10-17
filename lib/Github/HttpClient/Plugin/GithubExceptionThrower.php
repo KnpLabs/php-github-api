@@ -88,7 +88,6 @@ final class GithubExceptionThrower implements Plugin
                                     $errors[] = $error['message'];
                                 }
                                 break;
-
                         }
                     }
 

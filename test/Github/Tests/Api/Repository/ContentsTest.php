@@ -71,6 +71,7 @@ class ContentsTest extends TestCase
      * @param \PHPUnit_Framework_MockObject_Stub|\PHPUnit\Framework\MockObject\Stub\Exception
      *
      * @test
+     *
      * @dataProvider getFailureStubsForExistsTest
      */
     public function shouldReturnFalseWhenFileIsNotFound($failureStub)

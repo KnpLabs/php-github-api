@@ -70,6 +70,7 @@ class RepoCommentTest extends TestCase
 
     /**
      * @test
+     *
      * @depends shouldCreateCommentForCommit
      */
     public function shouldShowCommentByCommentId($commentId)
@@ -91,6 +92,7 @@ class RepoCommentTest extends TestCase
 
     /**
      * @test
+     *
      * @depends shouldShowCommentByCommentId
      */
     public function shouldUpdateCommentByCommentId($commentId)
@@ -113,6 +115,7 @@ class RepoCommentTest extends TestCase
 
     /**
      * @test
+     *
      * @depends shouldUpdateCommentByCommentId
      */
     public function shouldRemoveCommentByCommentId($commentId)

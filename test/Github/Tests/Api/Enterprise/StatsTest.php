@@ -24,6 +24,7 @@ class StatsTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider getTypes
      */
     public function shouldShowStatsByType($type)
