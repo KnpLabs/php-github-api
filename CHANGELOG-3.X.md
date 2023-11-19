@@ -1,5 +1,18 @@
 # Changelog
 
+## 3.13.0
+
+### Added
+- Test against php 8.3 ([sergiy-petrov](https://github.com/sergiy-petrov)) [#1124](https://github.com/KnpLabs/php-github-api/issues/1124)
+- feat: Secret Scanning Alerts ([haridarshan](https://github.com/haridarshan)) [#1114](https://github.com/KnpLabs/php-github-api/issues/1114)
+- feat: User Migration ([haridarshan](https://github.com/haridarshan)) [#1115](https://github.com/KnpLabs/php-github-api/issues/1115)
+
+### Changed
+- General chores ([acrobat](https://github.com/acrobat)) [#1125](https://github.com/KnpLabs/php-github-api/issues/1125)
+
+### Fixed
+- Fix detection of secondary rate limit ([mathieudz](https://github.com/mathieudz)) [#1126](https://github.com/KnpLabs/php-github-api/issues/1126)
+
 ## 3.12.0
 
 ### Added
