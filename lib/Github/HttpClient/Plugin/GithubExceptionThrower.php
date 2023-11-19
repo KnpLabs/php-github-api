@@ -128,7 +128,7 @@ final class GithubExceptionThrower implements Plugin
             }
 
             $reset = (int) ResponseMediator::getHeader($response, 'X-RateLimit-Reset');
-            if ((403 === $response->getStatusCode()) && 0 < $reset && isset($content['message']) && (0 === strpos($content['message'], 'You have exceeded a secondary rate limit.'))) {
+            if ((403 === $response->getStatusCode()) && 0 < $reset && isset($content['message']) && (0 === strpos($content['message'], 'You have exceeded a secondary rate limit'))) {
                 $limit = (int) ResponseMediator::getHeader($response, 'X-RateLimit-Limit');
 
                 throw new ApiLimitExceedException($limit, $reset);
