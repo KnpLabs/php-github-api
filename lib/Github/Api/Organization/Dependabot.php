@@ -16,6 +16,6 @@ class Dependabot extends AbstractApi
      */
     public function alerts(string $organization, array $params = [])
     {
-        return $this->get('/orgs/' . rawurlencode($organization) . '/dependabot/alerts', $params);
+        return $this->get('/orgs/'.rawurlencode($organization).'/dependabot/alerts', $params);
     }
 }

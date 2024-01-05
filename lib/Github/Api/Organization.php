@@ -5,12 +5,12 @@ namespace Github\Api;
 use Github\Api\Organization\Actions\Secrets;
 use Github\Api\Organization\Actions\SelfHostedRunners;
 use Github\Api\Organization\Actions\Variables;
+use Github\Api\Organization\Dependabot;
 use Github\Api\Organization\Hooks;
 use Github\Api\Organization\Members;
 use Github\Api\Organization\OutsideCollaborators;
 use Github\Api\Organization\SecretScanning;
 use Github\Api\Organization\Teams;
-use Github\Api\Organization\Dependabot;
 
 /**
  * Getting organization information and managing authenticated organization account information.
