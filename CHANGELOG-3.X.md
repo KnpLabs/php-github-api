@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.14.0
+
+### Added
+- Allow php-http/cache-plugin v2 ([GrahamCampbell](https://github.com/GrahamCampbell)) [#1134](https://github.com/KnpLabs/php-github-api/issues/1134)
+
 ## 3.13.0
 
 ### Added
