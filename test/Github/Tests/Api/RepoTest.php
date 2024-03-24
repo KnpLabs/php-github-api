@@ -92,14 +92,14 @@ class RepoTest extends TestCase
         $api->expects($this->once())
             ->method('post')
             ->with('/user/repos', [
-                'name'          => 'l3l0Repo',
-                'description'   => '',
-                'homepage'      => '',
-                'private'       => false,
-                'has_issues'    => false,
-                'has_wiki'      => false,
+                'name' => 'l3l0Repo',
+                'description' => '',
+                'homepage' => '',
+                'private' => false,
+                'has_issues' => false,
+                'has_wiki' => false,
                 'has_downloads' => false,
-                'auto_init'     => false,
+                'auto_init' => false,
                 'has_projects' => true,
             ])
             ->will($this->returnValue($expectedArray));
@@ -118,14 +118,14 @@ class RepoTest extends TestCase
         $api->expects($this->once())
             ->method('post')
             ->with('/orgs/KnpLabs/repos', [
-                'name'          => 'KnpLabsRepo',
-                'description'   => '',
-                'homepage'      => '',
-                'private'       => false,
-                'has_issues'    => false,
-                'has_wiki'      => false,
+                'name' => 'KnpLabsRepo',
+                'description' => '',
+                'homepage' => '',
+                'private' => false,
+                'has_issues' => false,
+                'has_wiki' => false,
                 'has_downloads' => false,
-                'auto_init'     => false,
+                'auto_init' => false,
                 'has_projects' => true,
             ])
             ->will($this->returnValue($expectedArray));
@@ -144,16 +144,16 @@ class RepoTest extends TestCase
         $api->expects($this->once())
             ->method('post')
             ->with('/user/repos', [
-                'name'          => 'KnpLabsRepo',
-                'description'   => '',
-                'homepage'      => '',
-                'has_issues'    => false,
-                'has_wiki'      => false,
+                'name' => 'KnpLabsRepo',
+                'description' => '',
+                'homepage' => '',
+                'has_issues' => false,
+                'has_wiki' => false,
                 'has_downloads' => false,
-                'auto_init'     => false,
-                'has_projects'  => true,
-                'visibility'    => 'internal',
-                'private'       => false,
+                'auto_init' => false,
+                'has_projects' => true,
+                'visibility' => 'internal',
+                'private' => false,
             ])
             ->will($this->returnValue($expectedArray));
 
@@ -389,14 +389,14 @@ class RepoTest extends TestCase
         $api->expects($this->once())
             ->method('post')
             ->with('/user/repos', [
-                'name'          => 'l3l0Repo',
-                'description'   => 'test',
-                'homepage'      => 'http://l3l0.eu',
-                'private'       => true,
-                'has_issues'    => false,
-                'has_wiki'      => false,
+                'name' => 'l3l0Repo',
+                'description' => 'test',
+                'homepage' => 'http://l3l0.eu',
+                'private' => true,
+                'has_issues' => false,
+                'has_wiki' => false,
                 'has_downloads' => false,
-                'auto_init'     => false,
+                'auto_init' => false,
                 'has_projects' => true,
             ])
             ->will($this->returnValue($expectedArray));

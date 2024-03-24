@@ -14,6 +14,7 @@ v3 APIs:
   * [Public keys](currentuser/publickeys.md)
   * [Memberships](currentuser/memberships.md)
 * [Enterprise](enterprise.md)
+  * [Secret Scanning Alert](enterprise/secret-scanning.md)
 * [Gists](gists.md)
   * [Comments](gists/comments.md)
 * GitData
@@ -42,6 +43,7 @@ v3 APIs:
   * [Self hosted runners](organization/actions/self_hosted_runners.md)
   * [Secrets](organization/actions/secrets.md)
   * [Variables](organization/actions/variables.md)
+  * [Secret Scanning Alert](organization/secret-scanning.md)
 * [Projects](project/projects.md)
   * [Columns](project/columns.md)
     * [Cards](project/cards.md)
@@ -74,8 +76,10 @@ v3 APIs:
   * [Stargazers](repo/stargazers.md)
   * [Statuses](repo/statuses.md)
   * [Tags](repo/tags.md)
+  * [Secret Scanning Alert](repo/secret-scanning.md)
 * [Search](search.md)
 * [Users](users.md)
+  * [Migrations](user/migration.md)
 
 Additional features:
 

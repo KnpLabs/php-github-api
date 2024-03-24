@@ -24,6 +24,7 @@ use Github\Api\Repository\Pages;
 use Github\Api\Repository\Projects;
 use Github\Api\Repository\Protection;
 use Github\Api\Repository\Releases;
+use Github\Api\Repository\SecretScanning;
 use Github\Api\Repository\Stargazers;
 use Github\Api\Repository\Statuses;
 use Github\Api\Repository\Traffic;
@@ -203,14 +204,14 @@ class Repo extends AbstractApi
         $path = null !== $organization ? '/orgs/'.$organization.'/repos' : '/user/repos';
 
         $parameters = [
-            'name'          => $name,
-            'description'   => $description,
-            'homepage'      => $homepage,
-            'private'       => ($visibility ?? ($public ? 'public' : 'private')) === 'private',
-            'has_issues'    => $hasIssues,
-            'has_wiki'      => $hasWiki,
+            'name' => $name,
+            'description' => $description,
+            'homepage' => $homepage,
+            'private' => ($visibility ?? ($public ? 'public' : 'private')) === 'private',
+            'has_issues' => $hasIssues,
+            'has_wiki' => $hasWiki,
             'has_downloads' => $hasDownloads,
-            'auto_init'     => $autoInit,
+            'auto_init' => $autoInit,
             'has_projects' => $hasProjects,
         ];
 
@@ -896,5 +897,13 @@ class Repo extends AbstractApi
     public function disableVulnerabilityAlerts(string $username, string $repository)
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/vulnerability-alerts');
+    }
+
+    /**
+     * @return SecretScanning
+     */
+    public function secretScanning(): SecretScanning
+    {
+        return new SecretScanning($this->getClient());
     }
 }

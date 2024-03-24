@@ -15,7 +15,7 @@ class ResponseMediatorTest extends \PHPUnit\Framework\TestCase
         $body = ['foo' => 'bar'];
         $response = new Response(
             200,
-            ['Content-Type'=>'application/json'],
+            ['Content-Type' => 'application/json'],
             \GuzzleHttp\Psr7\stream_for(json_encode($body))
         );
 
@@ -45,7 +45,7 @@ class ResponseMediatorTest extends \PHPUnit\Framework\TestCase
         $body = 'foobar';
         $response = new Response(
             200,
-            ['Content-Type'=>'application/json'],
+            ['Content-Type' => 'application/json'],
             \GuzzleHttp\Psr7\stream_for($body)
         );
 
@@ -64,7 +64,7 @@ class ResponseMediatorTest extends \PHPUnit\Framework\TestCase
         ];
 
         // response mock
-        $response = new Response(200, ['link'=>$header]);
+        $response = new Response(200, ['link' => $header]);
         $result = ResponseMediator::getPagination($response);
 
         $this->assertEquals($pagination, $result);
@@ -75,7 +75,7 @@ class ResponseMediatorTest extends \PHPUnit\Framework\TestCase
         $header = 'application/json';
         $response = new Response(
             200,
-            ['Content-Type'=> $header]
+            ['Content-Type' => $header]
         );
 
         $this->assertEquals($header, ResponseMediator::getHeader($response, 'content-type'));

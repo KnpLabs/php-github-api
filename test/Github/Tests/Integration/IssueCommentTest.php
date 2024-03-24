@@ -31,6 +31,7 @@ class IssueCommentTest extends TestCase
 
     /**
      * @test
+     *
      * @depends shouldRetrieveCommentsForIssue
      */
     public function shouldRetrieveSingleComment($commentId)
@@ -72,6 +73,7 @@ class IssueCommentTest extends TestCase
 
     /**
      * @test
+     *
      * @depends shouldCreateCommentForIssue
      */
     public function shouldUpdateCommentByCommentId($commentId)
@@ -94,6 +96,7 @@ class IssueCommentTest extends TestCase
 
     /**
      * @test
+     *
      * @depends shouldUpdateCommentByCommentId
      */
     public function shouldRemoveCommentByCommentId($commentId)

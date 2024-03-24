@@ -19,7 +19,7 @@
     "require": {
         "php": "^7.2.5 || ^8.0",
         "ext-json": "*",
-        "php-http/cache-plugin": "^1.7.1",
+        "php-http/cache-plugin": "^1.7.1|^2.0",
         "php-http/client-common": "^2.3",
         "php-http/discovery": "^1.12",
         "php-http/httplug": "^2.2",
@@ -27,7 +27,7 @@
         "psr/cache": "^1.0|^2.0|^3.0",
         "psr/http-client-implementation": "^1.0",
         "psr/http-factory-implementation": "^1.0",
-        "psr/http-message": "^1.0",
+        "psr/http-message": "^1.0|^2.0",
         "symfony/polyfill-php80": "^1.17",
         "symfony/deprecation-contracts": "^2.2|^3.0",
         "phpstan/phpdoc-parser": "^1.21"
@@ -53,7 +53,7 @@
     "extra": {
         "branch-alias": {
             "dev-2.x": "2.20.x-dev",
-            "dev-master": "3.11.x-dev"
+            "dev-master": "3.14-dev"
         }
     },
     "config": {

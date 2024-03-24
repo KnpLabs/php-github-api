@@ -71,6 +71,7 @@ class ContentsTest extends TestCase
      * @param \PHPUnit_Framework_MockObject_Stub|\PHPUnit\Framework\MockObject\Stub\Exception
      *
      * @test
+     *
      * @dataProvider getFailureStubsForExistsTest
      */
     public function shouldReturnFalseWhenFileIsNotFound($failureStub)
@@ -110,10 +111,10 @@ class ContentsTest extends TestCase
         $branch = 'master';
         $committer = ['name' => 'committer name', 'email' => 'email@example.com'];
         $parameters = [
-            'content'   => base64_encode($content),
-            'message'   => $message,
+            'content' => base64_encode($content),
+            'message' => $message,
             'committer' => $committer,
-            'branch'    => $branch,
+            'branch' => $branch,
         ];
 
         $api = $this->getApiMock();
@@ -149,11 +150,11 @@ class ContentsTest extends TestCase
         $branch = 'master';
         $committer = ['name' => 'committer name', 'email' => 'email@example.com'];
         $parameters = [
-            'content'   => base64_encode($content),
-            'message'   => $message,
+            'content' => base64_encode($content),
+            'message' => $message,
             'committer' => $committer,
-            'branch'    => $branch,
-            'sha'       => $sha,
+            'branch' => $branch,
+            'sha' => $sha,
         ];
 
         $api = $this->getApiMock();
@@ -188,10 +189,10 @@ class ContentsTest extends TestCase
         $branch = 'master';
         $committer = ['name' => 'committer name', 'email' => 'email@example.com'];
         $parameters = [
-            'message'   => $message,
+            'message' => $message,
             'committer' => $committer,
-            'branch'    => $branch,
-            'sha'       => $sha,
+            'branch' => $branch,
+            'sha' => $sha,
         ];
 
         $api = $this->getApiMock();

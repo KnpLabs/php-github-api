@@ -40,6 +40,7 @@ class ClientTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @test
+     *
      * @dataProvider getAuthenticationFullData
      */
     public function shouldAuthenticateUsingAllGivenParameters($login, $password, $method)
@@ -115,6 +116,7 @@ class ClientTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @test
+     *
      * @dataProvider getApiClassesProvider
      */
     public function shouldGetApiInstance($apiName, $class)
@@ -126,6 +128,7 @@ class ClientTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @test
+     *
      * @dataProvider getApiClassesProvider
      */
     public function shouldGetMagicApiInstance($apiName, $class)

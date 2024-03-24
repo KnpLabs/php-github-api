@@ -35,13 +35,13 @@ class TreesTest extends TestCase
                     'path' => 'path',
                     'mode' => 'mode',
                     'type' => 'type',
-                    'sha'  => '1234',
+                    'sha' => '1234',
                 ],
                 [
                     'path' => 'htap',
                     'mode' => 'edom',
                     'type' => 'epyt',
-                    'sha'  => '4321',
+                    'sha' => '4321',
                 ],
             ],
         ];
@@ -118,7 +118,7 @@ class TreesTest extends TestCase
             'tree' => [
                 'mode' => 'mode',
                 'type' => 'type',
-                'content'  => 'content',
+                'content' => 'content',
             ],
         ];
 
@@ -139,7 +139,7 @@ class TreesTest extends TestCase
             'tree' => [
                 'path' => 'path',
                 'type' => 'type',
-                'content'  => 'content',
+                'content' => 'content',
             ],
         ];
 
@@ -160,7 +160,7 @@ class TreesTest extends TestCase
             'tree' => [
                 'path' => 'path',
                 'mode' => 'mode',
-                'content'  => 'content',
+                'content' => 'content',
             ],
         ];
 

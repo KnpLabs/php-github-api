@@ -43,6 +43,7 @@ class AssetsTest extends TestCase
 
     /**
      * @test
+     *
      * @requires PHP 5.3.4
      */
     public function shouldCreateReleaseAsset()

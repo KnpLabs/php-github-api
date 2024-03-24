@@ -103,7 +103,7 @@ class GithubExceptionThrowerTest extends TestCase
                     ],
                     json_encode(
                         [
-                            'message' => 'You have exceeded a secondary rate limit. Please wait a few minutes before you try again.',
+                            'message' => 'You have exceeded a secondary rate limit and have been temporarily blocked from content creation. Please retry your request again later. If you reach out to GitHub Support for help, please include the request ID #xxxxxxx.',
                         ]
                     )
                 ),

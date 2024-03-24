@@ -15,21 +15,21 @@ class MembershipsTest extends TestCase
             [
                 'organization' => [
                     'login' => 'octocat',
-                    'id'    => 1,
+                    'id' => 1,
                 ],
-                'user'         => [
+                'user' => [
                     'login' => 'defunkt',
-                    'id'    => 3,
+                    'id' => 3,
                 ],
             ],
             [
                 'organization' => [
                     'login' => 'invitocat',
-                    'id'    => 2,
+                    'id' => 2,
                 ],
-                'user'         => [
+                'user' => [
                     'login' => 'defunkt',
-                    'id'    => 3,
+                    'id' => 3,
                 ],
             ],
         ];
@@ -51,11 +51,11 @@ class MembershipsTest extends TestCase
         $expectedValue = [
             'organization' => [
                 'login' => 'invitocat',
-                'id'    => 2,
+                'id' => 2,
             ],
-            'user'         => [
+            'user' => [
                 'login' => 'defunkt',
-                'id'    => 3,
+                'id' => 3,
             ],
         ];
 

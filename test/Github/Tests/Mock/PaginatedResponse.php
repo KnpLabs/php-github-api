@@ -18,7 +18,7 @@ class PaginatedResponse extends Response
         $this->loopCount = $loopCount;
         $this->content = $content;
 
-        parent::__construct(200, ['Content-Type'=>'application/json'], \GuzzleHttp\Psr7\stream_for(json_encode($content)));
+        parent::__construct(200, ['Content-Type' => 'application/json'], \GuzzleHttp\Psr7\stream_for(json_encode($content)));
     }
 
     public function getHeader($header)

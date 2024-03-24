@@ -1,5 +1,32 @@
 # Changelog
 
+## 3.14.0
+
+### Added
+- Allow php-http/cache-plugin v2 ([GrahamCampbell](https://github.com/GrahamCampbell)) [#1134](https://github.com/KnpLabs/php-github-api/issues/1134)
+
+## 3.13.0
+
+### Added
+- Test against php 8.3 ([sergiy-petrov](https://github.com/sergiy-petrov)) [#1124](https://github.com/KnpLabs/php-github-api/issues/1124)
+- feat: Secret Scanning Alerts ([haridarshan](https://github.com/haridarshan)) [#1114](https://github.com/KnpLabs/php-github-api/issues/1114)
+- feat: User Migration ([haridarshan](https://github.com/haridarshan)) [#1115](https://github.com/KnpLabs/php-github-api/issues/1115)
+
+### Changed
+- General chores ([acrobat](https://github.com/acrobat)) [#1125](https://github.com/KnpLabs/php-github-api/issues/1125)
+
+### Fixed
+- Fix detection of secondary rate limit ([mathieudz](https://github.com/mathieudz)) [#1126](https://github.com/KnpLabs/php-github-api/issues/1126)
+
+## 3.12.0
+
+### Added
+- feat: Support for Organization Runners ([haridarshan](https://github.com/haridarshan), [renovate](https://github.com/renovate)[[bot](https://github.com/bot)]) [#1101](https://github.com/KnpLabs/php-github-api/issues/1101)
+- allow psr/http-message v2 ([LordSimal](https://github.com/LordSimal)) [#1122](https://github.com/KnpLabs/php-github-api/issues/1122)
+
+### Changed
+- Fixed branch alias ([GrahamCampbell](https://github.com/GrahamCampbell)) [#1109](https://github.com/KnpLabs/php-github-api/issues/1109)
+
 ## 3.11.0
 
 ### Added
