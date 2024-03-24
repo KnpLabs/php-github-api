@@ -5,6 +5,7 @@ namespace Github\Api;
 use Github\Api\Organization\Actions\Secrets;
 use Github\Api\Organization\Actions\SelfHostedRunners;
 use Github\Api\Organization\Actions\Variables;
+use Github\Api\Organization\Dependabot;
 use Github\Api\Organization\Hooks;
 use Github\Api\Organization\Members;
 use Github\Api\Organization\OutsideCollaborators;
@@ -157,5 +158,13 @@ class Organization extends AbstractApi
     public function secretScanning(): SecretScanning
     {
         return new SecretScanning($this->getClient());
+    }
+
+    /**
+     * @return Dependabot
+     */
+    public function dependabot(): Dependabot
+    {
+        return new Dependabot($this->getClient());
     }
 }
