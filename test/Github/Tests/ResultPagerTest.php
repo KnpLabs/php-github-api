@@ -187,7 +187,7 @@ class ResultPagerTest extends \PHPUnit\Framework\TestCase
             'sha' => '43068834af7e501778708ed13106de95f782328c',
         ];
 
-        $response = new Response(200, ['Content-Type'=>'application/json'], Utils::streamFor(json_encode($content)));
+        $response = new Response(200, ['Content-Type' => 'application/json'], Utils::streamFor(json_encode($content)));
 
         // httpClient mock
         $httpClientMock = $this->getMockBuilder(HttpClient::class)
