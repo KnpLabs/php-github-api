@@ -227,10 +227,10 @@ class GistsTest extends TestCase
             'files' => [
                 'filename.txt' => [
                     'filename' => 'new_name.txt',
-                    'content'  => 'content',
+                    'content' => 'content',
                 ],
                 'filename_new.txt' => [
-                    'content'  => 'content new',
+                    'content' => 'content new',
                 ],
             ],
         ];

@@ -24,7 +24,7 @@ class CacheTest extends \PHPUnit\Framework\TestCase
         $mockClient->addResponse($this->getCurrentUserResponse('octocat'));
 
         $github = Client::createWithHttpClient($mockClient);
-        $github->addCache(new ArrayAdapter(), ['default_ttl'=>600]);
+        $github->addCache(new ArrayAdapter(), ['default_ttl' => 600]);
 
         $github->authenticate('fake_token_aaa', AuthMethod::ACCESS_TOKEN);
         $userA = $github->currentUser()->show();
@@ -44,7 +44,7 @@ class CacheTest extends \PHPUnit\Framework\TestCase
         $mockClient->addResponse($this->getCurrentUserResponse('octocat'));
 
         $github = Client::createWithHttpClient($mockClient);
-        $github->addCache(new ArrayAdapter(), ['default_ttl'=>600]);
+        $github->addCache(new ArrayAdapter(), ['default_ttl' => 600]);
 
         $github->authenticate('fake_token_aaa', AuthMethod::ACCESS_TOKEN);
         $userA = $github->currentUser()->show();
