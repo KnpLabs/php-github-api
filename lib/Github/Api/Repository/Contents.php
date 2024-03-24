@@ -181,7 +181,7 @@ class Contents extends AbstractApi
         $parameters = [
             'content' => base64_encode($content),
             'message' => $message,
-            'sha'     => $sha,
+            'sha' => $sha,
         ];
 
         if (null !== $branch) {
@@ -221,7 +221,7 @@ class Contents extends AbstractApi
 
         $parameters = [
             'message' => $message,
-            'sha'     => $sha,
+            'sha' => $sha,
         ];
 
         if (null !== $branch) {

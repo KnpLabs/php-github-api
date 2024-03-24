@@ -37,7 +37,7 @@ class PagesTest extends TestCase
         $params = [
             'source' => [
                 'branch' => 'master',
-                'path'   => '/path',
+                'path' => '/path',
             ],
         ];
 

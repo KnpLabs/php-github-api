@@ -111,10 +111,10 @@ class ContentsTest extends TestCase
         $branch = 'master';
         $committer = ['name' => 'committer name', 'email' => 'email@example.com'];
         $parameters = [
-            'content'   => base64_encode($content),
-            'message'   => $message,
+            'content' => base64_encode($content),
+            'message' => $message,
             'committer' => $committer,
-            'branch'    => $branch,
+            'branch' => $branch,
         ];
 
         $api = $this->getApiMock();
@@ -150,11 +150,11 @@ class ContentsTest extends TestCase
         $branch = 'master';
         $committer = ['name' => 'committer name', 'email' => 'email@example.com'];
         $parameters = [
-            'content'   => base64_encode($content),
-            'message'   => $message,
+            'content' => base64_encode($content),
+            'message' => $message,
             'committer' => $committer,
-            'branch'    => $branch,
-            'sha'       => $sha,
+            'branch' => $branch,
+            'sha' => $sha,
         ];
 
         $api = $this->getApiMock();
@@ -189,10 +189,10 @@ class ContentsTest extends TestCase
         $branch = 'master';
         $committer = ['name' => 'committer name', 'email' => 'email@example.com'];
         $parameters = [
-            'message'   => $message,
+            'message' => $message,
             'committer' => $committer,
-            'branch'    => $branch,
-            'sha'       => $sha,
+            'branch' => $branch,
+            'sha' => $sha,
         ];
 
         $api = $this->getApiMock();

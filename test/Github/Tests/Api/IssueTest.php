@@ -35,10 +35,10 @@ class IssueTest extends TestCase
         $data = [
             'state' => 'open',
             'milestone' => '*',
-            'assignee'  => 'l3l0',
+            'assignee' => 'l3l0',
             'mentioned' => 'l3l0',
-            'labels'    => 'bug,@high',
-            'sort'      => 'created',
+            'labels' => 'bug,@high',
+            'sort' => 'created',
             'direction' => 'asc',
         ];
         $sentData = $data + [
@@ -77,7 +77,7 @@ class IssueTest extends TestCase
     {
         $data = [
             'title' => 'some title',
-            'body'  => 'some body',
+            'body' => 'some body',
         ];
 
         $api = $this->getApiMock();
@@ -95,7 +95,7 @@ class IssueTest extends TestCase
     {
         $this->expectException(MissingArgumentException::class);
         $data = [
-            'body'  => 'some body',
+            'body' => 'some body',
         ];
 
         $api = $this->getApiMock();
