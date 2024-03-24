@@ -4,6 +4,7 @@ namespace Github\Tests;
 
 use Github\Api\Issue;
 use Github\Api\Organization\Members;
+use Github\Api\Repo;
 use Github\Api\Repository\Statuses;
 use Github\Api\Search;
 use Github\Client;
@@ -116,6 +117,40 @@ class ResultPagerTest extends \PHPUnit\Framework\TestCase
         $this->assertCount($amountLoops * count($content['items']), $result);
     }
 
+    /**
+     * @test
+     */
+    public function shouldHandleEmptyContributorListWith204Header()
+    {
+        // Set up a 204 response with an empty body
+        $response = new Response(204, [], '');
+        $username = 'testuser';
+        $reponame = 'testrepo';
+
+        // Mock the HttpClient to return the empty response
+        $httpClientMock = $this->getMockBuilder(HttpClient::class)
+            ->onlyMethods(['sendRequest'])
+            ->getMock();
+        $httpClientMock
+            ->method('sendRequest')
+            ->willReturn($response);
+
+        $client = Client::createWithHttpClient($httpClientMock);
+
+        $repoApi = new Repo($client);
+
+        $paginator = $this->getMockBuilder(ResultPager::class)
+            ->setConstructorArgs([$client]) // Pass the Client in the constructor
+            ->onlyMethods(['fetchAll'])
+            ->getMock();
+        $paginator->expects($this->once())
+            ->method('fetchAll')
+            ->with($repoApi, 'contributors', [$username, $reponame])
+            ->willReturn([]);
+
+        $this->assertEquals([], $paginator->fetchAll($repoApi, 'contributors', [$username, $reponame]));
+    }
+
     public function testFetch()
     {
         $result = ['foo'];
@@ -174,6 +209,34 @@ class ResultPagerTest extends \PHPUnit\Framework\TestCase
     }
 
     public function testFetchAllWithoutKeys()
+    {
+        $content = [
+            ['title' => 'issue 1'],
+            ['title' => 'issue 2'],
+            ['title' => 'issue 3'],
+        ];
+
+        $response = new PaginatedResponse(3, $content);
+
+        // httpClient mock
+        $httpClientMock = $this->getMockBuilder(HttpClient::class)
+            ->onlyMethods(['sendRequest'])
+            ->getMock();
+        $httpClientMock
+            ->expects($this->exactly(3))
+            ->method('sendRequest')
+            ->willReturn($response);
+
+        $client = Client::createWithHttpClient($httpClientMock);
+
+        $api = new Issue($client);
+        $paginator = new ResultPager($client);
+        $result = $paginator->fetchAll($api, 'all', ['knplabs', 'php-github-api']);
+
+        $this->assertCount(9, $result);
+    }
+
+    public function testFetchAll()
     {
         $content = [
             ['title' => 'issue 1'],
