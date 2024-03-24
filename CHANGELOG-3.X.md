@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.14.1
+
+### Fixed
+- Handle case of GitHub returning 204 No Content in some scenarios ([tomcorbett](https://github.com/tomcorbett)) [#1135](https://github.com/KnpLabs/php-github-api/issues/1135)
+
 ## 3.14.0
 
 ### Added
