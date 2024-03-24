@@ -4,9 +4,9 @@ namespace Github\Tests;
 
 use Github\Api\Issue;
 use Github\Api\Organization\Members;
+use Github\Api\Repo;
 use Github\Api\Repository\Statuses;
 use Github\Api\Search;
-use Github\Api\Repo;
 use Github\Client;
 use Github\ResultPager;
 use Github\Tests\Mock\PaginatedResponse;
@@ -118,7 +118,7 @@ class ResultPagerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @test 
+     * @test
      */
     public function shouldHandleEmptyContributorListWith204Header()
     {
