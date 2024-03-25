@@ -86,7 +86,7 @@ class ResultPager implements ResultPagerInterface
         $api = $closure($api);
         $result = $api->$method(...$parameters);
 
-        if ($result === '' && $this->client->getLastResponse()->getStatusCode() === 204) {
+        if ($result === '') {
             $result = [];
         }
 

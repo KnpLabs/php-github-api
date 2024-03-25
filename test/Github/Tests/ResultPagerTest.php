@@ -7,6 +7,7 @@ use Github\Api\Organization\Members;
 use Github\Api\Repo;
 use Github\Api\Repository\Statuses;
 use Github\Api\Search;
+use Github\Api\User;
 use Github\Client;
 use Github\ResultPager;
 use Github\Tests\Mock\PaginatedResponse;
@@ -174,6 +175,29 @@ class ResultPagerTest extends \PHPUnit\Framework\TestCase
             ->method('postFetch');
 
         $this->assertEquals($result, $paginator->fetch($api, $method, $parameters));
+    }
+
+    public function testEmptyFetch()
+    {
+        $parameters = ['username'];
+        $api = $this->getMockBuilder(User::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['events'])
+            ->getMock();
+        $api->expects($this->once())
+            ->method('events')
+            ->with(...$parameters)
+            ->willReturn('');
+
+        $paginator = $this->getMockBuilder(ResultPager::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['postFetch'])
+            ->getMock();
+
+        $paginator->expects($this->once())
+            ->method('postFetch');
+
+        $this->assertEquals([], $paginator->fetch($api, 'events', $parameters));
     }
 
     public function testFetchAllPreserveKeys()
