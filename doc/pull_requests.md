@@ -90,3 +90,11 @@ $pullRequest = $client->api('pull_request')->create('ezsystems', 'ezpublish', ar
 ```
 
 This returns the details of the pull request.
+
+### Merge a Pull Request
+
+> Requires [authentication](security.md)
+
+```php
+$client->api('pull_request')->merge('KnpLabs', 'php-github-api', $pullNumber, $commitMessage, $sha, $mergeMethod, $commitTitle);
+```
