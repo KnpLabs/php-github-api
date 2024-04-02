@@ -139,13 +139,13 @@ class Apps extends AbstractApi
      *
      * @link https://developer.github.com/v3/apps/installations/#list-repositories
      *
-     * @param int $userId
+     * @param int   $userId
+     * @param array $parameters
      *
      * @return array
      */
-    public function listRepositories($userId = null)
+    public function listRepositories($userId = null, $parameters = [])
     {
-        $parameters = [];
         if ($userId) {
             $parameters['user_id'] = $userId;
         }
