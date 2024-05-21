@@ -27,8 +27,8 @@ class Comments extends AbstractApi
      */
     public function configure($bodyType = null)
     {
-        if (!in_array($bodyType, ['raw', 'text', 'html'])) {
-            $bodyType = 'full';
+        if (!in_array($bodyType, ['text', 'html', 'full'])) {
+            $bodyType = 'raw';
         }
 
         $this->acceptHeaderValue = sprintf('application/vnd.github.%s.%s+json', $this->getApiVersion(), $bodyType);
