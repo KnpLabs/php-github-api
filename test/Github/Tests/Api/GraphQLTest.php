@@ -13,7 +13,7 @@ class GraphQLTest extends TestCase
 
         $api->expects($this->once())
             ->method('post')
-            ->with($this->equalTo('/graphql'), $this->equalTo(['query'=>'bar']))
+            ->with($this->equalTo('/graphql'), $this->equalTo(['query' => 'bar']))
             ->will($this->returnValue('foo'));
 
         $result = $api->execute('bar');
@@ -44,7 +44,7 @@ class GraphQLTest extends TestCase
         $api->expects($this->once())
             ->method('post')
             ->with('/graphql', $this->equalTo([
-                'query'=>'bar',
+                'query' => 'bar',
                 'variables' => '{"variable":"foo"}',
             ]));
 
