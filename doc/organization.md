@@ -6,6 +6,7 @@ Wraps [GitHub Organization API](http://developer.github.com/v3/orgs/).
 Additional APIs:
 * [Members API](organization/members.md)
 * [Teams API](organization/teams.md)
+* [Dependabot API](organization/dependabot.md)
 
 ### List issues in an organization
 [GitHub Issues API](https://developer.github.com/v3/issues/).
