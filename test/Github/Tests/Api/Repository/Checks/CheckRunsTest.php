@@ -102,6 +102,20 @@ class CheckRunsTest extends TestCase
         $api->allForReference('KnpLabs', 'php-github-api', 'cb4abc15424c0015b4468d73df55efb8b60a4a3d', $params);
     }
 
+    /**
+     * @test
+     */
+    public function shouldRerequestCheckRun()
+    {
+        /** @var CheckRuns|MockObject $api */
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('post')
+            ->with('/repos/KnpLabs/php-github-api/check-runs/123/rerequest');
+
+        $api->rerequest('KnpLabs', 'php-github-api', 123);
+    }
+
     protected function getApiClass(): string
     {
         return CheckRuns::class;
