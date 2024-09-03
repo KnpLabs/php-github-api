@@ -33,7 +33,7 @@ class UsageTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/orgs/KnpLabs/teams/php-github-api/copilot/usage', [])
+            ->with('/orgs/KnpLabs/team/php-github-api/copilot/usage', [])
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->orgTeamUsageSummary('KnpLabs', 'php-github-api'));
@@ -65,7 +65,7 @@ class UsageTest extends TestCase
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
-            ->with('/enterprises/KnpLabs/teams/php-github-api/copilot/usage', [])
+            ->with('/enterprises/KnpLabs/team/php-github-api/copilot/usage', [])
             ->will($this->returnValue($expectedValue));
 
         $this->assertEquals($expectedValue, $api->enterpriseTeamUsageSummary('KnpLabs', 'php-github-api'));

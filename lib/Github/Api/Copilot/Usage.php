@@ -14,7 +14,7 @@ class Usage extends AbstractApi
     public function orgTeamUsageSummary(string $organization, string $teamSlug, array $params = []): array
     {
         return $this->get(
-            '/orgs/'.rawurlencode($organization).'/teams/'.rawurlencode($teamSlug).'/copilot/usage',
+            '/orgs/'.rawurlencode($organization).'/team/'.rawurlencode($teamSlug).'/copilot/usage',
             $params
         );
     }
@@ -27,7 +27,7 @@ class Usage extends AbstractApi
     public function enterpriseTeamUsageSummary(string $enterprise, string $teamSlug, array $params = []): array
     {
         return $this->get(
-            '/enterprises/'.rawurlencode($enterprise).'/teams/'.rawurlencode($teamSlug).'/copilot/usage',
+            '/enterprises/'.rawurlencode($enterprise).'/team/'.rawurlencode($teamSlug).'/copilot/usage',
             $params
         );
     }
