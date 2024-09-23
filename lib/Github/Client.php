@@ -123,7 +123,7 @@ class Client
      * @param string|null  $apiVersion
      * @param string|null  $enterpriseUrl
      */
-    public function __construct(Builder $httpClientBuilder = null, $apiVersion = null, $enterpriseUrl = null)
+    public function __construct(?Builder $httpClientBuilder = null, $apiVersion = null, $enterpriseUrl = null)
     {
         $this->responseHistory = new History();
         $this->httpClientBuilder = $builder = $httpClientBuilder ?? new Builder();
