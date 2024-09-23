@@ -27,6 +27,8 @@ jobs:
 
             - name: Run phpunit
               run: vendor/bin/phpunit --verbose
+              env:
+                  SYMFONY_DEPRECATIONS_HELPER: 'max[self]=0'
 
     phpstan:
         name: PHPStan
