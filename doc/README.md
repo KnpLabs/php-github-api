@@ -44,6 +44,7 @@ v3 APIs:
   * [Secrets](organization/actions/secrets.md)
   * [Variables](organization/actions/variables.md)
   * [Secret Scanning Alert](organization/secret-scanning.md)
+  * [Organization Roles](organization/organization-roles.md)
 * [Projects](project/projects.md)
   * [Columns](project/columns.md)
     * [Cards](project/cards.md)
