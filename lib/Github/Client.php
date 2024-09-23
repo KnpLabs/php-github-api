@@ -301,6 +301,11 @@ class Client
                 $api = new Api\Organization\OutsideCollaborators($this);
                 break;
 
+            case 'copilotUsage':
+            case 'copilot_usage':
+                $api = new Api\Copilot\Usage($this);
+                break;
+
             default:
                 throw new InvalidArgumentException(sprintf('Undefined api instance called: "%s"', $name));
         }
