@@ -4,6 +4,7 @@ namespace Github\Tests\HttpClient\Message;
 
 use Github\HttpClient\Message\ResponseMediator;
 use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7\Utils;
 
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
@@ -16,7 +17,7 @@ class ResponseMediatorTest extends \PHPUnit\Framework\TestCase
         $response = new Response(
             200,
             ['Content-Type' => 'application/json'],
-            \GuzzleHttp\Psr7\stream_for(json_encode($body))
+            Utils::streamFor(json_encode($body))
         );
 
         $this->assertEquals($body, ResponseMediator::getContent($response));
@@ -31,7 +32,7 @@ class ResponseMediatorTest extends \PHPUnit\Framework\TestCase
         $response = new Response(
             200,
             [],
-            \GuzzleHttp\Psr7\stream_for($body)
+            Utils::streamFor($body)
         );
 
         $this->assertEquals($body, ResponseMediator::getContent($response));
@@ -46,7 +47,7 @@ class ResponseMediatorTest extends \PHPUnit\Framework\TestCase
         $response = new Response(
             200,
             ['Content-Type' => 'application/json'],
-            \GuzzleHttp\Psr7\stream_for($body)
+            Utils::streamFor($body)
         );
 
         $this->assertEquals($body, ResponseMediator::getContent($response));

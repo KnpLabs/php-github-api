@@ -3,6 +3,7 @@
 namespace Github\Tests\Mock;
 
 use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7\Utils;
 
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
@@ -18,10 +19,10 @@ class PaginatedResponse extends Response
         $this->loopCount = $loopCount;
         $this->content = $content;
 
-        parent::__construct(200, ['Content-Type' => 'application/json'], \GuzzleHttp\Psr7\stream_for(json_encode($content)));
+        parent::__construct(200, ['Content-Type' => 'application/json'], Utils::streamFor(json_encode($content)));
     }
 
-    public function getHeader($header)
+    public function getHeader($header): array
     {
         if ($header === 'Link') {
             if ($this->loopCount > 1) {
@@ -38,7 +39,7 @@ class PaginatedResponse extends Response
         return parent::getHeader($header);
     }
 
-    public function hasHeader($header)
+    public function hasHeader($header): bool
     {
         if ($header === 'Link') {
             return true;

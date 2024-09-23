@@ -33,7 +33,7 @@
     },
     "require-dev": {
         "symfony/cache": "^5.1.8",
-        "guzzlehttp/psr7": "^1.7",
+        "guzzlehttp/psr7": "^2.7",
         "http-interop/http-factory-guzzle": "^1.0",
         "guzzlehttp/guzzle": "^7.2",
         "php-http/mock-client": "^1.4.1",

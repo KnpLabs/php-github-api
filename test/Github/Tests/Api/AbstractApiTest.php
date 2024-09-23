@@ -4,6 +4,7 @@ namespace Github\Tests\Api;
 
 use Github\Api\AbstractApi;
 use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7\Utils;
 use Http\Client\Common\HttpMethodsClientInterface;
 
 class AbstractApiTest extends TestCase
@@ -232,7 +233,7 @@ class AbstractApiTest extends TestCase
         return new Response(
             200,
             ['Content-Type' => 'application/json'],
-            \GuzzleHttp\Psr7\stream_for(json_encode($expectedArray))
+            Utils::streamFor(json_encode($expectedArray))
         );
     }
 }

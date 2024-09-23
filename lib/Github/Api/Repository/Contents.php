@@ -98,7 +98,7 @@ class Contents extends AbstractApi
      *
      * @return array information about the new file
      */
-    public function create($username, $repository, $path, $content, $message, $branch = null, array $committer = null)
+    public function create($username, $repository, $path, $content, $message, $branch = null, ?array $committer = null)
     {
         $url = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
 
@@ -174,7 +174,7 @@ class Contents extends AbstractApi
      *
      * @return array information about the updated file
      */
-    public function update($username, $repository, $path, $content, $message, $sha, $branch = null, array $committer = null)
+    public function update($username, $repository, $path, $content, $message, $sha, $branch = null, ?array $committer = null)
     {
         $url = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
 
@@ -215,7 +215,7 @@ class Contents extends AbstractApi
      *
      * @return array information about the updated file
      */
-    public function rm($username, $repository, $path, $message, $sha, $branch = null, array $committer = null)
+    public function rm($username, $repository, $path, $message, $sha, $branch = null, ?array $committer = null)
     {
         $url = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/contents/'.rawurlencode($path);
 
