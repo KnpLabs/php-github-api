@@ -20,7 +20,7 @@ class GithubExceptionThrowerTest extends TestCase
     /**
      * @dataProvider responseProvider
      */
-    public function testHandleRequest(ResponseInterface $response, ExceptionInterface $exception = null): void
+    public function testHandleRequest(ResponseInterface $response, ?ExceptionInterface $exception = null): void
     {
         $request = new Request('GET', 'https://api.github.com/issues');
 
