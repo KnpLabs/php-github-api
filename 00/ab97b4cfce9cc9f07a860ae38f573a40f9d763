@@ -1,0 +1,39 @@
+---------------------------------------------------------------------------
+
+by eiriksm at 2024-09-23T09:11:18Z
+
+> It's necessary to also run the CI on PHP 8.4.
+
+Done
+
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2024-09-23T09:29:13Z
+
+Looks like there are more issues to fix. It may be easier to enable the php-cs-fixer rule that adds the `?` for you, to catch them all.
+
+---------------------------------------------------------------------------
+
+by eiriksm at 2024-09-23T09:35:24Z
+
+:+1:
+
+I am writing this on an airport before boarding my plane, so just mentioning that because I will get back to this :nerd_face:
+
+---------------------------------------------------------------------------
+
+by GrahamCampbell at 2024-09-23T10:00:57Z
+
+Looks like there are more downstream fixes that are needed first, to get this PR to pass.
+
+---------------------------------------------------------------------------
+
+by acrobat at 2024-09-23T18:45:56Z
+
+I've pushed some extra changes to fix most of the remaining issues. The deprecations in `Http\Client\Common\HttpMethodsClient` are fixed upstream but not yet releases. The http mock client still needs changes for this deprecation. I'm going to merge this PR for now as our code is deprecation free on php 8.4
+
+---------------------------------------------------------------------------
+
+by acrobat at 2024-09-23T18:46:32Z
+
+Thank you @eiriksm
