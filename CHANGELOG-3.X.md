@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.15.0
+
+### Added
+- Fix implicit nullable types to avoid PHP 8.4 warnings ([eiriksm](https://github.com/eiriksm), [acrobat](https://github.com/acrobat)) [#1144](https://github.com/KnpLabs/php-github-api/issues/1144)
+- Add API endpoints to interact with organization roles ([glaubinix](https://github.com/glaubinix)) [#1143](https://github.com/KnpLabs/php-github-api/issues/1143)
+- Copilot Usage Endpoints ([anthony-webart](https://github.com/anthony-webart)) [#1142](https://github.com/KnpLabs/php-github-api/issues/1142)
+- Fix type error in ResultPager::fetch ([nunoplopes](https://github.com/nunoplopes)) [#1132](https://github.com/KnpLabs/php-github-api/issues/1132)
+
 ## 3.14.1
 
 ### Fixed
