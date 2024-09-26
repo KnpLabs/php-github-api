@@ -62,6 +62,10 @@ $params = [/*...*/];
 $checks = $client->api('repo')->checkRuns()->allForReference('KnpLabs', 'php-github-api', $reference, $params);
 ```
 
+### Rerequest a check run
 
+https://docs.github.com/en/rest/reference/checks#rerequest-a-check-run
 
-
+```php
+$checks = $client->api('repo')->checkRuns()->rerequest('KnpLabs', 'php-github-api', $checkRunId);
+```
