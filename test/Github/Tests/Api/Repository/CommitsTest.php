@@ -58,7 +58,7 @@ class CommitsTest extends TestCase
     /**
      * @test
      */
-    public function shouldGetPullRequestsWithSha()
+    public function shouldGetAllPullRequestsUsingSha()
     {
         $expectedValue = [
             ['number' => '1', 'title' => 'My first PR'],
