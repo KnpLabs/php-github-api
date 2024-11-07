@@ -56,6 +56,25 @@ class CommitsTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function shouldGetAllPullRequestsUsingSha()
+    {
+        $expectedValue = [
+            ['number' => '1', 'title' => 'My first PR'],
+            ['number' => '2', 'title' => 'Another PR'],
+        ];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('/repos/KnpLabs/php-github-api/commits/123/pulls')
+            ->will($this->returnValue($expectedValue));
+
+        $this->assertEquals($expectedValue, $api->pulls('KnpLabs', 'php-github-api', 123));
+    }
+
+    /**
      * @return string
      */
     protected function getApiClass()

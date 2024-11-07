@@ -35,3 +35,11 @@ $commit = $client->api('repo')->commits()->compare('KnpLabs', 'php-github-api', 
 ```
 
 Returns an array of commits.
+
+### List pull requests associated with a commit
+
+```php
+$commit = $client->api('repo')->commits()->pulls('KnpLabs', 'php-github-api', '839e5185da9434753db47959bee16642bb4f2ce4');
+```
+
+Returns an array of pull requests.
