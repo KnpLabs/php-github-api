@@ -1,0 +1,17 @@
+---------------------------------------------------------------------------
+
+by lmjhs at 2024-10-22T17:02:05Z
+
+Hi @acrobat / @Nyholm, I have posted a small PR to add a missing pulls method to commits.  Please let me know if I should add anything else.  Thanks
+
+---------------------------------------------------------------------------
+
+by Nyholm at 2024-10-22T17:16:18Z
+
+Thank you. I think it looks good
+
+---------------------------------------------------------------------------
+
+by lmjhs at 2024-10-23T07:24:29Z
+
+Thanks, just realised I missed the documentation, have updated that too.
