@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.16.0
+
+### Added
+- Add API to rerequest a check run ([Spea](https://github.com/Spea)) [#1141](https://github.com/KnpLabs/php-github-api/issues/1141)
+- List pull requests associated with a commit ([lmjhs](https://github.com/lmjhs)) [#1146](https://github.com/KnpLabs/php-github-api/issues/1146)
+
 ## 3.15.0
 
 ### Added
