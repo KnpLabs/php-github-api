@@ -29,7 +29,7 @@ class CustomProperties extends AbstractApi
      * @return array
      * @throws RuntimeException if the property is not found.
      */
-    public function show(string $owner, string $repository, string $propertyName)
+    public function show(string $owner, string $repository, string $propertyName): array
     {
         $allProperties = $this->all($owner, $repository);
 
@@ -43,18 +43,17 @@ class CustomProperties extends AbstractApi
             }
         }
 
-        throw new RuntimeException("Property '{$propertyName}' not found.");
+        throw new RuntimeException("Property [$propertyName] not found.");
     }
 
     /**
      * @param string $owner The account owner of the repository.
      * @param string $repository The name of the repository.
-     * @param array<string, string|int> $params
+     * @param array<string, mixed> $params
      * @return array|string
      */
-    public function createOrUpdate(string $owner, string $repository, array $params)
+    public function update(string $owner, string $repository, array $params)
     {
         return $this->patch('/repos/' . rawurlencode($owner) . '/' . rawurlencode($repository) . '/properties/values', $params);
     }
-
 }

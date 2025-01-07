@@ -27,7 +27,7 @@ class CustomPropertiesTest extends TestCase
             'property2' => 'value2',
         ];
 
-        $api = $this->getApiMock(CustomProperties::class);
+        $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
             ->with('/repos/owner/repo/properties/values')
@@ -44,19 +44,19 @@ class CustomPropertiesTest extends TestCase
             'property2' => 'value2',
         ];
 
-        $api = $this->getApiMock(CustomProperties::class);
+        $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
             ->with('/repos/owner/repo/properties/values')
             ->willReturn($allProperties);
 
         $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage("Property 'property3' not found.");
+        $this->expectExceptionMessage("Property [property3] not found.");
 
         $api->show('owner', 'repo', 'property3');
     }
 
-    public function testCreateOrUpdate()
+    public function testUpdate()
     {
         $params = [
             'property1' => 'newValue1',
@@ -68,13 +68,13 @@ class CustomPropertiesTest extends TestCase
             'property2' => 42,
         ];
 
-        $api = $this->getApiMock(CustomProperties::class);
+        $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('patch')
             ->with('/repos/owner/repo/properties/values', $params)
             ->willReturn($expectedResponse);
 
-        $this->assertEquals($expectedResponse, $api->createOrUpdate('owner', 'repo', $params));
+        $this->assertEquals($expectedResponse, $api->update('owner', 'repo', $params));
     }
 
     protected function getApiClass()
