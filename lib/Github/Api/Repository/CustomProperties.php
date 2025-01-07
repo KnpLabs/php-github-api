@@ -15,6 +15,7 @@ class CustomProperties extends AbstractApi
     /**
      * @param string $owner      The account owner of the repository.
      * @param string $repository The name of the repository.
+     *
      * @return array|string
      */
     public function all(string $owner, string $repository)
@@ -52,6 +53,7 @@ class CustomProperties extends AbstractApi
      * @param string               $owner      The account owner of the repository.
      * @param string               $repository The name of the repository.
      * @param array<string, mixed> $params
+     *
      * @return array|string
      */
     public function update(string $owner, string $repository, array $params)

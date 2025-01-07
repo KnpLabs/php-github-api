@@ -35,7 +35,7 @@ class CustomPropertiesTest extends TestCase
 
         $expectedResult = [
             'property_name' => 'property2',
-            'value' => 'value2'
+            'value' => 'value2',
         ];
 
         $this->assertEquals($expectedResult, $api->show('owner', 'repo', 'property2'));
