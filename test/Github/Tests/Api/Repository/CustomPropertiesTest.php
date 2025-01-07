@@ -33,7 +33,11 @@ class CustomPropertiesTest extends TestCase
             ->with('/repos/owner/repo/properties/values')
             ->willReturn($allProperties);
 
-        $expectedResult = ['property_name' =>'property2', 'value' => 'value2'];
+        $expectedResult = [
+            'property_name' => 'property2',
+            'value' => 'value2'
+        ];
+
         $this->assertEquals($expectedResult, $api->show('owner', 'repo', 'property2'));
     }
 
@@ -51,7 +55,7 @@ class CustomPropertiesTest extends TestCase
             ->willReturn($allProperties);
 
         $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage("Property [property3] not found.");
+        $this->expectExceptionMessage('Property [property3] not found.');
 
         $api->show('owner', 'repo', 'property3');
     }

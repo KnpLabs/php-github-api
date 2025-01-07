@@ -13,27 +13,29 @@ use Github\Exception\RuntimeException;
 class CustomProperties extends AbstractApi
 {
     /**
-     * @param string $owner The account owner of the repository.
+     * @param string $owner      The account owner of the repository.
      * @param string $repository The name of the repository.
      * @return array|string
      */
     public function all(string $owner, string $repository)
     {
-        return $this->get('/repos/' . rawurlencode($owner)  . '/' . rawurlencode($repository) . '/properties/values');
+        return $this->get('/repos/'.rawurlencode($owner).'/'.rawurlencode($repository).'/properties/values');
     }
 
     /**
-     * @param string $owner The account owner of the repository.
-     * @param string $repository The name of the repository.
+     * @param string $owner        The account owner of the repository.
+     * @param string $repository   The name of the repository.
      * @param string $propertyName The name of the property to retrieve.
-     * @return array
+     *
      * @throws RuntimeException if the property is not found.
+     *
+     * @return array
      */
     public function show(string $owner, string $repository, string $propertyName): array
     {
         $allProperties = $this->all($owner, $repository);
 
-        if(!is_array($allProperties)) {
+        if (!is_array($allProperties)) {
             throw new RuntimeException('Unexpected response from GitHub API.');
         }
 
@@ -47,13 +49,13 @@ class CustomProperties extends AbstractApi
     }
 
     /**
-     * @param string $owner The account owner of the repository.
-     * @param string $repository The name of the repository.
+     * @param string               $owner      The account owner of the repository.
+     * @param string               $repository The name of the repository.
      * @param array<string, mixed> $params
      * @return array|string
      */
     public function update(string $owner, string $repository, array $params)
     {
-        return $this->patch('/repos/' . rawurlencode($owner) . '/' . rawurlencode($repository) . '/properties/values', $params);
+        return $this->patch('/repos/'.rawurlencode($owner).'/'.rawurlencode($repository).'/properties/values', $params);
     }
 }
