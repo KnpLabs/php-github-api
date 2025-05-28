@@ -138,8 +138,10 @@ class Client
         if ($password !== null) {
             // Username/password authentication
             $sessionService = new SessionService($this);
-            $sessionResponse = $sessionService->create($usernameOrToken, $password);
-            $this->token = $sessionResponse->getToken();
+            $responseArray = $sessionService->create($usernameOrToken, $password); // Returns array now
+            
+            // Extract token from array, based on reference/argocd_swagger.json (sessionSessionResponse)
+            $this->token = $responseArray['token'] ?? null;
 
             if (empty($this->token)) {
                 throw new InvalidArgumentException('Authentication failed: Could not retrieve token with the provided username and password.');

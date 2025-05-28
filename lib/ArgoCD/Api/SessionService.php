@@ -1,9 +1,7 @@
 <?php
 namespace ArgoCD\Api;
 
-use ArgoCD\Model\SessionSessionCreateRequest;
-use ArgoCD\Model\SessionSessionResponse;
-use ArgoCD\Model\SessionGetUserInfoResponse;
+// Model imports removed
 
 class SessionService extends AbstractApi
 {
@@ -13,50 +11,44 @@ class SessionService extends AbstractApi
      *
      * @param string $username
      * @param string $password
-     * @return SessionSessionResponse
+     * @return array
      * @throws \ArgoCD\Exception\RuntimeException
      */
-    public function create(string $username, string $password): SessionSessionResponse
+    public function create(string $username, string $password): array
     {
-        $requestModel = new SessionSessionCreateRequest();
-        $requestModel->setUsername($username);
-        $requestModel->setPassword($password);
+        $body = [
+            'username' => $username,
+            'password' => $password,
+        ];
 
-        $responseArray = $this->post('/api/v1/session', $requestModel->toArray());
-
-        return new SessionSessionResponse($responseArray);
+        return $this->post('/api/v1/session', $body);
     }
 
     /**
      * Corresponds to SessionService_Delete
      * Deletes the current session.
      *
-     * @return SessionSessionResponse
+     * @return array
      * @throws \ArgoCD\Exception\RuntimeException
      */
-    public function delete(): SessionSessionResponse
+    public function delete(): array
     {
         // The OpenAPI spec for delete /api/v1/session indicates a 200 response with sessionSessionResponse.
         // This is unusual for a DELETE operation (typically 204 No Content or an empty body),
         // but we will follow the spec.
-        $responseArray = $this->delete('/api/v1/session');
-
-        // If the response is truly empty (which is more typical for DELETE),
-        // instantiating SessionSessionResponse with an empty array will result in a model with a null token.
-        return new SessionSessionResponse($responseArray ?: []);
+        // The AbstractApi::delete method should return an array, even if empty.
+        return $this->delete('/api/v1/session');
     }
 
     /**
      * Corresponds to SessionService_GetUserInfo
      * Gets information about the current user.
      *
-     * @return SessionGetUserInfoResponse
+     * @return array
      * @throws \ArgoCD\Exception\RuntimeException
      */
-    public function getUserInfo(): SessionGetUserInfoResponse
+    public function getUserInfo(): array
     {
-        $responseArray = $this->get('/api/v1/session/userinfo');
-
-        return new SessionGetUserInfoResponse($responseArray);
+        return $this->get('/api/v1/session/userinfo');
     }
 }

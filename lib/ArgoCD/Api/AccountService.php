@@ -1,14 +1,7 @@
 <?php
 namespace ArgoCD\Api;
 
-use ArgoCD\Model\AccountAccount;
-use ArgoCD\Model\AccountAccountsList;
-use ArgoCD\Model\AccountCanIResponse;
-use ArgoCD\Model\AccountCreateTokenRequest;
-use ArgoCD\Model\AccountCreateTokenResponse;
-use ArgoCD\Model\AccountEmptyResponse;
-use ArgoCD\Model\AccountUpdatePasswordRequest;
-use ArgoCD\Model\AccountUpdatePasswordResponse;
+// Model imports removed
 
 class AccountService extends AbstractApi
 {
@@ -16,13 +9,12 @@ class AccountService extends AbstractApi
      * Corresponds to AccountService_ListAccounts
      * Lists all accounts.
      *
-     * @return AccountAccountsList
+     * @return array
      * @throws \ArgoCD\Exception\RuntimeException
      */
-    public function listAccounts(): AccountAccountsList
+    public function listAccounts(): array
     {
-        $responseArray = $this->get('/api/v1/account');
-        return new AccountAccountsList($responseArray);
+        return $this->get('/api/v1/account');
     }
 
     /**
@@ -32,43 +24,37 @@ class AccountService extends AbstractApi
      * @param string $resource
      * @param string $action
      * @param string $subresource
-     * @return AccountCanIResponse
+     * @return array
      * @throws \ArgoCD\Exception\RuntimeException
      */
-    public function canI(string $resource, string $action, string $subresource): AccountCanIResponse
+    public function canI(string $resource, string $action, string $subresource): array
     {
-        // The response for can-i is typically a raw string "yes" or "no".
-        // The AbstractApi::get method expects JSON.
-        // We need to handle this: either get() should allow raw responses,
-        // or this method needs to handle potential JSON decode errors if the response isn't JSON.
-        // For now, assuming get() returns the raw string if not JSON,
-        // and AccountCanIResponse constructor can handle it.
         $response = $this->get(sprintf("/api/v1/account/can-i/%s/%s/%s", rawurlencode($resource), rawurlencode($action), rawurlencode($subresource)));
         
-        // If $response is a string from get(), AccountCanIResponse constructor is designed to handle it.
-        // If $response is an array (e.g. {'value': 'yes'}), it also handles it.
-        return new AccountCanIResponse(is_array($response) ? $response : ['value' => $response]);
+        // If $response is a string from get(), convert to array format.
+        // Otherwise, it's assumed to be already an array (e.g. from JSON response).
+        return is_array($response) ? $response : ['value' => $response];
     }
 
     /**
      * Corresponds to AccountService_UpdatePassword
      * Updates the password for the current account or a specified account.
      *
-     * @param string $name The name of the account to update. If updating the current user's password, this might be the username.
+     * @param string $name The name of the account to update.
      * @param string $currentPassword The current password.
      * @param string $newPassword The new password.
-     * @return AccountUpdatePasswordResponse
+     * @return array
      * @throws \ArgoCD\Exception\RuntimeException
      */
-    public function updatePassword(string $name, string $currentPassword, string $newPassword): AccountUpdatePasswordResponse
+    public function updatePassword(string $name, string $currentPassword, string $newPassword): array
     {
-        $requestModel = new AccountUpdatePasswordRequest();
-        $requestModel->setName($name); // Name of the account being updated
-        $requestModel->setCurrentPassword($currentPassword);
-        $requestModel->setNewPassword($newPassword);
+        $body = [
+            'name' => $name,
+            'currentPassword' => $currentPassword,
+            'newPassword' => $newPassword,
+        ];
 
-        $responseArray = $this->put('/api/v1/account/password', $requestModel->toArray());
-        return new AccountUpdatePasswordResponse($responseArray ?: []); // Response might be empty
+        return $this->put('/api/v1/account/password', $body);
     }
 
     /**
@@ -76,35 +62,34 @@ class AccountService extends AbstractApi
      * Gets information about a specific account.
      *
      * @param string $name The name of the account.
-     * @return AccountAccount
+     * @return array
      * @throws \ArgoCD\Exception\RuntimeException
      */
-    public function getAccount(string $name): AccountAccount
+    public function getAccount(string $name): array
     {
-        $responseArray = $this->get(sprintf("/api/v1/account/%s", rawurlencode($name)));
-        return new AccountAccount($responseArray);
+        return $this->get(sprintf("/api/v1/account/%s", rawurlencode($name)));
     }
 
     /**
      * Corresponds to AccountService_CreateToken
      * Creates a new token for the specified account.
      *
-     * @param string $accountName The name of the account.
-     * @param string $tokenId The desired ID/name for the token.
-     * @param string $tokenDescription A description for the token.
+     * @param string $accountName The name of the account (used in URL path).
+     * @param string $tokenId The desired ID/name for the token (maps to 'id' in request body).
+     * @param string $tokenNameOrDescription A description for the token (maps to 'name' in request body).
      * @param string|null $expiresIn Duration string for token expiration (e.g., "30d", "24h", "0" for non-expiring).
-     * @return AccountCreateTokenResponse
+     * @return array
      * @throws \ArgoCD\Exception\RuntimeException
      */
-    public function createToken(string $accountName, string $tokenId, string $tokenDescription, ?string $expiresIn = "0"): AccountCreateTokenResponse
+    public function createToken(string $accountName, string $tokenId, string $tokenNameOrDescription, ?string $expiresIn = "0"): array
     {
-        $requestModel = new AccountCreateTokenRequest();
-        $requestModel->setId($tokenId); // This 'id' is the token's identifier
-        $requestModel->setName($tokenDescription); // This 'name' is the token's description
-        $requestModel->setExpiresIn($expiresIn);
+        $body = [
+            'id' => $tokenId,
+            'name' => $tokenNameOrDescription,
+            'expiresIn' => $expiresIn,
+        ];
 
-        $responseArray = $this->post(sprintf("/api/v1/account/%s/token", rawurlencode($accountName)), $requestModel->toArray());
-        return new AccountCreateTokenResponse($responseArray);
+        return $this->post(sprintf("/api/v1/account/%s/token", rawurlencode($accountName)), $body);
     }
 
     /**
@@ -113,12 +98,11 @@ class AccountService extends AbstractApi
      *
      * @param string $accountName The name of the account.
      * @param string $tokenId The ID of the token to delete.
-     * @return AccountEmptyResponse
+     * @return array
      * @throws \ArgoCD\Exception\RuntimeException
      */
-    public function deleteToken(string $accountName, string $tokenId): AccountEmptyResponse
+    public function deleteToken(string $accountName, string $tokenId): array
     {
-        $responseArray = $this->delete(sprintf("/api/v1/account/%s/token/%s", rawurlencode($accountName), rawurlencode($tokenId)));
-        return new AccountEmptyResponse($responseArray ?: []); // Response is typically empty
+        return $this->delete(sprintf("/api/v1/account/%s/token/%s", rawurlencode($accountName), rawurlencode($tokenId)));
     }
 }
