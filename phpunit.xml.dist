@@ -11,8 +11,8 @@
          bootstrap="vendor/autoload.php"
 >
     <testsuites>
-        <testsuite name="php-github-api Test Suite">
-            <directory>./test/Github/</directory>
+        <testsuite name="php-argocd-api Test Suite">
+            <directory>./test/ArgoCD/</directory>
         </testsuite>
     </testsuites>
 
@@ -24,7 +24,7 @@
 
     <filter>
         <whitelist>
-            <directory suffix=".php">./lib/Github/</directory>
+            <directory suffix=".php">./src/ArgoCD/</directory>
         </whitelist>
     </filter>
 
