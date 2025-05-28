@@ -1,0 +1,33 @@
+{
+    "name": "your-vendor/argocd-php-client",
+    "description": "A PHP client for the ArgoCD API",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Your Name",
+            "email": "your.email@example.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4 || ^8.0",
+        "php-http/client-common": "^2.3",
+        "php-http/discovery": "^1.12",
+        "psr/http-client-implementation": "^1.0",
+        "psr/http-factory-implementation": "^1.0",
+        "psr/http-message": "^1.0 || ^2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "ArgoCD\\": "src/ArgoCD/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ArgoCD\\Tests\\": "tests/"
+        }
+    }
+}
