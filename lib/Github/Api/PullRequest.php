@@ -182,7 +182,7 @@ class PullRequest extends AbstractApi
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/merge');
     }
 
-    public function merge($username, $repository, $id, $message, $sha, $mergeMethod = 'merge', $title = null)
+    public function merge($username, $repository, $id, $message, $sha = null, $mergeMethod = 'merge', $title = null)
     {
         if (is_bool($mergeMethod)) {
             $mergeMethod = $mergeMethod ? 'squash' : 'merge';
@@ -194,10 +194,12 @@ class PullRequest extends AbstractApi
 
         $params = [
             'commit_message' => $message,
-            'sha' => $sha,
             'merge_method' => $mergeMethod,
         ];
 
+        if (is_string($sha)) {
+            $params['sha'] = $sha;
+        }
         if (is_string($title)) {
             $params['commit_title'] = $title;
         }
