@@ -1,19 +1,48 @@
 parameters:
-    checkMissingIterableValueType: false
-
     level: 6
     paths:
         - lib
 
     ignoreErrors:
+        -
+            identifier: missingType.iterableValue
+
         # Ignore typehint errors on api classes
         -
-            message: '#Method (.*) with no typehint specified\.#'
+            identifier: missingType.return
             path: lib/Github/Api
+
         -
-            message: '#Method (.*) has no return typehint specified\.#'
+            identifier: missingType.parameter
             path: lib/Github/Api
 
         -
             message: '#(extends|Instantiation of|typehint with) deprecated class Github\\Api\\#'
             path: lib/Github/Api
+
+        # ResultPager writes this property through a bound closure.
+        -
+            identifier: property.onlyRead
+            count: 1
+            path: lib/Github/Api/AbstractApi.php
+
+        -
+            identifier: empty.variable
+            count: 1
+            path: lib/Github/Api/AbstractApi.php
+
+        -
+            identifier: booleanOr.rightAlwaysFalse
+            count: 1
+            path: lib/Github/Api/Repository/Assets.php
+
+        -
+            identifier: greater.alwaysTrue
+            count: 1
+            path: lib/Github/ResultPager.php
+
+        -
+            identifier: method.deprecated
+            message: '#^Call to deprecated method postFetch\(\) of class Github\\ResultPager:#'
+            count: 2
+            path: lib/Github/ResultPager.php
