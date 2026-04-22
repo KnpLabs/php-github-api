@@ -214,6 +214,23 @@ class PullRequest extends AbstractApi
     }
 
     /**
+     * Update a pull request branch with the latest changes from its base branch.
+     *
+     * @link https://docs.github.com/en/rest/pulls/pulls#update-a-pull-request-branch
+     *
+     * @param string $username   the username
+     * @param string $repository the repository
+     * @param string $id         the ID of the pull request whose branch should be updated
+     * @param array  $params     Optional request parameters such as expected_head_sha
+     *
+     * @return array|string
+     */
+    public function updateBranch($username, $repository, $id, array $params = [])
+    {
+        return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/update-branch', $params);
+    }
+
+    /**
      * Check if a pull request has been merged.
      *
      * @link https://docs.github.com/rest/pulls/pulls#check-if-a-pull-request-has-been-merged
