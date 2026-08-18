@@ -21,10 +21,11 @@ class Labels extends AbstractApi
      * @param string   $username
      * @param string   $repository
      * @param int|null $issue
+     * @param array    $params
      *
      * @return array
      */
-    public function all($username, $repository, $issue = null)
+    public function all($username, $repository, $issue = null, array $params = [])
     {
         if ($issue === null) {
             $path = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/labels';
@@ -32,7 +33,7 @@ class Labels extends AbstractApi
             $path = '/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/'.$issue.'/labels';
         }
 
-        return $this->get($path);
+        return $this->get($path, $params);
     }
 
     /**
