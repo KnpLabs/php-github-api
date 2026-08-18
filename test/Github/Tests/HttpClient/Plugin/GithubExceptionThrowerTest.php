@@ -248,6 +248,22 @@ class GithubExceptionThrowerTest extends TestCase
                 ),
                 'exception' => new \Github\Exception\ValidationFailedException('Validation Failed: We cannot delete an active deployment unless it is the only deployment in a given environment.', 422),
             ],
+            'Validation errors as a string' => [
+                'response' => new Response(
+                    422,
+                    [
+                        'content-type' => 'application/json',
+                    ],
+                    json_encode(
+                        [
+                            'message' => 'Validation Failed',
+                            'errors' => 'No commit found for SHA: 1234567890abcdef',
+                            'documentation_url' => 'https://docs.github.com/rest/commits/statuses#create-a-commit-status',
+                        ]
+                    )
+                ),
+                'exception' => new \Github\Exception\ValidationFailedException('Validation Failed: No commit found for SHA: 1234567890abcdef', 422),
+            ],
         ];
     }
 }
