@@ -42,7 +42,9 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
     protected function getMethod($object, $methodName)
     {
         $method = new ReflectionMethod($object, $methodName);
-        $method->setAccessible(true);
+        if (version_compare(PHP_VERSION, '8.5.0', '<')) {
+            $method->setAccessible(true);
+        }
 
         return $method;
     }

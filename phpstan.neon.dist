@@ -8,8 +8,9 @@ parameters:
     ignoreErrors:
         # Ignore typehint errors on api classes
         -
-            message: '#Method (.*) with no typehint specified\.#'
+            identifier: missingType.return
             path: lib/Github/Api
+
         -
-            message: '#Method (.*) has no return typehint specified\.#'
+            identifier: missingType.parameter
             path: lib/Github/Api

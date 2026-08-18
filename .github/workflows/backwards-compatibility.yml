@@ -15,7 +15,7 @@ jobs:
             -   name: Install PHP
                 uses: shivammathur/setup-php@v2
                 with:
-                    php-version: '8.2'
+                    php-version: '8.5'
 
             -   name: Install roave/backward-compatibility-check
                 run: composer require --dev roave/backward-compatibility-check
