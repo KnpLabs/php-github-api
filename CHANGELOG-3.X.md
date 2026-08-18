@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.16.1
+
+### Fixed
+- Fix handling of 422 responses where errors is a string ([GrahamCampbell](https://github.com/GrahamCampbell)) [#1164](https://github.com/KnpLabs/php-github-api/issues/1164)
+
 ## 3.16.0
 
 ### Added
