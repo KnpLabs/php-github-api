@@ -205,8 +205,9 @@ class ResultPager implements ResultPagerInterface
         $result = $this->client->getHttpClient()->get($this->pagination[$key]);
 
         $this->postFetch(true);
+        $content = ResponseMediator::getContent($result);
 
-        return ResponseMediator::getContent($result);
+        return is_array($content) ? $content : [];
     }
 
     private function setPagination(): void
