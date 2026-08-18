@@ -18,7 +18,7 @@ Uses [GitHub API v3](http://developer.github.com/v3/) & supports [GitHub API v4]
 
 ## Requirements
 
-* PHP >= 7.2
+* PHP >= 8.0
 * A [PSR-17 implementation](https://packagist.org/providers/psr/http-factory-implementation)
 * A [PSR-18 implementation](https://packagist.org/providers/psr/http-client-implementation)
 
