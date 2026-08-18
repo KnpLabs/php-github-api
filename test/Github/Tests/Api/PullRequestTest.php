@@ -176,6 +176,23 @@ class PullRequestTest extends TestCase
     /**
      * @test
      */
+    public function shouldUpdatePullRequestBranch()
+    {
+        $expectedArray = ['message' => 'Update request accepted'];
+        $params = ['expected_head_sha' => str_repeat('A', 40)];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('put')
+            ->with('/repos/ezsystems/ezpublish/pulls/15/update-branch', $params)
+            ->willReturn($expectedArray);
+
+        $this->assertSame($expectedArray, $api->updateBranch('ezsystems', 'ezpublish', 15, $params));
+    }
+
+    /**
+     * @test
+     */
     public function shouldCheckIfPullRequestIsMerged()
     {
         $expectedArray = ['some' => 'response'];
