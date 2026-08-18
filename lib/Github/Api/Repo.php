@@ -15,6 +15,7 @@ use Github\Api\Repository\Collaborators;
 use Github\Api\Repository\Comments;
 use Github\Api\Repository\Commits;
 use Github\Api\Repository\Contents;
+use Github\Api\Repository\CustomProperties;
 use Github\Api\Repository\DeployKeys;
 use Github\Api\Repository\Downloads;
 use Github\Api\Repository\Forks;
@@ -521,6 +522,18 @@ class Repo extends AbstractApi
     public function statuses()
     {
         return new Statuses($this->getClient());
+    }
+
+    /**
+     * Manage the custom properties of a repository.
+     *
+     * @link https://docs.github.com/en/rest/repos/custom-properties
+     *
+     * @return CustomProperties
+     */
+    public function customProperties()
+    {
+        return new CustomProperties($this->getClient());
     }
 
     /**
