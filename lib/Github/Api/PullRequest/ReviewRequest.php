@@ -3,22 +3,12 @@
 namespace Github\Api\PullRequest;
 
 use Github\Api\AbstractApi;
-use Github\Api\AcceptHeaderTrait;
 
 /**
  * @link https://developer.github.com/v3/pulls/review_requests/
  */
 class ReviewRequest extends AbstractApi
 {
-    use AcceptHeaderTrait;
-
-    public function configure()
-    {
-        trigger_deprecation('KnpLabs/php-github-api', '3.2', 'The "%s" is deprecated and will be removed.', __METHOD__);
-
-        return $this;
-    }
-
     /**
      * @link https://developer.github.com/v3/pulls/review_requests/#list-review-requests
      *

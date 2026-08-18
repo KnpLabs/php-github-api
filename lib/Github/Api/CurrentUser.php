@@ -18,8 +18,6 @@ use Github\Api\CurrentUser\Watchers;
  */
 class CurrentUser extends AbstractApi
 {
-    use AcceptHeaderTrait;
-
     public function show()
     {
         return $this->get('/user');
@@ -173,8 +171,6 @@ class CurrentUser extends AbstractApi
      */
     public function installations(array $params = [])
     {
-        $this->acceptHeaderValue = 'application/vnd.github.machine-man-preview+json';
-
         return $this->get('/user/installations', array_merge(['page' => 1], $params));
     }
 
@@ -186,8 +182,6 @@ class CurrentUser extends AbstractApi
      */
     public function repositoriesByInstallation($installationId, array $params = [])
     {
-        $this->acceptHeaderValue = 'application/vnd.github.machine-man-preview+json';
-
         return $this->get(sprintf('/user/installations/%s/repositories', $installationId), array_merge(['page' => 1], $params));
     }
 }

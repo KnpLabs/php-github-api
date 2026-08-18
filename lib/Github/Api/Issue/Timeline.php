@@ -3,19 +3,9 @@
 namespace Github\Api\Issue;
 
 use Github\Api\AbstractApi;
-use Github\Api\AcceptHeaderTrait;
 
 class Timeline extends AbstractApi
 {
-    use AcceptHeaderTrait;
-
-    public function configure()
-    {
-        $this->acceptHeaderValue = 'application/vnd.github.mockingbird-preview';
-
-        return $this;
-    }
-
     /**
      * Get all events for a specific issue.
      *

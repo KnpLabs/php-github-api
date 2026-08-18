@@ -3,19 +3,9 @@
 namespace Github\Api\Miscellaneous;
 
 use Github\Api\AbstractApi;
-use Github\Api\AcceptHeaderTrait;
 
 class CodeOfConduct extends AbstractApi
 {
-    use AcceptHeaderTrait;
-
-    public function configure()
-    {
-        $this->acceptHeaderValue = 'application/vnd.github.scarlet-witch-preview+json';
-
-        return $this;
-    }
-
     /**
      * List all codes of conduct.
      *

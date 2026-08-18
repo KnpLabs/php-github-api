@@ -3,7 +3,6 @@
 namespace Github\Api\PullRequest;
 
 use Github\Api\AbstractApi;
-use Github\Api\AcceptHeaderTrait;
 use Github\Exception\InvalidArgumentException;
 use Github\Exception\MissingArgumentException;
 
@@ -16,15 +15,6 @@ use Github\Exception\MissingArgumentException;
  */
 class Review extends AbstractApi
 {
-    use AcceptHeaderTrait;
-
-    public function configure()
-    {
-        trigger_deprecation('KnpLabs/php-github-api', '3.2', 'The "%s" is deprecated and will be removed.', __METHOD__);
-
-        return $this;
-    }
-
     /**
      * Get a listing of a pull request's reviews by the username, repository and pull request number.
      *

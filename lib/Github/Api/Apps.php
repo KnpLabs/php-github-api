@@ -11,13 +11,6 @@ use Github\Api\App\Hook;
  */
 class Apps extends AbstractApi
 {
-    use AcceptHeaderTrait;
-
-    private function configurePreviewHeader()
-    {
-        $this->acceptHeaderValue = 'application/vnd.github.machine-man-preview+json';
-    }
-
     /**
      * Create an access token for an installation.
      *
@@ -36,8 +29,6 @@ class Apps extends AbstractApi
             $parameters['user_id'] = $userId;
         }
 
-        $this->configurePreviewHeader();
-
         return $this->post('/app/installations/'.$installationId.'/access_tokens', $parameters);
     }
 
@@ -50,8 +41,6 @@ class Apps extends AbstractApi
      */
     public function findInstallations()
     {
-        $this->configurePreviewHeader();
-
         return $this->get('/app/installations');
     }
 
@@ -66,8 +55,6 @@ class Apps extends AbstractApi
      */
     public function getInstallation($installationId)
     {
-        $this->configurePreviewHeader();
-
         return $this->get('/app/installations/'.$installationId);
     }
 
@@ -82,8 +69,6 @@ class Apps extends AbstractApi
      */
     public function getInstallationForOrganization($org)
     {
-        $this->configurePreviewHeader();
-
         return $this->get('/orgs/'.rawurldecode($org).'/installation');
     }
 
@@ -99,8 +84,6 @@ class Apps extends AbstractApi
      */
     public function getInstallationForRepo($owner, $repo)
     {
-        $this->configurePreviewHeader();
-
         return $this->get('/repos/'.rawurldecode($owner).'/'.rawurldecode($repo).'/installation');
     }
 
@@ -115,8 +98,6 @@ class Apps extends AbstractApi
      */
     public function getInstallationForUser($username)
     {
-        $this->configurePreviewHeader();
-
         return $this->get('/users/'.rawurldecode($username).'/installation');
     }
 
@@ -129,8 +110,6 @@ class Apps extends AbstractApi
      */
     public function removeInstallation($installationId)
     {
-        $this->configurePreviewHeader();
-
         $this->delete('/app/installations/'.$installationId);
     }
 
@@ -150,8 +129,6 @@ class Apps extends AbstractApi
             $parameters['user_id'] = $userId;
         }
 
-        $this->configurePreviewHeader();
-
         return $this->get('/installation/repositories', $parameters);
     }
 
@@ -167,8 +144,6 @@ class Apps extends AbstractApi
      */
     public function addRepository($installationId, $repositoryId)
     {
-        $this->configurePreviewHeader();
-
         return $this->put('/installations/'.$installationId.'/repositories/'.$repositoryId);
     }
 
@@ -184,8 +159,6 @@ class Apps extends AbstractApi
      */
     public function removeRepository($installationId, $repositoryId)
     {
-        $this->configurePreviewHeader();
-
         return $this->delete('/installations/'.$installationId.'/repositories/'.$repositoryId);
     }
 

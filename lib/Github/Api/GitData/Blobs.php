@@ -26,7 +26,7 @@ class Blobs extends AbstractApi
     public function configure($bodyType = null)
     {
         if ('raw' === $bodyType) {
-            $this->acceptHeaderValue = sprintf('application/vnd.github.%s.raw', $this->getApiVersion());
+            $this->acceptHeaderValue = 'application/vnd.github.raw';
         }
 
         return $this;

@@ -3,27 +3,10 @@
 namespace Github\Api\Project;
 
 use Github\Api\AbstractApi;
-use Github\Api\AcceptHeaderTrait;
 use Github\Exception\MissingArgumentException;
 
 class Cards extends AbstractApi
 {
-    use AcceptHeaderTrait;
-
-    /**
-     * Configure the accept header for Early Access to the projects api.
-     *
-     * @see https://developer.github.com/v3/repos/projects/#projects
-     *
-     * @return $this
-     */
-    public function configure()
-    {
-        $this->acceptHeaderValue = 'application/vnd.github.inertia-preview+json';
-
-        return $this;
-    }
-
     public function all($columnId, array $params = [])
     {
         return $this->get('/projects/columns/'.rawurlencode($columnId).'/cards', array_merge(['page' => 1], $params));
