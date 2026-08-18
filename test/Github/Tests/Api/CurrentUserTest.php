@@ -2,6 +2,9 @@
 
 namespace Github\Tests\Api;
 
+use Github\Api\CurrentUser;
+use PHPUnit\Framework\MockObject\MockObject;
+
 class CurrentUserTest extends TestCase
 {
     /**
@@ -158,6 +161,32 @@ class CurrentUserTest extends TestCase
         $api = $this->getApiMock();
 
         $this->assertInstanceOf(\Github\Api\CurrentUser\Starring::class, $api->starring());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetRepositories()
+    {
+        $expectedArray = [
+            ['id' => 1, 'name' => 'dummy project'],
+            ['id' => 2, 'name' => 'awesome another project'],
+            ['id' => 3, 'name' => 'fork of php'],
+            ['id' => 4, 'name' => 'fork of php-cs'],
+        ];
+
+        /** @var CurrentUser|MockObject $api */
+        $api = $this->getApiMock();
+
+        $api
+            ->expects($this->once())
+            ->method('get')
+            ->with('/user/repos')
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->repositories('owner', 'full_name', 'asc', null, null, [
+            'per_page' => 10,
+        ]));
     }
 
     /**
