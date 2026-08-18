@@ -169,6 +169,16 @@ class IssueTest extends TestCase
     /**
      * @test
      */
+    public function shouldGetReactionsApiObject()
+    {
+        $api = $this->getApiMock();
+
+        $this->assertInstanceOf(\Github\Api\Issue\Reactions::class, $api->reactions());
+    }
+
+    /**
+     * @test
+     */
     public function shouldGetEventsApiObject()
     {
         $api = $this->getApiMock();

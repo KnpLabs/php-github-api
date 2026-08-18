@@ -4,6 +4,7 @@ namespace Github\Api\Issue;
 
 use Github\Api\AbstractApi;
 use Github\Api\AcceptHeaderTrait;
+use Github\Api\Issue\Comments\Reactions;
 use Github\Exception\MissingArgumentException;
 
 /**
@@ -129,5 +130,17 @@ class Comments extends AbstractApi
     public function remove($username, $repository, $comment)
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/issues/comments/'.$comment);
+    }
+
+    /**
+     * Manage issue comment reactions.
+     *
+     * @link https://docs.github.com/en/rest/reactions/reactions#list-reactions-for-an-issue-comment
+     *
+     * @return Reactions
+     */
+    public function reactions()
+    {
+        return new Reactions($this->getClient());
     }
 }

@@ -4,6 +4,7 @@ namespace Github\Api\PullRequest;
 
 use Github\Api\AbstractApi;
 use Github\Api\AcceptHeaderTrait;
+use Github\Api\PullRequest\Comments\Reactions;
 use Github\Exception\MissingArgumentException;
 
 /**
@@ -149,5 +150,17 @@ class Comments extends AbstractApi
     public function remove($username, $repository, $comment)
     {
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/comments/'.$comment);
+    }
+
+    /**
+     * Manage pull request review comment reactions.
+     *
+     * @link https://docs.github.com/en/rest/reactions/reactions#list-reactions-for-a-pull-request-review-comment
+     *
+     * @return Reactions
+     */
+    public function reactions()
+    {
+        return new Reactions($this->getClient());
     }
 }

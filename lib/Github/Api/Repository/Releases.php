@@ -3,6 +3,7 @@
 namespace Github\Api\Repository;
 
 use Github\Api\AbstractApi;
+use Github\Api\Repository\Releases\Reactions;
 use Github\Exception\MissingArgumentException;
 
 /**
@@ -137,5 +138,17 @@ class Releases extends AbstractApi
     public function assets()
     {
         return new Assets($this->getClient());
+    }
+
+    /**
+     * Manage release reactions.
+     *
+     * @link https://docs.github.com/en/rest/reactions/reactions#list-reactions-for-a-release
+     *
+     * @return Reactions
+     */
+    public function reactions()
+    {
+        return new Reactions($this->getClient());
     }
 }
