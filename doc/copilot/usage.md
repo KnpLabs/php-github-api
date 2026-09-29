@@ -5,7 +5,7 @@
 
 The Copilot Usage API provides endpoints to retrieve usage summaries for organizations and enterprises.
 
-**Note**: This endpoint is in beta and is subject to change.
+**Note**: This endpoint has been deprecated by GitHub in favor of the [Copilot usage metrics API](https://docs.github.com/rest/copilot/copilot-usage-metrics).
 
 ## Endpoints
 

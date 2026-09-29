@@ -1,7 +1,7 @@
 ## Applications API
 [Back to the navigation](README.md)
 
-Wraps [GitHub Applications API](http://developer.github.com/v3/apps/).
+Wraps [GitHub Applications API](https://docs.github.com/rest/apps/apps).
 
 ### Create a new installation token
 For the installation id 123 use the following:

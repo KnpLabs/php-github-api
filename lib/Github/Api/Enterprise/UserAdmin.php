@@ -9,7 +9,7 @@ class UserAdmin extends AbstractApi
     /**
      * Suspend a user.
      *
-     * @link https://developer.github.com/v3/users/administration/#suspend-a-user
+     * @link https://docs.github.com/enterprise-server@3.14/rest/enterprise-admin/users#suspend-a-user
      *
      * @param string $username
      *
@@ -23,7 +23,7 @@ class UserAdmin extends AbstractApi
     /**
      * Unsuspend a user.
      *
-     * @link https://developer.github.com/v3/users/administration/#unsuspend-a-user
+     * @link https://docs.github.com/enterprise-server@3.14/rest/enterprise-admin/users#unsuspend-a-user
      *
      * @param string $username
      *

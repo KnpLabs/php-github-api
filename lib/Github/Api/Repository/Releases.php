@@ -6,7 +6,7 @@ use Github\Api\AbstractApi;
 use Github\Exception\MissingArgumentException;
 
 /**
- * @link   http://developer.github.com/v3/repos/releases/
+ * @link   https://docs.github.com/rest/releases/releases
  *
  * @author Matthew Simo <matthew.a.simo@gmail.com>
  * @author Evgeniy Guseletov <d46k16@gmail.com>
@@ -15,6 +15,8 @@ class Releases extends AbstractApi
 {
     /**
      * Get the latest release.
+     *
+     * @link https://docs.github.com/rest/releases/releases#get-the-latest-release
      *
      * @param string $username
      * @param string $repository
@@ -27,7 +29,9 @@ class Releases extends AbstractApi
     }
 
     /**
-     * List releases for a tag.
+     * Get a release by tag name.
+     *
+     * @link https://docs.github.com/rest/releases/releases#get-a-release-by-tag-name
      *
      * @param string $username
      * @param string $repository
@@ -43,6 +47,8 @@ class Releases extends AbstractApi
     /**
      * List releases in selected repository.
      *
+     * @link https://docs.github.com/rest/releases/releases#list-releases
+     *
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
      * @param array  $params     the additional parameters like milestone, assignees, labels, sort, direction
@@ -56,6 +62,8 @@ class Releases extends AbstractApi
 
     /**
      * Get a release in selected repository.
+     *
+     * @link https://docs.github.com/rest/releases/releases#get-a-release
      *
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
@@ -71,6 +79,8 @@ class Releases extends AbstractApi
     /**
      * Generate release notes content for a release.
      *
+     * @link https://docs.github.com/rest/releases/releases#generate-release-notes-content-for-a-release
+     *
      * @param string $username
      * @param string $repository
      * @param array  $params
@@ -84,6 +94,8 @@ class Releases extends AbstractApi
 
     /**
      * Create new release in selected repository.
+     *
+     * @link https://docs.github.com/rest/releases/releases#create-a-release
      *
      * @param string $username
      * @param string $repository
@@ -105,6 +117,8 @@ class Releases extends AbstractApi
     /**
      * Edit release in selected repository.
      *
+     * @link https://docs.github.com/rest/releases/releases#update-a-release
+     *
      * @param string $username
      * @param string $repository
      * @param int    $id
@@ -119,6 +133,8 @@ class Releases extends AbstractApi
 
     /**
      * Delete a release in selected repository (Not thoroughly tested!).
+     *
+     * @link https://docs.github.com/rest/releases/releases#delete-a-release
      *
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo

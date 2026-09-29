@@ -2,7 +2,7 @@
 [Back to the navigation](README.md)
 
 Searching repositories, getting repository information and managing repository information for authenticated users.
-Wrap [GitHub Repo API](http://developer.github.com/v3/repos/). All methods are described on that page.
+Wrap [GitHub Repo API](https://docs.github.com/rest/repos/repos). All methods are described on that page.
 
 ### List all repositories
 
@@ -282,7 +282,7 @@ Returns a list of languages.
 
 ### Enable automated security fixes
 
-https://docs.github.com/en/rest/reference/repos#enable-automated-security-fixes
+https://docs.github.com/rest/repos/repos#enable-dependabot-security-updates
 
 ```php
 $client->api('repo')->enableAutomatedSecurityFixes('KnpLabs', 'php-github-api');
@@ -290,7 +290,7 @@ $client->api('repo')->enableAutomatedSecurityFixes('KnpLabs', 'php-github-api');
 
 ### Disable automated security fixes
 
-https://docs.github.com/en/rest/reference/repos#disable-automated-security-fixes
+https://docs.github.com/rest/repos/repos#disable-dependabot-security-updates
 
 ```php
 $client->api('repo')->disableAutomatedSecurityFixes('KnpLabs', 'php-github-api');
@@ -393,7 +393,7 @@ $client->api('repo')->createFromTemplate('template-owner', 'template-repo', [
 
 ### Check if vulnerability alerts (dependabot alerts) are enabled for a repository
 
-https://developer.github.com/v3/repos/#check-if-vulnerability-alerts-are-enabled-for-a-repository
+https://docs.github.com/rest/repos/repos#check-if-vulnerability-alerts-are-enabled-for-a-repository
 
 ```php
 $client->api('repo')->isVulnerabilityAlertsEnabled('KnpLabs', 'php-github-api');
@@ -401,7 +401,7 @@ $client->api('repo')->isVulnerabilityAlertsEnabled('KnpLabs', 'php-github-api');
 
 ### Enable vulnerability alerts (dependabot alerts)
 
-https://developer.github.com/v3/repos/#enable-vulnerability-alerts
+https://docs.github.com/rest/repos/repos#enable-vulnerability-alerts
 
 ```php
 $client->api('repo')->enableVulnerabilityAlerts('KnpLabs', 'php-github-api');
@@ -409,7 +409,7 @@ $client->api('repo')->enableVulnerabilityAlerts('KnpLabs', 'php-github-api');
 
 ### Disable vulnerability alerts (dependabot alerts)
 
-https://developer.github.com/v3/repos/#disable-vulnerability-alerts
+https://docs.github.com/rest/repos/repos#disable-vulnerability-alerts
 
 ```php
 $client->api('repo')->disableVulnerabilityAlerts('KnpLabs', 'php-github-api');

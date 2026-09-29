@@ -9,7 +9,7 @@ class ManagementConsole extends AbstractApi
     /**
      * Checks the status of your installation’s most recent configuration process.
      *
-     * @link https://developer.github.com/v3/enterprise/management_console/#check-configuration-status
+     * @link https://docs.github.com/enterprise-server@3.14/rest/enterprise-admin/management-console#get-the-configuration-status
      *
      * @param string $hash md5 hash of your license
      *
@@ -23,7 +23,7 @@ class ManagementConsole extends AbstractApi
     /**
      * Retrieves your installation’s settings.
      *
-     * @link https://developer.github.com/v3/enterprise/management_console/#retrieve-settings
+     * @link https://docs.github.com/enterprise-server@3.14/rest/enterprise-admin/management-console#get-settings
      *
      * @param string $hash md5 hash of your license
      *
@@ -37,7 +37,7 @@ class ManagementConsole extends AbstractApi
     /**
      * Checks your installation’s maintenance status.
      *
-     * @link https://developer.github.com/v3/enterprise/management_console/#check-maintenance-status
+     * @link https://docs.github.com/enterprise-server@3.14/rest/enterprise-admin/management-console#get-the-maintenance-status
      *
      * @param string $hash md5 hash of your license
      *
@@ -51,7 +51,7 @@ class ManagementConsole extends AbstractApi
     /**
      * Retrieves your installation’s authorized SSH keys.
      *
-     * @link https://developer.github.com/v3/enterprise/management_console/#retrieve-authorized-ssh-keys
+     * @link https://docs.github.com/enterprise-server@3.14/rest/enterprise-admin/management-console#get-all-authorized-ssh-keys
      *
      * @param string $hash md5 hash of your license
      *

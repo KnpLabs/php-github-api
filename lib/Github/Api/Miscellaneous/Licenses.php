@@ -9,7 +9,7 @@ class Licenses extends AbstractApi
     /**
      * Lists all the licenses available on GitHub.
      *
-     * @link https://developer.github.com/v3/licenses/
+     * @link https://docs.github.com/rest/licenses/licenses#get-all-commonly-used-licenses
      *
      * @return array
      */
@@ -21,7 +21,7 @@ class Licenses extends AbstractApi
     /**
      * Get an individual license by its license key.
      *
-     * @link https://developer.github.com/v3/licenses/#get-an-individual-license
+     * @link https://docs.github.com/rest/licenses/licenses#get-a-license
      *
      * @param string $license
      *

@@ -6,7 +6,7 @@ use Github\Api\AbstractApi;
 use Github\Exception\MissingArgumentException;
 
 /**
- * @link   http://developer.github.com/v3/git/tags/
+ * @link   https://docs.github.com/rest/git/tags
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
@@ -14,6 +14,8 @@ class Tags extends AbstractApi
 {
     /**
      * Get all tags for a repository.
+     *
+     * @link https://docs.github.com/rest/git/refs#list-matching-references
      *
      * @param string $username
      * @param string $repository
@@ -28,6 +30,8 @@ class Tags extends AbstractApi
     /**
      * Get a tag for a repository.
      *
+     * @link https://docs.github.com/rest/git/tags#get-a-tag
+     *
      * @param string $username
      * @param string $repository
      * @param string $sha
@@ -41,6 +45,8 @@ class Tags extends AbstractApi
 
     /**
      * Create a tag for a repository.
+     *
+     * @link https://docs.github.com/rest/git/tags#create-a-tag-object
      *
      * @param string $username
      * @param string $repository

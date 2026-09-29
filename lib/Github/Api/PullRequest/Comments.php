@@ -7,7 +7,7 @@ use Github\Api\AcceptHeaderTrait;
 use Github\Exception\MissingArgumentException;
 
 /**
- * @link   http://developer.github.com/v3/pulls/comments/
+ * @link   https://docs.github.com/rest/pulls/comments
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
@@ -18,7 +18,7 @@ class Comments extends AbstractApi
     /**
      * Configure the body type.
      *
-     * @link https://developer.github.com/v3/pulls/comments/#custom-media-types
+     * @link https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types
      *
      * @param string|null $bodyType
      * @param string|null $apiVersion
@@ -44,8 +44,8 @@ class Comments extends AbstractApi
      * Get a listing of a pull request's comments by the username, repository and pull request number
      * or all repository comments by the username and repository.
      *
-     * @link https://developer.github.com/v3/pulls/comments/#list-comments-on-a-pull-request
-     * @link https://developer.github.com/v3/pulls/comments/#list-comments-in-a-repository
+     * @link https://docs.github.com/rest/pulls/comments#list-review-comments-on-a-pull-request
+     * @link https://docs.github.com/rest/pulls/comments#list-review-comments-in-a-repository
      *
      * @param string   $username    the username
      * @param string   $repository  the repository
@@ -71,7 +71,7 @@ class Comments extends AbstractApi
     /**
      * Get a single pull request comment by the username, repository and comment id.
      *
-     * @link https://developer.github.com/v3/pulls/comments/#get-a-single-comment
+     * @link https://docs.github.com/rest/pulls/comments#get-a-review-comment-for-a-pull-request
      *
      * @param string $username   the username
      * @param string $repository the repository
@@ -87,7 +87,7 @@ class Comments extends AbstractApi
     /**
      * Create a pull request comment by the username, repository and pull request number.
      *
-     * @link https://developer.github.com/v3/pulls/comments/#create-a-comment
+     * @link https://docs.github.com/rest/pulls/comments#create-a-review-comment-for-a-pull-request
      *
      * @param string $username    the username
      * @param string $repository  the repository
@@ -115,7 +115,7 @@ class Comments extends AbstractApi
     /**
      * Update a pull request comment by the username, repository and comment id.
      *
-     * @link https://developer.github.com/v3/pulls/comments/#edit-a-comment
+     * @link https://docs.github.com/rest/pulls/comments#update-a-review-comment-for-a-pull-request
      *
      * @param string $username   the username
      * @param string $repository the repository
@@ -138,7 +138,7 @@ class Comments extends AbstractApi
     /**
      * Delete a pull request comment by the username, repository and comment id.
      *
-     * @link https://developer.github.com/v3/pulls/comments/#delete-a-comment
+     * @link https://docs.github.com/rest/pulls/comments#delete-a-review-comment-for-a-pull-request
      *
      * @param string $username   the username
      * @param string $repository the repository

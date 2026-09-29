@@ -5,12 +5,12 @@ namespace Github\Api\Organization\Actions;
 use Github\Api\AbstractApi;
 
 /**
- * @link https://docs.github.com/en/rest/reference/actions#variables
+ * @link https://docs.github.com/rest/actions/variables
  */
 class Variables extends AbstractApi
 {
     /**
-     * @link https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#list-organization-variables
+     * @link https://docs.github.com/rest/actions/variables#list-organization-variables
      *
      * @param string $organization
      *
@@ -22,7 +22,7 @@ class Variables extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/reference/actions#get-an-organization-secret
+     * @link https://docs.github.com/rest/actions/variables#get-an-organization-variable
      *
      * @param string $organization
      * @param string $variableName
@@ -35,7 +35,7 @@ class Variables extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#create-an-organization-variable
+     * @link https://docs.github.com/rest/actions/variables#create-an-organization-variable
      *
      * @param string $organization
      * @param array  $parameters
@@ -48,7 +48,7 @@ class Variables extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#update-an-organization-variable
+     * @link https://docs.github.com/rest/actions/variables#update-an-organization-variable
      *
      * @param string $organization
      * @param string $variableName
@@ -62,7 +62,7 @@ class Variables extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#delete-an-organization-variable
+     * @link https://docs.github.com/rest/actions/variables#delete-an-organization-variable
      *
      * @param string $organization
      * @param string $variableName
@@ -75,7 +75,7 @@ class Variables extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#list-selected-repositories-for-an-organization-variable
+     * @link https://docs.github.com/rest/actions/variables#list-selected-repositories-for-an-organization-variable
      *
      * @param string $organization
      * @param string $variableName
@@ -88,7 +88,7 @@ class Variables extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#set-selected-repositories-for-an-organization-variable
+     * @link https://docs.github.com/rest/actions/variables#set-selected-repositories-for-an-organization-variable
      *
      * @param string $organization
      * @param string $variableName
@@ -102,7 +102,7 @@ class Variables extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#add-selected-repository-to-an-organization-variable
+     * @link https://docs.github.com/rest/actions/variables#add-selected-repository-to-an-organization-variable
      *
      * @param string $organization
      * @param int    $repositoryId
@@ -116,7 +116,7 @@ class Variables extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#remove-selected-repository-from-an-organization-variable
+     * @link https://docs.github.com/rest/actions/variables#remove-selected-repository-from-an-organization-variable
      *
      * @param string $organization
      * @param int    $repositoryId

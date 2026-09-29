@@ -1,6 +1,8 @@
 ## Markdown API
 [Back to the navigation](../README.md)
 
+Wraps [GitHub Markdown API](https://docs.github.com/rest/markdown/markdown).
+
 ### Render an arbitrary Markdown document
 
 ```php

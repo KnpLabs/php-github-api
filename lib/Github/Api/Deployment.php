@@ -9,7 +9,7 @@ use Github\Exception\MissingArgumentException;
 /**
  * Listing, creating and updating deployments.
  *
- * @link https://developer.github.com/v3/repos/deployments/
+ * @link https://docs.github.com/rest/deployments/deployments
  */
 class Deployment extends AbstractApi
 {
@@ -18,7 +18,7 @@ class Deployment extends AbstractApi
     /**
      * List deployments for a particular repository.
      *
-     * @link https://developer.github.com/v3/repos/deployments/#list-deployments
+     * @link https://docs.github.com/rest/deployments/deployments#list-deployments
      *
      * @param string $username   the username of the user who owns the repository
      * @param string $repository the name of the repository
@@ -34,6 +34,8 @@ class Deployment extends AbstractApi
     /**
      * Get a deployment in selected repository.
      *
+     * @link https://docs.github.com/rest/deployments/deployments#get-a-deployment
+     *
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
      * @param int    $id         the id of the deployment
@@ -48,7 +50,7 @@ class Deployment extends AbstractApi
     /**
      * Create a new deployment for the given username and repo.
      *
-     * @link https://developer.github.com/v3/repos/deployments/#create-a-deployment
+     * @link https://docs.github.com/rest/deployments/deployments#create-a-deployment
      *
      * Important: Once a deployment is created, it cannot be updated. Changes are indicated by creating new statuses.
      * @see updateStatus
@@ -73,7 +75,7 @@ class Deployment extends AbstractApi
     /**
      * Delete a deployment for the given username and repo.
      *
-     * @link https://docs.github.com/en/rest/reference/repos#delete-a-deployment
+     * @link https://docs.github.com/rest/deployments/deployments#delete-a-deployment
      *
      * Important: Deployments can only be deleted when in inactive state
      * @see updateStatus
@@ -88,7 +90,7 @@ class Deployment extends AbstractApi
     /**
      * Updates a deployment by creating a new status update.
      *
-     * @link https://developer.github.com/v3/repos/deployments/#create-a-deployment-status
+     * @link https://docs.github.com/rest/deployments/statuses#create-a-deployment-status
      *
      * @param string $username   the username
      * @param string $repository the repository
@@ -108,7 +110,7 @@ class Deployment extends AbstractApi
         }
 
         // adjust media-type per github docs
-        // https://docs.github.com/en/rest/reference/repos#create-a-deployment-status
+        // https://docs.github.com/rest/deployments/statuses#create-a-deployment-status
         if ($params['state'] === 'inactive') {
             $this->acceptHeaderValue = 'application/vnd.github.ant-man-preview+json';
         }
@@ -122,6 +124,8 @@ class Deployment extends AbstractApi
     /**
      * Gets all of the status updates tied to a given deployment.
      *
+     * @link https://docs.github.com/rest/deployments/statuses#list-deployment-statuses
+     *
      * @param string $username   the username
      * @param string $repository the repository
      * @param int    $id         the deployment identifier
@@ -134,6 +138,10 @@ class Deployment extends AbstractApi
     }
 
     /**
+     * Manage the environments of a repository.
+     *
+     * @link https://docs.github.com/rest/deployments/environments
+     *
      * @return Environments
      */
     public function environments()
@@ -142,6 +150,10 @@ class Deployment extends AbstractApi
     }
 
     /**
+     * Manage the deployment branch policies of an environment.
+     *
+     * @link https://docs.github.com/rest/deployments/branch-policies
+     *
      * @return Policies
      */
     public function policies()

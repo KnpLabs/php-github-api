@@ -2,7 +2,7 @@
 [Back to the navigation](../README.md)
 
 Listing, showing, assigning, and removing orgniazationroles.
-Wraps [GitHub Organization Roles API](https://docs.github.com/en/rest/orgs/organization-roles).
+Wraps [GitHub Organization Roles API](https://docs.github.com/rest/orgs/organization-roles).
 
 Additional APIs:
 * [Organization](../doc/organization)

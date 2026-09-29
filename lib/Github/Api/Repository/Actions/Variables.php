@@ -5,12 +5,12 @@ namespace Github\Api\Repository\Actions;
 use Github\Api\AbstractApi;
 
 /**
- * @link https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#about-variables-in-github-actions
+ * @link https://docs.github.com/rest/actions/variables
  */
 class Variables extends AbstractApi
 {
     /**
-     * @link https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#list-repository-variables
+     * @link https://docs.github.com/rest/actions/variables#list-repository-variables
      *
      * @param string $username
      * @param string $repository
@@ -23,7 +23,7 @@ class Variables extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#get-a-repository-variable
+     * @link https://docs.github.com/rest/actions/variables#get-a-repository-variable
      *
      * @param string $username
      * @param string $repository
@@ -37,7 +37,7 @@ class Variables extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#create-a-repository-variable
+     * @link https://docs.github.com/rest/actions/variables#create-a-repository-variable
      *
      * @param string $username
      * @param string $repository
@@ -51,7 +51,7 @@ class Variables extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#update-a-repository-variable
+     * @link https://docs.github.com/rest/actions/variables#update-a-repository-variable
      *
      * @param string $username
      * @param string $repository
@@ -66,7 +66,7 @@ class Variables extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#delete-a-repository-variable
+     * @link https://docs.github.com/rest/actions/variables#delete-a-repository-variable
      *
      * @param string $username
      * @param string $repository

@@ -7,7 +7,7 @@ use Github\Api\AbstractApi;
 class Migration extends AbstractApi
 {
     /**
-     * @link https://docs.github.com/en/rest/migrations/users?apiVersion=2022-11-28#list-user-migrations
+     * @link https://docs.github.com/rest/migrations/users#list-user-migrations
      *
      * @param array $params
      *
@@ -19,7 +19,7 @@ class Migration extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/migrations/users?apiVersion=2022-11-28#start-a-user-migration
+     * @link https://docs.github.com/rest/migrations/users#start-a-user-migration
      *
      * @param array $params
      *
@@ -31,7 +31,7 @@ class Migration extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/migrations/users?apiVersion=2022-11-28#get-a-user-migration-status
+     * @link https://docs.github.com/rest/migrations/users#get-a-user-migration-status
      *
      * @param int   $migrationId
      * @param array $params
@@ -44,7 +44,7 @@ class Migration extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/migrations/users?apiVersion=2022-11-28#delete-a-user-migration-archive
+     * @link https://docs.github.com/rest/migrations/users#delete-a-user-migration-archive
      *
      * @param int $migrationId
      *
@@ -56,7 +56,7 @@ class Migration extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/migrations/users?apiVersion=2022-11-28#unlock-a-user-repository
+     * @link https://docs.github.com/rest/migrations/users#unlock-a-user-repository
      *
      * @param int    $migrationId
      * @param string $repository
@@ -69,7 +69,7 @@ class Migration extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/migrations/users?apiVersion=2022-11-28#list-repositories-for-a-user-migration
+     * @link https://docs.github.com/rest/migrations/users#list-repositories-for-a-user-migration
      *
      * @param int   $migrationId
      * @param array $params

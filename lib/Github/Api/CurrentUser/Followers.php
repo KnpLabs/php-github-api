@@ -5,7 +5,7 @@ namespace Github\Api\CurrentUser;
 use Github\Api\AbstractApi;
 
 /**
- * @link   http://developer.github.com/v3/users/followers/
+ * @link   https://docs.github.com/rest/users/followers
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
@@ -14,7 +14,7 @@ class Followers extends AbstractApi
     /**
      * List followed users by the authenticated user.
      *
-     * @link http://developer.github.com/v3/repos/followers/
+     * @link https://docs.github.com/rest/users/followers#list-the-people-the-authenticated-user-follows
      *
      * @param int $page
      *
@@ -30,7 +30,7 @@ class Followers extends AbstractApi
     /**
      * Check that the authenticated user follows a user.
      *
-     * @link http://developer.github.com/v3/repos/followers/
+     * @link https://docs.github.com/rest/users/followers#check-if-a-person-is-followed-by-the-authenticated-user
      *
      * @param string $username the username to follow
      *
@@ -44,7 +44,7 @@ class Followers extends AbstractApi
     /**
      * Make the authenticated user follow a user.
      *
-     * @link http://developer.github.com/v3/repos/followers/
+     * @link https://docs.github.com/rest/users/followers#follow-a-user
      *
      * @param string $username the username to follow
      *
@@ -58,7 +58,7 @@ class Followers extends AbstractApi
     /**
      * Make the authenticated user un-follow a user.
      *
-     * @link http://developer.github.com/v3/repos/followers/
+     * @link https://docs.github.com/rest/users/followers#unfollow-a-user
      *
      * @param string $username the username to un-follow
      *

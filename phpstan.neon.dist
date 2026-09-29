@@ -13,3 +13,7 @@ parameters:
         -
             message: '#Method (.*) has no return typehint specified\.#'
             path: lib/Github/Api
+
+        -
+            message: '#(extends|Instantiation of|typehint with) deprecated class Github\\Api\\#'
+            path: lib/Github/Api

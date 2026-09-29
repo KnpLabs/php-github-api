@@ -6,7 +6,7 @@ use Github\Api\AbstractApi;
 use Github\Api\AcceptHeaderTrait;
 
 /**
- * @link   https://developer.github.com/v3/activity/starring/
+ * @link   https://docs.github.com/rest/activity/starring
  *
  * @author Felipe Valtl de Mello <eu@felipe.im>
  */
@@ -17,7 +17,7 @@ class Starring extends AbstractApi
     /**
      * Configure the body type.
      *
-     * @see https://developer.github.com/v3/activity/starring/#list-stargazers
+     * @see https://docs.github.com/rest/activity/starring#list-stargazers
      *
      * @param string $bodyType
      *
@@ -35,7 +35,7 @@ class Starring extends AbstractApi
     /**
      * List repositories starred by the authenticated user.
      *
-     * @link https://developer.github.com/v3/activity/starring/
+     * @link https://docs.github.com/rest/activity/starring#list-repositories-starred-by-the-authenticated-user
      *
      * @param int $page
      * @param int $perPage
@@ -53,7 +53,7 @@ class Starring extends AbstractApi
     /**
      * Check that the authenticated user starres a repository.
      *
-     * @link https://developer.github.com/v3/activity/starring/
+     * @link https://docs.github.com/rest/activity/starring#check-if-a-repository-is-starred-by-the-authenticated-user
      *
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
@@ -68,7 +68,7 @@ class Starring extends AbstractApi
     /**
      * Make the authenticated user star a repository.
      *
-     * @link https://developer.github.com/v3/activity/starring/
+     * @link https://docs.github.com/rest/activity/starring#star-a-repository-for-the-authenticated-user
      *
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
@@ -83,7 +83,7 @@ class Starring extends AbstractApi
     /**
      * Make the authenticated user unstar a repository.
      *
-     * @link https://developer.github.com/v3/activity/starring
+     * @link https://docs.github.com/rest/activity/starring#unstar-a-repository-for-the-authenticated-user
      *
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo

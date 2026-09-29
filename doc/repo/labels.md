@@ -1,6 +1,8 @@
 ## Repo / Labels API
 [Back to the "Repos API"](../repos.md) | [Back to the navigation](../README.md)
 
+Provides information about labels for a repository. Wraps [GitHub Repository labels API](https://docs.github.com/rest/issues/labels).
+
 ### List all labels for this repository
 
 ```php

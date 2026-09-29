@@ -5,7 +5,7 @@ namespace Github\Api\Issue;
 use Github\Api\AbstractApi;
 
 /**
- * @link   http://developer.github.com/v3/issues/events/
+ * @link   https://docs.github.com/rest/issues/events
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
@@ -14,7 +14,7 @@ class Events extends AbstractApi
     /**
      * Get all events for an issue.
      *
-     * @link https://developer.github.com/v3/issues/events/#list-events-for-an-issue
+     * @link https://docs.github.com/rest/issues/events#list-issue-events
      *
      * @param string   $username
      * @param string   $repository
@@ -39,7 +39,7 @@ class Events extends AbstractApi
     /**
      * Display an event for an issue.
      *
-     * @link https://developer.github.com/v3/issues/events/#get-a-single-event
+     * @link https://docs.github.com/rest/issues/events#get-an-issue-event
      *
      * @param string $username
      * @param string $repository

@@ -1,6 +1,8 @@
 ## Repo / Cards API
 [Back to the "Repos API"](../repos.md) | [Back to the navigation](../README.md)
 
+> **Deprecated**: GitHub Projects (classic) was sunset on 2024-08-23 and this REST API is no longer part of the current documentation on docs.github.com.
+
 This api is currently only available to developers in Early Access. To access the API during the Early Access period, 
 you must provide a custom media type in the Accept header.
 

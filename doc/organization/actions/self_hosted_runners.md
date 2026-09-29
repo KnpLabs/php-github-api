@@ -3,7 +3,7 @@
 
 # List self-hosted runners for an Organization
 
-https://docs.github.com/en/rest/actions/self-hosted-runners?apiVersion=2022-11-28#list-self-hosted-runners-for-an-organization
+https://docs.github.com/rest/actions/self-hosted-runners#list-self-hosted-runners-for-an-organization
 
 ```php
 $runners = $client->api('organization')->runners()->all('KnpLabs');
@@ -11,7 +11,7 @@ $runners = $client->api('organization')->runners()->all('KnpLabs');
 
 # Get a self-hosted runner for an Organization
 
- https://docs.github.com/en/rest/actions/self-hosted-runners?apiVersion=2022-11-28#get-a-self-hosted-runner-for-an-organization
+ https://docs.github.com/rest/actions/self-hosted-runners#get-a-self-hosted-runner-for-an-organization
 
 ```php
 $runner = $client->api('organization')->runners()->show('KnpLabs', $runnerId);
@@ -19,7 +19,7 @@ $runner = $client->api('organization')->runners()->show('KnpLabs', $runnerId);
 
 # Delete a self-hosted runner from an Organization
 
-https://docs.github.com/en/rest/actions/self-hosted-runners?apiVersion=2022-11-28#delete-a-self-hosted-runner-from-an-organization
+https://docs.github.com/rest/actions/self-hosted-runners#delete-a-self-hosted-runner-from-an-organization
 
 ```php
 $client->api('organization')->runners()->remove('KnpLabs', $runnerId);
@@ -27,7 +27,7 @@ $client->api('organization')->runners()->remove('KnpLabs', $runnerId);
 
 # List runner applications for an Organization
 
-https://docs.github.com/en/rest/actions/self-hosted-runners?apiVersion=2022-11-28#list-runner-applications-for-an-organization
+https://docs.github.com/rest/actions/self-hosted-runners#list-runner-applications-for-an-organization
 
 ```php
 $applications = $client->api('organization')->selfHostedRunners()->applications('KnpLabs');

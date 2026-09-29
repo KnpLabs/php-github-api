@@ -6,14 +6,14 @@ use Github\Api\AbstractApi;
 use Github\Api\AcceptHeaderTrait;
 
 /**
- * @link https://docs.github.com/en/rest/reference/checks
+ * @link https://docs.github.com/rest/checks/suites
  */
 class CheckSuites extends AbstractApi
 {
     use AcceptHeaderTrait;
 
     /**
-     * @link https://docs.github.com/en/rest/reference/checks#create-a-check-suite
+     * @link https://docs.github.com/rest/checks/suites#create-a-check-suite
      *
      * @return array
      */
@@ -25,7 +25,7 @@ class CheckSuites extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/reference/checks#update-repository-preferences-for-check-suites
+     * @link https://docs.github.com/rest/checks/suites#update-repository-preferences-for-check-suites
      *
      * @return array
      */
@@ -37,7 +37,7 @@ class CheckSuites extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/reference/checks#get-a-check-suite
+     * @link https://docs.github.com/rest/checks/suites#get-a-check-suite
      *
      * @return array
      */
@@ -49,7 +49,7 @@ class CheckSuites extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/reference/checks#rerequest-a-check-suite
+     * @link https://docs.github.com/rest/checks/suites#rerequest-a-check-suite
      *
      * @return array
      */
@@ -61,7 +61,7 @@ class CheckSuites extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/reference/checks#list-check-suites-for-a-git-reference
+     * @link https://docs.github.com/rest/checks/suites#list-check-suites-for-a-git-reference
      *
      * @return array
      */

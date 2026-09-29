@@ -1,6 +1,8 @@
 ## Trees API
 [Back to the navigation](../README.md)
 
+Wraps [GitHub Git Trees API](https://docs.github.com/rest/git/trees).
+
 ### Show a tree
 
 ```php

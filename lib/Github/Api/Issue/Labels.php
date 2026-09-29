@@ -7,7 +7,7 @@ use Github\Exception\InvalidArgumentException;
 use Github\Exception\MissingArgumentException;
 
 /**
- * @link   http://developer.github.com/v3/issues/labels/
+ * @link   https://docs.github.com/rest/issues/labels
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
@@ -16,7 +16,8 @@ class Labels extends AbstractApi
     /**
      * Get all labels for a repository or the labels for a specific issue.
      *
-     * @link https://developer.github.com/v3/issues/labels/#list-labels-on-an-issue
+     * @link https://docs.github.com/rest/issues/labels#list-labels-for-a-repository
+     * @link https://docs.github.com/rest/issues/labels#list-labels-for-an-issue
      *
      * @param string   $username
      * @param string   $repository
@@ -38,7 +39,7 @@ class Labels extends AbstractApi
     /**
      * Get a single label.
      *
-     * @link https://developer.github.com/v3/issues/labels/#get-a-single-label
+     * @link https://docs.github.com/rest/issues/labels#get-a-label
      *
      * @param string $username
      * @param string $repository
@@ -54,7 +55,7 @@ class Labels extends AbstractApi
     /**
      * Create a label for a repository.
      *
-     * @link https://developer.github.com/v3/issues/labels/#create-a-label
+     * @link https://docs.github.com/rest/issues/labels#create-a-label
      *
      * @param string $username
      * @param string $repository
@@ -79,7 +80,7 @@ class Labels extends AbstractApi
     /**
      * Delete a label for a repository.
      *
-     * @link https://developer.github.com/v3/issues/labels/#remove-a-label-from-an-issue
+     * @link https://docs.github.com/rest/issues/labels#delete-a-label
      *
      * @param string $username
      * @param string $repository
@@ -95,7 +96,7 @@ class Labels extends AbstractApi
     /**
      * Edit a label for a repository.
      *
-     * @link https://developer.github.com/v3/issues/labels/#update-a-label
+     * @link https://docs.github.com/rest/issues/labels#update-a-label
      *
      * @param string $username
      * @param string $repository
@@ -118,7 +119,7 @@ class Labels extends AbstractApi
     /**
      * Add a label to an issue.
      *
-     * @link https://developer.github.com/v3/issues/labels/#add-labels-to-an-issue
+     * @link https://docs.github.com/rest/issues/labels#add-labels-to-an-issue
      *
      * @param string       $username
      * @param string       $repository
@@ -143,7 +144,7 @@ class Labels extends AbstractApi
     /**
      * Replace labels for an issue.
      *
-     * @link https://developer.github.com/v3/issues/labels/#replace-all-labels-for-an-issue
+     * @link https://docs.github.com/rest/issues/labels#set-labels-for-an-issue
      *
      * @param string $username
      * @param string $repository
@@ -160,7 +161,7 @@ class Labels extends AbstractApi
     /**
      * Remove a label for an issue.
      *
-     * @link https://developer.github.com/v3/issues/labels/#remove-a-label-from-an-issue
+     * @link https://docs.github.com/rest/issues/labels#remove-a-label-from-an-issue
      *
      * @param string $username
      * @param string $repository
@@ -177,7 +178,7 @@ class Labels extends AbstractApi
     /**
      * Remove all labels from an issue.
      *
-     * @link https://developer.github.com/v3/issues/labels/#replace-all-labels-for-an-issue
+     * @link https://docs.github.com/rest/issues/labels#remove-all-labels-from-an-issue
      *
      * @param string $username
      * @param string $repository
