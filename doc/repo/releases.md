@@ -1,7 +1,7 @@
 ## Repo / Releases API
 [Back to the "Repos API"](../repos.md) | [Back to the navigation](../README.md)
 
-Provides information about releases for a repository. Wraps [GitHub Releases API](https://developer.github.com/v3/repos/releases/).
+Provides information about releases for a repository. Wraps [GitHub Releases API](https://docs.github.com/rest/releases/releases).
 
 ### Get latest actual release
 

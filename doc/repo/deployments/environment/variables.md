@@ -3,7 +3,7 @@
 
 ### List environment variables
 
-https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#list-environment-variables
+https://docs.github.com/rest/actions/variables#list-environment-variables
 
 ```php
 $variables = $client->environment()->variables()->all($repoId, $envName);
@@ -11,7 +11,7 @@ $variables = $client->environment()->variables()->all($repoId, $envName);
 
 ### Get an environment variable
 
-https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#get-an-environment-variable
+https://docs.github.com/rest/actions/variables#get-an-environment-variable
 
 ```php
 $variable = $client->environment()->variables()->show($repoId, $envName, $variableName);
@@ -19,7 +19,7 @@ $variable = $client->environment()->variables()->show($repoId, $envName, $variab
 
 ### Create environment variable
 
-https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#create-an-environment-variable
+https://docs.github.com/rest/actions/variables#create-an-environment-variable
 
 ```php
 $client->environment()->variables()->create($repoId, $envName, [
@@ -30,7 +30,7 @@ $client->environment()->variables()->create($repoId, $envName, [
 
 ### Update environment variable
 
-https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#update-an-environment-variable
+https://docs.github.com/rest/actions/variables#update-an-environment-variable
 
 ```php
 $client->environment()->variables()->update($repoId, $envName, $variableName, [
@@ -41,7 +41,7 @@ $client->environment()->variables()->update($repoId, $envName, $variableName, [
 
 ### Delete an environment variable
 
-https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#delete-an-environment-variable
+https://docs.github.com/rest/actions/variables#delete-an-environment-variable
 
 ```php
 $client->environment()->variables()->remove($repoId, $envName, $variableName);

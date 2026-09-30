@@ -10,7 +10,7 @@ use Github\Exception\MissingArgumentException;
 /**
  * API for accessing Pull Request Reviews from your Git/Github repositories.
  *
- * @link https://developer.github.com/v3/pulls/reviews/
+ * @link https://docs.github.com/rest/pulls/reviews
  *
  * @author Christian Flothmann <christian.flothmann@sensiolabs.de>
  */
@@ -18,6 +18,11 @@ class Review extends AbstractApi
 {
     use AcceptHeaderTrait;
 
+    /**
+     * @deprecated since 3.2, will be removed in 4.0.
+     *
+     * @return $this
+     */
     public function configure()
     {
         trigger_deprecation('KnpLabs/php-github-api', '3.2', 'The "%s" is deprecated and will be removed.', __METHOD__);
@@ -28,7 +33,7 @@ class Review extends AbstractApi
     /**
      * Get a listing of a pull request's reviews by the username, repository and pull request number.
      *
-     * @link https://developer.github.com/v3/pulls/reviews/#list-reviews-on-a-pull-request
+     * @link https://docs.github.com/rest/pulls/reviews#list-reviews-for-a-pull-request
      *
      * @param string $username    the username
      * @param string $repository  the repository
@@ -54,7 +59,7 @@ class Review extends AbstractApi
     /**
      * Get a single pull request review by the username, repository, pull request number and the review id.
      *
-     * @link https://developer.github.com/v3/pulls/reviews/#get-a-single-review
+     * @link https://docs.github.com/rest/pulls/reviews#get-a-review-for-a-pull-request
      *
      * @param string $username    the username
      * @param string $repository  the repository
@@ -71,7 +76,7 @@ class Review extends AbstractApi
     /**
      * Delete a single pull request review by the username, repository, pull request number and the review id.
      *
-     * @link https://developer.github.com/v3/pulls/reviews/#delete-a-pending-review
+     * @link https://docs.github.com/rest/pulls/reviews#delete-a-pending-review-for-a-pull-request
      *
      * @param string $username    the username
      * @param string $repository  the repository
@@ -88,7 +93,7 @@ class Review extends AbstractApi
     /**
      * Get comments for a single pull request review.
      *
-     * @link https://developer.github.com/v3/pulls/reviews/#get-comments-for-a-single-review
+     * @link https://docs.github.com/rest/pulls/reviews#list-comments-for-a-pull-request-review
      *
      * @param string $username    the username
      * @param string $repository  the repository
@@ -105,7 +110,7 @@ class Review extends AbstractApi
     /**
      * Create a pull request review by the username, repository and pull request number.
      *
-     * @link https://developer.github.com/v3/pulls/reviews/#create-a-pull-request-review
+     * @link https://docs.github.com/rest/pulls/reviews#create-a-review-for-a-pull-request
      *
      * @param string $username    the username
      * @param string $repository  the repository
@@ -128,7 +133,7 @@ class Review extends AbstractApi
     /**
      * Submit a pull request review by the username, repository, pull request number and the review id.
      *
-     * @link https://developer.github.com/v3/pulls/reviews/#submit-a-pull-request-review
+     * @link https://docs.github.com/rest/pulls/reviews#submit-a-review-for-a-pull-request
      *
      * @param string $username    the username
      * @param string $repository  the repository
@@ -156,7 +161,7 @@ class Review extends AbstractApi
     /**
      * Dismiss a pull request review by the username, repository, pull request number and the review id.
      *
-     * @link https://developer.github.com/v3/pulls/reviews/#dismiss-a-pull-request-review
+     * @link https://docs.github.com/rest/pulls/reviews#dismiss-a-review-for-a-pull-request
      *
      * @param string $username    the username
      * @param string $repository  the repository
@@ -184,7 +189,7 @@ class Review extends AbstractApi
     /**
      * Update a pull request review by the username, repository, pull request number and the review id.
      *
-     * @link https://developer.github.com/v3/pulls/reviews/#update-a-pull-request-review
+     * @link https://docs.github.com/rest/pulls/reviews#update-a-review-for-a-pull-request
      *
      * @param string $username    the username
      * @param string $repository  the repository

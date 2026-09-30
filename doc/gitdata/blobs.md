@@ -1,6 +1,8 @@
 ## Blobs API
 [Back to the navigation](../README.md)
 
+Wraps [GitHub Git Blobs API](https://docs.github.com/rest/git/blobs).
+
 ### Show a blob
 
 ```php

@@ -1,7 +1,7 @@
 ## Issues / Assignees API
 [Back to the "Issues API"](../issues.md) | [Back to the navigation](../README.md)
 
-Wraps [GitHub Issue Assignees API](https://developer.github.com/v3/issues/assignees/).
+Wraps [GitHub Issue Assignees API](https://docs.github.com/rest/issues/assignees).
 
 ### List all available assignees
 

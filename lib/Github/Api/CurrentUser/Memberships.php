@@ -9,7 +9,7 @@ class Memberships extends AbstractApi
     /**
      * List your organization memberships.
      *
-     * @link https://developer.github.com/v3/orgs/members/#get-your-organization-membership
+     * @link https://docs.github.com/rest/orgs/members#list-organization-memberships-for-the-authenticated-user
      *
      * @return array
      */
@@ -21,7 +21,7 @@ class Memberships extends AbstractApi
     /**
      * Get your organization membership.
      *
-     * @link https://developer.github.com/v3/orgs/members/#get-your-organization-membership
+     * @link https://docs.github.com/rest/orgs/members#get-an-organization-membership-for-the-authenticated-user
      *
      * @param string $organization
      *
@@ -35,7 +35,7 @@ class Memberships extends AbstractApi
     /**
      * Edit your organization membership.
      *
-     * @link https://developer.github.com/v3/orgs/members/#edit-your-organization-membership
+     * @link https://docs.github.com/rest/orgs/members#update-an-organization-membership-for-the-authenticated-user
      *
      * @param string $organization
      *

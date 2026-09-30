@@ -11,6 +11,8 @@ class Assignees extends AbstractApi
     /**
      * List all the available assignees to which issues may be assigned.
      *
+     * @link https://docs.github.com/rest/issues/assignees#list-assignees
+     *
      * @param string $username
      * @param string $repository
      * @param array  $parameters
@@ -25,7 +27,7 @@ class Assignees extends AbstractApi
     /**
      * Check to see if a particular user is an assignee for a repository.
      *
-     * @link https://developer.github.com/v3/issues/assignees/#check-assignee
+     * @link https://docs.github.com/rest/issues/assignees#check-if-a-user-can-be-assigned
      *
      * @param string $username
      * @param string $repository
@@ -41,7 +43,7 @@ class Assignees extends AbstractApi
     /**
      * Add assignees to an Issue.
      *
-     * @link https://developer.github.com/v3/issues/assignees/#add-assignees-to-an-issue
+     * @link https://docs.github.com/rest/issues/assignees#add-assignees-to-an-issue
      *
      * @param string $username
      * @param string $repository
@@ -69,7 +71,7 @@ class Assignees extends AbstractApi
     /**
      * Remove assignees from an Issue.
      *
-     * @link https://developer.github.com/v3/issues/assignees/#remove-assignees-from-an-issue
+     * @link https://docs.github.com/rest/issues/assignees#remove-assignees-from-an-issue
      *
      * @param string $username
      * @param string $repository

@@ -11,7 +11,7 @@ use Github\Api\GitData\Trees;
 /**
  * Getting full versions of specific files and trees in your Git repositories.
  *
- * @link   http://developer.github.com/v3/git/
+ * @link   https://docs.github.com/rest/git
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */

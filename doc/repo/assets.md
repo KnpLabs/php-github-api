@@ -1,6 +1,8 @@
 ## Repo / Releases API
 [Back to the "Repos API"](../repos.md) | [Back to the navigation](../README.md)
 
+Provides information about release assets for a repository. Wraps [GitHub Release assets API](https://docs.github.com/rest/releases/assets).
+
 ### List all assets by release
 
 ```php

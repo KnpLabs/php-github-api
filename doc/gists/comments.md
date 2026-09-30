@@ -2,7 +2,7 @@
 
 [Back to the "Gists API"](../gists.md) | [Back to the navigation](../README.md)
 
-Wraps [GitHub Issue Comments API](http://developer.github.com/v3/gists/comments/).
+Wraps [GitHub Gist Comments API](https://docs.github.com/rest/gists/comments).
 
 ### List a gist comments
 

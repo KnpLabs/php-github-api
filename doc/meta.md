@@ -2,7 +2,7 @@
 [Back to the navigation](README.md)
 
 
-Wrap [GitHub Meta API](http://developer.github.com/v3/meta/).
+Wrap [GitHub Meta API](https://docs.github.com/rest/meta/meta).
 
 ### Get information about GitHub services
 

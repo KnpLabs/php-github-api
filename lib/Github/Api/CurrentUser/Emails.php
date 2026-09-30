@@ -6,7 +6,7 @@ use Github\Api\AbstractApi;
 use Github\Exception\InvalidArgumentException;
 
 /**
- * @link   http://developer.github.com/v3/users/emails/
+ * @link   https://docs.github.com/rest/users/emails
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
@@ -15,7 +15,7 @@ class Emails extends AbstractApi
     /**
      * List emails for the authenticated user.
      *
-     * @link http://developer.github.com/v3/users/emails/
+     * @link https://docs.github.com/rest/users/emails#list-email-addresses-for-the-authenticated-user
      *
      * @return array
      */
@@ -27,7 +27,7 @@ class Emails extends AbstractApi
     /**
      * List public email addresses for a user.
      *
-     * @link https://developer.github.com/v3/users/emails/#list-public-email-addresses-for-a-user
+     * @link https://docs.github.com/rest/users/emails#list-public-email-addresses-for-the-authenticated-user
      *
      * @return array
      */
@@ -39,7 +39,7 @@ class Emails extends AbstractApi
     /**
      * Adds one or more email for the authenticated user.
      *
-     * @link http://developer.github.com/v3/users/emails/
+     * @link https://docs.github.com/rest/users/emails#add-an-email-address-for-the-authenticated-user
      *
      * @param string|array $emails
      *
@@ -61,7 +61,7 @@ class Emails extends AbstractApi
     /**
      * Removes one or more email for the authenticated user.
      *
-     * @link http://developer.github.com/v3/users/emails/
+     * @link https://docs.github.com/rest/users/emails#delete-an-email-address-for-the-authenticated-user
      *
      * @param string|array $emails
      *
@@ -83,7 +83,7 @@ class Emails extends AbstractApi
     /**
      * Toggle primary email visibility.
      *
-     * @link https://developer.github.com/v3/users/emails/#toggle-primary-email-visibility
+     * @link https://docs.github.com/rest/users/emails#set-primary-email-visibility-for-the-authenticated-user
      *
      * @return array
      */

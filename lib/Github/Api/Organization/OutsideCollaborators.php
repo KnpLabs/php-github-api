@@ -5,14 +5,14 @@ namespace Github\Api\Organization;
 use Github\Api\AbstractApi;
 
 /**
- * @link   https://developer.github.com/v3/orgs/outside_collaborators/
+ * @link   https://docs.github.com/rest/orgs/outside-collaborators
  *
  * @author Matthieu Calie <matthieu@calie.be>
  */
 class OutsideCollaborators extends AbstractApi
 {
     /**
-     * @link https://developer.github.com/v3/orgs/outside_collaborators/#list-outside-collaborators-for-an-organization
+     * @link https://docs.github.com/rest/orgs/outside-collaborators#list-outside-collaborators-for-an-organization
      *
      * @param string $organization the organization
      * @param array  $params
@@ -25,7 +25,7 @@ class OutsideCollaborators extends AbstractApi
     }
 
     /**
-     * @link https://developer.github.com/v3/orgs/outside_collaborators/#convert-an-organization-member-to-outside-collaborator
+     * @link https://docs.github.com/rest/orgs/outside-collaborators#convert-an-organization-member-to-outside-collaborator
      *
      * @param string $organization the organization
      * @param string $username     the github username
@@ -38,7 +38,7 @@ class OutsideCollaborators extends AbstractApi
     }
 
     /**
-     * @link https://developer.github.com/v3/orgs/outside_collaborators/#remove-outside-collaborator-from-an-organization
+     * @link https://docs.github.com/rest/orgs/outside-collaborators#remove-outside-collaborator-from-an-organization
      *
      * @param string $organization the organization
      * @param string $username     the username

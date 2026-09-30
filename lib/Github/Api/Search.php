@@ -5,7 +5,7 @@ namespace Github\Api;
 /**
  * Implement the Search API.
  *
- * @link   https://developer.github.com/v3/search/
+ * @link   https://docs.github.com/rest/search/search
  *
  * @author Greg Payne <greg.payne@gmail.com>
  */
@@ -16,7 +16,7 @@ class Search extends AbstractApi
     /**
      * Search repositories by filter (q).
      *
-     * @link https://developer.github.com/v3/search/#search-repositories
+     * @link https://docs.github.com/rest/search/search#search-repositories
      *
      * @param string $q     the filter
      * @param string $sort  the sort field
@@ -32,7 +32,7 @@ class Search extends AbstractApi
     /**
      * Search issues by filter (q).
      *
-     * @link https://developer.github.com/v3/search/#search-issues
+     * @link https://docs.github.com/rest/search/search#search-issues-and-pull-requests
      *
      * @param string $q     the filter
      * @param string $sort  the sort field
@@ -48,7 +48,7 @@ class Search extends AbstractApi
     /**
      * Search code by filter (q).
      *
-     * @link https://developer.github.com/v3/search/#search-code
+     * @link https://docs.github.com/rest/search/search#search-code
      *
      * @param string $q     the filter
      * @param string $sort  the sort field
@@ -65,7 +65,7 @@ class Search extends AbstractApi
      * Search code by filter (q), but will return additional data to highlight
      * the matched results.
      *
-     * @link https://docs.github.com/en/rest/reference/search#text-match-metadata
+     * @link https://docs.github.com/rest/search/search#text-match-metadata
      *
      * @return array list of code found
      */
@@ -79,7 +79,7 @@ class Search extends AbstractApi
     /**
      * Search users by filter (q).
      *
-     * @link https://developer.github.com/v3/search/#search-users
+     * @link https://docs.github.com/rest/search/search#search-users
      *
      * @param string $q     the filter
      * @param string $sort  the sort field
@@ -95,7 +95,7 @@ class Search extends AbstractApi
     /**
      * Search commits by filter (q).
      *
-     * @link https://developer.github.com/v3/search/#search-commits
+     * @link https://docs.github.com/rest/search/search#search-commits
      *
      * @param string $q     the filter
      * @param string $sort  the sort field
@@ -114,7 +114,7 @@ class Search extends AbstractApi
     /**
      * Search topics by filter (q).
      *
-     * @link https://developer.github.com/v3/search/#search-topics
+     * @link https://docs.github.com/rest/search/search#search-topics
      *
      * @param string $q the filter
      *

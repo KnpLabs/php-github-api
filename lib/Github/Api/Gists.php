@@ -8,7 +8,7 @@ use Github\Exception\MissingArgumentException;
 /**
  * Creating, editing, deleting and listing gists.
  *
- * @link   http://developer.github.com/v3/gists/
+ * @link   https://docs.github.com/rest/gists/gists
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  * @author Edoardo Rivello <edoardo.rivello at gmail dot com>
@@ -20,7 +20,7 @@ class Gists extends AbstractApi
     /**
      * Configure the body type.
      *
-     * @link https://developer.github.com/v3/gists/#custom-media-types
+     * @link https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api
      *
      * @param string|null $bodyType
      *
@@ -38,6 +38,10 @@ class Gists extends AbstractApi
     }
 
     /**
+     * List gists (for the authenticated user, public, or starred, depending on $type).
+     *
+     * @link https://docs.github.com/rest/gists/gists
+     *
      * @param string|null $type
      *
      * @return array|string
@@ -52,6 +56,10 @@ class Gists extends AbstractApi
     }
 
     /**
+     * Get a gist.
+     *
+     * @link https://docs.github.com/rest/gists/gists#get-a-gist
+     *
      * @param string $number
      *
      * @return array
@@ -64,10 +72,10 @@ class Gists extends AbstractApi
     /**
      * Get a specific revision of a gist.
      *
+     * @link https://docs.github.com/rest/gists/gists#get-a-gist-revision
+     *
      * @param string $number
      * @param string $sha
-     *
-     * @link https://developer.github.com/v3/gists/#get-a-specific-revision-of-a-gist
      *
      * @return array
      */
@@ -76,6 +84,17 @@ class Gists extends AbstractApi
         return $this->get('/gists/'.rawurlencode($number).'/'.rawurlencode($sha));
     }
 
+    /**
+     * Create a gist.
+     *
+     * @link https://docs.github.com/rest/gists/gists#create-a-gist
+     *
+     * @param array $params
+     *
+     * @throws MissingArgumentException
+     *
+     * @return array
+     */
     public function create(array $params)
     {
         if (!isset($params['files']) || (!is_array($params['files']) || 0 === count($params['files']))) {
@@ -88,6 +107,10 @@ class Gists extends AbstractApi
     }
 
     /**
+     * Update a gist.
+     *
+     * @link https://docs.github.com/rest/gists/gists#update-a-gist
+     *
      * @param string $id
      * @param array  $params
      *
@@ -99,6 +122,10 @@ class Gists extends AbstractApi
     }
 
     /**
+     * List gist commits.
+     *
+     * @link https://docs.github.com/rest/gists/gists#list-gist-commits
+     *
      * @param string $id
      *
      * @return array
@@ -109,6 +136,10 @@ class Gists extends AbstractApi
     }
 
     /**
+     * Fork a gist.
+     *
+     * @link https://docs.github.com/rest/gists/gists#fork-a-gist
+     *
      * @param string $id
      *
      * @return array
@@ -119,6 +150,10 @@ class Gists extends AbstractApi
     }
 
     /**
+     * List gist forks.
+     *
+     * @link https://docs.github.com/rest/gists/gists#list-gist-forks
+     *
      * @param string $id
      *
      * @return array
@@ -129,6 +164,10 @@ class Gists extends AbstractApi
     }
 
     /**
+     * Delete a gist.
+     *
+     * @link https://docs.github.com/rest/gists/gists#delete-a-gist
+     *
      * @param string $id
      *
      * @return array
@@ -139,6 +178,10 @@ class Gists extends AbstractApi
     }
 
     /**
+     * Check if a gist is starred.
+     *
+     * @link https://docs.github.com/rest/gists/gists#check-if-a-gist-is-starred
+     *
      * @param string $id
      *
      * @return array
@@ -149,6 +192,10 @@ class Gists extends AbstractApi
     }
 
     /**
+     * Star a gist.
+     *
+     * @link https://docs.github.com/rest/gists/gists#star-a-gist
+     *
      * @param string $id
      *
      * @return array
@@ -159,6 +206,10 @@ class Gists extends AbstractApi
     }
 
     /**
+     * Unstar a gist.
+     *
+     * @link https://docs.github.com/rest/gists/gists#unstar-a-gist
+     *
      * @param string $id
      *
      * @return array
@@ -171,7 +222,7 @@ class Gists extends AbstractApi
     /**
      * Get a gist's comments.
      *
-     * @link http://developer.github.com/v3/gists/comments/
+     * @link https://docs.github.com/rest/gists/comments
      *
      * @return Comments
      */

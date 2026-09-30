@@ -15,7 +15,7 @@ $statuses = $client->api('repo')->statuses()->combined('NimbleCI', 'docker-web-t
 
 ### Create a status for a commit
 
-For the full list of parameters see https://developer.github.com/v3/repos/statuses/#parameters
+For the full list of parameters see https://docs.github.com/rest/commits/statuses#create-a-commit-status
 
 ```php
 $params = [

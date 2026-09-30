@@ -1,7 +1,7 @@
 ## Rate Limit API
 [Back to the navigation](README.md)
 
-Get rate limit wrappers from [GitHub Rate Limit API](http://developer.github.com/v3/rate_limit/).
+Get rate limit wrappers from [GitHub Rate Limit API](https://docs.github.com/rest/rate-limit/rate-limit#get-rate-limit-status-for-the-authenticated-user).
 
 #### Get All Rate Limits
 

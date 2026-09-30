@@ -1,7 +1,7 @@
 ## Enterprise API
 [Back to the navigation](README.md)
 
-Provides information about a GitHub Enterprise installation. Wraps [GitHub Enterprise API](http://developer.github.com/v3/enterprise/).
+Provides information about a GitHub Enterprise installation. Wraps [GitHub Enterprise API](https://docs.github.com/rest/enterprise-admin).
 
 ### Configuration
 In order to configure the client to point to a GitHub Enterprise installation, do the following:

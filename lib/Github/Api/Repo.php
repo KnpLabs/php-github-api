@@ -33,7 +33,7 @@ use Github\Api\Repository\Traffic;
  * Searching repositories, getting repository information
  * and managing repository information for authenticated users.
  *
- * @link   http://developer.github.com/v3/repos/
+ * @link   https://docs.github.com/rest/repos/repos
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  * @author Thibault Duplessis <thibault.duplessis at gmail dot com>
@@ -45,7 +45,7 @@ class Repo extends AbstractApi
     /**
      * List all public repositories.
      *
-     * @link https://developer.github.com/v3/repos/#list-all-public-repositories
+     * @link https://docs.github.com/rest/repos/repos#list-public-repositories
      *
      * @param int|null $id The integer ID of the last Repository that you’ve seen.
      *
@@ -63,7 +63,7 @@ class Repo extends AbstractApi
     /**
      * Get the last year of commit activity for a repository grouped by week.
      *
-     * @link http://developer.github.com/v3/repos/statistics/#commit-activity
+     * @link https://docs.github.com/rest/metrics/statistics#get-the-last-year-of-commit-activity
      *
      * @param string $username   the user who owns the repository
      * @param string $repository the name of the repository
@@ -78,7 +78,7 @@ class Repo extends AbstractApi
     /**
      * Get contributor commit statistics for a repository.
      *
-     * @link http://developer.github.com/v3/repos/statistics/#contributors
+     * @link https://docs.github.com/rest/metrics/statistics#get-all-contributor-commit-activity
      *
      * @param string $username   the user who owns the repository
      * @param string $repository the name of the repository
@@ -93,7 +93,7 @@ class Repo extends AbstractApi
     /**
      * Get a weekly aggregate of the number of additions and deletions pushed to a repository.
      *
-     * @link http://developer.github.com/v3/repos/statistics/#code-frequency
+     * @link https://docs.github.com/rest/metrics/statistics#get-the-weekly-commit-activity
      *
      * @param string $username   the user who owns the repository
      * @param string $repository the name of the repository
@@ -108,7 +108,7 @@ class Repo extends AbstractApi
     /**
      * Get the weekly commit count for the repository owner and everyone else.
      *
-     * @link http://developer.github.com/v3/repos/statistics/#participation
+     * @link https://docs.github.com/rest/metrics/statistics#get-the-weekly-commit-count
      *
      * @param string $username   the user who owns the repository
      * @param string $repository the name of the repository
@@ -123,7 +123,7 @@ class Repo extends AbstractApi
     /**
      * List all repositories for an organization.
      *
-     * @link http://developer.github.com/v3/repos/#list-organization-repositories
+     * @link https://docs.github.com/rest/repos/repos#list-organization-repositories
      *
      * @param string $organization the name of the organization
      * @param array  $params
@@ -138,7 +138,7 @@ class Repo extends AbstractApi
     /**
      * Get extended information about a repository by its username and repository name.
      *
-     * @link http://developer.github.com/v3/repos/
+     * @link https://docs.github.com/rest/repos/repos#get-a-repository
      *
      * @param string $username   the user who owns the repository
      * @param string $repository the name of the repository
@@ -154,7 +154,6 @@ class Repo extends AbstractApi
      * Get extended information about a repository by its id.
      * Note: at time of writing this is an undocumented feature but GitHub support have advised that it can be relied on.
      *
-     * @link http://developer.github.com/v3/repos/
      * @link https://github.com/piotrmurach/github/issues/283
      * @link https://github.com/piotrmurach/github/issues/282
      *
@@ -170,7 +169,8 @@ class Repo extends AbstractApi
     /**
      * Create repository.
      *
-     * @link http://developer.github.com/v3/repos/
+     * @link https://docs.github.com/rest/repos/repos#create-a-repository-for-the-authenticated-user
+     * @link https://docs.github.com/rest/repos/repos#create-an-organization-repository
      *
      * @param string      $name         name of the repository
      * @param string      $description  repository description
@@ -229,7 +229,7 @@ class Repo extends AbstractApi
     /**
      * Set information of a repository.
      *
-     * @link http://developer.github.com/v3/repos/
+     * @link https://docs.github.com/rest/repos/repos#update-a-repository
      *
      * @param string $username   the user who owns the repository
      * @param string $repository the name of the repository
@@ -245,7 +245,7 @@ class Repo extends AbstractApi
     /**
      * Delete a repository.
      *
-     * @link http://developer.github.com/v3/repos/
+     * @link https://docs.github.com/rest/repos/repos#delete-a-repository
      *
      * @param string $username   the user who owns the repository
      * @param string $repository the name of the repository
@@ -260,7 +260,7 @@ class Repo extends AbstractApi
     /**
      * Get the readme content for a repository by its username and repository name.
      *
-     * @link http://developer.github.com/v3/repos/contents/#get-the-readme
+     * @link https://docs.github.com/rest/repos/contents#get-a-repository-readme
      *
      * @param string $username   the user who owns the repository
      * @param string $repository the name of the repository
@@ -286,7 +286,7 @@ class Repo extends AbstractApi
     /**
      * Create a repository dispatch event.
      *
-     * @link https://developer.github.com/v3/repos/#create-a-repository-dispatch-event
+     * @link https://docs.github.com/rest/repos/repos#create-a-repository-dispatch-event
      *
      * @param string       $username      the user who owns the repository
      * @param string       $repository    the name of the repository
@@ -310,7 +310,7 @@ class Repo extends AbstractApi
     /**
      * Manage the collaborators of a repository.
      *
-     * @link http://developer.github.com/v3/repos/collaborators/
+     * @link https://docs.github.com/rest/collaborators/collaborators
      *
      * @return Collaborators
      */
@@ -322,7 +322,7 @@ class Repo extends AbstractApi
     /**
      * Manage the comments of a repository.
      *
-     * @link http://developer.github.com/v3/repos/comments/
+     * @link https://docs.github.com/rest/commits/comments
      *
      * @return Comments
      */
@@ -334,7 +334,7 @@ class Repo extends AbstractApi
     /**
      * Manage the commits of a repository.
      *
-     * @link http://developer.github.com/v3/repos/commits/
+     * @link https://docs.github.com/rest/commits/commits
      *
      * @return Commits
      */
@@ -344,7 +344,7 @@ class Repo extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/reference/checks#check-runs
+     * @link https://docs.github.com/rest/checks/runs
      */
     public function checkRuns(): CheckRuns
     {
@@ -352,7 +352,7 @@ class Repo extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/reference/checks#check-suites
+     * @link https://docs.github.com/rest/checks/suites
      */
     public function checkSuites(): CheckSuites
     {
@@ -360,7 +360,7 @@ class Repo extends AbstractApi
     }
 
     /**
-     * @link https://developer.github.com/v3/actions/artifacts/#artifacts
+     * @link https://docs.github.com/rest/actions/artifacts
      */
     public function artifacts(): Artifacts
     {
@@ -368,7 +368,7 @@ class Repo extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/reference/actions#workflows
+     * @link https://docs.github.com/rest/actions/workflows
      */
     public function workflows(): Workflows
     {
@@ -376,7 +376,7 @@ class Repo extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/reference/actions#workflow-runs
+     * @link https://docs.github.com/rest/actions/workflow-runs
      */
     public function workflowRuns(): WorkflowRuns
     {
@@ -384,7 +384,7 @@ class Repo extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/reference/actions#workflow-jobs
+     * @link https://docs.github.com/rest/actions/workflow-jobs
      */
     public function workflowJobs(): WorkflowJobs
     {
@@ -392,7 +392,7 @@ class Repo extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/reference/actions#self-hosted-runners
+     * @link https://docs.github.com/rest/actions/self-hosted-runners
      */
     public function selfHostedRunners(): SelfHostedRunners
     {
@@ -400,7 +400,7 @@ class Repo extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/reference/actions#secrets
+     * @link https://docs.github.com/rest/actions/secrets
      */
     public function secrets(): Secrets
     {
@@ -408,7 +408,7 @@ class Repo extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/reference/actions#secrets
+     * @link https://docs.github.com/rest/actions/variables
      */
     public function variables(): Variables
     {
@@ -418,7 +418,7 @@ class Repo extends AbstractApi
     /**
      * Manage the content of a repository.
      *
-     * @link http://developer.github.com/v3/repos/contents/
+     * @link https://docs.github.com/rest/repos/contents
      *
      * @return Contents
      */
@@ -430,7 +430,8 @@ class Repo extends AbstractApi
     /**
      * Manage the content of a repository.
      *
-     * @link http://developer.github.com/v3/repos/downloads/
+     * Note: the Downloads API has been removed by GitHub; there is no current
+     * docs.github.com endpoint backing this sub-API.
      *
      * @return Downloads
      */
@@ -440,9 +441,9 @@ class Repo extends AbstractApi
     }
 
     /**
-     * Manage the releases of a repository (Currently Undocumented).
+     * Manage the releases of a repository.
      *
-     * @link http://developer.github.com/v3/repos/
+     * @link https://docs.github.com/rest/releases/releases
      *
      * @return Releases
      */
@@ -454,7 +455,7 @@ class Repo extends AbstractApi
     /**
      * Manage the deploy keys of a repository.
      *
-     * @link http://developer.github.com/v3/repos/keys/
+     * @link https://docs.github.com/rest/deploy-keys/deploy-keys
      *
      * @return DeployKeys
      */
@@ -466,7 +467,7 @@ class Repo extends AbstractApi
     /**
      * Manage the forks of a repository.
      *
-     * @link http://developer.github.com/v3/repos/forks/
+     * @link https://docs.github.com/rest/repos/forks
      *
      * @return Forks
      */
@@ -478,7 +479,7 @@ class Repo extends AbstractApi
     /**
      * Manage the stargazers of a repository.
      *
-     * @link https://developer.github.com/v3/activity/starring/#list-stargazers
+     * @link https://docs.github.com/rest/activity/starring#list-stargazers
      *
      * @return Stargazers
      */
@@ -490,7 +491,7 @@ class Repo extends AbstractApi
     /**
      * Manage the hooks of a repository.
      *
-     * @link http://developer.github.com/v3/issues/jooks/
+     * @link https://docs.github.com/rest/webhooks/repos
      *
      * @return Hooks
      */
@@ -502,7 +503,7 @@ class Repo extends AbstractApi
     /**
      * Manage the labels of a repository.
      *
-     * @link http://developer.github.com/v3/issues/labels/
+     * @link https://docs.github.com/rest/issues/labels
      *
      * @return Labels
      */
@@ -514,8 +515,6 @@ class Repo extends AbstractApi
     /**
      * Manage the statuses of a repository.
      *
-     * @link http://developer.github.com/v3/repos/statuses/
-     *
      * @return Statuses
      */
     public function statuses()
@@ -526,7 +525,7 @@ class Repo extends AbstractApi
     /**
      * Get the branch(es) of a repository.
      *
-     * @link http://developer.github.com/v3/repos/
+     * @link https://docs.github.com/rest/branches/branches
      *
      * @param string $username   the username
      * @param string $repository the name of the repository
@@ -548,7 +547,7 @@ class Repo extends AbstractApi
     /**
      * Sync a fork branch with the upstream repository.
      *
-     * @link https://docs.github.com/en/rest/branches/branches#sync-a-fork-branch-with-the-upstream-repository
+     * @link https://docs.github.com/rest/branches/branches#sync-a-fork-branch-with-the-upstream-repository
      *
      * @return array|string
      */
@@ -563,8 +562,6 @@ class Repo extends AbstractApi
     /**
      * Manage the protection of a repository branch.
      *
-     * @link https://developer.github.com/v3/repos/branches/#get-branch-protection
-     *
      * @return Protection
      */
     public function protection()
@@ -575,7 +572,7 @@ class Repo extends AbstractApi
     /**
      * Get the contributors of a repository.
      *
-     * @link http://developer.github.com/v3/repos/
+     * @link https://docs.github.com/rest/repos/repos#list-repository-contributors
      *
      * @param string $username           the user who owns the repository
      * @param string $repository         the name of the repository
@@ -594,7 +591,7 @@ class Repo extends AbstractApi
     /**
      * Get the language breakdown of a repository.
      *
-     * @link http://developer.github.com/v3/repos/
+     * @link https://docs.github.com/rest/repos/repos#list-repository-languages
      *
      * @param string $username   the user who owns the repository
      * @param string $repository the name of the repository
@@ -609,7 +606,7 @@ class Repo extends AbstractApi
     /**
      * Get the tags of a repository.
      *
-     * @link http://developer.github.com/v3/repos/
+     * @link https://docs.github.com/rest/repos/repos#list-repository-tags
      *
      * @param string $username   the user who owns the repository
      * @param string $repository the name of the repository
@@ -625,7 +622,7 @@ class Repo extends AbstractApi
     /**
      * Get the teams of a repository.
      *
-     * @link http://developer.github.com/v3/repos/
+     * @link https://docs.github.com/rest/repos/repos#list-repository-teams
      *
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
@@ -638,6 +635,10 @@ class Repo extends AbstractApi
     }
 
     /**
+     * List the watchers of a repository.
+     *
+     * @link https://docs.github.com/rest/activity/watching#list-watchers
+     *
      * @param string $username
      * @param string $repository
      * @param int    $page
@@ -654,7 +655,7 @@ class Repo extends AbstractApi
     /**
      * Perform a merge.
      *
-     * @link http://developer.github.com/v3/repos/merging/
+     * @link https://docs.github.com/rest/branches/branches#merge-a-branch
      *
      * @param string $username
      * @param string $repository
@@ -679,6 +680,10 @@ class Repo extends AbstractApi
     }
 
     /**
+     * List milestones for a repository.
+     *
+     * @link https://docs.github.com/rest/issues/milestones#list-milestones
+     *
      * @param string $username
      * @param string $repository
      * @param array  $parameters
@@ -691,7 +696,7 @@ class Repo extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/reference/repos#enable-automated-security-fixes
+     * @link https://docs.github.com/rest/repos/repos#enable-dependabot-security-updates
      *
      * @param string $username
      * @param string $repository
@@ -706,7 +711,7 @@ class Repo extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/reference/repos#disable-automated-security-fixes
+     * @link https://docs.github.com/rest/repos/repos#disable-dependabot-security-updates
      *
      * @param string $username
      * @param string $repository
@@ -720,16 +725,37 @@ class Repo extends AbstractApi
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/automated-security-fixes');
     }
 
+    /**
+     * Manage the (classic) projects of a repository.
+     *
+     * @link https://docs.github.com/rest/projects/projects
+     *
+     * @return Projects
+     */
     public function projects()
     {
         return new Projects($this->getClient());
     }
 
+    /**
+     * Get the traffic metrics of a repository.
+     *
+     * @link https://docs.github.com/rest/metrics/traffic
+     *
+     * @return Traffic
+     */
     public function traffic()
     {
         return new Traffic($this->getClient());
     }
 
+    /**
+     * Manage GitHub Pages for a repository.
+     *
+     * @link https://docs.github.com/rest/pages/pages
+     *
+     * @return Pages
+     */
     public function pages()
     {
         return new Pages($this->getClient());
@@ -742,7 +768,7 @@ class Repo extends AbstractApi
      *
      * @return array|string
      *
-     * @see https://developer.github.com/v3/activity/events/#list-repository-events
+     * @see https://docs.github.com/rest/activity/events#list-repository-events
      */
     public function events($username, $repository, $page = 1)
     {
@@ -752,7 +778,7 @@ class Repo extends AbstractApi
     /**
      * Get the community profile metrics for a repository.
      *
-     * @link https://developer.github.com/v3/repos/community/#retrieve-community-profile-metrics
+     * @link https://docs.github.com/rest/metrics/community#get-community-profile-metrics
      *
      * @param string $username
      * @param string $repository
@@ -770,7 +796,7 @@ class Repo extends AbstractApi
     /**
      * Get the contents of a repository's code of conduct.
      *
-     * @link https://developer.github.com/v3/codes_of_conduct/#get-the-contents-of-a-repositorys-code-of-conduct
+     * @link https://docs.github.com/rest/codes-of-conduct/codes-of-conduct
      *
      * @param string $username
      * @param string $repository
@@ -788,7 +814,7 @@ class Repo extends AbstractApi
     /**
      * List all topics for a repository.
      *
-     * @link https://developer.github.com/v3/repos/#list-all-topics-for-a-repository
+     * @link https://docs.github.com/rest/repos/repos#get-all-repository-topics
      *
      * @param string $username
      * @param string $repository
@@ -806,7 +832,7 @@ class Repo extends AbstractApi
     /**
      * Replace all topics for a repository.
      *
-     * @link https://developer.github.com/v3/repos/#replace-all-topics-for-a-repository
+     * @link https://docs.github.com/rest/repos/repos#replace-all-repository-topics
      *
      * @param string $username
      * @param string $repository
@@ -825,7 +851,7 @@ class Repo extends AbstractApi
     /**
      * Transfer a repository.
      *
-     * @link https://developer.github.com/v3/repos/#transfer-a-repository
+     * @link https://docs.github.com/rest/repos/repos#transfer-a-repository
      *
      * @param string $username
      * @param string $repository
@@ -842,7 +868,7 @@ class Repo extends AbstractApi
     /**
      * Create a repository using a template.
      *
-     * @link https://developer.github.com/v3/repos/#create-a-repository-using-a-template
+     * @link https://docs.github.com/rest/repos/repos#create-a-repository-using-a-template
      *
      * @return array
      */
@@ -857,7 +883,7 @@ class Repo extends AbstractApi
     /**
      * Check if vulnerability alerts are enabled for a repository.
      *
-     * @link https://developer.github.com/v3/repos/#check-if-vulnerability-alerts-are-enabled-for-a-repository
+     * @link https://docs.github.com/rest/repos/repos#check-if-vulnerability-alerts-are-enabled-for-a-repository
      *
      * @param string $username   the username
      * @param string $repository the repository
@@ -872,7 +898,7 @@ class Repo extends AbstractApi
     /**
      * Enable vulnerability alerts for a repository.
      *
-     * @link https://developer.github.com/v3/repos/#enable-vulnerability-alerts
+     * @link https://docs.github.com/rest/repos/repos#enable-vulnerability-alerts
      *
      * @param string $username   the username
      * @param string $repository the repository
@@ -887,7 +913,7 @@ class Repo extends AbstractApi
     /**
      * Disable vulnerability alerts for a repository.
      *
-     * @link https://developer.github.com/v3/repos/#disable-vulnerability-alerts
+     * @link https://docs.github.com/rest/repos/repos#disable-vulnerability-alerts
      *
      * @param string $username   the username
      * @param string $repository the repository
@@ -900,6 +926,10 @@ class Repo extends AbstractApi
     }
 
     /**
+     * Manage secret scanning alerts for a repository.
+     *
+     * @link https://docs.github.com/rest/secret-scanning/secret-scanning
+     *
      * @return SecretScanning
      */
     public function secretScanning(): SecretScanning

@@ -6,7 +6,7 @@ use Github\Api\AbstractApi;
 use Github\Api\AcceptHeaderTrait;
 
 /**
- * @link   https://developer.github.com/v3/activity/starring/#list-stargazers
+ * @link   https://docs.github.com/rest/activity/starring#list-stargazers
  *
  * @author Nicolas Dupont <nicolas@akeneo.com>
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
@@ -16,9 +16,9 @@ class Stargazers extends AbstractApi
     use AcceptHeaderTrait;
 
     /**
-     * Configure the body type.
+     * Configure the body type to include star creation timestamps in the response.
      *
-     * @see https://developer.github.com/v3/activity/starring/#alternative-response-with-star-creation-timestamps
+     * @see https://docs.github.com/rest/activity/starring#list-stargazers
      *
      * @param string $bodyType
      *
@@ -33,6 +33,16 @@ class Stargazers extends AbstractApi
         return $this;
     }
 
+    /**
+     * List the people that have starred a repository.
+     *
+     * @link https://docs.github.com/rest/activity/starring#list-stargazers
+     *
+     * @param string $username   the username
+     * @param string $repository the repository
+     *
+     * @return array
+     */
     public function all($username, $repository)
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/stargazers');

@@ -9,7 +9,7 @@ class Gitignore extends AbstractApi
     /**
      * List all templates available to pass as an option when creating a repository.
      *
-     * @link https://developer.github.com/v3/gitignore/#listing-available-templates
+     * @link https://docs.github.com/rest/gitignore/gitignore#get-all-gitignore-templates
      *
      * @return array
      */
@@ -21,7 +21,7 @@ class Gitignore extends AbstractApi
     /**
      * Get a single template.
      *
-     * @link https://developer.github.com/v3/gitignore/#get-a-single-template
+     * @link https://docs.github.com/rest/gitignore/gitignore#get-a-gitignore-template
      *
      * @param string $template
      *

@@ -7,7 +7,7 @@ namespace Github\Api;
  *
  * Part of the Github v4 API
  *
- * @link   https://developer.github.com/v4/
+ * @link   https://docs.github.com/graphql
  *
  * @author Miguel Piedrafita <soy@miguelpiedrafita.com>
  */
@@ -16,6 +16,10 @@ class GraphQL extends AbstractApi
     use AcceptHeaderTrait;
 
     /**
+     * Execute a GraphQL query.
+     *
+     * @link https://docs.github.com/graphql
+     *
      * @param string $query
      * @param array  $variables
      * @param string $acceptHeaderValue
@@ -36,6 +40,10 @@ class GraphQL extends AbstractApi
     }
 
     /**
+     * Execute a GraphQL query read from a file.
+     *
+     * @link https://docs.github.com/graphql
+     *
      * @param string $file
      * @param array  $variables
      *

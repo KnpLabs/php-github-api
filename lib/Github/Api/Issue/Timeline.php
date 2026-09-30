@@ -9,6 +9,11 @@ class Timeline extends AbstractApi
 {
     use AcceptHeaderTrait;
 
+    /**
+     * Configure the accept header to use the timeline preview media type.
+     *
+     * @return $this
+     */
     public function configure()
     {
         $this->acceptHeaderValue = 'application/vnd.github.mockingbird-preview';
@@ -19,7 +24,7 @@ class Timeline extends AbstractApi
     /**
      * Get all events for a specific issue.
      *
-     * @link https://developer.github.com/v3/issues/timeline/#list-events-for-an-issue
+     * @link https://docs.github.com/rest/issues/timeline#list-timeline-events-for-an-issue
      *
      * @param string $username
      * @param string $repository

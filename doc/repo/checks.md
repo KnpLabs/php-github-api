@@ -5,7 +5,7 @@
 
 ### Create a check for a commit
 
-[Visit GitHub for a full of list of parameters and their descriptions.](https://developer.github.com/v3/checks/runs/#create-a-check-run)
+[Visit GitHub for a full of list of parameters and their descriptions.](https://docs.github.com/rest/checks/runs#create-a-check-run)
 
 ```php
 $params = [
@@ -20,7 +20,7 @@ $check = $client->api('repo')->checks()->create('NimbleCI', 'docker-web-tester-b
 
 ### Update an existing check on a commit
 
-https://developer.github.com/v3/checks/runs/#update-a-check-run
+https://docs.github.com/rest/checks/runs#update-a-check-run
 
 ```php
 $params = [
@@ -34,7 +34,7 @@ $check = $client->api('repo')->checks()->create('NimbleCI', 'docker-web-tester-b
 
 ### List check runs for a Git reference
 
-https://developer.github.com/v3/checks/runs/#list-check-runs-for-a-git-reference
+https://docs.github.com/rest/checks/runs#list-check-runs-for-a-git-reference
 
 ```php
 $params = [
@@ -47,7 +47,7 @@ $checks = $client->api('repo')->checks()->all('NimbleCI', 'docker-web-tester-beh
 
 ### Get a check run
 
-https://developer.github.com/v3/checks/runs/#get-a-check-run
+https://docs.github.com/rest/checks/runs#get-a-check-run
 
 ```php
 $check = $client->api('repo')->checks()->show('NimbleCI', 'docker-web-tester-behat', $checkRunId);
@@ -55,7 +55,7 @@ $check = $client->api('repo')->checks()->show('NimbleCI', 'docker-web-tester-beh
 
 ### List check run annotations
 
-https://developer.github.com/v3/checks/runs/#list-check-run-annotations
+https://docs.github.com/rest/checks/runs#list-check-run-annotations
 
 ```php
 $annotations = $client->api('repo')->checks()->annotations('NimbleCI', 'docker-web-tester-behat', $checkRunId);

@@ -6,7 +6,7 @@ use Github\Api\AbstractApi;
 use Github\Api\AcceptHeaderTrait;
 
 /**
- * @link   https://developer.github.com/v3/repos/branches/
+ * @link   https://docs.github.com/rest/branches/branch-protection
  *
  * @author Brandon Bloodgood <bbloodgood@gmail.com>
  */
@@ -17,7 +17,7 @@ class Protection extends AbstractApi
     /**
      * Retrieves configured protection for the provided branch.
      *
-     * @link https://developer.github.com/v3/repos/branches/#get-branch-protection
+     * @link https://docs.github.com/rest/branches/branch-protection#get-branch-protection
      *
      * @param string $username   The user who owns the repository
      * @param string $repository The name of the repo
@@ -36,7 +36,7 @@ class Protection extends AbstractApi
     /**
      * Updates the repo's branch protection.
      *
-     * @link https://developer.github.com/v3/repos/branches/#update-branch-protection
+     * @link https://docs.github.com/rest/branches/branch-protection#update-branch-protection
      *
      * @param string $username   The user who owns the repository
      * @param string $repository The name of the repo
@@ -56,7 +56,7 @@ class Protection extends AbstractApi
     /**
      * Remove the repo's branch protection.
      *
-     * @link https://developer.github.com/v3/repos/branches/#remove-branch-protection
+     * @link https://docs.github.com/rest/branches/branch-protection#delete-branch-protection
      *
      * @param string $username   The user who owns the repository
      * @param string $repository The name of the repo
@@ -70,7 +70,7 @@ class Protection extends AbstractApi
     /**
      * Get required status checks of protected branch.
      *
-     * @link https://developer.github.com/v3/repos/branches/#get-required-status-checks-of-protected-branch
+     * @link https://docs.github.com/rest/branches/branch-protection#get-status-checks-protection
      *
      * @param string $username   The user who owns the repository
      * @param string $repository The name of the repo
@@ -86,7 +86,7 @@ class Protection extends AbstractApi
     /**
      * Update required status checks of protected branch.
      *
-     * @link https://developer.github.com/v3/repos/branches/#update-required-status-checks-of-protected-branch
+     * @link https://docs.github.com/rest/branches/branch-protection#update-status-check-protection
      *
      * @param string $username   The user who owns the repository
      * @param string $repository The name of the repo
@@ -103,7 +103,7 @@ class Protection extends AbstractApi
     /**
      * Remove required status checks of protected branch.
      *
-     * @link https://developer.github.com/v3/repos/branches/#remove-required-status-checks-of-protected-branch
+     * @link https://docs.github.com/rest/branches/branch-protection#remove-status-check-protection
      *
      * @param string $username   The user who owns the repository
      * @param string $repository The name of the repo
@@ -117,7 +117,7 @@ class Protection extends AbstractApi
     /**
      * List required status checks contexts of protected branch.
      *
-     * @link https://developer.github.com/v3/repos/branches/#list-required-status-checks-contexts-of-protected-branch
+     * @link https://docs.github.com/rest/branches/branch-protection#get-all-status-check-contexts
      *
      * @param string $username   The user who owns the repository
      * @param string $repository The name of the repo
@@ -133,7 +133,7 @@ class Protection extends AbstractApi
     /**
      * Replace required status checks contexts of protected branch.
      *
-     * @link https://developer.github.com/v3/repos/branches/#replace-required-status-checks-contexts-of-protected-branch
+     * @link https://docs.github.com/rest/branches/branch-protection#set-status-check-contexts
      *
      * @param string $username   The user who owns the repository
      * @param string $repository The name of the repo
@@ -150,7 +150,7 @@ class Protection extends AbstractApi
     /**
      * Add required status checks contexts of protected branch.
      *
-     * @link https://developer.github.com/v3/repos/branches/#add-required-status-checks-contexts-of-protected-branch
+     * @link https://docs.github.com/rest/branches/branch-protection#add-status-check-contexts
      *
      * @param string $username   The user who owns the repository
      * @param string $repository The name of the repo
@@ -167,7 +167,7 @@ class Protection extends AbstractApi
     /**
      * Remove required status checks contexts of protected branch.
      *
-     * @link https://developer.github.com/v3/repos/branches/#remove-required-status-checks-contexts-of-protected-branch
+     * @link https://docs.github.com/rest/branches/branch-protection#remove-status-check-contexts
      *
      * @param string $username   The user who owns the repository
      * @param string $repository The name of the repo
@@ -184,7 +184,7 @@ class Protection extends AbstractApi
     /**
      * Get pull request review enforcement of protected branch.
      *
-     * @link https://developer.github.com/v3/repos/branches/#get-pull-request-review-enforcement-of-protected-branch
+     * @link https://docs.github.com/rest/branches/branch-protection#get-pull-request-review-protection
      *
      * @param string $username   The user who owns the repository
      * @param string $repository The name of the repo
@@ -200,7 +200,7 @@ class Protection extends AbstractApi
     /**
      * Update pull request review enforcement of protected branch.
      *
-     * @link https://developer.github.com/v3/repos/branches/#update-pull-request-review-enforcement-of-protected-branch
+     * @link https://docs.github.com/rest/branches/branch-protection#update-pull-request-review-protection
      *
      * @param string $username   The user who owns the repository
      * @param string $repository The name of the repo
@@ -217,7 +217,7 @@ class Protection extends AbstractApi
     /**
      * Remove pull request review enforcement of protected branch.
      *
-     * @link https://developer.github.com/v3/repos/branches/#remove-pull-request-review-enforcement-of-protected-branch
+     * @link https://docs.github.com/rest/branches/branch-protection#delete-pull-request-review-protection
      *
      * @param string $username   The user who owns the repository
      * @param string $repository The name of the repo
@@ -231,7 +231,7 @@ class Protection extends AbstractApi
     /**
      * Get admin enforcement of protected branch.
      *
-     * @link https://developer.github.com/v3/repos/branches/#get-admin-enforcement-of-protected-branch
+     * @link https://docs.github.com/rest/branches/branch-protection#get-admin-branch-protection
      *
      * @param string $username   The user who owns the repository
      * @param string $repository The name of the repo
@@ -247,7 +247,7 @@ class Protection extends AbstractApi
     /**
      * Add admin enforcement of protected branch.
      *
-     * @link https://developer.github.com/v3/repos/branches/#add-admin-enforcement-of-protected-branch
+     * @link https://docs.github.com/rest/branches/branch-protection#set-admin-branch-protection
      *
      * @param string $username   The user who owns the repository
      * @param string $repository The name of the repo
@@ -263,7 +263,7 @@ class Protection extends AbstractApi
     /**
      * Remove admin enforcement of protected branch.
      *
-     * @link https://developer.github.com/v3/repos/branches/#remove-admin-enforcement-of-protected-branch
+     * @link https://docs.github.com/rest/branches/branch-protection#delete-admin-branch-protection
      *
      * @param string $username   The user who owns the repository
      * @param string $repository The name of the repo
@@ -277,7 +277,7 @@ class Protection extends AbstractApi
     /**
      * Get restrictions of protected branch.
      *
-     * @link https://developer.github.com/v3/repos/branches/#get-restrictions-of-protected-branch
+     * @link https://docs.github.com/rest/branches/branch-protection#get-access-restrictions
      *
      * @param string $username   The user who owns the repository
      * @param string $repository The name of the repo
@@ -293,7 +293,7 @@ class Protection extends AbstractApi
     /**
      * Remove restrictions of protected branch.
      *
-     * @link https://developer.github.com/v3/repos/branches/#remove-restrictions-of-protected-branch
+     * @link https://docs.github.com/rest/branches/branch-protection#delete-access-restrictions
      *
      * @param string $username   The user who owns the repository
      * @param string $repository The name of the repo
@@ -307,7 +307,7 @@ class Protection extends AbstractApi
     /**
      * List team restrictions of protected branch.
      *
-     * @link https://developer.github.com/v3/repos/branches/#list-team-restrictions-of-protected-branch
+     * @link https://docs.github.com/rest/branches/branch-protection#get-teams-with-access-to-the-protected-branch
      *
      * @param string $username   The user who owns the repository
      * @param string $repository The name of the repo
@@ -323,7 +323,7 @@ class Protection extends AbstractApi
     /**
      * Replace team restrictions of protected branch.
      *
-     * @link https://developer.github.com/v3/repos/branches/#replace-team-restrictions-of-protected-branch
+     * @link https://docs.github.com/rest/branches/branch-protection#set-team-access-restrictions
      *
      * @param string $username   The user who owns the repository
      * @param string $repository The name of the repo
@@ -340,7 +340,7 @@ class Protection extends AbstractApi
     /**
      * Add team restrictions of protected branch.
      *
-     * @link https://developer.github.com/v3/repos/branches/#add-team-restrictions-of-protected-branch
+     * @link https://docs.github.com/rest/branches/branch-protection#add-team-access-restrictions
      *
      * @param string $username   The user who owns the repository
      * @param string $repository The name of the repo
@@ -357,7 +357,7 @@ class Protection extends AbstractApi
     /**
      * Remove team restrictions of protected branch.
      *
-     * @link https://developer.github.com/v3/repos/branches/#remove-team-restrictions-of-protected-branch
+     * @link https://docs.github.com/rest/branches/branch-protection#remove-team-access-restrictions
      *
      * @param string $username   The user who owns the repository
      * @param string $repository The name of the repo
@@ -374,7 +374,7 @@ class Protection extends AbstractApi
     /**
      * List user restrictions of protected branch.
      *
-     * @link https://developer.github.com/v3/repos/branches/#list-user-restrictions-of-protected-branch
+     * @link https://docs.github.com/rest/branches/branch-protection#get-users-with-access-to-the-protected-branch
      *
      * @param string $username   The user who owns the repository
      * @param string $repository The name of the repo
@@ -390,7 +390,7 @@ class Protection extends AbstractApi
     /**
      * Replace user restrictions of protected branch.
      *
-     * @link https://developer.github.com/v3/repos/branches/#replace-user-restrictions-of-protected-branch
+     * @link https://docs.github.com/rest/branches/branch-protection#set-user-access-restrictions
      *
      * @param string $username   The user who owns the repository
      * @param string $repository The name of the repo
@@ -407,7 +407,7 @@ class Protection extends AbstractApi
     /**
      * Add user restrictions of protected branch.
      *
-     * @link https://developer.github.com/v3/repos/branches/#add-user-restrictions-of-protected-branch
+     * @link https://docs.github.com/rest/branches/branch-protection#add-user-access-restrictions
      *
      * @param string $username   The user who owns the repository
      * @param string $repository The name of the repo
@@ -424,7 +424,7 @@ class Protection extends AbstractApi
     /**
      * Remove user restrictions of protected branch.
      *
-     * @link https://developer.github.com/v3/repos/branches/#remove-user-restrictions-of-protected-branch
+     * @link https://docs.github.com/rest/branches/branch-protection#remove-user-access-restrictions
      *
      * @param string $username   The user who owns the repository
      * @param string $repository The name of the repo

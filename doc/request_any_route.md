@@ -12,4 +12,4 @@ $repo     = Github\HttpClient\Message\ResponseMediator::getContent($response);
 
 Returns an array describing the "php-github-api" repository.
 
-See all GitHub API routes: [http://developer.github.com/](http://developer.github.com/)
+See all GitHub API routes: [https://docs.github.com/rest](https://docs.github.com/rest)

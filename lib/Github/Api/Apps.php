@@ -5,7 +5,7 @@ namespace Github\Api;
 use Github\Api\App\Hook;
 
 /**
- * @link   https://developer.github.com/v3/apps/
+ * @link   https://docs.github.com/rest/apps/apps
  *
  * @author Nils Adermann <naderman@naderman.de>
  */
@@ -25,7 +25,7 @@ class Apps extends AbstractApi
      * @param int $userId         An optional user id on behalf of whom the
      *                            token will be requested
      *
-     * @link https://developer.github.com/v3/apps/#create-a-new-installation-token
+     * @link https://docs.github.com/rest/apps/apps#create-an-installation-access-token-for-an-app
      *
      * @return array token and token metadata
      */
@@ -44,7 +44,7 @@ class Apps extends AbstractApi
     /**
      * Find all installations for the authenticated application.
      *
-     * @link https://developer.github.com/v3/apps/#find-installations
+     * @link https://docs.github.com/rest/apps/apps#list-installations-for-the-authenticated-app
      *
      * @return array
      */
@@ -58,7 +58,7 @@ class Apps extends AbstractApi
     /**
      * Get an installation of the application.
      *
-     * @link https://developer.github.com/v3/apps/#get-an-installation
+     * @link https://docs.github.com/rest/apps/apps#get-an-installation-for-the-authenticated-app
      *
      * @param int $installationId An integration installation id
      *
@@ -74,7 +74,7 @@ class Apps extends AbstractApi
     /**
      * Get an installation of the application for an organization.
      *
-     * @link https://developer.github.com/v3/apps/#get-an-organization-installation
+     * @link https://docs.github.com/rest/apps/apps#get-an-organization-installation-for-the-authenticated-app
      *
      * @param string $org An organization
      *
@@ -90,7 +90,7 @@ class Apps extends AbstractApi
     /**
      * Get an installation of the application for a repository.
      *
-     * @link https://developer.github.com/v3/apps/#get-a-repository-installation
+     * @link https://docs.github.com/rest/apps/apps#get-a-repository-installation-for-the-authenticated-app
      *
      * @param string $owner the owner of a repository
      * @param string $repo  the name of the repository
@@ -107,7 +107,7 @@ class Apps extends AbstractApi
     /**
      * Get an installation of the application for a user.
      *
-     * @link https://developer.github.com/v3/apps/#get-a-user-installation
+     * @link https://docs.github.com/rest/apps/apps#get-a-user-installation-for-the-authenticated-app
      *
      * @param string $username
      *
@@ -123,7 +123,7 @@ class Apps extends AbstractApi
     /**
      * Delete an installation of the application.
      *
-     * @link https://developer.github.com/v3/apps/#delete-an-installation
+     * @link https://docs.github.com/rest/apps/apps#delete-an-installation-for-the-authenticated-app
      *
      * @param int $installationId An integration installation id
      */
@@ -137,7 +137,7 @@ class Apps extends AbstractApi
     /**
      * List repositories that are accessible to the authenticated installation.
      *
-     * @link https://developer.github.com/v3/apps/installations/#list-repositories
+     * @link https://docs.github.com/rest/apps/installations#list-repositories-accessible-to-the-app-installation
      *
      * @param int $userId
      *
@@ -158,7 +158,7 @@ class Apps extends AbstractApi
     /**
      * Add a single repository to an installation.
      *
-     * @link https://developer.github.com/v3/apps/installations/#add-repository-to-installation
+     * @link https://docs.github.com/rest/apps/installations#add-a-repository-to-an-app-installation
      *
      * @param int $installationId
      * @param int $repositoryId
@@ -175,7 +175,7 @@ class Apps extends AbstractApi
     /**
      * Remove a single repository from an installation.
      *
-     * @link https://developer.github.com/v3/apps/installations/#remove-repository-from-installation
+     * @link https://docs.github.com/rest/apps/installations#remove-a-repository-from-an-app-installation
      *
      * @param int $installationId
      * @param int $repositoryId
@@ -192,7 +192,7 @@ class Apps extends AbstractApi
     /**
      * Get the currently authenticated app.
      *
-     * @link https://docs.github.com/en/rest/reference/apps#get-the-authenticated-app
+     * @link https://docs.github.com/rest/apps/apps#get-the-authenticated-app
      *
      * @return array
      */
@@ -204,7 +204,7 @@ class Apps extends AbstractApi
     /**
      * Manage the hook of an app.
      *
-     * @link https://docs.github.com/en/rest/apps/webhooks
+     * @link https://docs.github.com/rest/apps/webhooks
      *
      * @return Hook
      */

@@ -6,14 +6,14 @@ use Github\Api\AbstractApi;
 use Github\Exception\MissingArgumentException;
 
 /**
- * @link   http://developer.github.com/v3/repos/statuses/
+ * @link   https://docs.github.com/rest/commits/statuses
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class Statuses extends AbstractApi
 {
     /**
-     * @link http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-sha
+     * @link https://docs.github.com/rest/commits/statuses#list-commit-statuses-for-a-reference
      *
      * @param string $username
      * @param string $repository
@@ -27,7 +27,7 @@ class Statuses extends AbstractApi
     }
 
     /**
-     * @link https://developer.github.com/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref
+     * @link https://docs.github.com/rest/commits/statuses#get-the-combined-status-for-a-specific-reference
      *
      * @param string $username
      * @param string $repository
@@ -41,7 +41,7 @@ class Statuses extends AbstractApi
     }
 
     /**
-     * @link http://developer.github.com/v3/repos/statuses/#create-a-status
+     * @link https://docs.github.com/rest/commits/statuses#create-a-commit-status
      *
      * @param string $username
      * @param string $repository

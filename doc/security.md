@@ -17,9 +17,9 @@ $client->authenticate($usernameOrToken, $password, $method);
 and guess what should contain `$password`. The `$method` can contain one of the three allowed values:
 
 #### Supported methods
-* `Github\AuthMethod::CLIENT_ID` - https://developer.github.com/v3/#oauth2-keysecret
-* `Github\AuthMethod::ACCESS_TOKEN` - https://developer.github.com/v3/#oauth2-token-sent-in-a-header
-* `Github\AuthMethod::JWT` - https://developer.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app
+* `Github\AuthMethod::CLIENT_ID` - https://docs.github.com/rest/authentication/authenticating-to-the-rest-api
+* `Github\AuthMethod::ACCESS_TOKEN` - https://docs.github.com/rest/authentication/authenticating-to-the-rest-api
+* `Github\AuthMethod::JWT` - https://docs.github.com/apps/creating-github-apps/authenticating-with-a-github-app/authenticating-as-a-github-app
 
 The required value of `$password` depends on the chosen `$method`. For `Github\AuthMethod::CLIENT_ID`, `Github\AuthMethod::ACCESS_TOKEN` and
 `Github\AuthMethod::JWT` methods you should provide the API token in `$usernameOrToken` variable (`$password` is omitted in
@@ -34,7 +34,7 @@ further requests are done as the given user.
 
 To authenticate as an integration you need to supply a JSON Web Token with `Github\AuthMethod::JWT` to request
 and installation access token which is then usable with `Github\AuthMethod::ACCESS_TOKEN`. [GitHub´s integration
-authentication docs](https://developer.github.com/apps/building-github-apps/authentication-options-for-github-apps/#authenticating-as-a-github-app) describe the flow in detail.
+authentication docs](https://docs.github.com/apps/creating-github-apps/authenticating-with-a-github-app/authenticating-as-a-github-app) describe the flow in detail.
 It´s important for integration requests to use the custom Accept header `application/vnd.github.machine-man-preview`.
 
 The following sample code authenticates as an installation using [lcobucci/jwt 4.1](https://github.com/lcobucci/jwt/tree/4.1.x)

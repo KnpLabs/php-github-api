@@ -15,7 +15,7 @@ use Github\Api\Organization\Teams;
 /**
  * Getting organization information and managing authenticated organization account information.
  *
- * @link   http://developer.github.com/v3/orgs/
+ * @link   https://docs.github.com/rest/orgs/orgs
  *
  * @author Antoine Berranger <antoine at ihqs dot net>
  * @author Joseph Bielawski <stloyd@gmail.com>
@@ -23,7 +23,9 @@ use Github\Api\Organization\Teams;
 class Organization extends AbstractApi
 {
     /**
-     * @link https://developer.github.com/v3/orgs/#list-all-organizations
+     * List all organizations, in the order that they were created on GitHub.
+     *
+     * @link https://docs.github.com/rest/orgs/orgs#list-organizations
      *
      * @return array the organizations
      */
@@ -35,7 +37,7 @@ class Organization extends AbstractApi
     /**
      * Get extended information about an organization by its name.
      *
-     * @link http://developer.github.com/v3/orgs/#get
+     * @link https://docs.github.com/rest/orgs/orgs#get-an-organization
      *
      * @param string $organization the organization to show
      *
@@ -46,6 +48,16 @@ class Organization extends AbstractApi
         return $this->get('/orgs/'.rawurlencode($organization));
     }
 
+    /**
+     * Update the profile and default preferences of an organization.
+     *
+     * @link https://docs.github.com/rest/orgs/orgs#update-an-organization
+     *
+     * @param string $organization the organization to update
+     * @param array  $params       the parameters to update (e.g. billing_email, company, name, description)
+     *
+     * @return array
+     */
     public function update($organization, array $params)
     {
         return $this->patch('/orgs/'.rawurlencode($organization), $params);
@@ -54,7 +66,7 @@ class Organization extends AbstractApi
     /**
      * List all repositories across all the organizations that you can access.
      *
-     * @link http://developer.github.com/v3/repos/#list-organization-repositories
+     * @link https://docs.github.com/rest/repos/repos#list-organization-repositories
      *
      * @param string $organization the user name
      * @param string $type         the type of repositories
@@ -131,7 +143,9 @@ class Organization extends AbstractApi
     }
 
     /**
-     * @link http://developer.github.com/v3/issues/#list-issues
+     * List issues in an organization assigned to the authenticated user.
+     *
+     * @link https://docs.github.com/rest/issues/issues#list-organization-issues-assigned-to-the-authenticated-user
      *
      * @param string $organization
      * @param array  $params
@@ -160,6 +174,9 @@ class Organization extends AbstractApi
         return new SecretScanning($this->getClient());
     }
 
+    /**
+     * @return OrganizationRoles
+     */
     public function organizationRoles(): OrganizationRoles
     {
         return new OrganizationRoles($this->getClient());

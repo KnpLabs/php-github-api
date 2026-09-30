@@ -2,7 +2,7 @@
 [Back to the navigation](README.md)
 
 Access to Starring and Watching a Repository for [non] authenticated users.
-Wrap [GitHub Activity API](https://developer.github.com/v3/activity/).
+Wrap [GitHub Activity API](https://docs.github.com/rest/activity).
 
 > *** No authentication required. ***
 

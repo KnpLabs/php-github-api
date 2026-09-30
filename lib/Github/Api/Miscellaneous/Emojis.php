@@ -9,7 +9,7 @@ class Emojis extends AbstractApi
     /**
      * Lists all the emojis available to use on GitHub.
      *
-     * @link https://developer.github.com/v3/emojis/
+     * @link https://docs.github.com/rest/emojis/emojis#get-emojis
      *
      * @return array
      */

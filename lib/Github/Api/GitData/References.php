@@ -6,7 +6,7 @@ use Github\Api\AbstractApi;
 use Github\Exception\MissingArgumentException;
 
 /**
- * @link   http://developer.github.com/v3/git/references/
+ * @link   https://docs.github.com/rest/git/refs
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
@@ -14,6 +14,8 @@ class References extends AbstractApi
 {
     /**
      * Get all references of a repository.
+     *
+     * @link https://docs.github.com/rest/git/refs#list-matching-references
      *
      * @param string $username
      * @param string $repository
@@ -27,6 +29,8 @@ class References extends AbstractApi
 
     /**
      * Get all matching references for the supplied reference name.
+     *
+     * @link https://docs.github.com/rest/git/refs#list-matching-references
      *
      * @param string $username
      * @param string $repository
@@ -44,6 +48,8 @@ class References extends AbstractApi
     /**
      * Get all branches of a repository.
      *
+     * @link https://docs.github.com/rest/git/refs#list-matching-references
+     *
      * @param string $username
      * @param string $repository
      *
@@ -57,6 +63,8 @@ class References extends AbstractApi
     /**
      * Get all tags of a repository.
      *
+     * @link https://docs.github.com/rest/git/refs#list-matching-references
+     *
      * @param string $username
      * @param string $repository
      *
@@ -69,6 +77,8 @@ class References extends AbstractApi
 
     /**
      * Show the reference of a repository.
+     *
+     * @link https://docs.github.com/rest/git/refs#get-a-reference
      *
      * @param string $username
      * @param string $repository
@@ -85,6 +95,8 @@ class References extends AbstractApi
 
     /**
      * Create a reference for a repository.
+     *
+     * @link https://docs.github.com/rest/git/refs#create-a-reference
      *
      * @param string $username
      * @param string $repository
@@ -105,6 +117,8 @@ class References extends AbstractApi
 
     /**
      * Update a reference for a repository.
+     *
+     * @link https://docs.github.com/rest/git/refs#update-a-reference
      *
      * @param string $username
      * @param string $repository
@@ -128,6 +142,8 @@ class References extends AbstractApi
 
     /**
      * Delete a reference of a repository.
+     *
+     * @link https://docs.github.com/rest/git/refs#delete-a-reference
      *
      * @param string $username
      * @param string $repository
