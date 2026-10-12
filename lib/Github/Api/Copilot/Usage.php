@@ -10,7 +10,6 @@ class Usage extends AbstractApi
      * Get a summary of Copilot usage for an organization.
      *
      * @deprecated This endpoint has been deprecated by GitHub in favor of the Copilot usage metrics API.
-     *
      * @link https://docs.github.com/rest/copilot/copilot-usage-metrics
      *
      * @param string $organization the organization name
@@ -27,7 +26,6 @@ class Usage extends AbstractApi
      * Get a summary of Copilot usage for a team within an organization.
      *
      * @deprecated This endpoint has been deprecated by GitHub in favor of the Copilot usage metrics API.
-     *
      * @link https://docs.github.com/rest/copilot/copilot-usage-metrics
      *
      * @param string $organization the organization name
@@ -48,7 +46,6 @@ class Usage extends AbstractApi
      * Get a summary of Copilot usage for an enterprise.
      *
      * @deprecated This endpoint has been deprecated by GitHub in favor of the Copilot usage metrics API.
-     *
      * @link https://docs.github.com/rest/copilot/copilot-usage-metrics
      *
      * @param string $enterprise the enterprise slug
@@ -65,7 +62,6 @@ class Usage extends AbstractApi
      * Get a summary of Copilot usage for a team within an enterprise.
      *
      * @deprecated This endpoint has been deprecated by GitHub in favor of the Copilot usage metrics API.
-     *
      * @link https://docs.github.com/rest/copilot/copilot-usage-metrics
      *
      * @param string $enterprise the enterprise slug
