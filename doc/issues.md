@@ -20,10 +20,11 @@ Returns an array of issues.
 ### Search issues in a project
 
 ```php
-$issues = $client->api('issue')->find('KnpLabs', 'php-github-api', 'closed', 'bug');
+$result = $client->api('search')->issues('repo:KnpLabs/php-github-api is:issue is:closed bug');
+$issues = $result['items'];
 ```
 
-Returns an array of closed issues matching the "bug" term. For more complex searches, use the [search api](search.md) which supports the advanced GitHub search syntax.
+Uses the [Search API](search.md) to find closed issues in this repository matching the "bug" term. The search response contains `total_count`, `incomplete_results`, and `items`; `$issues` contains the issues from the returned page. The `is:issue` qualifier excludes pull requests.
 
 ### Get information about an issue
 
