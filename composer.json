@@ -37,9 +37,9 @@
         "http-interop/http-factory-guzzle": "^1.0",
         "guzzlehttp/guzzle": "^7.2",
         "php-http/mock-client": "^1.4.1",
-        "phpstan/phpstan": "^0.12.57",
+        "phpstan/phpstan": "^1",
         "phpstan/extension-installer": "^1.0.5",
-        "phpstan/phpstan-deprecation-rules": "^0.12.5",
+        "phpstan/phpstan-deprecation-rules": "^1",
         "phpunit/phpunit": "^8.5 || ^9.4",
         "symfony/phpunit-bridge": "^5.2"
     },
