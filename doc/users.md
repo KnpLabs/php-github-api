@@ -188,3 +188,16 @@ $emails = $client->api('current_user')->emails()->remove(array('first@provider.o
 ```
 
 Return an array of the authenticated user emails.
+
+### List repositories for the user
+
+> Requires [authentication](security.md) for authenticated user
+
+```php
+$repos = $client->api('current_user')->repositories();
+$repos = $client->api('users')->repositories();
+```
+
+> Note: Following arguments `$type`, `$sort`, `$direction`, `$visibility` and `$affiliation` are deprecated and a new array argument is added `$parameters` which can be used to pass all these existing arguments as well as parameters like `per_page` which was not supported earlier.
+
+Return an array of the authenticated user repos.
