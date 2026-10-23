@@ -34,7 +34,7 @@ composer require knplabs/github-api:^3.0 guzzlehttp/guzzle:^7.0.1 http-interop/h
 
 ## Advanced install
 
-We are decoupled from any HTTP messaging client with help by [HTTPlug](https://httplug.io). 
+We are decoupled from any HTTP messaging client with help by [HTTPlug](https://httplug.io).
 
 ### Using a different http client
 
@@ -52,6 +52,14 @@ $client = Client::createWithHttpClient(new HttplugClient());
 ```
 
 Read more about [using different clients in our docs](doc/customize.md).
+
+## Code Completion (JetBrains PhpStorm)
+To improve code-completion and ux approach in PhpStorm, advanced metadata is now added.
+
+![Auto-Complete Api Names](https://user-images.githubusercontent.com/1327607/229752632-f1e4a1b3-a9f8-48be-9beb-d41927e96cde.png)
+
+![Auto-Complete Api Methods](https://user-images.githubusercontent.com/1327607/229752677-3a2f3dc8-51d7-45b7-a7d0-0cde7ac145f7.png)
+
 
 ## Framework integrations
 
