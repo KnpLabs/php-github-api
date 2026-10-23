@@ -151,6 +151,16 @@ class CommentsTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function shouldGetReactionsApiObject()
+    {
+        $api = $this->getApiMock();
+
+        $this->assertInstanceOf(\Github\Api\Repository\Comments\Reactions::class, $api->reactions());
+    }
+
+    /**
      * @return string
      */
     protected function getApiClass()

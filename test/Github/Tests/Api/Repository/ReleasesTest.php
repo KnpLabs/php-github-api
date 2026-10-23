@@ -174,6 +174,16 @@ class ReleasesTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function shouldGetReactionsApiObject()
+    {
+        $api = $this->getApiMock();
+
+        $this->assertInstanceOf('Github\Api\Repository\Releases\Reactions', $api->reactions());
+    }
+
+    /**
      * @return string
      */
     protected function getApiClass()

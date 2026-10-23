@@ -7,6 +7,7 @@ use Github\Api\Issue\Comments;
 use Github\Api\Issue\Events;
 use Github\Api\Issue\Labels;
 use Github\Api\Issue\Milestones;
+use Github\Api\Issue\Reactions;
 use Github\Api\Issue\Timeline;
 use Github\Exception\MissingArgumentException;
 
@@ -177,6 +178,18 @@ class Issue extends AbstractApi
     public function comments()
     {
         return new Comments($this->getClient());
+    }
+
+    /**
+     * Manage issue reactions.
+     *
+     * @link https://docs.github.com/en/rest/reactions/reactions#list-reactions-for-an-issue
+     *
+     * @return Reactions
+     */
+    public function reactions()
+    {
+        return new Reactions($this->getClient());
     }
 
     /**

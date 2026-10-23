@@ -488,6 +488,16 @@ class CommentsTest extends TestCase
         $api->remove('octocat', 'Hello-World', 1);
     }
 
+    /**
+     * @test
+     */
+    public function shouldGetReactionsApiObject()
+    {
+        $api = $this->getApiMock();
+
+        $this->assertInstanceOf(\Github\Api\PullRequest\Comments\Reactions::class, $api->reactions());
+    }
+
     protected function getApiClass()
     {
         return Comments::class;
