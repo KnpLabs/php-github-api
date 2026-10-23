@@ -5,7 +5,7 @@ namespace Github\Api\CurrentUser;
 use Github\Api\AbstractApi;
 
 /**
- * @link   http://developer.github.com/v3/activity/notifications/
+ * @link   https://docs.github.com/rest/activity/notifications
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
@@ -14,7 +14,7 @@ class Notifications extends AbstractApi
     /**
      * List all notifications for the authenticated user.
      *
-     * @link http://developer.github.com/v3/activity/notifications/#list-your-notifications
+     * @link https://docs.github.com/rest/activity/notifications#list-notifications-for-the-authenticated-user
      *
      * @param array $params
      *
@@ -28,7 +28,7 @@ class Notifications extends AbstractApi
     /**
      * List all notifications for the authenticated user in selected repository.
      *
-     * @link http://developer.github.com/v3/activity/notifications/#list-your-notifications-in-a-repository
+     * @link https://docs.github.com/rest/activity/notifications#list-repository-notifications-for-the-authenticated-user
      *
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
@@ -44,7 +44,7 @@ class Notifications extends AbstractApi
     /**
      * Mark all notifications as read.
      *
-     * @link http://developer.github.com/v3/activity/notifications/#mark-as-read
+     * @link https://docs.github.com/rest/activity/notifications#mark-notifications-as-read
      *
      * @param array $params
      *
@@ -58,7 +58,7 @@ class Notifications extends AbstractApi
     /**
      * Mark all notifications for a repository as read.
      *
-     * @link http://developer.github.com/v3/activity/notifications/#mark-notifications-as-read-in-a-repository
+     * @link https://docs.github.com/rest/activity/notifications#mark-repository-notifications-as-read
      *
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
@@ -74,7 +74,7 @@ class Notifications extends AbstractApi
     /**
      * Mark a notification as read.
      *
-     * @link http://developer.github.com/v3/activity/notifications/#mark-a-thread-as-read
+     * @link https://docs.github.com/rest/activity/notifications#mark-a-thread-as-read
      *
      * @param int   $id     the notification number
      * @param array $params
@@ -89,7 +89,7 @@ class Notifications extends AbstractApi
     /**
      * Show a notification.
      *
-     * @link http://developer.github.com/v3/activity/notifications/#view-a-single-thread
+     * @link https://docs.github.com/rest/activity/notifications#get-a-thread
      *
      * @param int $id the notification number
      *
@@ -103,7 +103,7 @@ class Notifications extends AbstractApi
     /**
      * Show a subscription.
      *
-     * @link http://developer.github.com/v3/activity/notifications/#get-a-thread-subscription
+     * @link https://docs.github.com/rest/activity/notifications#get-a-thread-subscription-for-the-authenticated-user
      *
      * @param int $id the notification number
      *
@@ -117,7 +117,7 @@ class Notifications extends AbstractApi
     /**
      * Create a subscription.
      *
-     * @link http://developer.github.com/v3/activity/notifications/#set-a-thread-subscription
+     * @link https://docs.github.com/rest/activity/notifications#set-a-thread-subscription
      *
      * @param int   $id     the notification number
      * @param array $params
@@ -132,7 +132,7 @@ class Notifications extends AbstractApi
     /**
      * Delete a subscription.
      *
-     * @link http://developer.github.com/v3/activity/notifications/#delete-a-thread-subscription
+     * @link https://docs.github.com/rest/activity/notifications#delete-a-thread-subscription
      *
      * @param int $id the notification number
      *

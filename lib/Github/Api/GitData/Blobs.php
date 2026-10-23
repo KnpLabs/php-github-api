@@ -7,7 +7,7 @@ use Github\Api\AcceptHeaderTrait;
 use Github\Exception\MissingArgumentException;
 
 /**
- * @link   http://developer.github.com/v3/git/blobs/
+ * @link   https://docs.github.com/rest/git/blobs
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
@@ -18,6 +18,8 @@ class Blobs extends AbstractApi
 
     /**
      * Configure the Accept header depending on the blob type.
+     *
+     * @link https://docs.github.com/rest/git/blobs#get-a-blob
      *
      * @param string|null $bodyType
      *
@@ -35,6 +37,8 @@ class Blobs extends AbstractApi
     /**
      * Show a blob of a sha for a repository.
      *
+     * @link https://docs.github.com/rest/git/blobs#get-a-blob
+     *
      * @param string $username
      * @param string $repository
      * @param string $sha
@@ -48,6 +52,8 @@ class Blobs extends AbstractApi
 
     /**
      * Create a blob of a sha for a repository.
+     *
+     * @link https://docs.github.com/rest/git/blobs#create-a-blob
      *
      * @param string $username
      * @param string $repository

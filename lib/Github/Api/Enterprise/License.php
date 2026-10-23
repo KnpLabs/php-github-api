@@ -9,7 +9,7 @@ class License extends AbstractApi
     /**
      * Provides information about your Enterprise license (only available to site admins).
      *
-     * @link https://developer.github.com/v3/enterprise/license/
+     * @link https://docs.github.com/enterprise-server@3.14/rest/enterprise-admin/license#get-license-information
      *
      * @return array array of license information
      */

@@ -2,7 +2,7 @@
 [Back to the navigation](README.md)
 
 Listing issues, searching, editing and closing your projects issues.
-Wraps [GitHub Issue API](http://developer.github.com/v3/issues/).
+Wraps [GitHub Issue API](https://docs.github.com/rest/issues/issues).
 
 Additional APIs:
 * [Comments](issue/comments.md)

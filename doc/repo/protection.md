@@ -20,7 +20,7 @@ $protection = $client->api('repo')->protection()->show('twbs', 'bootstrap', 'mas
 
 > Requires [authentication](../security.md).
 
-For the full list of parameters see https://developer.github.com/v3/repos/branches/#parameters-1
+For the full list of parameters see https://docs.github.com/rest/branches/branch-protection#update-branch-protection
 
 ```php
 $params = [

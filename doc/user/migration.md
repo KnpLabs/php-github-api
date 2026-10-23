@@ -3,7 +3,7 @@
 
 # List user migrations
 
-https://docs.github.com/en/rest/migrations/users?apiVersion=2022-11-28#list-user-migrations
+https://docs.github.com/rest/migrations/users#list-user-migrations
 
 ```php
 $api = $github->api('user')->migration();
@@ -22,7 +22,7 @@ while($paginator->hasNext());
 
 # Start a User Migration
 
-https://docs.github.com/en/rest/migrations/users?apiVersion=2022-11-28#start-a-user-migration
+https://docs.github.com/rest/migrations/users#start-a-user-migration
 
 ```php
 $client->users()->migration()->start([
@@ -44,7 +44,7 @@ $client->users()->migration()->start([
 
 # Get a User Migration Status
 
-https://docs.github.com/en/rest/migrations/users?apiVersion=2022-11-28#get-a-user-migration-status
+https://docs.github.com/rest/migrations/users#get-a-user-migration-status
 
 ```php
 $status = $client->user()->migration()->status(12, [
@@ -56,7 +56,7 @@ $status = $client->user()->migration()->status(12, [
 
 # Delete a User Migration Archive
 
-https://docs.github.com/en/rest/migrations/users?apiVersion=2022-11-28#delete-a-user-migration-archive
+https://docs.github.com/rest/migrations/users#delete-a-user-migration-archive
 
 ```php
 $client->user()->migration()->deleteArchive(12);
@@ -64,7 +64,7 @@ $client->user()->migration()->deleteArchive(12);
 
 # Unlock a User Repository
 
-https://docs.github.com/en/rest/migrations/users?apiVersion=2022-11-28#unlock-a-user-repository
+https://docs.github.com/rest/migrations/users#unlock-a-user-repository
 
 ```php
 $client->user()->migration()->unlockRepo(12, 'php-github-api');
@@ -72,7 +72,7 @@ $client->user()->migration()->unlockRepo(12, 'php-github-api');
 
 # List repositories for a User Migration
 
-https://docs.github.com/en/rest/migrations/users?apiVersion=2022-11-28#list-repositories-for-a-user-migration
+https://docs.github.com/rest/migrations/users#list-repositories-for-a-user-migration
 
 ```php
 $repos = $client->user()->migration()->repos(2);

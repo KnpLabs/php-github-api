@@ -8,7 +8,7 @@ use Github\Exception\ErrorException;
 use Github\Exception\MissingArgumentException;
 
 /**
- * @link   http://developer.github.com/v3/repos/releases/
+ * @link   https://docs.github.com/rest/releases/assets
  *
  * @author Evgeniy Guseletov <d46k16@gmail.com>
  */
@@ -19,6 +19,8 @@ class Assets extends AbstractApi
     /**
      * Get all release's assets in selected repository
      * GET /repos/:owner/:repo/releases/:id/assets.
+     *
+     * @link https://docs.github.com/rest/releases/assets#list-release-assets
      *
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
@@ -34,6 +36,8 @@ class Assets extends AbstractApi
     /**
      * Get an asset in selected repository's release
      * GET /repos/:owner/:repo/releases/assets/:id.
+     *
+     * @link https://docs.github.com/rest/releases/assets#get-a-release-asset
      *
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
@@ -57,7 +61,7 @@ class Assets extends AbstractApi
      * Creating an asset requires support for server name indentification (SNI)
      * so this must be supported by your PHP version.
      *
-     * @see http://developer.github.com/v3/repos/releases/#upload-a-release-asset
+     * @see https://docs.github.com/rest/releases/assets#upload-a-release-asset
      * @see http://php.net/manual/en/openssl.constsni.php
      *
      * @param string $username    the user who owns the repo
@@ -88,6 +92,8 @@ class Assets extends AbstractApi
      * Edit an asset in selected repository's release
      * PATCH /repos/:owner/:repo/releases/assets/:id.
      *
+     * @link https://docs.github.com/rest/releases/assets#update-a-release-asset
+     *
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
      * @param int    $id         the id of the asset
@@ -109,6 +115,8 @@ class Assets extends AbstractApi
     /**
      * Delete an asset in selected repository's release
      * DELETE /repos/:owner/:repo/releases/assets/:id.
+     *
+     * @link https://docs.github.com/rest/releases/assets#delete-a-release-asset
      *
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo

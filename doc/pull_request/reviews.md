@@ -1,6 +1,8 @@
 ## Pull Requests / Reviews API
 [Back to the "Pull Requests API"](../pull_requests.md) | [Back to the navigation](../README.md)
 
+Wraps [GitHub Pull Request Reviews API](https://docs.github.com/rest/pulls/reviews).
+
 ### List all reviews
 
 ```php
@@ -11,7 +13,7 @@ $reviewRequests = $client->api('pull_request')->reviews()->all('twbs', 'bootstra
 
 ```php
 $client->api('pull_request')->reviews()->create('twbs', 'bootstrap', 12, array(                  
-    'event' => 'APPROVE', // Accepted values: APPROVE, REQUEST_CHANGES, COMMENT, see https://developer.github.com/v3/pulls/reviews/#input-1
+    'event' => 'APPROVE', // Accepted values: APPROVE, REQUEST_CHANGES, COMMENT, see https://docs.github.com/rest/pulls/reviews#create-a-review-for-a-pull-request
     'body' => 'OK, looks good :)',// Optional, the review body text
     'commit_id' => $commitSha, // Optional, default value is HEAD sha
 ));

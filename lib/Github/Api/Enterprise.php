@@ -11,7 +11,7 @@ use Github\Api\Enterprise\UserAdmin;
 /**
  * Getting information about a GitHub Enterprise instance.
  *
- * @link   https://developer.github.com/v3/enterprise/
+ * @link   https://docs.github.com/rest/enterprise-admin
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  * @author Guillermo A. Fisher <guillermoandraefisher@gmail.com>

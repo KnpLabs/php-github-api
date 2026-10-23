@@ -5,7 +5,7 @@ Review Comments are comments on a portion of the unified diff. These are separat
 are applied directly to a commit, outside of the Pull Request view), and Issue Comments (which do not reference
 a portion of the unified diff).
 
-Wraps [GitHub PR Review Comments API](http://developer.github.com/v3/pulls/comments/).
+Wraps [GitHub PR Review Comments API](https://docs.github.com/rest/pulls/comments).
 
 > **Note:**
 > New comments are assigned to the [authenticated](../security.md) user.

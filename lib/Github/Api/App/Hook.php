@@ -11,7 +11,7 @@ class Hook extends AbstractApi
     /**
      * Show the app hook configuration.
      *
-     * @link https://docs.github.com/en/rest/apps/webhooks#get-a-webhook-configuration-for-an-app
+     * @link https://docs.github.com/rest/apps/webhooks#get-a-webhook-configuration-for-an-app
      *
      * @return array
      */
@@ -23,7 +23,7 @@ class Hook extends AbstractApi
     /**
      * Update the hook configuration of an app.
      *
-     * @link https://docs.github.com/en/rest/apps/webhooks#update-a-webhook-configuration-for-an-app
+     * @link https://docs.github.com/rest/apps/webhooks#update-a-webhook-configuration-for-an-app
      *
      * @param array $params
      *
@@ -37,7 +37,7 @@ class Hook extends AbstractApi
     /**
      * List deliveries for an app webhook.
      *
-     * @link https://docs.github.com/en/rest/apps/webhooks#list-deliveries-for-an-app-webhook
+     * @link https://docs.github.com/rest/apps/webhooks#list-deliveries-for-an-app-webhook
      *
      * @return array
      */
@@ -49,7 +49,7 @@ class Hook extends AbstractApi
     /**
      * Get a delivery for an app webhook.
      *
-     * @link https://docs.github.com/en/rest/apps/webhooks#get-a-delivery-for-an-app-webhook
+     * @link https://docs.github.com/rest/apps/webhooks#get-a-delivery-for-an-app-webhook
      *
      * @param int $delivery
      *
@@ -63,7 +63,7 @@ class Hook extends AbstractApi
     /**
      * Redeliver a delivery for an app webhook.
      *
-     * @link https://docs.github.com/en/rest/apps/webhooks#redeliver-a-delivery-for-an-app-webhook
+     * @link https://docs.github.com/rest/apps/webhooks#redeliver-a-delivery-for-an-app-webhook
      *
      * @param int $delivery
      *

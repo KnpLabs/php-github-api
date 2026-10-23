@@ -10,7 +10,7 @@ class Hooks extends AbstractApi
     /**
      * List hooks.
      *
-     * @link https://developer.github.com/v3/orgs/hooks/#list-hooks
+     * @link https://docs.github.com/rest/orgs/webhooks#list-organization-webhooks
      *
      * @param string $organization
      *
@@ -24,7 +24,7 @@ class Hooks extends AbstractApi
     /**
      * Get a single hook.
      *
-     * @link https://developer.github.com/v3/orgs/hooks/#get-single-hook
+     * @link https://docs.github.com/rest/orgs/webhooks#get-an-organization-webhook
      *
      * @param string $organization
      * @param int    $id
@@ -39,7 +39,7 @@ class Hooks extends AbstractApi
     /**
      * Create a hook.
      *
-     * @link https://developer.github.com/v3/orgs/hooks/#create-a-hook
+     * @link https://docs.github.com/rest/orgs/webhooks#create-an-organization-webhook
      *
      * @param string $organization
      * @param array  $params
@@ -60,7 +60,7 @@ class Hooks extends AbstractApi
     /**
      * Edit a hook.
      *
-     * @link https://developer.github.com/v3/orgs/hooks/#edit-a-hook
+     * @link https://docs.github.com/rest/orgs/webhooks#update-an-organization-webhook
      *
      * @param string $organization
      * @param int    $id
@@ -82,7 +82,7 @@ class Hooks extends AbstractApi
     /**
      * Ping a hook.
      *
-     * @link https://developer.github.com/v3/orgs/hooks/#ping-a-hook
+     * @link https://docs.github.com/rest/orgs/webhooks#ping-an-organization-webhook
      *
      * @param string $organization
      * @param int    $id
@@ -97,7 +97,7 @@ class Hooks extends AbstractApi
     /**
      * Delete a hook.
      *
-     * @link https://developer.github.com/v3/orgs/hooks/#delete-a-hook
+     * @link https://docs.github.com/rest/orgs/webhooks#delete-an-organization-webhook
      *
      * @param string $organization
      * @param int    $id

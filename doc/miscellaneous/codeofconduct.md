@@ -1,6 +1,8 @@
 ## CodeOfConduct API
 [Back to the navigation](../README.md)
 
+Wraps [GitHub Codes of conduct API](https://docs.github.com/rest/codes-of-conduct/codes-of-conduct).
+
 ### Lists all code of conducts.
 
 ```php

@@ -5,12 +5,12 @@ namespace Github\Api\Environment;
 use Github\Api\AbstractApi;
 
 /**
- * @link https://docs.github.com/en/rest/actions/secrets?apiVersion=2022-11-28
+ * @link https://docs.github.com/rest/actions/secrets
  */
 class Secrets extends AbstractApi
 {
     /**
-     * @link https://docs.github.com/en/rest/actions/secrets?apiVersion=2022-11-28#list-environment-secrets
+     * @link https://docs.github.com/rest/actions/secrets#list-environment-secrets
      *
      * @param int    $id
      * @param string $name
@@ -23,7 +23,7 @@ class Secrets extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/actions/secrets?apiVersion=2022-11-28#get-an-environment-secret
+     * @link https://docs.github.com/rest/actions/secrets#get-an-environment-secret
      *
      * @param int    $id
      * @param string $name
@@ -37,7 +37,7 @@ class Secrets extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/actions/secrets?apiVersion=2022-11-28#create-or-update-an-environment-secret
+     * @link https://docs.github.com/rest/actions/secrets#create-or-update-an-environment-secret
      *
      * @param int    $id
      * @param string $name
@@ -52,7 +52,7 @@ class Secrets extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/actions/secrets?apiVersion=2022-11-28#delete-an-environment-secret
+     * @link https://docs.github.com/rest/actions/secrets#delete-an-environment-secret
      *
      * @param int    $id
      * @param string $name
@@ -66,7 +66,7 @@ class Secrets extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/actions/secrets?apiVersion=2022-11-28#get-an-environment-public-key
+     * @link https://docs.github.com/rest/actions/secrets#get-an-environment-public-key
      *
      * @param int    $id
      * @param string $name

@@ -5,12 +5,12 @@ namespace Github\Api\Environment;
 use Github\Api\AbstractApi;
 
 /**
- * @link https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28
+ * @link https://docs.github.com/rest/actions/variables
  */
 class Variables extends AbstractApi
 {
     /**
-     * @link https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#list-environment-variables
+     * @link https://docs.github.com/rest/actions/variables#list-environment-variables
      *
      * @param int    $id
      * @param string $name
@@ -23,7 +23,7 @@ class Variables extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#get-an-environment-variable
+     * @link https://docs.github.com/rest/actions/variables#get-an-environment-variable
      *
      * @param int    $id
      * @param string $name
@@ -37,7 +37,7 @@ class Variables extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#create-an-environment-variable
+     * @link https://docs.github.com/rest/actions/variables#create-an-environment-variable
      *
      * @param int    $id
      * @param string $name
@@ -51,7 +51,7 @@ class Variables extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#update-an-environment-variable
+     * @link https://docs.github.com/rest/actions/variables#update-an-environment-variable
      *
      * @param int    $id
      * @param string $name
@@ -66,7 +66,7 @@ class Variables extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#delete-an-environment-variable
+     * @link https://docs.github.com/rest/actions/variables#delete-an-environment-variable
      *
      * @param int    $id
      * @param string $name

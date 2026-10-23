@@ -11,7 +11,7 @@ use Github\Api\CurrentUser\Starring;
 use Github\Api\CurrentUser\Watchers;
 
 /**
- * @link   http://developer.github.com/v3/users/
+ * @link   https://docs.github.com/rest/users/users
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  * @author Felipe Valtl de Mello <eu@felipe.im>
@@ -20,11 +20,27 @@ class CurrentUser extends AbstractApi
 {
     use AcceptHeaderTrait;
 
+    /**
+     * Get the authenticated user.
+     *
+     * @link https://docs.github.com/rest/users/users#get-the-authenticated-user
+     *
+     * @return array
+     */
     public function show()
     {
         return $this->get('/user');
     }
 
+    /**
+     * Update the authenticated user.
+     *
+     * @link https://docs.github.com/rest/users/users#update-the-authenticated-user
+     *
+     * @param array $params
+     *
+     * @return array
+     */
     public function update(array $params)
     {
         return $this->patch('/user', $params);
@@ -46,6 +62,15 @@ class CurrentUser extends AbstractApi
         return new Followers($this->getClient());
     }
 
+    /**
+     * List followers of the authenticated user.
+     *
+     * @link https://docs.github.com/rest/users/followers#list-followers-of-the-authenticated-user
+     *
+     * @param int $page
+     *
+     * @return array
+     */
     public function followers($page = 1)
     {
         return $this->get('/user/followers', [
@@ -54,7 +79,7 @@ class CurrentUser extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/reference/issues#list-user-account-issues-assigned-to-the-authenticated-user
+     * @link https://docs.github.com/rest/issues/issues#list-user-account-issues-assigned-to-the-authenticated-user
      *
      * @param array $params
      * @param bool  $includeOrgIssues
@@ -91,7 +116,7 @@ class CurrentUser extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/reference/orgs#list-organizations-for-the-authenticated-user
+     * @link https://docs.github.com/rest/orgs/orgs#list-organizations-for-the-authenticated-user
      *
      * @return array
      */
@@ -101,7 +126,7 @@ class CurrentUser extends AbstractApi
     }
 
     /**
-     * @link https://developer.github.com/v3/orgs/teams/#list-user-teams
+     * @link https://docs.github.com/rest/teams/teams#list-teams-for-the-authenticated-user
      *
      * @return array
      */
@@ -111,7 +136,7 @@ class CurrentUser extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/reference/repos#list-repositories-for-the-authenticated-user
+     * @link https://docs.github.com/rest/repos/repos#list-repositories-for-the-authenticated-user
      *
      * @param string $type        role in the repository
      * @param string $sort        sort by
@@ -159,7 +184,7 @@ class CurrentUser extends AbstractApi
     }
 
     /**
-     *  @link https://docs.github.com/en/rest/reference/activity#list-repositories-watched-by-the-authenticated-user
+     *  @link https://docs.github.com/rest/activity/watching#list-repositories-watched-by-the-authenticated-user
      */
     public function subscriptions()
     {
@@ -167,7 +192,7 @@ class CurrentUser extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/reference/apps#list-app-installations-accessible-to-the-user-access-token
+     * @link https://docs.github.com/rest/apps/installations#list-app-installations-accessible-to-the-user-access-token
      *
      * @param array $params
      */
@@ -179,7 +204,7 @@ class CurrentUser extends AbstractApi
     }
 
     /**
-     * @link https://developer.github.com/v3/apps/installations/#list-repositories-accessible-to-the-user-access-token
+     * @link https://docs.github.com/rest/apps/installations#list-repositories-accessible-to-the-user-access-token
      *
      * @param string $installationId the ID of the Installation
      * @param array  $params

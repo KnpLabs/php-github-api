@@ -1,6 +1,8 @@
 ## Commits API
 [Back to the navigation](../README.md)
 
+Wraps [GitHub Git Commits API](https://docs.github.com/rest/git/commits).
+
 ### Show a commit
 
 ```php

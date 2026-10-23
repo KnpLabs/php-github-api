@@ -5,7 +5,7 @@ namespace Github\Api\Repository;
 class SecretScanning extends \Github\Api\AbstractApi
 {
     /**
-     * @link https://docs.github.com/en/enterprise-server@3.5/rest/secret-scanning#list-secret-scanning-alerts-for-a-repository
+     * @link https://docs.github.com/rest/secret-scanning/secret-scanning#list-secret-scanning-alerts-for-a-repository
      *
      * @param string $username
      * @param string $repository
@@ -19,7 +19,7 @@ class SecretScanning extends \Github\Api\AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/enterprise-server@3.5/rest/secret-scanning#get-a-secret-scanning-alert
+     * @link https://docs.github.com/rest/secret-scanning/secret-scanning#get-a-secret-scanning-alert
      *
      * @param string $username
      * @param string $repository
@@ -33,7 +33,7 @@ class SecretScanning extends \Github\Api\AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/enterprise-server@3.5/rest/secret-scanning#update-a-secret-scanning-alert
+     * @link https://docs.github.com/rest/secret-scanning/secret-scanning#update-a-secret-scanning-alert
      *
      * @param string $username
      * @param string $repository
@@ -48,7 +48,7 @@ class SecretScanning extends \Github\Api\AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/enterprise-server@3.5/rest/secret-scanning#list-locations-for-a-secret-scanning-alert
+     * @link https://docs.github.com/rest/secret-scanning/secret-scanning#list-locations-for-a-secret-scanning-alert
      *
      * @param string $username
      * @param string $repository

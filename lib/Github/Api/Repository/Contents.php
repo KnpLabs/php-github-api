@@ -10,7 +10,7 @@ use Github\Exception\MissingArgumentException;
 use Github\Exception\TwoFactorAuthenticationRequiredException;
 
 /**
- * @link   http://developer.github.com/v3/repos/contents/
+ * @link   https://docs.github.com/rest/repos/contents
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
@@ -21,7 +21,7 @@ class Contents extends AbstractApi
     /**
      * Configure the body type.
      *
-     * @link https://developer.github.com/v3/repo/contents/#custom-media-types
+     * @link https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types
      *
      * @param string|null $bodyType
      *
@@ -41,7 +41,7 @@ class Contents extends AbstractApi
     /**
      * Get content of README file in a repository.
      *
-     * @link http://developer.github.com/v3/repos/contents/
+     * @link https://docs.github.com/rest/repos/contents#get-a-repository-readme
      *
      * @param string      $username   the user who owns the repository
      * @param string      $repository the name of the repository
@@ -59,7 +59,7 @@ class Contents extends AbstractApi
     /**
      * Get contents of any file or directory in a repository.
      *
-     * @link http://developer.github.com/v3/repos/contents/
+     * @link https://docs.github.com/rest/repos/contents#get-repository-content
      *
      * @param string      $username       the user who owns the repository
      * @param string      $repository     the name of the repository
@@ -84,7 +84,7 @@ class Contents extends AbstractApi
     /**
      * Creates a new file in a repository.
      *
-     * @link http://developer.github.com/v3/repos/contents/#create-a-file
+     * @link https://docs.github.com/rest/repos/contents#create-or-update-file-contents
      *
      * @param string      $username   the user who owns the repository
      * @param string      $repository the name of the repository
@@ -159,7 +159,7 @@ class Contents extends AbstractApi
     /**
      * Updates the contents of a file in a repository.
      *
-     * @link http://developer.github.com/v3/repos/contents/#update-a-file
+     * @link https://docs.github.com/rest/repos/contents#create-or-update-file-contents
      *
      * @param string      $username   the user who owns the repository
      * @param string      $repository the name of the repository
@@ -201,7 +201,7 @@ class Contents extends AbstractApi
     /**
      * Deletes a file from a repository.
      *
-     * @link http://developer.github.com/v3/repos/contents/#delete-a-file
+     * @link https://docs.github.com/rest/repos/contents#delete-a-file
      *
      * @param string      $username   the user who owns the repository
      * @param string      $repository the name of the repository
@@ -241,7 +241,7 @@ class Contents extends AbstractApi
     /**
      * Get content of archives in a repository.
      *
-     * @link http://developer.github.com/v3/repos/contents/
+     * @link https://docs.github.com/rest/repos/contents#download-a-repository-archive-tar
      *
      * @param string      $username   the user who owns the repository
      * @param string      $repository the name of the repository
@@ -301,7 +301,7 @@ class Contents extends AbstractApi
      *
      * Use this method instead of the download method if your file is bigger than 1MB
      *
-     * @see https://docs.github.com/en/rest/repos/contents
+     * @see https://docs.github.com/rest/repos/contents#get-repository-content
      *
      * @param string      $username   the user who owns the repository
      * @param string      $repository the name of the repository

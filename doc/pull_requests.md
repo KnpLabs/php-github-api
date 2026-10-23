@@ -8,7 +8,7 @@ Additional APIs:
 
 Lets you list pull requests for a given repository, list one pull request in particular along
 with its discussion, and create a pull-request.
-Wraps [GitHub Pull Request API](http://developer.github.com/v3/pulls/).
+Wraps [GitHub Pull Request API](https://docs.github.com/rest/pulls/pulls).
 
 ### List all pull requests, per repository
 

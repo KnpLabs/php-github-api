@@ -4,6 +4,8 @@ namespace Github\Api\RateLimit;
 
 /**
  * Represents the data block for a GitHub rate limit response, grouped by a name.
+ *
+ * @link https://docs.github.com/rest/rate-limit/rate-limit#get-rate-limit-status-for-the-authenticated-user
  */
 class RateLimitResource
 {

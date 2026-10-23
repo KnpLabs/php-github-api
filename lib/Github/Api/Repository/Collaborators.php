@@ -5,14 +5,14 @@ namespace Github\Api\Repository;
 use Github\Api\AbstractApi;
 
 /**
- * @link   http://developer.github.com/v3/repos/collaborators/
+ * @link   https://docs.github.com/rest/collaborators/collaborators
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class Collaborators extends AbstractApi
 {
     /**
-     * @link https://developer.github.com/v3/repos/collaborators/#list-collaborators
+     * @link https://docs.github.com/rest/collaborators/collaborators#list-repository-collaborators
      *
      * @param string $username
      * @param string $repository
@@ -26,7 +26,7 @@ class Collaborators extends AbstractApi
     }
 
     /**
-     * @link https://developer.github.com/v3/repos/collaborators/#check-if-a-user-is-a-collaborator
+     * @link https://docs.github.com/rest/collaborators/collaborators#check-if-a-user-is-a-repository-collaborator
      *
      * @param string $username
      * @param string $repository
@@ -40,7 +40,7 @@ class Collaborators extends AbstractApi
     }
 
     /**
-     * @link https://developer.github.com/v3/repos/collaborators/#add-user-as-a-collaborator
+     * @link https://docs.github.com/rest/collaborators/collaborators#add-a-repository-collaborator
      *
      * @param string $username
      * @param string $repository
@@ -55,7 +55,7 @@ class Collaborators extends AbstractApi
     }
 
     /**
-     * @link https://developer.github.com/v3/repos/collaborators/#remove-user-as-a-collaborator
+     * @link https://docs.github.com/rest/collaborators/collaborators#remove-a-repository-collaborator
      *
      * @param string $username
      * @param string $repository
@@ -69,7 +69,7 @@ class Collaborators extends AbstractApi
     }
 
     /**
-     * @link https://developer.github.com/v3/repos/collaborators/#review-a-users-permission-level
+     * @link https://docs.github.com/rest/collaborators/collaborators#get-repository-permissions-for-a-user
      *
      * @param string $username
      * @param string $repository

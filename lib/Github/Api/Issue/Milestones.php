@@ -6,7 +6,7 @@ use Github\Api\AbstractApi;
 use Github\Exception\MissingArgumentException;
 
 /**
- * @link   http://developer.github.com/v3/issues/milestones/
+ * @link   https://docs.github.com/rest/issues/milestones
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
@@ -15,7 +15,7 @@ class Milestones extends AbstractApi
     /**
      * Get all milestones for a repository.
      *
-     * @link https://developer.github.com/v3/issues/milestones/#list-milestones-for-a-repository
+     * @link https://docs.github.com/rest/issues/milestones#list-milestones
      *
      * @param string $username
      * @param string $repository
@@ -46,7 +46,7 @@ class Milestones extends AbstractApi
     /**
      * Get a milestone for a repository.
      *
-     * @link https://developer.github.com/v3/issues/milestones/#get-a-single-milestone
+     * @link https://docs.github.com/rest/issues/milestones#get-a-milestone
      *
      * @param string $username
      * @param string $repository
@@ -62,7 +62,7 @@ class Milestones extends AbstractApi
     /**
      * Create a milestone for a repository.
      *
-     * @link https://developer.github.com/v3/issues/milestones/#create-a-milestone
+     * @link https://docs.github.com/rest/issues/milestones#create-a-milestone
      *
      * @param string $username
      * @param string $repository
@@ -87,7 +87,7 @@ class Milestones extends AbstractApi
     /**
      * Update a milestone for a repository.
      *
-     * @link https://developer.github.com/v3/issues/milestones/#update-a-milestone
+     * @link https://docs.github.com/rest/issues/milestones#update-a-milestone
      *
      * @param string $username
      * @param string $repository
@@ -108,7 +108,7 @@ class Milestones extends AbstractApi
     /**
      * Delete a milestone for a repository.
      *
-     * @link https://developer.github.com/v3/issues/milestones/#delete-a-milestone
+     * @link https://docs.github.com/rest/issues/milestones#delete-a-milestone
      *
      * @param string $username
      * @param string $repository
@@ -124,7 +124,7 @@ class Milestones extends AbstractApi
     /**
      * Get the labels of a milestone.
      *
-     * @link https://developer.github.com/v3/issues/labels/#get-labels-for-every-issue-in-a-milestone
+     * @link https://docs.github.com/rest/issues/labels#list-labels-for-issues-in-a-milestone
      *
      * @param string $username
      * @param string $repository

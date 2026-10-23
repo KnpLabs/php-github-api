@@ -7,7 +7,7 @@ use Github\Api\RateLimit\RateLimitResource;
 /**
  * Get rate limits.
  *
- * @link   https://developer.github.com/v3/rate_limit/
+ * @link   https://docs.github.com/rest/rate-limit/rate-limit#get-rate-limit-status-for-the-authenticated-user
  *
  * @author Jeff Finley <quickliketurtle@gmail.com>
  */
@@ -53,6 +53,8 @@ class RateLimit extends AbstractApi
 
     /**
      * Returns the data directly from the GitHub API endpoint.
+     *
+     * @link https://docs.github.com/rest/rate-limit/rate-limit#get-rate-limit-status-for-the-authenticated-user
      *
      * @return array
      */

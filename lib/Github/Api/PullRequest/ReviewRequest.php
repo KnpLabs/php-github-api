@@ -6,12 +6,17 @@ use Github\Api\AbstractApi;
 use Github\Api\AcceptHeaderTrait;
 
 /**
- * @link https://developer.github.com/v3/pulls/review_requests/
+ * @link https://docs.github.com/rest/pulls/review-requests
  */
 class ReviewRequest extends AbstractApi
 {
     use AcceptHeaderTrait;
 
+    /**
+     * @deprecated since 3.2, will be removed in 4.0.
+     *
+     * @return $this
+     */
     public function configure()
     {
         trigger_deprecation('KnpLabs/php-github-api', '3.2', 'The "%s" is deprecated and will be removed.', __METHOD__);
@@ -20,7 +25,7 @@ class ReviewRequest extends AbstractApi
     }
 
     /**
-     * @link https://developer.github.com/v3/pulls/review_requests/#list-review-requests
+     * @link https://docs.github.com/rest/pulls/review-requests#get-all-requested-reviewers-for-a-pull-request
      *
      * @param string $username
      * @param string $repository
@@ -39,7 +44,7 @@ class ReviewRequest extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/reference/pulls#request-reviewers-for-a-pull-request
+     * @link https://docs.github.com/rest/pulls/review-requests#request-reviewers-for-a-pull-request
      *
      * @param string $username
      * @param string $repository
@@ -55,7 +60,7 @@ class ReviewRequest extends AbstractApi
     }
 
     /**
-     * @link https://developer.github.com/v3/pulls/review_requests/#delete-a-review-request
+     * @link https://docs.github.com/rest/pulls/review-requests#remove-requested-reviewers-from-a-pull-request
      *
      * @param string $username
      * @param string $repository

@@ -5,7 +5,7 @@ namespace Github\Api;
 /**
  * Creating, deleting and listing authorizations.
  *
- * @link   http://developer.github.com/v3/oauth_authorizations/
+ * @link   https://docs.github.com/rest/apps/oauth-applications
  *
  * @author Evgeniy Guseletov <d46k16@gmail.com>
  */
@@ -13,6 +13,8 @@ class Authorizations extends AbstractApi
 {
     /**
      * Check an application token.
+     *
+     * @link https://docs.github.com/rest/apps/oauth-applications#check-a-token
      *
      * @param string      $clientId
      * @param string|null $token
@@ -27,6 +29,8 @@ class Authorizations extends AbstractApi
     /**
      * Reset an application token.
      *
+     * @link https://docs.github.com/rest/apps/oauth-applications#reset-a-token
+     *
      * @param string      $clientId
      * @param string|null $token
      *
@@ -40,6 +44,8 @@ class Authorizations extends AbstractApi
     /**
      * Revoke an application token.
      *
+     * @link https://docs.github.com/rest/apps/oauth-applications#delete-an-app-token
+     *
      * @param string      $clientId
      * @param string|null $token
      *
@@ -52,6 +58,8 @@ class Authorizations extends AbstractApi
 
     /**
      * Revoke an application authorization.
+     *
+     * @link https://docs.github.com/rest/apps/oauth-applications#delete-an-app-authorization
      *
      * @param string      $clientId
      * @param string|null $token

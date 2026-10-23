@@ -9,14 +9,14 @@ use Github\Api\Environment\Variables;
 /**
  * Listing, creating and updating environments.
  *
- * @link https://docs.github.com/en/rest/deployments/environments?apiVersion=2022-11-28#
+ * @link https://docs.github.com/rest/deployments/environments
  */
 class Environments extends AbstractApi
 {
     /**
      * List environments for a particular repository.
      *
-     * @link https://docs.github.com/en/rest/deployments/environments?apiVersion=2022-11-28##list-environments
+     * @link https://docs.github.com/rest/deployments/environments#list-environments
      *
      * @param string $username   the username of the user who owns the repository
      * @param string $repository the name of the repository
@@ -32,6 +32,8 @@ class Environments extends AbstractApi
     /**
      * Get a environment in selected repository.
      *
+     * @link https://docs.github.com/rest/deployments/environments#get-an-environment
+     *
      * @param string $username   the user who owns the repo
      * @param string $repository the name of the repo
      * @param string $name       the name of the environment
@@ -46,7 +48,7 @@ class Environments extends AbstractApi
     /**
      * Create or update a environment for the given username and repo.
      *
-     * @link https://docs.github.com/en/rest/deployments/environments?apiVersion=2022-11-28#create-or-update-an-environment
+     * @link https://docs.github.com/rest/deployments/environments#create-or-update-an-environment
      *
      * @param string $username   the username
      * @param string $repository the repository
@@ -63,7 +65,7 @@ class Environments extends AbstractApi
     /**
      * Delete a environment for the given username and repo.
      *
-     * @link https://docs.github.com/en/rest/deployments/environments?apiVersion=2022-11-28#delete-an-environment
+     * @link https://docs.github.com/rest/deployments/environments#delete-an-environment
      *
      * @return mixed null on success, array on error with 'message'
      */
@@ -73,7 +75,7 @@ class Environments extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/actions/secrets?apiVersion=2022-11-28#about-secrets-in-github-actions
+     * @link https://docs.github.com/rest/actions/secrets#about-secrets-in-github-actions
      */
     public function secrets(): Secrets
     {
@@ -81,7 +83,7 @@ class Environments extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/actions/variables?apiVersion=2022-11-28#about-variables-in-github-actions
+     * @link https://docs.github.com/rest/actions/variables#about-variables-in-github-actions
      */
     public function variables(): Variables
     {

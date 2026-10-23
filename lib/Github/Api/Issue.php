@@ -13,7 +13,7 @@ use Github\Exception\MissingArgumentException;
 /**
  * Listing issues, searching, editing and closing your projects issues.
  *
- * @link   http://develop.github.com/p/issues.html
+ * @link   https://docs.github.com/rest/issues/issues
  *
  * @author Thibault Duplessis <thibault.duplessis at gmail dot com>
  * @author Joseph Bielawski <stloyd@gmail.com>
@@ -25,7 +25,7 @@ class Issue extends AbstractApi
     /**
      * Configure the body type.
      *
-     * @link https://developer.github.com/v3/issues/#custom-media-types
+     * @link https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api
      *
      * @param string|null $bodyType
      *
@@ -45,7 +45,7 @@ class Issue extends AbstractApi
     /**
      * List issues by username, repo and state.
      *
-     * @link http://developer.github.com/v3/issues/
+     * @link https://docs.github.com/rest/issues/issues#list-repository-issues
      *
      * @param string $username   the username
      * @param string $repository the repository
@@ -61,7 +61,7 @@ class Issue extends AbstractApi
     /**
      * List issues by organization.
      *
-     * @link http://developer.github.com/v3/issues/
+     * @link https://docs.github.com/rest/issues/issues#list-organization-issues-assigned-to-the-authenticated-user
      *
      * @param string $organization the organization
      * @param string $state        the issue state, can be open or closed
@@ -81,7 +81,7 @@ class Issue extends AbstractApi
     /**
      * Get extended information about an issue by its username, repo and number.
      *
-     * @link http://developer.github.com/v3/issues/
+     * @link https://docs.github.com/rest/issues/issues#get-an-issue
      *
      * @param string $username   the username
      * @param string $repository the repository
@@ -98,7 +98,7 @@ class Issue extends AbstractApi
      * Create a new issue for the given username and repo.
      * The issue is assigned to the authenticated user. Requires authentication.
      *
-     * @link http://developer.github.com/v3/issues/
+     * @link https://docs.github.com/rest/issues/issues#create-an-issue
      *
      * @param string $username   the username
      * @param string $repository the repository
@@ -120,7 +120,7 @@ class Issue extends AbstractApi
     /**
      * Update issue information's by username, repo and issue number. Requires authentication.
      *
-     * @link http://developer.github.com/v3/issues/
+     * @link https://docs.github.com/rest/issues/issues#update-an-issue
      *
      * @param string $username   the username
      * @param string $repository the repository
@@ -138,7 +138,7 @@ class Issue extends AbstractApi
     /**
      * Lock an issue. Users with push access can lock an issue's conversation.
      *
-     * @link https://developer.github.com/v3/issues/#lock-an-issue
+     * @link https://docs.github.com/rest/issues/issues#lock-an-issue
      *
      * @param string $username
      * @param string $repository
@@ -154,7 +154,7 @@ class Issue extends AbstractApi
     /**
      * Unlock an issue. Users with push access can unlock an issue's conversation.
      *
-     * @link https://developer.github.com/v3/issues/#lock-an-issue
+     * @link https://docs.github.com/rest/issues/issues#unlock-an-issue
      *
      * @param string $username
      * @param string $repository
@@ -170,7 +170,7 @@ class Issue extends AbstractApi
     /**
      * List an issue comments.
      *
-     * @link http://developer.github.com/v3/issues/comments/
+     * @link https://docs.github.com/rest/issues/comments
      *
      * @return Comments
      */
@@ -182,7 +182,7 @@ class Issue extends AbstractApi
     /**
      * List all project events.
      *
-     * @link http://developer.github.com/v3/issues/events/
+     * @link https://docs.github.com/rest/issues/events
      *
      * @return Events
      */
@@ -194,7 +194,7 @@ class Issue extends AbstractApi
     /**
      * List all project labels.
      *
-     * @link http://developer.github.com/v3/issues/labels/
+     * @link https://docs.github.com/rest/issues/labels
      *
      * @return Labels
      */
@@ -206,7 +206,7 @@ class Issue extends AbstractApi
     /**
      * List all project milestones.
      *
-     * @link http://developer.github.com/v3/issues/milestones/
+     * @link https://docs.github.com/rest/issues/milestones
      *
      * @return Milestones
      */
@@ -218,7 +218,7 @@ class Issue extends AbstractApi
     /**
      * List all assignees.
      *
-     * @link https://developer.github.com/v3/issues/assignees/
+     * @link https://docs.github.com/rest/issues/assignees
      *
      * @return Assignees
      */
@@ -230,7 +230,7 @@ class Issue extends AbstractApi
     /**
      * List all events.
      *
-     * @link https://developer.github.com/v3/issues/timeline/
+     * @link https://docs.github.com/rest/issues/timeline
      *
      * @return Timeline
      */

@@ -1,7 +1,7 @@
 ## Current user / Public Keys API
 [Back to the navigation](../README.md)
 
-Wraps [GitHub User Public Keys API](https://developer.github.com/v3/users/keys/#public-keys).
+Wraps [GitHub User Public Keys API](https://docs.github.com/rest/users/keys).
 
 ### List your public keys
 

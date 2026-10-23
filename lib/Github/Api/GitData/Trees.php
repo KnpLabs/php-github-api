@@ -6,7 +6,7 @@ use Github\Api\AbstractApi;
 use Github\Exception\MissingArgumentException;
 
 /**
- * @link   http://developer.github.com/v3/git/trees/
+ * @link   https://docs.github.com/rest/git/trees
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
@@ -14,6 +14,8 @@ class Trees extends AbstractApi
 {
     /**
      * Get the tree for a repository.
+     *
+     * @link https://docs.github.com/rest/git/trees#get-a-tree
      *
      * @param string $username
      * @param string $repository
@@ -29,6 +31,8 @@ class Trees extends AbstractApi
 
     /**
      * Create tree for a repository.
+     *
+     * @link https://docs.github.com/rest/git/trees#create-a-tree
      *
      * @param string $username
      * @param string $repository

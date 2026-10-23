@@ -11,7 +11,7 @@ use Github\Exception\MissingArgumentException;
 /**
  * API for accessing Pull Requests from your Git/Github repositories.
  *
- * @see   http://developer.github.com/v3/pulls/
+ * @see   https://docs.github.com/rest/pulls/pulls
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
@@ -22,7 +22,7 @@ class PullRequest extends AbstractApi
     /**
      * Configure the body type.
      *
-     * @link https://developer.github.com/v3/pulls/#custom-media-types
+     * @link https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types
      *
      * @param string|null $bodyType
      * @param string|null $apiVersion
@@ -51,7 +51,7 @@ class PullRequest extends AbstractApi
     /**
      * Get a listing of a project's pull requests by the username, repository and (optionally) state.
      *
-     * @link http://developer.github.com/v3/pulls/
+     * @link https://docs.github.com/rest/pulls/pulls#list-pull-requests
      *
      * @param string $username   the username
      * @param string $repository the repository
@@ -67,7 +67,7 @@ class PullRequest extends AbstractApi
     /**
      * Show all details of a pull request, including the discussions.
      *
-     * @link http://developer.github.com/v3/pulls/
+     * @link https://docs.github.com/rest/pulls/pulls#get-a-pull-request
      *
      * @param string $username   the username
      * @param string $repository the repository
@@ -80,11 +80,35 @@ class PullRequest extends AbstractApi
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.$id);
     }
 
+    /**
+     * List commits on a pull request.
+     *
+     * @link https://docs.github.com/rest/pulls/pulls#list-commits-on-a-pull-request
+     *
+     * @param string     $username   the username
+     * @param string     $repository the repository
+     * @param int|string $id         the ID of the pull request
+     * @param array      $parameters a list of extra parameters.
+     *
+     * @return array array of commits for the pull request
+     */
     public function commits($username, $repository, $id, array $parameters = [])
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/commits', $parameters);
     }
 
+    /**
+     * List the files on a pull request.
+     *
+     * @link https://docs.github.com/rest/pulls/pulls#list-pull-requests-files
+     *
+     * @param string     $username   the username
+     * @param string     $repository the repository
+     * @param int|string $id         the ID of the pull request
+     * @param array      $parameters a list of extra parameters.
+     *
+     * @return array array of files for the pull request
+     */
     public function files($username, $repository, $id, array $parameters = [])
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/files', $parameters);
@@ -93,7 +117,7 @@ class PullRequest extends AbstractApi
     /**
      * All statuses which are the statuses of its head branch.
      *
-     * @see http://developer.github.com/v3/pulls/
+     * @see https://docs.github.com/rest/commits/statuses#list-commit-statuses-for-a-reference
      *
      * @param string $username   the username
      * @param string $repository the repository
@@ -135,7 +159,7 @@ class PullRequest extends AbstractApi
     /**
      * Create a pull request.
      *
-     * @link   http://developer.github.com/v3/pulls/
+     * @link   https://docs.github.com/rest/pulls/pulls#create-a-pull-request
      *
      * @param string $username   the username
      * @param string $repository the repository
@@ -168,6 +192,18 @@ class PullRequest extends AbstractApi
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls', $params);
     }
 
+    /**
+     * Update a pull request.
+     *
+     * @link https://docs.github.com/rest/pulls/pulls#update-a-pull-request
+     *
+     * @param string     $username   the username
+     * @param string     $repository the repository
+     * @param int|string $id         the ID of the pull request to update
+     * @param array      $params     the parameters to update (e.g. title, body, state, base)
+     *
+     * @return array
+     */
     public function update($username, $repository, $id, array $params)
     {
         if (isset($params['state']) && !in_array($params['state'], ['open', 'closed'])) {
@@ -177,11 +213,39 @@ class PullRequest extends AbstractApi
         return $this->patch('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id), $params);
     }
 
+    /**
+     * Check if a pull request has been merged.
+     *
+     * @link https://docs.github.com/rest/pulls/pulls#check-if-a-pull-request-has-been-merged
+     *
+     * @param string     $username   the username
+     * @param string     $repository the repository
+     * @param int|string $id         the ID of the pull request
+     *
+     * @return array|string an empty response if the pull request has been merged (a 404 is raised otherwise)
+     */
     public function merged($username, $repository, $id)
     {
         return $this->get('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pulls/'.rawurlencode($id).'/merge');
     }
 
+    /**
+     * Merge a pull request.
+     *
+     * @link https://docs.github.com/rest/pulls/pulls#merge-a-pull-request
+     *
+     * @param string      $username    the username
+     * @param string      $repository  the repository
+     * @param int|string  $id          the ID of the pull request to merge
+     * @param string      $message     the commit message
+     * @param string      $sha         the SHA that pull request head must match to allow merge
+     * @param bool|string $mergeMethod the merge method to use (merge, squash or rebase)
+     * @param string|null $title       the commit title
+     *
+     * @throws InvalidArgumentException
+     *
+     * @return array
+     */
     public function merge($username, $repository, $id, $message, $sha, $mergeMethod = 'merge', $title = null)
     {
         if (is_bool($mergeMethod)) {

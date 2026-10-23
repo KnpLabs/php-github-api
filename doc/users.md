@@ -2,7 +2,7 @@
 [Back to the navigation](README.md)
 
 Searching users, getting user information and managing authenticated user account information.
-Wrap [GitHub User API](http://developer.github.com/v3/users/).
+Wrap [GitHub User API](https://docs.github.com/rest/users/users).
 
 ### Search for users by keyword
 

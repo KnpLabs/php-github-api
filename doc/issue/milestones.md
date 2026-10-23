@@ -1,7 +1,7 @@
 ## Issues / Milestones API
 [Back to the "Issues API"](../issues.md) | [Back to the navigation](../README.md)
 
-Wraps [GitHub Issue Milestones API](http://developer.github.com/v3/issues/milestones/).
+Wraps [GitHub Issue Milestones API](https://docs.github.com/rest/issues/milestones).
 
 ### List milestones for a repository
 

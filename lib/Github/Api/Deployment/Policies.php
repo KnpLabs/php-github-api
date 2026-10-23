@@ -7,14 +7,14 @@ use Github\Api\AbstractApi;
 /**
  * Listing, creating and updating deployments.
  *
- * @link https://docs.github.com/en/rest/deployments/branch-policies?apiVersion=2022-11-28#list-deployment-branch-policies
+ * @link https://docs.github.com/rest/deployments/branch-policies#list-deployment-branch-policies
  */
 class Policies extends AbstractApi
 {
     /**
      * List deployment branch policies.
      *
-     * @link https://docs.github.com/en/rest/deployments/branch-policies?apiVersion=2022-11-28#list-deployment-branch-policies
+     * @link https://docs.github.com/rest/deployments/branch-policies#list-deployment-branch-policies
      *
      * @param string $username    the username of the user who owns the repository
      * @param string $repository  the name of the repository
@@ -31,7 +31,7 @@ class Policies extends AbstractApi
     /**
      * Get a deployment branch policy.
      *
-     * @link https://docs.github.com/en/rest/deployments/branch-policies?apiVersion=2022-11-28#get-a-deployment-branch-policy
+     * @link https://docs.github.com/rest/deployments/branch-policies#get-a-deployment-branch-policy
      *
      * @param string $username    the username of the user who owns the repository
      * @param string $repository  the name of the repository
@@ -48,7 +48,7 @@ class Policies extends AbstractApi
     /**
      * Creates a deployment branch policy for an environment.
      *
-     * @link https://docs.github.com/en/rest/deployments/branch-policies?apiVersion=2022-11-28#create-a-deployment-branch-policy
+     * @link https://docs.github.com/rest/deployments/branch-policies#create-a-deployment-branch-policy
      *
      * @param string $username    the username of the user who owns the repository
      * @param string $repository  the name of the repository
@@ -64,7 +64,7 @@ class Policies extends AbstractApi
     /**
      * Updates a deployment branch policy for an environment.
      *
-     * @link https://docs.github.com/en/rest/deployments/branch-policies?apiVersion=2022-11-28#update-a-deployment-branch-policy
+     * @link https://docs.github.com/rest/deployments/branch-policies#update-a-deployment-branch-policy
      *
      * @param string $username    the username of the user who owns the repository
      * @param string $repository  the name of the repository
@@ -81,7 +81,7 @@ class Policies extends AbstractApi
     /**
      * Delete a deployment branch policy.
      *
-     * @link https://docs.github.com/en/rest/deployments/branch-policies?apiVersion=2022-11-28#delete-a-deployment-branch-policy
+     * @link https://docs.github.com/rest/deployments/branch-policies#delete-a-deployment-branch-policy
      *
      * @param string $username    the username of the user who owns the repository
      * @param string $repository  the name of the repository

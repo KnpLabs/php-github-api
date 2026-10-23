@@ -5,12 +5,12 @@ namespace Github\Api\Repository\Actions;
 use Github\Api\AbstractApi;
 
 /**
- * @link https://docs.github.com/en/rest/reference/actions#workflow-runs
+ * @link https://docs.github.com/rest/actions/workflow-runs
  */
 class WorkflowRuns extends AbstractApi
 {
     /**
-     * @link https://docs.github.com/en/rest/reference/actions#list-workflow-runs-for-a-repository
+     * @link https://docs.github.com/rest/actions/workflow-runs#list-workflow-runs-for-a-repository
      *
      * @param string $username
      * @param string $repository
@@ -24,7 +24,7 @@ class WorkflowRuns extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/reference/actions#list-workflow-runs
+     * @link https://docs.github.com/rest/actions/workflow-runs#list-workflow-runs-for-a-workflow
      *
      * @param string $username
      * @param string $repository
@@ -39,7 +39,7 @@ class WorkflowRuns extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/reference/actions#get-a-workflow-run
+     * @link https://docs.github.com/rest/actions/workflow-runs#get-a-workflow-run
      *
      * @param string $username
      * @param string $repository
@@ -54,7 +54,7 @@ class WorkflowRuns extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/reference/actions#delete-a-workflow-run
+     * @link https://docs.github.com/rest/actions/workflow-runs#delete-a-workflow-run
      *
      * @param string $username
      * @param string $repository
@@ -68,7 +68,7 @@ class WorkflowRuns extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/reference/actions#re-run-a-workflow
+     * @link https://docs.github.com/rest/actions/workflow-runs#re-run-a-workflow
      *
      * @param string $username
      * @param string $repository
@@ -82,7 +82,7 @@ class WorkflowRuns extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/reference/actions#cancel-a-workflow-run
+     * @link https://docs.github.com/rest/actions/workflow-runs#cancel-a-workflow-run
      *
      * @param string $username
      * @param string $repository
@@ -96,7 +96,7 @@ class WorkflowRuns extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/reference/actions#get-workflow-run-usage
+     * @link https://docs.github.com/rest/actions/workflow-runs#get-workflow-run-usage
      *
      * @param string $username
      * @param string $repository
@@ -110,7 +110,7 @@ class WorkflowRuns extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/reference/actions#download-workflow-run-logs
+     * @link https://docs.github.com/rest/actions/workflow-runs#download-workflow-run-logs
      *
      * @param string $username
      * @param string $repository
@@ -124,7 +124,7 @@ class WorkflowRuns extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/reference/actions#delete-workflow-run-logs
+     * @link https://docs.github.com/rest/actions/workflow-runs#delete-workflow-run-logs
      *
      * @param string $username
      * @param string $repository
@@ -138,7 +138,7 @@ class WorkflowRuns extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/reference/actions#approve-a-workflow-run-for-a-fork-pull-request
+     * @link https://docs.github.com/rest/actions/workflow-runs#approve-a-workflow-run-for-a-fork-pull-request
      *
      * @param string $username
      * @param string $repository

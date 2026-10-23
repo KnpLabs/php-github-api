@@ -2,7 +2,7 @@
 [Back to the navigation](../README.md)
 
 Listing, showing, creating, updating, testing and removing organizations webhooks.
-Wraps [GitHub Organization Webhooks API](https://developer.github.com/v3/orgs/hooks/).
+Wraps [GitHub Organization Webhooks API](https://docs.github.com/rest/orgs/webhooks).
 
 Additional APIs:
 * [Organization](../doc/organization)

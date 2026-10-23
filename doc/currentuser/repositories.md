@@ -19,7 +19,7 @@ There are three values that can be passed into the `repositories` method: `type`
 | sort          | `full_name` | `created`, `updated`, `pushed`, `full_name`
 | direction     | `asc`       | `asc`, `desc`
 
-> See https://developer.github.com/v3/repos/#list-your-repositories for possible values and additional information
+> See https://docs.github.com/rest/repos/repos#list-repositories-for-the-authenticated-user for possible values and additional information
 
 #### Code Example:
 

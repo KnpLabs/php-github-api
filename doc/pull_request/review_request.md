@@ -1,6 +1,8 @@
 ## Pull Requests / Review Requests API
 [Back to the "Pull Requests API"](../pull_requests.md) | [Back to the navigation](../README.md)
 
+Wraps [GitHub Pull Request Review Requests API](https://docs.github.com/rest/pulls/review-requests).
+
 ### List all review requests
 
 ```php

@@ -5,12 +5,12 @@ namespace Github\Api\Repository\Actions;
 use Github\Api\AbstractApi;
 
 /**
- * @link https://docs.github.com/en/rest/reference/actions#workflow-jobs
+ * @link https://docs.github.com/rest/actions/workflow-jobs
  */
 class WorkflowJobs extends AbstractApi
 {
     /**
-     * @link https://docs.github.com/en/rest/reference/actions#list-jobs-for-a-workflow-run
+     * @link https://docs.github.com/rest/actions/workflow-jobs#list-jobs-for-a-workflow-run
      *
      * @param string $username
      * @param string $repository
@@ -25,7 +25,7 @@ class WorkflowJobs extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/reference/actions#get-a-job-for-a-workflow-run
+     * @link https://docs.github.com/rest/actions/workflow-jobs#get-a-job-for-a-workflow-run
      *
      * @param string $username
      * @param string $repository
@@ -39,7 +39,7 @@ class WorkflowJobs extends AbstractApi
     }
 
     /**
-     * @link https://docs.github.com/en/rest/reference/actions#download-job-logs-for-a-workflow-run
+     * @link https://docs.github.com/rest/actions/workflow-jobs#download-job-logs-for-a-workflow-run
      *
      * @param string $username
      * @param string $repository

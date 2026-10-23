@@ -1,6 +1,7 @@
 ## References API
 [Back to the navigation](../README.md)
 
+Wraps [GitHub Git References API](https://docs.github.com/rest/git/refs).
 
 ### List all references
 ```php

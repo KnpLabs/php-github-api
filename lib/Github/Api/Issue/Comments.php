@@ -7,7 +7,7 @@ use Github\Api\AcceptHeaderTrait;
 use Github\Exception\MissingArgumentException;
 
 /**
- * @link   http://developer.github.com/v3/issues/comments/
+ * @link   https://docs.github.com/rest/issues/comments
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
@@ -19,7 +19,7 @@ class Comments extends AbstractApi
     /**
      * Configure the body type.
      *
-     * @link https://developer.github.com/v3/issues/comments/#custom-media-types
+     * @link https://docs.github.com/rest/using-the-rest-api/media-types#media-types
      *
      * @param string|null $bodyType
      *
@@ -39,7 +39,7 @@ class Comments extends AbstractApi
     /**
      * Get all comments for an issue.
      *
-     * @link https://developer.github.com/v3/issues/comments/#list-comments-on-an-issue
+     * @link https://docs.github.com/rest/issues/comments#list-issue-comments
      *
      * @param string $username
      * @param string $repository
@@ -56,7 +56,7 @@ class Comments extends AbstractApi
     /**
      * Get a comment for an issue.
      *
-     * @link https://developer.github.com/v3/issues/comments/#get-a-single-comment
+     * @link https://docs.github.com/rest/issues/comments#get-an-issue-comment
      *
      * @param string $username
      * @param string $repository
@@ -72,7 +72,7 @@ class Comments extends AbstractApi
     /**
      * Create a comment for an issue.
      *
-     * @link https://developer.github.com/v3/issues/comments/#create-a-comment
+     * @link https://docs.github.com/rest/issues/comments#create-an-issue-comment
      *
      * @param string $username
      * @param string $repository
@@ -95,7 +95,7 @@ class Comments extends AbstractApi
     /**
      * Update a comment for an issue.
      *
-     * @link https://developer.github.com/v3/issues/comments/#edit-a-comment
+     * @link https://docs.github.com/rest/issues/comments#update-an-issue-comment
      *
      * @param string $username
      * @param string $repository
@@ -118,7 +118,7 @@ class Comments extends AbstractApi
     /**
      * Delete a comment for an issue.
      *
-     * @link https://developer.github.com/v3/issues/comments/#delete-a-comment
+     * @link https://docs.github.com/rest/issues/comments#delete-an-issue-comment
      *
      * @param string $username
      * @param string $repository

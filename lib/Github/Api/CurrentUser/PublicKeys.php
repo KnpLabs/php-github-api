@@ -6,7 +6,7 @@ use Github\Api\AbstractApi;
 use Github\Exception\MissingArgumentException;
 
 /**
- * @link   http://developer.github.com/v3/users/keys/
+ * @link   https://docs.github.com/rest/users/keys
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
@@ -15,7 +15,7 @@ class PublicKeys extends AbstractApi
     /**
      * List deploy keys for the authenticated user.
      *
-     * @link https://developer.github.com/v3/users/keys/
+     * @link https://docs.github.com/rest/users/keys#list-public-ssh-keys-for-the-authenticated-user
      *
      * @return array
      */
@@ -27,7 +27,7 @@ class PublicKeys extends AbstractApi
     /**
      * Shows deploy key for the authenticated user.
      *
-     * @link https://developer.github.com/v3/users/keys/
+     * @link https://docs.github.com/rest/users/keys#get-a-public-ssh-key-for-the-authenticated-user
      *
      * @param int $id
      *
@@ -41,7 +41,7 @@ class PublicKeys extends AbstractApi
     /**
      * Adds deploy key for the authenticated user.
      *
-     * @link https://developer.github.com/v3/users/keys/
+     * @link https://docs.github.com/rest/users/keys#create-a-public-ssh-key-for-the-authenticated-user
      *
      * @param array $params
      *
@@ -61,7 +61,7 @@ class PublicKeys extends AbstractApi
     /**
      * Removes deploy key for the authenticated user.
      *
-     * @link https://developer.github.com/v3/users/keys/
+     * @link https://docs.github.com/rest/users/keys#delete-a-public-ssh-key-for-the-authenticated-user
      *
      * @param int $id
      *

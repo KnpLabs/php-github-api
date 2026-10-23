@@ -1,7 +1,7 @@
 ## Issues / Comments API
 [Back to the "Issues API"](../issues.md) | [Back to the navigation](../README.md)
 
-Wraps [GitHub Issue Comments API](http://developer.github.com/v3/issues/comments/).
+Wraps [GitHub Issue Comments API](https://docs.github.com/rest/issues/comments).
 
 ### List an issue comments
 

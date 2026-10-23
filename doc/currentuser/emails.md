@@ -1,7 +1,7 @@
 ## Current user / Emails API
 [Back to the navigation](../README.md)
 
-Wraps [GitHub User Emails API](https://developer.github.com/v3/users/emails/#emails).
+Wraps [GitHub User Emails API](https://docs.github.com/rest/users/emails).
 
 > Requires [authentication](../security.md).
 

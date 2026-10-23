@@ -3,7 +3,7 @@
 
 # List secret-scanning alerts for a repository
 
-https://docs.github.com/en/enterprise-server@3.5/rest/secret-scanning#list-secret-scanning-alerts-for-a-repository
+https://docs.github.com/rest/secret-scanning/secret-scanning#list-secret-scanning-alerts-for-a-repository
 
 ```php
 $alerts = $client->api('repos')->secretScanning()->alerts('KnpLabs', 'php-github-api');
@@ -11,7 +11,7 @@ $alerts = $client->api('repos')->secretScanning()->alerts('KnpLabs', 'php-github
 
 # Get a secret-scanning alert
 
-https://docs.github.com/en/enterprise-server@3.5/rest/secret-scanning#get-a-secret-scanning-alert
+https://docs.github.com/rest/secret-scanning/secret-scanning#get-a-secret-scanning-alert
 
 ```php
 $alert = $client->api('repos')->secretScanning()->getAlert('KnpLabs', 'php-github-api', $alertNumber);
@@ -19,7 +19,7 @@ $alert = $client->api('repos')->secretScanning()->getAlert('KnpLabs', 'php-githu
 
 # Update a secret-scanning alert
 
-https://docs.github.com/en/enterprise-server@3.5/rest/secret-scanning#update-a-secret-scanning-alert
+https://docs.github.com/rest/secret-scanning/secret-scanning#update-a-secret-scanning-alert
 
 ```php
 $client->api('repos')->secretScanning()->updateAlert('KnpLabs', 'php-github-api', $alertNumber, [
@@ -30,7 +30,7 @@ $client->api('repos')->secretScanning()->updateAlert('KnpLabs', 'php-github-api'
 
 # List Locations for a secret-scanning alert
 
-https://docs.github.com/en/enterprise-server@3.5/rest/secret-scanning#list-locations-for-a-secret-scanning-alert
+https://docs.github.com/rest/secret-scanning/secret-scanning#list-locations-for-a-secret-scanning-alert
 
 ```php
 $locations = $client->api('repos')->secretScanning()->locations('KnpLabs', 'php-github-api', $alertNumber);

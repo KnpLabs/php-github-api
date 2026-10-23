@@ -5,14 +5,14 @@ namespace Github\Api\Repository;
 use Github\Api\AbstractApi;
 
 /**
- * @link   https://developer.github.com/v3/repos/traffic/
+ * @link   https://docs.github.com/rest/metrics/traffic
  *
  * @author Miguel Piedrafita <soy@miguelpiedrafita.com>
  */
 class Traffic extends AbstractApi
 {
     /**
-     * @link https://developer.github.com/v3/repos/traffic/#list-referrers
+     * @link https://docs.github.com/rest/metrics/traffic#get-top-referral-sources
      *
      * @param string $owner
      * @param string $repository
@@ -25,7 +25,7 @@ class Traffic extends AbstractApi
     }
 
     /**
-     * @link https://developer.github.com/v3/repos/traffic/#list-paths
+     * @link https://docs.github.com/rest/metrics/traffic#get-top-referral-paths
      *
      * @param string $owner
      * @param string $repository
@@ -38,7 +38,7 @@ class Traffic extends AbstractApi
     }
 
     /**
-     * @link https://developer.github.com/v3/repos/traffic/#views
+     * @link https://docs.github.com/rest/metrics/traffic#get-page-views
      *
      * @param string $owner
      * @param string $repository
@@ -52,7 +52,7 @@ class Traffic extends AbstractApi
     }
 
     /**
-     * @link https://developer.github.com/v3/repos/traffic/#clones
+     * @link https://docs.github.com/rest/metrics/traffic#get-repository-clones
      *
      * @param string $owner
      * @param string $repository

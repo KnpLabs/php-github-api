@@ -1,7 +1,7 @@
 ## Repo / Deployments API
 [Back to the "Repos API"](../repos.md) | [Back to the navigation](../index.md)
 
-Provides information about deployments for a repository. Wraps [GitHub Deployments API](https://developer.github.com/v3/repos/deployments/).
+Provides information about deployments for a repository. Wraps [GitHub Deployments API](https://docs.github.com/rest/deployments/deployments).
 
 #### List all deployments.
 
@@ -9,7 +9,7 @@ Provides information about deployments for a repository. Wraps [GitHub Deploymen
 $deployments = $client->api('deployment')->all('KnpLabs', 'php-github-api');
 ```
 
-You can also filter the returned results (see [the documentation](https://developer.github.com/v3/repos/deployments/#list-deployments) for more information):
+You can also filter the returned results (see [the documentation](https://docs.github.com/rest/deployments/deployments#list-deployments) for more information):
 
 ```php
 $deployments = $client->api('deployment')->all('KnpLabs', 'php-github-api', array('environment' => 'production'));

@@ -6,7 +6,7 @@ use Github\Api\AbstractApi;
 use Github\Exception\MissingArgumentException;
 
 /**
- * @link   http://developer.github.com/v3/git/commits/
+ * @link   https://docs.github.com/rest/git/commits
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
@@ -14,6 +14,8 @@ class Commits extends AbstractApi
 {
     /**
      * Show a commit for a repository.
+     *
+     * @link https://docs.github.com/rest/git/commits#get-a-commit-object
      *
      * @param string $username
      * @param string $repository
@@ -28,6 +30,8 @@ class Commits extends AbstractApi
 
     /**
      * Create a commit for a repository.
+     *
+     * @link https://docs.github.com/rest/git/commits#create-a-commit
      *
      * @param string $username
      * @param string $repository

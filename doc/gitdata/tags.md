@@ -1,6 +1,8 @@
 ## Tags API
 [Back to the navigation](../README.md)
 
+Wraps [GitHub Git Tags API](https://docs.github.com/rest/git/tags).
+
 ### Show all tags
 
 ```php

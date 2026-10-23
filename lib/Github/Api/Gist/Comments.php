@@ -6,7 +6,7 @@ use Github\Api\AbstractApi;
 use Github\Api\AcceptHeaderTrait;
 
 /**
- * @link   https://developer.github.com/v3/gists/comments/
+ * @link   https://docs.github.com/rest/gists/comments
  *
  * @author Kayla Daniels <kayladnls@gmail.com>
  */
@@ -17,7 +17,7 @@ class Comments extends AbstractApi
     /**
      * Configure the body type.
      *
-     * @link https://developer.github.com/v3/gists/comments/#custom-media-types
+     * @link https://docs.github.com/rest/gists/comments
      *
      * @param string|null $bodyType
      *
@@ -37,6 +37,8 @@ class Comments extends AbstractApi
     /**
      * Get all comments for a gist.
      *
+     * @link https://docs.github.com/rest/gists/comments#list-gist-comments
+     *
      * @param string $gist
      *
      * @return array
@@ -48,6 +50,8 @@ class Comments extends AbstractApi
 
     /**
      * Get a comment of a gist.
+     *
+     * @link https://docs.github.com/rest/gists/comments#get-a-gist-comment
      *
      * @param string $gist
      * @param int    $comment
@@ -62,6 +66,8 @@ class Comments extends AbstractApi
     /**
      * Create a comment for gist.
      *
+     * @link https://docs.github.com/rest/gists/comments#create-a-gist-comment
+     *
      * @param string $gist
      * @param string $body
      *
@@ -74,6 +80,8 @@ class Comments extends AbstractApi
 
     /**
      * Create a comment for a gist.
+     *
+     * @link https://docs.github.com/rest/gists/comments#update-a-gist-comment
      *
      * @param string $gist
      * @param int    $comment_id
@@ -88,6 +96,8 @@ class Comments extends AbstractApi
 
     /**
      * Delete a comment for a gist.
+     *
+     * @link https://docs.github.com/rest/gists/comments#delete-a-gist-comment
      *
      * @param string $gist
      * @param int    $comment

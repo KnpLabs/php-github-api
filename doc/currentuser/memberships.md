@@ -1,7 +1,7 @@
 ## Current user / Memberships API
 [Back to the navigation](../README.md)
 
-Wraps [GitHub Issue Comments API](https://developer.github.com/v3/orgs/members/#get-your-organization-membership).
+Wraps [GitHub Organization Memberships API](https://docs.github.com/rest/orgs/members).
 
 ### List your memberships
 

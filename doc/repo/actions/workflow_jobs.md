@@ -3,7 +3,7 @@
 
 ### List jobs for a workflow run
 
-https://docs.github.com/en/rest/reference/actions#list-jobs-for-a-workflow-run
+https://docs.github.com/rest/actions/workflow-jobs#list-jobs-for-a-workflow-run
 
 ```php
 $client->api('repo')->workflowJobs()->all('KnpLabs', 'php-github-api', $runId);
@@ -11,7 +11,7 @@ $client->api('repo')->workflowJobs()->all('KnpLabs', 'php-github-api', $runId);
 
 ### Get a job for a workflow run
 
-https://docs.github.com/en/rest/reference/actions#get-a-job-for-a-workflow-run
+https://docs.github.com/rest/actions/workflow-jobs#get-a-job-for-a-workflow-run
 
 ```php
 $job = $client->api('repo')->workflowJobs()->all('KnpLabs', 'php-github-api', $jobId);
@@ -19,7 +19,7 @@ $job = $client->api('repo')->workflowJobs()->all('KnpLabs', 'php-github-api', $j
 
 ### Download job logs for a workflow run
 
-https://docs.github.com/en/rest/reference/actions#download-job-logs-for-a-workflow-run
+https://docs.github.com/rest/actions/workflow-jobs#download-job-logs-for-a-workflow-run
 
 ```php
 $jobLogs = $client->api('repo')->workflowJobs()->downloadLogs('KnpLabs', 'php-github-api', $jobId);

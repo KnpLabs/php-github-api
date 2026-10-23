@@ -2,7 +2,7 @@
 [Back to the navigation](README.md)
 
 Getting information on specific commits, the diffs they introduce, the files they've changed.
-Wrap [GitHub Commit API](http://developer.github.com/v3/git/commits/).
+Wrap [GitHub Commit API](https://docs.github.com/rest/commits/commits).
 
 ### List commits in a branch
 

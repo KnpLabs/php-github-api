@@ -1,7 +1,7 @@
 ## Deployment / Environments API
 [Back to the "Deployment API"](../deployments.md) | [Back to the navigation](../index.md)
 
-Provides information about environments for a repository. Wraps [GitHub Environments API](https://docs.github.com/en/rest/deployments/environments?apiVersion=2022-11-28).
+Provides information about environments for a repository. Wraps [GitHub Environments API](https://docs.github.com/rest/deployments/environments).
 
 Additional APIs:
 * [Secrets API](environment/secrets.md)

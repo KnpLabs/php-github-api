@@ -7,7 +7,7 @@ use Github\Api\User\Migration;
 /**
  * Searching users, getting user information.
  *
- * @link   http://developer.github.com/v3/users/
+ * @link   https://docs.github.com/rest/users/users
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  * @author Thibault Duplessis <thibault.duplessis at gmail dot com>
@@ -17,7 +17,7 @@ class User extends AbstractApi
     /**
      * Request all users.
      *
-     * @link https://developer.github.com/v3/users/#get-all-users
+     * @link https://docs.github.com/rest/users/users#list-users
      *
      * @param int|null $id ID of the last user that you've seen
      *
@@ -35,7 +35,7 @@ class User extends AbstractApi
     /**
      * Get extended information about a user by its username.
      *
-     * @link http://developer.github.com/v3/users/
+     * @link https://docs.github.com/rest/users/users#get-a-user
      *
      * @param string $username the username to show
      *
@@ -50,7 +50,7 @@ class User extends AbstractApi
      * Get extended information about a user by its id.
      * Note: at time of writing this is an undocumented feature but GitHub support have advised that it can be relied on.
      *
-     * @link http://developer.github.com/v3/users/
+     * @link https://docs.github.com/rest/users/users#get-a-user-using-their-id
      *
      * @param int $id the id of the user to show
      *
@@ -64,7 +64,7 @@ class User extends AbstractApi
     /**
      * Get extended information about a user by its username.
      *
-     * @link https://developer.github.com/v3/orgs/
+     * @link https://docs.github.com/rest/orgs/orgs#list-organizations-for-a-user
      *
      * @param string $username the username to show
      *
@@ -78,7 +78,7 @@ class User extends AbstractApi
     /**
      * Get user organizations.
      *
-     * @link https://developer.github.com/v3/orgs/#list-your-organizations
+     * @link https://docs.github.com/rest/orgs/orgs#list-organizations-for-the-authenticated-user
      *
      * @return array information about organizations that authenticated user belongs to
      */
@@ -90,7 +90,7 @@ class User extends AbstractApi
     /**
      * Request the users that a specific user is following.
      *
-     * @link http://developer.github.com/v3/users/followers/
+     * @link https://docs.github.com/rest/users/followers#list-the-people-a-user-follows
      *
      * @param string $username       the username
      * @param array  $parameters     parameters for the query string
@@ -106,7 +106,7 @@ class User extends AbstractApi
     /**
      * Request the users following a specific user.
      *
-     * @link http://developer.github.com/v3/users/followers/
+     * @link https://docs.github.com/rest/users/followers#list-followers-of-a-user
      *
      * @param string $username       the username
      * @param array  $parameters     parameters for the query string
@@ -122,7 +122,7 @@ class User extends AbstractApi
     /**
      * Request starred repositories that a specific user has starred.
      *
-     * @link http://developer.github.com/v3/activity/starring/
+     * @link https://docs.github.com/rest/activity/starring#list-repositories-starred-by-a-user
      *
      * @param string $username  the username
      * @param int    $page      the page number of the paginated result set
@@ -145,7 +145,7 @@ class User extends AbstractApi
     /**
      * Request the repository that a specific user is watching.
      *
-     * @link http://developer.github.com/v3/activity/watching/
+     * @link https://docs.github.com/rest/activity/watching#list-repositories-watched-by-a-user
      *
      * @param string $username the username
      *
@@ -159,7 +159,7 @@ class User extends AbstractApi
     /**
      * List public repositories for the specified user.
      *
-     * @link https://developer.github.com/v3/repos/#list-user-repositories
+     * @link https://docs.github.com/rest/repos/repos#list-repositories-for-a-user
      *
      * @param string $username    the username
      * @param string $type        role in the repository
@@ -184,7 +184,7 @@ class User extends AbstractApi
     /**
      * List repositories that are accessible to the authenticated user.
      *
-     * @link https://developer.github.com/v3/repos/#list-your-repositories
+     * @link https://docs.github.com/rest/repos/repos#list-repositories-for-the-authenticated-user
      *
      * @param array $params visibility, affiliation, type, sort, direction
      *
@@ -198,7 +198,7 @@ class User extends AbstractApi
     /**
      * Get the public gists for a user.
      *
-     * @link http://developer.github.com/v3/gists/
+     * @link https://docs.github.com/rest/gists/gists#list-gists-for-a-user
      *
      * @param string $username the username
      *
@@ -212,7 +212,7 @@ class User extends AbstractApi
     /**
      * Get the public keys for a user.
      *
-     * @link http://developer.github.com/v3/users/keys/#list-public-keys-for-a-user
+     * @link https://docs.github.com/rest/users/keys#list-public-keys-for-a-user
      *
      * @param string $username the username
      *
@@ -226,7 +226,7 @@ class User extends AbstractApi
     /**
      * List events performed by a user.
      *
-     * @link http://developer.github.com/v3/activity/events/#list-public-events-performed-by-a-user
+     * @link https://docs.github.com/rest/activity/events#list-public-events-for-a-user
      *
      * @param string $username
      *
@@ -240,7 +240,7 @@ class User extends AbstractApi
     /**
      * List events performed by an authenticated user.
      *
-     * @link https://docs.github.com/en/rest/reference/activity#list-events-for-the-authenticated-user
+     * @link https://docs.github.com/rest/activity/events#list-events-for-the-authenticated-user
      *
      * @return array
      */
