@@ -40,8 +40,6 @@ use Github\Api\Repository\Traffic;
  */
 class Repo extends AbstractApi
 {
-    use AcceptHeaderTrait;
-
     /**
      * List all public repositories.
      *
@@ -705,8 +703,6 @@ class Repo extends AbstractApi
      */
     public function enableAutomatedSecurityFixes(string $username, string $repository)
     {
-        $this->acceptHeaderValue = 'application/vnd.github.london-preview+json';
-
         return $this->put('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/automated-security-fixes');
     }
 
@@ -720,8 +716,6 @@ class Repo extends AbstractApi
      */
     public function disableAutomatedSecurityFixes(string $username, string $repository)
     {
-        $this->acceptHeaderValue = 'application/vnd.github.london-preview+json';
-
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/automated-security-fixes');
     }
 
@@ -787,9 +781,6 @@ class Repo extends AbstractApi
      */
     public function communityProfile($username, $repository)
     {
-        //This api is in preview mode, so set the correct accept-header
-        $this->acceptHeaderValue = 'application/vnd.github.black-panther-preview+json';
-
         return $this->get('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/community/profile');
     }
 
@@ -805,9 +796,6 @@ class Repo extends AbstractApi
      */
     public function codeOfConduct($username, $repository)
     {
-        //This api is in preview mode, so set the correct accept-header
-        $this->acceptHeaderValue = 'application/vnd.github.scarlet-witch-preview+json';
-
         return $this->get('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/community/code_of_conduct');
     }
 
@@ -823,9 +811,6 @@ class Repo extends AbstractApi
      */
     public function topics($username, $repository)
     {
-        //This api is in preview mode, so set the correct accept-header
-        $this->acceptHeaderValue = 'application/vnd.github.mercy-preview+json';
-
         return $this->get('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/topics');
     }
 
@@ -842,9 +827,6 @@ class Repo extends AbstractApi
      */
     public function replaceTopics($username, $repository, array $topics)
     {
-        //This api is in preview mode, so set the correct accept-header
-        $this->acceptHeaderValue = 'application/vnd.github.mercy-preview+json';
-
         return $this->put('/repos/'.rawurldecode($username).'/'.rawurldecode($repository).'/topics', ['names' => $topics]);
     }
 
@@ -874,9 +856,6 @@ class Repo extends AbstractApi
      */
     public function createFromTemplate(string $templateOwner, string $templateRepo, array $parameters = [])
     {
-        //This api is in preview mode, so set the correct accept-header
-        $this->acceptHeaderValue = 'application/vnd.github.baptiste-preview+json';
-
         return $this->post('/repos/'.rawurldecode($templateOwner).'/'.rawurldecode($templateRepo).'/generate', $parameters);
     }
 

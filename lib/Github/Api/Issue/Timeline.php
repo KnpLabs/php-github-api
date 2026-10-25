@@ -3,20 +3,19 @@
 namespace Github\Api\Issue;
 
 use Github\Api\AbstractApi;
-use Github\Api\AcceptHeaderTrait;
 
 class Timeline extends AbstractApi
 {
-    use AcceptHeaderTrait;
-
     /**
      * Configure the accept header to use the timeline preview media type.
+     *
+     * @deprecated since 3.17, GitHub no longer requires a custom accept header; this method will be removed in 4.0.
      *
      * @return $this
      */
     public function configure()
     {
-        $this->acceptHeaderValue = 'application/vnd.github.mockingbird-preview';
+        trigger_deprecation('KnpLabs/php-github-api', '3.17', 'The "%s" is deprecated and will be removed.', __METHOD__);
 
         return $this;
     }

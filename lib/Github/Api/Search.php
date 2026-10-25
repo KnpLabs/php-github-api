@@ -71,7 +71,7 @@ class Search extends AbstractApi
      */
     public function codeWithMatch(string $q, string $sort = 'updated', string $order = 'desc'): array
     {
-        $this->acceptHeaderValue = 'application/vnd.github.v3.text-match+json';
+        $this->acceptHeaderValue = 'application/vnd.github.text-match+json';
 
         return $this->code($q, $sort, $order);
     }
@@ -105,9 +105,6 @@ class Search extends AbstractApi
      */
     public function commits($q, $sort = null, $order = 'desc')
     {
-        // This api is in preview mode, so set the correct accept-header
-        $this->acceptHeaderValue = 'application/vnd.github.cloak-preview';
-
         return $this->get('/search/commits', ['q' => $q, 'sort' => $sort, 'order' => $order]);
     }
 
@@ -122,9 +119,6 @@ class Search extends AbstractApi
      */
     public function topics($q)
     {
-        // This api is in preview mode, so set the correct accept-header
-        $this->acceptHeaderValue = 'application/vnd.github.mercy-preview+json';
-
         return $this->get('/search/topics', ['q' => $q]);
     }
 }

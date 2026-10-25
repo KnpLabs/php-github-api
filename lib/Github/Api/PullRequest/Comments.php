@@ -36,7 +36,7 @@ class Comments extends AbstractApi
             $bodyType = 'raw';
         }
 
-        $this->acceptHeaderValue = sprintf('application/vnd.github.%s.%s+json', $apiVersion, $bodyType);
+        $this->acceptHeaderValue = sprintf('application/vnd.github.%s+json', $bodyType);
 
         return $this;
     }

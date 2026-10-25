@@ -135,7 +135,7 @@ class Client
         $builder->addPlugin(new Plugin\AddHostPlugin(Psr17FactoryDiscovery::findUriFactory()->createUri('https://api.github.com')));
         $builder->addPlugin(new Plugin\HeaderDefaultsPlugin([
             'User-Agent' => 'php-github-api (http://github.com/KnpLabs/php-github-api)',
-            'Accept' => sprintf('application/vnd.github.%s+json', $this->apiVersion),
+            'Accept' => 'application/vnd.github+json',
         ]));
 
         if ($enterpriseUrl) {

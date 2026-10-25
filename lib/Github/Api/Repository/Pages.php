@@ -3,7 +3,6 @@
 namespace Github\Api\Repository;
 
 use Github\Api\AbstractApi;
-use Github\Api\AcceptHeaderTrait;
 
 /**
  * @link   https://docs.github.com/rest/pages/pages
@@ -12,8 +11,6 @@ use Github\Api\AcceptHeaderTrait;
  */
 class Pages extends AbstractApi
 {
-    use AcceptHeaderTrait;
-
     /**
      * Get a GitHub Pages site for a repository.
      *
@@ -42,8 +39,6 @@ class Pages extends AbstractApi
      */
     public function enable($username, $repository, array $params = [])
     {
-        $this->acceptHeaderValue = 'application/vnd.github.switcheroo-preview+json';
-
         return $this->post('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pages', $params);
     }
 
@@ -59,8 +54,6 @@ class Pages extends AbstractApi
      */
     public function disable($username, $repository)
     {
-        $this->acceptHeaderValue = 'application/vnd.github.switcheroo-preview+json';
-
         return $this->delete('/repos/'.rawurlencode($username).'/'.rawurlencode($repository).'/pages');
     }
 

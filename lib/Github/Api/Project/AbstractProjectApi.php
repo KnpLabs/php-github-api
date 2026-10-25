@@ -3,7 +3,6 @@
 namespace Github\Api\Project;
 
 use Github\Api\AbstractApi;
-use Github\Api\AcceptHeaderTrait;
 
 /**
  * Base class for the "Projects (classic)" boards API.
@@ -13,19 +12,16 @@ use Github\Api\AcceptHeaderTrait;
  */
 abstract class AbstractProjectApi extends AbstractApi
 {
-    use AcceptHeaderTrait;
-
     /**
      * Configure the accept header for Early Access to the projects (classic) api.
      *
-     * @deprecated GitHub Projects (classic) was sunset by GitHub; this endpoint no longer has documentation
-     *             on docs.github.com.
+     * @deprecated since 3.17, GitHub no longer requires a custom accept header; this method will be removed in 4.0.
      *
      * @return $this
      */
     public function configure()
     {
-        $this->acceptHeaderValue = 'application/vnd.github.inertia-preview+json';
+        trigger_deprecation('KnpLabs/php-github-api', '3.17', 'The "%s" is deprecated and will be removed.', __METHOD__);
 
         return $this;
     }

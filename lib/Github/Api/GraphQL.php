@@ -26,7 +26,7 @@ class GraphQL extends AbstractApi
      *
      * @return array
      */
-    public function execute($query, array $variables = [], string $acceptHeaderValue = 'application/vnd.github.v4+json')
+    public function execute($query, array $variables = [], string $acceptHeaderValue = 'application/vnd.github+json')
     {
         $this->acceptHeaderValue = $acceptHeaderValue;
         $params = [

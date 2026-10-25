@@ -3,7 +3,6 @@
 namespace Github\Api\PullRequest;
 
 use Github\Api\AbstractApi;
-use Github\Api\AcceptHeaderTrait;
 use Github\Exception\InvalidArgumentException;
 use Github\Exception\MissingArgumentException;
 
@@ -16,8 +15,6 @@ use Github\Exception\MissingArgumentException;
  */
 class Review extends AbstractApi
 {
-    use AcceptHeaderTrait;
-
     /**
      * @deprecated since 3.2, will be removed in 4.0.
      *

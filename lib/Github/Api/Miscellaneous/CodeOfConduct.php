@@ -3,20 +3,19 @@
 namespace Github\Api\Miscellaneous;
 
 use Github\Api\AbstractApi;
-use Github\Api\AcceptHeaderTrait;
 
 class CodeOfConduct extends AbstractApi
 {
-    use AcceptHeaderTrait;
-
     /**
      * Configure the accept header for the codes of conduct preview API.
+     *
+     * @deprecated since 3.17, GitHub no longer requires a custom accept header; this method will be removed in 4.0.
      *
      * @return $this
      */
     public function configure()
     {
-        $this->acceptHeaderValue = 'application/vnd.github.scarlet-witch-preview+json';
+        trigger_deprecation('KnpLabs/php-github-api', '3.17', 'The "%s" is deprecated and will be removed.', __METHOD__);
 
         return $this;
     }

@@ -3,15 +3,12 @@
 namespace Github\Api\PullRequest;
 
 use Github\Api\AbstractApi;
-use Github\Api\AcceptHeaderTrait;
 
 /**
  * @link https://docs.github.com/rest/pulls/review-requests
  */
 class ReviewRequest extends AbstractApi
 {
-    use AcceptHeaderTrait;
-
     /**
      * @deprecated since 3.2, will be removed in 4.0.
      *

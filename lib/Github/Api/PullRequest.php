@@ -31,10 +31,6 @@ class PullRequest extends AbstractApi
      */
     public function configure($bodyType = null, $apiVersion = null)
     {
-        if (null === $apiVersion) {
-            $apiVersion = $this->getApiVersion();
-        }
-
         if (!in_array($bodyType, ['text', 'html', 'full', 'diff', 'patch'])) {
             $bodyType = 'raw';
         }
@@ -43,7 +39,7 @@ class PullRequest extends AbstractApi
             $bodyType .= '+json';
         }
 
-        $this->acceptHeaderValue = sprintf('application/vnd.github.%s.%s', $apiVersion, $bodyType);
+        $this->acceptHeaderValue = sprintf('application/vnd.github.%s', $bodyType);
 
         return $this;
     }
